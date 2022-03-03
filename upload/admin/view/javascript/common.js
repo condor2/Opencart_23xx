@@ -78,6 +78,12 @@ $(document).ready(function() {
 		sessionStorage.setItem('menu', $(this).attr('href'));
 	});
 
+	var my = {
+		window : $(window)
+	};
+
+	if (my.window.width() > 640) {
+
 	if (!sessionStorage.getItem('menu')) {
 		$('#menu #dashboard').addClass('active');
 	} else {
@@ -98,6 +104,7 @@ $(document).ready(function() {
 
 		$('#menu li li.active').has('ul').children('ul').addClass('collapse in');
 		$('#menu li li').not('.active').has('ul').children('ul').addClass('collapse');
+	}
 	}
 
 	// Menu button
