@@ -1,0 +1,20 @@
+{
+    "name": "opencart/opencart",
+    "type": "project",
+    "description": "OpenCart",
+    "keywords": ["opencart", "ecommerce", "framework", "opensource"],
+    "homepage": "http://www.opencart.com",
+    "license": "GPL-3.0+",
+    "config": {
+    "vendor-dir": "./upload/system/storage/vendor/"
+    },
+    "require": {
+        "cardinity/cardinity-sdk-php": "2.1",
+        "braintree/braintree_php" : "3.2.0",
+        "scssphp/scssphp": "1.1.1",
+        "divido/divido-php": "1.15",
+        "php": ">=7.3.0",
+        "ext-curl": "*",
+        "ext-zip": "*"
+    }
+}
