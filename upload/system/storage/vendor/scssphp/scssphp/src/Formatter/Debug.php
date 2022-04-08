@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SCSSPHP
  *
@@ -13,15 +12,12 @@
 namespace ScssPhp\ScssPhp\Formatter;
 
 use ScssPhp\ScssPhp\Formatter;
+use ScssPhp\ScssPhp\Formatter\OutputBlock;
 
 /**
  * Debug formatter
  *
  * @author Anthon Pang <anthon.pang@gmail.com>
- *
- * @deprecated since 1.4.0.
- *
- * @internal
  */
 class Debug extends Formatter
 {
@@ -30,8 +26,6 @@ class Debug extends Formatter
      */
     public function __construct()
     {
-        @trigger_error('The Debug formatter is deprecated since 1.4.0.', E_USER_DEPRECATED);
-
         $this->indentLevel = 0;
         $this->indentChar = '';
         $this->break = "\n";

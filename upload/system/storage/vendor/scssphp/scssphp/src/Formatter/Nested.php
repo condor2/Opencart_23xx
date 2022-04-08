@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SCSSPHP
  *
@@ -13,21 +12,18 @@
 namespace ScssPhp\ScssPhp\Formatter;
 
 use ScssPhp\ScssPhp\Formatter;
+use ScssPhp\ScssPhp\Formatter\OutputBlock;
 use ScssPhp\ScssPhp\Type;
 
 /**
  * Nested formatter
  *
  * @author Leaf Corcoran <leafot@gmail.com>
- *
- * @deprecated since 1.4.0. Use the Expanded formatter instead.
- *
- * @internal
  */
 class Nested extends Formatter
 {
     /**
-     * @var int
+     * @var integer
      */
     private $depth;
 
@@ -36,8 +32,6 @@ class Nested extends Formatter
      */
     public function __construct()
     {
-        @trigger_error('The Nested formatter is deprecated since 1.4.0. Use the Expanded formatter instead.', E_USER_DEPRECATED);
-
         $this->indentLevel = 0;
         $this->indentChar = '  ';
         $this->break = "\n";
@@ -68,9 +62,7 @@ class Nested extends Formatter
 
         foreach ($block->lines as $index => $line) {
             if (substr($line, 0, 2) === '/*') {
-                $replacedLine = preg_replace('/\r\n?|\n|\f/', $this->break, $line);
-                assert($replacedLine !== null);
-                $block->lines[$index] = $replacedLine;
+                $block->lines[$index] = preg_replace('/[\r\n]+/', $glue, $line);
             }
         }
 
@@ -105,8 +97,7 @@ class Nested extends Formatter
             array_pop($depths);
             $this->depth--;
 
-            if (
-                ! $this->depth && ($block->depth <= 1 || (! $this->indentLevel && $block->type === Type::T_COMMENT)) &&
+            if (! $this->depth && ($block->depth <= 1 || (! $this->indentLevel && $block->type === Type::T_COMMENT)) &&
                 (($block->selectors && ! $isMediaOrDirective) || $previousHasSelector)
             ) {
                 $downLevel = $this->break;
@@ -223,7 +214,7 @@ class Nested extends Formatter
      *
      * @param \ScssPhp\ScssPhp\Formatter\OutputBlock $block
      *
-     * @return bool
+     * @return boolean
      */
     private function hasFlatChild($block)
     {

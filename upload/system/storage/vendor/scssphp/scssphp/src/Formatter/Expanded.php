@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SCSSPHP
  *
@@ -13,13 +12,12 @@
 namespace ScssPhp\ScssPhp\Formatter;
 
 use ScssPhp\ScssPhp\Formatter;
+use ScssPhp\ScssPhp\Formatter\OutputBlock;
 
 /**
  * Expanded formatter
  *
  * @author Leaf Corcoran <leafot@gmail.com>
- *
- * @internal
  */
 class Expanded extends Formatter
 {
@@ -57,9 +55,7 @@ class Expanded extends Formatter
 
         foreach ($block->lines as $index => $line) {
             if (substr($line, 0, 2) === '/*') {
-                $replacedLine = preg_replace('/\r\n?|\n|\f/', $this->break, $line);
-                assert($replacedLine !== null);
-                $block->lines[$index] = $replacedLine;
+                $block->lines[$index] = preg_replace('/[\r\n]+/', $glue, $line);
             }
         }
 

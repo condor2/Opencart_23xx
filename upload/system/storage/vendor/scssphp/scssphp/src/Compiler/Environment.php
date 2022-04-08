@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SCSSPHP
  *
@@ -16,40 +15,18 @@ namespace ScssPhp\ScssPhp\Compiler;
  * Compiler environment
  *
  * @author Anthon Pang <anthon.pang@gmail.com>
- *
- * @internal
  */
 class Environment
 {
     /**
-     * @var \ScssPhp\ScssPhp\Block|null
+     * @var \ScssPhp\ScssPhp\Block
      */
     public $block;
 
     /**
-     * @var \ScssPhp\ScssPhp\Compiler\Environment|null
+     * @var \ScssPhp\ScssPhp\Compiler\Environment
      */
     public $parent;
-
-    /**
-     * @var Environment|null
-     */
-    public $declarationScopeParent;
-
-    /**
-     * @var Environment|null
-     */
-    public $parentStore;
-
-    /**
-     * @var array|null
-     */
-    public $selectors;
-
-    /**
-     * @var string|null
-     */
-    public $marker;
 
     /**
      * @var array
@@ -62,7 +39,7 @@ class Environment
     public $storeUnreduced;
 
     /**
-     * @var int
+     * @var integer
      */
     public $depth;
 }

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SCSSPHP
  *
@@ -21,8 +20,6 @@ use ScssPhp\ScssPhp\Exception\CompilerException;
  *
  * @author Josh Schmidt <oyejorge@gmail.com>
  * @author Nicolas FRANÇOIS <nicolas.francois@frog-labs.com>
- *
- * @internal
  */
 class SourceMapGenerator
 {
@@ -35,7 +32,6 @@ class SourceMapGenerator
      * Array of default options
      *
      * @var array
-     * @phpstan-var array{sourceRoot: string, sourceMapFilename: string|null, sourceMapURL: string|null, sourceMapWriteTo: string|null, outputSourceFiles: bool, sourceMapRootpath: string, sourceMapBasepath: string}
      */
     protected $defaultOptions = [
         // an optional source root, useful for relocating source files
@@ -73,7 +69,6 @@ class SourceMapGenerator
      * Array of mappings
      *
      * @var array
-     * @phpstan-var list<array{generated_line: int, generated_column: int, original_line: int, original_column: int, source_file: string}>
      */
     protected $mappings = [];
 
@@ -87,40 +82,30 @@ class SourceMapGenerator
     /**
      * File to content map
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $sources = [];
-
-    /**
-     * @var array<string, int>
-     */
     protected $sourceKeys = [];
 
     /**
      * @var array
-     * @phpstan-var array{sourceRoot: string, sourceMapFilename: string|null, sourceMapURL: string|null, sourceMapWriteTo: string|null, outputSourceFiles: bool, sourceMapRootpath: string, sourceMapBasepath: string}
      */
     private $options;
 
-    /**
-     * @phpstan-param array{sourceRoot?: string, sourceMapFilename?: string|null, sourceMapURL?: string|null, sourceMapWriteTo?: string|null, outputSourceFiles?: bool, sourceMapRootpath?: string, sourceMapBasepath?: string} $options
-     */
     public function __construct(array $options = [])
     {
-        $this->options = array_replace($this->defaultOptions, $options);
+        $this->options = array_merge($this->defaultOptions, $options);
         $this->encoder = new Base64VLQ();
     }
 
     /**
      * Adds a mapping
      *
-     * @param int    $generatedLine   The line number in generated file
-     * @param int    $generatedColumn The column number in generated file
-     * @param int    $originalLine    The line number in original file
-     * @param int    $originalColumn  The column number in original file
-     * @param string $sourceFile      The original source file
-     *
-     * @return void
+     * @param integer $generatedLine   The line number in generated file
+     * @param integer $generatedColumn The column number in generated file
+     * @param integer $originalLine    The line number in original file
+     * @param integer $originalColumn  The column number in original file
+     * @param string  $sourceFile      The original source file
      */
     public function addMapping($generatedLine, $generatedColumn, $originalLine, $originalColumn, $sourceFile)
     {
@@ -140,15 +125,13 @@ class SourceMapGenerator
      *
      * @param string $content The content to write
      *
-     * @return string|null
+     * @return string
      *
      * @throws \ScssPhp\ScssPhp\Exception\CompilerException If the file could not be saved
-     * @deprecated
      */
     public function saveMap($content)
     {
         $file = $this->options['sourceMapWriteTo'];
-        assert($file !== null);
         $dir  = \dirname($file);
 
         // directory does not exist
@@ -170,16 +153,14 @@ class SourceMapGenerator
     /**
      * Generates the JSON source map
      *
-     * @param string $prefix A prefix added in the output file, which needs to shift mappings
-     *
      * @return string
      *
      * @see https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit#
      */
-    public function generateJson($prefix = '')
+    public function generateJson()
     {
         $sourceMap = [];
-        $mappings  = $this->generateMappings($prefix);
+        $mappings  = $this->generateMappings();
 
         // File version (always the first entry in the object) and must be a positive integer.
         $sourceMap['version'] = self::VERSION;
@@ -202,7 +183,7 @@ class SourceMapGenerator
         // A list of original sources used by the 'mappings' entry.
         $sourceMap['sources'] = [];
 
-        foreach ($this->sources as $sourceFilename) {
+        foreach ($this->sources as $sourceUri => $sourceFilename) {
             $sourceMap['sources'][] = $this->normalizeFilename($sourceFilename);
         }
 
@@ -224,21 +205,13 @@ class SourceMapGenerator
             unset($sourceMap['sourceRoot']);
         }
 
-        $jsonSourceMap = json_encode($sourceMap, JSON_UNESCAPED_SLASHES);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \RuntimeException(json_last_error_msg());
-        }
-
-        assert($jsonSourceMap !== false);
-
-        return $jsonSourceMap;
+        return json_encode($sourceMap, JSON_UNESCAPED_SLASHES);
     }
 
     /**
      * Returns the sources contents
      *
-     * @return string[]|null
+     * @return array|null
      */
     protected function getSourcesContent()
     {
@@ -258,20 +231,13 @@ class SourceMapGenerator
     /**
      * Generates the mappings string
      *
-     * @param string $prefix A prefix added in the output file, which needs to shift mappings
-     *
      * @return string
      */
-    public function generateMappings($prefix = '')
+    public function generateMappings()
     {
         if (! \count($this->mappings)) {
             return '';
         }
-
-        $prefixLines = substr_count($prefix, "\n");
-        $lastPrefixNewLine = strrpos($prefix, "\n");
-        $lastPrefixLineStart = false === $lastPrefixNewLine ? 0 : $lastPrefixNewLine + 1;
-        $prefixColumn = strlen($prefix) - $lastPrefixLineStart;
 
         $this->sourceKeys = array_flip(array_keys($this->sources));
 
@@ -287,12 +253,6 @@ class SourceMapGenerator
         $lastGeneratedLine = $lastOriginalIndex = $lastOriginalLine = $lastOriginalColumn = 0;
 
         foreach ($groupedMap as $lineNumber => $lineMap) {
-            if ($lineNumber > 1) {
-                // The prefix only impacts the column for the first line of the original output
-                $prefixColumn = 0;
-            }
-            $lineNumber += $prefixLines;
-
             while (++$lastGeneratedLine < $lineNumber) {
                 $groupedMapEncoded[] = ';';
             }
@@ -301,10 +261,8 @@ class SourceMapGenerator
             $lastGeneratedColumn = 0;
 
             foreach ($lineMap as $m) {
-                $generatedColumn = $m['generated_column'] + $prefixColumn;
-
-                $mapEncoded = $this->encoder->encode($generatedColumn - $lastGeneratedColumn);
-                $lastGeneratedColumn = $generatedColumn;
+                $mapEncoded = $this->encoder->encode($m['generated_column'] - $lastGeneratedColumn);
+                $lastGeneratedColumn = $m['generated_column'];
 
                 // find the index
                 if ($m['source_file']) {
@@ -335,7 +293,7 @@ class SourceMapGenerator
      *
      * @param string $filename
      *
-     * @return int|false
+     * @return integer|false
      */
     protected function findFileIndex($filename)
     {
@@ -371,8 +329,8 @@ class SourceMapGenerator
     /**
      * Fix windows paths
      *
-     * @param string $path
-     * @param bool   $addEndSlash
+     * @param string  $path
+     * @param boolean $addEndSlash
      *
      * @return string
      */
