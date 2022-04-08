@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '7c11b61b46a1a962c022c0dc6e67b20faa3cb799',
+    'reference' => 'dde718caf22d0bd31e3c5a174bbcf40a9854376d',
     'name' => 'opencart/opencart',
   ),
   'versions' => 
@@ -104,7 +104,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '7c11b61b46a1a962c022c0dc6e67b20faa3cb799',
+      'reference' => 'dde718caf22d0bd31e3c5a174bbcf40a9854376d',
     ),
     'psr/http-message' => 
     array (
@@ -133,12 +133,12 @@ private static $installed = array (
     ),
     'scssphp/scssphp' => 
     array (
-      'pretty_version' => '1.1.1',
-      'version' => '1.1.1.0',
+      'pretty_version' => 'v1.10.2',
+      'version' => '1.10.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '824e4cec10b2bfa88eec5dac23991cb9106622c1',
+      'reference' => '387f4f4abf5d99f16be16314c5ab856f81c82f46',
     ),
     'symfony/polyfill-ctype' => 
     array (
