@@ -84,10 +84,15 @@ class ControllerStartupSeoUrl extends Controller {
 
 						unset($data[$key]);
 					}
-				} elseif ($data['route'] == 'common/home') {
-					$url .= '/';
+				} elseif ($key == 'route') {
+					$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($value) . "'");
+				   	if ($query->num_rows && $query->row['keyword']) {
+					 	$url .= '/' . $query->row['keyword'];
 
-					break;
+					 	unset($data[$key]);
+				   	} elseif ($data['route'] == 'common/home') {
+					    $url .= '/';
+				   	}
 				} elseif ($key == 'path') {
 					$categories = explode('_', $value);
 
