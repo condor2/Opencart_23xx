@@ -224,7 +224,15 @@ class ControllerCommonColumnLeft extends Controller {
 					'children' => array()		
 				);
 			}
-			
+
+			if ($this->user->hasPermission('access', 'design/seo_url')) {
+				$design[] = array(
+					'name'	   => $this->language->get('text_seo_url'),
+					'href'     => $this->url->link('design/seo_url', 'token=' . $this->session->data['token'], true),
+					'children' => array()		
+				);
+			}
+
 			if ($design) {
 				$data['menus'][] = array(
 					'id'       => 'menu-design',
