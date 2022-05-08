@@ -55,7 +55,7 @@ class ModelReportAffiliate extends Model {
 
 		$query = $this->db->query($sql);
 
-		return $query->row['total'];
+		return (int)$query->row['total'];
 	}
 
 	public function getProducts($data = array()) {
@@ -113,7 +113,7 @@ class ModelReportAffiliate extends Model {
 
 		$query = $this->db->query($sql);
 
-		return $query->row['total'];
+		return (int)$query->row['total'];
 	}
 
 	public function getAffiliateActivities($data = array()) {
@@ -187,6 +187,6 @@ class ModelReportAffiliate extends Model {
 
 		$query = $this->db->query($sql);
 
-		return $query->row['total'];
+		return (int)$query->row['total'];
 	}
 }

@@ -112,7 +112,7 @@ class ModelAffiliateAffiliate extends Model {
 	public function getTotalAffiliatesByEmail($email) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 
-		return $query->row['total'];
+		return (int)$query->row['total'];
 	}
 
 	public function addTransaction($affiliate_id, $amount = '', $order_id = 0) {
@@ -155,7 +155,7 @@ class ModelAffiliateAffiliate extends Model {
 	public function getTransactionTotal($affiliate_id) {
 		$query = $this->db->query("SELECT SUM(amount) AS total FROM " . DB_PREFIX . "affiliate_transaction WHERE affiliate_id = '" . (int)$affiliate_id . "'");
 
-		return $query->row['total'];
+		return (int)$query->row['total'];
 	}
 	
 	public function addLoginAttempt($email) {
