@@ -15,6 +15,7 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 - Filter on Zone List - 4.0.0.0_b
 - Filter on Country List - 4.0.0.0_b
 - <a href="https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=18892">No FTP on Ocmod Installer</a>
+- Admin SEO URL like in Opencart 3.0.x.x
 
 ## Updates
 - Bootstrap 3.4.1
@@ -34,7 +35,7 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 
 ## Language patch for non English
 
-<b>Currency module and Timezone</b>
+<b>Currency module & Timezone</b>
 
 - Edit <b>admin/language/your_language/setting.php</b> and add this values:
 
@@ -44,11 +45,12 @@ $_['entry_currency_engine']        = 'Currency Rate Engine';
 - Copy <b>currency.php</b> from <b>admin/language/en-gb/extension/extension</b> in the same location of your language.
 - Copy <b>currency</b> folder from <b>admin/language/en-gb/extension/</b> in the same location of your language.
 
-<b>Cron module</b>
+<b>Cron & SEO URL</b>
 
-- Edit <b>admin/language/your_language/column_left.php</b> and add this value:
+- Edit <b>admin/language/your_language/column_left.php</b> and add this values:
 
 $_['text_cron']                      = 'Cron Jobs';
+$_['text_seo_url']                   = 'SEO URL';
 
 - Copy <b>cron.php from admin/language/en-gb/extension</b> in the same location of your language.
 
