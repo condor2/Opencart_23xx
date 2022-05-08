@@ -61,7 +61,7 @@ $_['summernote']                    = 'xx-YY';
 
 ## Patching standard version of Opencart 2.3.0.2
 
-After you have replaced this version with your standard version run [b]your-store-url/install[/b]
+After you have replaced this version with your standard version run <b>your-store-url/install</b>
 
 <b>Admin config</b>
 
