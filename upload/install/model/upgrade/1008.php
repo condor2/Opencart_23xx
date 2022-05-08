@@ -61,5 +61,43 @@ class ModelUpgrade1008 extends Model {
 		if (!$query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "modification` ADD `extension_install_id` INT(11) NOT NULL AFTER `modification_id`");
 		}
+
+        // Cron
+		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "cron' AND COLUMN_NAME = 'cron_id'");
+
+		if (!$query->num_rows) {
+			$this->db->query("CREATE TABLE `" . DB_PREFIX . "cron` (cron_id int(11) NOT NULL AUTO_INCREMENT, code varchar(64) NOT NULL, cycle varchar(12) NOT NULL, action text NOT NULL, status tinyint(1) NOT NULL, date_added datetime NOT NULL,date_modified datetime NOT NULL, PRIMARY KEY (cron_id)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
+		}
+
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "cron` WHERE `code` = 'currency'");
+
+		if (!$query->num_rows) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "cron` (code, cycle, action, status, date_added, date_modified) VALUES ('currency', 'day', 'cron/currency', 1, '2014-09-25 14:40:00', '2019-08-25 21:12:59');");
+		}
+
+        // Event
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "event` WHERE `action` = 'event/currency'");
+
+		if (!$query->num_rows) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (code, trigger, action, status, date_added) VALUES ('admin_currency_add', 'admin/model/localisation/currency/addCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (code, trigger, action, status, date_added) VALUES ('admin_currency_edit', 'admin/model/localisation/currency/editCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (code, trigger, action, status, date_added) VALUES ('admin_setting', 'admin/model/setting/setting/editSetting/after', 'event/currency', 1, '2022-03-24 14:00:00');");
+		}
+
+        // Setting - Time Zone
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_timezone'");
+
+		if (!$query->num_rows) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'config', 'config_timezone', 'UTC', 0);");
+		}
+
+        // Setting - ECB
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_currency_engine'");
+
+		if (!$query->num_rows) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'config', 'config_currency_engine', 'ecb', 0);");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'ecb', 'ecb_status', '1', 0);");
+		}
+
 	}
 }
