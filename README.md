@@ -65,6 +65,35 @@ $_['summernote']                    = 'xx-YY';
 
 - If you had standard Opencart 2.3.0.2 and you have replaced with this version then you need to create in Database "oc_cron" table from opencart.sql
 
+CREATE TABLE `oc_cron` (<br>
+  `cron_id` int(11) NOT NULL AUTO_INCREMENT,<br>
+  `code` varchar(64) NOT NULL,<br>
+  `cycle` varchar(12) NOT NULL,<br>
+  `action` text NOT NULL,<br>
+  `status` tinyint(1) NOT NULL,<br>
+  `date_added` datetime NOT NULL,<br>
+  `date_modified` datetime NOT NULL,<br>
+  PRIMARY KEY (`cron_id`)<br>
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;<br>
+
+Then insert CRON values
+
+INSERT INTO `oc_cron` (`cron_id`, `code`, `cycle`, `action`, `status`, `date_added`, `date_modified`) VALUES<br>
+(1, 'currency', 'day', 'cron/currency', 1, '2014-09-25 14:40:00', '2019-08-25 21:12:59');<br>
+
+Change <b>oc_</b> with your database prefix
+
+
+<b>Event database values</b>
+
+INSERT INTO `oc_event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES<br>
+('admin_currency_add', 'admin/model/localisation/currency/addCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');<br>
+INSERT INTO `oc_event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES<br>
+('admin_currency_edit', 'admin/model/localisation/currency/editCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');<br>
+INSERT INTO `oc_event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES<br>
+('admin_setting', 'admin/model/setting/setting/editSetting/after', 'event/currency', 1, '2022-03-24 14:00:00');<br>
+
+
 <b>Admin config</b>
 
 Replace old structure
