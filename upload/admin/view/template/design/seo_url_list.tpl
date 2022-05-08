@@ -34,7 +34,7 @@
             <div class="col-sm-6">
               <div class="form-group">
                 <label class="control-label" for="input-query"><?php echo $entry_query; ?></label>
-                <input type="text" name="filter_query " value="<?php echo $filter_query ; ?>" placeholder="<?php echo $entry_query; ?>" id="input-query" class="form-control" />
+                <input type="text" name="filter_query" value="<?php echo $filter_query ; ?>" placeholder="<?php echo $entry_query; ?>" id="input-query" class="form-control" />
               </div>
             </div>
             <div class="col-sm-6">

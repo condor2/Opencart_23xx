@@ -244,7 +244,6 @@ class ControllerDesignSeoUrl extends Controller {
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_filter'] = $this->language->get('button_filter');
 
-
 		$data['token'] = $this->session->data['token'];
 
 		if (isset($this->error['warning'])) {
@@ -294,6 +293,10 @@ class ControllerDesignSeoUrl extends Controller {
 
 		if (isset($this->request->get['filter_query'])) {
 			$url .= '&filter_query=' . urlencode(html_entity_decode($this->request->get['filter_query'], ENT_QUOTES, 'UTF-8'));
+		}
+
+		if (isset($this->request->get['filter_keyword'])) {
+			$url .= '&filter_keyword=' . urlencode(html_entity_decode($this->request->get['filter_keyword'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['sort'])) {
