@@ -29,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'dde718caf22d0bd31e3c5a174bbcf40a9854376d',
+    'reference' => '0b0cecfcca8fdf8c964f0fda194cc0ae63d99a37',
     'name' => 'opencart/opencart',
   ),
   'versions' => 
@@ -63,12 +63,12 @@ private static $installed = array (
     ),
     'guzzlehttp/guzzle' => 
     array (
-      'pretty_version' => '6.5.5',
-      'version' => '6.5.5.0',
+      'pretty_version' => '6.5.6',
+      'version' => '6.5.6.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9d4290de1cfd701f38099ef7e183b64b4b7b0c5e',
+      'reference' => 'f092dd734083473658de3ee4bef093ed77d2689c',
     ),
     'guzzlehttp/oauth-subscriber' => 
     array (
@@ -104,7 +104,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'dde718caf22d0bd31e3c5a174bbcf40a9854376d',
+      'reference' => '0b0cecfcca8fdf8c964f0fda194cc0ae63d99a37',
     ),
     'psr/http-message' => 
     array (
@@ -133,12 +133,12 @@ private static $installed = array (
     ),
     'scssphp/scssphp' => 
     array (
-      'pretty_version' => 'v1.10.2',
-      'version' => '1.10.2.0',
+      'pretty_version' => 'v1.10.3',
+      'version' => '1.10.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '387f4f4abf5d99f16be16314c5ab856f81c82f46',
+      'reference' => '0f1e1516ed2412ad43e42a6a319e77624ba1f713',
     ),
     'symfony/polyfill-ctype' => 
     array (
@@ -205,12 +205,12 @@ private static $installed = array (
     ),
     'symfony/validator' => 
     array (
-      'pretty_version' => 'v4.4.40',
-      'version' => '4.4.40.0',
+      'pretty_version' => 'v4.4.41',
+      'version' => '4.4.41.0',
       'aliases' => 
       array (
       ),
-      'reference' => '86464b6f16c888514b32ffd64fb9a2ad64dc3965',
+      'reference' => 'b79a7830b8ead3fb0a2a0080ba6f5b2a0861c28c',
     ),
   ),
 );
