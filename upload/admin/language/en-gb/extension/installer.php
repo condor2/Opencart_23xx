@@ -16,7 +16,7 @@ $_['entry_upload']         = 'Upload File';
 $_['entry_progress']       = 'Progress';
 
 // Help
-$_['help_upload']          = 'Requires a modification file with extension ".ocmod.zip" or ".ocmod.xml".';
+$_['help_upload']          = 'Requires a modification file with extension \'.ocmod.zip\'.';
 
 // Error
 $_['error_permission']     = 'Warning: You do not have permission to modify extensions!';
