@@ -325,36 +325,46 @@ class ControllerExtensionInstaller extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		}
 
-		$file = DIR_UPLOAD . $this->request->post['path'] . '/install.sql';
-
-		if (!is_file($file) || substr(str_replace('\\', '/', realpath($file)), 0, strlen(DIR_UPLOAD)) != DIR_UPLOAD) {
-			$json['error'] = $this->language->get('error_file');
+		if (!isset($this->session->data['install'])) {
+			$json['error'] = $this->language->get('error_directory');
+		} elseif (!is_dir(DIR_UPLOAD . 'tmp-' . $this->session->data['install'] . '/')) {
+			$json['error'] = $this->language->get('error_directory');
 		}
 
 		if (!$json) {
-			$lines = file($file);
+			$file = DIR_UPLOAD . 'tmp-' . $this->session->data['install'] . '/install.sql';
 
-			if ($lines) {
-				try {
-					$sql = '';
+            if (is_file($file)) {
 
-					foreach ($lines as $line) {
-						if ($line && (substr($line, 0, 2) != '--') && (substr($line, 0, 1) != '#')) {
-							$sql .= $line;
+                $lines = file($file);
 
-							if (preg_match('/;\s*$/', $line)) {
-								$sql = str_replace(" `oc_", " `" . DB_PREFIX, $sql);
+                    if ($lines) {
+                        try {
+			                $sql = '';
 
-								$this->db->query($sql);
+						foreach ($lines as $line) {
+                            if ($line && (substr($line, 0, 2) != '--') && (substr($line, 0, 1) != '#')) {
+                                $sql .= $line;
 
-								$sql = '';
-							}
+                                if (preg_match('/;\s*$/', $line)) {
+                                    $sql = str_replace(" `oc_", " `" . DB_PREFIX, $sql);
+
+                                    $this->db->query($sql);
+
+                                    $sql = '';
+                                }
+                            }
 						}
+					} catch(Exception $exception) {
+						$json['error'] = sprintf($this->language->get('error_exception'), $exception->getCode(), $exception->getMessage(), $exception->getFile(), $exception->getLine());
 					}
-				} catch(Exception $exception) {
-					$json['error'] = sprintf($this->language->get('error_exception'), $exception->getCode(), $exception->getMessage(), $exception->getFile(), $exception->getLine());
-				}
+			    }
 			}
+		}
+
+		if (!$json) {
+			$json['text'] = $this->language->get('text_php');
+			$json['next'] = str_replace('&amp;', '&', $this->url->link('extension/installer/php', 'token=' . $this->session->data['token'], true));
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -462,6 +472,10 @@ class ControllerExtensionInstaller extends Controller {
 			$json['text'] = $this->language->get('text_remove');
 
 			$json['next'] = str_replace('&amp;', '&', $this->url->link('extension/installer/remove', 'token=' . $this->session->data['token'], true));
+
+			$json['text'] = $this->language->get('text_sql');
+
+			$json['next'] = str_replace('&amp;', '&', $this->url->link('extension/installer/sql', 'token=' . $this->session->data['token'], true));
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -477,18 +491,27 @@ class ControllerExtensionInstaller extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		}
 
-		$file = DIR_UPLOAD . $this->request->post['path'] . '/install.php';
-
-		if (!is_file($file) || substr(str_replace('\\', '/', realpath($file)), 0, strlen(DIR_UPLOAD)) != DIR_UPLOAD) {
-			$json['error'] = $this->language->get('error_file');
+		if (!isset($this->session->data['install'])) {
+			$json['error'] = $this->language->get('error_directory');
+		} elseif (!is_dir(DIR_UPLOAD . 'tmp-' . $this->session->data['install'] . '/')) {
+			$json['error'] = $this->language->get('error_directory');
 		}
 
 		if (!$json) {
-			try {
-				include($file);
-			} catch(Exception $exception) {
-				$json['error'] = sprintf($this->language->get('error_exception'), $exception->getCode(), $exception->getMessage(), $exception->getFile(), $exception->getLine());
-			}
+            $file = DIR_UPLOAD . 'tmp-' . $this->session->data['install'] . '/install.php';
+                        
+                if (is_file($file)) {
+                    try {
+                        include($file);
+                            } catch(Exception $exception) {
+                                $json['error'] = sprintf($this->language->get('error_exception'), $exception->getCode(), $exception->getMessage(), $exception->getFile(), $exception->getLine());
+                    }
+                }
+		}
+
+		if (!$json) {
+			$json['text'] = $this->language->get('text_remove');
+			$json['next'] = str_replace('&amp;', '&', $this->url->link('extension/installer/remove', 'token=' . $this->session->data['token'], true));
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
