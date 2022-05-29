@@ -20,6 +20,7 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 - Bootstrap 3.4.1
 - jQuery 3.6.0
 - Summernote v0.8.20
+- OCMod extension installer like in 3.0.x.x. Ocmod.xml not allowed through installer.
 
 ## Removed
 - OpenBay
