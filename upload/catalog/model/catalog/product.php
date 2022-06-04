@@ -106,7 +106,7 @@ class ModelCatalogProduct extends Model {
 				$words = explode(' ', trim(preg_replace('/\s+/', ' ', $data['filter_name'])));
 
 				foreach ($words as $word) {
-					$implode[] = "pd.name LIKE '%" . $this->db->escape($word) . "%'";
+					$implode[] = "pd.name LIKE '" . $this->db->escape('%' . $word . '%') . "'";
 				}
 
 				if ($implode) {
@@ -114,7 +114,7 @@ class ModelCatalogProduct extends Model {
 				}
 
 				if (!empty($data['filter_description'])) {
-					$sql .= " OR pd.description LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+					$sql .= " OR pd.description LIKE '" . $this->db->escape('%' . $data['filter_name'] . '%') . "'";
 				}
 			}
 
@@ -128,7 +128,7 @@ class ModelCatalogProduct extends Model {
 				$words = explode(' ', trim(preg_replace('/\s+/', ' ', $data['filter_tag'])));
 
 				foreach ($words as $word) {
-					$implode[] = "pd.tag LIKE '%" . $this->db->escape($word) . "%'";
+					$implode[] = "pd.tag LIKE '" . $this->db->escape('%' . $word . '%') . "'";
 				}
 
 				if ($implode) {
@@ -463,7 +463,7 @@ class ModelCatalogProduct extends Model {
 				$words = explode(' ', trim(preg_replace('/\s+/', ' ', $data['filter_name'])));
 
 				foreach ($words as $word) {
-					$implode[] = "pd.name LIKE '%" . $this->db->escape($word) . "%'";
+					$implode[] = "pd.name LIKE '" . $this->db->escape('%' . $word . '%') . "'";
 				}
 
 				if ($implode) {
@@ -471,7 +471,7 @@ class ModelCatalogProduct extends Model {
 				}
 
 				if (!empty($data['filter_description'])) {
-					$sql .= " OR pd.description LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+					$sql .= " OR pd.description LIKE '" . $this->db->escape('%' . $data['filter_name'] . '%') . "'";
 				}
 			}
 
@@ -485,7 +485,7 @@ class ModelCatalogProduct extends Model {
 				$words = explode(' ', trim(preg_replace('/\s+/', ' ', $data['filter_tag'])));
 
 				foreach ($words as $word) {
-					$implode[] = "pd.tag LIKE '%" . $this->db->escape($word) . "%'";
+					$implode[] = "pd.tag LIKE '" . $this->db->escape('%' . $word . '%') . "'";
 				}
 
 				if ($implode) {
