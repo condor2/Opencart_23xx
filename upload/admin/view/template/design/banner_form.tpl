@@ -121,4 +121,4 @@ function addImage(language_id) {
 $('#language a:first').tab('show');
 //--></script> 
 </div>
-<?php echo $footer; ?> 
+<?php echo $footer; ?>

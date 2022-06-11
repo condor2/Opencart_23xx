@@ -208,5 +208,6 @@
   </div>
   <script type="text/javascript"><!--
 $('#language a:first').tab('show');
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>

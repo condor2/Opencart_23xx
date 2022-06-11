@@ -113,5 +113,6 @@ $('#button-upload').on('click', function() {
 		}
 	}, 500);
 });
-//--></script></div> 
+//--></script>
+</div> 
 <?php echo $footer; ?>

@@ -1407,5 +1407,6 @@ $('.datetime').datetimepicker({
   <script type="text/javascript"><!--
 $('#language a:first').tab('show');
 $('#option a:first').tab('show');
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>

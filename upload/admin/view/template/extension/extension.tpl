@@ -113,4 +113,4 @@ $('#extension').on('click', '.btn-danger, .btn-warning', function(e) {
 //--></script>
   <?php } ?>
 </div>
-<?php echo $footer; ?> 
+<?php echo $footer; ?>

@@ -102,5 +102,6 @@ function addFilterRow() {
 	
 	filter_row++;
 }
-//--></script></div>
-<?php echo $footer; ?> 
+//--></script>
+</div>
+<?php echo $footer; ?>

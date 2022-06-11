@@ -79,4 +79,4 @@ $('#range a').on('click', function(e) {
 });
 
 $('#range .active a').trigger('click');
-//--></script> 
+//--></script>

@@ -293,5 +293,6 @@ $('input[name=\'filter_email\']').autocomplete({
 $('.date').datetimepicker({
 	pickTime: false
 });
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>

@@ -176,5 +176,6 @@ function addOptionValue() {
 	
 	option_value_row++;
 }
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>

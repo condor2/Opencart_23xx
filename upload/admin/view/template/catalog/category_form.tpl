@@ -296,5 +296,6 @@ $('#category-filter').on('click', '.fa-minus-circle', function() {
 //--></script> 
   <script type="text/javascript"><!--
 $('#language a:first').tab('show');
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>

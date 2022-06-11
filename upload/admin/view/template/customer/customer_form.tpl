@@ -1185,5 +1185,6 @@ $('#tab-customer .form-group[data-sort]').detach().each(function() {
 	}
 });
 <?php } ?>
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>

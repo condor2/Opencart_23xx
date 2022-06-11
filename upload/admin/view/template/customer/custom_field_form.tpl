@@ -282,5 +282,6 @@ function addCustomFieldValue() {
 	
 	custom_field_value_row++;
 }
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>

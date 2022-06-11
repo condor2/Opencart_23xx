@@ -193,5 +193,6 @@ $('input[name=\'filter_product\']').autocomplete({
 $('.date').datetimepicker({
 	pickTime: false
 });
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>

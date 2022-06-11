@@ -256,5 +256,6 @@ $('input[name=\'filter_model\']').autocomplete({
 		$('input[name=\'filter_model\']').val(item['label']);
 	}
 });
-//--></script></div>
+//--></script>
+</div>
 <?php echo $footer; ?>
