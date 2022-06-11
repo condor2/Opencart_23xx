@@ -5,11 +5,7 @@ class PDO {
 	private $data = [];
 	private $affected;
 
-	public function __construct($hostname, $username, $password, $database, $port = '') {
-		if (!$port) {
-			$port = '3306';
-		}
-
+	public function __construct($hostname, $username, $password, $database, $port = '3306') {
 		try {
 			$pdo = @new \PDO('mysql:host=' . $hostname . ';port=' . $port . ';dbname=' . $database, $username, $password, [\PDO::ATTR_PERSISTENT => false]);
 		} catch (\PDOException $e) {
@@ -23,9 +19,7 @@ class PDO {
 	}
 
 	public function query($sql) {
-		$sql = preg_replace('/(?:\'\:)([a-z0-9]*.)(?:\')/', ':$1', $sql);
-
-		$statement = $this->connection->prepare($sql);
+		$statement = $this->connection->prepare(preg_replace('/(?:\'\:)([a-z0-9]*.)(?:\')/', ':$1', $sql));
 
 		try {
 			if ($statement && $statement->execute($this->data)) {
@@ -43,19 +37,13 @@ class PDO {
 					return $result;
 				} else {
 					$this->affected = $statement->rowCount();
-
-					return true;
 				}
 
 				$statement->closeCursor();
-			} else {
-				return true;
 			}
 		} catch (\PDOException $e) {
 			throw new \Exception('Error: ' . $e->getMessage() . ' Error Code : ' . $e->getCode() . ' <br />' . $sql);
 		}
-
-		return false;
 	}
 
 	public function escape($value) {
@@ -89,6 +77,6 @@ class PDO {
 	 *
 	 */
 	public function __destruct() {
-		unset($this->connection);
+		$this->connection = '';
 	}
 }
