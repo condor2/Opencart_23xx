@@ -1,8 +1,8 @@
 <?php
 class ControllerMarketingContact extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');
 
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
@@ -83,7 +83,7 @@ class ControllerMarketingContact extends Controller {
 		$this->response->setOutput($this->load->view('marketing/contact', $data));
 	}
 
-	public function send() {
+	public function send(): void {
 		$this->load->language('marketing/contact');
 
 		$json = array();

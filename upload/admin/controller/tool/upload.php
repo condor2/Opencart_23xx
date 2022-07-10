@@ -1,8 +1,8 @@
 <?php
 class ControllerToolUpload extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('tool/upload');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerToolUpload extends Controller {
 		$this->getList();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('tool/upload');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -61,7 +61,7 @@ class ControllerToolUpload extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -258,7 +258,7 @@ class ControllerToolUpload extends Controller {
 		$this->response->setOutput($this->load->view('tool/upload', $data));
 	}
 
-	protected function validateDelete() {
+	protected function validateDelete(): bool {
 		if (!$this->user->hasPermission('modify', 'tool/upload')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -266,7 +266,7 @@ class ControllerToolUpload extends Controller {
 		return !$this->error;
 	}
 
-	public function download() {
+	public function download(): void {
 		$this->load->model('tool/upload');
 
 		if (isset($this->request->get['code'])) {
@@ -329,7 +329,7 @@ class ControllerToolUpload extends Controller {
 		}
 	}
 
-	public function upload() {
+	public function upload(): void {
 		$this->load->language('sale/order');
 
 		$json = array();

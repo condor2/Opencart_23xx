@@ -1,8 +1,8 @@
 <?php
 class ControllerUserApi extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerUserApi extends Controller {
 		$this->getList();
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerUserApi extends Controller {
 		$this->getForm();
 	}
 
-	public function edit() {
+	public function edit(): void {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerUserApi extends Controller {
 		$this->getForm();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerUserApi extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -265,7 +265,7 @@ class ControllerUserApi extends Controller {
 		$this->response->setOutput($this->load->view('user/api_list', $data));
 	}
 
-	protected function getForm() {
+	protected function getForm(): void {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['api_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -373,7 +373,7 @@ class ControllerUserApi extends Controller {
 		if (isset($this->request->post['status'])) {
 			$data['status'] = $this->request->post['status'];
 		} elseif (!empty($api_info)) {
-			$data['status'] = $api_info['status'];
+			$data['status'] = (int)$api_info['status'];
 		} else {
 			$data['status'] = 0;
 		}
@@ -411,7 +411,7 @@ class ControllerUserApi extends Controller {
 		$this->response->setOutput($this->load->view('user/api_form', $data));
 	}
 
-	protected function validateForm() {
+	protected function validateForm(): bool {
 		if (!$this->user->hasPermission('modify', 'user/api')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -431,7 +431,7 @@ class ControllerUserApi extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete() {
+	protected function validateDelete(): bool {
 		if (!$this->user->hasPermission('modify', 'user/api')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -439,7 +439,7 @@ class ControllerUserApi extends Controller {
 		return !$this->error;
 	}
 
-	public function addIp() {
+	public function addIp(): void {
 		$this->load->language('user/api');
 
 		$json = array();
@@ -458,7 +458,7 @@ class ControllerUserApi extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function deleteSession() {
+	public function deleteSession(): void {
 		$this->load->language('user/api');
 
 		$json = array();

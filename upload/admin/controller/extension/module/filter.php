@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModulefilter extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -68,7 +68,7 @@ class ControllerExtensionModulefilter extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/filter', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/filter')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

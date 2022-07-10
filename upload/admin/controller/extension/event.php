@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionEvent extends Controller {
-	private $error = array();
+	private array $error = array();
 	
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/event');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerExtensionEvent extends Controller {
 		$this->getList();
 	}
 
-	public function enable() {
+	public function enable(): void {
 		$this->load->language('extension/event');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerExtensionEvent extends Controller {
 		$this->getList();
 	}
 
-	public function disable() {
+	public function disable(): void {
 		$this->load->language('extension/event');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerExtensionEvent extends Controller {
 		$this->getList();
 	}
 	
-	public function getList() {
+	public function getList(): void {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -232,7 +232,7 @@ class ControllerExtensionEvent extends Controller {
 		$this->response->setOutput($this->load->view('extension/event', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/event')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionShippingParcelforce48 extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/shipping/parcelforce_48');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -148,7 +148,7 @@ class ControllerExtensionShippingParcelforce48 extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/parcelforce_48', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/parcelforce_48')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

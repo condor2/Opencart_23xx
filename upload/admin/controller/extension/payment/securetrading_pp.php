@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSecureTradingPp extends Controller {
-	private $error = array();
+	private array $error = array();
 
 	public function index() {
 		$this->load->model('setting/setting');

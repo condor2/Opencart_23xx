@@ -1,8 +1,8 @@
 <?php
 class ControllerLocalisationReturnAction extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('localisation/return_action');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		$this->getList();
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('localisation/return_action');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		$this->getForm();
 	}
 
-	public function edit() {
+	public function edit(): void {
 		$this->load->language('localisation/return_action');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		$this->getForm();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('localisation/return_action');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -256,7 +256,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		$this->response->setOutput($this->load->view('localisation/return_action_list', $data));
 	}
 
-	protected function getForm() {
+	protected function getForm(): void {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['return_action_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -331,7 +331,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		$this->response->setOutput($this->load->view('localisation/return_action_form', $data));
 	}
 
-	protected function validateForm() {
+	protected function validateForm(): bool {
 		if (!$this->user->hasPermission('modify', 'localisation/return_action')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -345,7 +345,7 @@ class ControllerLocalisationReturnAction extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete() {
+	protected function validateDelete(): bool {
 		if (!$this->user->hasPermission('modify', 'localisation/return_action')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

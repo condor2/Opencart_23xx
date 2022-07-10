@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->language->load('extension/module/klarna_checkout_module');
 
 		$this->load->model('extension/payment/klarna_checkout');
@@ -70,15 +70,11 @@ class ControllerExtensionModuleKlarnaCheckoutModule extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/klarna_checkout_module', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/klarna_checkout_module')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
+		return !$this->error;
 	}
 }

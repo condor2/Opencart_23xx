@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleDividoCalculator extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/divido_calculator');
 		$this->load->model('setting/setting');
 
@@ -65,7 +65,7 @@ class ControllerExtensionModuleDividoCalculator extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/divido_calculator', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/divido_calculator')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

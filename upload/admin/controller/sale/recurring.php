@@ -1,8 +1,8 @@
 <?php
 class ControllerSaleRecurring extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('sale/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerSaleRecurring extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		if (isset($this->request->get['filter_order_recurring_id'])) {
 			$filter_order_recurring_id = (int)$this->request->get['filter_order_recurring_id'];
 		} else {
@@ -316,7 +316,7 @@ class ControllerSaleRecurring extends Controller {
 		$this->response->setOutput($this->load->view('sale/recurring_list', $data));
 	}
 
-	public function info() {
+	public function info(): object|null {
 		$this->load->model('sale/recurring');
 		
 		if (isset($this->request->get['order_recurring_id'])) {
@@ -478,6 +478,7 @@ class ControllerSaleRecurring extends Controller {
 			$data['footer'] = $this->load->controller('common/footer');
 
 			$this->response->setOutput($this->load->view('sale/recurring_info', $data));
+			return null;
 		} else {
 			return new Action('error/not_found');
 		}

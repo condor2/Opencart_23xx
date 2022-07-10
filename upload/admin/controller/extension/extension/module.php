@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionExtensionModule extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -12,7 +12,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -38,7 +38,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -59,7 +59,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 	
-	public function add() {
+	public function add(): void {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -77,7 +77,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -93,7 +93,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_layout'] = sprintf($this->language->get('text_layout'), $this->url->link('design/layout', 'token=' . $this->session->data['token'], true));
@@ -181,7 +181,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->response->setOutput($this->load->view('extension/extension/module', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/extension/module')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

@@ -1,8 +1,8 @@
 <?php
 class ControllerToolBackup extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('tool/backup');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -81,7 +81,7 @@ class ControllerToolBackup extends Controller {
 		$this->response->setOutput($this->load->view('tool/backup', $data));
 	}
 
-	public function backup() {
+	public function backup(): void {
 		$this->load->language('tool/backup');
 
 		if (!isset($this->request->post['backup'])) {

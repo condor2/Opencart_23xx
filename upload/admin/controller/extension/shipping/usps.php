@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionShippingUsps extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/shipping/usps');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -519,7 +519,7 @@ class ControllerExtensionShippingUsps extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/usps', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/usps')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionFraudFraudLabsPro extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/fraud/fraudlabspro');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -137,19 +137,19 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 		$this->response->setOutput($this->load->view('extension/fraud/fraudlabspro', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/fraud/fraudlabspro');
 
 		$this->model_extension_fraud_fraudlabspro->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/fraud/fraudlabspro');
 
 		$this->model_extension_fraud_fraudlabspro->uninstall();
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/fraud/fraudlabspro')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -161,7 +161,7 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 		return !$this->error;
 	}
 
-	public function order() {
+	public function order(): string {
 		$this->load->language('extension/fraud/fraudlabspro');
 
 		$this->load->model('extension/fraud/fraudlabspro');
@@ -402,7 +402,7 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 		}
 	}
 
-	private function fix_case($s) {
+	private function fix_case(string $s) {
 		$s = ucwords(strtolower($s));
 		$s = preg_replace_callback("/( [ a-zA-Z]{1}')([a-zA-Z0-9]{1})/s", create_function('$matches', 'return $matches[1].strtoupper($matches[2]);'), $s);
 		return $s;

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionTotalLowOrderFee extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/total/low_order_fee');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -103,7 +103,7 @@ class ControllerExtensionTotalLowOrderFee extends Controller {
 		$this->response->setOutput($this->load->view('extension/total/low_order_fee', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/total/low_order_fee')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

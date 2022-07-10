@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleStore extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -77,7 +77,7 @@ class ControllerExtensionModuleStore extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/store', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/store')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

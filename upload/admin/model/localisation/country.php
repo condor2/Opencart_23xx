@@ -1,6 +1,6 @@
 <?php
 class ModelLocalisationCountry extends Model {
-	public function addCountry($data) {
+	public function addCountry(array $data): int {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "country SET name = '" . $this->db->escape($data['name']) . "', iso_code_2 = '" . $this->db->escape($data['iso_code_2']) . "', iso_code_3 = '" . $this->db->escape($data['iso_code_3']) . "', address_format = '" . $this->db->escape($data['address_format']) . "', postcode_required = '" . (int)$data['postcode_required'] . "', status = '" . (int)$data['status'] . "'");
 
 		$this->cache->delete('country');
@@ -8,25 +8,25 @@ class ModelLocalisationCountry extends Model {
 		return $this->db->getLastId();
 	}
 
-	public function editCountry($country_id, $data) {
+	public function editCountry(int $country_id, array $data): void {
 		$this->db->query("UPDATE " . DB_PREFIX . "country SET name = '" . $this->db->escape($data['name']) . "', iso_code_2 = '" . $this->db->escape($data['iso_code_2']) . "', iso_code_3 = '" . $this->db->escape($data['iso_code_3']) . "', address_format = '" . $this->db->escape($data['address_format']) . "', postcode_required = '" . (int)$data['postcode_required'] . "', status = '" . (int)$data['status'] . "' WHERE country_id = '" . (int)$country_id . "'");
 
 		$this->cache->delete('country');
 	}
 
-	public function deleteCountry($country_id) {
+	public function deleteCountry(int $country_id): void {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "country WHERE country_id = '" . (int)$country_id . "'");
 
 		$this->cache->delete('country');
 	}
 
-	public function getCountry($country_id) {
+	public function getCountry(int $country_id): array {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "country WHERE country_id = '" . (int)$country_id . "'");
 
 		return $query->row;
 	}
 
-	public function getCountries($data = array()) {
+	public function getCountries(array $data = array()): array {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "country";
 
@@ -96,7 +96,7 @@ class ModelLocalisationCountry extends Model {
 		}
 	}
 
-	public function getTotalCountries() {
+	public function getTotalCountries(): int {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "country`";
 
 		$implode = [];

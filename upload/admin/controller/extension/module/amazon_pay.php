@@ -1,9 +1,8 @@
 <?php
 class ControllerExtensionModuleAmazonPay extends Controller {
+	private array $error = array();
 
-	private $error = array();
-
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/amazon_pay');
 
 		$this->load->model('setting/setting');
@@ -120,7 +119,7 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/amazon_pay', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/amazon_pay')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -128,14 +127,13 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 		return !$this->error;
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/event');
 		$this->model_extension_event->addEvent('amazon_pay', 'catalog/controller/account/logout/after', 'extension/module/amazon_pay/logout');
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/event');
 		$this->model_extension_event->deleteEvent('amazon_pay');
 	}
-
 }

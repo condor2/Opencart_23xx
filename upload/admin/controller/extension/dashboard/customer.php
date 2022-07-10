@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionDashboardCustomer extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/dashboard/customer');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -88,7 +88,7 @@ class ControllerExtensionDashboardCustomer extends Controller {
 		$this->response->setOutput($this->load->view('extension/dashboard/customer_form', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/analytics/google_analytics')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -96,7 +96,7 @@ class ControllerExtensionDashboardCustomer extends Controller {
 		return !$this->error;
 	}
 		
-	public function dashboard() {
+	public function dashboard(): string {
 		$this->load->language('extension/dashboard/customer');
 
 		$data['heading_title'] = $this->language->get('heading_title');

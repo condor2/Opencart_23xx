@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionExtensionPayment extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/payment');
 		
 		$this->load->model('extension/extension');
@@ -10,7 +10,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 		$this->getList();
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->language('extension/extension/payment');
 
 		$this->load->model('extension/extension');
@@ -32,7 +32,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 		$this->getList();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->language('extension/extension/payment');
 
 		$this->load->model('extension/extension');
@@ -49,7 +49,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
@@ -124,7 +124,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 		$this->response->setOutput($this->load->view('extension/extension/payment', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/extension/payment')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

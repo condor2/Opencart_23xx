@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonCron extends Controller {
-	public function index() {
+	public function index(): void {
 		$time = time();
 
 		$this->load->model('setting/cron');

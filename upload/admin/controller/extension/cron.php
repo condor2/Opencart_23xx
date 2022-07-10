@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionCron extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/cron');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerExtensionCron extends Controller {
 		$this->getList();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('extension/cron');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -46,7 +46,7 @@ class ControllerExtensionCron extends Controller {
 		$this->getList();
 	}
 
-	public function getList() {
+	public function getList(): void {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -213,7 +213,7 @@ class ControllerExtensionCron extends Controller {
 		$this->response->setOutput($this->load->view('extension/cron', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/cron')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -221,7 +221,7 @@ class ControllerExtensionCron extends Controller {
 		return !$this->error;
 	}
 
-	public function run() {
+	public function run(): void {
 		$this->load->language('extension/cron');
 
 		$json = array();
@@ -253,7 +253,7 @@ class ControllerExtensionCron extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function enable() {
+	public function enable(): void {
 		$this->load->language('extension/cron');
 
 		$json = array();
@@ -278,7 +278,7 @@ class ControllerExtensionCron extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function disable() {
+	public function disable(): void {
 		$this->load->language('extension/cron');
 
 		$json = array();

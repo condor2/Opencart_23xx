@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleGoogleHangouts extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/google_hangouts');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -83,7 +83,7 @@ class ControllerExtensionModuleGoogleHangouts extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/google_hangouts', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/google_hangouts')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleSlideshow extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/slideshow');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -147,7 +147,7 @@ class ControllerExtensionModuleSlideshow extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/slideshow', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/slideshow')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
