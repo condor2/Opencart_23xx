@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionTotalCredit extends Model {
-	public function getTotal(float $total): void {
+	public function getTotal($total) {
 		$this->load->language('extension/total/credit');
 
 		$balance = $this->customer->getBalance();
@@ -29,7 +29,7 @@ class ModelExtensionTotalCredit extends Model {
 		}
 	}
 
-	public function unconfirm(int $order_id) {: void
+	public function unconfirm(int $order_id): void {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_transaction WHERE order_id = '" . (int)$order_id . "'");
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionTotalReward extends Model {
-	public function getTotal(float $total): array {
+	public function getTotal($total) {
 		if (isset($this->session->data['reward'])) {
 			$this->load->language('extension/total/reward');
 
@@ -51,7 +51,7 @@ class ModelExtensionTotalReward extends Model {
 		}
 	}
 
-	public function confirm(array $order_info, array $order_total): void {
+	public function confirm(array $order_info, array $order_total): int {
 		$this->load->language('extension/total/reward');
 
 		$points = 0;
@@ -70,6 +70,8 @@ class ModelExtensionTotalReward extends Model {
 		} else {
 			return $this->config->get('config_fraud_status_id');
 		}
+
+		return 0;
 	}
 
 	public function unconfirm(int $order_id): void {

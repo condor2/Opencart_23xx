@@ -68,11 +68,11 @@ class ModelExtensionTotalVoucher extends Model {
 				'date_added'       => $voucher_query->row['date_added']
 			);
 		} else {
-			return array;
+			return array();
 		}
 	}
 
-	public function getTotal(float $total): void {
+	public function getTotal($total) {
 		if (isset($this->session->data['voucher'])) {
 			$this->load->language('extension/total/voucher');
 
