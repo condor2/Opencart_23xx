@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionTotalReward extends Model {
-	public function getTotal($total) {
+	public function getTotal(float $total): array {
 		if (isset($this->session->data['reward'])) {
 			$this->load->language('extension/total/reward');
 
@@ -51,7 +51,7 @@ class ModelExtensionTotalReward extends Model {
 		}
 	}
 
-	public function confirm($order_info, $order_total) {
+	public function confirm(array $order_info, array $order_total): void {
 		$this->load->language('extension/total/reward');
 
 		$points = 0;
@@ -72,7 +72,7 @@ class ModelExtensionTotalReward extends Model {
 		}
 	}
 
-	public function unconfirm($order_id) {
+	public function unconfirm(int $order_id): void {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "' AND points < 0");
 	}
 }

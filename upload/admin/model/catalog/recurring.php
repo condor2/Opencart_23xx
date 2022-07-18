@@ -1,7 +1,7 @@
 <?php
 class ModelCatalogRecurring extends Model {
 	public function addRecurring(array $data): int {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "recurring` SET `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (int)$data['status'] . "', `price` = '" . (float)$data['price'] . "', `frequency` = '" . $this->db->escape((string)$data['frequency']) . "', `duration` = '" . (int)$data['duration'] . "', `cycle` = '" . (int)$data['cycle'] . "', `trial_status` = '" . (int)$data['trial_status'] . "', `trial_price` = '" . (float)$data['trial_price'] . "', `trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', `trial_duration` = '" . (int)$data['trial_duration'] . "', `trial_cycle` = '" . (int)$data['trial_cycle'] . "'");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "recurring` SET `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (bool)$data['status'] . "', `price` = '" . (float)$data['price'] . "', `frequency` = '" . $this->db->escape((string)$data['frequency']) . "', `duration` = '" . (int)$data['duration'] . "', `cycle` = '" . (int)$data['cycle'] . "', `trial_status` = '" . (int)$data['trial_status'] . "', `trial_price` = '" . (float)$data['trial_price'] . "', `trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', `trial_duration` = '" . (int)$data['trial_duration'] . "', `trial_cycle` = '" . (int)$data['trial_cycle'] . "'");
 
 		$recurring_id = $this->db->getLastId();
 
@@ -15,7 +15,7 @@ class ModelCatalogRecurring extends Model {
 	public function editRecurring(int $recurring_id, array $data): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "recurring_description` WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 
-		$this->db->query("UPDATE `" . DB_PREFIX . "recurring` SET `price` = '" . (float)$data['price'] . "', `frequency` = '" . $this->db->escape((string)$data['frequency']) . "', `duration` = '" . (int)$data['duration'] . "', `cycle` = '" . (int)$data['cycle'] . "', `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (int)$data['status'] . "', `trial_price` = '" . (float)$data['trial_price'] . "', `trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', `trial_duration` = '" . (int)$data['trial_duration'] . "', `trial_cycle` = '" . (int)$data['trial_cycle'] . "', `trial_status` = '" . (int)$data['trial_status'] . "' WHERE `recurring_id` = '" . (int)$recurring_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "recurring` SET `price` = '" . (float)$data['price'] . "', `frequency` = '" . $this->db->escape((string)$data['frequency']) . "', `duration` = '" . (int)$data['duration'] . "', `cycle` = '" . (int)$data['cycle'] . "', `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (bool)$data['status'] . "', `trial_price` = '" . (float)$data['trial_price'] . "', `trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', `trial_duration` = '" . (int)$data['trial_duration'] . "', `trial_cycle` = '" . (int)$data['trial_cycle'] . "', `trial_status` = '" . (int)$data['trial_status'] . "' WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 
 		foreach ($data['recurring_description'] as $language_id => $recurring_description) {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "recurring_description` SET `recurring_id` = '" . (int)$recurring_id . "', `language_id` = '" . (int)$language_id . "', `name` = '" . $this->db->escape($recurring_description['name']) . "'");

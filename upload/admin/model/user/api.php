@@ -1,7 +1,7 @@
 <?php
 class ModelUserApi extends Model {
 	public function addApi(array $data): int {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "api` SET name = '" . $this->db->escape($data['name']) . "', `key` = '" . $this->db->escape($data['key']) . "', status = '" . (int)$data['status'] . "', date_added = NOW(), date_modified = NOW()");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "api` SET name = '" . $this->db->escape($data['name']) . "', `key` = '" . $this->db->escape($data['key']) . "', status = '" . (bool)$data['status'] . "', date_added = NOW(), date_modified = NOW()");
 
 		$api_id = $this->db->getLastId();
 
@@ -17,7 +17,7 @@ class ModelUserApi extends Model {
 	}
 
 	public function editApi(int $api_id, array $data): void {
-		$this->db->query("UPDATE `" . DB_PREFIX . "api` SET name = '" . $this->db->escape($data['name']) . "', `key` = '" . $this->db->escape($data['key']) . "', status = '" . (int)$data['status'] . "', date_modified = NOW() WHERE api_id = '" . (int)$api_id . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "api` SET name = '" . $this->db->escape($data['name']) . "', `key` = '" . $this->db->escape($data['key']) . "', status = '" . (bool)$data['status'] . "', date_modified = NOW() WHERE api_id = '" . (int)$api_id . "'");
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "api_ip WHERE api_id = '" . (int)$api_id . "'");
 
