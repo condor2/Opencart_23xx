@@ -14,13 +14,13 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 - Vendor folder for some payments
 - Filter on Zone List - 4.0.0.0_b
 - Filter on Country List - 4.0.0.0_b
+- <a href="https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=18892">No FTP on Ocmod Installer</a>
 - Admin SEO URL like in Opencart 3.0.x.x
 
 ## Updates
 - Bootstrap 3.4.1
 - jQuery 3.6.0
 - Summernote v0.8.20
-- OCMod extension installer like in 3.0.x.x. Ocmod.xml not allowed through installer.
 
 ## Removed
 - OpenBay
