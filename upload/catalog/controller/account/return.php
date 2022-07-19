@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountReturn extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/return', '', true);
 
@@ -47,7 +47,7 @@ class ControllerAccountReturn extends Controller {
 		$data['column_customer'] = $this->language->get('column_customer');
 
 		$data['button_view'] = $this->language->get('button_view');
-		$data['button_back'] = $this->language->get('button_back');
+		$data['button_continue'] = $this->language->get('button_continue');
 
 		$this->load->model('account/return');
 
@@ -84,7 +84,7 @@ class ControllerAccountReturn extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($return_total) ? (($page - 1) * $this->config->get($this->config->get('config_theme') . '_product_limit')) + 1 : 0, ((($page - 1) * $this->config->get($this->config->get('config_theme') . '_product_limit')) > ($return_total - $this->config->get($this->config->get('config_theme') . '_product_limit'))) ? $return_total : ((($page - 1) * $this->config->get($this->config->get('config_theme') . '_product_limit')) + $this->config->get($this->config->get('config_theme') . '_product_limit')), $return_total, ceil($return_total / $this->config->get($this->config->get('config_theme') . '_product_limit')));
 
-		$data['back'] = $this->url->link('account/account', '', true);
+		$data['continue'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -96,11 +96,11 @@ class ControllerAccountReturn extends Controller {
 		$this->response->setOutput($this->load->view('account/return_list', $data));
 	}
 
-	public function info() {
+	public function info(): void {
 		$this->load->language('account/return');
 
 		if (isset($this->request->get['return_id'])) {
-			$return_id = $this->request->get['return_id'];
+			$return_id = (int)$this->request->get['return_id'];
 		} else {
 			$return_id = 0;
 		}
@@ -263,7 +263,7 @@ class ControllerAccountReturn extends Controller {
 		}
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('account/return');
 
 		$this->load->model('account/return');
@@ -549,7 +549,7 @@ class ControllerAccountReturn extends Controller {
 		$this->response->setOutput($this->load->view('account/return_form', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->request->post['order_id']) {
 			$this->error['order_id'] = $this->language->get('error_order_id');
 		}
@@ -603,7 +603,7 @@ class ControllerAccountReturn extends Controller {
 		return !$this->error;
 	}
 
-	public function success() {
+	public function success(): void {
 		$this->load->language('account/return');
 
 		$this->document->setTitle($this->language->get('heading_title'));

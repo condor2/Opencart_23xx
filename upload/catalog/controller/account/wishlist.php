@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountWishList extends Controller {
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/wishlist', '', true);
 
@@ -54,9 +54,9 @@ class ControllerAccountWishList extends Controller {
 		$data['column_price'] = $this->language->get('column_price');
 		$data['column_action'] = $this->language->get('column_action');
 
+		$data['button_continue'] = $this->language->get('button_continue');
 		$data['button_cart'] = $this->language->get('button_cart');
 		$data['button_remove'] = $this->language->get('button_remove');
-		$data['button_back'] = $this->language->get('button_back');
 
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
@@ -116,7 +116,7 @@ class ControllerAccountWishList extends Controller {
 			}
 		}
 
-		$data['back'] = $this->url->link('account/account', '', true);
+		$data['continue'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -128,13 +128,13 @@ class ControllerAccountWishList extends Controller {
 		$this->response->setOutput($this->load->view('account/wishlist', $data));
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('account/wishlist');
 
 		$json = array();
 
 		if (isset($this->request->post['product_id'])) {
-			$product_id = $this->request->post['product_id'];
+			$product_id = (int)$this->request->post['product_id'];
 		} else {
 			$product_id = 0;
 		}

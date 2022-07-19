@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountTransaction extends Controller {
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/transaction', '', true);
 
@@ -40,7 +40,6 @@ class ControllerAccountTransaction extends Controller {
 		$data['text_empty'] = $this->language->get('text_empty');
 
 		$data['button_continue'] = $this->language->get('button_continue');
-		$data['button_back'] = $this->language->get('button_back');
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
@@ -82,7 +81,6 @@ class ControllerAccountTransaction extends Controller {
 		$data['total'] = $this->currency->format($this->customer->getBalance(), $this->session->data['currency']);
 
 		$data['continue'] = $this->url->link('account/account', '', true);
-		$data['back'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');

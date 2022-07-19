@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountRecurring extends Controller {
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/recurring', '', true);
 
@@ -45,7 +45,7 @@ class ControllerAccountRecurring extends Controller {
 		$data['column_action'] = $this->language->get('column_action');
 
 		$data['button_view'] = $this->language->get('button_view');
-		$data['button_back'] = $this->language->get('button_back');
+		$data['button_continue'] = $this->language->get('button_continue');
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
@@ -86,7 +86,7 @@ class ControllerAccountRecurring extends Controller {
 
 		$data['pagination'] = $pagination->render();
 
-		$data['back'] = $this->url->link('account/account', '', true);
+		$data['continue'] = $this->url->link('account/account', '', true);
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -98,11 +98,11 @@ class ControllerAccountRecurring extends Controller {
 		$this->response->setOutput($this->load->view('account/recurring_list', $data));
 	}
 
-	public function info() {
+	public function info(): void {
 		$this->load->language('account/recurring');
 
 		if (isset($this->request->get['order_recurring_id'])) {
-			$order_recurring_id = $this->request->get['order_recurring_id'];
+			$order_recurring_id = (int)$this->request->get['order_recurring_id'];
 		} else {
 			$order_recurring_id = 0;
 		}

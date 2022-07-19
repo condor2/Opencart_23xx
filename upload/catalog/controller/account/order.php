@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountOrder extends Controller {
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/order', '', true);
 
@@ -46,7 +46,7 @@ class ControllerAccountOrder extends Controller {
 		$data['column_date_added'] = $this->language->get('column_date_added');
 
 		$data['button_view'] = $this->language->get('button_view');
-		$data['button_back'] = $this->language->get('button_back');
+		$data['button_continue'] = $this->language->get('button_continue');
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
@@ -99,7 +99,7 @@ class ControllerAccountOrder extends Controller {
 		$this->response->setOutput($this->load->view('account/order_list', $data));
 	}
 
-	public function info() {
+	public function info(): void {
 		$this->load->language('account/order');
 
 		if (isset($this->request->get['order_id'])) {
@@ -175,7 +175,7 @@ class ControllerAccountOrder extends Controller {
 
 			$data['button_reorder'] = $this->language->get('button_reorder');
 			$data['button_return'] = $this->language->get('button_return');
-			$data['button_back'] = $this->language->get('button_back');
+			$data['button_continue'] = $this->language->get('button_continue');
 
 			if (isset($this->session->data['error'])) {
 				$data['error_warning'] = $this->session->data['error'];
@@ -365,7 +365,7 @@ class ControllerAccountOrder extends Controller {
 				);
 			}
 
-			$data['back'] = $this->url->link('account/order', '', true);
+			$data['continue'] = $this->url->link('account/order', '', true);
 
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
@@ -406,7 +406,7 @@ class ControllerAccountOrder extends Controller {
 				'href' => $this->url->link('account/order/info', 'order_id=' . $order_id, true)
 			);
 
-			$data['back'] = $this->url->link('account/order', '', true);
+			$data['continue'] = $this->url->link('account/order', '', true);
 
 			$data['column_left'] = $this->load->controller('common/column_left');
 			$data['column_right'] = $this->load->controller('common/column_right');
@@ -419,7 +419,7 @@ class ControllerAccountOrder extends Controller {
 		}
 	}
 
-	public function reorder() {
+	public function reorder(): void {
 		$this->load->language('account/order');
 
 		if (isset($this->request->get['order_id'])) {

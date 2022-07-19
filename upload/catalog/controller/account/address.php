@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountAddress extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -18,7 +18,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getList();
 	}
 
-	public function add() {
+	public function add(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -58,7 +58,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getForm();
 	}
 
-	public function edit() {
+	public function edit(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -114,7 +114,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getForm();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -164,7 +164,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
@@ -262,7 +262,7 @@ class ControllerAccountAddress extends Controller {
 		$this->response->setOutput($this->load->view('account/address_list', $data));
 	}
 
-	protected function getForm() {
+	protected function getForm(): void {
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -312,7 +312,7 @@ class ControllerAccountAddress extends Controller {
 		$data['entry_zone'] = $this->language->get('entry_zone');
 		$data['entry_default'] = $this->language->get('entry_default');
 
-		$data['button_save'] = $this->language->get('button_save');
+		$data['button_continue'] = $this->language->get('button_continue');
 		$data['button_back'] = $this->language->get('button_back');
 		$data['button_upload'] = $this->language->get('button_upload');
 
@@ -484,7 +484,7 @@ class ControllerAccountAddress extends Controller {
 		$this->response->setOutput($this->load->view('account/address_form', $data));
 	}
 
-	protected function validateForm() {
+	protected function validateForm(): bool {
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
@@ -533,7 +533,7 @@ class ControllerAccountAddress extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete() {
+	protected function validateDelete(): bool {
 		if ($this->model_account_address->getTotalAddresses() == 1) {
 			$this->error['warning'] = $this->language->get('error_delete');
 		}

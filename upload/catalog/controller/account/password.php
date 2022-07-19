@@ -1,8 +1,8 @@
 <?php
 class ControllerAccountPassword extends Controller {
-	private $error = array();
+	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/password', '', true);
 
@@ -59,7 +59,7 @@ class ControllerAccountPassword extends Controller {
 		$data['entry_password'] = $this->language->get('entry_password');
 		$data['entry_confirm'] = $this->language->get('entry_confirm');
 
-		$data['button_save'] = $this->language->get('button_save');
+		$data['button_continue'] = $this->language->get('button_continue');
 		$data['button_back'] = $this->language->get('button_back');
 
 		if (isset($this->error['password'])) {
@@ -100,7 +100,7 @@ class ControllerAccountPassword extends Controller {
 		$this->response->setOutput($this->load->view('account/password', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
 			$this->error['password'] = $this->language->get('error_password');
 		}

@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateEdit extends Controller {
-	private $error = array();
+	private array $error = array();
 
 	public function index() {
 		if (!$this->affiliate->isLogged()) {
