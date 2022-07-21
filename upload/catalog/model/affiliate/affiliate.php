@@ -115,7 +115,7 @@ class ModelAffiliateAffiliate extends Model {
 		return (int)$query->row['total'];
 	}
 
-	public function addTransaction(int $affiliate_id, float $amount = 0, int $order_id = 0): void {
+	public function addTransaction(int $affiliate_id, float $amount = 0, int $order_id = 0): int {
 		$affiliate_info = $this->getAffiliate($affiliate_id);
 
 		if ($affiliate_info) {

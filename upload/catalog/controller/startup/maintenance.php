@@ -1,6 +1,6 @@
 <?php
 class ControllerStartupMaintenance extends Controller {
-	public function index() {
+	public function index(): object|null {
 		if ($this->config->get('config_maintenance')) {
 			// Route
 			if (isset($this->request->get['route']) && $this->request->get['route'] != 'startup/router') {
@@ -21,5 +21,7 @@ class ControllerStartupMaintenance extends Controller {
 				return new Action('common/maintenance');
 			}
 		}
+
+		return null;
 	}
 }

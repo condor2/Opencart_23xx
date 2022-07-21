@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionCaptchaBasicCaptcha extends Controller {
-	public function index($error = array()) {
+	public function index($error = array()): string {
 		$this->load->language('extension/captcha/basic_captcha');
 
 		$data['text_captcha'] = $this->language->get('text_captcha');
@@ -18,7 +18,7 @@ class ControllerExtensionCaptchaBasicCaptcha extends Controller {
 		return $this->load->view('extension/captcha/basic_captcha', $data);
 	}
 
-	public function validate() {
+	public function validate(): bool {
 		$this->load->language('extension/captcha/basic_captcha');
 
 		if (empty($this->session->data['captcha']) || ($this->session->data['captcha'] != $this->request->post['captcha'])) {
@@ -26,7 +26,7 @@ class ControllerExtensionCaptchaBasicCaptcha extends Controller {
 		}
 	}
 
-	public function captcha() {
+	public function captcha(): void {
 		$this->session->data['captcha'] = substr(sha1(mt_rand()), 17, 6);
 
 		$image = imagecreatetruecolor(150, 35);

@@ -2,7 +2,7 @@
 class ControllerAffiliatePassword extends Controller {
 	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		if (!$this->affiliate->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('affiliate/password', '', true);
 
@@ -100,7 +100,7 @@ class ControllerAffiliatePassword extends Controller {
 		$this->response->setOutput($this->load->view('affiliate/password', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
 			$this->error['password'] = $this->language->get('error_password');
 		}

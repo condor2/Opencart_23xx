@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateTracking extends Controller {
-	public function index() {
+	public function index(): void {
 		if (!$this->affiliate->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('affiliate/tracking', '', true);
 
@@ -54,7 +54,7 @@ class ControllerAffiliateTracking extends Controller {
 		$this->response->setOutput($this->load->view('affiliate/tracking', $data));
 	}
 
-	public function autocomplete() {
+	public function autocomplete(): void {
 		$json = array();
 
 		if (isset($this->request->get['filter_name'])) {

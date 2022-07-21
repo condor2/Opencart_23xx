@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionTotalShipping extends Controller {
-	public function index() {
+	public function index(): string {
 		if ($this->config->get('shipping_status') && $this->config->get('shipping_estimator') && $this->cart->hasShipping()) {
 			$this->load->language('extension/total/shipping');
 
@@ -52,7 +52,7 @@ class ControllerExtensionTotalShipping extends Controller {
 		}
 	}
 
-	public function quote() {
+	public function quote(): void {
 		$this->load->language('extension/total/shipping');
 
 		$json = array();
@@ -170,7 +170,7 @@ class ControllerExtensionTotalShipping extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function shipping() {
+	public function shipping(): void {
 		$this->load->language('extension/total/shipping');
 
 		$json = array();
@@ -199,7 +199,7 @@ class ControllerExtensionTotalShipping extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function country() {
+	public function country(): void {
 		$json = array();
 
 		$this->load->model('localisation/country');

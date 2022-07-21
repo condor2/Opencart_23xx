@@ -2,7 +2,7 @@
 class ControllerProductProduct extends Controller {
 	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('product/product');
 
 		$data['breadcrumbs'] = array();
@@ -563,7 +563,7 @@ class ControllerProductProduct extends Controller {
 		}
 	}
 
-	public function review() {
+	public function review(): void {
 		$this->load->language('product/product');
 
 		$this->load->model('catalog/review');
@@ -604,7 +604,7 @@ class ControllerProductProduct extends Controller {
 		$this->response->setOutput($this->load->view('product/review', $data));
 	}
 
-	public function write() {
+	public function write(): void {
 		$this->load->language('product/product');
 
 		$json = array();
@@ -644,24 +644,24 @@ class ControllerProductProduct extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function getRecurringDescription() {
+	public function getRecurringDescription(): void {
 		$this->load->language('product/product');
 		$this->load->model('catalog/product');
 
 		if (isset($this->request->post['product_id'])) {
-			$product_id = $this->request->post['product_id'];
+			$product_id = (int)$this->request->post['product_id'];
 		} else {
 			$product_id = 0;
 		}
 
 		if (isset($this->request->post['recurring_id'])) {
-			$recurring_id = $this->request->post['recurring_id'];
+			$recurring_id = (int)$this->request->post['recurring_id'];
 		} else {
 			$recurring_id = 0;
 		}
 
 		if (isset($this->request->post['quantity'])) {
-			$quantity = $this->request->post['quantity'];
+			$quantity = (int)$this->request->post['quantity'];
 		} else {
 			$quantity = 1;
 		}

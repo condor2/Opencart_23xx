@@ -1,17 +1,17 @@
 <?php
 class ControllerStartupError extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->registry->set('log', new Log($this->config->get('config_error_filename')));
-		
+
 		set_error_handler(array($this, 'handler'));	
 	}
-	
-	public function handler($code, $message, $file, $line) {
+
+	public function handler(string $code, string $message, string $file, string $line): bool {
 		// error suppressed with @
 		if (error_reporting() === 0) {
 			return false;
 		}
-	
+
 		switch ($code) {
 			case E_NOTICE:
 			case E_USER_NOTICE:
@@ -29,15 +29,15 @@ class ControllerStartupError extends Controller {
 				$error = 'Unknown';
 				break;
 		}
-	
+
 		if ($this->config->get('config_error_display')) {
 			echo '<b>' . $error . '</b>: ' . $message . ' in <b>' . $file . '</b> on line <b>' . $line . '</b>';
 		}
-	
+
 		if ($this->config->get('config_error_log')) {
 			$this->log->write('PHP ' . $error . ':  ' . $message . ' in ' . $file . ' on line ' . $line);
 		}
-	
+
 		return true;
-	} 
-} 
+	}
+}

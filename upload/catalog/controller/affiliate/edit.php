@@ -2,7 +2,7 @@
 class ControllerAffiliateEdit extends Controller {
 	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		if (!$this->affiliate->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('affiliate/edit', '', true);
 
@@ -261,7 +261,7 @@ class ControllerAffiliateEdit extends Controller {
 		$this->response->setOutput($this->load->view('affiliate/edit', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
@@ -308,7 +308,7 @@ class ControllerAffiliateEdit extends Controller {
 		return !$this->error;
 	}
 
-	public function country() {
+	public function country(): void {
 		$json = array();
 
 		$this->load->model('localisation/country');

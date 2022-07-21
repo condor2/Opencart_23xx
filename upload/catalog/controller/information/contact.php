@@ -2,7 +2,7 @@
 class ControllerInformationContact extends Controller {
 	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('information/contact');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -159,7 +159,7 @@ class ControllerInformationContact extends Controller {
 		$this->response->setOutput($this->load->view('information/contact', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
 			$this->error['name'] = $this->language->get('error_name');
 		}
@@ -184,7 +184,7 @@ class ControllerInformationContact extends Controller {
 		return !$this->error;
 	}
 
-	public function success() {
+	public function success(): void {
 		$this->load->language('information/contact');
 
 		$this->document->setTitle($this->language->get('heading_title'));

@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateTransaction extends Controller {
-	public function index() {
+	public function index(): void {
 		if (!$this->affiliate->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('affiliate/transaction', '', true);
 

@@ -2,7 +2,7 @@
 class ControllerAffiliateForgotten extends Controller {
 	private array $error = array();
 
-	public function index() {
+	public function index(): void {
 		if ($this->affiliate->isLogged()) {
 			$this->response->redirect($this->url->link('affiliate/account', '', true));
 		}
@@ -110,7 +110,7 @@ class ControllerAffiliateForgotten extends Controller {
 		$this->response->setOutput($this->load->view('affiliate/forgotten', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
 		} elseif (!$this->model_affiliate_affiliate->getTotalAffiliatesByEmail($this->request->post['email'])) {
