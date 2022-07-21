@@ -20,6 +20,8 @@ class ControllerExtensionTotalVoucher extends Controller {
 
 			return $this->load->view('extension/total/voucher', $data);
 		}
+
+		return '';
 	}
 
 	public function voucher(): void {

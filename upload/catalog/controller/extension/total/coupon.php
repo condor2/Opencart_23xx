@@ -20,6 +20,8 @@ class ControllerExtensionTotalCoupon extends Controller {
 
 			return $this->load->view('extension/total/coupon', $data);
 		}
+
+		return '';
 	}
 
 	public function coupon(): void {
