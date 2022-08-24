@@ -716,7 +716,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						$transaction['payment_status'] = 'Failed';
 						$this->model_extension_payment_pp_express->addTransaction($transaction, $call_data);
 						$this->response->redirect($this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $paypal_order['order_id'], true));
-					} else if ($result['ACK'] != 'Failure' && $result['ACK'] != 'FailureWithWarning') {
+					} elseif ($result['ACK'] != 'Failure' && $result['ACK'] != 'FailureWithWarning') {
 
 						$transaction['transaction_id'] = $result['REFUNDTRANSACTIONID'];
 						$transaction['payment_type'] = $result['REFUNDSTATUS'];

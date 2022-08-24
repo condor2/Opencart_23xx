@@ -95,7 +95,7 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 				$this->session->data['guest']['telephone'] = '';
 				$this->session->data['guest']['fax'] = '';
 				$this->response->redirect($this->url->link('extension/payment/amazon_login_pay/address', '', true));
-			} else if ($customer_info) {
+			} elseif ($customer_info) {
 				if ($this->validate($user->email)) {
 					unset($this->session->data['guest']);
 

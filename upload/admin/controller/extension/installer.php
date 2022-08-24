@@ -262,11 +262,11 @@ class ControllerExtensionInstaller extends Controller {
 				// Update from newer OpenCart versions:
 				if (substr($destination, 0, 5) == 'admin') {
 					$destination = DIR_APPLICATION . substr($destination, 5);
-				} else if (substr($destination, 0, 7) == 'catalog') {
+				} elseif (substr($destination, 0, 7) == 'catalog') {
 					$destination = DIR_CATALOG . substr($destination, 7);
-				} else if (substr($destination, 0, 5) == 'image') {
+				} elseif (substr($destination, 0, 5) == 'image') {
 					$destination = DIR_IMAGE . substr($destination, 5);
-				} else if (substr($destination, 0, 6) == 'system') {
+				} elseif (substr($destination, 0, 6) == 'system') {
 					$destination = DIR_SYSTEM . substr($destination, 6);
 				} else {
 					$destination = $root.$destination;

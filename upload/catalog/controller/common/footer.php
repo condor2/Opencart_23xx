@@ -53,7 +53,7 @@ class ControllerCommonFooter extends Controller {
 
 			if (isset($this->request->server['HTTP_X_REAL_IP'])) {
 				$ip = $this->request->server['HTTP_X_REAL_IP'];
-			} else if (isset($this->request->server['REMOTE_ADDR'])) {
+			} elseif (isset($this->request->server['REMOTE_ADDR'])) {
 				$ip = $this->request->server['REMOTE_ADDR'];
 			} else {
 				$ip = '';
