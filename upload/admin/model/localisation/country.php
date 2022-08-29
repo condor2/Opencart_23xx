@@ -20,7 +20,7 @@ class ModelLocalisationCountry extends Model {
 		$this->cache->delete('country');
 	}
 
-	public function getCountry(int $country_id): array {
+	public function getCountry($country_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "country WHERE country_id = '" . (int)$country_id . "'");
 
 		return $query->row;
