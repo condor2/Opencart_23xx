@@ -133,11 +133,6 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
                     <?php } ?></td>
-                  <td class="text-left"><?php if ($sort == 'c.ip') { ?>
-                    <a href="<?php echo $sort_ip; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_ip; ?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo $sort_ip; ?>"><?php echo $column_ip; ?></a>
-                    <?php } ?></td>
                   <td class="text-left"><?php if ($sort == 'c.date_added') { ?>
                     <a href="<?php echo $sort_date_added; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_date_added; ?></a>
                     <?php } else { ?>
@@ -159,7 +154,6 @@
                   <td class="text-left"><?php echo $customer['email']; ?></td>
                   <td class="text-left"><?php echo $customer['customer_group']; ?></td>
                   <td class="text-left"><?php echo $customer['status']; ?></td>
-                  <td class="text-left"><?php echo $customer['ip']; ?></td>
                   <td class="text-left"><?php echo $customer['date_added']; ?></td>
                   <td class="text-right"><?php if ($customer['approve']) { ?>
                     <a href="<?php echo $customer['approve']; ?>" data-toggle="tooltip" title="<?php echo $button_approve; ?>" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i></a>
