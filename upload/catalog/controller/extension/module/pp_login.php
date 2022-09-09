@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModulePPLogin extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index() {
 		if (!$this->customer->isLogged()) {

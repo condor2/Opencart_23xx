@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionCurrencyFixer extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		$this->load->language('extension/currency/fixer');

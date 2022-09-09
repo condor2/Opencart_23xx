@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateForgotten extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		if ($this->affiliate->isLogged()) {

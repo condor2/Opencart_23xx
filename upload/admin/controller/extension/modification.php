@@ -5,7 +5,7 @@
  * https://github.com/opencart/opencart/wiki/Modification-System
  */
 class ControllerExtensionModification extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		$this->load->language('extension/modification');

@@ -1,6 +1,6 @@
 <?php
 class ControllerUserApi extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		$this->load->language('user/api');

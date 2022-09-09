@@ -1,6 +1,6 @@
 <?php
 class ControllerSaleRecurring extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		$this->load->language('sale/recurring');

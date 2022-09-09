@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionShippingUsps extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		$this->load->language('extension/shipping/usps');

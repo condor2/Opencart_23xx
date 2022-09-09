@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonReset extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {

@@ -1,6 +1,6 @@
 <?php
 class ControllerMarketingContact extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');

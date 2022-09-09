@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPPProIframe extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index() {
 		$this->load->language('extension/payment/pp_pro_iframe');

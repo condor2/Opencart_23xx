@@ -1,6 +1,6 @@
 <?php
 class ControllerSaleVoucherTheme extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index(): void {
 		$this->load->language('sale/voucher_theme');

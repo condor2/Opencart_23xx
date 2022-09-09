@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentAuthorizeNetSim extends Controller {
-	private array $error = array();
+	private $error = array();
 
 	public function index() {
 		$this->load->language('extension/payment/authorizenet_sim');
