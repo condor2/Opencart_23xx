@@ -1,8 +1,10 @@
 <?php
 class ModelUpgrade1003 extends Model {
 	public function upgrade() {
-
 		// affiliate_activity
+		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate_activity'");
+		
+		if ($query->num_rows) {
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate_activity' AND COLUMN_NAME = 'activity_id'");
 
 		if ($query->num_rows) {
@@ -92,6 +94,9 @@ class ModelUpgrade1003 extends Model {
 		}
 
 		// affiliate_activity
+		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate_activity'");
+
+		if ($query->num_rows) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "affiliate_activity` WHERE data LIKE 'a:%'");
 
 		foreach ($query->rows as $result) {
