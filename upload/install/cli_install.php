@@ -142,8 +142,8 @@ function install($options) {
 
 function check_requirements() {
 	$error = null;
-	if (phpversion() < '7.3') {
-		$error = 'Warning: You need to use PHP 7.3+ or above for OpenCart to work!';
+	if (version_compare(phpversion(), '8.0.0', '<')) {
+		$error .= 'ERROR: You need to use PHP8+ or above for OpenCart to work!' . "\n";
 	}
 
 	if (!ini_get('file_uploads')) {
@@ -209,8 +209,6 @@ function setup_db($data) {
 		}
 
 		$db->query("SET CHARACTER SET utf8");
-
-		$db->query("SET @@session.sql_mode = ''");
 
 		$db->query("DELETE FROM `" . $data['db_prefix'] . "user` WHERE user_id = '1'");
 
