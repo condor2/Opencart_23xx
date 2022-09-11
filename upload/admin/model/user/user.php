@@ -122,7 +122,7 @@ class ModelUserUser extends Model {
 		return $query->row;
 	}
 
-	public function deleteLoginAttempts(string $username): array {
+	public function deleteLoginAttempts(string $username): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_login` WHERE email = '" . $this->db->escape(utf8_strtolower($username)) . "'");
 	}
 }
