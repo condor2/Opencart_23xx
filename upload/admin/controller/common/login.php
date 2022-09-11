@@ -114,7 +114,7 @@ class ControllerCommonLogin extends Controller {
 
 				$this->model_user_user->addLoginAttempt($this->request->post['username']);
 
-				unset($this->session->data['user_token']);
+				unset($this->session->data['token']);
 			} else {
 				$this->model_user_user->deleteLoginAttempts($this->request->post['username']);
 			}
