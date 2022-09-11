@@ -376,7 +376,7 @@ class ControllerProductSearch extends Controller {
 
 			sort($limits);
 
-			foreach($limits as $value) {
+			foreach ($limits as $value) {
 				$data['limits'][] = array(
 					'text'  => $value,
 					'value' => $value,
@@ -445,7 +445,7 @@ class ControllerProductSearch extends Controller {
 				$this->load->model('account/search');
 
 				if ($this->customer->isLogged()) {
-					$customer_id = $this->customer->getId();
+					$customer_id = (int)$this->customer->getId();
 				} else {
 					$customer_id = 0;
 				}

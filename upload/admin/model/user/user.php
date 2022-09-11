@@ -105,4 +105,24 @@ class ModelUserUser extends Model {
 
 		return (int)$query->row['total'];
 	}
+
+	public function addLoginAttempt(string $username): void {
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_login WHERE email = '" . $this->db->escape(utf8_strtolower((string)$username)) . "'");
+
+		if (!$query->num_rows) {
+			$this->db->query("INSERT INTO " . DB_PREFIX . "customer_login SET email = '" . $this->db->escape(utf8_strtolower((string)$username)) . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', total = 1, date_added = '" . $this->db->escape(date('Y-m-d H:i:s')) . "', date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "'");
+		} else {
+			$this->db->query("UPDATE " . DB_PREFIX . "customer_login SET total = (total + 1), date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE customer_login_id = '" . (int)$query->row['customer_login_id'] . "'");
+		}
+	}
+
+	public function getLoginAttempts(string $username): array {
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_login` WHERE email = '" . $this->db->escape(utf8_strtolower($username)) . "'");
+
+		return $query->row;
+	}
+
+	public function deleteLoginAttempts(string $username): array {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_login` WHERE email = '" . $this->db->escape(utf8_strtolower($username)) . "'");
+	}
 }
