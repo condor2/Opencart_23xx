@@ -3,9 +3,9 @@
 error_reporting(E_ALL);
 
 // Check Version
- if (version_compare(phpversion(), '8.0.0', '<')) { 
- 	exit('PHP8.0+ Required'); 
- }
+if (version_compare(phpversion(), '8.0.0', '<')) {
+	exit('PHP8+ Required');
+}
 
 if (!ini_get('date.timezone')) {
 	date_default_timezone_set('UTC');
@@ -48,7 +48,7 @@ if ((isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTP
 // Check IP if forwarded IP
 if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 	$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_X_FORWARDED_FOR'];
-} elseif(!empty($_SERVER['HTTP_CLIENT_IP'])) {
+} elseif (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 	$_SERVER['REMOTE_ADDR'] = $_SERVER['HTTP_CLIENT_IP'];
 }
 
