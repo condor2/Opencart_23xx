@@ -85,11 +85,11 @@ class ModelExtensionPaymentWorldpay extends Model {
 
 	public function getOrder($order_id) {
 
-		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
-		if ($qry->num_rows) {
-			$order = $qry->row;
-			$order['transactions'] = $this->getTransactions($order['worldpay_order_id'], $qry->row['currency_code']);
+		if ($query->num_rows) {
+			$order = $query->row;
+			$order['transactions'] = $this->getTransactions($order['worldpay_order_id'], $query->row['currency_code']);
 
 			return $order;
 		} else {

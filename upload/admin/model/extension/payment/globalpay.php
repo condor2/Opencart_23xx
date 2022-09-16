@@ -216,10 +216,10 @@ class ModelExtensionPaymentGlobalpay extends Model {
 	public function getOrder($order_id) {
 		$this->logger('getOrder - ' . $order_id);
 
-		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "globalpay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "globalpay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
-		if ($qry->num_rows) {
-			$order = $qry->row;
+		if ($query->num_rows) {
+			$order = $query->row;
 			$order['transactions'] = $this->getTransactions($order['globalpay_order_id']);
 
 			$this->logger(print_r($order, 1));
@@ -231,10 +231,10 @@ class ModelExtensionPaymentGlobalpay extends Model {
 	}
 
 	private function getTransactions($globalpay_order_id) {
-		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "globalpay_order_transaction` WHERE `globalpay_order_id` = '" . (int)$globalpay_order_id . "'");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "globalpay_order_transaction` WHERE `globalpay_order_id` = '" . (int)$globalpay_order_id . "'");
 
-		if ($qry->num_rows) {
-			return $qry->rows;
+		if ($query->num_rows) {
+			return $query->rows;
 		} else {
 			return false;
 		}

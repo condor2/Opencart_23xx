@@ -54,11 +54,11 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 	public function getOrder($order_id) {
 
-		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "amazon_login_pay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "amazon_login_pay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
-		if ($qry->num_rows) {
-			$order = $qry->row;
-			$order['transactions'] = $this->getTransactions($order['amazon_login_pay_order_id'], $qry->row['currency_code']);
+		if ($query->num_rows) {
+			$order = $query->row;
+			$order['transactions'] = $this->getTransactions($order['amazon_login_pay_order_id'], $query->row['currency_code']);
 			return $order;
 		} else {
 			return false;
@@ -183,9 +183,9 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 	}
 
 	public function getUnCaptured($amazon_login_pay_order_id) {
-		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "amazon_login_pay_order_transaction` WHERE (`type` = 'refund' OR `type` = 'capture') AND `amazon_login_pay_order_id` = '" . (int)$amazon_login_pay_order_id . "' ORDER BY `date_added`");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "amazon_login_pay_order_transaction` WHERE (`type` = 'refund' OR `type` = 'capture') AND `amazon_login_pay_order_id` = '" . (int)$amazon_login_pay_order_id . "' ORDER BY `date_added`");
 		$uncaptured = array();
-		foreach ($qry->rows as $row) {
+		foreach ($query->rows as $row) {
 			$uncaptured[$row['amazon_capture_id']]['amazon_authorization_id'] = $row['amazon_authorization_id'];
 			$uncaptured[$row['amazon_capture_id']]['amazon_capture_id'] = $row['amazon_capture_id'];
 			if (isset($uncaptured[$row['amazon_capture_id']]['capture_remaining'])) {
