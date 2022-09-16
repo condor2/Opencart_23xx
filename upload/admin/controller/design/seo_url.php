@@ -425,7 +425,7 @@ class ControllerDesignSeoUrl extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 
-		if(isset($this->request->get['url_alias_id']) && $this->request->get['url_alias_id']) {
+		if (isset($this->request->get['url_alias_id']) && $this->request->get['url_alias_id']) {
 			$seo_urls = $this->model_design_seo_url->getSeoUrlsByQueryId($this->request->get['url_alias_id'], $this->request->post['query']);
 		} else {
 			$seo_urls = $this->model_design_seo_url->getSeoUrlsByQuery($this->request->post['query']);

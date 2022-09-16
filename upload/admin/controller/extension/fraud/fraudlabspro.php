@@ -177,7 +177,7 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 			for($i=0; $i<3; $i++){
 				$result = @file_get_contents('https://api.fraudlabspro.com/v1/order/feedback?key=' . $fraudlabspro_key . '&format=json&id=' . $_POST['flp_id'] . '&action=' . $flp_status);
 
-				if($result) break;
+				if ($result) break;
 			}
 
 			// Update fraud status into table
