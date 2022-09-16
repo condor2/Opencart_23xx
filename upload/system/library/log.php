@@ -28,7 +28,7 @@ class Log {
      * @param	string	$message
      */
 	public function write($message) {
-		fwrite($this->handle, date('Y-m-d G:i:s') . ' - ' . print_r($message, true) . "\n");
+		fwrite($this->handle, date('Y-m-d H:i:s') . ' - ' . print_r($message, true) . "\n");
 	}
 	
 	/**
