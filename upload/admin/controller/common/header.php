@@ -98,7 +98,7 @@ class ControllerCommonHeader extends Controller {
 
 			$data['review'] = $this->url->link('catalog/review', 'token=' . $this->session->data['token'] . '&filter_status=0', true);
 
-			// Affliate
+			// Affiliate
 			$this->load->model('marketing/affiliate');
 
 			$affiliate_total = $this->model_marketing_affiliate->getTotalAffiliates(array('filter_approved' => false));
