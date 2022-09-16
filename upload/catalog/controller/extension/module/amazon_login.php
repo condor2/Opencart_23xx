@@ -81,14 +81,14 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 
 					if ($this->config->get('config_tax_customer') == 'payment') {
 						$payment_address = $this->model_account_address->getAddress($this->customer->getAddressId());
-						if ($payment_address){
+						if ($payment_address) {
 							$this->session->data['payment_address'] = $payment_address;
 						}
 					}
 
 					if ($this->config->get('config_tax_customer') == 'shipping') {
 						$shipping_address = $this->model_account_address->getAddress($this->customer->getAddressId());
-						if ($shipping_address){
+						if ($shipping_address) {
 							$this->session->data['shipping_address'] = $shipping_address;
 						}
 					}
@@ -147,14 +147,14 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 
 					if ($this->config->get('config_tax_customer') == 'payment') {
 						$payment_address = $this->model_account_address->getAddress($this->customer->getAddressId());
-						if ($payment_address){
+						if ($payment_address) {
 							$this->session->data['payment_address'] = $payment_address;
 						}
 					}
 
 					if ($this->config->get('config_tax_customer') == 'shipping') {
 						$shipping_address = $this->model_account_address->getAddress($this->customer->getAddressId());
-						if ($shipping_address){
+						if ($shipping_address) {
 							$this->session->data['shipping_address'] = $shipping_address;
 						}
 					}
