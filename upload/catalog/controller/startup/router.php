@@ -3,9 +3,6 @@ class ControllerStartupRouter extends Controller {
 	public function index(): mixed {
 		// Route
 		if (isset($this->request->get['route']) && $this->request->get['route'] != 'startup/router') {
-			if (isset($this->request->get['page']) && (int)$this->request->get['page'] < 1) {
-				$this->request->get['page'] = 1;
-			}
 			$route = $this->request->get['route'];
 		} else {
 			$route = $this->config->get('action_default');
