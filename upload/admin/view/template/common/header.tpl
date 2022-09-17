@@ -60,23 +60,23 @@
         <li><a href="<?php echo $affiliate_approval; ?>"><span class="label label-danger pull-right"><?php echo $affiliate_total; ?></span><?php echo $text_approval; ?></a></li>
       </ul>
     </li>
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-home fa-lg"></i></a>
-      <ul class="dropdown-menu dropdown-menu-right">
-        <li class="dropdown-header"><?php echo $text_store; ?></li>
-        <?php foreach ($stores as $store) { ?>
-        <li><a href="<?php echo $store['href']; ?>" target="_blank"><?php echo $store['name']; ?></a></li>
-        <?php } ?>
-      </ul>
+    <li id="header-profile" class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="<?php echo $image; ?>" alt="<?php echo $firstname; ?> <?php echo $lastname; ?>" title="<?php echo $username; ?>" id="user-profile" class="img-circle" /><span class="hidden-xs hidden-sm hidden-md"> <?php echo $firstname; ?> <?php echo $lastname; ?> <i class="fa fa-caret-down fa-fw"></i></span></a>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li><a href="<?php echo $profile; ?>"><i class="fa fa-user-circle-o fa-fw"></i> <?php echo $text_profile; ?></a></li>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header"><?php echo $text_store; ?></li>
+          <?php foreach ($stores as $store) { ?>
+          <li><a href="<?php echo $store['href']; ?>" target="_blank"><?php echo $store['name']; ?></a></li>
+          <?php } ?>
+          <li role="separator" class="divider"></li>
+          <li class="dropdown-header"><?php echo $text_help; ?></li>
+          <li><a href="https://www.opencart.com" target="_blank"><i class="fa fa-opencart fa-fw"></i> <?php echo $text_homepage; ?></a></li>
+          <li><a href="https://docs.opencart.com" target="_blank"><i class="fa fa-file-text-o fa-fw"></i> <?php echo $text_documentation; ?></a></li>
+          <li><a href="https://forum.opencart.com" target="_blank"><i class="fa fa-comments-o fa-fw"></i> <?php echo $text_support; ?></a></li>
+        </ul>
     </li>
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-life-ring fa-lg"></i></a>
-      <ul class="dropdown-menu dropdown-menu-right">
-        <li class="dropdown-header"><?php echo $text_help; ?></li>
-        <li><a href="https://www.opencart.com" target="_blank"><?php echo $text_homepage; ?></a></li>
-        <li><a href="http://docs.opencart.com" target="_blank"><?php echo $text_documentation; ?></a></li>
-        <li><a href="https://forum.opencart.com" target="_blank"><?php echo $text_support; ?></a></li>
-      </ul>
-    </li>
-    <li><a href="<?php echo $logout; ?>"><span class="hidden-xs hidden-sm hidden-md"><?php echo $text_logout; ?></span> <i class="fa fa-sign-out fa-lg"></i></a></li>
+    <li><a href="<?php echo $logout; ?>"><i class="fa fa-sign-out"></i> <span class="hidden-xs hidden-sm hidden-md"><?php echo $text_logout; ?></span></a></li>
   </ul>
   <?php } ?>
 </header>

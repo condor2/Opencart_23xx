@@ -14,6 +14,7 @@ $_['text_stock']             = 'Out of stock';
 $_['text_review']            = 'Reviews';
 $_['text_return']            = 'Returns';
 $_['text_affiliate']         = 'Affiliates';
+$_['text_profile']           = 'Your Profile';
 $_['text_store']             = 'Stores';
 $_['text_front']             = 'Store Front';
 $_['text_help']              = 'Help';

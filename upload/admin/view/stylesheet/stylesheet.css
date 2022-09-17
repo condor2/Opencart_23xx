@@ -111,6 +111,25 @@ span.hidden-xs, span.hidden-sm, span.hidden-md, span.hidden-lg {
 	top: 8px;
 	left: 6px;
 }
+/* Header Profile */
+#header #header-profile .nav-link {
+    padding: 0px 15px;
+    line-height: 45px;
+}
+#header #header-profile img {
+    max-width: 30px;
+}
+/* Desktop */
+@media (min-width: 992px) {
+    #header #header-profile .nav-link {
+        padding: 0px 10px;
+        line-height: 60px;
+    }
+
+    #header #header-profile img {
+        max-width: 35px;
+    }
+}
 #button-menu {
 	padding: 10px 17px 9px 17px;
 	line-height: 25px;

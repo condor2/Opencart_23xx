@@ -35,6 +35,7 @@ class ControllerCommonHeader extends Controller {
 		$data['text_support'] = $this->language->get('text_support');
 		$data['text_logged'] = sprintf($this->language->get('text_logged'), $this->user->getUserName());
 		$data['text_logout'] = $this->language->get('text_logout');
+		$data['text_profile'] = $this->language->get('text_profile');
 
 		if (!isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
 			$data['logged'] = '';
@@ -45,6 +46,29 @@ class ControllerCommonHeader extends Controller {
 
 			$data['home'] = $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true);
 			$data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], true);
+			$data['profile'] = $this->url->link('common/profile', 'token=' . $this->session->data['token'], true);
+
+			$this->load->model('tool/image');
+
+			$data['firstname'] = '';
+			$data['lastname'] = '';
+			$data['user_group'] = '';
+			$data['image'] = $this->model_tool_image->resize('profile.png', 45, 45);
+
+			$this->load->model('user/user');
+
+			$user_info = $this->model_user_user->getUser($this->user->getId());
+
+			if ($user_info) {
+				$data['firstname'] = $user_info['firstname'];
+				$data['lastname'] = $user_info['lastname'];
+				$data['username']  = $user_info['username'];
+				$data['user_group'] = $user_info['user_group'];
+
+				if (is_file(DIR_IMAGE . html_entity_decode($user_info['image'], ENT_QUOTES, 'UTF-8'))) {
+					$data['image'] = $this->model_tool_image->resize(html_entity_decode($user_info['image'], ENT_QUOTES, 'UTF-8'), 45, 45);
+				}
+			}
 
 			// Orders
 			$this->load->model('sale/order');

@@ -1,16 +1,4 @@
 <nav id="column-left">
-  <div id="profile">
-    <div>
-      <?php if ($image) { ?>
-      <img src="<?php echo $image; ?>" alt="<?php echo $firstname; ?> <?php echo $lastname; ?>" title="<?php echo $firstname; ?> <?php echo $lastname; ?>" class="img-circle" />
-      <?php } else { ?>
-      <i class="fa fa-opencart"></i>
-      <?php } ?>
-    </div>
-    <div>
-      <h4><?php echo $firstname; ?> <?php echo $lastname; ?></h4>
-      <small><?php echo $user_group; ?></small></div>
-  </div>
   <ul id="menu">
     <?php foreach ($menus as $menu) { ?>
     <li id="<?php echo $menu['id']; ?>">
