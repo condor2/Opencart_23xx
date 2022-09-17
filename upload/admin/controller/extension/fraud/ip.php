@@ -38,7 +38,7 @@ class ControllerExtensionFraudIp extends Controller {
 		$data['button_ip_add'] = $this->language->get('button_ip_add');
 
 		$data['tab_general'] = $this->language->get('tab_general');
-        $data['tab_ip'] = $this->language->get('tab_ip');
+		$data['tab_ip'] = $this->language->get('tab_ip');
 
 		$data['token'] = $this->session->data['token'];
 
@@ -116,7 +116,7 @@ class ControllerExtensionFraudIp extends Controller {
 		$this->load->language('extension/fraud/ip');
 
 		$this->load->model('extension/fraud/ip');
-        $this->load->model('customer/customer');
+		$this->load->model('customer/customer');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_loading'] = $this->language->get('text_loading');
@@ -126,7 +126,7 @@ class ControllerExtensionFraudIp extends Controller {
 		$data['column_date_added'] = $this->language->get('column_date_added');
 		$data['column_action'] = $this->language->get('column_action');
 
-        $data['button_remove'] = $this->language->get('button_remove');
+		$data['button_remove'] = $this->language->get('button_remove');
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
