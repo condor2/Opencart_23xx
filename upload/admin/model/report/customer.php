@@ -256,7 +256,7 @@ class ModelReportCustomer extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalCredit(array $data = array()): int {
+	public function getTotalCredit(array $data = array()): float {
 		$sql = "SELECT COUNT(DISTINCT ct.customer_id) AS total FROM `" . DB_PREFIX . "customer_transaction` ct LEFT JOIN `" . DB_PREFIX . "customer` c ON (ct.customer_id = c.customer_id)";
 
 		$implode = array();
@@ -279,7 +279,7 @@ class ModelReportCustomer extends Model {
 
 		$query = $this->db->query($sql);
 
-		return (int)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 
 	public function getCustomersOnline(array $data = array()): array {

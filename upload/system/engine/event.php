@@ -8,7 +8,7 @@ class Event {
 	protected $registry;
 	protected $data = array();
 
-	public function __construct($registry) {
+	public function __construct(object $registry) {
 		$this->registry = $registry;
 	}
 

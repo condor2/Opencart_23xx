@@ -257,25 +257,25 @@ class ModelMarketingAffiliate extends Model {
 		return (int)$query->row['total'];
 	}
 
-	public function getTransactionTotal(int $affiliate_id): int {
+	public function getTransactionTotal(int $affiliate_id): float {
 		$query = $this->db->query("SELECT SUM(amount) AS total FROM " . DB_PREFIX . "affiliate_transaction WHERE affiliate_id = '" . (int)$affiliate_id . "'");
 
-		return (int)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 
-	public function getTotalTransactionsByOrderId(int $order_id): int {
+	public function getTotalTransactionsByOrderId(int $order_id): float {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate_transaction WHERE order_id = '" . (int)$order_id . "'");
 
-		return (int)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 
 	public function getTotalLoginAttempts(string $email): array {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "affiliate_login` WHERE `email` = '" . $this->db->escape($email) . "'");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "affiliate_login` WHERE LCASE(`email`) = '" . $this->db->escape($email) . "'");
 
 		return $query->row;
 	}
 
 	public function deleteLoginAttempts(string $email): void {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "affiliate_login` WHERE `email` = '" . $this->db->escape($email) . "'");
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "affiliate_login` WHERE LCASE(`email`) = '" . $this->db->escape($email) . "'");
 	}
 }

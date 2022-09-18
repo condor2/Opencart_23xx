@@ -42,7 +42,7 @@ class ModelCatalogProduct extends Model {
 				'height'           => $query->row['height'],
 				'length_class_id'  => $query->row['length_class_id'],
 				'subtract'         => $query->row['subtract'],
-				'rating'           => $query->row['rating'],
+				'rating'           => round(($query->row['rating'] === null ? 0 : $query->row['rating'])),
 				'reviews'          => $query->row['reviews'] ? $query->row['reviews'] : 0,
 				'minimum'          => $query->row['minimum'],
 				'sort_order'       => $query->row['sort_order'],
@@ -253,7 +253,7 @@ class ModelCatalogProduct extends Model {
 		$query = $this->db->query($sql);
 
 		foreach ($query->rows as $result) {
-			$product_data[$result['product_id']] = $this->getProduct($result['product_id']);
+			$product_data[$result['product_id']] = $this->model_catalog_product->getProduct($result['product_id']);
 		}
 
 		return $product_data;

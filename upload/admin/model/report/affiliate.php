@@ -36,7 +36,7 @@ class ModelReportAffiliate extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalCommission(array $data = array()): int {
+	public function getTotalCommission(array $data = array()): float {
 		$sql = "SELECT COUNT(DISTINCT affiliate_id) AS total FROM `" . DB_PREFIX . "affiliate_transaction`";
 
 		$implode = array();
@@ -55,7 +55,7 @@ class ModelReportAffiliate extends Model {
 
 		$query = $this->db->query($sql);
 
-		return (int)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 
 	public function getProducts(array $data = array()): array {
