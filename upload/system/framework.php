@@ -10,11 +10,12 @@ $config->load('default');
 $config->load($application_config);
 $registry->set('config', $config);
 
+// Set the default time zone
+date_default_timezone_set($config->get('date_timezone'));
+
 // Log
 $log = new Log($config->get('error_filename'));
 $registry->set('log', $log);
-
-date_default_timezone_set($config->get('date_timezone'));
 
 set_error_handler(function($code, $message, $file, $line) use($log, $config) {
 	// error suppressed with @
