@@ -11,20 +11,20 @@
 * Image class
 */
 class Image {
-	private $file;
-	private $image;
-	private $width;
-	private $height;
-	private $bits;
-	private $mime;
+	private int $width;
+	private int $height;
+	private string $file;
+	private object $image;
+	private string $bits;
+	private string $mime;
 
 	/**
 	 * Constructor
 	 *
-	 * @param	string	$file
+	 * @para string $file
 	 *
  	*/
-	public function __construct($file) {
+	public function __construct(string $file) {
 		if (!extension_loaded('gd')) {
 			exit('Error: PHP GD is not installed!');
 		}
@@ -34,7 +34,7 @@ class Image {
 
 			$info = getimagesize($file);
 
-			$this->width  = $info[0];
+			$this->width = $info[0];
 			$this->height = $info[1];
 			$this->bits = isset($info['bits']) ? $info['bits'] : '';
 			$this->mime = isset($info['mime']) ? $info['mime'] : '';
@@ -49,16 +49,16 @@ class Image {
 				$this->image = imagecreatefromwebp($file);
 			}
 		} else {
-			error_log('Error: Could not load image ' . $file . '!');
+			throw new \Exception('Error: Could not load image ' . $file . '!');
 		}
 	}
 
 	/**
      *
 	 *
-	 * @return	string
+	 * @return string
      */
-	public function getFile() {
+	public function getFile(): string {
 		return $this->file;
 	}
 
@@ -67,25 +67,25 @@ class Image {
 	 *
 	 * @return	array
      */
-	public function getImage() {
+	public function getImage(): object {
 		return $this->image;
 	}
 
 	/**
      *
 	 *
-	 * @return	string
+	 * @return	int
      */
-	public function getWidth() {
+	public function getWidth(): int {
 		return $this->width;
 	}
 
 	/**
      *
 	 *
-	 * @return	string
+	 * @return	int
      */
-	public function getHeight() {
+	public function getHeight(): int {
 		return $this->height;
 	}
 
@@ -94,7 +94,7 @@ class Image {
 	 *
 	 * @return	string
      */
-	public function getBits() {
+	public function getBits(): string {
 		return $this->bits;
 	}
 
@@ -103,7 +103,7 @@ class Image {
 	 *
 	 * @return	string
      */
-	public function getMime() {
+	public function getMime(): string {
 		return $this->mime;
 	}
 
@@ -113,7 +113,7 @@ class Image {
      * @param	string	$file
 	 * @param	int		$quality
      */
-	public function save($file, int $quality = 90) {
+	public function save(string $file, int $quality = 90): void {
 		$info = pathinfo($file);
 
 		$extension = strtolower($info['extension']);
@@ -140,7 +140,7 @@ class Image {
 	 * @param	int	$height
 	 * @param	string	$default
      */
-	public function resize(int $width = 0, int $height = 0, $default = '') {
+	public function resize(int $width = 0, int $height = 0, string $default = ''): void {
 		if (!$this->width || !$this->height) {
 			return;
 		}
@@ -206,43 +206,43 @@ class Image {
      * @param	string	$watermark
 	 * @param	string	$position
      */
-	public function watermark($watermark, $position = 'bottomright') {
+	public function watermark($watermark, string $position = 'bottomright'): void {
 		switch($position) {
 			case 'topleft':
 				$watermark_pos_x = 0;
 				$watermark_pos_y = 0;
 				break;
 			case 'topcenter':
-				$watermark_pos_x = intval(($this->width - $watermark->getWidth()) / 2);
+				$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
 				$watermark_pos_y = 0;
 				break;
 			case 'topright':
-				$watermark_pos_x = $this->width - $watermark->getWidth();
+				$watermark_pos_x = ($this->width - $watermark->getWidth());
 				$watermark_pos_y = 0;
 				break;
 			case 'middleleft':
 				$watermark_pos_x = 0;
-				$watermark_pos_y = intval(($this->height - $watermark->getHeight()) / 2);
+				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
 			case 'middlecenter':
-				$watermark_pos_x = intval(($this->width - $watermark->getWidth()) / 2);
-				$watermark_pos_y = intval(($this->height - $watermark->getHeight()) / 2);
+				$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
+				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
 			case 'middleright':
-				$watermark_pos_x = $this->width - $watermark->getWidth();
-				$watermark_pos_y = intval(($this->height - $watermark->getHeight()) / 2);
+				$watermark_pos_x = ($this->width - $watermark->getWidth());
+				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
 			case 'bottomleft':
 				$watermark_pos_x = 0;
-				$watermark_pos_y = $this->height - $watermark->getHeight();
+				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
 			case 'bottomcenter':
-				$watermark_pos_x = intval(($this->width - $watermark->getWidth()) / 2);
-				$watermark_pos_y = $this->height - $watermark->getHeight();
+				$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
+				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
 			case 'bottomright':
-				$watermark_pos_x = $this->width - $watermark->getWidth();
-				$watermark_pos_y = $this->height - $watermark->getHeight();
+				$watermark_pos_x = ($this->width - $watermark->getWidth());
+				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
 		}
 
@@ -261,7 +261,7 @@ class Image {
 	 * @param	int		$bottom_x
 	 * @param	int		$bottom_y
      */
-	public function crop($top_x, $top_y, $bottom_x, $bottom_y) {
+	public function crop(int $top_x, $top_y, int $bottom_x, int $bottom_y): void {
 		$image_old = $this->image;
 		$this->image = imagecreatetruecolor($bottom_x - $top_x, $bottom_y - $top_y);
 
@@ -278,7 +278,7 @@ class Image {
      * @param	int		$degree
 	 * @param	string	$color
      */
-	public function rotate($degree, $color = 'FFFFFF') {
+	public function rotate(int $degree, string $color = 'FFFFFF'): void {
 		$rgb = $this->html2rgb($color);
 
 		$this->image = imagerotate($this->image, $degree, imagecolorallocate($this->image, $rgb[0], $rgb[1], $rgb[2]));
@@ -291,7 +291,7 @@ class Image {
      *
      *
      */
-	private function filter() {
+	private function filter(): void {
         $args = func_get_args();
 
         call_user_func_array('imagefilter', $args);
@@ -306,7 +306,7 @@ class Image {
 	 * @param	int		$size
 	 * @param	string	$color
      */
-	private function text($text, $x = 0, $y = 0, $size = 5, $color = '000000') {
+	private function text(string $text, int $x = 0, int $y = 0, int $size = 5, string $color = '000000'): void {
 		$rgb = $this->html2rgb($color);
 
 		imagestring($this->image, $size, $x, $y, $text, imagecolorallocate($this->image, $rgb[0], $rgb[1], $rgb[2]));
@@ -316,11 +316,11 @@ class Image {
      *
      *
      * @param	object	$merge
-	 * @param	object	$x
-	 * @param	object	$y
-	 * @param	object	$opacity
+	 * @param	int	$x
+	 * @param	int	$y
+	 * @param	int	$opacity
      */
-	private function merge($merge, $x = 0, $y = 0, $opacity = 100) {
+	private function merge(object $merge, int $x = 0, int $y = 0, int $opacity = 100): void {
 		imagecopymerge($this->image, $merge->getImage(), $x, $y, 0, 0, $merge->getWidth(), $merge->getHeight(), $opacity);
 	}
 
@@ -331,7 +331,7 @@ class Image {
 	 *
 	 * @return	array
      */
-	private function html2rgb($color) {
+	private function html2rgb(string $color): array {
 		if ($color[0] == '#') {
 			$color = substr($color, 1);
 		}

@@ -11,11 +11,11 @@
 * Request class
 */
 class Request {
-	public $get = array();
-	public $post = array();
-	public $cookie = array();
-	public $files = array();
-	public $server = array();
+	public array $get = array();
+	public array $post = array();
+	public array $cookie = array();
+	public array $files = array();
+	public array $server = array();
 	
 	/**
 	 * Constructor
@@ -35,7 +35,7 @@ class Request {
 	 *
      * @return	array
      */
-	public function clean($data) {
+	public function clean(mixed $data): mixed {
 		if (is_array($data)) {
 			foreach ($data as $key => $value) {
 				unset($data[$key]);
