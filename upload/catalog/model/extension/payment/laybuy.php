@@ -175,7 +175,7 @@ class ModelExtensionPaymentLaybuy extends Model {
 
 		$this->load->language('extension/payment/laybuy');
 
-		$data = array_change_key_case($post_data, CASE_LCASE);
+		$data = array_change_key_case($post_data, CASE_LOWER);
 
 		$data['order_id'] = $data['custom'];
 
