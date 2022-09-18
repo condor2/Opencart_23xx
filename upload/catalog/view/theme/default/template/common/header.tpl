@@ -31,7 +31,7 @@
 <link href="<?php echo $link['href']; ?>" rel="<?php echo $link['rel']; ?>" />
 <?php } ?>
 <?php foreach ($scripts as $script) { ?>
-<script src="<?php echo $script; ?>" type="text/javascript"></script>
+<script src="<?php echo $script['href']; ?>" type="text/javascript"></script>
 <?php } ?>
 <?php foreach ($analytics as $analytic) { ?>
 <?php echo $analytic; ?>
