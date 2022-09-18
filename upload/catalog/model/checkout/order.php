@@ -238,7 +238,7 @@ class ModelCheckoutOrder extends Model {
 		}
 	}
 
-	public function addOrderHistory(int $order_id, int $order_status_id, string $comment = '', bool $notify = false, bool $override = false): int {
+	public function addOrderHistory(int $order_id, int $order_status_id, string $comment = '', bool $notify = false, bool $override = false): void {
 		$order_info = $this->getOrder($order_id);
 		
 		if ($order_info) {
