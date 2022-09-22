@@ -127,14 +127,14 @@ class Document {
 	 * @param	string	$position
      */
 	public function addScript(string $href, $position = 'header'): void {
-		$this->scripts[$position][$href] = $href;
+		$this->scripts[$position][$href] = ['href' => $href];
 	}
 
 	/**
-     * 
+     *
      *
      * @param	string	$position
-	 * 
+	 *
 	 * @return	array
      */
 	public function getScripts($position = 'header'): array {
