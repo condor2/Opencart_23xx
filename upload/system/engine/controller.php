@@ -2,15 +2,15 @@
 abstract class Controller {
 	protected $registry;
 
-	public function __construct(object $registry) {
+	public function __construct($registry) {
 		$this->registry = $registry;
 	}
 
-	public function __get(string $key): object {
+	public function __get($key) {
 		return $this->registry->get($key);
 	}
 
-	public function __set(string $key, object $value): void {
+	public function __set($key, $value) {
 		$this->registry->set($key, $value);
 	}
 }

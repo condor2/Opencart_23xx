@@ -2,7 +2,7 @@
 final class Loader {
 	protected $registry;
 
-	public function __construct(object $registry) {
+	public function __construct($registry) {
 		$this->registry = $registry;
 	}
 
@@ -113,7 +113,7 @@ final class Loader {
 		}
 	}
 	
-	public function helper(string $route): void {
+	public function helper($route) {
 		$file = DIR_SYSTEM . 'helper/' . preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route) . '.php';
 
 		if (is_file($file)) {
