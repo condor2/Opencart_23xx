@@ -10,7 +10,6 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 - Bug fixes found on opencart forum and github
 - Currency module from Master Branch - 3.1.0.0b
 - Timezone from Master Branch - 3.1.0.0b
-- Integrated Cron module from Master Branch - 3.1.0.0b
 - Vendor folder for some payments
 - Filter on Zone List - 4.0.0.0_b
 - Filter on Country List - 4.0.0.0_b
@@ -44,15 +43,6 @@ $_['entry_currency_engine']        = 'Currency Rate Engine';
 
 - Copy <b>currency.php</b> from <b>admin/language/en-gb/extension/extension</b> in the same location of your language.
 - Copy <b>currency</b> folder from <b>admin/language/en-gb/extension/</b> in the same location of your language.
-
-<b>Cron & SEO URL</b>
-
-- Edit <b>admin/language/your_language/column_left.php</b> and add this values:
-
-$_['text_cron']                      = 'Cron Jobs';
-$_['text_seo_url']                   = 'SEO URL';
-
-- Copy <b>cron.php from admin/language/en-gb/extension</b> in the same location of your language.
 
 <b>Multilanguage Summernote</b>
 - Edit <b>admin/language/your_language/xx-yy.php</b> and add this value:

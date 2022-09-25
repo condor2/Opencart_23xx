@@ -3,22 +3,22 @@ class ModelUpgrade1008 extends Model {
 	public function upgrade() {
 		//  Option
 		$this->db->query("UPDATE `" . DB_PREFIX . "option` SET `type` = 'radio' WHERE `type` = 'image'");
-		
+
 		// Event
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "event' AND COLUMN_NAME = 'status'");
 
 		if (!$query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "event` ADD `status` TINYINT(1) NOT NULL AFTER `action`");
 		}
-		
+
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "event' AND COLUMN_NAME = 'date_added'");
-		
+
 		if (!$query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "event` ADD `date_added` DATETIME NOT NULL AFTER `status`");
 		}
-		
+
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "extension` WHERE `type` = 'dashboard'");
-		
+
 		if (!$query->num_rows) {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "extension` SET `type` = 'dashboard', `code` = 'activity'");
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "extension` SET `type` = 'dashboard', `code` = 'sale'"); 
@@ -28,7 +28,7 @@ class ModelUpgrade1008 extends Model {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "extension` SET `type` = 'dashboard', `code` = 'map'"); 
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "extension` SET `type` = 'dashboard', `code` = 'customer'"); 
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "extension` SET `type` = 'dashboard', `code` = 'chart'"); 
-		
+
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = '0', `code` = 'dashboard_activity', `key` = 'dashboard_activity_status', `value` = '1', `serialized` = '0'");
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = '0', `code` = 'dashboard_activity', `key` = 'dashboard_activity_sort_order', `value` = '7', `serialized` = '0'");
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = '0', `code` = 'dashboard_sale', `key` = 'dashboard_sale_status', `value` = '1', `serialized` = '0'");
@@ -60,19 +60,6 @@ class ModelUpgrade1008 extends Model {
 		
 		if (!$query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "modification` ADD `extension_install_id` INT(11) NOT NULL AFTER `modification_id`");
-		}
-
-        // Cron
-		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "cron' AND COLUMN_NAME = 'cron_id'");
-
-		if (!$query->num_rows) {
-			$this->db->query("CREATE TABLE `" . DB_PREFIX . "cron` (cron_id int(11) NOT NULL AUTO_INCREMENT, code varchar(64) NOT NULL, cycle varchar(12) NOT NULL, action text NOT NULL, status tinyint(1) NOT NULL, date_added datetime NOT NULL,date_modified datetime NOT NULL, PRIMARY KEY (cron_id)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
-		}
-
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "cron` WHERE `code` = 'currency'");
-
-		if (!$query->num_rows) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "cron` (code, cycle, action, status, date_added, date_modified) VALUES ('currency', 'day', 'cron/currency', 1, '2014-09-25 14:40:00', '2019-08-25 21:12:59');");
 		}
 
         // Event
