@@ -63,6 +63,7 @@ $_['text_picklist']              = 'Dispatch Note';
 // Column
 $_['column_order_id']            = 'Order ID';
 $_['column_customer']            = 'Customer';
+$_['column_store']				 = 'Store';
 $_['column_status']              = 'Status';
 $_['column_date_added']          = 'Date Added';
 $_['column_date_modified']       = 'Date Modified';

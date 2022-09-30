@@ -100,6 +100,14 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_order; ?>"><?php echo $column_order_id; ?></a>
                     <?php } ?></td>
+
+                  <td class="text-left"><?php if ($sort == 'o.store_name') { ?>
+                    <a href="<?php echo $sort_store_name ; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_store ; ?></a>
+                    <?php } else { ?>
+                    <a href="<?php echo $sort_store_name ; ?>"><?php echo $column_store ; ?></a>
+                    <?php } ?></td>
+
+
                   <td class="text-left"><?php if ($sort == 'customer') { ?>
                     <a href="<?php echo $sort_customer; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_customer; ?></a>
                     <?php } else { ?>

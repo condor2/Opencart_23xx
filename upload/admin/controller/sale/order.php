@@ -245,6 +245,7 @@ class ControllerSaleOrder extends Controller {
 		$data['text_loading'] = $this->language->get('text_loading');
 
 		$data['column_order_id'] = $this->language->get('column_order_id');
+		$data['column_store'] = $this->language->get('column_store');
 		$data['column_customer'] = $this->language->get('column_customer');
 		$data['column_status'] = $this->language->get('column_status');
 		$data['column_total'] = $this->language->get('column_total');
@@ -331,6 +332,7 @@ class ControllerSaleOrder extends Controller {
 		}
 
 		$data['sort_order'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . '&sort=o.order_id' . $url, true);
+		$data['sort_store_name'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . '&sort=o.store_name' . $url, true);
 		$data['sort_customer'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . '&sort=customer' . $url, true);
 		$data['sort_status'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . '&sort=order_status' . $url, true);
 		$data['sort_total'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'] . '&sort=o.total' . $url, true);
@@ -395,6 +397,24 @@ class ControllerSaleOrder extends Controller {
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
+
+		$data['stores'] = array();
+
+		$data['stores'][] = array(
+			'store_id' => 0,
+			'name'     => $this->language->get('text_default')
+		);
+
+		$this->load->model('setting/store');
+
+		$stores = $this->model_setting_store->getStores();
+
+		foreach ($stores as $store) {
+			$data['stores'][] = array(
+				'store_id' => $store['store_id'],
+				'name'     => $store['name']
+			);
+		}
 
 		$this->load->model('localisation/order_status');
 
