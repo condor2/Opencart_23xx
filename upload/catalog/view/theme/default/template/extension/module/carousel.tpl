@@ -29,4 +29,4 @@ $('#carousel<?php echo $module; ?>').swiper({
 	autoplay: $('#carousel<?php echo $module; ?> img').length > 5 ? 2500 : 0,
 	loop: true
 });
-//--></script>
+--></script>
