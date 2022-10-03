@@ -6,6 +6,12 @@ class ControllerExtensionModuleCarousel extends Controller {
 		$this->load->model('design/banner');
 		$this->load->model('tool/image');
 
+		// Swipper
+		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/swiper.min.css');
+		$this->document->addStyle('catalog/view/javascript/jquery/swiper/css/opencart.css');
+		$this->document->addScript('catalog/view/javascript/jquery/swiper/js/swiper.jquery.min.js');
+
+		// Owl Carousel
 		$this->document->addStyle('catalog/view/javascript/jquery/owl-carousel/owl.carousel.css');
 		$this->document->addScript('catalog/view/javascript/jquery/owl-carousel/owl.carousel.min.js');
 
