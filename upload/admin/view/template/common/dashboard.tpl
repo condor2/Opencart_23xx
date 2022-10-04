@@ -30,5 +30,6 @@
     </div>
     <?php } ?>
   </div>
+<?php echo $security; ?>
 </div>
 <?php echo $footer; ?>
