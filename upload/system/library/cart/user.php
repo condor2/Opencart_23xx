@@ -1,10 +1,15 @@
 <?php
 namespace Cart;
 class User {
-	private $user_id;
-	private $username;
-	private $permission = array();
+	private int $user_id = 0;
+	private string $username = '';
+	private array $permission = array();
 
+	/**
+	 * Constructor
+	 *
+	 * @param    object  $registry
+	 */
 	public function __construct($registry) {
 		$this->db = $registry->get('db');
 		$this->request = $registry->get('request');
@@ -35,7 +40,15 @@ class User {
 		}
 	}
 
-	public function login($username, $password) {
+	/**
+	 * Login
+	 *
+	 * @param    string  $username
+	 * @param    string  $password
+	 *
+	 * @return   bool
+	 */
+	public function login(string $username, string $password): bool {
 		$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND (password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('" . $this->db->escape(htmlspecialchars($password, ENT_QUOTES)) . "'))))) OR password = '" . $this->db->escape(md5($password)) . "') AND status = '1'");
 
 		if ($user_query->num_rows) {
@@ -61,14 +74,27 @@ class User {
 		}
 	}
 
-	public function logout() {
+	/**
+	 * Logout
+	 *
+	  * @return   void
+	 */
+	public function logout(): void {
 		unset($this->session->data['user_id']);
 
-		$this->user_id = '';
+		$this->user_id = 0;
 		$this->username = '';
 	}
 
-	public function hasPermission($key, $value) {
+	/**
+	 * hasPermission
+	 *
+	 * @param    string  $key
+	 * @param    mixed  $value
+	 *
+	 * @return   bool
+	 */
+	public function hasPermission(string $key, mixed $value: bool) {
 		if (isset($this->permission[$key])) {
 			return in_array($value, $this->permission[$key]);
 		} else {
@@ -76,19 +102,39 @@ class User {
 		}
 	}
 
-	public function isLogged() {
+	/**
+	 * isLogged
+	 *
+	 * @return   bool
+	 */
+	public function isLogged(): bool {
+		return $this->user_id ? true : false;
+	}
+
+	/**
+	 * getId
+	 *
+	 * @return   int
+	 */
+	public function getId(): int {
 		return $this->user_id;
 	}
 
-	public function getId() {
-		return $this->user_id;
-	}
-
-	public function getUserName() {
+	/**
+	 * getUserName
+	 *
+	 * @return   string
+	 */
+	public function getUserName(): string {
 		return $this->username;
 	}
 
-	public function getGroupId() {
+	/**
+	 * getGroupId
+	 *
+	 * @return   int
+	 */
+	public function getGroupId(): int {
 		return $this->user_group_id;
 	}
 }
