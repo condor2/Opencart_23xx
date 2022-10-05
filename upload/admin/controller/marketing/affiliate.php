@@ -1006,6 +1006,40 @@ class ControllerMarketingAffiliate extends Controller {
 			$data['confirm'] = '';
 		}
 
+		// Custom Fields
+		$this->load->model('customer/custom_field');
+
+		$data['custom_fields'] = array();
+
+		$filter_data = array(
+			'sort'  => 'cf.sort_order',
+			'order' => 'ASC'
+		);
+
+		$custom_fields = $this->model_customer_custom_field->getCustomFields($filter_data);
+
+		foreach ($custom_fields as $custom_field) {
+			if ($custom_field['status']) {
+				$data['custom_fields'][] = array(
+					'custom_field_id'    => $custom_field['custom_field_id'],
+					'custom_field_value' => $this->model_customer_custom_field->getCustomFieldValues($custom_field['custom_field_id']),
+					'name'               => $custom_field['name'],
+					'value'              => $custom_field['value'],
+					'type'               => $custom_field['type'],
+					'location'           => $custom_field['location'],
+					'sort_order'         => $custom_field['sort_order']
+				);
+			}
+		}
+
+		if (isset($this->request->post['custom_field'])) {
+			$data['affiliate_custom_field'] = $this->request->post['custom_field'];
+		} elseif (!empty($affiliate_info)) {
+			$data['affiliate_custom_field'] = json_decode($affiliate_info['custom_field'], true);
+		} else {
+			$data['affiliate_custom_field'] = array();
+		}
+
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
