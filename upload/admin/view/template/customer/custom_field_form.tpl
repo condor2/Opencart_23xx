@@ -52,11 +52,6 @@
                 <?php } else { ?>
                 <option value="address"><?php echo $text_address; ?></option>
                 <?php } ?>
-                <?php if ($location == 'affiliate') { ?>
-                <option value="affiliate" selected="selected"><?php echo $text_affiliate; ?></option>
-                <?php } else { ?>
-                <option value="affiliate"><?php echo $text_affiliate; ?></option>
-                <?php } ?>
               </select>
             </div>
           </div>

@@ -86,14 +86,5 @@ class ModelUpgrade1008 extends Model {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'ecb', 'ecb_status', '1', 0);");
 		}
 
-		// Custom_field - Location
-		$this->db->query("ALTER TABLE `" . DB_PREFIX . "custom_field` CHANGE `location` `location` VARCHAR(10) NOT NULL");
-		
-		// Custom_field - Affiliate
-		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate' AND COLUMN_NAME = 'custom_field'");
-		
-		if (!$query->num_rows) {
-			$this->db->query("ALTER TABLE `" . DB_PREFIX . "affiliate` ADD `custom_field` text NOT NULL AFTER `bank_account_number`");
-		}
 	}
 }

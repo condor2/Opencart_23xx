@@ -724,12 +724,6 @@ class ControllerMarketingAffiliate extends Controller {
 			$data['error_code'] = '';
 		}
 
-		if (isset($this->error['custom_field'])) {
-			$data['error_custom_field'] = $this->error['custom_field'];
-		} else {
-			$data['error_custom_field'] = array();
-		}
-
 		$url = '';
 
 		if (isset($this->request->get['filter_name'])) {
@@ -1012,40 +1006,6 @@ class ControllerMarketingAffiliate extends Controller {
 			$data['confirm'] = '';
 		}
 
-		// Custom Fields
-		$this->load->model('customer/custom_field');
-
-		$data['custom_fields'] = array();
-
-		$filter_data = array(
-			'sort'  => 'cf.sort_order',
-			'order' => 'ASC'
-		);
-
-		$custom_fields = $this->model_customer_custom_field->getCustomFields($filter_data);
-
-		foreach ($custom_fields as $custom_field) {
-			if ($custom_field['status']) {
-				$data['custom_fields'][] = array(
-					'custom_field_id'    => $custom_field['custom_field_id'],
-					'custom_field_value' => $this->model_customer_custom_field->getCustomFieldValues($custom_field['custom_field_id']),
-					'name'               => $custom_field['name'],
-					'value'              => $custom_field['value'],
-					'type'               => $custom_field['type'],
-					'location'           => $custom_field['location'],
-					'sort_order'         => $custom_field['sort_order']
-				);
-			}
-		}
-
-		if (isset($this->request->post['custom_field'])) {
-			$data['affiliate_custom_field'] = $this->request->post['custom_field'];
-		} elseif (!empty($affiliate_info)) {
-			$data['affiliate_custom_field'] = json_decode($affiliate_info['custom_field'], true);
-		} else {
-			$data['affiliate_custom_field'] = array();
-		}
-
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -1085,21 +1045,6 @@ class ControllerMarketingAffiliate extends Controller {
 
 			if ($this->request->post['bank_account_number'] == '') {
 				$this->error['bank_account_number'] = $this->language->get('error_bank_account_number');
-			}
-		}
-
-		// Custom field validation
-		if ($customer_info) {
-			$this->load->model('customer/custom_field');
-
-			$custom_fields = $this->model_customer_custom_field->getCustomFields(['filter_customer_group_id' => $customer_info['customer_group_id']]);
-
-			foreach ($custom_fields as $custom_field) {
-				if (($custom_field['location'] == 'affiliate') && $custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['custom_field_id']])) {
-					$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
-				} elseif (($custom_field['location'] == 'affiliate') && ($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !filter_var($this->request->post['custom_field'][$custom_field['custom_field_id']], FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/' . html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8') . '/']])) {
-					$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
-				}
 			}
 		}
 
