@@ -16,6 +16,8 @@ class ControllerCommonSecurity extends Controller {
 		$data['text_admin'] = $this->language->get('text_admin');
 		$data['text_loading'] = $this->language->get('text_loading');
 
+		$data['entry_directory'] = $this->language->get('entry_directory');
+
 		$data['path'] = $this->language->get('path');
 
 		$data['button_move'] = $this->language->get('button_move');
