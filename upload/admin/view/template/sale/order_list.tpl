@@ -43,6 +43,19 @@
                 <label class="control-label" for="input-customer"><?php echo $entry_customer; ?></label>
                 <input type="text" name="filter_customer" value="<?php echo $filter_customer; ?>" placeholder="<?php echo $entry_customer; ?>" id="input-customer" class="form-control" />
               </div>
+              <div class="form-group">
+                <label class="control-label" for="input-store"><?php echo $entry_store; ?></label>
+                <select name="filter_store_id" id="input-store" class="form-control">
+                  <option value=""></option>
+                   <?php foreach ($stores as $store) { ?>
+                    <?php if ($store['store_id'] == $filter_store_id) { ?>
+                     <option value="<?php echo $store['store_id']; ?>" selected="selected"><?php echo $store['name']; ?></option>
+                    <?php } else { ?>
+                     <option value="<?php echo $store['store_id']; ?>"><?php echo $store['name']; ?></option>
+				   <?php } ?>
+                  <?php } ?>
+                </select>
+              </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
