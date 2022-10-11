@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionTotalReward extends Controller {
-	public function index(): string {
+	public function index() {
 		$points = $this->customer->getRewardPoints();
 
 		$points_total = 0;
@@ -34,7 +34,7 @@ class ControllerExtensionTotalReward extends Controller {
 		return '';
 	}
 
-	public function reward(): void {
+	public function reward() {
 		$this->load->language('extension/total/reward');
 
 		$json = array();

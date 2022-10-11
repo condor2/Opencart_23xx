@@ -2,7 +2,7 @@
 class ControllerAccountForgotten extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if ($this->customer->isLogged()) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
@@ -117,7 +117,7 @@ class ControllerAccountForgotten extends Controller {
 		$this->response->setOutput($this->load->view('account/forgotten', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
 		} elseif (!$this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {

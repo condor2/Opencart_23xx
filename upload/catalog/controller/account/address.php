@@ -2,7 +2,7 @@
 class ControllerAccountAddress extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -18,7 +18,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -59,7 +59,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -116,7 +116,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -166,7 +166,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
@@ -264,7 +264,7 @@ class ControllerAccountAddress extends Controller {
 		$this->response->setOutput($this->load->view('account/address_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
@@ -486,7 +486,7 @@ class ControllerAccountAddress extends Controller {
 		$this->response->setOutput($this->load->view('account/address_form', $data));
 	}
 
-	protected function validateForm(): bool {
+	protected function validateForm() {
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
@@ -535,7 +535,7 @@ class ControllerAccountAddress extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete(): bool {
+	protected function validateDelete() {
 		if ($this->model_account_address->getTotalAddresses() == 1) {
 			$this->error['warning'] = $this->language->get('error_delete');
 		}

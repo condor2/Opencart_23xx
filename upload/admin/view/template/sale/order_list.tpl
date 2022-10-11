@@ -100,14 +100,11 @@
                     <?php } else { ?>
                     <a href="<?php echo $sort_order; ?>"><?php echo $column_order_id; ?></a>
                     <?php } ?></td>
-
                   <td class="text-left"><?php if ($sort == 'o.store_name') { ?>
                     <a href="<?php echo $sort_store_name ; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_store ; ?></a>
                     <?php } else { ?>
                     <a href="<?php echo $sort_store_name ; ?>"><?php echo $column_store ; ?></a>
                     <?php } ?></td>
-
-
                   <td class="text-left"><?php if ($sort == 'customer') { ?>
                     <a href="<?php echo $sort_customer; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_customer; ?></a>
                     <?php } else { ?>
@@ -147,6 +144,7 @@
                     <?php } ?>
                     <input type="hidden" name="shipping_code[]" value="<?php echo $order['shipping_code']; ?>" /></td>
                   <td class="text-right"><?php echo $order['order_id']; ?></td>
+                  <td class="text-left"><?php echo $order['store_name']; ?></td>
                   <td class="text-left"><?php echo $order['customer']; ?></td>
                   <td class="text-left"><?php echo $order['order_status']; ?></td>
                   <td class="text-right"><?php echo $order['total']; ?></td>
@@ -157,7 +155,7 @@
                 <?php } ?>
                 <?php } else { ?>
                 <tr>
-                  <td class="text-center" colspan="8"><?php echo $text_no_results; ?></td>
+                  <td class="text-center" colspan="9"><?php echo $text_no_results; ?></td>
                 </tr>
                 <?php } ?>
               </tbody>
@@ -179,6 +177,12 @@ $('#button-filter').on('click', function() {
 
 	if (filter_order_id) {
 		url += '&filter_order_id=' + encodeURIComponent(filter_order_id);
+	}
+
+	var filter_store_id = $('select[name=\'filter_store_id\']').val();
+
+	if (filter_store_id !== '') {
+		url += '&filter_store_id=' + encodeURIComponent(filter_store_id);
 	}
 
 	var filter_customer = $('input[name=\'filter_customer\']').val();

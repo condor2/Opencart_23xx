@@ -1,6 +1,6 @@
 <?php
 class ControllerApiOrder extends Controller {
-	public function add(): void {
+	public function add() {
 		$this->load->language('api/order');
 
 		$json = array();
@@ -368,7 +368,7 @@ class ControllerApiOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('api/order');
 
 		$json = array();
@@ -712,7 +712,7 @@ class ControllerApiOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('api/order');
 
 		$json = array();
@@ -750,7 +750,7 @@ class ControllerApiOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function info(): void {
+	public function info() {
 		$this->load->language('api/order');
 
 		$json = array();
@@ -788,7 +788,7 @@ class ControllerApiOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function history(): void {
+	public function history() {
 		$this->load->language('api/order');
 
 		$json = array();

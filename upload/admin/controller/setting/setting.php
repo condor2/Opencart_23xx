@@ -2,7 +2,7 @@
 class ControllerSettingSetting extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('setting/setting');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -1110,7 +1110,7 @@ class ControllerSettingSetting extends Controller {
 		$this->response->setOutput($this->load->view('setting/setting', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'setting/setting')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -1186,7 +1186,7 @@ class ControllerSettingSetting extends Controller {
 		return !$this->error;
 	}
 	
-	public function theme(): void {
+	public function theme() {
 		// This is only here for compatibility with old themes.
 		if ($this->request->get['theme'] == 'theme_default') {
 			$theme = $this->config->get('theme_default_directory');

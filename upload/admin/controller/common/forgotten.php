@@ -2,7 +2,7 @@
 class ControllerCommonForgotten extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
 			$this->response->redirect($this->url->link('common/dashboard', '', true));
 		}
@@ -96,7 +96,7 @@ class ControllerCommonForgotten extends Controller {
 		$this->response->setOutput($this->load->view('common/forgotten', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
 		} elseif (!$this->model_user_user->getTotalUsersByEmail($this->request->post['email'])) {

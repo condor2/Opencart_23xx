@@ -1,6 +1,6 @@
 <?php
 class ControllerProductManufacturer extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('product/manufacturer');
 
 		$this->load->model('catalog/manufacturer');
@@ -59,7 +59,7 @@ class ControllerProductManufacturer extends Controller {
 		$this->response->setOutput($this->load->view('product/manufacturer_list', $data));
 	}
 
-	public function info(): void {
+	public function info() {
 		$this->load->language('product/manufacturer');
 
 		$this->load->model('catalog/manufacturer');

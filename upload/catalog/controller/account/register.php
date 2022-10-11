@@ -2,7 +2,7 @@
 class ControllerAccountRegister extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if ($this->customer->isLogged()) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
@@ -353,7 +353,7 @@ class ControllerAccountRegister extends Controller {
 		$this->response->setOutput($this->load->view('account/register', $data));
 	}
 
-	private function validate(): bool {
+	private function validate() {
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
@@ -449,7 +449,7 @@ class ControllerAccountRegister extends Controller {
 		return !$this->error;
 	}
 
-	public function customfield(): void {
+	public function customfield() {
 		$json = array();
 
 		$this->load->model('account/custom_field');

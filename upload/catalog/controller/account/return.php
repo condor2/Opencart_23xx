@@ -2,7 +2,7 @@
 class ControllerAccountReturn extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/return', '', true);
 
@@ -96,7 +96,7 @@ class ControllerAccountReturn extends Controller {
 		$this->response->setOutput($this->load->view('account/return_list', $data));
 	}
 
-	public function info(): void {
+	public function info() {
 		$this->load->language('account/return');
 
 		if (isset($this->request->get['return_id'])) {
@@ -263,7 +263,7 @@ class ControllerAccountReturn extends Controller {
 		}
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('account/return');
 
 		$this->load->model('account/return');
@@ -550,7 +550,7 @@ class ControllerAccountReturn extends Controller {
 		$this->response->setOutput($this->load->view('account/return_form', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->request->post['order_id']) {
 			$this->error['order_id'] = $this->language->get('error_order_id');
 		}
@@ -604,7 +604,7 @@ class ControllerAccountReturn extends Controller {
 		return !$this->error;
 	}
 
-	public function success(): void {
+	public function success() {
 		$this->load->language('account/return');
 
 		$this->document->setTitle($this->language->get('heading_title'));

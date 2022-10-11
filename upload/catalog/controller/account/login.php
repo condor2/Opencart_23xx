@@ -2,7 +2,7 @@
 class ControllerAccountLogin extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->model('account/customer');
 
 		// Login override for admin users
@@ -182,7 +182,7 @@ class ControllerAccountLogin extends Controller {
 		$this->response->setOutput($this->load->view('account/login', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		// Check how many login attempts have been made.
 		$login_info = $this->model_account_customer->getLoginAttempts($this->request->post['email']);
 

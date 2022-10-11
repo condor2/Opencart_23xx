@@ -2,7 +2,7 @@
 class ControllerAccountReset extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if ($this->customer->isLogged()) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
@@ -113,7 +113,7 @@ class ControllerAccountReset extends Controller {
 		}
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
 			$this->error['password'] = $this->language->get('error_password');
 		}

@@ -2,7 +2,7 @@
 class ControllerCatalogFilter extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -259,7 +259,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->response->setOutput($this->load->view('catalog/filter_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['filter_group_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -366,7 +366,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->response->setOutput($this->load->view('catalog/filter_form', $data));
 	}
 
-	protected function validateForm(): bool {
+	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'catalog/filter')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -396,7 +396,7 @@ class ControllerCatalogFilter extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete(): bool {
+	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'catalog/filter')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -404,7 +404,7 @@ class ControllerCatalogFilter extends Controller {
 		return !$this->error;
 	}
 
-	public function autocomplete(): void {
+	public function autocomplete() {
 		$json = array();
 
 		if (isset($this->request->get['filter_name'])) {

@@ -2,7 +2,7 @@
 class ControllerAffiliateLogin extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if ($this->affiliate->isLogged()) {
 			$this->response->redirect($this->url->link('affiliate/account', '', true));
 		}
@@ -116,7 +116,7 @@ class ControllerAffiliateLogin extends Controller {
 		$this->response->setOutput($this->load->view('affiliate/login', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		// Check how many login attempts have been made.
 		$login_info = $this->model_affiliate_affiliate->getLoginAttempts($this->request->post['email']);
 				

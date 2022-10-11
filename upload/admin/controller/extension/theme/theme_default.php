@@ -2,7 +2,7 @@
 class ControllerExtensionThemeThemeDefault extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/theme/theme_default');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -360,7 +360,7 @@ class ControllerExtensionThemeThemeDefault extends Controller {
 		$this->response->setOutput($this->load->view('extension/theme/theme_default', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/theme/theme_default')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

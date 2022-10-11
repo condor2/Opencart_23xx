@@ -2,7 +2,7 @@
 class ControllerAccountEdit extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/edit', '', true);
 
@@ -181,7 +181,7 @@ class ControllerAccountEdit extends Controller {
 		$this->response->setOutput($this->load->view('account/edit', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}

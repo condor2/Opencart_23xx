@@ -1,6 +1,6 @@
 <?php
 class ControllerToolBackup extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('tool/backup');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -63,7 +63,7 @@ class ControllerToolBackup extends Controller {
 		$this->response->setOutput($this->load->view('tool/backup', $data));
 	}
 
-	public function import(): void {
+	public function import() {
 		$this->load->language('tool/backup');
 
 		$json = array();
@@ -156,7 +156,7 @@ class ControllerToolBackup extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function export(): void {
+	public function export() {
 		$this->load->language('tool/backup');
 
 		if (!isset($this->request->post['backup'])) {

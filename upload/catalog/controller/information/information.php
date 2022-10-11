@@ -1,6 +1,6 @@
 <?php
 class ControllerInformationInformation extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('information/information');
 
 		$this->load->model('catalog/information');
@@ -75,7 +75,7 @@ class ControllerInformationInformation extends Controller {
 		}
 	}
 
-	public function agree(): void {
+	public function agree() {
 		$this->load->model('catalog/information');
 
 		if (isset($this->request->get['information_id'])) {

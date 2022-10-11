@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionTotalVoucher extends Controller {
-	public function index(): string {
+	public function index() {
 		if ($this->config->get('voucher_status')) {
 			$this->load->language('extension/total/voucher');
 
@@ -24,7 +24,7 @@ class ControllerExtensionTotalVoucher extends Controller {
 		return '';
 	}
 
-	public function voucher(): void {
+	public function voucher() {
 		$this->load->language('extension/total/voucher');
 
 		$json = array();
@@ -55,7 +55,7 @@ class ControllerExtensionTotalVoucher extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function send(string $route, array $output, int $order_id, int $order_status_id): void {
+	public function send(string $route, array $output, int $order_id, int $order_status_id) {
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($order_id);

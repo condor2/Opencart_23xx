@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountOrder extends Controller {
-	public function index(): void {
+	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/order', '', true);
 
@@ -99,7 +99,7 @@ class ControllerAccountOrder extends Controller {
 		$this->response->setOutput($this->load->view('account/order_list', $data));
 	}
 
-	public function info(): void {
+	public function info() {
 		$this->load->language('account/order');
 
 		if (isset($this->request->get['order_id'])) {
@@ -419,7 +419,7 @@ class ControllerAccountOrder extends Controller {
 		}
 	}
 
-	public function reorder(): void {
+	public function reorder() {
 		$this->load->language('account/order');
 
 		if (isset($this->request->get['order_id'])) {

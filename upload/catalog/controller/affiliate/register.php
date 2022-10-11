@@ -2,7 +2,7 @@
 class ControllerAffiliateRegister extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if ($this->affiliate->isLogged()) {
 			$this->response->redirect($this->url->link('affiliate/account', '', true));
 		}
@@ -354,7 +354,7 @@ class ControllerAffiliateRegister extends Controller {
 		$this->response->setOutput($this->load->view('affiliate/register', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
@@ -429,7 +429,7 @@ class ControllerAffiliateRegister extends Controller {
 		return !$this->error;
 	}
 
-	public function country(): void {
+	public function country() {
 		$json = array();
 
 		$this->load->model('localisation/country');

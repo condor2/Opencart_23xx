@@ -3,7 +3,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 
 		$this->load->language('extension/module/amazon_login');
 
@@ -118,7 +118,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/amazon_login', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/module/amazon_login')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -126,12 +126,12 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		return !$this->error;
 	}
 
-	public function install(): void {
+	public function install() {
 			$this->load->model('extension/event');
 			$this->model_extension_event->addEvent('amazon_login', 'catalog/controller/account/logout/after', 'extension/module/amazon_login/logout');
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/event');
 		$this->model_extension_event->deleteEvent('amazon_login');
 	}

@@ -2,7 +2,7 @@
 class ControllerExtensionShippingPickup extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/shipping/pickup');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -88,7 +88,7 @@ class ControllerExtensionShippingPickup extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/pickup', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/pickup')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

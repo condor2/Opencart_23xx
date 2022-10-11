@@ -2,7 +2,7 @@
 class ControllerExtensionDashboardMap extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/dashboard/map');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -88,7 +88,7 @@ class ControllerExtensionDashboardMap extends Controller {
 		$this->response->setOutput($this->load->view('extension/dashboard/map_form', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/analytics/google_analytics')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -96,7 +96,7 @@ class ControllerExtensionDashboardMap extends Controller {
 		return !$this->error;
 	}
 		
-	public function dashboard(): string {
+	public function dashboard() {
 		$this->load->language('extension/dashboard/map');
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -109,7 +109,7 @@ class ControllerExtensionDashboardMap extends Controller {
 		return $this->load->view('extension/dashboard/map_info', $data);
 	}
 
-	public function map(): void {
+	public function map() {
 		$json = array();
 
 		$this->load->model('report/sale');

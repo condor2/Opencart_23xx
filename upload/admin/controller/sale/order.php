@@ -2,7 +2,7 @@
 class ControllerSaleOrder extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -22,7 +22,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -32,7 +32,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getForm();
 	}
 	
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -49,9 +49,13 @@ class ControllerSaleOrder extends Controller {
 			$url = '';
 
 			if (isset($this->request->get['filter_order_id'])) {
-				$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
+				$url .= '&filter_order_id=' . (int)$this->request->get['filter_order_id'];
 			}
-	
+
+			if (isset($this->request->get['filter_store_id'])) {
+				$url .= '&filter_store_id=' . (int)$this->request->get['filter_store_id'];
+			}
+
 			if (isset($this->request->get['filter_customer'])) {
 				$url .= '&filter_customer=' . urlencode(html_entity_decode($this->request->get['filter_customer'], ENT_QUOTES, 'UTF-8'));
 			}
@@ -82,11 +86,17 @@ class ControllerSaleOrder extends Controller {
 		$this->getList();
 	}
 	
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_order_id'])) {
 			$filter_order_id = (int)$this->request->get['filter_order_id'];
 		} else {
 			$filter_order_id = '';
+		}
+
+		if (isset($this->request->get['filter_store_id'])) {
+			$filter_store_id = (int)$this->request->get['filter_store_id'];
+		} else {
+			$filter_store_id = '';
 		}
 
 		if (isset($this->request->get['filter_customer'])) {
@@ -146,7 +156,11 @@ class ControllerSaleOrder extends Controller {
 		$url = '';
 
 		if (isset($this->request->get['filter_order_id'])) {
-			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
+			$url .= '&filter_order_id=' . (int)$this->request->get['filter_order_id'];
+		}
+
+		if (isset($this->request->get['filter_store_id'])) {
+			$url .= '&filter_store_id=' . (int)$this->request->get['filter_store_id'];
 		}
 
 		if (isset($this->request->get['filter_customer'])) {
@@ -158,7 +172,7 @@ class ControllerSaleOrder extends Controller {
 		}
 
 		if (isset($this->request->get['filter_order_status_id'])) {
-			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+			$url .= '&filter_order_status_id=' . (int)$this->request->get['filter_order_status_id'];
 		}
 
 		if (isset($this->request->get['filter_total'])) {
@@ -206,6 +220,7 @@ class ControllerSaleOrder extends Controller {
 
 		$filter_data = array(
 			'filter_order_id'        => $filter_order_id,
+			'filter_store_id'		 => $filter_store_id,
 			'filter_customer'	     => $filter_customer,
 			'filter_order_status'    => $filter_order_status,
 			'filter_order_status_id' => $filter_order_status_id,
@@ -225,6 +240,7 @@ class ControllerSaleOrder extends Controller {
 		foreach ($results as $result) {
 			$data['orders'][] = array(
 				'order_id'      => $result['order_id'],
+				'store_name'    => $result['store_name'],
 				'customer'      => $result['customer'],
 				'order_status'  => $result['order_status'] ? $result['order_status'] : $this->language->get('text_missing'),
 				'total'         => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
@@ -294,7 +310,11 @@ class ControllerSaleOrder extends Controller {
 		$url = '';
 
 		if (isset($this->request->get['filter_order_id'])) {
-			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
+			$url .= '&filter_order_id=' . (int)$this->request->get['filter_order_id'];
+		}
+
+		if (isset($this->request->get['filter_store_id'])) {
+			$url .= '&filter_store_id=' . (int)$this->request->get['filter_store_id'];
 		}
 
 		if (isset($this->request->get['filter_customer'])) {
@@ -342,7 +362,11 @@ class ControllerSaleOrder extends Controller {
 		$url = '';
 
 		if (isset($this->request->get['filter_order_id'])) {
-			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
+			$url .= '&filter_order_id=' . (int)$this->request->get['filter_order_id'];
+		}
+
+		if (isset($this->request->get['filter_store_id'])) {
+			$url .= '&filter_store_id=' . (int)$this->request->get['filter_store_id'];
 		}
 
 		if (isset($this->request->get['filter_customer'])) {
@@ -388,6 +412,7 @@ class ControllerSaleOrder extends Controller {
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($order_total) ? (($page - 1) * $this->config->get('config_limit_admin')) + 1 : 0, ((($page - 1) * $this->config->get('config_limit_admin')) > ($order_total - $this->config->get('config_limit_admin'))) ? $order_total : ((($page - 1) * $this->config->get('config_limit_admin')) + $this->config->get('config_limit_admin')), $order_total, ceil($order_total / $this->config->get('config_limit_admin')));
 
 		$data['filter_order_id'] = $filter_order_id;
+		$data['filter_store_id'] = $filter_store_id;
 		$data['filter_customer'] = $filter_customer;
 		$data['filter_order_status'] = $filter_order_status;
 		$data['filter_order_status_id'] = $filter_order_status_id;
@@ -427,7 +452,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_list', $data));
 	}
 
-	public function getForm(): void {
+	public function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['order_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -510,7 +535,11 @@ class ControllerSaleOrder extends Controller {
 		$url = '';
 
 		if (isset($this->request->get['filter_order_id'])) {
-			$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
+			$url .= '&filter_order_id=' . (int)$this->request->get['filter_order_id'];
+		}
+
+		if (isset($this->request->get['filter_store_id'])) {
+			$url .= '&filter_store_id=' . (int)$this->request->get['filter_store_id'];
 		}
 
 		if (isset($this->request->get['filter_customer'])) {
@@ -806,7 +835,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_form', $data));
 	}
 
-	public function info(): object|null {
+	public function info() {
 		$this->load->model('sale/order');
 
 		if (isset($this->request->get['order_id'])) {
@@ -886,7 +915,11 @@ class ControllerSaleOrder extends Controller {
 			$url = '';
 
 			if (isset($this->request->get['filter_order_id'])) {
-				$url .= '&filter_order_id=' . $this->request->get['filter_order_id'];
+				$url .= '&filter_order_id=' . (int)$this->request->get['filter_order_id'];
+			}
+
+			if (isset($this->request->get['filter_store_id'])) {
+				$url .= '&filter_store_id=' . (int)$this->request->get['filter_store_id'];
 			}
 
 			if (isset($this->request->get['filter_customer'])) {
@@ -1406,7 +1439,7 @@ class ControllerSaleOrder extends Controller {
 		}
 	}
 	
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -1414,7 +1447,7 @@ class ControllerSaleOrder extends Controller {
 		return !$this->error;
 	}
 	
-	public function createInvoiceNo(): void {
+	public function createInvoiceNo() {
 		$this->load->language('sale/order');
 
 		$json = array();
@@ -1443,7 +1476,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function addReward(): void {
+	public function addReward() {
 		$this->load->language('sale/order');
 
 		$json = array();
@@ -1478,7 +1511,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function removeReward(): void {
+	public function removeReward() {
 		$this->load->language('sale/order');
 
 		$json = array();
@@ -1509,7 +1542,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function addCommission(): void {
+	public function addCommission() {
 		$this->load->language('sale/order');
 
 		$json = array();
@@ -1544,7 +1577,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function removeCommission(): void {
+	public function removeCommission() {
 		$this->load->language('sale/order');
 
 		$json = array();
@@ -1575,7 +1608,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function history(): void {
+	public function history() {
 		$this->load->language('sale/order');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
@@ -1621,7 +1654,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_history', $data));
 	}
 
-	public function invoice(): void {
+	public function invoice() {
 		$this->load->language('sale/order');
 
 		$data['title'] = $this->language->get('text_invoice');
@@ -1847,7 +1880,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_invoice', $data));
 	}
 
-	public function shipping(): void {
+	public function shipping() {
 		$this->load->language('sale/order');
 
 		$data['title'] = $this->language->get('text_shipping');

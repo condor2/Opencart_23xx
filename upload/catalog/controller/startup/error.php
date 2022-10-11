@@ -1,12 +1,12 @@
 <?php
 class ControllerStartupError extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->registry->set('log', new Log($this->config->get('config_error_filename')));
 
 		set_error_handler(array($this, 'handler'));	
 	}
 
-	public function handler(string $code, string $message, string $file, string $line): bool {
+	public function handler(string $code, string $message, string $file, string $line) {
 		// error suppressed with @
 		if (!(error_reporting() & $code)) {
 			return false;

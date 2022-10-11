@@ -2,7 +2,7 @@
 class ControllerAccountVoucher extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('account/voucher');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -171,7 +171,7 @@ class ControllerAccountVoucher extends Controller {
 		$this->response->setOutput($this->load->view('account/voucher', $data));
 	}
 
-	public function success(): void {
+	public function success() {
 		$this->load->language('account/voucher');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -206,7 +206,7 @@ class ControllerAccountVoucher extends Controller {
 		$this->response->setOutput($this->load->view('common/success', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if ((utf8_strlen($this->request->post['to_name']) < 1) || (utf8_strlen($this->request->post['to_name']) > 64)) {
 			$this->error['to_name'] = $this->language->get('error_to_name');
 		}

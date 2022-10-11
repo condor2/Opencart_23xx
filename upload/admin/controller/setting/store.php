@@ -2,7 +2,7 @@
 class ControllerSettingStore extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('setting/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -14,7 +14,7 @@ class ControllerSettingStore extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('setting/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -36,7 +36,7 @@ class ControllerSettingStore extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('setting/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -58,7 +58,7 @@ class ControllerSettingStore extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('setting/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -82,7 +82,7 @@ class ControllerSettingStore extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
 		} else {
@@ -193,7 +193,7 @@ class ControllerSettingStore extends Controller {
 		$this->response->setOutput($this->load->view('setting/store_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['store_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -765,7 +765,7 @@ class ControllerSettingStore extends Controller {
 		$this->response->setOutput($this->load->view('setting/store_form', $data));
 	}
 
-	protected function validateForm(): bool {
+	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'setting/store')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -809,7 +809,7 @@ class ControllerSettingStore extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete(): bool {
+	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'setting/store')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionInstaller extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/installer');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -49,7 +49,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->setOutput($this->load->view('extension/installer', $data));
 	}
 
-	public function upload(): void {
+	public function upload() {
 		$this->load->language('extension/installer');
 
 		$json = array();
@@ -220,7 +220,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function no_ftp(): void {
+	public function no_ftp() {
 		$this->load->language('extension/installer');
 
 		$json = array();
@@ -292,7 +292,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
  
-	public function unzip(): void {
+	public function unzip() {
 		$this->load->language('extension/installer');
 
 		$json = array();
@@ -327,7 +327,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function sql(): void {
+	public function sql() {
 		$this->load->language('extension/installer');
 
 		$json = array();
@@ -372,7 +372,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function xml(): void {
+	public function xml() {
 		$this->load->language('extension/installer');
 
 		$json = array();
@@ -468,7 +468,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function php(): void {
+	public function php() {
 		$this->load->language('extension/installer');
 
 		$json = array();
@@ -495,7 +495,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function remove(): void {
+	public function remove() {
 		$this->load->language('extension/installer');
 
 		$json = array();
@@ -553,7 +553,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function clear(): void {
+	public function clear() {
 		$this->load->language('extension/installer');
 
 		$json = array();

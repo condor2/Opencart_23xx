@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountAccount extends Controller {
-	public function index(): void {
+	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/account', '', true);
 
@@ -95,7 +95,7 @@ class ControllerAccountAccount extends Controller {
 		$this->response->setOutput($this->load->view('account/account', $data));
 	}
 
-	public function country(): void {
+	public function country() {
 		$json = array();
 
 		$this->load->model('localisation/country');

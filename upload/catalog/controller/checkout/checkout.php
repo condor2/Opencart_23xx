@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutCheckout extends Controller {
-	public function index(): void {
+	public function index() {
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$this->response->redirect($this->url->link('checkout/cart'));
