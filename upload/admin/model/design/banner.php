@@ -1,6 +1,6 @@
 <?php
 class ModelDesignBanner extends Model {
-	public function addBanner(array $data): int {
+	public function addBanner($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "banner SET name = '" . $this->db->escape($data['name']) . "', status = '" . (bool)$data['status'] . "'");
 
 		$banner_id = $this->db->getLastId();
@@ -16,7 +16,7 @@ class ModelDesignBanner extends Model {
 		return $banner_id;
 	}
 
-	public function editBanner(int $banner_id, array $data): void {
+	public function editBanner($banner_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "banner SET name = '" . $this->db->escape($data['name']) . "', status = '" . (bool)$data['status'] . "' WHERE banner_id = '" . (int)$banner_id . "'");
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "banner_image WHERE banner_id = '" . (int)$banner_id . "'");
@@ -30,18 +30,18 @@ class ModelDesignBanner extends Model {
 		}
 	}
 
-	public function deleteBanner(int $banner_id): void {
+	public function deleteBanner($banner_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "banner WHERE banner_id = '" . (int)$banner_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "banner_image WHERE banner_id = '" . (int)$banner_id . "'");
 	}
 
-	public function getBanner(int $banner_id): array {
+	public function getBanner($banner_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "banner WHERE banner_id = '" . (int)$banner_id . "'");
 
 		return $query->row;
 	}
 
-	public function getBanners(array $data = array()): array {
+	public function getBanners($data = array()) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "banner";
 
 		$sort_data = array(
@@ -78,7 +78,7 @@ class ModelDesignBanner extends Model {
 		return $query->rows;
 	}
 
-	public function getBannerImages(int $banner_id): array {
+	public function getBannerImages($banner_id) {
 		$banner_image_data = array();
 
 		$banner_image_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "banner_image WHERE banner_id = '" . (int)$banner_id . "' ORDER BY sort_order ASC");
@@ -95,7 +95,7 @@ class ModelDesignBanner extends Model {
 		return $banner_image_data;
 	}
 
-	public function getTotalBanners(): int {
+	public function getTotalBanners() {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "banner");
 
 		return (int)$query->row['total'];

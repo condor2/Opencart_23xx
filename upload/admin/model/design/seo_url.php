@@ -1,24 +1,24 @@
 <?php
 class ModelDesignSeoUrl extends Model {
-	public function addSeoUrl(array $data): int {
+	public function addSeoUrl($data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "url_alias` SET query = '" . $this->db->escape($data['query']) . "', keyword = '" . $this->db->escape($data['keyword']) . "'");
 	}
 
-	public function editSeoUrl(int $url_alias_id, array $data): void {
+	public function editSeoUrl($url_alias_id, $data) {
 		$this->db->query("UPDATE `" . DB_PREFIX . "url_alias` SET query = '" . $this->db->escape($data['query']) . "', keyword = '" . $this->db->escape($data['keyword']) . "' WHERE url_alias_id = '" . (int)$url_alias_id . "'");
 	}
 
-	public function deleteSeoUrl(int $url_alias_id): void {
+	public function deleteSeoUrl($url_alias_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "url_alias` WHERE url_alias_id = '" . (int)$url_alias_id . "'");
 	}
 	
-	public function getSeoUrl(int $url_alias_id): array {
+	public function getSeoUrl($url_alias_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE url_alias_id = '" . (int)$url_alias_id . "'");
 
 		return $query->row;
 	}
 
-	public function getSeoUrls(array $data = array()): array {
+	public function getSeoUrls($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "url_alias`";
 
 		$implode = array();
@@ -69,7 +69,7 @@ class ModelDesignSeoUrl extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalSeoUrls(array $data = array()): int {
+	public function getTotalSeoUrls($data = array()) {
 		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "url_alias`";
 		
 		$implode = array();
@@ -91,25 +91,25 @@ class ModelDesignSeoUrl extends Model {
 		return (int)$query->row['total'];
 	}
 	
-	public function getSeoUrlsByKeyword(string $keyword): array {
+	public function getSeoUrlsByKeyword($keyword) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE keyword = '" . $this->db->escape($keyword) . "'");
 
 		return $query->rows;
 	}	
 	
-	public function getSeoUrlsByQuery(string $query): array {
+	public function getSeoUrlsByQuery($query) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE query = '" . $this->db->escape($query) . "'");
 
 		return $query->rows;
 	}
 	
-	public function getSeoUrlsByQueryId(int $url_alias_id, string $query): array {
+	public function getSeoUrlsByQueryId($url_alias_id, $query) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE query = '" . $this->db->escape($query) . "' AND url_alias_id != '" . (int)$url_alias_id . "'");
 
 		return $query->rows;
 	}	
 
-	public function getSeoUrlsByKeywordId(int $url_alias_id, string $keyword): array {
+	public function getSeoUrlsByKeywordId($url_alias_id, $keyword) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE keyword = '" . $this->db->escape($keyword) . "' AND url_alias_id != '" . (int)$url_alias_id . "'");
 
 		return $query->rows;

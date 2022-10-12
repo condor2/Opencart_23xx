@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionFraudMaxMind extends Model {
-	public function install(): void {
+	public function install() {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "maxmind` (
 			  `order_id` int(11) NOT NULL,
@@ -61,11 +61,11 @@ class ModelExtensionFraudMaxMind extends Model {
 		");		
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "maxmind`");
 	}
 	
-	public function getOrder(int $order_id): array {
+	public function getOrder($order_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "maxmind` WHERE order_id = '" . (int)$order_id . "'");
 
 		return $query->row;

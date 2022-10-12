@@ -1,20 +1,20 @@
 <?php
 class ModelUserUserGroup extends Model {
-	public function addUserGroup(array $data): int {
+	public function addUserGroup($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "user_group SET name = '" . $this->db->escape($data['name']) . "', permission = '" . (isset($data['permission']) ? $this->db->escape(json_encode($data['permission'])) : '') . "'");
 	
 		return $this->db->getLastId();
 	}
 
-	public function editUserGroup(int $user_group_id, array $data): void {
+	public function editUserGroup($user_group_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "user_group SET name = '" . $this->db->escape($data['name']) . "', permission = '" . (isset($data['permission']) ? $this->db->escape(json_encode($data['permission'])) : '') . "' WHERE user_group_id = '" . (int)$user_group_id . "'");
 	}
 
-	public function deleteUserGroup(int $user_group_id): void {
+	public function deleteUserGroup($user_group_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_group_id . "'");
 	}
 
-	public function getUserGroup(int $user_group_id): array {
+	public function getUserGroup($user_group_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_group_id . "'");
 
 		$user_group = array(
@@ -25,7 +25,7 @@ class ModelUserUserGroup extends Model {
 		return $user_group;
 	}
 
-	public function getUserGroups(array $data = array()): array {
+	public function getUserGroups($data = array()) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "user_group";
 
 		$sql .= " ORDER BY `name`";
@@ -53,13 +53,13 @@ class ModelUserUserGroup extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalUserGroups(): int {
+	public function getTotalUserGroups() {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "user_group");
 
 		return (int)$query->row['total'];
 	}
 
-	public function addPermission(int $user_group_id, string $type, string $route): void {
+	public function addPermission($user_group_id, $type, $route) {
 		$user_group_query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_group_id . "'");
 
 		if ($user_group_query->num_rows) {
@@ -71,7 +71,7 @@ class ModelUserUserGroup extends Model {
 		}
 	}
 
-	public function removePermission(int $user_group_id, string $type, string $route): void {
+	public function removePermission($user_group_id, $type, $route) {
 		$user_group_query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_group_id . "'");
 
 		if ($user_group_query->num_rows) {

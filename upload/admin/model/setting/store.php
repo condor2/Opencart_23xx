@@ -1,6 +1,6 @@
 <?php
 class ModelSettingStore extends Model {
-	public function addStore(array $data): int {
+	public function addStore($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "store SET name = '" . $this->db->escape((string)$data['config_name']) . "', `url` = '" . $this->db->escape((string)$data['config_url']) . "'");
 
 		$store_id = $this->db->getLastId();
@@ -17,26 +17,26 @@ class ModelSettingStore extends Model {
 		return $store_id;
 	}
 
-	public function editStore(int $store_id, array $data): void {
+	public function editStore($store_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "store SET name = '" . $this->db->escape((string)$data['config_name']) . "', `url` = '" . $this->db->escape((string)$data['config_url']) . "' WHERE store_id = '" . (int)$store_id . "'");
 
 		$this->cache->delete('store');
 	}
 
-	public function deleteStore(int $store_id): void {
+	public function deleteStore($store_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "store WHERE store_id = '" . (int)$store_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_route WHERE store_id = '" . (int)$store_id . "'");
 
 		$this->cache->delete('store');
 	}
 
-	public function getStore(int $store_id): array {
+	public function getStore($store_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "store WHERE store_id = '" . (int)$store_id . "'");
 
 		return $query->row;
 	}
 
-	public function getStores(array $data = array()): array {
+	public function getStores($data = array()) {
 		$store_data = $this->cache->get('store');
 
 		if (!$store_data) {
@@ -50,49 +50,49 @@ class ModelSettingStore extends Model {
 		return $store_data;
 	}
 
-	public function getTotalStores(): int {
+	public function getTotalStores() {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "store");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalStoresByLayoutId(int $layout_id): int {
+	public function getTotalStoresByLayoutId($layout_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_layout_id' AND `value` = '" . (int)$layout_id . "' AND store_id != '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalStoresByLanguage(string $language): int {
+	public function getTotalStoresByLanguage($language) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_language' AND `value` = '" . $this->db->escape($language) . "' AND store_id != '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalStoresByCurrency(string $currency): int {
+	public function getTotalStoresByCurrency($currency) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_currency' AND `value` = '" . $this->db->escape($currency) . "' AND store_id != '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalStoresByCountryId(int $country_id): int {
+	public function getTotalStoresByCountryId($country_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_country_id' AND `value` = '" . (int)$country_id . "' AND store_id != '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalStoresByZoneId(int $zone_id): int {
+	public function getTotalStoresByZoneId($zone_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_zone_id' AND `value` = '" . (int)$zone_id . "' AND store_id != '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalStoresByCustomerGroupId(int $customer_group_id): int {
+	public function getTotalStoresByCustomerGroupId($customer_group_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_customer_group_id' AND `value` = '" . (int)$customer_group_id . "' AND store_id != '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalStoresByInformationId(int $information_id): int {
+	public function getTotalStoresByInformationId($information_id) {
 		$account_query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_account_id' AND `value` = '" . (int)$information_id . "' AND store_id != '0'");
 
 		$checkout_query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_checkout_id' AND `value` = '" . (int)$information_id . "' AND store_id != '0'");
@@ -100,7 +100,7 @@ class ModelSettingStore extends Model {
 		return ($account_query->row['total'] + $checkout_query->row['total']);
 	}
 
-	public function getTotalStoresByOrderStatusId(int $order_status_id): int {
+	public function getTotalStoresByOrderStatusId($order_status_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "setting WHERE `key` = 'config_order_status_id' AND `value` = '" . (int)$order_status_id . "' AND store_id != '0'");
 
 		return (int)$query->row['total'];

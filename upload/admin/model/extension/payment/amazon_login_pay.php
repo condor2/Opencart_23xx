@@ -372,7 +372,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		return array('status' => (int)$code, 'ResponseBody' => $responseBody);
 	}
 
-	private function getParametersAsString(array $parameters) {
+	private function getParametersAsString($parameters) {
 		$queryParameters = array();
 		foreach ($parameters as $key => $value) {
 			$queryParameters[] = $key . '=' . $this->urlencode($value);
@@ -380,7 +380,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		return implode('&', $queryParameters);
 	}
 
-	private function calculateStringToSignV2(array $parameters, $url) {
+	private function calculateStringToSignV2($parameters, $url) {
 		$data = 'POST';
 		$data .= "\n";
 		$endpoint = parse_url($url);

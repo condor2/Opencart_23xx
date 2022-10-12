@@ -1,6 +1,6 @@
 <?php
 class ModelDesignLayout extends Model {
-	public function addLayout(array $data): int {
+	public function addLayout($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "layout SET name = '" . $this->db->escape($data['name']) . "'");
 
 		$layout_id = $this->db->getLastId();
@@ -20,7 +20,7 @@ class ModelDesignLayout extends Model {
 		return $layout_id;
 	}
 
-	public function editLayout(int $layout_id, array $data): void {
+	public function editLayout($layout_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "layout SET name = '" . $this->db->escape($data['name']) . "' WHERE layout_id = '" . (int)$layout_id . "'");
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int)$layout_id . "'");
@@ -40,7 +40,7 @@ class ModelDesignLayout extends Model {
 		}
 	}
 
-	public function deleteLayout(int $layout_id): void {
+	public function deleteLayout($layout_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "layout WHERE layout_id = '" . (int)$layout_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int)$layout_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int)$layout_id . "'");
@@ -49,13 +49,13 @@ class ModelDesignLayout extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "information_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
 	}
 
-	public function getLayout(int $layout_id): array {
+	public function getLayout($layout_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "layout WHERE layout_id = '" . (int)$layout_id . "'");
 
 		return $query->row;
 	}
 
-	public function getLayouts(array $data = array()): array {
+	public function getLayouts($data = array()) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "layout";
 
 		$sort_data = array('name');
@@ -89,19 +89,19 @@ class ModelDesignLayout extends Model {
 		return $query->rows;
 	}
 
-	public function getLayoutRoutes(int $layout_id): array {
+	public function getLayoutRoutes($layout_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "layout_route WHERE layout_id = '" . (int)$layout_id . "'");
 
 		return $query->rows;
 	}
 
-	public function getLayoutModules(int $layout_id): array {
+	public function getLayoutModules($layout_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "layout_module WHERE layout_id = '" . (int)$layout_id . "' ORDER BY position ASC, sort_order ASC");
 
 		return $query->rows;
 	}
 
-	public function getTotalLayouts(): int {
+	public function getTotalLayouts() {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "layout");
 
 		return (int)$query->row['total'];

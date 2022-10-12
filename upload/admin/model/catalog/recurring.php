@@ -1,6 +1,6 @@
 <?php
 class ModelCatalogRecurring extends Model {
-	public function addRecurring(array $data): int {
+	public function addRecurring($data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "recurring` SET `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (bool)$data['status'] . "', `price` = '" . (float)$data['price'] . "', `frequency` = '" . $this->db->escape((string)$data['frequency']) . "', `duration` = '" . (int)$data['duration'] . "', `cycle` = '" . (int)$data['cycle'] . "', `trial_status` = '" . (int)$data['trial_status'] . "', `trial_price` = '" . (float)$data['trial_price'] . "', `trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', `trial_duration` = '" . (int)$data['trial_duration'] . "', `trial_cycle` = '" . (int)$data['trial_cycle'] . "'");
 
 		$recurring_id = $this->db->getLastId();
@@ -12,7 +12,7 @@ class ModelCatalogRecurring extends Model {
 		return $recurring_id;
 	}
 
-	public function editRecurring(int $recurring_id, array $data): void {
+	public function editRecurring($recurring_id, $data) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "recurring_description` WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 
 		$this->db->query("UPDATE `" . DB_PREFIX . "recurring` SET `price` = '" . (float)$data['price'] . "', `frequency` = '" . $this->db->escape((string)$data['frequency']) . "', `duration` = '" . (int)$data['duration'] . "', `cycle` = '" . (int)$data['cycle'] . "', `sort_order` = '" . (int)$data['sort_order'] . "', `status` = '" . (bool)$data['status'] . "', `trial_price` = '" . (float)$data['trial_price'] . "', `trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', `trial_duration` = '" . (int)$data['trial_duration'] . "', `trial_cycle` = '" . (int)$data['trial_cycle'] . "', `trial_status` = '" . (int)$data['trial_status'] . "' WHERE `recurring_id` = '" . (int)$recurring_id . "'");
@@ -22,7 +22,7 @@ class ModelCatalogRecurring extends Model {
 		}
 	}
 
-	public function copyRecurring(int $recurring_id): voif {
+	public function copyRecurring($recurring_id): voif {
 		$data = $this->getRecurring($recurring_id);
 
 		$data['recurring_description'] = $this->getRecurringDescription($recurring_id);
@@ -34,20 +34,20 @@ class ModelCatalogRecurring extends Model {
 		$this->addRecurring($data);
 	}
 
-	public function deleteRecurring(int $recurring_id): void {
+	public function deleteRecurring($recurring_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "recurring` WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "recurring_description` WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "product_recurring` WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 		$this->db->query("UPDATE `" . DB_PREFIX . "order_recurring` SET `recurring_id` = 0 WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 	}
 
-	public function getRecurring(int $recurring_id): array {
+	public function getRecurring($recurring_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "recurring` WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 
 		return $query->row;
 	}
 
-	public function getRecurringDescription(int $recurring_id): array {
+	public function getRecurringDescription($recurring_id) {
 		$recurring_description_data = array();
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "recurring_description` WHERE `recurring_id` = '" . (int)$recurring_id . "'");
@@ -59,7 +59,7 @@ class ModelCatalogRecurring extends Model {
 		return $recurring_description_data;
 	}
 
-	public function getRecurrings(array $data = array()): array {
+	public function getRecurrings($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "recurring` r LEFT JOIN `" . DB_PREFIX . "recurring_description` rd ON (r.`recurring_id` = rd.`recurring_id`) WHERE rd.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
@@ -100,7 +100,7 @@ class ModelCatalogRecurring extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalRecurrings(): int {
+	public function getTotalRecurrings() {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "recurring`");
 
 		return (int)$query->row['total'];
