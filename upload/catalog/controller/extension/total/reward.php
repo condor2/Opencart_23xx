@@ -30,8 +30,6 @@ class ControllerExtensionTotalReward extends Controller {
 
 			return $this->load->view('extension/total/reward', $data);
 		}
-
-		return '';
 	}
 
 	public function reward() {

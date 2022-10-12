@@ -51,7 +51,7 @@ class ModelExtensionTotalReward extends Model {
 		}
 	}
 
-	public function confirm(array $order_info, array $order_total): int {
+	public function confirm($order_info, $order_total) {
 		$this->load->language('extension/total/reward');
 
 		$points = 0;
@@ -74,7 +74,7 @@ class ModelExtensionTotalReward extends Model {
 		return 0;
 	}
 
-	public function unconfirm(int $order_id): void {
+	public function unconfirm($order_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "' AND points < 0");
 	}
 }

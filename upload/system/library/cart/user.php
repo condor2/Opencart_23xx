@@ -1,9 +1,9 @@
 <?php
 namespace Cart;
 class User {
-	private int $user_id = 0;
-	private string $username = '';
-	private array $permission = array();
+	private $user_id = 0;
+	private $username = '';
+	private $permission = array();
 
 	/**
 	 * Constructor
@@ -48,7 +48,7 @@ class User {
 	 *
 	 * @return   bool
 	 */
-	public function login(string $username, string $password): bool {
+	public function login($username, $password) {
 		$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND (password = SHA1(CONCAT(salt, SHA1(CONCAT(salt, SHA1('" . $this->db->escape(htmlspecialchars($password, ENT_QUOTES)) . "'))))) OR password = '" . $this->db->escape(md5($password)) . "') AND status = '1'");
 
 		if ($user_query->num_rows) {
@@ -79,7 +79,7 @@ class User {
 	 *
 	  * @return   void
 	 */
-	public function logout(): void {
+	public function logout() {
 		unset($this->session->data['user_id']);
 
 		$this->user_id = 0;
@@ -94,7 +94,7 @@ class User {
 	 *
 	 * @return   bool
 	 */
-	public function hasPermission(string $key, mixed $value): bool {
+	public function hasPermission($key, $value) {
 		if (isset($this->permission[$key])) {
 			return in_array($value, $this->permission[$key]);
 		} else {
@@ -107,7 +107,7 @@ class User {
 	 *
 	 * @return   bool
 	 */
-	public function isLogged(): bool {
+	public function isLogged() {
 		return $this->user_id ? true : false;
 	}
 
@@ -116,7 +116,7 @@ class User {
 	 *
 	 * @return   int
 	 */
-	public function getId(): int {
+	public function getId() {
 		return $this->user_id;
 	}
 
@@ -125,7 +125,7 @@ class User {
 	 *
 	 * @return   string
 	 */
-	public function getUserName(): string {
+	public function getUserName() {
 		return $this->username;
 	}
 
@@ -134,7 +134,7 @@ class User {
 	 *
 	 * @return   int
 	 */
-	public function getGroupId(): int {
+	public function getGroupId() {
 		return $this->user_group_id;
 	}
 }

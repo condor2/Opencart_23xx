@@ -1,5 +1,5 @@
 <?php
-function token(int $length = 32): string {
+function token($length = 32) {
 	return substr(bin2hex(random_bytes($length)), 0, $length);
 }
 
@@ -10,7 +10,7 @@ function token(int $length = 32): string {
  */
 
 if (!function_exists('hash_equals')) {
-	function hash_equals(string $known_string, string $user_string) {
+	function hash_equals($known_string, $user_string) {
 		$known_string = $known_string;
 		$user_string = $user_string;
 

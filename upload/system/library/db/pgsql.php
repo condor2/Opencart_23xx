@@ -1,9 +1,9 @@
 <?php
 namespace DB;
 class PgSQL {
-	private object $connection;
+	private $connection;
 
-	public function __construct(string $hostname, string $username, string $password, string $database, string $port = '') {
+	public function __construct($hostname, $username, $password, $database, $port = '') {
 		if (!$port) {
 			$port = '5432';
 		}
@@ -20,7 +20,7 @@ class PgSQL {
 		}
 	}
 
-	public function query(string $sql): bool|object {
+	public function query($sql) {
 		$resource = pg_query($this->connection, $sql);
 
 		if ($resource) {
@@ -53,15 +53,15 @@ class PgSQL {
 		}
 	}
 
-	public function escape(string $value): string  {
+	public function escape($value)  {
 		return pg_escape_string($this->connection, $value);
 	}
 
-	public function countAffected(): int {
+	public function countAffected() {
 		return pg_affected_rows($this->connection);
 	}
 
-	public function isConnected(): bool {
+	public function isConnected() {
 		if (pg_connection_status($this->connection) == PGSQL_CONNECTION_OK) {
 			return true;
 		} else {
@@ -69,7 +69,7 @@ class PgSQL {
 		}
 	}
 
-	public function getLastId(): int {
+	public function getLastId() {
 		$query = $this->query("SELECT LASTVAL() AS `id`");
 
 		return $query->row['id'];

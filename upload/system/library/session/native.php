@@ -1,31 +1,31 @@
 <?php
 namespace Session;
 class Native extends \SessionHandler {
-    public function create_sid(): string {
+    public function create_sid() {
         return parent::create_sid();
     }
 
-    public function open(string $path, $name): bool {
+    public function open($path, $name) {
         return parent::open($path, $name);
     }
 
-    public function close(): bool {
+    public function close() {
         return parent::close();
     }
 	
-    public function read($session_id): string {
+    public function read($session_id) {
         return parent::read($session_id);
     }
 
-    public function write(string $session_id, $data): bool {
+    public function write($session_id, $data) {
 		return parent::write($session_id, $data);
     }
 
-    public function destroy(string $session_id): bool {
+    public function destroy($session_id) {
         return parent::destroy($session_id);
     }
 
-    public function gc($maxlifetime): int {
+    public function gc($maxlifetime) {
         return parent::gc($maxlifetime);
     }	
 }
