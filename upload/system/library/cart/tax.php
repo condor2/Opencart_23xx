@@ -13,6 +13,10 @@ class Tax {
 		$this->db = $registry->get('db');
 	}
 
+	public function unsetRates() {
+		$this->tax_rates = array();
+	}
+
 	/**
 	 * setShippingAddress
 	 *
