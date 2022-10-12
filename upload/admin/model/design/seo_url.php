@@ -28,7 +28,7 @@ class ModelDesignSeoUrl extends Model {
 		}
 		
 		if (!empty($data['filter_keyword'])) {
-			$implode[] = "`keyword` LIKE '" . $this->db->escape($data['filter_keyword']) . "'";
+			$implode[] = "`keyword` LIKE '%" . $this->db->escape($data['filter_keyword']) . "%'";
 		}
 		
 		if ($implode) {
