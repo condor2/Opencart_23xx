@@ -410,7 +410,7 @@ class ControllerMarketingAffiliate extends Controller {
 				'affiliate_id' => $result['affiliate_id'],
 				'name'         => $result['name'],
 				'email'        => $result['email'],
-				'balance'      => $this->currency->format($result['balance'], $this->config->get('config_currency')),
+				'balance'      => $this->currency->format($this->model_marketing_affiliate->getTransactionTotal($result['affiliate_id']), $this->config->get('config_currency')),
 				'status'       => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
 				'date_added'   => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'approve'      => $approve,

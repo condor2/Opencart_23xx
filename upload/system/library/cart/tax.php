@@ -13,7 +13,7 @@ class Tax {
 		$this->db = $registry->get('db');
 	}
 
-	public function unsetRates() {
+	public function unsetRates(): void {
 		$this->tax_rates = array();
 	}
 
