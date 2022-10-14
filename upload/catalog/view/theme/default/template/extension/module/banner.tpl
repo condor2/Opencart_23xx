@@ -19,4 +19,4 @@ $('#banner<?php echo $module; ?>').swiper({
 	autoplay: 2500,
     autoplayDisableOnInteraction: false
 });
---></script
+--></script>
