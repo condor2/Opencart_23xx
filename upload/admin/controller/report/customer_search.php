@@ -90,8 +90,8 @@ class ControllerReportCustomerSearch extends Controller {
 			'filter_keyword'    => $filter_keyword,
 			'filter_customer'   => $filter_customer,
 			'filter_ip'         => $filter_ip,
-			'start'             => ($page - 1) * 20,
-			'limit'             => 20
+			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit'             => $this->config->get('config_limit_admin')
 		);
 
 		$search_total = $this->model_report_customer->getTotalCustomerSearches($filter_data);
