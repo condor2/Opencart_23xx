@@ -61,7 +61,7 @@ class ControllerAccountReturn extends Controller {
 
 		$return_total = $this->model_account_return->getTotalReturns();
 
-		$results = $this->model_account_return->getReturns(($page - 1) * 10, 10);
+		$results = $this->model_account_return->getReturns(($page - 1) * $this->config->get($this->config->get('config_theme') . '_product_limit'), $this->config->get($this->config->get('config_theme') . '_product_limit'));
 
 		foreach ($results as $result) {
 			$data['returns'][] = array(
