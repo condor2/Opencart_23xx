@@ -2,7 +2,7 @@
 class ControllerExtensionTotalTotal extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/total/total');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -75,7 +75,7 @@ class ControllerExtensionTotalTotal extends Controller {
 		$this->response->setOutput($this->load->view('extension/total/total', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/total/total')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

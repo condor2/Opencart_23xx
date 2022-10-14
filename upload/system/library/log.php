@@ -11,7 +11,7 @@
 * Log class
 */
 class Log {
-	private $file;
+	private string $file;
 
 	/**
 	 * Constructor
@@ -27,7 +27,7 @@ class Log {
      *
      * @param	string	$message
      */
-	public function write($message) {
+	public function write(string|array $message): void {
 		file_put_contents($this->file, date('Y-m-d H:i:s') . ' - ' . print_r($message, true) . "\n", FILE_APPEND);
 	}
 }

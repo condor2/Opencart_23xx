@@ -2,7 +2,7 @@
 class ControllerExtensionModuleSagepayServerCards extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/sagepay_server_cards');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -68,7 +68,7 @@ class ControllerExtensionModuleSagepayServerCards extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/sagepay_server_cards', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/sagepay_server_cards')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

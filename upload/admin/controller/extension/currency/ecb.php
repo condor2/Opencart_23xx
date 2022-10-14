@@ -2,7 +2,7 @@
 class ControllerExtensionCurrencyECB extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/currency/ecb');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -69,7 +69,7 @@ class ControllerExtensionCurrencyECB extends Controller {
 		$this->response->setOutput($this->load->view('extension/currency/ecb', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/currency/ecb')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -77,7 +77,7 @@ class ControllerExtensionCurrencyECB extends Controller {
 		return !$this->error;
 	}
 
-	public function currency(string $default = '') {
+	public function currency(string $default = ''): void {
 		if ($this->config->get('ecb_status')) {
 			$curl = curl_init();
 

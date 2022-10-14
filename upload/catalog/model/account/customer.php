@@ -1,6 +1,6 @@
 <?php
 class ModelAccountCustomer extends Model {
-	public function addCustomer($data) {
+	public function addCustomer(array $data): int {
 		if (isset($data['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($data['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 			$customer_group_id = $data['customer_group_id'];
 		} else {
@@ -94,43 +94,43 @@ class ModelAccountCustomer extends Model {
 		return $customer_id;
 	}
 
-	public function editCustomer($data) {
+	public function editCustomer(array $data): void {
 		$customer_id = $this->customer->getId();
 
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `firstname` = '" . $this->db->escape($data['firstname']) . "', `lastname` = '" . $this->db->escape($data['lastname']) . "', `email` = '" . $this->db->escape($data['email']) . "', `telephone` = '" . $this->db->escape($data['telephone']) . "', `fax` = '" . $this->db->escape($data['fax']) . "', `custom_field` = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "' WHERE `customer_id` = '" . (int)$customer_id . "'");
 	}
 
-	public function editPassword($email, $password) {
+	public function editPassword(string $email, string $password): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `salt` = '" . $this->db->escape($salt = token(9)) . "', `password` = '" . $this->db->escape(sha1($salt . sha1($salt . sha1($password)))) . "', `code` = '' WHERE LCASE(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 	}
 
-	public function editCode($email, $code) {
+	public function editCode(string $email, string $code): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `code` = '" . $this->db->escape($code) . "' WHERE LCASE(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 	}
 
-	public function editNewsletter($newsletter) {
+	public function editNewsletter(string $newsletter): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `newsletter` = '" . (int)$newsletter . "' WHERE `customer_id` = '" . (int)$this->customer->getId() . "'");
 	}
 
-	public function getCustomer($customer_id) {
+	public function getCustomer(int $customer_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer` WHERE `customer_id` = '" . (int)$customer_id . "'");
 
 		return $query->row;
 	}
 
-	public function getCustomerByEmail($email) {
+	public function getCustomerByEmail(string $email): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer` WHERE LCASE(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 
 		return $query->row;
 	}
 
-	public function getCustomerByCode($code) {
+	public function getCustomerByCode(string $code): array {
 		$query = $this->db->query("SELECT `customer_id`, `firstname`, `lastname`, `email` FROM `" . DB_PREFIX . "customer` WHERE `code` = '" . $this->db->escape($code) . "' AND `code` != ''");
 
 		return $query->row;
 	}
 
-	public function getCustomerByToken($token) {
+	public function getCustomerByToken(string $token): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer` WHERE `token` = '" . $this->db->escape($token) . "' AND `token` != ''");
 
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `token` = ''");
@@ -138,25 +138,25 @@ class ModelAccountCustomer extends Model {
 		return $query->row;
 	}
 
-	public function getTotalCustomersByEmail($email) {
+	public function getTotalCustomersByEmail(string $email): int {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "customer` WHERE LCASE(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getRewardTotal($customer_id) {
+	public function getRewardTotal(int $customer_id): int {
 		$query = $this->db->query("SELECT SUM(`points`) AS total FROM `" . DB_PREFIX . "customer_reward` WHERE `customer_id` = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getIps($customer_id) {
+	public function getIps(int $customer_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip` WHERE `customer_id` = '" . (int)$customer_id . "'");
 
 		return $query->rows;
 	}
 
-	public function addLoginAttempt($email) {
+	public function addLoginAttempt(string $email): void {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_login` WHERE LCASE(`email`) = '" . $this->db->escape(utf8_strtolower((string)$email)) . "' AND `ip` = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "'");
 
 		if (!$query->num_rows) {
@@ -166,13 +166,13 @@ class ModelAccountCustomer extends Model {
 		}
 	}
 
-	public function getLoginAttempts($email) {
+	public function getLoginAttempts(string $email): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_login` WHERE LCASE(`email`) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 
 		return $query->row;
 	}
 
-	public function deleteLoginAttempts($email) {
+	public function deleteLoginAttempts(string $email): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_login` WHERE LCASE(`email`) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 	}
 }

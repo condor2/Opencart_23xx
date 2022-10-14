@@ -2,7 +2,7 @@
 class ControllerExtensionShippingWeight extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/shipping/weight');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -112,7 +112,7 @@ class ControllerExtensionShippingWeight extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/weight', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/weight')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

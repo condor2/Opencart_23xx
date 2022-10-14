@@ -1,11 +1,11 @@
 <?php
 namespace DB;
 class PDO {
-	private $connection;
-	private $data = array();
-	private $affected;
+	private object $connection;
+	private array $data = array();
+	private int $affected;
 
-	public function __construct($hostname, $username, $password, $database, $port = '') {
+	public function __construct(string $hostname, string $username, string $password, string $database, string $port = '') {
 		if (!$port) {
 			$port = '3306';
 		}
@@ -22,7 +22,7 @@ class PDO {
 		}
 	}
 
-	public function query($sql) {
+	public function query(string $sql): bool|object {
 		$sql = preg_replace('/(?:\'\:)([a-z0-9]*.)(?:\')/', ':$1', $sql);
 
 		$statement = $this->connection->prepare($sql);
@@ -58,7 +58,7 @@ class PDO {
 		return false;
 	}
 
-	public function escape($value) {
+	public function escape(string $value): string {
 		$key = ':' . count($this->data);
 
 		$this->data[$key] = $value;
@@ -66,15 +66,15 @@ class PDO {
 		return $key;
 	}
 
-	public function countAffected() {
+	public function countAffected(): int {
 		return $this->affected;
 	}
 
-	public function getLastId() {
+	public function getLastId(): int {
 		return $this->connection->lastInsertId();
 	}
 
-	public function isConnected() {
+	public function isConnected(): bool {
 		if ($this->connection) {
 			return true;
 		} else {

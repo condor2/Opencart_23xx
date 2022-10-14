@@ -2,7 +2,7 @@
 class ControllerExtensionShippingFlat extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/shipping/flat');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -106,7 +106,7 @@ class ControllerExtensionShippingFlat extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/flat', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/flat')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

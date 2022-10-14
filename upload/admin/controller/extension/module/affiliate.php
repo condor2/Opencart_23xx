@@ -2,7 +2,7 @@
 class ControllerExtensionModuleAffiliate extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/affiliate');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -68,7 +68,7 @@ class ControllerExtensionModuleAffiliate extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/affiliate', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/affiliate')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

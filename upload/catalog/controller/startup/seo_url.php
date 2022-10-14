@@ -65,7 +65,7 @@ class ControllerStartupSeoUrl extends Controller {
 		}
 	}
 
-	public function rewrite($link) {
+	public function rewrite(string $link) {
 		$url_info = parse_url(str_replace('&amp;', '&', $link));
 
 		$url = '';

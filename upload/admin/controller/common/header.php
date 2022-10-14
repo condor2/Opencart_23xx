@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonHeader extends Controller {
-	public function index() {
+	public function index(): string {
 		$data['title'] = $this->document->getTitle();
 
 		$data['base'] = HTTP_SERVER;

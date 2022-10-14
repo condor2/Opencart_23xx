@@ -2,7 +2,7 @@
 class ControllerExtensionShippingFedex extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/shipping/fedex');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -409,7 +409,7 @@ class ControllerExtensionShippingFedex extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/fedex', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/fedex')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

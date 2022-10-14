@@ -1,6 +1,6 @@
 <?php
 class ModelAccountApi extends Model {
-	public function getApiByKey($key) {
+	public function getApiByKey(string $key): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api` WHERE `key` = '" . $this->db->escape($key) . "' AND `status` = '1'");
 
 		return $query->row;
@@ -14,7 +14,7 @@ class ModelAccountApi extends Model {
 		return $token;
 	}
 
-	public function getApiIps($api_id) {
+	public function getApiIps(int $api_id): array {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "api_ip` WHERE `api_id` = '" . (int)$api_id . "'");
 
 		return $query->rows;

@@ -2,7 +2,7 @@
 class ControllerExtensionShippingAusPost extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/shipping/auspost');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -147,7 +147,7 @@ class ControllerExtensionShippingAusPost extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/auspost', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/auspost')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

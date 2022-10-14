@@ -50,6 +50,8 @@ class ControllerExtensionTotalShipping extends Controller {
 
 			return $this->load->view('extension/total/shipping', $data);
 		}
+
+		return '';
 	}
 
 	public function quote() {

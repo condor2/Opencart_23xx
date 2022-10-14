@@ -2,7 +2,7 @@
 class ControllerExtensionModuleLaybuyLayout extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->model('setting/setting');
 
 		$this->language->load('extension/module/laybuy_layout');
@@ -68,7 +68,7 @@ class ControllerExtensionModuleLaybuyLayout extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/laybuy_layout', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/laybuy_layout')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

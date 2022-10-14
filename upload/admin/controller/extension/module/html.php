@@ -2,7 +2,7 @@
 class ControllerExtensionModuleHTML extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');
 
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
@@ -135,7 +135,7 @@ class ControllerExtensionModuleHTML extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/html', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/module/html')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

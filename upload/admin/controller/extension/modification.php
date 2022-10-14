@@ -7,7 +7,7 @@
 class ControllerExtensionModification extends Controller {
 	private $error = array();
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/modification');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -17,7 +17,7 @@ class ControllerExtensionModification extends Controller {
 		$this->getList();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('extension/modification');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -51,7 +51,7 @@ class ControllerExtensionModification extends Controller {
 		$this->getList();
 	}
 
-	public function refresh(array $data = array()) {
+	public function refresh(array $data = array()): void {
 		$this->load->language('extension/modification');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -447,7 +447,7 @@ class ControllerExtensionModification extends Controller {
 		$this->getList();
 	}
 
-	public function clear() {
+	public function clear(): void {
 		$this->load->language('extension/modification');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -514,7 +514,7 @@ class ControllerExtensionModification extends Controller {
 		$this->getList();
 	}
 
-	public function enable() {
+	public function enable(): void {
 		$this->load->language('extension/modification');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -546,7 +546,7 @@ class ControllerExtensionModification extends Controller {
 		$this->getList();
 	}
 
-	public function disable() {
+	public function disable(): void {
 		$this->load->language('extension/modification');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -578,7 +578,7 @@ class ControllerExtensionModification extends Controller {
 		$this->getList();
 	}
 
-	public function clearlog() {
+	public function clearlog(): void {
 		$this->load->language('extension/modification');
 
 		if ($this->validate()) {
@@ -608,7 +608,7 @@ class ControllerExtensionModification extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -790,7 +790,7 @@ class ControllerExtensionModification extends Controller {
 		$this->response->setOutput($this->load->view('extension/modification', $data));
 	}
 
-	protected function validate() {
+	protected function validate(): bool {
 		if (!$this->user->hasPermission('modify', 'extension/modification')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
