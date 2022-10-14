@@ -82,7 +82,7 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 		return $query->row;
 	}
 
-	public function addOrderHistory(int $order_id, array $data, int $store_id = 0): array {
+	public function addOrderHistory(int $order_id, array $data, int $store_id = 0) {
 		$json = array();
 
 		$this->load->model('setting/store');
