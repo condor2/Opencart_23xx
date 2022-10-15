@@ -54,3 +54,35 @@ RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]
 
 # 7. disable open_basedir limitations
 # php_admin_value open_basedir none
+
+### Uncomment to enable security
+
+## No-Referrer-Header
+#<IfModule mod_headers.c>
+#    Header set Referrer-Policy "no-referrer"
+#</IfModule>
+
+## X-FRAME-OPTIONS-Header
+#<IfModule mod_headers.c>
+#    Header always append X-Frame-Options SAMEORIGIN
+#</IfModule>
+
+## X-XSS-PROTECTION-Header
+#<IfModule mod_headers.c>
+#    Header set X-XSS-Protection "1; mode=block"
+#</IfModule>
+
+## X-Content-Type-Options-Header
+#<IfModule mod_headers.c>
+#    Header set X-Content-Type-Options "nosniff"
+#</IfModule>
+
+## Strict-Transport-Security-Header - if you are using https on your website, comment this block out
+#<IfModule mod_headers.c>
+#   Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+#</IfModule>
+
+## Permission-Policy
+#<IfModule mod_headers.c>
+#   Header Set Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+#</IfModule>
