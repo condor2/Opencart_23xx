@@ -87,15 +87,17 @@ class ControllerAccountDownload extends Controller {
 			}
 		}
 
+		$limit = $this->config->get($this->config->get('config_theme') . '_product_limit');
+
 		$pagination = new Pagination();
 		$pagination->total = $download_total;
 		$pagination->page = $page;
-		$pagination->limit = $this->config->get($this->config->get('config_theme') . '_product_limit');
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('account/download', 'page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($download_total) ? (($page - 1) * $this->config->get($this->config->get('config_theme') . '_product_limit')) + 1 : 0, ((($page - 1) * $this->config->get($this->config->get('config_theme') . '_product_limit')) > ($download_total - $this->config->get($this->config->get('config_theme') . '_product_limit'))) ? $download_total : ((($page - 1) * $this->config->get($this->config->get('config_theme') . '_product_limit')) + $this->config->get($this->config->get($this->config->get('config_theme') . '_theme') . '_product_limit')), $download_total, ceil($download_total / $this->config->get($this->config->get('config_theme') . '_product_limit')));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($download_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($download_total - $limit)) ? $download_total : ((($page - 1) * $limit) + $limit), $download_total, ceil($download_total / $limit));
 
 		$data['continue'] = $this->url->link('account/account', '', true);
 
