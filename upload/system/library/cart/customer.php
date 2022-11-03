@@ -2,14 +2,14 @@
 namespace Cart;
 class Customer {
 	private $customer_id = 0;
-	private $firstname;
-	private $lastname;
-	private $customer_group_id;
-	private $email;
-	private $telephone;
-	private $fax;
-	private $newsletter;
-	private $address_id;
+	private $firstname = '';
+	private $lastname = '';
+	private $customer_group_id = 0;
+	private $email = '';
+	private $telephone = '';
+	private $fax = '';
+	private $newsletter = false;
+	private $address_id = 0;
 
 	public function __construct($registry) {
 		$this->config = $registry->get('config');
