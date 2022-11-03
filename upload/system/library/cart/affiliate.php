@@ -1,13 +1,13 @@
 <?php
 namespace Cart;
 class Affiliate {
-	private $affiliate_id;
-	private $firstname;
-	private $lastname;
-	private $email;
-	private $telephone;
-	private $fax;
-	private $code;
+	private $affiliate_id = 0;
+	private $firstname = '';
+	private $lastname = '';
+	private $email = '';
+	private $telephone = '';
+	private $fax = '';
+	private $code = '';
 
 	public function __construct($registry) {
 		$this->config = $registry->get('config');
