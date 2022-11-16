@@ -53,7 +53,7 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 				$data['products'][] = array(
 					'name'     => htmlspecialchars($product['name']),
 					'model'    => htmlspecialchars($product['model']),
-					'price'    => $this->currency->format($product['price'], $order_info['currency_code'], false, false,
+					'price'    => $this->currency->format($product['price'], $order_info['currency_code'], false, false),
 					'quantity' => $product['quantity'],
 					'option'   => $option_data,
 					'weight'   => $product['weight']
