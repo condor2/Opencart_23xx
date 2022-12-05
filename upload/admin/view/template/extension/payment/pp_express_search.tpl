@@ -185,17 +185,17 @@ $('#button-search').on('click', function() {
 			} else {
 				if (data.result != '') {
 					html += '<thead><tr>';
-					html += '<td class="left"><?php echo $column_date; ?></td>';
-					html += '<td class="left"><?php echo $column_type; ?></td>';
-					html += '<td class="left"><?php echo $column_email; ?></td>';
-					html += '<td class="left"><?php echo $column_name; ?></td>';
-					html += '<td class="left"><?php echo $column_transid; ?></td>';
-					html += '<td class="left"><?php echo $column_status; ?></td>';
-					html += '<td class="left"><?php echo $column_currency; ?></td>';
-					html += '<td class="right"><?php echo $column_amount; ?></td>';
-					html += '<td class="right"><?php echo $column_fee; ?></td>';
-					html += '<td class="right"><?php echo $column_netamt; ?></td>';
-					html += '<td class="center"><?php echo $column_action; ?></td>';
+					html += '<td class="text-left"><?php echo $column_date; ?></td>';
+					html += '<td class="text-left"><?php echo $column_type; ?></td>';
+					html += '<td class="text-left"><?php echo $column_email; ?></td>';
+					html += '<td class="text-left"><?php echo $column_name; ?></td>';
+					html += '<td class="text-left"><?php echo $column_transid; ?></td>';
+					html += '<td class="text-left"><?php echo $column_status; ?></td>';
+					html += '<td class="text-left"><?php echo $column_currency; ?></td>';
+					html += '<td class="text-right"><?php echo $column_amount; ?></td>';
+					html += '<td class="text-right"><?php echo $column_fee; ?></td>';
+					html += '<td class="text-right"><?php echo $column_netamt; ?></td>';
+					html += '<td class="text-center"><?php echo $column_action; ?></td>';
 					html += '</tr></thead>';
 				
           $.each(data.result, function (k, v) {
@@ -207,17 +207,17 @@ $('#button-search').on('click', function() {
               }
 
               html += '<tr>';
-              html += '<td class="left">' + v.L_TIMESTAMP + '</td>';
-              html += '<td class="left">' + v.L_TYPE + '</td>';
-              html += '<td class="left">' + v.L_EMAIL + '</td>';
-              html += '<td class="left">' + v.L_NAME + '</td>';
-              html += '<td class="left">' + v.L_TRANSACTIONID + '</td>';
-              html += '<td class="left">' + v.L_STATUS + '</td>';
-              html += '<td class="left">' + v.L_CURRENCYCODE + '</td>';
-              html += '<td class="right">' + v.L_AMT + '</td>';
-              html += '<td class="right">' + v.L_FEEAMT + '</td>';
-              html += '<td class="right">' + v.L_NETAMT + '</td>';
-              html += '<td class="center">';
+              html += '<td class="text-left">' + v.L_TIMESTAMP + '</td>';
+              html += '<td class="text-left">' + v.L_TYPE + '</td>';
+              html += '<td class="text-left">' + v.L_EMAIL + '</td>';
+              html += '<td class="text-left">' + v.L_NAME + '</td>';
+              html += '<td class="text-left">' + v.L_TRANSACTIONID + '</td>';
+              html += '<td class="text-left">' + v.L_STATUS + '</td>';
+              html += '<td class="text-left">' + v.L_CURRENCYCODE + '</td>';
+              html += '<td class="text-right">' + v.L_AMT + '</td>';
+              html += '<td class="text-right">' + v.L_FEEAMT + '</td>';
+              html += '<td class="text-right">' + v.L_NETAMT + '</td>';
+              html += '<td class="text-center">';
               html += '<a href="<?php echo $view_link; ?>&transaction_id=' + v.L_TRANSACTIONID + '"><?php echo $text_view; ?></a>';
               html += '</td>';
               html += '</tr>';
