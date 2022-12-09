@@ -1,6 +1,8 @@
 <?php
 namespace Cart;
 class Currency {
+	private $db;
+	private $language;
 	private array $currencies = array();
 
 	/**

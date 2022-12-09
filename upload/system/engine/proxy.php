@@ -1,5 +1,5 @@
 <?php
-class Proxy {
+class Proxy extends \stdClass {
 	public function __get($key) {
 		return $this->{$key};
 	}	

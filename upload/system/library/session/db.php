@@ -11,6 +11,7 @@ namespace Session;
 final class DB {
 	public $data = array();
 	public $expire = array();
+	public $db;
 	
 	public function __construct($registry) {
 		$this->db = $registry->get('db');

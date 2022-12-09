@@ -4,6 +4,9 @@ class User {
 	private int $user_id = 0;
 	private string $username = '';
 	private array $permission = array();
+	private $db;
+	private $request;
+	private $session;
 
 	/**
 	 * Constructor

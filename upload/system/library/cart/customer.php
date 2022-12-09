@@ -1,6 +1,10 @@
 <?php
 namespace Cart;
 class Customer {
+	private $config;
+	private $db;
+	private $request;
+	private $session;
 	private $customer_id = 0;
 	private $firstname = '';
 	private $lastname = '';
