@@ -21,7 +21,7 @@ class ModelExtensionTotalCredit extends Model {
 		}
 	}
 
-	public function confirm(array $order_info, array $order_total): void {
+	public function confirm($order_info, $order_total) {
 		$this->load->language('extension/total/credit');
 
 		if ($order_info['customer_id']) {
@@ -29,7 +29,7 @@ class ModelExtensionTotalCredit extends Model {
 		}
 	}
 
-	public function unconfirm(int $order_id): void {
+	public function unconfirm(int $order_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_transaction WHERE order_id = '" . (int)$order_id . "'");
 	}
 }
