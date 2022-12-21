@@ -1,27 +1,27 @@
 <?php
 class ModelSaleReturn extends Model {
-	public function addReturn(array $data): int {
+	public function addReturn($data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "return` SET order_id = '" . (int)$data['order_id'] . "', product_id = '" . (int)$data['product_id'] . "', customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', product = '" . $this->db->escape($data['product']) . "', model = '" . $this->db->escape($data['model']) . "', quantity = '" . (int)$data['quantity'] . "', opened = '" . (int)$data['opened'] . "', return_reason_id = '" . (int)$data['return_reason_id'] . "', return_action_id = '" . (int)$data['return_action_id'] . "', return_status_id = '" . (int)$data['return_status_id'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_ordered = '" . $this->db->escape($data['date_ordered']) . "', date_added = NOW(), date_modified = NOW()");
 	
 		return $this->db->getLastId();
 	}
 
-	public function editReturn(int $return_id, array $data): void {
+	public function editReturn($return_id, $data) {
 		$this->db->query("UPDATE `" . DB_PREFIX . "return` SET order_id = '" . (int)$data['order_id'] . "', product_id = '" . (int)$data['product_id'] . "', customer_id = '" . (int)$data['customer_id'] . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', product = '" . $this->db->escape($data['product']) . "', model = '" . $this->db->escape($data['model']) . "', quantity = '" . (int)$data['quantity'] . "', opened = '" . (int)$data['opened'] . "', return_reason_id = '" . (int)$data['return_reason_id'] . "', return_action_id = '" . (int)$data['return_action_id'] . "', comment = '" . $this->db->escape($data['comment']) . "', date_ordered = '" . $this->db->escape($data['date_ordered']) . "', date_modified = NOW() WHERE return_id = '" . (int)$return_id . "'");
 	}
 
-	public function deleteReturn(int $return_id): void {
+	public function deleteReturn($return_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "return` WHERE return_id = '" . (int)$return_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "return_history WHERE return_id = '" . (int)$return_id . "'");
 	}
 
-	public function getReturn(int $return_id): array {
+	public function getReturn($return_id) {
 		$query = $this->db->query("SELECT DISTINCT *, (SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = r.customer_id) AS customer, (SELECT rs.name FROM " . DB_PREFIX . "return_status rs WHERE rs.return_status_id = r.return_status_id AND rs.language_id = '" . (int)$this->config->get('config_language_id') . "') AS return_status FROM `" . DB_PREFIX . "return` r WHERE r.return_id = '" . (int)$return_id . "'");
 
 		return $query->row;
 	}
 
-	public function getReturns(array $data = array()): array {
+	public function getReturns($data = array()) {
 		$sql = "SELECT *, CONCAT(r.firstname, ' ', r.lastname) AS customer, (SELECT rs.name FROM " . DB_PREFIX . "return_status rs WHERE rs.return_status_id = r.return_status_id AND rs.language_id = '" . (int)$this->config->get('config_language_id') . "') AS return_status FROM `" . DB_PREFIX . "return` r";
 
 		$implode = array();
@@ -102,7 +102,7 @@ class ModelSaleReturn extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalReturns(array $data = array()): int {
+	public function getTotalReturns($data = array()) {
 		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "return`r";
 
 		$implode = array();
@@ -148,25 +148,25 @@ class ModelSaleReturn extends Model {
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalReturnsByReturnStatusId(int $return_status_id): int {
+	public function getTotalReturnsByReturnStatusId($return_status_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "return` WHERE return_status_id = '" . (int)$return_status_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalReturnsByReturnReasonId(int $return_reason_id): int {
+	public function getTotalReturnsByReturnReasonId($return_reason_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "return` WHERE return_reason_id = '" . (int)$return_reason_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalReturnsByReturnActionId(int $return_action_id): int {
+	public function getTotalReturnsByReturnActionId($return_action_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "return` WHERE return_action_id = '" . (int)$return_action_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function addReturnHistory(int $return_id, array $data): void {
+	public function addReturnHistory($return_id, $data) {
 		$this->db->query("UPDATE `" . DB_PREFIX . "return` SET return_status_id = '" . (int)$data['return_status_id'] . "', date_modified = NOW() WHERE return_id = '" . (int)$return_id . "'");
 
 		$this->db->query("INSERT INTO " . DB_PREFIX . "return_history SET return_id = '" . (int)$return_id . "', return_status_id = '" . (int)$data['return_status_id'] . "', notify = '" . (isset($data['notify']) ? (int)$data['notify'] : 0) . "', comment = '" . $this->db->escape(strip_tags($data['comment'])) . "', date_added = NOW()");
@@ -210,7 +210,7 @@ class ModelSaleReturn extends Model {
 		}
 	}
 
-	public function getReturnHistories(int $return_id, int $start = 0, int $limit = 10): array {
+	public function getReturnHistories($return_id, $start = 0, $limit = 10) {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -224,13 +224,13 @@ class ModelSaleReturn extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalReturnHistories(int $return_id): int {
+	public function getTotalReturnHistories($return_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "return_history WHERE return_id = '" . (int)$return_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalReturnHistoriesByReturnStatusId(int $return_status_id): int {
+	public function getTotalReturnHistoriesByReturnStatusId($return_status_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "return_history WHERE return_status_id = '" . (int)$return_status_id . "'");
 
 		return (int)$query->row['total'];

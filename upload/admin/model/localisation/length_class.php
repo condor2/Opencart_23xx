@@ -1,6 +1,6 @@
 <?php
 class ModelLocalisationLengthClass extends Model {
-	public function addLengthClass(array $data): int {
+	public function addLengthClass($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "length_class SET value = '" . (float)$data['value'] . "'");
 
 		$length_class_id = $this->db->getLastId();
@@ -14,7 +14,7 @@ class ModelLocalisationLengthClass extends Model {
 		return $length_class_id;
 	}
 
-	public function editLengthClass(int $length_class_id, array $data): void {
+	public function editLengthClass($length_class_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "length_class SET value = '" . (float)$data['value'] . "' WHERE length_class_id = '" . (int)$length_class_id . "'");
 
 		$this->db->query("DELETE FROM " . DB_PREFIX . "length_class_description WHERE length_class_id = '" . (int)$length_class_id . "'");
@@ -26,14 +26,14 @@ class ModelLocalisationLengthClass extends Model {
 		$this->cache->delete('length_class');
 	}
 
-	public function deleteLengthClass(int $length_class_id): void {
+	public function deleteLengthClass($length_class_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "length_class WHERE length_class_id = '" . (int)$length_class_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "length_class_description WHERE length_class_id = '" . (int)$length_class_id . "'");
 
 		$this->cache->delete('length_class');
 	}
 
-	public function getLengthClasses(array $data = array()): array {
+	public function getLengthClasses($data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "length_class lc LEFT JOIN " . DB_PREFIX . "length_class_description lcd ON (lc.length_class_id = lcd.length_class_id) WHERE lcd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
@@ -85,19 +85,19 @@ class ModelLocalisationLengthClass extends Model {
 		}
 	}
 
-	public function getLengthClass(int $length_class_id): array {
+	public function getLengthClass($length_class_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "length_class lc LEFT JOIN " . DB_PREFIX . "length_class_description lcd ON (lc.length_class_id = lcd.length_class_id) WHERE lc.length_class_id = '" . (int)$length_class_id . "' AND lcd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
 	}
 
-	public function getLengthClassDescriptionByUnit(string $unit): array {
+	public function getLengthClassDescriptionByUnit($unit) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "length_class_description WHERE unit = '" . $this->db->escape($unit) . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 		return $query->row;
 	}
 
-	public function getLengthClassDescriptions(int $length_class_id): array {
+	public function getLengthClassDescriptions($length_class_id) {
 		$length_class_data = array();
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "length_class_description WHERE length_class_id = '" . (int)$length_class_id . "'");
@@ -112,7 +112,7 @@ class ModelLocalisationLengthClass extends Model {
 		return $length_class_data;
 	}
 
-	public function getTotalLengthClasses(): int {
+	public function getTotalLengthClasses() {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "length_class");
 
 		return (int)$query->row['total'];

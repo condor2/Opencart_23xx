@@ -1,6 +1,6 @@
 <?php
 class ModelSaleOrder extends Model {
-	public function deleteOrder(int $order_id): void {
+	public function deleteOrder($order_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order` WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_product` WHERE order_id = '" . (int)$order_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "order_option` WHERE order_id = '" . (int)$order_id . "'");
@@ -15,7 +15,7 @@ class ModelSaleOrder extends Model {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "voucher_history` WHERE order_id = '" . (int)$order_id . "'");
 	}	
 	
-	public function getOrder(int $order_id): array {
+	public function getOrder($order_id) {
 		$order_query = $this->db->query("SELECT *, (SELECT CONCAT(c.firstname, ' ', c.lastname) FROM " . DB_PREFIX . "customer c WHERE c.customer_id = o.customer_id) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status FROM `" . DB_PREFIX . "order` o WHERE o.order_id = '" . (int)$order_id . "'");
 
 		if ($order_query->num_rows) {
@@ -169,7 +169,7 @@ class ModelSaleOrder extends Model {
 		}
 	}
 
-	public function getOrders(array $data = array()): array {
+	public function getOrders($data = array()) {
 		$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status, o.store_name, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
 
 		if (!empty($data['filter_order_status'])) {
@@ -249,37 +249,37 @@ class ModelSaleOrder extends Model {
 		return $query->rows;
 	}
 
-	public function getOrderProducts(int $order_id): array {
+	public function getOrderProducts($order_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
 
 		return $query->rows;
 	}
 
-	public function getOrderOptions(int $order_id, int $order_product_id): array {
+	public function getOrderOptions($order_id, $order_product_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$order_product_id . "'");
 
 		return $query->rows;
 	}
 
-	public function getOrderVouchers(int $order_id): array {
+	public function getOrderVouchers($order_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_voucher WHERE order_id = '" . (int)$order_id . "'");
 
 		return $query->rows;
 	}
 
-	public function getOrderVoucherByVoucherId(int $voucher_id): array {
+	public function getOrderVoucherByVoucherId($voucher_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_voucher` WHERE voucher_id = '" . (int)$voucher_id . "'");
 
 		return $query->row;
 	}
 
-	public function getOrderTotals(int $order_id): array {
+	public function getOrderTotals($order_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_total WHERE order_id = '" . (int)$order_id . "' ORDER BY sort_order");
 
 		return $query->rows;
 	}
 
-	public function getTotalOrders(array $data = array()): int {
+	public function getTotalOrders($data = array()) {
 		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order`";
 
 		if (!empty($data['filter_order_status'])) {
@@ -325,19 +325,19 @@ class ModelSaleOrder extends Model {
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalOrdersByStoreId(int $store_id): int {
+	public function getTotalOrdersByStoreId($store_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE store_id = '" . (int)$store_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalOrdersByOrderStatusId(int $order_status_id): int {
+	public function getTotalOrdersByOrderStatusId($order_status_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE order_status_id = '" . (int)$order_status_id . "' AND order_status_id > '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalOrdersByProcessingStatus(): int {
+	public function getTotalOrdersByProcessingStatus() {
 		$implode = array();
 
 		$order_statuses = $this->config->get('config_processing_status');
@@ -355,7 +355,7 @@ class ModelSaleOrder extends Model {
 		}
 	}
 
-	public function getTotalOrdersByCompleteStatus(): int {
+	public function getTotalOrdersByCompleteStatus() {
 		$implode = array();
 
 		$order_statuses = $this->config->get('config_complete_status');
@@ -373,19 +373,19 @@ class ModelSaleOrder extends Model {
 		}
 	}
 
-	public function getTotalOrdersByLanguageId(int $language_id): int {
+	public function getTotalOrdersByLanguageId($language_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE language_id = '" . (int)$language_id . "' AND order_status_id > '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalOrdersByCurrencyId(int $currency_id): int {
+	public function getTotalOrdersByCurrencyId($currency_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` WHERE currency_id = '" . (int)$currency_id . "' AND order_status_id > '0'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function createInvoiceNo(int $order_id): string {
+	public function createInvoiceNo($order_id) {
 		$order_info = $this->getOrder($order_id);
 
 		if ($order_info && !$order_info['invoice_no']) {
@@ -403,7 +403,7 @@ class ModelSaleOrder extends Model {
 		}
 	}
 
-	public function getOrderHistories(int $order_id, int $start = 0, int $limit = 10): array {
+	public function getOrderHistories($order_id, $start = 0, $limit = 10) {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -417,19 +417,19 @@ class ModelSaleOrder extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalOrderHistories(int $order_id): int {
+	public function getTotalOrderHistories($order_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order_history WHERE order_id = '" . (int)$order_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalOrderHistoriesByOrderStatusId(int $order_status_id): int {
+	public function getTotalOrderHistoriesByOrderStatusId($order_status_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "order_history WHERE order_status_id = '" . (int)$order_status_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getEmailsByProductsOrdered(array $products, int $start, int $end): array {
+	public function getEmailsByProductsOrdered($products, $start, $end) {
 		$implode = array();
 
 		foreach ($products as $product_id) {
@@ -441,7 +441,7 @@ class ModelSaleOrder extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalEmailsByProductsOrdered(array $products): int {
+	public function getTotalEmailsByProductsOrdered($products) {
 		$implode = array();
 
 		foreach ($products as $product_id) {

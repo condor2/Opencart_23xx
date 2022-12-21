@@ -1,6 +1,6 @@
 <?php
 class ModelSaleRecurring extends Model {
-	public function getRecurrings(array $data): array {
+	public function getRecurrings($data) {
 		$sql = "SELECT `or`.order_recurring_id, `or`.order_id, `or`.reference, `or`.`status`, `or`.`date_added`, CONCAT(`o`.firstname, ' ', `o`.lastname) AS customer FROM `" . DB_PREFIX . "order_recurring` `or` LEFT JOIN `" . DB_PREFIX . "order` `o` ON (`or`.order_id = `o`.order_id)";
 
 		$implode = array();
@@ -71,13 +71,13 @@ class ModelSaleRecurring extends Model {
 		return $query->rows;
 	}
 
-	public function getRecurring(int $order_recurring_id): array {
+	public function getRecurring($order_recurring_id) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_recurring WHERE order_recurring_id = " . (int)$order_recurring_id);
 
 		return $query->row;
 	}
 
-	public function getRecurringTransactions(int $order_recurring_id): array {
+	public function getRecurringTransactions($order_recurring_id) {
 		$transactions = array();
 
 		$query = $this->db->query("SELECT amount, type, date_added FROM " . DB_PREFIX . "order_recurring_transaction WHERE order_recurring_id = " . (int)$order_recurring_id . " ORDER BY date_added DESC");
@@ -129,7 +129,7 @@ class ModelSaleRecurring extends Model {
 		return $transactions;
 	}
 
-	private function getStatus(string $status): array {
+	private function getStatus($status) {
 		switch ($status) {
 			case 1:
 				$result = $this->language->get('text_status_inactive');
@@ -157,7 +157,7 @@ class ModelSaleRecurring extends Model {
 		return $result;
 	}
 	
-	public function getTotalRecurrings(array $data): int {
+	public function getTotalRecurrings($data) {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "order_recurring` `or` LEFT JOIN `" . DB_PREFIX . "order` o ON (`or`.order_id = `o`.order_id)";
 		
 		$implode = array();
