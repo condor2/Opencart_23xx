@@ -150,7 +150,7 @@ class ControllerDesignSeoUrl extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'keyword';
+			$sort = 'query';
 		}
 
 		if (isset($this->request->get['order'])) {
