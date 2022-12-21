@@ -2,7 +2,7 @@
 class ControllerExtensionModuleFeatured extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/featured');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -171,7 +171,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/featured', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/module/featured')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

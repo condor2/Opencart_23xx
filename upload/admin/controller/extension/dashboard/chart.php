@@ -2,7 +2,7 @@
 class ControllerExtensionDashboardChart extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/dashboard/chart');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -88,7 +88,7 @@ class ControllerExtensionDashboardChart extends Controller {
 		$this->response->setOutput($this->load->view('extension/dashboard/chart_form', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/dashboard/chart')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -112,7 +112,7 @@ class ControllerExtensionDashboardChart extends Controller {
 		return $this->load->view('extension/dashboard/chart_info', $data);
 	}
 
-	public function chart(): void {
+	public function chart() {
 		$this->load->language('extension/dashboard/chart');
 
 		$json = array();

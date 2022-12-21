@@ -1,6 +1,6 @@
 <?php
 class ControllerReportCustomerSearch extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/customer_search');
 
 		$this->document->setTitle($this->language->get('heading_title'));

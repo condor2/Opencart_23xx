@@ -2,7 +2,7 @@
 class ControllerLocalisationLengthClass extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('localisation/length_class');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('localisation/length_class');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('localisation/length_class');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('localisation/length_class');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -260,7 +260,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->response->setOutput($this->load->view('localisation/length_class_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['length_class_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -357,7 +357,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		$this->response->setOutput($this->load->view('localisation/length_class_form', $data));
 	}
 
-	protected function validateForm(): bool {
+	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'localisation/length_class')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -375,7 +375,7 @@ class ControllerLocalisationLengthClass extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete(): bool {
+	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'localisation/length_class')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

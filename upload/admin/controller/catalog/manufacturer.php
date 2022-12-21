@@ -12,7 +12,7 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('catalog/manufacturer');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('catalog/manufacturer');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('catalog/manufacturer');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -259,7 +259,7 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->response->setOutput($this->load->view('catalog/manufacturer_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['manufacturer_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -400,7 +400,7 @@ class ControllerCatalogManufacturer extends Controller {
 		$this->response->setOutput($this->load->view('catalog/manufacturer_form', $data));
 	}
 
-	protected function validateForm(): bool {
+	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'catalog/manufacturer')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -430,7 +430,7 @@ class ControllerCatalogManufacturer extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete(): bool {
+	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'catalog/manufacturer')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -448,7 +448,7 @@ class ControllerCatalogManufacturer extends Controller {
 		return !$this->error;
 	}
 
-	public function autocomplete(): void {
+	public function autocomplete() {
 		$json = array();
 
 		if (isset($this->request->get['filter_name'])) {

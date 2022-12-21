@@ -2,7 +2,7 @@
 class ControllerExtensionModulePPLogin extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/pp_login');
 
 		$this->load->model('setting/setting');
@@ -298,7 +298,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/pp_login', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/module/pp_login')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -314,13 +314,13 @@ class ControllerExtensionModulePPLogin extends Controller {
 		return !$this->error;
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/event');
 
 		$this->model_extension_event->addEvent('pp_login', 'catalog/controller/account/logout/after', 'extension/module/pp_login/logout');
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/event');
 
 		$this->model_extension_event->deleteEvent('pp_login');

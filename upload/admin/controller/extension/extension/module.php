@@ -2,7 +2,7 @@
 class ControllerExtensionExtensionModule extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -12,7 +12,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -38,7 +38,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -59,7 +59,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 	
-	public function add(): void {
+	public function add() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -77,7 +77,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -93,7 +93,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_layout'] = sprintf($this->language->get('text_layout'), $this->url->link('design/layout', 'token=' . $this->session->data['token'], true));
@@ -181,7 +181,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->response->setOutput($this->load->view('extension/extension/module', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/extension/module')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

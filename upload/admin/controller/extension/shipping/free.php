@@ -2,7 +2,7 @@
 class ControllerExtensionShippingFree extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/shipping/free');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -97,7 +97,7 @@ class ControllerExtensionShippingFree extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/free', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/free')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonFileManager extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('common/filemanager');
 
 		// Make sure we have the correct directory
@@ -196,7 +196,7 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput($this->load->view('common/filemanager', $data));
 	}
 
-	public function upload(): void {
+	public function upload() {
 		$this->load->language('common/filemanager');
 
 		$json = array();
@@ -299,7 +299,7 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function folder(): void {
+	public function folder() {
 		$this->load->language('common/filemanager');
 
 		$json = array();
@@ -349,7 +349,7 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('common/filemanager');
 
 		$json = array();

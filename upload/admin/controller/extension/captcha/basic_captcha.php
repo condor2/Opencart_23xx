@@ -2,7 +2,7 @@
 class ControllerExtensionCaptchaBasicCaptcha extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/captcha/basic_captcha');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -68,7 +68,7 @@ class ControllerExtensionCaptchaBasicCaptcha extends Controller {
 		$this->response->setOutput($this->load->view('extension/captcha/basic_captcha', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/captcha/basic_captcha')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

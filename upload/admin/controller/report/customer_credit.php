@@ -1,6 +1,6 @@
 <?php
 class ControllerReportCustomerCredit extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/customer_credit');
 
 		$this->document->setTitle($this->language->get('heading_title'));

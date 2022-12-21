@@ -2,7 +2,7 @@
 class ControllerExtensionFeedGoogleBase extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/feed/google_base');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -78,7 +78,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		$this->response->setOutput($this->load->view('extension/feed/google_base', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/feed/google_base')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -86,19 +86,19 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		return !$this->error;
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/feed/google_base');
 
 		$this->model_extension_feed_google_base->install();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/feed/google_base');
 
 		$this->model_extension_feed_google_base->uninstall();
 	}
 
-	public function import(): void {
+	public function import() {
 		$this->load->language('extension/feed/google_base');
 
 		$json = array();
@@ -149,7 +149,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function category(): void {
+	public function category() {
 		$this->load->language('extension/feed/google_base');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
@@ -197,7 +197,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		$this->response->setOutput($this->load->view('extension/feed/google_base_category', $data));
 	}
 
-	public function addCategory(): void {
+	public function addCategory() {
 		$this->load->language('extension/feed/google_base');
 
 		$json = array();
@@ -216,7 +216,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function removeCategory(): void {
+	public function removeCategory() {
 		$this->load->language('extension/feed/google_base');
 
 		$json = array();
@@ -235,7 +235,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function autocomplete(): void {
+	public function autocomplete() {
 		$json = array();
 
 		if (isset($this->request->get['filter_name'])) {

@@ -1,6 +1,6 @@
 <?php
 class ControllerReportCustomerReward extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/customer_reward');
 
 		$this->document->setTitle($this->language->get('heading_title'));

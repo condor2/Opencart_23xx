@@ -2,7 +2,7 @@
 class ControllerCommonReset extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
 			$this->response->redirect($this->url->link('common/dashboard', '', true));
 		}
@@ -99,7 +99,7 @@ class ControllerCommonReset extends Controller {
 		}
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if ((utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 4) || (utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 20)) {
 			$this->error['password'] = $this->language->get('error_password');
 		}

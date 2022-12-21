@@ -2,7 +2,7 @@
 class ControllerExtensionCurrencyFixer extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/currency/fixer');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -84,7 +84,7 @@ class ControllerExtensionCurrencyFixer extends Controller {
 		$this->response->setOutput($this->load->view('extension/currency/fixer', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/currency/fixer')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -96,7 +96,7 @@ class ControllerExtensionCurrencyFixer extends Controller {
 		return !$this->error;
 	}
 
-	public function currency(string $default = ''): void {
+	public function currency(string $default = '') {
 		if ($this->config->get('fixer_status')) {
 			$curl = curl_init();
 

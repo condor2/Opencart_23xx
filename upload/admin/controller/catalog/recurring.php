@@ -12,7 +12,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	public function copy(): void {
+	public function copy() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -144,7 +144,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -295,7 +295,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->response->setOutput($this->load->view('catalog/recurring_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['recurring_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -506,7 +506,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->response->setOutput($this->load->view('catalog/recurring_form', $data));
 	}
 
-	protected function validateForm(): bool {
+	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'catalog/recurring')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -524,7 +524,7 @@ class ControllerCatalogRecurring extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete(): bool {
+	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'catalog/recurring')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -542,7 +542,7 @@ class ControllerCatalogRecurring extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateCopy(): bool {
+	protected function validateCopy() {
 		if (!$this->user->hasPermission('modify', 'catalog/recurring')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

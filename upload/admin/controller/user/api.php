@@ -2,7 +2,7 @@
 class ControllerUserApi extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerUserApi extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerUserApi extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerUserApi extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerUserApi extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -265,7 +265,7 @@ class ControllerUserApi extends Controller {
 		$this->response->setOutput($this->load->view('user/api_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['api_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -411,7 +411,7 @@ class ControllerUserApi extends Controller {
 		$this->response->setOutput($this->load->view('user/api_form', $data));
 	}
 
-	protected function validateForm(): bool {
+	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'user/api')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -431,7 +431,7 @@ class ControllerUserApi extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete(): bool {
+	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'user/api')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -439,7 +439,7 @@ class ControllerUserApi extends Controller {
 		return !$this->error;
 	}
 
-	public function addIp(): void {
+	public function addIp() {
 		$this->load->language('user/api');
 
 		$json = array();
@@ -458,7 +458,7 @@ class ControllerUserApi extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function deleteSession(): void {
+	public function deleteSession() {
 		$this->load->language('user/api');
 
 		$json = array();

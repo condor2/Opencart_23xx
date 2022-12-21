@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModulePilibabaButton extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/pilibaba_button');
 
 		$this->load->model('setting/setting');
@@ -66,7 +66,7 @@ class ControllerExtensionModulePilibabaButton extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/pilibaba_button', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/module/pilibaba_button')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

@@ -2,7 +2,7 @@
 class ControllerExtensionShippingCitylink extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/shipping/citylink');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerExtensionShippingCitylink extends Controller {
 		$this->response->setOutput($this->load->view('extension/shipping/citylink', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/shipping/citylink')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}

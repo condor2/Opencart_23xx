@@ -2,7 +2,7 @@
 class ControllerExtensionTotalVoucher extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/total/voucher');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -75,7 +75,7 @@ class ControllerExtensionTotalVoucher extends Controller {
 		$this->response->setOutput($this->load->view('extension/total/voucher', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/total/voucher')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -83,14 +83,14 @@ class ControllerExtensionTotalVoucher extends Controller {
 		return !$this->error;
 	}
 
-	public function install(): void {
+	public function install() {
 		// Register the event triggers
 		$this->load->model('extension/event');
 
 		$this->model_extension_event->addEvent('voucher', 'catalog/model/checkout/order/addOrderHistory/after', 'extension/total/voucher/send');
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		// delete the event triggers
 		$this->load->model('extension/event');
 

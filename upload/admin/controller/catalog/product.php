@@ -2,7 +2,7 @@
 class ControllerCatalogProduct extends Controller {
 	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -64,7 +64,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -116,7 +116,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -170,7 +170,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getList();
 	}
 
-	public function copy(): void {
+	public function copy() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -224,7 +224,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -541,7 +541,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->response->setOutput($this->load->view('catalog/product_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');
 
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
@@ -1349,7 +1349,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->response->setOutput($this->load->view('catalog/product_form', $data));
 	}
 
-	protected function validateForm(): bool {
+	protected function validateForm() {
 		if (!$this->user->hasPermission('modify', 'catalog/product')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -1389,7 +1389,7 @@ class ControllerCatalogProduct extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateDelete(): bool {
+	protected function validateDelete() {
 		if (!$this->user->hasPermission('modify', 'catalog/product')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -1397,7 +1397,7 @@ class ControllerCatalogProduct extends Controller {
 		return !$this->error;
 	}
 
-	protected function validateCopy(): bool {
+	protected function validateCopy() {
 		if (!$this->user->hasPermission('modify', 'catalog/product')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
@@ -1405,7 +1405,7 @@ class ControllerCatalogProduct extends Controller {
 		return !$this->error;
 	}
 
-	public function autocomplete(): void {
+	public function autocomplete() {
 		$json = array();
 
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model'])) {

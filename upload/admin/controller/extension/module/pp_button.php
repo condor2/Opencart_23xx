@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModulePPButton extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/pp_button');
 
 		$this->load->model('setting/setting');
@@ -66,7 +66,7 @@ class ControllerExtensionModulePPButton extends Controller {
 		$this->response->setOutput($this->load->view('extension/module/pp_button', $data));
 	}
 
-	protected function validate(): bool {
+	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/module/pp_button')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
