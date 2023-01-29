@@ -388,14 +388,10 @@ class Mail {
 				$lines = explode("\n", $message);
 
 				foreach ($lines as $line) {
-					$results = str_split($line, 998);
-
-					foreach ($results as $result) {
-						if (substr(PHP_OS, 0, 3) != 'WIN') {
-							fputs($handle, $result . "\r\n");
-						} else {
-							fputs($handle, str_replace("\n", "\r\n", $result) . "\r\n");
-						}
+					$results = ($line === '') ? [''] : str_split($line, 998);
+					
+					foreach($results as $result) {
+						fputs($handle, $result . "\r\n");
 					}
 				}
 
