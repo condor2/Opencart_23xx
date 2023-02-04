@@ -107,22 +107,22 @@ class ModelUserUser extends Model {
 	}
 
 	public function addLoginAttempt($username) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_login WHERE email = '" . $this->db->escape(utf8_strtolower((string)$username)) . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user_login WHERE `username` = '" . $this->db->escape($username) . "'");
 
 		if (!$query->num_rows) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "customer_login SET email = '" . $this->db->escape(utf8_strtolower((string)$username)) . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', total = 1, date_added = '" . $this->db->escape(date('Y-m-d H:i:s')) . "', date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "'");
+			$this->db->query("INSERT INTO " . DB_PREFIX . "user_login SET `username` = '" . $this->db->escape($username) . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', total = 1, date_added = '" . $this->db->escape(date('Y-m-d H:i:s')) . "', date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "'");
 		} else {
-			$this->db->query("UPDATE " . DB_PREFIX . "customer_login SET total = (total + 1), date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE customer_login_id = '" . (int)$query->row['customer_login_id'] . "'");
+			$this->db->query("UPDATE " . DB_PREFIX . "user_login SET total = (total + 1), date_modified = '" . $this->db->escape(date('Y-m-d H:i:s')) . "' WHERE `user_login_id` = '" . (int)$query->row['user_login_id'] . "'");
 		}
 	}
 
 	public function getLoginAttempts($username) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_login` WHERE email = '" . $this->db->escape(utf8_strtolower($username)) . "'");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "user_login` WHERE `username` = '" . $this->db->escape($username) . "'");
 
 		return $query->row;
 	}
 
 	public function deleteLoginAttempts($username) {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_login` WHERE email = '" . $this->db->escape(utf8_strtolower($username)) . "'");
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "user_login` WHERE `username` = '" . $this->db->escape($username) . "'");
 	}
 }

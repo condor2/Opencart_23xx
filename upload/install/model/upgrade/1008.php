@@ -55,14 +55,14 @@ class ModelUpgrade1008 extends Model {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET `store_id` = '0', `code` = 'dashboard_recent', `key` = 'dashboard_recent_width', `value` = '8', `serialized` = '0'");
 		}
 
-        // Modification
+		// Modification
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "modification' AND COLUMN_NAME = 'extension_install_id'");
 		
 		if (!$query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "modification` ADD `extension_install_id` INT(11) NOT NULL AFTER `modification_id`");
 		}
 
-        // Event
+		// Event
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "event` WHERE `action` = 'event/currency'");
 
 		if (!$query->num_rows) {
@@ -71,14 +71,14 @@ class ModelUpgrade1008 extends Model {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (code, trigger, action, status, date_added) VALUES ('admin_setting', 'admin/model/setting/setting/editSetting/after', 'event/currency', 1, '2022-03-24 14:00:00');");
 		}
 
-        // Setting - Time Zone
+		// Setting - Time Zone
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_timezone'");
 
 		if (!$query->num_rows) {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'config', 'config_timezone', 'UTC', 0);");
 		}
 
-        // Setting - ECB
+		// Setting - ECB
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_currency_engine'");
 
 		if (!$query->num_rows) {
@@ -86,42 +86,42 @@ class ModelUpgrade1008 extends Model {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'ecb', 'ecb_status', '1', 0);");
 		}
 
-        // Update Affiliate `password` column Length
+		// Update Affiliate `password` column Length
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate' AND COLUMN_NAME = 'affiliate_id'");
 
 		if ($query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "affiliate` MODIFY `password` VARCHAR(255)");
 		}
 
-        // Update Customer `password` column Length
+		// Update Customer `password` column Length
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "customer' AND COLUMN_NAME = 'customer_id'");
 
 		if ($query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer` MODIFY `password` VARCHAR(255)");
 		}
 
-        // Update User `password` column Length
+		// Update User `password` column Length
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "user' AND COLUMN_NAME = 'user_id'");
 
 		if ($query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "user` MODIFY `password` VARCHAR(255)");
 		}
 
-        // Remove Affiliate `salt` column
+		// Remove Affiliate `salt` column
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate' AND COLUMN_NAME = 'salt'");
 
 		if ($query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "affiliate` DROP COLUMN `salt`");
 		}
 
-        // Remove Customer `salt` column
+		// Remove Customer `salt` column
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "customer' AND COLUMN_NAME = 'salt'");
 
 		if ($query->num_rows) {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer` DROP COLUMN `salt`");
 		}
 
-        // Remove User `salt` column
+		// Remove User `salt` column
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "user' AND COLUMN_NAME = 'salt'");
 
 		if ($query->num_rows) {
