@@ -20,7 +20,7 @@ class ControllerAffiliateRegister extends Controller {
     		$this->load->model('account/customer');
 			$this->model_account_customer->deleteLoginAttempts($this->request->post['email']);
 
-			$this->affiliate->login($this->request->post['email'], $this->request->post['password']);
+			$this->affiliate->login($this->request->post['email'], html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8'));
 
 			// Add to activity log
 			if ($this->config->get('config_customer_activity')) {

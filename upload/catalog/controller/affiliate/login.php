@@ -132,7 +132,7 @@ class ControllerAffiliateLogin extends Controller {
 		}
 		
 		if (!$this->error) {
-			if (!$this->affiliate->login($this->request->post['email'], $this->request->post['password'])) {
+			if (!$this->affiliate->login($this->request->post['email'], html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8'));
 				$this->error['warning'] = $this->language->get('error_login');
 			
 				$this->model_affiliate_affiliate->addLoginAttempt($this->request->post['email']);
