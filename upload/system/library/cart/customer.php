@@ -51,19 +51,21 @@ class Customer {
 	public function login($email, $password, $override = false) {
 	  $customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "' AND status = '1' AND approved = '1'");
 
-		if ($user_query->num_rows) {
-			if (password_verify($password, $user_query->row['password'])) {
-				$rehash = password_needs_rehash($user_query->row['password'], PASSWORD_DEFAULT);
-			} elseif (isset($user_query->row['salt']) && $user_query->row['password'] == sha1($user_query->row['salt'] . sha1($user_query->row['salt'] . sha1($password)))) {
-				$rehash = true;
-			} elseif ($user_query->row['password'] == md5($password)) {
-				$rehash = true;
-			} else {
-				return false;
-			}
+		if ($customer_query->row) {
+			if (!$override) {
+				if (password_verify($password, $customer_query->row['password'])) {
+					$rehash = password_needs_rehash($customer_query->row['password'], PASSWORD_DEFAULT);
+				} elseif (isset($customer_query->row['salt']) && $customer_query->row['password'] == sha1($customer_query->row['salt'] . sha1($customer_query->row['salt'] . sha1($password)))) {
+					$rehash = true;
+				} elseif ($customer_query->row['password'] == md5($password)) {
+					$rehash = true;
+				} else {
+					return false;
+				}
 
-			if ($rehash) {
-				$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `password` = '" . $this->db->escape(password_hash($password, PASSWORD_DEFAULT)) . "' WHERE `customer_id` = '" . (int)$user_query->row['customer_id'] . "'");
+				if ($rehash) {
+					$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `password` = '" . $this->db->escape(password_hash($password, PASSWORD_DEFAULT)) . "' WHERE `customer_id` = '" . (int)$customer_query->row['customer_id'] . "'");
+				}
 			}
 
 			$this->session->data['customer_id'] = $customer_query->row['customer_id'];

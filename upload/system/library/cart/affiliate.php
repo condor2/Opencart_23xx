@@ -37,19 +37,19 @@ class Affiliate {
 	public function login($email, $password) {
 	  $affiliate_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "' AND status = '1' AND approved = '1'");
 
-		if ($user_query->num_rows) {
-			if (password_verify($password, $user_query->row['password'])) {
-				$rehash = password_needs_rehash($user_query->row['password'], PASSWORD_DEFAULT);
-			} elseif (isset($user_query->row['salt']) && $user_query->row['password'] == sha1($user_query->row['salt'] . sha1($user_query->row['salt'] . sha1($password)))) {
+		if ($affiliate_query->num_rows) {
+			if (password_verify($password, $affiliate_query->row['password'])) {
+				$rehash = password_needs_rehash($affiliate_query->row['password'], PASSWORD_DEFAULT);
+			} elseif (isset($affiliate_query->row['salt']) && $affiliate_query->row['password'] == sha1($affiliate_query->row['salt'] . sha1($affiliate_query->row['salt'] . sha1($password)))) {
 				$rehash = true;
-			} elseif ($user_query->row['password'] == md5($password)) {
+			} elseif ($affiliate_query->row['password'] == md5($password)) {
 				$rehash = true;
 			} else {
 				return false;
 			}
 
 			if ($rehash) {
-				$this->db->query("UPDATE `" . DB_PREFIX . "affiliate` SET `password` = '" . $this->db->escape(password_hash($password, PASSWORD_DEFAULT)) . "' WHERE `affiliate_id` = '" . (int)$user_query->row['affiliate_id'] . "'");
+				$this->db->query("UPDATE `" . DB_PREFIX . "affiliate` SET `password` = '" . $this->db->escape(password_hash($password, PASSWORD_DEFAULT)) . "' WHERE `affiliate_id` = '" . (int)$affiliate_query->row['affiliate_id'] . "'");
 			}
 
 			$this->session->data['affiliate_id'] = $affiliate_query->row['affiliate_id'];
