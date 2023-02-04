@@ -10,7 +10,7 @@ class ModelToolImage extends Model {
 		$image_old = $filename;
 		$image_new = 'cache/' . utf8_substr($filename, 0, utf8_strrpos($filename, '.')) . '-' . (int)$width . 'x' . (int)$height . '.' . $extension;
 
-		if (!is_file(DIR_IMAGE . $image_new) || (filectime(DIR_IMAGE . $image_old) > filectime(DIR_IMAGE . $image_new))) {
+		if (!is_file(DIR_IMAGE . $image_new) || (filemtime(DIR_IMAGE . $image_old) > filemtime(DIR_IMAGE . $image_new))) {
 			list($width_orig, $height_orig, $image_type) = getimagesize(DIR_IMAGE . $image_old);
 
 			if (!in_array($image_type, array(IMAGETYPE_PNG, IMAGETYPE_JPEG, IMAGETYPE_GIF, IMAGETYPE_WEBP))) {
@@ -22,7 +22,11 @@ class ModelToolImage extends Model {
 			$directories = explode('/', dirname($image_new));
 
 			foreach ($directories as $directory) {
-				$path = $path . '/' . $directory;
+				if (!$path) {
+					$path = $directory;
+				} else {
+					$path = $path . '/' . $directory;
+				}
 
 				if (!is_dir(DIR_IMAGE . $path)) {
 					@mkdir(DIR_IMAGE . $path, 0755);
@@ -38,7 +42,7 @@ class ModelToolImage extends Model {
 			}
 		}
 
-		$image_new = str_replace(' ', '%20', $image_new);  // fix bug when attach image on email (gmail.com). it is automatic changing space " " to +
+		$image_new = str_replace(' ', '%20', $image_new);  // fix bug when attach image on email (gmail.com). it is automatically changing space from " " to +
 
 		return $this->config->get('config_url') . 'image/' . $image_new;
 	}
