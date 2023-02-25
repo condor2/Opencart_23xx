@@ -57,11 +57,13 @@ class ControllerAccountReturn extends Controller {
 			$page = 1;
 		}
 
+		$limit = 10;
+
 		$data['returns'] = array();
 
 		$return_total = $this->model_account_return->getTotalReturns();
 
-		$results = $this->model_account_return->getReturns(($page - 1) * 10, 10);
+		$results = $this->model_account_return->getReturns(($page - 1) * $limit, $limit);
 
 		foreach ($results as $result) {
 			$data['returns'][] = array(
@@ -77,12 +79,12 @@ class ControllerAccountReturn extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $return_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('account/return', 'page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($return_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($return_total - 10)) ? $return_total : ((($page - 1) * 10) + 10), $return_total, ceil($return_total / 10));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($return_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($return_total - $limit)) ? $return_total : ((($page - 1) * $limit) + $limit), $return_total, ceil($return_total / $limit));
 
 		$data['continue'] = $this->url->link('account/account', '', true);
 

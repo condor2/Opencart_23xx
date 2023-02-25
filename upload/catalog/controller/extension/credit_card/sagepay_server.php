@@ -64,17 +64,19 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 				$page = 1;
 			}
 
+			$limit = 10;
+
 			$cards_total = count($data['cards']);
 
 			$pagination = new Pagination();
 			$pagination->total = $cards_total;
 			$pagination->page = $page;
-			$pagination->limit = 10;
+			$pagination->limit = $limit;
 			$pagination->url = $this->url->link('extension/credit_card/sagepay_server', 'page={page}', true);
 
 			$data['pagination'] = $pagination->render();
 
-			$data['results'] = sprintf($this->language->get('text_pagination'), ($cards_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($cards_total - 10)) ? $cards_total : ((($page - 1) * 10) + 10), $cards_total, ceil($cards_total / 10));
+			$data['results'] = sprintf($this->language->get('text_pagination'), ($cards_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($cards_total - $limit)) ? $cards_total : ((($page - 1) * $limit) + $limit), $cards_total, ceil($cards_total / $limit));
 		} else {
 			$data['cards'] = false;
 			$data['pagination'] = false;

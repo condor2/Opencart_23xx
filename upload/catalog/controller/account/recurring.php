@@ -53,13 +53,15 @@ class ControllerAccountRecurring extends Controller {
 			$page = 1;
 		}
 
+		$limit = 10;
+
 		$data['recurrings'] = array();
 
 		$this->load->model('account/recurring');
 
 		$recurring_total = $this->model_account_recurring->getTotalOrderRecurrings();
 
-		$results = $this->model_account_recurring->getOrderRecurrings(($page - 1) * 10, 10);
+		$results = $this->model_account_recurring->getOrderRecurrings(($page - 1) * $limit, $limit);
 
 		foreach ($results as $result) {
 			if ($result['status']) {
@@ -80,7 +82,7 @@ class ControllerAccountRecurring extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $recurring_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('account/recurring', 'page={page}', true);
 
 		$data['pagination'] = $pagination->render();

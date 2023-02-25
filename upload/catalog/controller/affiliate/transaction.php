@@ -47,13 +47,15 @@ class ControllerAffiliateTransaction extends Controller {
 			$page = 1;
 		}
 
+		$limit = 10;
+
 		$data['transactions'] = array();
 
 		$filter_data = array(
 			'sort'  => 't.date_added',
 			'order' => 'DESC',
-			'start' => ($page - 1) * 10,
-			'limit' => 10
+			'start' => ($page - 1) * $limit,
+			'limit' => $limit
 		);
 
 		$transaction_total = $this->model_affiliate_transaction->getTotalTransactions();
@@ -71,12 +73,12 @@ class ControllerAffiliateTransaction extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $transaction_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('affiliate/transaction', 'page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($transaction_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($transaction_total - 10)) ? $transaction_total : ((($page - 1) * 10) + 10), $transaction_total, ceil($transaction_total / 10));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($transaction_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($transaction_total - $limit)) ? $transaction_total : ((($page - 1) * $limit) + $limit), $transaction_total, ceil($transaction_total / $limit));
 
 		$data['balance'] = $this->currency->format($this->model_affiliate_transaction->getBalance(), $this->session->data['currency']);
 
