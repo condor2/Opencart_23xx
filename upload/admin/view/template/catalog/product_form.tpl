@@ -1072,12 +1072,8 @@ var attribute_row = <?php echo $attribute_row; ?>;
 function addAttribute() {
     html  = '<tr id="attribute-row' + attribute_row + '">';
 	html += ' <td class="text-left" style="width: 20%;">';
-	html += '  <ul class="nav nav-pills nav-stacked">';
-	html += '   <li>';
 	html += '    <input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="<?php echo $entry_attribute; ?>" class="form-control" />';
 	html += '    <input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" />';
-	html += '   </li>';
-	html += '  </ul>';
 	html += ' </td>';
 	html += '  <td class="text-left">';
 	<?php foreach ($languages as $language) { ?>
