@@ -1076,13 +1076,13 @@ function addAttribute() {
 	html += '   <li>';
 	html += '    <input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="<?php echo $entry_attribute; ?>" class="form-control" />';
 	html += '    <input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" />';
+	html += '   </li>';
+	html += '  </ul>';
 	html += ' </td>';
 	html += '  <td class="text-left">';
 	<?php foreach ($languages as $language) { ?>
 	html += '<div class="input-group"><span class="input-group-addon"><img src="language/<?php echo $language['code']; ?>/<?php echo $language['code']; ?>.png" title="<?php echo $language['name']; ?>" /></span><textarea name="product_attribute[' + attribute_row + '][product_attribute_description][<?php echo $language['language_id']; ?>][text]" rows="5" placeholder="<?php echo $entry_text; ?>" class="form-control"></textarea></div>';
     <?php } ?>
-	html += '   </li>';
-	html += '  </ul>';
 	html += '  </td>';
 	html += '  <td class="text-right"><button type="button" onclick="$(\'#attribute-row' + attribute_row + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
     html += '</tr>';
