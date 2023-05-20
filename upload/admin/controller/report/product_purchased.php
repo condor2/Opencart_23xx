@@ -18,9 +18,15 @@ class ControllerReportProductPurchased extends Controller {
 		}
 
 		if (isset($this->request->get['filter_order_status_id'])) {
-			$filter_order_status_id = $this->request->get['filter_order_status_id'];
+			$filter_order_status_id = (int)$this->request->get['filter_order_status_id'];
 		} else {
 			$filter_order_status_id = 0;
+		}
+
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = '';
 		}
 
 		if (isset($this->request->get['page'])) {
@@ -41,6 +47,10 @@ class ControllerReportProductPurchased extends Controller {
 
 		if (isset($this->request->get['filter_order_status_id'])) {
 			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
+		}
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
 		}
 
 		if (isset($this->request->get['page'])) {
@@ -67,6 +77,7 @@ class ControllerReportProductPurchased extends Controller {
 			'filter_date_start'	     => $filter_date_start,
 			'filter_date_end'	     => $filter_date_end,
 			'filter_order_status_id' => $filter_order_status_id,
+			'filter_name'            => $filter_name,
 			'start'                  => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'                  => $this->config->get('config_limit_admin')
 		);
@@ -99,6 +110,7 @@ class ControllerReportProductPurchased extends Controller {
 		$data['entry_date_start'] = $this->language->get('entry_date_start');
 		$data['entry_date_end'] = $this->language->get('entry_date_end');
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_name'] = $this->language->get('entry_name');
 
 		$data['button_filter'] = $this->language->get('button_filter');
 
@@ -122,6 +134,10 @@ class ControllerReportProductPurchased extends Controller {
 			$url .= '&filter_order_status_id=' . $this->request->get['filter_order_status_id'];
 		}
 
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . urlencode(html_entity_decode($this->request->get['filter_name'], ENT_QUOTES, 'UTF-8'));
+		}
+
 		$pagination = new Pagination();
 		$pagination->total = $product_total;
 		$pagination->page = $page;
@@ -135,6 +151,7 @@ class ControllerReportProductPurchased extends Controller {
 		$data['filter_date_start'] = $filter_date_start;
 		$data['filter_date_end'] = $filter_date_end;
 		$data['filter_order_status_id'] = $filter_order_status_id;
+		$data['filter_name'] = $filter_name;
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

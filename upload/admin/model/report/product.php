@@ -53,6 +53,10 @@ class ModelReportProduct extends Model {
 			$sql .= " AND DATE(o.date_added) <= DATE('" . $this->db->escape($data['filter_date_end']) . "')";
 		}
 
+		if (!empty($data['filter_name'])) {
+			$sql .= " AND op.`name` LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
 		$sql .= " GROUP BY op.product_id ORDER BY total DESC";
 
 		if (isset($data['start']) || isset($data['limit'])) {
@@ -87,6 +91,10 @@ class ModelReportProduct extends Model {
 
 		if (!empty($data['filter_date_end'])) {
 			$sql .= " AND DATE(o.date_added) <= DATE('" . $this->db->escape($data['filter_date_end']) . "')";
+		}
+
+		if (!empty($data['filter_name'])) {
+			$sql .= " AND op.`name` LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
 		$query = $this->db->query($sql);

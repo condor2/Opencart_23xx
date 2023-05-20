@@ -50,6 +50,10 @@
                   <?php } ?>
                 </select>
               </div>
+              <div class="form-group">
+                <label class="control-label" for="input-name"><?php echo $entry_name; ?></label>
+                <input type="text" name="filter_name" value="<?php echo $filter_name; ?>" placeholder="<?php echo $entry_name; ?>" id="input-name" class="form-control" />
+              </div>
               <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
             </div>
           </div>
@@ -111,9 +115,36 @@ $('#button-filter').on('click', function() {
 		url += '&filter_order_status_id=' + encodeURIComponent(filter_order_status_id);
 	}	
 
+	var filter_name = $('input[name=\'filter_name\']').val();
+
+	if (filter_name) {
+		url += '&filter_name=' + encodeURIComponent(filter_name);
+	}
+
 	location = url;
 });
-//--></script> 
+//--></script>
+  <script type="text/javascript"><!--
+$('input[name=\'filter_name\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/product/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['name'],
+						value: item['product_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'filter_name\']').val(item['label']);
+	}
+});
+//--></script>
   <script type="text/javascript"><!--
 $('.date').datetimepicker({
 	pickTime: false
