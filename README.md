@@ -49,13 +49,15 @@ $_['entry_currency_engine']        = 'Currency Rate Engine';
 
 $_['summernote']                    = 'xx-YY';
 
-## Patching standard version of Opencart 2.3.0.2
+# Patching standard version of Opencart 2.3.0.2
 
 After you have replaced this version with your standard version run <b>your-store-url/install</b>
 
-<b>Admin config</b>
+# Make changes in both config files
 
-Replace old structure
+## Admin config
+
+<b>Replace old structure</b>
 
 // DIR<br>
 define('DIR_APPLICATION', '/your_path/admin/');<br>
@@ -71,7 +73,7 @@ define('DIR_MODIFICATION', '/your_path/system/storage/modification/');<br>
 define('DIR_UPLOAD', '/your_path/system/storage/upload/');<br>
 define('DIR_CATALOG', '/your_path/catalog/');<br>
 
-With the new one
+<b>With the new one</b>
 
 // DIR<br>
 define('DIR_APPLICATION', '/your_path/admin/');<br>
@@ -89,9 +91,9 @@ define('DIR_MODIFICATION', DIR_STORAGE . 'modification/');<br>
 define('DIR_SESSION', DIR_STORAGE . 'session/');<br>
 define('DIR_UPLOAD', DIR_STORAGE . 'upload/');<br>
 
-<b>Catalog config</b>
+## Catalog config
 
-Replace old structure
+<b>Replace old structure</b>
 
 // DIR<br>
 define('DIR_APPLICATION', '/your_path/catalog/');<br>
@@ -106,7 +108,7 @@ define('DIR_LOGS', '/your_path/system/storage/logs/');<br>
 define('DIR_MODIFICATION', '/your_path/system/storage/modification/');<br>
 define('DIR_UPLOAD', '/your_path/system/storage/upload/');<br>
 
-With the new one
+<b>With the new one</b>
 
 // DIR<br>
 define('DIR_APPLICATION', '/your_path/catalog/');<br>
