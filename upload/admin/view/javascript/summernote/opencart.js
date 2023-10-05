@@ -20,10 +20,10 @@ $(document).ready(function() {
 				lineNumbers: true,
 				theme: 'monokai'
 			},
-			fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '24', '30', '36', '48' , '64'],
+			fontSizes: ['8', '9', '10', '11', '12', '13', '14', '16', '18', '20', '24', '30', '36', '48' , '64'],
 			toolbar: [
 				['style', ['style']],
-				['font', ['bold', 'underline', 'clear']],
+				['font', ['bold', 'italic', 'underline', 'clear', 'height', 'strikethrough', 'subscript', 'superscript']],
 				['fontname', ['fontname']],
 				['fontsize', ['fontsize']],
 				['color', ['color']],
