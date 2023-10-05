@@ -525,6 +525,7 @@ $(document).on('click', '#button-guest', function() {
 	    },
         success: function(json) {
             $('.alert, .text-danger').remove();
+            $('.form-group').removeClass('has-error');
 
             if (json['redirect']) {
                 location = json['redirect'];
@@ -650,6 +651,7 @@ $(document).on('click', '#button-guest-shipping', function() {
 		},
         success: function(json) {
             $('.alert, .text-danger').remove();
+            $('.form-group').removeClass('has-error');
 
             if (json['redirect']) {
                 location = json['redirect'];
@@ -671,7 +673,7 @@ $(document).on('click', '#button-guest-shipping', function() {
 				}
 
 				// Highlight any found errors
-				$('.text-danger').parent().addClass('has-error');
+				$('.text-danger').parent().parent().addClass('has-error');
             } else {
                 $.ajax({
                     url: 'index.php?route=checkout/shipping_method',
