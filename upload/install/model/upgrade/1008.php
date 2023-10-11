@@ -75,15 +75,15 @@ class ModelUpgrade1008 extends Model {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_timezone'");
 
 		if (!$query->num_rows) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'config', 'config_timezone', 'UTC', 0);");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'config', 'config_timezone', 'UTC', 0);");
 		}
 
 		// Setting - ECB
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_currency_engine'");
 
 		if (!$query->num_rows) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'config', 'config_currency_engine', 'ecb', 0);");
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (store_id, code, key, value, serialized) VALUES (0, 'ecb', 'ecb_status', '1', 0);");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'config', 'config_currency_engine', 'ecb', 0);");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'ecb', 'ecb_status', '1', 0);");
 		}
 
 		// Update Affiliate `password` column Length
