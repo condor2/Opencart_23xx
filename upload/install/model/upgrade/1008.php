@@ -66,9 +66,9 @@ class ModelUpgrade1008 extends Model {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "event` WHERE `action` = 'event/currency'");
 
 		if (!$query->num_rows) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (code, trigger, action, status, date_added) VALUES ('admin_currency_add', 'admin/model/localisation/currency/addCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');");
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (code, trigger, action, status, date_added) VALUES ('admin_currency_edit', 'admin/model/localisation/currency/editCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');");
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (code, trigger, action, status, date_added) VALUES ('admin_setting', 'admin/model/setting/setting/editSetting/after', 'event/currency', 1, '2022-03-24 14:00:00');");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES ('admin_currency_add', 'admin/model/localisation/currency/addCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES ('admin_currency_edit', 'admin/model/localisation/currency/editCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');");
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES ('admin_setting', 'admin/model/setting/setting/editSetting/after', 'event/currency', 1, '2022-03-24 14:00:00');");
 		}
 
 		// Setting - Time Zone
