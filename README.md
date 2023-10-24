@@ -8,7 +8,7 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 
 ## Added
 - Bug fixes found on opencart forum and github
-- Currency module from Master Branch - 3.1.0.0b
+- Currency module from 3.0.x.x
 - Timezone from Master Branch - 3.1.0.0b
 - Vendor folder for some payments
 - Filter on Zone List - 4.0.0.0_b

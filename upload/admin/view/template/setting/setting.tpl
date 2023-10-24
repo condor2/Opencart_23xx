@@ -271,9 +271,14 @@
                 <label class="col-sm-2 control-label" for="input-currency-engine"><?php echo $entry_currency_engine; ?></label>
                 <div class="col-sm-10">
                   <select name="config_currency_engine" id="input-currency-engine" class="form-control">
+                    <?php if (!$config_currency_engine) { ?>
+                    <option value="" selected><?php echo $text_none; ?></option>
+                    <?php } else { ?>
+                    <option value=""><?php echo $text_none; ?></option>
+                    <?php } ?>
                     <?php foreach ($currency_engines as $currency_engine) { ?>
                     <?php if ($currency_engine['value'] == $config_currency_engine) { ?>
-                    <option value="<?php echo $currency_engine['value']; ?>" selected="selected"><?php echo $currency_engine['text']; ?></option>
+                    <option value="<?php echo $currency_engine['value']; ?>" selected><?php echo $currency_engine['text']; ?></option>
                     <?php } else { ?>
                     <option value="<?php echo $currency_engine['value']; ?>"><?php echo $currency_engine['text']; ?></option>
                     <?php } ?>
