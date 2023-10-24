@@ -23,6 +23,10 @@ class ControllerExtensionExtensionCurrency extends Controller {
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/currency/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/currency/' . $this->request->get['extension']);
 
+			// Compatibility
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'currency/' . $this->request->get['extension']);
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'currency/' . $this->request->get['extension']);
+
 			// Call install method if it exsits
 			$this->load->controller('extension/currency/' . $this->request->get['extension'] . '/install');
 
