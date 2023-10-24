@@ -4,7 +4,7 @@ class ControllerExtensionCurrencyEcb extends Controller {
 	public function refresh() {
 		// This function can be called as a CRON task
 
-		if (!$this->config->get('currency_ecb_status')) {
+		if (!$this->config->get('ecb_status')) {
 			return false;
 		}
 
@@ -16,8 +16,8 @@ class ControllerExtensionCurrencyEcb extends Controller {
 			return false;
 		}
 
-		if (!empty($this->config->get('currency_ecb_ip'))) {
-			if ($_SERVER['REMOTE_ADDR'] != $this->config->get('currency_ecb_ip')) {
+		if (!empty($this->config->get('ecb_ip'))) {
+			if ($_SERVER['REMOTE_ADDR'] != $this->config->get('ecb_ip')) {
 				return false;
 			}
 		}
