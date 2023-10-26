@@ -127,9 +127,9 @@ class ControllerExtensionCurrencyEcb extends Controller {
 
 	public function uninstall() {
 		// remove event handlers
-		$this->load->model('setting/event');
+		$this->load->model('extension/event');
 		$code = 'ecb';
-		$this->model_extension_event->deleteEventByCode( $code );
+		$this->model_extension_event->deleteEvent($code);
 
 	}
 
