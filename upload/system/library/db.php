@@ -24,7 +24,7 @@ class DB {
 	 * @param	int		$port
 	 *
  	*/
-	public function __construct(string $adaptor, string $hostname, string $username, string $password, string $database, string $port = '') {
+	public function __construct($adaptor, $hostname, $username, $password, $database, $port = '') {
 		$class = 'DB\\' . $adaptor;
 
 		if (class_exists($class)) {
@@ -41,7 +41,7 @@ class DB {
 	 * 
 	 * @return	array
      */
-	public function query(string $sql): bool|object {
+	public function query($sql) {
 		return $this->adaptor->query($sql);
 	}
 
@@ -52,7 +52,7 @@ class DB {
 	 * 
 	 * @return	string	returns escaped value
      */
-	public function escape(string $value): string {
+	public function escape($value) {
 		return $this->adaptor->escape($value);
 	}
 
@@ -63,7 +63,7 @@ class DB {
 	 *
 	 * @return	int	returns the total number of affected rows.
      */
-	public function countAffected(): int {
+	public function countAffected() {
 		return $this->adaptor->countAffected();
 	}
 
@@ -74,7 +74,7 @@ class DB {
 	 *
 	 * @return	int returns last ID
      */
-	public function getLastId(): int {
+	public function getLastId() {
 		return $this->adaptor->getLastId();
 	}
 	
@@ -85,7 +85,7 @@ class DB {
 	 *
 	 * @return	bool
      */	
-	public function isConnected(): bool {
+	public function isConnected() {
 		return $this->adaptor->isConnected();
 	}
 }

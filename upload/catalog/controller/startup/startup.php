@@ -1,5 +1,16 @@
 <?php
 class ControllerStartupStartup extends Controller {
+	public function __isset($key) {
+		// To make sure that calls to isset also support dynamic properties from the registry
+		// See https://www.php.net/manual/en/language.oop5.overloading.php#object.isset
+		if ($this->registry) {
+			if ($this->registry->get($key)!== null) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function index() {
 		// Store
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "store` WHERE REPLACE(`url`, 'www.', '') = '" . $this->db->escape(($this->request->server['HTTPS'] ? 'https://' : 'http://') . str_replace('www.', '', $this->request->server['HTTP_HOST']) . rtrim(dirname($this->request->server['PHP_SELF']), '/.\\') . '/') . "'");

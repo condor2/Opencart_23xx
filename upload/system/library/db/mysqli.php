@@ -1,9 +1,9 @@
 <?php
 namespace DB;
 class MySQLi {
-	private object $connection;
+	private $connection;
 
-	public function __construct(string $hostname, string $username, string $password, string $database, string $port = '') {
+	public function __construct($hostname, $username, $password, $database, $port = '') {
 		if (!$port) {
 			$port = '3306';
 		}
@@ -21,7 +21,7 @@ class MySQLi {
 		}
 	}
 
-	public function query(string $sql): bool|object {
+	public function query($sql) {
 		try {
 			$query = $this->connection->query($sql);
 
@@ -50,19 +50,19 @@ class MySQLi {
 		}
 	}
 
-	public function escape(string $value): string {
+	public function escape($value) {
 		return $this->connection->real_escape_string($value);
 	}
 	
-	public function countAffected(): int {
+	public function countAffected() {
 		return $this->connection->affected_rows;
 	}
 
-	public function getLastId(): int {
+	public function getLastId() {
 		return $this->connection->insert_id;
 	}
 	
-	public function isConnected(): bool {
+	public function isConnected() {
 		if ($this->connection) {
 			return $this->connection->ping();
 		} else {

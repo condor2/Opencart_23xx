@@ -1,6 +1,6 @@
 <?php
 class ControllerEventTheme extends Controller {
-	public function index(string &$view, array &$data, mixed &$output) {
+	public function index(&$view, &$data, &$output) {
 		if (!$this->config->get($this->config->get('config_theme') . '_status')) {
 			exit('Error: A theme has not been assigned to this store!');
 		}

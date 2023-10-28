@@ -4,7 +4,7 @@ class Action {
 	private $route;
 	private $method = 'index';
 
-	public function __construct(string $route) {
+	public function __construct($route) {
 		$this->id = $route;
 		
 		$parts = explode('/', preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route));
@@ -27,14 +27,14 @@ class Action {
 		return $this->id;
 	}
 	
-	public function execute($registry, $args = array()) {
+	public function execute($registry, array $args = array()) {
 		// Stop any magical methods being called
 		if (substr($this->method, 0, 2) == '__') {
 			return new \Exception('Error: Calls to magic methods are not allowed!');
 		}
 
 		$file = DIR_APPLICATION . 'controller/' . $this->route . '.php';		
-		$class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', (string)$this->route);
+		$class = 'Controller' . preg_replace('/[^a-zA-Z0-9]/', '', $this->route);
 		
 		// Initialize the class
 		if (is_file($file)) {
