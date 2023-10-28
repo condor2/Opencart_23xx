@@ -196,6 +196,22 @@ class Image {
 		imagecopyresampled($this->image, $image_old, $xpos, $ypos, 0, 0, $new_width, $new_height, $this->width, $this->height);
 		imagedestroy($image_old);
 
+		// START MaxD Image Details Tweak //
+		static $matrix, $divisor;
+
+		if (!$matrix) {
+			$matrix = array(
+				array(-1, -1, -1),
+				array(-1, 16, -1),
+				array(-1, -1, -1),
+			);
+
+			$divisor = array_sum(array_map('array_sum', $matrix));
+		}
+
+		imageconvolution($this->image, $matrix, $divisor, 0);
+		// END MaxD Image Details Tweak //
+
 		$this->width = $width;
 		$this->height = $height;
 	}
