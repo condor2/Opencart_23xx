@@ -30,7 +30,7 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 - Option to show and hide/reveal password. Code used from <a href="https://github.com/opencartbrasil/opencartbrasil">Opencart Brasil</a>
 
 ## Compatibility
-- PHP 8.0 and above
+- PHP 7.4.0 and above
 
 ## Language patch for non English
 
