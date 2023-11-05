@@ -15,7 +15,7 @@ class Tax {
 		$this->db = $registry->get('db');
 	}
 
-	public function unsetRates(): void {
+	public function unsetRates() {
 		$this->tax_rates = array();
 	}
 
@@ -71,7 +71,7 @@ class Tax {
 	 *
 	 * @return   void
 	 */
-	public function setStoreAddress(int $country_id, int $zone_id): void {
+	public function setStoreAddress($country_id, $zone_id) {
 		$tax_query = $this->db->query("SELECT tr1.`tax_class_id`, tr2.`tax_rate_id`, tr2.`name`, tr2.`rate`, tr2.`type`, tr1.`priority` FROM `" . DB_PREFIX . "tax_rule` tr1 LEFT JOIN `" . DB_PREFIX . "tax_rate` tr2 ON (tr1.`tax_rate_id` = tr2.`tax_rate_id`) INNER JOIN `" . DB_PREFIX . "tax_rate_to_customer_group` tr2cg ON (tr2.`tax_rate_id` = tr2cg.`tax_rate_id`) LEFT JOIN `" . DB_PREFIX . "zone_to_geo_zone` z2gz ON (tr2.`geo_zone_id` = z2gz.`geo_zone_id`) LEFT JOIN `" . DB_PREFIX . "geo_zone` gz ON (tr2.`geo_zone_id` = gz.`geo_zone_id`) WHERE tr1.`based` = 'store' AND tr2cg.`customer_group_id` = '" . (int)$this->config->get('config_customer_group_id') . "' AND z2gz.`country_id` = '" . (int)$country_id . "' AND (z2gz.`zone_id` = '0' OR z2gz.`zone_id` = '" . (int)$zone_id . "') ORDER BY tr1.`priority` ASC");
 
 		foreach ($tax_query->rows as $result) {
@@ -94,7 +94,7 @@ class Tax {
 	 *
 	 * @return   float
 	 */
-	public function calculate(float $value, int $tax_class_id, bool $calculate = true): float {
+	public function calculate($value, $tax_class_id, $calculate = true) {
 		if ($tax_class_id && $calculate) {
 			$amount = 0;
 
@@ -122,7 +122,7 @@ class Tax {
 	 *
 	 * @return   float
 	 */
-	public function getTax(float $value, int $tax_class_id): float {
+	public function getTax($value, $tax_class_id) {
 		$amount = 0;
 
 		$tax_rates = $this->getRates($value, $tax_class_id);
@@ -141,7 +141,7 @@ class Tax {
 	 *
 	 * @return   string
 	 */
-	public function getRateName(int $tax_rate_id): string {
+	public function getRateName($tax_rate_id) {
 		$tax_query = $this->db->query("SELECT `name` FROM `" . DB_PREFIX . "tax_rate` WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
 
 		if ($tax_query->num_rows) {
@@ -159,7 +159,7 @@ class Tax {
 	 *
 	 * @return   array
 	 */
-	public function getRates(float $value, int $tax_class_id): array {
+	public function getRates($value, $tax_class_id) {
 		$tax_rate_data = array();
 
 		if (isset($this->tax_rates[$tax_class_id])) {

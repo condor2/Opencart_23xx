@@ -1,7 +1,7 @@
 <?php
 namespace Cart;
 class Length {
-	private array $lengths = array();
+	private $lengths = array();
 	private $db;
 	private $config;
 
@@ -35,7 +35,7 @@ class Length {
 	 *
 	 * @return   float
 	 */
-	public function convert(float $value, string $from, string $to): float {
+	public function convert($value, $from, $to) {
 		if ($from == $to) {
 			return $value;
 		}
@@ -65,7 +65,7 @@ class Length {
 	 *
 	 * @return   string
 	 */
-	public function format(float $value, int $length_class_id, string $decimal_point = '.', string $thousand_point = ','): string {
+	public function format($value, $length_class_id, $decimal_point = '.', $thousand_point = ',') {
 		if (isset($this->lengths[$length_class_id])) {
 			return number_format($value, 2, $decimal_point, $thousand_point) . $this->lengths[$length_class_id]['unit'];
 		} else {
@@ -80,7 +80,7 @@ class Length {
 	 *
 	 * @return   string
 	 */
-	public function getUnit(int $length_class_id): string {
+	public function getUnit($length_class_id) {
 		if (isset($this->lengths[$length_class_id])) {
 			return $this->lengths[$length_class_id]['unit'];
 		} else {
