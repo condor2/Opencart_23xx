@@ -25,6 +25,8 @@
       </div>
       <div class="panel-body">
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-filter" class="form-horizontal">
+         <fieldset id="option-value">
+          <legend><?php echo $text_group; ?></legend>
           <div class="form-group required">
             <label class="col-sm-2 control-label"><?php echo $entry_group; ?></label>
             <div class="col-sm-10">
@@ -44,6 +46,9 @@
               <input type="text" name="sort_order" value="<?php echo $sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" id="input-sort-order" class="form-control" />
             </div>
           </div>
+          </fieldset>
+          <fieldset id="option-value">
+          <legend><?php echo $text_value; ?></legend>
           <table id="filter" class="table table-striped table-bordered table-hover">
             <thead>
               <tr>
