@@ -3,7 +3,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 	public function index($setting) {
 		$this->load->language('extension/module/featured');
 
-		$data['heading_title'] = $this->language->get('heading_title');
+		$data['heading_title'] = $setting['name'];
 
 		$data['text_tax'] = $this->language->get('text_tax');
 
