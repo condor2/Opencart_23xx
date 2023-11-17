@@ -54,7 +54,7 @@
             </div>
           </div>
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name"><?php echo $entry_rating; ?></label>
+            <label class="col-sm-2 control-label" for="input-rating"><?php echo $entry_rating; ?></label>
             <div class="col-sm-10">
               <label class="radio-inline">
                 <?php if ($rating == 1) { ?>
