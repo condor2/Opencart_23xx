@@ -52,10 +52,10 @@ class ControllerToolLog extends Controller {
 
 		$file = DIR_LOGS . $this->config->get('config_error_filename');
 
-		if (is_file($file)) {
+		if (file_exists($file)) {
 			$size = filesize($file);
 
-			if ($size >= 3145728) {
+			if ($size >= 5242880) {
 				$suffix = array(
 					'B',
 					'KB',
@@ -76,13 +76,9 @@ class ControllerToolLog extends Controller {
 				}
 
 				$data['error_warning'] = sprintf($this->language->get('error_warning'), basename($file), round(substr($size, 0, strpos($size, '.') + 4), 2) . $suffix[$i]);
+			} else {
+				$data['log'] = file_get_contents($file, FILE_USE_INCLUDE_PATH, null);
 			}
-
-			$handle = fopen($file, 'r+');
-
-			$data['log'] = fread($handle, 3145728);
-
-			fclose($handle);
 		}
 
 		$data['header'] = $this->load->controller('common/header');
