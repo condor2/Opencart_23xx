@@ -2,7 +2,7 @@
 /**
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2017, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
  * @link		https://www.opencart.com
 */
@@ -11,17 +11,17 @@
 * Image class
 */
 class Image {
-	private $width;
-	private $height;
 	private $file;
 	private $image;
+	private $width;
+	private $height;
 	private $bits;
 	private $mime;
 
 	/**
 	 * Constructor
 	 *
-	 * @para string $file
+	 * @param string $file
 	 *
  	*/
 	public function __construct($file) {

@@ -2,16 +2,16 @@
 /**
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2017, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
  * @link		https://www.opencart.com
 */
 
 /**
-* DB Adapter
+* DB Class
 */
 class DB {
-	private object $adaptor;
+	private $adaptor;
 
 	/**
 	 * Constructor
@@ -24,7 +24,7 @@ class DB {
 	 * @param	int		$port
 	 *
  	*/
-	public function __construct($adaptor, $hostname, $username, $password, $database, $port = '') {
+	public function __construct($adaptor, $hostname, $username, $password, $database, $port = NULL) {
 		$class = 'DB\\' . $adaptor;
 
 		if (class_exists($class)) {

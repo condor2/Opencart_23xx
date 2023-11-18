@@ -2,7 +2,7 @@
 /**
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2017, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
  * @link		https://www.opencart.com
 */
@@ -11,19 +11,19 @@
 * Document class
 */
 class Document {
-	private string $title = '';
-	private string $description = '';
-	private string $keywords = '';
-	private array $links = array();
-	private array $styles = array();
-	private array $scripts = array();
+	private $title;
+	private $description;
+	private $keywords;
+	private $links = array();
+	private $styles = array();
+	private $scripts = array();
 
 	/**
      *
      *
      * @param	string	$title
      */
-	public function setTitle(string $title): void {
+	public function setTitle($title) {
 		$this->title = $title;
 	}
 
@@ -32,7 +32,7 @@ class Document {
 	 *
 	 * @return	string
      */
-	public function getTitle(): string {
+	public function getTitle() {
 		return $this->title;
 	}
 
@@ -41,7 +41,7 @@ class Document {
      *
      * @param	string	$description
      */
-	public function setDescription(string $description): void {
+	public function setDescription($description) {
 		$this->description = $description;
 	}
 
@@ -52,7 +52,7 @@ class Document {
 	 *
 	 * @return	string
      */
-	public function getDescription(): string {
+	public function getDescription() {
 		return $this->description;
 	}
 
@@ -61,7 +61,7 @@ class Document {
      *
      * @param	string	$keywords
      */
-	public function setKeywords(string $keywords): void {
+	public function setKeywords($keywords) {
 		$this->keywords = $keywords;
 	}
 
@@ -70,7 +70,7 @@ class Document {
 	 *
 	 * @return	string
      */
-	public function getKeywords(): string {
+	public function getKeywords() {
 		return $this->keywords;
 	}
 
@@ -80,7 +80,7 @@ class Document {
      * @param	string	$href
 	 * @param	string	$rel
      */
-	public function addLink(string $href, string $rel): void {
+	public function addLink($href, $rel) {
 		$this->links[$href] = array(
 			'href' => $href,
 			'rel'  => $rel
@@ -92,7 +92,7 @@ class Document {
 	 *
 	 * @return	array
      */
-	public function getLinks(): array {
+	public function getLinks() {
 		return $this->links;
 	}
 
@@ -103,7 +103,7 @@ class Document {
 	 * @param	string	$rel
 	 * @param	string	$media
      */
-	public function addStyle(string $href, $rel = 'stylesheet', $media = 'screen'): void {
+	public function addStyle($href, $rel = 'stylesheet', $media = 'screen') {
 		$this->styles[$href] = array(
 			'href'  => $href,
 			'rel'   => $rel,
@@ -126,8 +126,8 @@ class Document {
      * @param	string	$href
 	 * @param	string	$position
      */
-	public function addScript($href, $postion = 'header') {
-		$this->scripts[$postion][$href] = $href;
+	public function addScript($href, $position = 'header') {
+		$this->scripts[$position][$href] = $href;
 	}
 
 	/**
@@ -137,7 +137,7 @@ class Document {
 	 *
 	 * @return	array
      */
-	public function getScripts($position = 'header'): array {
+	public function getScripts($position = 'header') {
 		if (isset($this->scripts[$position])) {
 			return $this->scripts[$position];
 		} else {
