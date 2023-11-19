@@ -1,6 +1,5 @@
 <?php
 class ControllerExtensionCurrencyEcb extends Controller {
-
 	private $error = array();
 
 	public function index() {
@@ -112,28 +111,6 @@ class ControllerExtensionCurrencyEcb extends Controller {
 		}
 		return !$this->error;
 	}
-
-
-	public function install() {
-		// add event handlers
-		$this->load->model('extension/event');
-		$code = 'ecb';
-		$app = 'admin/';
-
-		$trigger = 'model/localisation/currency/refresh/before';
-		$route = 'extension/currency/ecb/eventModelLocalisationCurrencyRefreshBefore';
-		$this->model_extension_event->addEvent( $code, $app.$trigger, $route );
-	}
-
-
-	public function uninstall() {
-		// remove event handlers
-		$this->load->model('extension/event');
-		$code = 'ecb';
-		$this->model_extension_event->deleteEvent($code);
-
-	}
-
 
 	public function currency() {
 		if ($this->config->get('ecb_status')) {

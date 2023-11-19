@@ -1410,7 +1410,8 @@ CREATE TABLE `oc_event` (
 --
 
 INSERT INTO `oc_event` (`event_id`, `code`, `trigger`, `action`, `status`, `date_added`) VALUES
-(1, 'voucher', 'catalog/model/checkout/order/addOrderHistory/after', 'extension/total/voucher/send', 1, '2022-03-24 14:00:00');
+(1, 'voucher', 'catalog/model/checkout/order/addOrderHistory/after', 'extension/total/voucher/send', 1, '2022-03-24 14:00:00'),
+(2, 'ecb', 'admin/model/localisation/currency/refresh/before', 'extension/currency/ecb/eventModelLocalisationCurrencyRefreshBefore', 1, '2022-03-24 14:00:00');
 
 -- --------------------------------------------------------
 

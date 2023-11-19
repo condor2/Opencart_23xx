@@ -62,15 +62,6 @@ class ModelUpgrade1008 extends Model {
 			$this->db->query("ALTER TABLE `" . DB_PREFIX . "modification` ADD `extension_install_id` INT(11) NOT NULL AFTER `modification_id`");
 		}
 
-		// Event
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "event` WHERE `action` = 'event/currency'");
-
-		if (!$query->num_rows) {
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES ('admin_currency_add', 'admin/model/localisation/currency/addCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');");
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES ('admin_currency_edit', 'admin/model/localisation/currency/editCurrency/after', 'event/currency', 1, '2022-03-24 14:00:00');");
-			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES ('admin_setting', 'admin/model/setting/setting/editSetting/after', 'event/currency', 1, '2022-03-24 14:00:00');");
-		}
-
 		// Setting - Time Zone
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE `key` = 'config_timezone'");
 
@@ -84,6 +75,13 @@ class ModelUpgrade1008 extends Model {
 		if (!$query->num_rows) {
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'config', 'config_currency_engine', 'ecb', 0);");
 			$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` (`store_id`, `code`, `key`, `value`, `serialized`) VALUES (0, 'ecb', 'ecb_status', '1', 0);");
+		}
+
+		// ECB Event
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "event` WHERE `code` = 'ecb'");
+
+		if (!$query->num_rows) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "event` (`code`, `trigger`, `action`, `status`, `date_added`) VALUES ('ecb', 'admin/model/localisation/currency/refresh/before', 'extension/currency/ecb/eventModelLocalisationCurrencyRefreshBefore', 1, '2022-03-24 14:00:00');");
 		}
 
 		// Update Affiliate `password` column Length
