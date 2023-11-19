@@ -54,7 +54,7 @@ class Currency {
 
 		$amount = $value ? (float)$number * $value : (float)$number;
 
-		$amount = round($amount, $decimal_place);
+		$amount = round($amount, (int)$decimal_place);
 
 		if (!$format) {
 			return $amount;
@@ -66,7 +66,7 @@ class Currency {
 			$string .= $symbol_left;
 		}
 
-		$string .= number_format($amount, $decimal_place, $this->language->get('decimal_point'), $this->language->get('thousand_point'));
+		$string .= number_format($amount, (int)$decimal_place, $this->language->get('decimal_point'), $this->language->get('thousand_point'));
 
 		if ($symbol_right) {
 			$string .= $symbol_right;

@@ -3,19 +3,65 @@ namespace DB;
 class MySQLi {
 	private $connection;
 
-	public function __construct($hostname, $username, $password, $database, $port = '') {
+	public function __construct($hostname, $username, $password, $database, $port = '', $ssl_key = '', $ssl_cert = '', $ssl_ca = '') {
 		if (!$port) {
 			$port = '3306';
 		}
 
-		try {
-			$mysqli = @new \MySQLi($hostname, $username, $password, $database, $port);
+		// MYSQLI SSL connection
+		$temp_ssl_key_file = '';
 
-			$this->connection = $mysqli;
-			$this->connection->report_mode = MYSQLI_REPORT_ERROR;
+		if ($ssl_key) {
+			$temp_ssl_key_file = tempnam(sys_get_temp_dir(), 'mysqli_key_');
+
+			$handle = fopen($temp_ssl_key_file, 'w');
+
+			fwrite($handle, $ssl_key);
+
+			fclose($handle);
+		}
+
+		$temp_ssl_cert_file = '';
+
+		if ($ssl_cert) {
+			$temp_ssl_cert_file = tempnam(sys_get_temp_dir(), 'mysqli_cert_');
+
+			$handle = fopen($temp_ssl_cert_file, 'w');
+
+			fwrite($handle, $ssl_cert);
+
+			fclose($handle);
+		}
+
+		$temp_ssl_ca_file = '';
+
+		if ($ssl_ca) {
+			$temp_ssl_ca_file = tempnam(sys_get_temp_dir(), 'mysqli_ca_');
+
+			$handle = fopen($temp_ssl_ca_file, 'w');
+
+			fwrite($handle, '-----BEGIN CERTIFICATE-----' . PHP_EOL . $ssl_ca . PHP_EOL . '-----END CERTIFICATE-----');
+
+			fclose($handle);
+		}
+
+		try {
+			$this->connection = mysqli_init();
+
+			if ($temp_ssl_key_file || $temp_ssl_cert_file || $temp_ssl_ca_file) {
+				$this->connection->ssl_set($temp_ssl_key_file, $temp_ssl_cert_file, $temp_ssl_ca_file, null, null);
+				$this->connection->real_connect($hostname, $username, $password, $database, $port, null, MYSQLI_CLIENT_SSL);
+			} else {
+				$this->connection->real_connect($hostname, $username, $password, $database, $port, null);
+			}
+
 			$this->connection->set_charset('utf8');
-			$this->connection->query("SET SESSION sql_mode = 'NO_ZERO_IN_DATE,NO_ENGINE_SUBSTITUTION'");
-			$this->connection->query("SET FOREIGN_KEY_CHECKS = 0");
+
+			$this->query("SET SESSION sql_mode = 'NO_ZERO_IN_DATE,NO_ENGINE_SUBSTITUTION'");
+			$this->query("SET FOREIGN_KEY_CHECKS = 0");
+
+			// Sync PHP and DB time zones
+			$this->query("SET `time_zone` = '" . $this->escape(date('P')) . "'");
 		} catch (\mysqli_sql_exception $e) {
 			throw new \Exception('Error: Could not make a database link using ' . $username . '@' . $hostname . '!<br>Message: ' . $e->getMessage());
 		}
@@ -80,7 +126,7 @@ class MySQLi {
 		if ($this->connection) {
 			$this->connection->close();
 
-			unset($this->connection);
+			$this->connection = null;
 		}
 	}
 }
