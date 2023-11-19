@@ -1,8 +1,8 @@
 <?php
 namespace Cart;
 class Customer {
-	private $config;
 	private $db;
+	private $config;
 	private $request;
 	private $session;
 	private $customer_id = 0;

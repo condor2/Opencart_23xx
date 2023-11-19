@@ -11,9 +11,9 @@
 * Document class
 */
 class Document {
-	private $title;
-	private $description;
-	private $keywords;
+	private $title = '';
+	private $description = '';
+	private $keywords = '';
 	private $links = array();
 	private $styles = array();
 	private $scripts = array();

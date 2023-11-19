@@ -1,13 +1,16 @@
 <?php
 namespace Cart;
 class User {
-	private $user_id = 0;
-	private $username = '';
-	private $user_group_id = 0;
-	private $permission = array();
 	private $db;
 	private $request;
 	private $session;
+	private $user_id = 0;
+	private $username = '';
+	private $firstname  = '';
+	private $lastname = '';
+	private $email  = '';
+	private $user_group_id = 0;
+	private $permission = array();
 
 	/**
 	 * Constructor
@@ -25,6 +28,9 @@ class User {
 			if ($user_query->num_rows) {
 				$this->user_id = $user_query->row['user_id'];
 				$this->username = $user_query->row['username'];
+				$this->firstname = $user_query->row['firstname'];
+				$this->lastname = $user_query->row['lastname'];
+				$this->email = $user_query->row['email'];
 				$this->user_group_id = $user_query->row['user_group_id'];
 
 				$this->db->query("UPDATE " . DB_PREFIX . "user SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE user_id = '" . (int)$this->session->data['user_id'] . "'");
@@ -74,6 +80,9 @@ class User {
 
 			$this->user_id = $user_query->row['user_id'];
 			$this->username = $user_query->row['username'];
+			$this->firstname = $user_query->row['firstname'];
+			$this->lastname = $user_query->row['lastname'];
+			$this->email = $user_query->row['email'];
 			$this->user_group_id = $user_query->row['user_group_id'];
 
 			$user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_query->row['user_group_id'] . "'");
@@ -102,6 +111,10 @@ class User {
 
 		$this->user_id = 0;
 		$this->username = '';
+		$this->firstname = '';
+		$this->lastname = '';
+		$this->email = '';
+		$this->user_group_id = 0;
 	}
 
 	/**
@@ -145,6 +158,33 @@ class User {
 	 */
 	public function getUserName() {
 		return $this->username;
+	}
+
+	/**
+	 * getFirstName
+	 *
+	 * @return   string
+	 */
+	public function getFirstName() {
+		return $this->firstname;
+	}
+
+	/**
+	 * getLastName
+	 *
+	 * @return   string
+	 */
+	public function getLastName() {
+		return $this->lastname;
+	}
+
+	/**
+	 * getEmail
+	 *
+	 * @return   string
+	 */
+	public function getEmail() {
+		return $this->email;
 	}
 
 	/**

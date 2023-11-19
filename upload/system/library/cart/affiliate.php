@@ -1,6 +1,10 @@
 <?php
 namespace Cart;
 class Affiliate {
+	private $db;
+	private $config;
+	private $request;
+	private $session;
 	private $affiliate_id = 0;
 	private $firstname = '';
 	private $lastname = '';
@@ -10,8 +14,8 @@ class Affiliate {
 	private $code = '';
 
 	public function __construct($registry) {
-		$this->config = $registry->get('config');
 		$this->db = $registry->get('db');
+		$this->config = $registry->get('config');
 		$this->request = $registry->get('request');
 		$this->session = $registry->get('session');
 
@@ -71,7 +75,7 @@ class Affiliate {
 	public function logout() {
 		unset($this->session->data['affiliate_id']);
 
-		$this->affiliate_id = '';
+		$this->affiliate_id = 0;
 		$this->firstname = '';
 		$this->lastname = '';
 		$this->email = '';

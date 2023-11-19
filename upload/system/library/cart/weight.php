@@ -1,9 +1,9 @@
 <?php
 namespace Cart;
 class Weight {
-	private $weights = array();
 	private $db;
 	private $config;
+	private $weights = array();
 
 	/**
 	 * Constructor

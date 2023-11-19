@@ -1,9 +1,9 @@
 <?php
 namespace Cart;
 class Tax {
-	private $tax_rates = array();
-	private $config;
 	private $db;
+	private $config;
+	private $tax_rates = array();
 
 	/**
 	 * Constructor
@@ -11,8 +11,8 @@ class Tax {
 	 * @param    object  $registry
 	 */
 	public function __construct($registry) {
-		$this->config = $registry->get('config');
 		$this->db = $registry->get('db');
+		$this->config = $registry->get('config');
 	}
 
 	public function unsetRates() {

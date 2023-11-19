@@ -1,9 +1,9 @@
 <?php
 namespace Cart;
 class Length {
-	private $lengths = array();
 	private $db;
 	private $config;
+	private $lengths = array();
 
 	/**
 	 * Constructor
