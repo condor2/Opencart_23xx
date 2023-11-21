@@ -426,7 +426,7 @@
                     <?php $attribute_row = 0; ?>
                     <?php foreach ($product_attributes as $product_attribute) { ?>
                     <tr id="attribute-row<?php echo $attribute_row; ?>">
-                      <td class="text-left" style="width: 40%;"><input type="text" name="product_attribute[<?php echo $attribute_row; ?>][name]" value="<?php echo $product_attribute['name']; ?>" placeholder="<?php echo $entry_attribute; ?>" class="form-control" />
+                      <td class="text-left" style="width: 40%;"><input type="text" name="product_attribute[<?php echo $attribute_row; ?>][name]" value="<?php echo $product_attribute['name']; ?>" placeholder="<?php echo $entry_attribute; ?>" class="form-control" style="position:relative;" />
                         <input type="hidden" name="product_attribute[<?php echo $attribute_row; ?>][attribute_id]" value="<?php echo $product_attribute['attribute_id']; ?>" /></td>
                       <td class="text-left"><?php foreach ($languages as $language) { ?>
                         <div class="input-group"><span class="input-group-addon"><img src="language/<?php echo $language['code']; ?>/<?php echo $language['code']; ?>.png" title="<?php echo $language['name']; ?>" /></span>
@@ -1071,10 +1071,10 @@ var attribute_row = <?php echo $attribute_row; ?>;
 
 function addAttribute() {
     html  = '<tr id="attribute-row' + attribute_row + '">';
-	html += ' <td class="text-left" style="width: 20%;">';
+	html += ' <td class="text-left" style="width: 40%;">';
 	html += '  <ul class="nav nav-pills nav-stacked">';
 	html += '   <li>';
-	html += '    <input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="<?php echo $entry_attribute; ?>" class="form-control" />';
+	html += '    <input type="text" name="product_attribute[' + attribute_row + '][name]" value="" placeholder="<?php echo $entry_attribute; ?>" class="form-control" style="position:relative;" />';
 	html += '    <input type="hidden" name="product_attribute[' + attribute_row + '][attribute_id]" value="" />';
 	html += '   </li>';
 	html += '  </ul>';
