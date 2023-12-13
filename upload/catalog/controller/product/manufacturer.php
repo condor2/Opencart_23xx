@@ -141,6 +141,7 @@ class ControllerProductManufacturer extends Controller {
 			$data['heading_title'] = $manufacturer_info['name'];
 
 			$data['text_empty'] = $this->language->get('text_empty');
+			$data['text_no_results'] = $this->language->get('text_no_results');
 			$data['text_quantity'] = $this->language->get('text_quantity');
 			$data['text_manufacturer'] = $this->language->get('text_manufacturer');
 			$data['text_model'] = $this->language->get('text_model');

@@ -34,7 +34,7 @@
       <?php } ?>
       <?php } ?>
       <?php } else { ?>
-      <p><?php echo $text_empty; ?></p>
+      <p><?php echo $text_no_results ?></p>
       <div class="buttons clearfix">
         <div class="pull-right"><a href="<?php echo $continue; ?>" class="btn btn-primary"><?php echo $button_continue; ?></a></div>
       </div>
