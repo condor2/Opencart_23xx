@@ -134,9 +134,11 @@ class ControllerExtensionFraudIp extends Controller {
 			$page = 1;
 		}
 
+		$limit = 10;
+
 		$data['ips'] = array();
 
-		$results = $this->model_extension_fraud_ip->getIps(($page - 1) * 10, 10);
+		$results = $this->model_extension_fraud_ip->getIps(($page - 1) * $limit, $limit);
 
 		foreach ($results as $result) {
 			$data['ips'][] = array(
@@ -152,12 +154,12 @@ class ControllerExtensionFraudIp extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $ip_total;
 		$pagination->page = $page;
-		$pagination->limit = 10;
+		$pagination->limit = $limit;
 		$pagination->url = $this->url->link('extension/fraud/ip/ip', 'token=' . $this->session->data['token'] . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), ($ip_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($ip_total - 10)) ? $ip_total : ((($page - 1) * 10) + 10), $ip_total, ceil($ip_total / 10));
+		$data['results'] = sprintf($this->language->get('text_pagination'), ($ip_total) ? (($page - 1) * $limit) + 1 : 0, ((($page - 1) * $limit) > ($ip_total - $limit)) ? $ip_total : ((($page - 1) * $limit) + $limit), $ip_total, ceil($ip_total / $limit));
 
 		$this->response->setOutput($this->load->view('extension/fraud/ip_ip', $data));
 	}
