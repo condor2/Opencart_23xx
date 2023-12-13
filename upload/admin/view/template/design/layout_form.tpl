@@ -124,6 +124,7 @@
                     <tr>
                       <td class="text-left"><div class="input-group">
                           <select class="form-control input-sm">
+                            <option value=""></option>
                             <?php foreach ($extensions as $extension) { ?>
                             <optgroup label="<?php echo $extension['name']; ?>">
                             <?php if (!$extension['module']) { ?>
@@ -192,6 +193,7 @@
                     <tr>
                       <td class="text-left"><div class="input-group">
                           <select class="form-control input-sm">
+                            <option value=""></option>
                             <?php foreach ($extensions as $extension) { ?>
                             <optgroup label="<?php echo $extension['name']; ?>">
                             <?php if (!$extension['module']) { ?>
@@ -258,6 +260,7 @@
                     <tr>
                       <td class="text-left"><div class="input-group">
                           <select class="form-control input-sm">
+                            <option value=""></option>
                             <?php foreach ($extensions as $extension) { ?>
                             <optgroup label="<?php echo $extension['name']; ?>">
                             <?php if (!$extension['module']) { ?>
@@ -326,6 +329,7 @@
                     <tr>
                       <td class="text-left"><div class="input-group">
                           <select class="form-control input-sm">
+                            <option value=""></option>
                             <?php foreach ($extensions as $extension) { ?>
                             <optgroup label="<?php echo $extension['name']; ?>">
                             <?php if (!$extension['module']) { ?>
