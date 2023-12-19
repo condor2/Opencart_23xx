@@ -20,7 +20,7 @@ class PgSQL {
 		}
 	}
 
-	public function query(string $sql): bool|object {
+	public function query(string $sql) {
 		$resource = pg_query($this->connection, $sql);
 
 		if ($resource) {
