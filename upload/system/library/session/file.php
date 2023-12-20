@@ -13,7 +13,7 @@ class File extends \SessionHandler {
         return true;
     }
 	
-    public function read(string $session_id): array {
+    public function read($session_id) {
 		$file = session_save_path() . '/sess_' . $session_id;
 		
 		if (is_file($file)) {
@@ -33,7 +33,7 @@ class File extends \SessionHandler {
 		return null;
 	}
 
-    public function write(string $session_id, array $data): bool {
+    public function write($session_id, $data) {
 		$file = session_save_path() . '/sess_' . $session_id;
 		
 		$handle = fopen($file, 'w');
@@ -51,7 +51,7 @@ class File extends \SessionHandler {
 		return true;
     }
 
-    public function destroy(string $session_id): void {
+    public function destroy($session_id) {
 		$file = session_save_path() . '/sess_' . $session_id;
 		
 		if (is_file($file)) {
