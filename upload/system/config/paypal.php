@@ -1013,4 +1013,3 @@ $_['paypal_setting'] = array(
 		),
 	)
 );
-?>
