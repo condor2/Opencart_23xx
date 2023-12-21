@@ -398,9 +398,11 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 				$data['flp_credits'] = '';
 			}
 
-			return $this->load->view('extension/fraud/fraudlabspro_info', $data);
-		}
-	}
+            return $this->load->view('extension/fraud/fraudlabspro_info', $data);
+        } else {
+            return '';
+        }
+    }
 
 	private function fix_case(string $s) {
 		$s = ucwords(strtolower($s));

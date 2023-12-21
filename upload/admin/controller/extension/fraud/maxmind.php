@@ -443,7 +443,9 @@ class ControllerExtensionFraudMaxMind extends Controller {
 			$data['maxmind_id'] = $fraud_info['maxmind_id'];
 			$data['error'] = $fraud_info['error'];
 
-			return $this->load->view('extension/fraud/maxmind_info', $data);
-		}
-	}
+            return $this->load->view('extension/fraud/maxmind_info', $data);
+        } else {
+            return '';
+        }
+    }
 }
