@@ -2,6 +2,7 @@
 class Session {
 	public $session_id = '';
 	public $data = array();
+	public $adaptor;
 
 	public function __construct($adaptor = 'native') {
 		$class = 'Session\\' . $adaptor;

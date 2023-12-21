@@ -593,10 +593,6 @@ $_['paypal_setting'] = array(
 			'code' => 'bancontact',
 			'name' => 'text_bancontact'
 		),
-		'bancontact' => array(
-			'code' => 'bancontact',
-			'name' => 'text_bancontact'
-		),
 		'blik' => array(
 			'code' => 'blik',
 			'name' => 'text_blik'
@@ -1017,4 +1013,3 @@ $_['paypal_setting'] = array(
 		),
 	)
 );
-?>

@@ -1,18 +1,17 @@
 <?php
 namespace Session;
 class File extends \SessionHandler {
-    public function create_sid() {
-        return parent::create_sid();
-    }
-
+    #[\ReturnTypeWillChange]
     public function open($path, $name) {
         return true;
     }
 
+    #[\ReturnTypeWillChange]
     public function close() {
         return true;
     }
 	
+    #[\ReturnTypeWillChange]
     public function read($session_id) {
 		$file = session_save_path() . '/sess_' . $session_id;
 		
@@ -33,6 +32,7 @@ class File extends \SessionHandler {
 		return null;
 	}
 
+    #[\ReturnTypeWillChange]
     public function write($session_id, $data) {
 		$file = session_save_path() . '/sess_' . $session_id;
 		
@@ -51,6 +51,7 @@ class File extends \SessionHandler {
 		return true;
     }
 
+    #[\ReturnTypeWillChange]
     public function destroy($session_id) {
 		$file = session_save_path() . '/sess_' . $session_id;
 		
@@ -58,8 +59,4 @@ class File extends \SessionHandler {
 			unlink($file);
 		}
     }
-
-    public function gc($maxlifetime) {
-        return parent::gc($maxlifetime);
-    }	
 }
