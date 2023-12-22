@@ -1,6 +1,6 @@
 <?php
 class ModelCheckoutRecurring extends Model {
-	public function create($recurring, $order_id, $description, $data) {
+	public function create($order_id, $description, $data) {
 
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "order_recurring` SET 
 		`order_id` = '" . (int)$order_id . "', 
@@ -9,18 +9,18 @@ class ModelCheckoutRecurring extends Model {
 		`product_id` = '" . (int)$data['product_id'] . "', 
 		`product_name` = '" . $this->db->escape((string)$data['name']) . "', 
 		`product_quantity` = '" . (int)$data['quantity'] . "', 
-		`recurring_id` = '" . (int)$data['recurring']['recurring_id'] . "', 
-		`recurring_name` = '" . $this->db->escape((string)$data['recurring']['name']) . "', 
+		`recurring_id` = '" . (int)$data['recurring_id'] . "', 
+		`recurring_name` = '" . $this->db->escape((string)$data['name']) . "', 
 		`recurring_description` = '" . $this->db->escape($description) . "', 
-		`recurring_frequency` = '" . $this->db->escape((string)$data['recurring']['frequency']) . "', 
-		`recurring_cycle` = '" . (int)$data['recurring']['cycle'] . "', 
-		`recurring_duration` = '" . (int)$data['recurring']['duration'] . "', 
-		`recurring_price` = '" . (float)$data['recurring']['price'] . "', 
-		`trial` = '" . (int)$data['recurring']['trial'] . "', 
-		`trial_frequency` = '" . $this->db->escape((string)$data['recurring']['trial_frequency']) . "', 
-		`trial_cycle` = '" . (int)$data['recurring']['trial_cycle'] . "', 
-		`trial_duration` = '" . (int)$data['recurring']['trial_duration'] . "', 
-		`trial_price` = '" . (float)$data['recurring']['trial_price'] . "', 
+		`recurring_frequency` = '" . $this->db->escape((string)$data['frequency']) . "', 
+		`recurring_cycle` = '" . (int)$data['cycle'] . "', 
+		`recurring_duration` = '" . (int)$data['duration'] . "', 
+		`recurring_price` = '" . (float)$data['price'] . "', 
+		`trial` = '" . (int)$data['trial'] . "', 
+		`trial_frequency` = '" . $this->db->escape((string)$data['trial_frequency']) . "', 
+		`trial_cycle` = '" . (int)$data['trial_cycle'] . "', 
+		`trial_duration` = '" . (int)$data['trial_duration'] . "', 
+		`trial_price` = '" . (float)$data['trial_price'] . "', 
 		`reference` = ''");
 
 		return $this->db->getLastId();
