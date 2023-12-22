@@ -43,7 +43,9 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.cache/composer/files
+          path: |
+            ~/.cache/composer/files
+            ./.cache
           key: ${{ matrix.php }}-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ matrix.php }}-
 
