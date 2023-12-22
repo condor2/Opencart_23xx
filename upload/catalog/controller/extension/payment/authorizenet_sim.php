@@ -50,7 +50,7 @@ class ControllerExtensionPaymentAuthorizeNetSim extends Controller {
 		if (md5($this->config->get('authorizenet_sim_response_key') . $this->request->post['x_login'] . $this->request->post['x_trans_id'] . $this->request->post['x_amount']) == strtolower($this->request->post['x_MD5_Hash'])) {
 			$this->load->model('checkout/order');
 
-			$order_info = $this->model_checkout_order->getOrder($details['x_invoice_num']);
+			$order_info = $this->model_checkout_order->getOrder($this->request->post['x_invoice_num']);
 
 			if ($order_info && $this->request->post['x_response_code'] == '1') {
 				$message = '';
@@ -71,7 +71,7 @@ class ControllerExtensionPaymentAuthorizeNetSim extends Controller {
 					$message .= 'Receipt: ' . $this->request->post['exact_ctr'];
 				}
 
-				$this->model_checkout_order->addOrderHistory($details['x_invoice_num'], $this->config->get('authorizenet_sim_order_status_id'), $message, true);
+				$this->model_checkout_order->addOrderHistory($this->request->post['x_invoice_num'], $this->config->get('authorizenet_sim_order_status_id'), $message, true);
 
 				$this->response->redirect($this->url->link('checkout/success'));
 			} else {
