@@ -910,7 +910,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			$result = $this->model_extension_payment_pp_express->call($call_data);
 
-			if ($response_info) {
+			if ($result) {
 
 				$parent_transaction = $this->model_extension_payment_pp_express->getLocalTransaction($transaction['parent_id']);
 
