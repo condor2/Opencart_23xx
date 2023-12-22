@@ -61,7 +61,7 @@ final class Front {
 	 *
 	 *
 	 * @param	object	$action
-	 * @return	object
+	 * @return	?object
  	*/
 	private function execute(Action $action) {
 		$result = $action->execute($this->registry);
@@ -77,5 +77,7 @@ final class Front {
 
 			return $action;
 		}
+
+		return null;
 	}
 }
