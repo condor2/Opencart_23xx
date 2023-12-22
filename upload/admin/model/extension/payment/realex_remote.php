@@ -152,7 +152,7 @@ class ModelExtensionPaymentRealexRemote extends Model {
 		$realex_order = $this->getOrder($order_id);
 
 		if (!empty($realex_order) && $realex_order['rebate_status'] != 1) {
-			$$timestamp = date("YmdHis");
+			$timestamp = date("YmdHis");
 			$merchant_id = $this->config->get('realex_remote_merchant_id');
 			$secret = $this->config->get('realex_remote_secret');
 
