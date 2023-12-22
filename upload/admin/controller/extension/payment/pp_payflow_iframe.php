@@ -278,7 +278,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 
 			$this->response->setOutput($this->load->view('extension/payment/pp_payflow_iframe_refund', $data));
 		} else {
-			return $this->forward('error/not_found');
+			return new Action('error/not_found');
 		}
 	}
 
