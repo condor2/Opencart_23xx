@@ -815,6 +815,8 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 	public function recurringCancel() {
 		$json = array();
 
+		$log = new Log('pp_express.log');
+
 		$this->load->language('extension/recurring/pp_express');
 
 		//cancel an active recurring
@@ -864,7 +866,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$response = curl_exec($curl);
 
 			if (!$response) {
-				$this->log(sprintf($this->language->get('error_curl'), curl_errno($curl), curl_error($curl)));
+				$log->write(sprintf($this->language->get('error_curl'), curl_errno($curl), curl_error($curl)));
 			}
 
 			curl_close($curl);
