@@ -581,7 +581,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 					$json['success'] = $this->language->get('text_success');
 				} else {
-					$json['error'] = (isset($response_info['L_SHORTMESSAGE0']) ? $response_info['L_SHORTMESSAGE0'] : $this->language->get('error_transaction'));
+					$json['error'] = (isset($response['L_SHORTMESSAGE0']) ? $response['L_SHORTMESSAGE0'] : $this->language->get('error_transaction'));
 				}
 			} else {
 				$json['error'] = $this->language->get('error_not_found');
@@ -801,7 +801,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 				$json['success'] = $this->language->get('text_success');
 			} else {
-				$json['error'] = (isset($result['L_SHORTMESSAGE0']) ? $result['L_SHORTMESSAGE0'] : $this->language->get('error_transaction'));
+				$json['error'] = (isset($response_info['L_SHORTMESSAGE0']) ? $response_info['L_SHORTMESSAGE0'] : $this->language->get('error_transaction'));
 			}
 		} else {
 			$json['error'] = $this->language->get('error_not_found');
