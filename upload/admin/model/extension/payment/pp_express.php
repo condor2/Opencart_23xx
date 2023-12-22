@@ -56,7 +56,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 		if ($request_data) {
 			$serialized_data = json_encode($request_data);
 
-			$this->db->query("UPDATE " . DB_PREFIX . "paypal_order_transaction SET call_data = '" . $this->db->escape($serialized_data) . "' WHERE paypal_order_transaction_id = " . (int)$paypal_order_transaction_id . " LIMIT 1");
+			$this->db->query("UPDATE " . DB_PREFIX . "paypal_order_transaction SET call_data = '" . $this->db->escape($serialized_data) . "' WHERE paypal_order_transaction_id = " . (int)$transaction_data['transaction_id'] . " LIMIT 1");
 		}
 
 

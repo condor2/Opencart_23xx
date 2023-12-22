@@ -58,5 +58,7 @@ class File extends \SessionHandler {
 		if (is_file($file)) {
 			unlink($file);
 		}
+
+		return true;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+namespace Opencart\System\Engine;
 /*
 * Event System Userguide
 * 
@@ -12,7 +13,7 @@ class Event {
 		$this->registry = $registry;
 	}
 
-	public function register($trigger, Action $action) {
+	public function register($trigger, \Action $action) {
 		$this->data[$trigger][] = $action;
 	}
 	
@@ -22,7 +23,7 @@ class Event {
 				foreach ($actions as $action) {
 					$result = $action->execute($this->registry, $args);
 
-					if (!is_null($result) && !($result instanceof Exception)) {
+					if (!is_null($result) && !($result instanceof \Exception)) {
 						return $result;
 					}
 				}
