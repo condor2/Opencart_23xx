@@ -35,12 +35,14 @@ class ControllerExtensionRecurringPPExpress extends Controller {
 		$json = array();
 		
 		$this->load->language('extension/recurring/pp_express');
-		
+
+		$log = new Log('recurring_pp_express.log');
+
 		//cancel an active recurring
 		$this->load->model('account/recurring');
 		
 		if (isset($this->request->get['order_recurring_id'])) {
-			$order_recurring_id = $this->request->get['order_recurring_id'];
+			$order_recurring_id = (int)$this->request->get['order_recurring_id'];
 		} else {
 			$order_recurring_id = 0;
 		}
@@ -83,11 +85,11 @@ class ControllerExtensionRecurringPPExpress extends Controller {
 			$response = curl_exec($curl);
 			
 			if (!$response) {
-				$this->log(sprintf($this->language->get('error_curl'), curl_errno($curl), curl_error($curl)));
+				$log->write(sprintf($this->language->get('error_curl'), curl_errno($curl), curl_error($curl)));
 			}
-			
+
 			curl_close($curl);
-			
+
 			$response_info = array();
 			
 			parse_str($response, $response_info);
