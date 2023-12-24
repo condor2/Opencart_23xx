@@ -38,10 +38,10 @@ class ModelMarketingAffiliate extends Model {
 		return $query->row;
 	}
 
-	public function getAffiliates($data = array()) {
+	public function getAffiliates($data =[]) {
 		$sql = "SELECT *, CONCAT(a.firstname, ' ', a.lastname) AS name, (SELECT SUM(at.amount) FROM " . DB_PREFIX . "affiliate_transaction at WHERE at.affiliate_id = a.affiliate_id GROUP BY at.affiliate_id) AS balance FROM " . DB_PREFIX . "affiliate a";
 
-		$implode = array();
+		$implode =[];
 
 		if (!empty($data['filter_name'])) {
 			$implode[] = "CONCAT(a.firstname, ' ', a.lastname) LIKE '" . $this->db->escape($data['filter_name']) . "%'";
@@ -71,14 +71,14 @@ class ModelMarketingAffiliate extends Model {
 			$sql .= " WHERE " . implode(" AND ", $implode);
 		}
 
-		$sort_data = array(
+		$sort_data = [
 			'name',
 			'a.email',
 			'a.code',
 			'a.status',
 			'a.approved',
 			'a.date_added'
-		);
+		];
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
@@ -148,10 +148,10 @@ class ModelMarketingAffiliate extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalAffiliates($data = array()) {
+	public function getTotalAffiliates($data =[]) {
 		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate";
 
-		$implode = array();
+		$implode =[];
 
 		if (!empty($data['filter_name'])) {
 			$implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";

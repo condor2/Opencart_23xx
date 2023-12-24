@@ -79,7 +79,7 @@ class ModelExtensionPaymentPilibaba extends Model {
 
 		$app_secret = strtoupper(md5((($warehouse) ? $warehouse : $country) . '0210000574' . '0b8l3ww5' . $currency . $email . md5($password)));
 
-		$data = array(
+		$data = [
 			'platformNo'  => '0210000574',
 			'appSecret'   => $app_secret,
 			'email'       => $email,
@@ -87,11 +87,11 @@ class ModelExtensionPaymentPilibaba extends Model {
 			'currency'    => $currency,
 			'logistics'   => $warehouse,
 			'countryCode' => $country
-		);
+		];
 
 		$this->log('Data: ' . print_r($data, true));
 
-		$headers = array('Accept: application/json','Content-Type: application/json');
+		$headers = ['Accept: application/json','Content-Type: application/json'];
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);

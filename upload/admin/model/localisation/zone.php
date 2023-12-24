@@ -26,7 +26,7 @@ class ModelLocalisationZone extends Model {
 		return $query->row;
 	}
 
-	public function getZones($data = array()) {
+	public function getZones($data =[]) {
 		$sql = "SELECT *, z.name, c.name AS country FROM " . DB_PREFIX . "zone z LEFT JOIN " . DB_PREFIX . "country c ON (z.country_id = c.country_id)";
 
 		$implode = [];
@@ -47,11 +47,11 @@ class ModelLocalisationZone extends Model {
 			$sql .= " WHERE " . implode(" AND ", $implode);
 		}
 
-		$sort_data = array(
+		$sort_data = [
 			'c.name',
 			'z.name',
 			'z.code'
-		);
+		];
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
@@ -96,7 +96,7 @@ class ModelLocalisationZone extends Model {
 		return $zone_data;
 	}
 
-	public function getTotalZones($data = array()) {
+	public function getTotalZones($data =[]) {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "zone` z";
 
 		if (!empty($data['filter_country'])) {

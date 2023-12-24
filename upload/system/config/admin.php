@@ -29,7 +29,7 @@ $_['action_default'] = 'common/dashboard';
 
 // Action Events
 $_['action_event'] = [
-    'view/*/before'                           => 'event/theme',
+	'view/*/before'                           => 'event/theme',
 	'controller/extension/analytics/*/before' => 'event/compatibility/controller',
 	'controller/extension/captcha/*/before'   => 'event/compatibility/controller',
 	'controller/extension/feed/*/before'      => 'event/compatibility/controller',

@@ -107,6 +107,6 @@ require_once(modification(DIR_SYSTEM . 'engine/proxy.php'));
 require_once(DIR_SYSTEM . 'helper/general.php');
 require_once(DIR_SYSTEM . 'helper/utf8.php');
 
-function start($application_config) {
-	require_once(DIR_SYSTEM . 'framework.php');	
+function start($application_config): void {
+	require_once(DIR_SYSTEM . 'framework.php');
 }

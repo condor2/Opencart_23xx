@@ -171,7 +171,7 @@ class ModelExtensionPaymentSecureTradingPp extends Model {
 	public function call($data) {
 		$ch = curl_init();
 
-		$defaults = array(
+		$defaults = [
 			CURLOPT_POST => 1,
 			CURLOPT_HEADER => 0,
 			CURLOPT_SSL_VERIFYPEER => 0,
@@ -180,13 +180,13 @@ class ModelExtensionPaymentSecureTradingPp extends Model {
 			CURLOPT_RETURNTRANSFER => 1,
 			CURLOPT_FORBID_REUSE => 1,
 			CURLOPT_TIMEOUT => 15,
-			CURLOPT_HTTPHEADER => array(
+			CURLOPT_HTTPHEADER => [
 				'User-Agent: OpenCart - Secure Trading PP',
 				'Content-Length: ' . strlen($data),
 				'Authorization: Basic ' . base64_encode($this->config->get('securetrading_pp_webservice_username') . ':' . $this->config->get('securetrading_pp_webservice_password')),
-			),
+			],
 			CURLOPT_POSTFIELDS => $data,
-		);
+		];
 
 		curl_setopt_array($ch, $defaults);
 

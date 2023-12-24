@@ -67,11 +67,11 @@ class ModelExtensionPaymentG2aPay extends Model {
 			$string = $g2apay_order['g2apay_transaction_id'] . $g2apay_order['order_id'] . round($g2apay_order['total'], 2) . $refunded_amount . html_entity_decode($this->config->get('g2apay_secret'));
 			$hash = hash('sha256', $string);
 
-			$fields = array(
+			$fields = [
 				'action' => 'refund',
 				'amount' => $refunded_amount,
 				'hash' => $hash,
-			);
+			];
 
 			return $this->sendCurl($url, $fields);
 		} else {
@@ -86,7 +86,7 @@ class ModelExtensionPaymentG2aPay extends Model {
 	private function getTransactions($g2apay_order_id, $currency_code) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "g2apay_order_transaction` WHERE `g2apay_order_id` = '" . (int)$g2apay_order_id . "'");
 
-		$transactions = array();
+		$transactions =[];
 		if ($query->num_rows) {
 			foreach ($query->rows as $row) {
 				$row['amount'] = $this->currency->format($row['amount'], $currency_code, true, true);
@@ -118,9 +118,9 @@ class ModelExtensionPaymentG2aPay extends Model {
 		$auth_hash = hash('sha256', $this->config->get('g2apay_api_hash') . $this->config->get('g2apay_username') . html_entity_decode($this->config->get('g2apay_secret')));
 		$authorization = $this->config->get('g2apay_api_hash') . ";" . $auth_hash;
 		curl_setopt(
-				$curl, CURLOPT_HTTPHEADER, array(
+				$curl, CURLOPT_HTTPHEADER, [
 			"Authorization: " . $authorization
-				)
+				]
 		);
 
 		$response = json_decode(curl_exec($curl));

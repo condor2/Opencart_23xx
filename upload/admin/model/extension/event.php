@@ -29,16 +29,16 @@ class ModelExtensionEvent extends Model {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "setting WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
 		
-	public function getEvents($data = array()) {
+	public function getEvents($data =[]) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "event`";
 
-		$sort_data = array(
+		$sort_data = [
 			'code',
 			'trigger',
 			'action',
 			'status',
 			'date_added'
-		);
+		];
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY `" . $data['sort'] . "`";

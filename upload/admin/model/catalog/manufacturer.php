@@ -62,17 +62,17 @@ class ModelCatalogManufacturer extends Model {
 		return $query->row;
 	}
 
-	public function getManufacturers($data = array()) {
+	public function getManufacturers($data =[]) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "manufacturer`";
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " WHERE `name` LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
-		$sort_data = array(
+		$sort_data = [
 			'name',
 			'sort_order'
-		);
+		];
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
@@ -104,7 +104,7 @@ class ModelCatalogManufacturer extends Model {
 	}
 
 	public function getManufacturerStores($manufacturer_id) {
-		$manufacturer_store_data = array();
+		$manufacturer_store_data =[];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "manufacturer_to_store` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
 

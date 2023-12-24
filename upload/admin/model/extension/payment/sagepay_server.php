@@ -75,7 +75,7 @@ class ModelExtensionPaymentSagepayServer extends Model {
 
 		if (!empty($sagepay_server_order) && $sagepay_server_order['release_status'] == 0) {
 
-			$void_data = array();
+			$void_data =[];
 
 			if ($this->config->get('sagepay_server_test') == 'live') {
 				$url = 'https://live.sagepay.com/gateway/service/void.vsp';
@@ -112,7 +112,7 @@ class ModelExtensionPaymentSagepayServer extends Model {
 		$total_released = $this->getTotalReleased($sagepay_server_order['sagepay_server_order_id']);
 
 		if (!empty($sagepay_server_order) && $sagepay_server_order['release_status'] == 0 && ($total_released + $amount <= $sagepay_server_order['total'])) {
-			$release_data = array();
+			$release_data =[];
 
 			if ($this->config->get('sagepay_server_test') == 'live') {
 				$url = 'https://live.sagepay.com/gateway/service/release.vsp';
@@ -154,7 +154,7 @@ class ModelExtensionPaymentSagepayServer extends Model {
 
 		if (!empty($sagepay_server_order) && $sagepay_server_order['rebate_status'] != 1) {
 
-			$refund_data = array();
+			$refund_data =[];
 
 			if ($this->config->get('sagepay_server_test') == 'live') {
 				$url = 'https://live.sagepay.com/gateway/service/refund.vsp';

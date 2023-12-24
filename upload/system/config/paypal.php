@@ -1,4 +1,4 @@
-<?php 
+<?php
 $_['paypal_setting'] = [
 	'version' => '2.1.0',
 	'partner' => [

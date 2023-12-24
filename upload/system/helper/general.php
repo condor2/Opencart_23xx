@@ -20,7 +20,9 @@ if (!function_exists('hash_equals')) {
 			$res = $known_string ^ $user_string;
 			$ret = 0;
 
-			for ($i = strlen($res) - 1; $i >= 0; $i--) $ret |= ord($res[$i]);
+			for ($i = strlen($res) - 1; $i >= 0; $i--) {
+				$ret |= ord($res[$i]);
+			}
 
 			return !$ret;
 		}
