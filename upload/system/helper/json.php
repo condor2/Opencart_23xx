@@ -123,6 +123,6 @@ if (!function_exists('json_decode')) {
 
 		$json = strtr($json, array_map('stripcslashes', $m2s));
 
-		return eval('return {'.$json.'}');
+		return eval('return '.$json.';');
 	}
 }
