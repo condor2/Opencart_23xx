@@ -41,7 +41,7 @@ class ControllerExtensionFeedGoogleSitemap extends Controller {
 				$output .= '  <priority>0.7</priority>';
 				$output .= '</url>';
 
-				$products = $this->model_catalog_product->getProducts(array('filter_manufacturer_id' => $manufacturer['manufacturer_id']));
+				$products = $this->model_catalog_product->getProducts(['filter_manufacturer_id' => $manufacturer['manufacturer_id']]);
 
 				foreach ($products as $product) {
 					$output .= '<url>';
@@ -89,7 +89,7 @@ class ControllerExtensionFeedGoogleSitemap extends Controller {
 			$output .= '  <priority>0.7</priority>';
 			$output .= '</url>';
 
-			$products = $this->model_catalog_product->getProducts(array('filter_category_id' => $result['category_id']));
+			$products = $this->model_catalog_product->getProducts(['filter_category_id' => $result['category_id']]);
 
 			foreach ($products as $product) {
 				$output .= '<url>';

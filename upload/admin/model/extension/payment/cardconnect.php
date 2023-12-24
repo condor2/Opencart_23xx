@@ -88,7 +88,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		$url = 'https://' . $this->config->get('cardconnect_site') . '.cardconnect.com:' . (($this->config->get('cardconnect_environment') == 'live') ? 8443 : 6443) . '/cardconnect/rest/inquire/' . $retref . '/' . $this->config->get('cardconnect_merchant_id');
 
-		$header =[];
+		$header = [];
 
 		$header[] = 'Content-type: application/json';
 		$header[] = 'Authorization: Basic ' . base64_encode($this->config->get('cardconnect_api_username') . ':' . $this->config->get('cardconnect_api_password'));
@@ -138,7 +138,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		$products = $this->model_sale_order->getOrderProducts($order_info['order_id']);
 
-		$items =[];
+		$items = [];
 
 		$i = 1;
 
@@ -179,7 +179,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		$url = 'https://' . $this->config->get('cardconnect_site') . '.cardconnect.com:' . (($this->config->get('cardconnect_environment') == 'live') ? 8443 : 6443) . '/cardconnect/rest/capture';
 
-		$header =[];
+		$header = [];
 
 		$header[] = 'Content-type: application/json';
 		$header[] = 'Content-length: ' . strlen($data_json);
@@ -228,7 +228,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		$url = 'https://' . $this->config->get('cardconnect_site') . '.cardconnect.com:' . (($this->config->get('cardconnect_environment') == 'live') ? 8443 : 6443) . '/cardconnect/rest/refund';
 
-		$header =[];
+		$header = [];
 
 		$header[] = 'Content-type: application/json';
 		$header[] = 'Content-length: ' . strlen($data_json);
@@ -277,7 +277,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		$url = 'https://' . $this->config->get('cardconnect_site') . '.cardconnect.com:' . (($this->config->get('cardconnect_environment') == 'live') ? 8443 : 6443) . '/cardconnect/rest/void';
 
-		$header =[];
+		$header = [];
 
 		$header[] = 'Content-type: application/json';
 		$header[] = 'Content-length: ' . strlen($data_json);

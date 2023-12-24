@@ -79,10 +79,10 @@ class ControllerAccountLogin extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('account/activity');
 
-				$activity_data = array(
+				$activity_data = [
 					'customer_id' => $this->customer->getId(),
 					'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-				);
+				];
 
 				$this->model_account_activity->addActivity('login', $activity_data);
 			}
@@ -97,20 +97,20 @@ class ControllerAccountLogin extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_login'),
 			'href' => $this->url->link('account/login', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

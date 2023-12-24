@@ -37,7 +37,7 @@ class ModelCustomerCustomerGroup extends Model {
 		return $query->row;
 	}
 
-	public function getCustomerGroups($data =[]) {
+	public function getCustomerGroups($data = []) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "customer_group cg LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (cg.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		$sort_data = [
@@ -75,7 +75,7 @@ class ModelCustomerCustomerGroup extends Model {
 	}
 
 	public function getCustomerGroupDescriptions($customer_group_id) {
-		$customer_group_data =[];
+		$customer_group_data = [];
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_group_description WHERE customer_group_id = '" . (int)$customer_group_id . "'");
 

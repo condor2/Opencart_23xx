@@ -50,7 +50,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 				$data['site_security'] = false;
 			}
 
-			$cards = array(
+			$cards = [
 				'AMEX' => 'American Express',
 				'VISA' => 'Visa',
 				'DELTA' => 'Visa Debit',
@@ -61,7 +61,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 				'MASTERCARDDEBIT' => 'MasterCard Debit',
 				'MAESTRO' => 'Maestro',
 				'PAYPAL' => 'PayPal',
-			);
+			];
 
 			$data['cards'] = [];
 
@@ -87,7 +87,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 		$keys = array_keys($this->request->post);
 		sort($keys);
 
-		$keys_ignore = array('notificationreference', 'responsesitesecurity');
+		$keys_ignore = ['notificationreference', 'responsesitesecurity'];
 
 		$string_to_hash = '';
 
@@ -106,12 +106,12 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 				$order_total = $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false);
 
 				if ($order_total == $this->request->post['mainamount'] && $order_info['currency_code'] == $this->request->post['currencyiso3a'] && $order_info['payment_code'] == 'securetrading_pp') {
-					$status_code_mapping = array(
+					$status_code_mapping = [
 						0 => $this->language->get('text_not_given'),
 						1 => $this->language->get('text_not_checked'),
 						2 => $this->language->get('text_match'),
 						4 => $this->language->get('text_not_match'),
-					);
+					];
 					$shipping_country = $this->model_extension_payment_securetrading_pp->getCountry($this->request->post['customercountryiso2a']);
 					$payment_country = $this->model_extension_payment_securetrading_pp->getCountry($this->request->post['billingcountryiso2a']);
 

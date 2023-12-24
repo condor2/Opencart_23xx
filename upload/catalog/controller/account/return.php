@@ -15,15 +15,15 @@ class ControllerAccountReturn extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		);
+		];
 
 		$url = '';
 
@@ -31,10 +31,10 @@ class ControllerAccountReturn extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/return', $url, true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -66,14 +66,14 @@ class ControllerAccountReturn extends Controller {
 		$results = $this->model_account_return->getReturns(($page - 1) * $limit, $limit);
 
 		foreach ($results as $result) {
-			$data['returns'][] = array(
+			$data['returns'][] = [
 				'return_id'  => $result['return_id'],
 				'order_id'   => $result['order_id'],
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
 				'status'     => $result['status'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'href'       => $this->url->link('account/return/info', 'return_id=' . $result['return_id'] . $url, true)
-			);
+			];
 		}
 
 		$pagination = new Pagination();
@@ -122,15 +122,15 @@ class ControllerAccountReturn extends Controller {
 
 			$data['breadcrumbs'] = [];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_home'),
 				'href' => $this->url->link('common/home', '', true)
-			);
+			];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_account'),
 				'href' => $this->url->link('account/account', '', true)
-			);
+			];
 
 			$url = '';
 
@@ -138,15 +138,15 @@ class ControllerAccountReturn extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('heading_title'),
 				'href' => $this->url->link('account/return', $url, true)
-			);
+			];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_return'),
 				'href' => $this->url->link('account/return/info', 'return_id=' . $this->request->get['return_id'] . $url, true)
-			);
+			];
 
 			$data['heading_title'] = $this->language->get('text_return');
 
@@ -198,11 +198,11 @@ class ControllerAccountReturn extends Controller {
 			$results = $this->model_account_return->getReturnHistories($this->request->get['return_id']);
 
 			foreach ($results as $result) {
-				$data['histories'][] = array(
+				$data['histories'][] = [
 					'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 					'status'     => $result['status'],
 					'comment'    => nl2br($result['comment'])
-				);
+				];
 			}
 
 			$data['continue'] = $this->url->link('account/return', $url, true);
@@ -220,20 +220,20 @@ class ControllerAccountReturn extends Controller {
 
 			$data['breadcrumbs'] = [];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_home'),
 				'href' => $this->url->link('common/home')
-			);
+			];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_account'),
 				'href' => $this->url->link('account/account', '', true)
-			);
+			];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('heading_title'),
 				'href' => $this->url->link('account/return', '', true)
-			);
+			];
 
 			$url = '';
 
@@ -241,10 +241,10 @@ class ControllerAccountReturn extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_return'),
 				'href' => $this->url->link('account/return/info', 'return_id=' . $return_id . $url, true)
-			);
+			];
 
 			$data['heading_title'] = $this->language->get('text_return');
 
@@ -278,18 +278,18 @@ class ControllerAccountReturn extends Controller {
 				$this->load->model('account/activity');
 
 				if ($this->customer->isLogged()) {
-					$activity_data = array(
+					$activity_data = [
 						'customer_id' => $this->customer->getId(),
 						'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
 						'return_id'   => $return_id
-					);
+					];
 
 					$this->model_account_activity->addActivity('return_account', $activity_data);
 				} else {
-					$activity_data = array(
+					$activity_data = [
 						'name'      => $this->request->post['firstname'] . ' ' . $this->request->post['lastname'],
 						'return_id' => $return_id
-					);
+					];
 
 					$this->model_account_activity->addActivity('return_guest', $activity_data);
 				}
@@ -306,20 +306,20 @@ class ControllerAccountReturn extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/return/add', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -613,15 +613,15 @@ class ControllerAccountReturn extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/return', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

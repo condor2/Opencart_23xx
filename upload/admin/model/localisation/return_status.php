@@ -38,7 +38,7 @@ class ModelLocalisationReturnStatus extends Model {
 		return $query->row;
 	}
 
-	public function getReturnStatuses($data =[]) {
+	public function getReturnStatuses($data = []) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "return_status WHERE language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
@@ -81,7 +81,7 @@ class ModelLocalisationReturnStatus extends Model {
 	}
 
 	public function getReturnStatusDescriptions($return_status_id) {
-		$return_status_data =[];
+		$return_status_data = [];
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "return_status WHERE return_status_id = '" . (int)$return_status_id . "'");
 

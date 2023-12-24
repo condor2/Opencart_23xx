@@ -35,12 +35,12 @@ class ControllerExtensionModulePPLogin extends Controller {
 				$data['locale'] = 'en-gb';
 			}
 
-			$scopes = array(
+			$scopes = [
 				'profile',
 				'email',
 				'address',
 				'phone'
-			);
+			];
 
 			if ($this->config->get('pp_login_seamless')) {
 				$scopes[] = 'https://uri.paypal.com/services/expresscheckout';
@@ -109,7 +109,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 					$customer_group_id = $this->config->get('config_customer_group_id');
 				}
 
-				$data = array(
+				$data = [
 					'customer_group_id' => (int)$customer_group_id,
 					'firstname'         => $user->given_name,
 					'lastname'          => $user->family_name,
@@ -124,7 +124,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 					'postcode'          => $user->address->postal_code,
 					'country_id'        => (int)$country_id,
 					'zone_id'           => (int)$zone_id,
-				);
+				];
 
 				$customer_id = $this->model_account_customer->addCustomer($data);
 
@@ -164,10 +164,10 @@ class ControllerExtensionModulePPLogin extends Controller {
 		if ($this->config->get('config_customer_activity')) {
 			$this->load->model('account/activity');
 
-			$activity_data = array(
+			$activity_data = [
 				'customer_id' => $this->customer->getId(),
 				'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-			);
+			];
 
 			$this->model_account_activity->addActivity('login', $activity_data);
 		}

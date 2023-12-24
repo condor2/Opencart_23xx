@@ -112,7 +112,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 					if (isset($this->request->post['approval_code'])) {
 						$response_parts = explode(':', $this->request->post['approval_code']);
 
-						$address_codes = array(
+						$address_codes = [
 							'PPX' => $this->language->get('text_address_ppx'),
 							'YYY' => $this->language->get('text_address_yyy'),
 							'YNA' => $this->language->get('text_address_yna'),
@@ -121,9 +121,9 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 							'YPX' => $this->language->get('text_address_ypx'),
 							'PYX' => $this->language->get('text_address_pyx'),
 							'XXU' => $this->language->get('text_address_xxu')
-						);
+						];
 
-						$cvv_codes = array(
+						$cvv_codes = [
 							'M'    => $this->language->get('text_card_code_m'),
 							'N'    => $this->language->get('text_card_code_n'),
 							'P'    => $this->language->get('text_card_code_p'),
@@ -131,16 +131,16 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 							'U'    => $this->language->get('text_card_code_u'),
 							'X'    => $this->language->get('text_card_code_x'),
 							'NONE' => $this->language->get('text_card_code_blank')
-						);
+						];
 
-						$card_types = array(
+						$card_types = [
 							'M'         => $this->language->get('text_card_type_m'),
 							'V'         => $this->language->get('text_card_type_v'),
 							'C'         => $this->language->get('text_card_type_c'),
 							'A'         => $this->language->get('text_card_type_a'),
 							'MA'        => $this->language->get('text_card_type_ma'),
 							'MAESTROUK' => $this->language->get('text_card_type_mauk')
-						);
+						];
 
 						if ($response_parts[0] == 'Y') {
 							if (isset($response_parts[3])) {

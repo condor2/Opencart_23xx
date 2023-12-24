@@ -22,7 +22,7 @@ class ModelCustomerCustomer extends Model {
 
 	public function editCustomer($customer_id, $data) {
 		if (!isset($data['custom_field'])) {
-			$data['custom_field'] =[];
+			$data['custom_field'] = [];
 		}
 
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `customer_group_id` = '" . (int)$data['customer_group_id'] . "', `firstname` = '" . $this->db->escape($data['firstname']) . "', `lastname` = '" . $this->db->escape($data['lastname']) . "', `email` = '" . $this->db->escape($data['email']) . "', `telephone` = '" . $this->db->escape($data['telephone']) . "', `fax` = '" . $this->db->escape($data['fax']) . "', `custom_field` = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "', `newsletter` = '" . (int)$data['newsletter'] . "', `status` = '" . (bool)$data['status'] . "', `approved` = '" . (int)$data['approved'] . "', `safe` = '" . (int)$data['safe'] . "' WHERE `customer_id` = '" . (int)$customer_id . "'");
@@ -36,7 +36,7 @@ class ModelCustomerCustomer extends Model {
 		if (isset($data['address'])) {
 			foreach ($data['address'] as $address) {
 				if (!isset($address['custom_field'])) {
-					$address['custom_field'] =[];
+					$address['custom_field'] = [];
 				}
 
 				$this->db->query("INSERT INTO `" . DB_PREFIX . "address` SET `address_id` = '" . (int)$address['address_id'] . "', `customer_id` = '" . (int)$customer_id . "', `firstname` = '" . $this->db->escape($address['firstname']) . "', `lastname` = '" . $this->db->escape($address['lastname']) . "', `company` = '" . $this->db->escape($address['company']) . "', `address_1` = '" . $this->db->escape($address['address_1']) . "', `address_2` = '" . $this->db->escape($address['address_2']) . "', `city` = '" . $this->db->escape($address['city']) . "', `postcode` = '" . $this->db->escape($address['postcode']) . "', `country_id` = '" . (int)$address['country_id'] . "', `zone_id` = '" . (int)$address['zone_id'] . "', `custom_field` = '" . $this->db->escape(isset($address['custom_field']) ? json_encode($address['custom_field']) : '') . "'");
@@ -76,7 +76,7 @@ class ModelCustomerCustomer extends Model {
 		return $query->row;
 	}
 
-	public function getCustomers($data =[]) {
+	public function getCustomers($data = []) {
 		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
@@ -259,7 +259,7 @@ class ModelCustomerCustomer extends Model {
 	}
 
 	public function getAddresses($customer_id) {
-		$address_data =[];
+		$address_data = [];
 
 		$query = $this->db->query("SELECT address_id FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$customer_id . "'");
 
@@ -274,10 +274,10 @@ class ModelCustomerCustomer extends Model {
 		return $address_data;
 	}
 
-	public function getTotalCustomers($data =[]) {
+	public function getTotalCustomers($data = []) {
 		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_name'])) {
 			$implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";

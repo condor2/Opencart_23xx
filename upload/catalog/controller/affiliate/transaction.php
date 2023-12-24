@@ -13,20 +13,20 @@ class ControllerAffiliateTransaction extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('affiliate/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_transaction'),
 			'href' => $this->url->link('affiliate/transaction', '', true)
-		);
+		];
 
 		$this->load->model('affiliate/transaction');
 
@@ -51,23 +51,23 @@ class ControllerAffiliateTransaction extends Controller {
 
 		$data['transactions'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'sort'  => 't.date_added',
 			'order' => 'DESC',
 			'start' => ($page - 1) * $limit,
 			'limit' => $limit
-		);
+		];
 
 		$transaction_total = $this->model_affiliate_transaction->getTotalTransactions();
 
 		$results = $this->model_affiliate_transaction->getTransactions($filter_data);
 
 		foreach ($results as $result) {
-			$data['transactions'][] = array(
+			$data['transactions'][] = [
 				'amount'      => $this->currency->format($result['amount'], $this->config->get('config_currency')),
 				'description' => $result['description'],
 				'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added']))
-			);
+			];
 		}
 
 		$pagination = new Pagination();

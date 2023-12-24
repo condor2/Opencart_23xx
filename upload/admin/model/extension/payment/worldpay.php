@@ -100,7 +100,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 	private function getTransactions($worldpay_order_id, $currency_code) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order_transaction` WHERE `worldpay_order_id` = '" . (int)$worldpay_order_id . "'");
 
-		$transactions =[];
+		$transactions = [];
 		if ($query->num_rows) {
 			foreach ($query->rows as $row) {
 				$row['amount'] = $this->currency->format($row['amount'], $currency_code, false);
@@ -152,7 +152,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 		$result = json_decode(curl_exec($curl));
 		curl_close($curl);
 
-		$response =[];
+		$response = [];
 
 		if (isset($result)) {
 			$response['status'] = $result->httpStatusCode;

@@ -18,33 +18,33 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 
 		$accounts = $this->config->get('globalpay_remote_account');
 
-		$card_types = array(
+		$card_types = [
 			'visa' => $this->language->get('text_card_visa'),
 			'mc' => $this->language->get('text_card_mc'),
 			'amex' => $this->language->get('text_card_amex'),
 			'switch' => $this->language->get('text_card_switch'),
 			'laser' => $this->language->get('text_card_laser'),
 			'diners' => $this->language->get('text_card_diners'),
-		);
+		];
 
 		$data['cards'] = [];
 
 		foreach ($accounts as $card => $account) {
 			if (isset($account['enabled']) && $account['enabled'] == 1) {
-				$data['cards'][] = array(
+				$data['cards'][] = [
 					'code' => $card,
 					'text' => $card_types[$card],
-				);
+				];
 			}
 		}
 
 		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = array(
+			$data['months'][] = [
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			);
+			];
 		}
 
 		$today = getdate();
@@ -52,10 +52,10 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 		$data['year_expire'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = array(
+			$data['year_expire'][] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%02d', $i % 100)
-			);
+			];
 		}
 
 		return $this->load->view('extension/payment/globalpay_remote', $data);
@@ -115,7 +115,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 
 				// Proceed to 3D secure
 				if (isset($verify_3ds->result) && $verify_3ds->result == '00') {
-					$enc_data = array(
+					$enc_data = [
 						'account' => $account,
 						'amount' => $amount,
 						'currency' => $currency,
@@ -127,7 +127,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 						'cc_type' => $this->request->post['cc_type'],
 						'cc_cvv2' => $this->request->post['cc_cvv2'],
 						'cc_issue' => $this->request->post['cc_issue']
-					);
+					];
 
 					$md = $this->encryption->encrypt(json_encode($enc_data));
 

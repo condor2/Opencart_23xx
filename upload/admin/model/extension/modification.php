@@ -22,7 +22,7 @@ class ModelExtensionModification extends Model {
 		return $query->row;
 	}
 
-	public function getModifications($data =[]) {
+	public function getModifications($data = []) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "modification";
 
 		$sort_data = [

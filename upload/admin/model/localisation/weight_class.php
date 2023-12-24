@@ -33,7 +33,7 @@ class ModelLocalisationWeightClass extends Model {
 		$this->cache->delete('weight_class');
 	}
 
-	public function getWeightClasses($data =[]) {
+	public function getWeightClasses($data = []) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "weight_class wc LEFT JOIN " . DB_PREFIX . "weight_class_description wcd ON (wc.weight_class_id = wcd.weight_class_id) WHERE wcd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
@@ -98,7 +98,7 @@ class ModelLocalisationWeightClass extends Model {
 	}
 
 	public function getWeightClassDescriptions($weight_class_id) {
-		$weight_class_data =[];
+		$weight_class_data = [];
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "weight_class_description WHERE weight_class_id = '" . (int)$weight_class_id . "'");
 

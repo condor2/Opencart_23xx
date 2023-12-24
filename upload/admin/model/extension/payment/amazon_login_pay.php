@@ -70,8 +70,8 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 		if (!empty($amazon_login_pay_order) && $total_captured == 0) {
 
-			$cancel_response =[];
-			$cancel_paramter_data =[];
+			$cancel_response = [];
+			$cancel_paramter_data = [];
 
 			$cancel_paramter_data['AmazonOrderReferenceId'] = $amazon_login_pay_order['amazon_order_reference_id'];
 			$cancel_details = $this->offAmazon('CancelOrderReference', $cancel_paramter_data);
@@ -108,7 +108,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 				$amazon_authorization_id = $amazon_login_pay_order['amazon_authorization_id'];
 			}
 
-			$capture_paramter_data =[];
+			$capture_paramter_data = [];
 			$capture_paramter_data['AmazonOrderReferenceId'] = $amazon_login_pay_order['amazon_order_reference_id'];
 			$capture_paramter_data['AmazonAuthorizationId'] = $amazon_authorization_id;
 			$capture_paramter_data['CaptureAmount.Amount'] = $amount;
@@ -126,7 +126,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 	}
 
 	private function authorize($amazon_login_pay_order, $amount) {
-		$authorize_paramter_data =[];
+		$authorize_paramter_data = [];
 		$authorize_paramter_data['AmazonOrderReferenceId'] = $amazon_login_pay_order['amazon_order_reference_id'];
 		$authorize_paramter_data['AuthorizationAmount.Amount'] = $amount;
 		$authorize_paramter_data['AuthorizationAmount.CurrencyCode'] = $amazon_login_pay_order['currency_code'];
@@ -138,7 +138,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 	}
 
 	public function closeOrderRef($amazon_order_reference_id) {
-		$close_paramter_data =[];
+		$close_paramter_data = [];
 		$close_paramter_data['AmazonOrderReferenceId'] = $amazon_order_reference_id;
 		$this->offAmazon('CloseOrderReference', $close_paramter_data);
 		$close_details = $this->offAmazon('CloseOrderReference', $close_paramter_data);
@@ -153,7 +153,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		if (!empty($amazon_login_pay_order) && $amazon_login_pay_order['refund_status'] != 1) {
 			$amazon_captures_remaining = $this->getUnCaptured($amazon_login_pay_order['amazon_login_pay_order_id']);
 
-			$refund_response =[];
+			$refund_response = [];
 			$i = 0;
 			$count = count($amazon_captures_remaining);
 			for ($amount; $amount > 0 && $count > $i; $amount -= $amazon_captures_remaining[$i++]['capture_remaining']) {
@@ -162,7 +162,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 					$refund_amount = $amazon_captures_remaining[$i]['capture_remaining'];
 				}
 
-				$refund_paramter_data =[];
+				$refund_paramter_data = [];
 				$refund_paramter_data['AmazonOrderReferenceId'] = $amazon_login_pay_order['amazon_order_reference_id'];
 				$refund_paramter_data['AmazonCaptureId'] = $amazon_captures_remaining[$i]['amazon_capture_id'];
 				$refund_paramter_data['RefundAmount.Amount'] = $refund_amount;
@@ -184,7 +184,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 	public function getUnCaptured($amazon_login_pay_order_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "amazon_login_pay_order_transaction` WHERE (`type` = 'refund' OR `type` = 'capture') AND `amazon_login_pay_order_id` = '" . (int)$amazon_login_pay_order_id . "' ORDER BY `date_added`");
-		$uncaptured =[];
+		$uncaptured = [];
 		foreach ($query->rows as $row) {
 			$uncaptured[$row['amazon_capture_id']]['amazon_authorization_id'] = $row['amazon_authorization_id'];
 			$uncaptured[$row['amazon_capture_id']]['amazon_capture_id'] = $row['amazon_capture_id'];
@@ -217,7 +217,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 	private function getTransactions($amazon_login_pay_order_id, $currency_code) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "amazon_login_pay_order_transaction` WHERE `amazon_login_pay_order_id` = '" . (int)$amazon_login_pay_order_id . "'");
 
-		$transactions =[];
+		$transactions = [];
 		if ($query->num_rows) {
 			foreach ($query->rows as $row) {
 				$row['amount'] = $this->currency->format($row['amount'], $currency_code, true, true);
@@ -246,7 +246,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 	}
 
 	public function validateDetails($data) {
-		$validate_paramter_data =[];
+		$validate_paramter_data = [];
 		$validate_paramter_data['AWSAccessKeyId'] = $data['amazon_login_pay_access_key'];
 		$validate_paramter_data['SellerId'] = $data['amazon_login_pay_merchant_id'];
 		$validate_paramter_data['AmazonOrderReferenceId'] = 'validate details';
@@ -287,7 +287,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			}
 		}
 
-		$parameters =[];
+		$parameters = [];
 		$parameters['AWSAccessKeyId'] = $access_key;
 		$parameters['Action'] = $Action;
 		$parameters['SellerId'] = $merchant_id;
@@ -373,7 +373,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 	}
 
 	private function getParametersAsString(array $parameters) {
-		$queryParameters =[];
+		$queryParameters = [];
 		foreach ($parameters as $key => $value) {
 			$queryParameters[] = $key . '=' . $this->urlencode($value);
 		}

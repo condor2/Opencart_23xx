@@ -32,7 +32,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 		$payment_country = $this->model_localisation_country->getCountry($order_info['payment_country_id']);
 		$payment_zone = $this->model_localisation_zone->getZone($order_info['payment_zone_id']);
 
-		$url_params = array(
+		$url_params = [
 			'TENDER'            => 'C',
 			'TRXTYPE'           => $transaction_type,
 			'AMT'               => $this->currency->format($order_info['total'], $order_info['currency_code'], false, false),
@@ -46,7 +46,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 			'BILLTOSTATE'       => $payment_zone['code'],
 			'BILLTOZIP'         => $order_info['payment_postcode'],
 			'BILLTOCOUNTRY'     => $payment_country['iso_code_2'],
-		);
+		];
 
 		if ($shipping_country) {
 			$url_params['SHIPTOFIRSTNAME'] = $order_info['shipping_firstname'];
@@ -66,11 +66,11 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 			$secure_token = '';
 		}
 
-		$iframe_params = array(
+		$iframe_params = [
 			'MODE'          => $mode,
 			'SECURETOKENID' => $secure_token_id,
 			'SECURETOKEN'   => $secure_token,
-		);
+		];
 
 		$data['iframe_url'] = $payflow_url . '?' . http_build_query($iframe_params, '', "&");
 		$data['checkout_method'] = $this->config->get('pp_payflow_iframe_checkout_method');
@@ -111,11 +111,11 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 		if ($order_id) {
 			$order_info = $this->model_checkout_order->getOrder($order_id);
 
-			$url_params = array(
+			$url_params = [
 				'TENDER'  => 'C',
 				'TRXTYPE' => 'I',
 				'ORIGID'  => $this->request->post['PNREF'],
-			);
+			];
 
 			$response_params = $this->model_extension_payment_pp_payflow_iframe->call($url_params);
 
@@ -128,21 +128,21 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 					$complete = 0;
 				}
 
-				$data = array(
+				$data = [
 					'secure_token_id'       => $this->request->post['SECURETOKENID'],
 					'transaction_reference' => $this->request->post['PNREF'],
 					'transaction_type'      => $this->request->post['TYPE'],
 					'complete'              => $complete,
-				);
+				];
 
 				$this->model_extension_payment_pp_payflow_iframe->updateOrder($data);
 
-				$data = array(
+				$data = [
 					'order_id'              => $order_id,
 					'type'                  => $this->request->post['TYPE'],
 					'transaction_reference' => $this->request->post['PNREF'],
 					'amount'                => $this->request->post['AMT'],
-				);
+				];
 
 				$this->model_extension_payment_pp_payflow_iframe->addTransaction($data);
 			}

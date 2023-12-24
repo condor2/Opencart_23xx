@@ -35,7 +35,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$weight = intval($product['weight']);
 			}
 
-			$products[] = array_map('strval', array(
+			$products[] = array_map('strval', [
 				'name'       => $product['name'],
 				'pictureUrl' => $this->config->get('config_url') . 'image/' . $product['image'],
 				'price'      => intval(round($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'), $this->session->data['currency']), 2) * 100),
@@ -43,7 +43,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				'productId'  => $product['product_id'],
 				'quantity'   => $product['quantity'],
 				'weight'     => $weight
-			));
+			)];
 		}
 
 		$data['products'] = $products;
@@ -88,11 +88,11 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$total = 0;
 
 				// Because __call can not keep var references so we put them into an array.
-				$total_data = array(
+				$total_data = [
 					'totals' => &$totals,
 					'taxes'  => &$taxes,
 					'total'  => &$total
-				);
+				];
 
 				$this->load->model('extension/extension');
 
@@ -192,7 +192,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 					$option_data = [];
 
 					foreach ($product['option'] as $option) {
-						$option_data[] = array(
+						$option_data[] = [
 							'product_option_id'       => $option['product_option_id'],
 							'product_option_value_id' => $option['product_option_value_id'],
 							'option_id'               => $option['option_id'],
@@ -200,10 +200,10 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 							'name'                    => $option['name'],
 							'value'                   => $option['value'],
 							'type'                    => $option['type']
-						);
+						];
 					}
 
-					$order_data['products'][] = array(
+					$order_data['products'][] = [
 						'product_id' => $product['product_id'],
 						'name'       => $product['name'],
 						'model'      => $product['model'],
@@ -215,7 +215,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 						'total'      => $product['total'],
 						'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
 						'reward'     => $product['reward']
-					);
+					];
 				}
 
 				// Gift Voucher
@@ -223,7 +223,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 
 				if (!empty($this->session->data['vouchers'])) {
 					foreach ($this->session->data['vouchers'] as $voucher) {
-						$order_data['vouchers'][] = array(
+						$order_data['vouchers'][] = [
 							'description'      => $voucher['description'],
 							'code'             => token(10),
 							'to_name'          => $voucher['to_name'],
@@ -233,7 +233,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 							'voucher_theme_id' => $voucher['voucher_theme_id'],
 							'message'          => $voucher['message'],
 							'amount'           => $voucher['amount']
-						);
+						];
 					}
 				}
 
@@ -332,7 +332,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 						$weight = intval($product['weight']);
 					}
 
-					$products[] = array_map('strval', array(
+					$products[] = array_map('strval', [
 						'name'       => $product['name'],
 						'pictureUrl' => $this->config->get('config_url') . 'image/' . $product['image'],
 						'price'      => intval(round($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'), $this->session->data['currency']), 2) * 100),
@@ -340,7 +340,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 						'productId'  => $product['product_id'],
 						'quantity'   => $product['quantity'],
 						'weight'     => $weight
-					));
+					]);
 				}
 
 				$data['products'] = $products;

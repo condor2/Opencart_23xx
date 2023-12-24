@@ -58,7 +58,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 						$rating = false;
 					}
 
-					$data['products'][] = array(
+					$data['products'][] = [
 						'product_id'  => $product_info['product_id'],
 						'thumb'       => $image,
 						'name'        => $product_info['name'],
@@ -68,7 +68,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 						'tax'         => $tax,
 						'rating'      => $rating,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
-					);
+					];
 				}
 			}
 		}

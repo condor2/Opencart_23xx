@@ -1,6 +1,6 @@
 <?php
 class ModelReportMarketing extends Model {
-	public function getMarketing($data =[]) {
+	public function getMarketing($data = []) {
 		$sql = "SELECT m.marketing_id, m.name AS campaign, m.code, m.clicks AS clicks, (SELECT COUNT(DISTINCT order_id) FROM `" . DB_PREFIX . "order` o1 WHERE o1.marketing_id = m.marketing_id";
 
 		if (!empty($data['filter_order_status_id'])) {
@@ -52,7 +52,7 @@ class ModelReportMarketing extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalMarketing($data =[]) {
+	public function getTotalMarketing($data = []) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "marketing`");
 
 		return (int)$query->row['total'];

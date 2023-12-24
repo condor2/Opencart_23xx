@@ -1,7 +1,7 @@
 <?php
 class ModelToolBackup extends Model {
 	public function getTables() {
-		$table_data =[];
+		$table_data = [];
 
 		$query = $this->db->query("SHOW TABLES FROM `" . DB_DATABASE . "`");
 

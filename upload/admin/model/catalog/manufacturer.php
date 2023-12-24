@@ -62,7 +62,7 @@ class ModelCatalogManufacturer extends Model {
 		return $query->row;
 	}
 
-	public function getManufacturers($data =[]) {
+	public function getManufacturers($data = []) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "manufacturer`";
 
 		if (!empty($data['filter_name'])) {
@@ -104,7 +104,7 @@ class ModelCatalogManufacturer extends Model {
 	}
 
 	public function getManufacturerStores($manufacturer_id) {
-		$manufacturer_store_data =[];
+		$manufacturer_store_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "manufacturer_to_store` WHERE `manufacturer_id` = '" . (int)$manufacturer_id . "'");
 

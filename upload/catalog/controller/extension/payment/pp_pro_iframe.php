@@ -148,17 +148,17 @@ class ControllerExtensionPaymentPPProIframe extends Controller {
 					}
 
 					if (!$order_info['order_status_id']) {
-						$paypal_order_data = array(
+						$paypal_order_data = [
 							'order_id'         => $order_id,
 							'capture_status'   => ($this->config->get('pp_pro_iframe_transaction_method') == 'sale' ? 'Complete' : 'NotComplete'),
 							'currency_code'    => $this->request->post['mc_currency'],
 							'authorization_id' => $this->request->post['txn_id'],
 							'total'            => $this->request->post['mc_gross'],
-						);
+						];
 
 						$paypal_iframe_order_id = $this->model_extension_payment_pp_pro_iframe->addOrder($paypal_order_data);
 
-						$paypal_transaction_data = array(
+						$paypal_transaction_data = [
 							'paypal_iframe_order_id' => $paypal_iframe_order_id,
 							'transaction_id'         => $this->request->post['txn_id'],
 							'parent_id'  => '',
@@ -171,7 +171,7 @@ class ControllerExtensionPaymentPPProIframe extends Controller {
 							'transaction_entity'     => ($this->config->get('pp_pro_iframe_transaction_method') == 'sale' ? 'payment' : 'auth'),
 							'amount'                 => $this->request->post['mc_gross'],
 							'debug_data'             => json_encode($this->request->post),
-						);
+						];
 
 						$this->model_extension_payment_pp_pro_iframe->addTransaction($paypal_transaction_data);
 
@@ -276,7 +276,7 @@ class ControllerExtensionPaymentPPProIframe extends Controller {
 		curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
 		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($s_data, '', "&"));
-		curl_setopt($curl, CURLOPT_HTTPHEADER, array('X-VPS-REQUEST-ID: ' . md5($order_info['order_id'] . mt_rand())));
+		curl_setopt($curl, CURLOPT_HTTPHEADER, ['X-VPS-REQUEST-ID: ' . md5($order_info['order_id'] . mt_rand())]);
 
 		$response = curl_exec($curl);
 

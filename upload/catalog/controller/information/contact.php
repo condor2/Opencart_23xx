@@ -30,15 +30,15 @@ class ControllerInformationContact extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('information/contact')
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -110,7 +110,7 @@ class ControllerInformationContact extends Controller {
 					$image = false;
 				}
 
-				$data['locations'][] = array(
+				$data['locations'][] = [
 					'location_id' => $location_info['location_id'],
 					'name'        => $location_info['name'],
 					'address'     => nl2br($location_info['address']),
@@ -120,7 +120,7 @@ class ControllerInformationContact extends Controller {
 					'image'       => $image,
 					'open'        => nl2br($location_info['open']),
 					'comment'     => $location_info['comment']
-				);
+				];
 			}
 		}
 
@@ -191,15 +191,15 @@ class ControllerInformationContact extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('information/contact')
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

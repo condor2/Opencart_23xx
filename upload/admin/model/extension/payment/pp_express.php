@@ -157,7 +157,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 	public function cleanReturn($data) {
 		$data = explode('&', $data);
 
-		$arr =[];
+		$arr = [];
 
 		foreach ($data as $k => $v) {
 			$tmp = explode('=', $v);
@@ -237,7 +237,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 
 		$endpoint1 = $endpoint . '?tracking_id=' . $merchant_id;
 
-		$header =[];
+		$header = [];
 		$header[] = 'Content-Type: application/json';
 		$header[] = 'Authorization: Bearer ' . $access_token;
 		$header[] = 'PAYPAL_SERVICE_VERSION:1.2.0';

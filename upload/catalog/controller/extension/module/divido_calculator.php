@@ -41,7 +41,7 @@ class ControllerExtensionModuleDividoCalculator extends Controller {
 		$plans_ids = array_unique($plans_ids);
 		$plans_list = implode(',', $plans_ids);
 
-		$data = array(
+		$data = [
 			'text_choose_deposit'		=> $this->language->get('text_choose_deposit'),
 			'text_choose_plan'			=> $this->language->get('text_choose_plan'),
 			'text_checkout_title'		=> $this->language->get('text_checkout_title'),
@@ -58,7 +58,7 @@ class ControllerExtensionModuleDividoCalculator extends Controller {
 			'product_price'				=> $price,
 			'plan_list'					=> $plans_list,
 			'generic_credit_req_error'	=> 'Credit request could not be initiated',
-		);
+		];
 
 		return $this->load->view('extension/module/divido_calculator', $data);
 	}

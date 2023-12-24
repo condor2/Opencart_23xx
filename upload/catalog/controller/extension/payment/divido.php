@@ -12,7 +12,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		STATUS_FULFILLED = 'FULFILLED',
 		STATUS_SIGNED = 'SIGNED';
 
-	private $status_id = array(
+	private $status_id = [
 		self::STATUS_ACCEPTED => 1,
 		self::STATUS_ACTION_LENDER => 2,
 		self::STATUS_CANCELED => 0,
@@ -23,9 +23,9 @@ class ControllerExtensionPaymentDivido extends Controller {
 		self::STATUS_DEPOSIT_PAID => 1,
 		self::STATUS_FULFILLED => 1,
 		self::STATUS_SIGNED => 2,
-	);
+	];
 
-	private $history_messages = array(
+	private $history_messages = [
 		self::STATUS_ACCEPTED => 'Credit request accepted',
 		self::STATUS_ACTION_LENDER => 'Lender notified',
 		self::STATUS_CANCELED => 'Credit request canceled',
@@ -36,7 +36,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		self::STATUS_DEPOSIT_PAID => 'Deposit paid',
 		self::STATUS_FULFILLED => 'Credit request fulfilled',
 		self::STATUS_SIGNED => 'Contract signed',
-	);
+	];
 
 	public function index() {
 		$this->load->language('extension/payment/divido');
@@ -65,7 +65,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$plans_ids  = array_unique($plans_ids);
 		$plans_list = implode(',', $plans_ids);
 
-		$data = array(
+		$data = [
 			'button_confirm'           => $this->language->get('divido_checkout'),
 			'text_loading'             => $this->language->get('text_loading'),
 			'text_choose_deposit'      => $this->language->get('text_choose_deposit'),
@@ -84,7 +84,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 			'grand_total'              => $total,
 			'plan_list'                => $plans_list,
 			'generic_credit_req_error' => 'Credit request could not be initiated',
-		);
+		];
 
 		return $this->load->view('extension/payment/divido', $data);
 	}
@@ -187,12 +187,12 @@ class ControllerExtensionPaymentDivido extends Controller {
 
 		$products  = [];
 		foreach ($this->cart->getProducts() as $product) {
-			$products[] = array(
+			$products[] = [
 				'type' => 'product',
 				'text' => $product['name'],
 				'quantity' => $product['quantity'],
 				'value' => $product['price'],
-			);
+			];
 		}
 
 		list($total, $totals) = $this->model_extension_payment_divido->getOrderTotals();
@@ -201,12 +201,12 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$cart_total = $this->cart->getSubTotal();
 		$shiphandle = $sub_total - $cart_total;
 
-		$products[] = array(
+		$products[] = [
 			'type'     => 'product',
 			'text'     => 'Shipping & Handling',
 			'quantity' => 1,
 			'value'    => $shiphandle,
-		);
+		];
 
 		$deposit_amount = round(($deposit / 100) * $total, 2, PHP_ROUND_HALF_UP);
 
@@ -222,18 +222,18 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$salt = uniqid('', true);
 		$hash = $this->model_extension_payment_divido->hashOrderId($order_id, $salt);
 
-		$request_data = array(
+		$request_data = [
 			'merchant' => $api_key,
 			'deposit'  => $deposit_amount,
 			'finance'  => $finance,
 			'country'  => $country,
 			'language' => $language,
 			'currency' => $currency,
-			'metadata' => array(
+			'metadata' => [
 				'order_id'   => $order_id,
 				'order_hash' => $hash,
-			),
-			'customer' => array(
+			],
+			'customer' => [
 				'title'         => '',
 				'first_name'    => $firstname,
 				'middle_name'   => '',
@@ -243,12 +243,12 @@ class ControllerExtensionPaymentDivido extends Controller {
 				'email'         => $email,
 				'mobile_number' => '',
 				'phone_number'  => $telephone,
-			),
+			],
 			'products'     => $products,
 			'response_url' => $callback_url,
 			'redirect_url' => $return_url,
 			'checkout_url' => $checkout_url,
-		);
+		];
 
 		$response = Divido_CreditRequest::create($request_data);
 
@@ -256,15 +256,15 @@ class ControllerExtensionPaymentDivido extends Controller {
 
 			$this->model_extension_payment_divido->saveLookup($order_id, $salt, $response->id, null, $deposit_amount);
 
-			$data = array(
+			$data = [
 				'status' => 'ok',
 				'url'    => $response->url,
-			);
+			];
 		} else {
-			$data = array(
+			$data = [
 				'status'  => 'error',
 				'message' => $this->language->get($response->error),
-			);
+			];
 		}
 
 		$this->response->setOutput(json_encode($data));
@@ -302,7 +302,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 
 		$plan_list = implode(',', $plans_ids);
 
-		$data = array(
+		$data = [
 			'planList'                 => $plan_list,
 			'productPrice'             => $product_price,
 			'text_loading'             => $this->language->get('text_loading'),
@@ -317,7 +317,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 			'text_amount_payable'      => $this->language->get('text_amount_payable'),
 			'text_total_interest'      => $this->language->get('text_total_interest'),
 			'text_monthly_installment' => $this->language->get('text_monthly_installment'),
-		);
+		];
 
 		$filename = ($type == 'full') ? 'extension/payment/divido_calculator' : 'extension/payment/divido_widget';
 

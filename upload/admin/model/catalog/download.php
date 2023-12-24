@@ -33,7 +33,7 @@ class ModelCatalogDownload extends Model {
 		return $query->row;
 	}
 
-	public function getDownloads($data =[]) {
+	public function getDownloads($data = []) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "download` d LEFT JOIN `" . DB_PREFIX . "download_description` dd ON (d.`download_id` = dd.`download_id`) WHERE dd.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
@@ -75,7 +75,7 @@ class ModelCatalogDownload extends Model {
 	}
 
 	public function getDownloadDescriptions($download_id) {
-		$download_description_data =[];
+		$download_description_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "download_description` WHERE `download_id` = '" . (int)$download_id . "'");
 

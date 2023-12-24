@@ -136,7 +136,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 							$order_status_id = $this->config->get('cardconnect_order_status_id_pending');
 						}
 
-						$data = array(
+						$data = [
 							'merchid'    => $this->config->get('cardconnect_merchant_id'),
 							'accttype'   => $accttype,
 							'account'    => $account,
@@ -158,9 +158,9 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 							'profile'    => $profile,
 							'capture'    => $capture,
 							'bankaba'    => $bankaba,
-							'userfields' => array('secret_token' => $this->config->get('cardconnect_token')),
+							'userfields' => ['secret_token' => $this->config->get('cardconnect_token')],
 							'frontendid' => '26'
-						);
+						];
 
 						$data_json = json_encode($data);
 

@@ -24,10 +24,10 @@ class ControllerAffiliatePayment extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('affiliate/activity');
 
-				$activity_data = array(
+				$activity_data = [
 					'affiliate_id' => $this->affiliate->getId(),
 					'name'         => $this->affiliate->getFirstName() . ' ' . $this->affiliate->getLastName()
-				);
+				];
 
 				$this->model_affiliate_activity->addActivity('payment', $activity_data);
 			}
@@ -37,20 +37,20 @@ class ControllerAffiliatePayment extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('affiliate/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_payment'),
 			'href' => $this->url->link('affiliate/payment', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

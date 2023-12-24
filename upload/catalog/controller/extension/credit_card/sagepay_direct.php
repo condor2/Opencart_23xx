@@ -15,15 +15,15 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		);
+		];
 
 
 		if (isset($this->session->data['success'])) {
@@ -110,15 +110,15 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -136,58 +136,58 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		$data['cards'] = [];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'Visa',
 			'value' => 'VISA'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'MasterCard',
 			'value' => 'MC'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'Visa Delta/Debit',
 			'value' => 'DELTA'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'Solo',
 			'value' => 'SOLO'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'Maestro',
 			'value' => 'MAESTRO'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'Visa Electron UK Debit',
 			'value' => 'UKE'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'American Express',
 			'value' => 'AMEX'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'Diners Club',
 			'value' => 'DC'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text' => 'Japan Credit Bureau',
 			'value' => 'JCB'
-		);
+		];
 
 		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = array(
+			$data['months'][] = [
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			);
+			];
 		}
 
 		$today = getdate();
@@ -195,19 +195,19 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 		$data['year_valid'] = [];
 
 		for ($i = $today['year'] - 10; $i < $today['year'] + 1; $i++) {
-			$data['year_valid'][] = array(
+			$data['year_valid'][] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			);
+			];
 		}
 
 		$data['year_expire'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = array(
+			$data['year_expire'][] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			);
+			];
 		}
 
 		$data['column_left'] = $this->load->controller('common/column_left');

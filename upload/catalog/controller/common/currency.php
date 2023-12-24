@@ -17,12 +17,12 @@ class ControllerCommonCurrency extends Controller {
 
 		foreach ($results as $result) {
 			if ($result['status']) {
-				$data['currencies'][] = array(
+				$data['currencies'][] = [
 					'title'        => $result['title'],
 					'code'         => $result['code'],
 					'symbol_left'  => $result['symbol_left'],
 					'symbol_right' => $result['symbol_right']
-				);
+				];
 			}
 		}
 

@@ -49,7 +49,7 @@ class ModelExtensionPaymentBluePayHosted extends Model {
 
 		if (!empty($bluepay_hosted_order) && $bluepay_hosted_order['release_status'] == 1) {
 
-			$void_data =[];
+			$void_data = [];
 
 			$void_data['MERCHANT'] = $this->config->get('bluepay_hosted_account_id');
 			$void_data["TRANSACTION_TYPE"] = 'VOID';
@@ -89,7 +89,7 @@ class ModelExtensionPaymentBluePayHosted extends Model {
 		$total_released = $this->getTotalReleased($bluepay_hosted_order['bluepay_hosted_order_id']);
 
 		if (!empty($bluepay_hosted_order) && $bluepay_hosted_order['release_status'] == 0 && ($total_released + $amount <= $bluepay_hosted_order['total'])) {
-			$release_data =[];
+			$release_data = [];
 
 			$release_data['MERCHANT'] = $this->config->get('bluepay_hosted_account_id');
 			$release_data["TRANSACTION_TYPE"] = 'CAPTURE';
@@ -124,7 +124,7 @@ class ModelExtensionPaymentBluePayHosted extends Model {
 		$bluepay_hosted_order = $this->getOrder($order_id);
 
 		if (!empty($bluepay_hosted_order) && $bluepay_hosted_order['rebate_status'] != 1) {
-			$rebate_data =[];
+			$rebate_data = [];
 
 			$rebate_data['MERCHANT'] = $this->config->get('bluepay_hosted_account_id');
 			$rebate_data["TRANSACTION_TYPE"] = 'REFUND';

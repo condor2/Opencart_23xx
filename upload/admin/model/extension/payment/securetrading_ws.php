@@ -172,7 +172,7 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 	public function getCsv($data) {
 		$ch = curl_init();
 
-		$post_data =[];
+		$post_data = [];
 		$post_data['sitereferences'] = $this->config->get('securetrading_ws_site_reference');
 		$post_data['startdate'] = $data['date_from'];
 		$post_data['enddate'] = $data['date_to'];
@@ -296,7 +296,7 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 	}
 
 	private function encodePost($data) {
-		$params =[];
+		$params = [];
 
 		foreach ($data as $key => $value) {
 			if (is_array($value)) {

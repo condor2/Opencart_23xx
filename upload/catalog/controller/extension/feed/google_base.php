@@ -20,10 +20,10 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 			$google_base_categories = $this->model_extension_feed_google_base->getCategories();
 
 			foreach ($google_base_categories as $google_base_category) {
-				$filter_data = array(
+				$filter_data = [
 					'filter_category_id' => $google_base_category['category_id'],
 					'filter_filter'      => false
-				);
+				];
 
 				$products = $this->model_catalog_product->getProducts($filter_data);
 
@@ -59,11 +59,11 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 							$output .= '  <g:ean>' . $product['ean'] . '</g:ean>';
 						}
 
-						$currencies = array(
+						$currencies = [
 							'USD',
 							'EUR',
 							'GBP'
-						);
+						];
 
 						if (in_array($this->session->data['currency'], $currencies)) {
 							$currency_code = $this->session->data['currency'];

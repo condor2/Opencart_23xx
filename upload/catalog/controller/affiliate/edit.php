@@ -24,10 +24,10 @@ class ControllerAffiliateEdit extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('affiliate/activity');
 
-				$activity_data = array(
+				$activity_data = [
 					'affiliate_id' => $this->affiliate->getId(),
 					'name'         => $this->affiliate->getFirstName() . ' ' . $this->affiliate->getLastName()
-				);
+				];
 
 				$this->model_affiliate_activity->addActivity('edit', $activity_data);
 			}
@@ -37,20 +37,20 @@ class ControllerAffiliateEdit extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('affiliate/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_edit'),
 			'href' => $this->url->link('affiliate/edit', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -318,7 +318,7 @@ class ControllerAffiliateEdit extends Controller {
 		if ($country_info) {
 			$this->load->model('localisation/zone');
 
-			$json = array(
+			$json = [
 				'country_id'        => $country_info['country_id'],
 				'name'              => $country_info['name'],
 				'iso_code_2'        => $country_info['iso_code_2'],
@@ -327,7 +327,7 @@ class ControllerAffiliateEdit extends Controller {
 				'postcode_required' => $country_info['postcode_required'],
 				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
 				'status'            => $country_info['status']
-			);
+			];
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

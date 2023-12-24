@@ -17,10 +17,10 @@ class ControllerCommonLanguage extends Controller {
 
 		foreach ($results as $result) {
 			if ($result['status']) {
-				$data['languages'][] = array(
+				$data['languages'][] = [
 					'name' => $result['name'],
 					'code' => $result['code']
-				);
+				];
 			}
 		}
 

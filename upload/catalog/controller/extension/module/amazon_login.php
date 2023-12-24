@@ -96,10 +96,10 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 					if ($this->config->get('config_customer_activity')) {
 						$this->load->model('account/activity');
 
-						$activity_data = array(
+						$activity_data = [
 							'customer_id' => $this->customer->getId(),
 							'name' => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-						);
+						];
 
 						$this->model_account_activity->addActivity('login', $activity_data);
 					}
@@ -119,7 +119,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 				$last_name = array_pop($full_name);
 				$first_name = implode(' ', $full_name);
 
-				$data = array(
+				$data = [
 					'customer_group_id' => (int)$this->config->get('config_customer_group_id'),
 					'firstname' => $first_name,
 					'lastname' => $last_name,
@@ -134,7 +134,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 					'postcode' => '',
 					'country_id' => (int)$country_id,
 					'zone_id' => (int)$zone_id,
-				);
+				];
 
 				$customer_id = $this->model_extension_payment_amazon_login_pay->addCustomer($data);
 
@@ -162,10 +162,10 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 					if ($this->config->get('config_customer_activity')) {
 						$this->load->model('account/activity');
 
-						$activity_data = array(
+						$activity_data = [
 							'customer_id' => $this->customer->getId(),
 							'name' => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-						);
+						];
 
 						$this->model_account_activity->addActivity('login', $activity_data);
 					}

@@ -11,18 +11,18 @@ class ControllerCheckoutSuccess extends Controller {
 				$this->load->model('account/activity');
 
 				if ($this->customer->isLogged()) {
-					$activity_data = array(
+					$activity_data = [
 						'customer_id' => $this->customer->getId(),
 						'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName(),
 						'order_id'    => $this->session->data['order_id']
-					);
+					];
 
 					$this->model_account_activity->addActivity('order_account', $activity_data);
 				} else {
-					$activity_data = array(
+					$activity_data = [
 						'name'     => $this->session->data['guest']['firstname'] . ' ' . $this->session->data['guest']['lastname'],
 						'order_id' => $this->session->data['order_id']
-					);
+					];
 
 					$this->model_account_activity->addActivity('order_guest', $activity_data);
 				}
@@ -46,25 +46,25 @@ class ControllerCheckoutSuccess extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_basket'),
 			'href' => $this->url->link('checkout/cart')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_checkout'),
 			'href' => $this->url->link('checkout/checkout', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_success'),
 			'href' => $this->url->link('checkout/success')
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

@@ -37,19 +37,19 @@ class ControllerExtensionPaymentPayPalPayLater extends Controller {
 											
 			require_once DIR_SYSTEM .'library/paypal/paypal.php';
 		
-			$paypal_info = array(
+			$paypal_info = [
 				'partner_id' => $data['partner_id'],
 				'client_id' => $data['client_id'],
 				'secret' => $data['secret'],
 				'environment' => $data['environment'],
 				'partner_attribution_id' => $data['partner_attribution_id']
-			);
+			];
 		
 			$paypal = new PayPal($paypal_info);
 		
-			$token_info = array(
+			$token_info = [
 				'grant_type' => 'client_credentials'
-			);	
+			];	
 				
 			$paypal->setAccessToken($token_info);
 		
@@ -114,19 +114,19 @@ class ControllerExtensionPaymentPayPalPayLater extends Controller {
 											
 		require_once DIR_SYSTEM .'library/paypal/paypal.php';
 		
-		$paypal_info = array(
+		$paypal_info = [
 			'partner_id' => $data['partner_id'],
 			'client_id' => $data['client_id'],
 			'secret' => $data['secret'],
 			'environment' => $data['environment'],
 			'partner_attribution_id' => $data['partner_attribution_id']
-		);
+		];
 		
 		$paypal = new PayPal($paypal_info);
 	
-		$token_info = array(
+		$token_info = [
 			'grant_type' => 'client_credentials'
-		);	
+		];	
 				
 		$paypal->setAccessToken($token_info);
 		

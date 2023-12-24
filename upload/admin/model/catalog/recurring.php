@@ -48,7 +48,7 @@ class ModelCatalogRecurring extends Model {
 	}
 
 	public function getRecurringDescription($recurring_id) {
-		$recurring_description_data =[];
+		$recurring_description_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "recurring_description` WHERE `recurring_id` = '" . (int)$recurring_id . "'");
 
@@ -59,7 +59,7 @@ class ModelCatalogRecurring extends Model {
 		return $recurring_description_data;
 	}
 
-	public function getRecurrings($data =[]) {
+	public function getRecurrings($data = []) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "recurring` r LEFT JOIN `" . DB_PREFIX . "recurring_description` rd ON (r.`recurring_id` = rd.`recurring_id`) WHERE rd.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {

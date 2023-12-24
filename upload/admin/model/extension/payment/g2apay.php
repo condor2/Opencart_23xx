@@ -86,7 +86,7 @@ class ModelExtensionPaymentG2aPay extends Model {
 	private function getTransactions($g2apay_order_id, $currency_code) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "g2apay_order_transaction` WHERE `g2apay_order_id` = '" . (int)$g2apay_order_id . "'");
 
-		$transactions =[];
+		$transactions = [];
 		if ($query->num_rows) {
 			foreach ($query->rows as $row) {
 				$row['amount'] = $this->currency->format($row['amount'], $currency_code, true, true);

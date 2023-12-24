@@ -26,10 +26,10 @@ class ControllerCommonFooter extends Controller {
 
 		foreach ($this->model_catalog_information->getInformations() as $result) {
 			if ($result['bottom']) {
-				$data['informations'][] = array(
+				$data['informations'][] = [
 					'title' => $result['title'],
 					'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
-				);
+				];
 			}
 		}
 

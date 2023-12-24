@@ -1,9 +1,9 @@
 <?php
 class ModelReportAffiliate extends Model {
-	public function getCommission($data =[]) {
+	public function getCommission($data = []) {
 		$sql = "SELECT at.affiliate_id, CONCAT(a.firstname, ' ', a.lastname) AS affiliate, a.email, a.status, SUM(at.amount) AS commission, COUNT(o.order_id) AS orders, SUM(o.total) AS total FROM " . DB_PREFIX . "affiliate_transaction at LEFT JOIN `" . DB_PREFIX . "affiliate` a ON (at.affiliate_id = a.affiliate_id) LEFT JOIN `" . DB_PREFIX . "order` o ON (at.order_id = o.order_id)";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_date_start'])) {
 			$implode[] = "DATE(at.date_added) >= DATE('" . $this->db->escape($data['filter_date_start']) . "')";
@@ -36,10 +36,10 @@ class ModelReportAffiliate extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalCommission($data =[]) {
+	public function getTotalCommission($data = []) {
 		$sql = "SELECT COUNT(DISTINCT affiliate_id) AS total FROM `" . DB_PREFIX . "affiliate_transaction`";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_date_start'])) {
 			$implode[] = "DATE(date_added) >= DATE('" . $this->db->escape($data['filter_date_start']) . "')";
@@ -58,10 +58,10 @@ class ModelReportAffiliate extends Model {
 		return (float)$query->row['total'];
 	}
 
-	public function getProducts($data =[]) {
+	public function getProducts($data = []) {
 		$sql = "SELECT at.product_id, CONCAT(a.firstname, ' ', a.lastname) AS affiliate, a.email, a.status, SUM(at.amount) AS commission, COUNT(o.order_id) AS orders, SUM(o.total) AS total FROM " . DB_PREFIX . "affiliate_transaction at LEFT JOIN `" . DB_PREFIX . "affiliate` a ON (at.affiliate_id = a.affiliate_id) LEFT JOIN `" . DB_PREFIX . "order` o ON (at.order_id = o.order_id) LEFT JOIN " . DB_PREFIX . "product";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_date_start'])) {
 			$implode[] = "DATE(at.date_added) >= DATE('" . $this->db->escape($data['filter_date_start']) . "')";
@@ -94,10 +94,10 @@ class ModelReportAffiliate extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalProducts($data =[]) {
+	public function getTotalProducts($data = []) {
 		$sql = "SELECT COUNT(DISTINCT product_id) AS total FROM `" . DB_PREFIX . "affiliate_transaction`";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_date_start'])) {
 			$implode[] = "DATE(date_added) >= DATE('" . $this->db->escape($data['filter_date_start']) . "')";
@@ -116,10 +116,10 @@ class ModelReportAffiliate extends Model {
 		return (int)$query->row['total'];
 	}
 
-	public function getAffiliateActivities($data =[]) {
+	public function getAffiliateActivities($data = []) {
 		$sql = "SELECT aa.affiliate_activity_id, aa.affiliate_id, aa.key, aa.data, aa.ip, aa.date_added FROM " . DB_PREFIX . "affiliate_activity aa LEFT JOIN " . DB_PREFIX . "affiliate a ON (aa.affiliate_id = a.affiliate_id)";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_affiliate'])) {
 			$implode[] = "CONCAT(a.firstname, ' ', a.lastname) LIKE '" . $this->db->escape($data['filter_affiliate']) . "'";
@@ -160,10 +160,10 @@ class ModelReportAffiliate extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalAffiliateActivities($data =[]) {
+	public function getTotalAffiliateActivities($data = []) {
 		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "affiliate_activity` aa LEFT JOIN " . DB_PREFIX . "affiliate a ON (aa.affiliate_id = a.affiliate_id)";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_affiliate'])) {
 			$implode[] = "CONCAT(a.firstname, ' ', a.lastname) LIKE '" . $this->db->escape($data['filter_affiliate']) . "'";

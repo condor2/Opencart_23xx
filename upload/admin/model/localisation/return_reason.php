@@ -38,7 +38,7 @@ class ModelLocalisationReturnReason extends Model {
 		return $query->row;
 	}
 
-	public function getReturnReasons($data =[]) {
+	public function getReturnReasons($data = []) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "return_reason WHERE language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
@@ -81,7 +81,7 @@ class ModelLocalisationReturnReason extends Model {
 	}
 
 	public function getReturnReasonDescriptions($return_reason_id) {
-		$return_reason_data =[];
+		$return_reason_data = [];
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "return_reason WHERE return_reason_id = '" . (int)$return_reason_id . "'");
 

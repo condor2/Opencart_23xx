@@ -25,7 +25,7 @@ class ModelUserUserGroup extends Model {
 		return $user_group;
 	}
 
-	public function getUserGroups($data =[]) {
+	public function getUserGroups($data = []) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "user_group";
 
 		$sql .= " ORDER BY `name`";

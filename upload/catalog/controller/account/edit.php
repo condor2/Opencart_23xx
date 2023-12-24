@@ -29,10 +29,10 @@ class ControllerAccountEdit extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('account/activity');
 
-				$activity_data = array(
+				$activity_data = [
 					'customer_id' => $this->customer->getId(),
 					'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-				);
+				];
 
 				$this->model_account_activity->addActivity('edit', $activity_data);
 			}
@@ -42,20 +42,20 @@ class ControllerAccountEdit extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text'      => $this->language->get('text_home'),
 			'href'      => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text'      => $this->language->get('text_account'),
 			'href'      => $this->url->link('account/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text'      => $this->language->get('text_edit'),
 			'href'      => $this->url->link('account/edit', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

@@ -44,20 +44,20 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 						}
 					}
 
-					$option_data[] = array(
+					$option_data[] = [
 						'name'  => (utf8_strlen($option['name']) > 64 ? utf8_substr($option['name'], 0, 62) . '..' : $option['name']),
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-					);
+					];
 				}
 
-				$data['products'][] = array(
+				$data['products'][] = [
 					'name'     => htmlspecialchars($product['name']),
 					'model'    => htmlspecialchars($product['model']),
 					'price'    => $this->currency->format($product['price'], $order_info['currency_code'], false, false),
 					'quantity' => $product['quantity'],
 					'option'   => $option_data,
 					'weight'   => $product['weight']
-				);
+				];
 			}
 
 			$data['discount_amount_cart'] = 0;
@@ -65,25 +65,25 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 			$total = $this->currency->format($order_info['total'] - $this->cart->getSubTotal(), $order_info['currency_code'], false, false);
 
 			if ($total > 0) {
-				$data['products'][] = array(
+				$data['products'][] = [
 					'name'     => $this->language->get('text_total'),
 					'model'    => '',
 					'price'    => $total,
 					'quantity' => 1,
 					'option'   => [],
 					'weight'   => 0
-				);
+				];
 			} else {
 				$data['discount_amount_cart'] -= $total;
 			}
 
-			$ship_to_state_codes = array(
+			$ship_to_state_codes = [
 				'BR', // Brazil
 				'CA', // Canada
 				'IT', // Italy
 				'MX', // Mexico
 				'US'  // USA
-			);
+			];
 
 			if ($this->cart->hasShipping()) {
 				$data['no_shipping'] = 2;
@@ -139,7 +139,7 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 
 	public function callback() {
 		if (isset($this->request->post['custom'])) {
-			$order_id = $this->request->post['custom'];
+			$order_id = (int)$this->request->post['custom'];
 		} else {
 			$order_id = 0;
 		}

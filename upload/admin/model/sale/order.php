@@ -169,11 +169,11 @@ class ModelSaleOrder extends Model {
 		}
 	}
 
-	public function getOrders($data =[]) {
+	public function getOrders($data = []) {
 		$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS order_status, o.store_name, o.shipping_code, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
 
 		if (!empty($data['filter_order_status'])) {
-			$implode =[];
+			$implode = [];
 
 			$order_statuses = explode(',', $data['filter_order_status']);
 
@@ -279,11 +279,11 @@ class ModelSaleOrder extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalOrders($data =[]) {
+	public function getTotalOrders($data = []) {
 		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order`";
 
 		if (!empty($data['filter_order_status'])) {
-			$implode =[];
+			$implode = [];
 
 			$order_statuses = explode(',', $data['filter_order_status']);
 
@@ -338,7 +338,7 @@ class ModelSaleOrder extends Model {
 	}
 
 	public function getTotalOrdersByProcessingStatus() {
-		$implode =[];
+		$implode = [];
 
 		$order_statuses = $this->config->get('config_processing_status');
 
@@ -356,7 +356,7 @@ class ModelSaleOrder extends Model {
 	}
 
 	public function getTotalOrdersByCompleteStatus() {
-		$implode =[];
+		$implode = [];
 
 		$order_statuses = $this->config->get('config_complete_status');
 
@@ -430,7 +430,7 @@ class ModelSaleOrder extends Model {
 	}
 
 	public function getEmailsByProductsOrdered($products, $start, $end) {
-		$implode =[];
+		$implode = [];
 
 		foreach ($products as $product_id) {
 			$implode[] = "op.product_id = '" . (int)$product_id . "'";
@@ -442,7 +442,7 @@ class ModelSaleOrder extends Model {
 	}
 
 	public function getTotalEmailsByProductsOrdered($products) {
-		$implode =[];
+		$implode = [];
 
 		foreach ($products as $product_id) {
 			$implode[] = "op.product_id = '" . (int)$product_id . "'";

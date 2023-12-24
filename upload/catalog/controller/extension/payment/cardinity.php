@@ -15,10 +15,10 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = array(
+			$data['months'][] = [
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			);
+			];
 		}
 
 		$today = getdate();
@@ -26,10 +26,10 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$data['years'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['years'][] = array(
+			$data['years'][] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			);
+			];
 		}
 
 		return $this->load->view('extension/payment/cardinity', $data);
@@ -58,20 +58,20 @@ class ControllerExtensionPaymentCardinity extends Controller {
 				$order_id = $order_info['order_id'];
 			}
 
-			$payment_data = array(
+			$payment_data = [
 				'amount'			 => (float)$this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false),
 				'currency'			 => $order_info['currency_code'],
 				'order_id'			 => $order_id,
 				'country'            => $order_info['shipping_iso_code_2'],
 				'payment_method'     => 'card',
-				'payment_instrument' => array(
+				'payment_instrument' => [
 					'pan'		=> preg_replace('!\s+!', '', $this->request->post['pan']),
 					'exp_year'	=> (int)$this->request->post['exp_year'],
 					'exp_month' => (int)$this->request->post['exp_month'],
 					'cvc'		=> $this->request->post['cvc'],
 					'holder'	=> $this->request->post['holder']
-				),
-			);
+				],
+			];
 
 			try {
 				$payment = $this->model_extension_payment_cardinity->createPayment($this->config->get('cardinity_key'), $this->config->get('cardinity_secret'), $payment_data);
@@ -85,10 +85,10 @@ class ControllerExtensionPaymentCardinity extends Controller {
 				$json['redirect'] = $this->url->link('checkout/checkout', '', true);
 			}
 
-			$successful_order_statuses = array(
+			$successful_order_statuses = [
 				'approved',
 				'pending'
-			);
+			];
 
 			if ($payment) {
 				if (!in_array($payment->getStatus(), $successful_order_statuses)) {
@@ -96,28 +96,28 @@ class ControllerExtensionPaymentCardinity extends Controller {
 
 					$json['redirect'] = $this->url->link('checkout/checkout', '', true);
 				} else {
-					$this->model_extension_payment_cardinity->addOrder(array(
+					$this->model_extension_payment_cardinity->addOrder([
 						'order_id'   => $this->session->data['order_id'],
 						'payment_id' => $payment->getId()
-					));
+					]);
 
 					if ($payment->getStatus() == 'pending') {
 						//3ds
 						$authorization_information = $payment->getAuthorizationInformation();
 
-						$encryption_data = array(
+						$encryption_data = [
 							'order_id' => $this->session->data['order_id'],
 							'secret'   => $this->config->get('cardinity_secret')
-						);
+						];
 
 						$hash = $this->encryption->encrypt(json_encode($encryption_data));
 
-						$json['3ds'] = array(
+						$json['3ds'] = [
 							'url'     => $authorization_information->getUrl(),
 							'PaReq'   => $authorization_information->getData(),
 							'TermUrl' => $this->url->link('extension/payment/cardinity/threeDSecureCallback', '', true),
 							'hash'    => $hash
-						);
+						];
 					} elseif ($payment->getStatus() == 'approved') {
 						$this->finalizeOrder($payment);
 
@@ -141,10 +141,10 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$success = false;
 		$redirect = false;
 
-		$encryption_data = array(
+		$encryption_data = [
 			'order_id' => $this->session->data['order_id'],
 			'secret'   => $this->config->get('cardinity_secret')
-		);
+		];
 
 		$hash = $this->encryption->encrypt(json_encode($encryption_data));
 
@@ -176,10 +176,10 @@ class ControllerExtensionPaymentCardinity extends Controller {
 
 		$error = '';
 
-		$encryption_data = array(
+		$encryption_data = [
 			'order_id' => $this->session->data['order_id'],
 			'secret'   => $this->config->get('cardinity_secret')
-		);
+		];
 
 		$hash = $this->encryption->encrypt(json_encode($encryption_data));
 

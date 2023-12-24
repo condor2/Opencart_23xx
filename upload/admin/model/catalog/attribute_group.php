@@ -33,7 +33,7 @@ class ModelCatalogAttributeGroup extends Model {
 		return $query->row;
 	}
 
-	public function getAttributeGroups($data =[]) {
+	public function getAttributeGroups($data = []) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "attribute_group` ag LEFT JOIN `" . DB_PREFIX . "attribute_group_description` agd ON (ag.attribute_group_id = agd.attribute_group_id) WHERE agd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		$sort_data = [
@@ -71,7 +71,7 @@ class ModelCatalogAttributeGroup extends Model {
 	}
 
 	public function getAttributeGroupDescriptions($attribute_group_id) {
-		$attribute_group_data =[];
+		$attribute_group_data = [];
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "attribute_group_description` WHERE `attribute_group_id` = '" . (int)$attribute_group_id . "'");
 

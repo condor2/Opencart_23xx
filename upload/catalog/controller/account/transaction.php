@@ -13,20 +13,20 @@ class ControllerAccountTransaction extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_transaction'),
 			'href' => $this->url->link('account/transaction', '', true)
-		);
+		];
 
 		$this->load->model('account/transaction');
 
@@ -51,23 +51,23 @@ class ControllerAccountTransaction extends Controller {
 
 		$data['transactions'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'sort'  => 'date_added',
 			'order' => 'DESC',
 			'start' => ($page - 1) * $limit,
 			'limit' => $limit
-		);
+		];
 
 		$transaction_total = $this->model_account_transaction->getTotalTransactions();
 
 		$results = $this->model_account_transaction->getTransactions($filter_data);
 
 		foreach ($results as $result) {
-			$data['transactions'][] = array(
+			$data['transactions'][] = [
 				'amount'      => $this->currency->format($result['amount'], $this->config->get('config_currency')),
 				'description' => $result['description'],
 				'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added']))
-			);
+			];
 		}
 
 		$pagination = new Pagination();

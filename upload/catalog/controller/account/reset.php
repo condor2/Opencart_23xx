@@ -28,10 +28,10 @@ class ControllerAccountReset extends Controller {
 				if ($this->config->get('config_customer_activity')) {
 					$this->load->model('account/activity');
 
-					$activity_data = array(
+					$activity_data = [
 						'customer_id' => $customer_info['customer_id'],
 						'name'        => $customer_info['firstname'] . ' ' . $customer_info['lastname']
-					);
+					];
 
 					$this->model_account_activity->addActivity('reset', $activity_data);
 				}
@@ -53,20 +53,20 @@ class ControllerAccountReset extends Controller {
 
 			$data['breadcrumbs'] = [];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_home'),
 				'href' => $this->url->link('common/home')
-			);
+			];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_account'),
 				'href' => $this->url->link('account/account', '', true)
-			);
+			];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('heading_title'),
 				'href' => $this->url->link('account/reset', '', true)
-			);
+			];
 
 			if (isset($this->error['password'])) {
 				$data['error_password'] = $this->error['password'];

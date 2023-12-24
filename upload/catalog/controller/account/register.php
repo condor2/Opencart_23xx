@@ -32,10 +32,10 @@ class ControllerAccountRegister extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('account/activity');
 
-				$activity_data = array(
+				$activity_data = [
 					'customer_id' => $customer_id,
 					'name'        => $this->request->post['firstname'] . ' ' . $this->request->post['lastname']
-				);
+				];
 
 				$this->model_account_activity->addActivity('register', $activity_data);
 			}
@@ -45,20 +45,20 @@ class ControllerAccountRegister extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_register'),
 			'href' => $this->url->link('account/register', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -464,10 +464,10 @@ class ControllerAccountRegister extends Controller {
 		$custom_fields = $this->model_account_custom_field->getCustomFields($customer_group_id);
 
 		foreach ($custom_fields as $custom_field) {
-			$json[] = array(
+			$json[] = [
 				'custom_field_id' => $custom_field['custom_field_id'],
 				'required'        => $custom_field['required']
-			);
+			];
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

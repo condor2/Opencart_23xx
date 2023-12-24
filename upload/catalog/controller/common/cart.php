@@ -11,11 +11,11 @@ class ControllerCommonCart extends Controller {
 		$total = 0;
 
 		// Because __call can not keep var references so we put them into an array.
-		$total_data = array(
+		$total_data = [
 			'totals' => &$totals,
 			'taxes'  => &$taxes,
 			'total'  => &$total
-		);
+		];
 			
 		// Display prices
 		if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -83,11 +83,11 @@ class ControllerCommonCart extends Controller {
 					}
 				}
 
-				$option_data[] = array(
+				$option_data[] = [
 					'name'  => $option['name'],
 					'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value),
 					'type'  => $option['type']
-				);
+				];
 			}
 
 			// Display prices
@@ -101,7 +101,7 @@ class ControllerCommonCart extends Controller {
 				$total = false;
 			}
 
-			$data['products'][] = array(
+			$data['products'][] = [
 				'cart_id'   => $product['cart_id'],
 				'thumb'     => $image,
 				'name'      => $product['name'],
@@ -112,7 +112,7 @@ class ControllerCommonCart extends Controller {
 				'price'     => $price,
 				'total'     => $total,
 				'href'      => $this->url->link('product/product', 'product_id=' . $product['product_id'])
-			);
+			];
 		}
 
 		// Gift Voucher
@@ -120,21 +120,21 @@ class ControllerCommonCart extends Controller {
 
 		if (!empty($this->session->data['vouchers'])) {
 			foreach ($this->session->data['vouchers'] as $key => $voucher) {
-				$data['vouchers'][] = array(
+				$data['vouchers'][] = [
 					'key'         => $key,
 					'description' => $voucher['description'],
 					'amount'      => $this->currency->format($voucher['amount'], $this->session->data['currency'])
-				);
+				];
 			}
 		}
 
 		$data['totals'] = [];
 
 		foreach ($totals as $total) {
-			$data['totals'][] = array(
+			$data['totals'][] = [
 				'title' => $total['title'],
 				'text'  => $this->currency->format($total['value'], $this->session->data['currency']),
-			);
+			];
 		}
 
 		$data['cart'] = $this->url->link('checkout/cart');

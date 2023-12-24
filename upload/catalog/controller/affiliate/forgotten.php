@@ -51,10 +51,10 @@ class ControllerAffiliateForgotten extends Controller {
 				if ($affiliate_info) {
 					$this->load->model('affiliate/activity');
 
-					$activity_data = array(
+					$activity_data = [
 						'affiliate_id' => $affiliate_info['affiliate_id'],
 						'name'         => $affiliate_info['firstname'] . ' ' . $affiliate_info['lastname']
-					);
+					];
 
 					$this->model_affiliate_activity->addActivity('forgotten', $activity_data);
 				}
@@ -65,20 +65,20 @@ class ControllerAffiliateForgotten extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('affiliate/account', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_forgotten'),
 			'href' => $this->url->link('affiliate/forgotten', '', true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

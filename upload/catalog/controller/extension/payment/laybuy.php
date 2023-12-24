@@ -421,23 +421,23 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 							$next_payment_date = $payment['paymentDate'];
 
 							if ($payment['type'] == 'd') {
-								$report_content[] = array(
+								$report_content[] = [
 									'instalment'	=> 0,
 									'amount'		=> $this->currency->format($payment['amount'], $transaction['currency']),
 									'date'			=> $date,
 									'pp_trans_id'	=> $payment['txnID'],
 									'status'		=> $payment['paymentStatus']
-								);
+								];
 							} elseif ($payment['type'] == 'p') {
 								$pending_flag = true;
 
-								$report_content[] = array(
+								$report_content[] = [
 									'instalment'	=> $month,
 									'amount'		=> $this->currency->format($payment['amount'], $transaction['currency']),
 									'date'			=> $date,
 									'pp_trans_id'	=> $payment['txnID'],
 									'status'		=> $payment['paymentStatus']
-								);
+								];
 
 								$next_payment_status = $payment['paymentStatus'];
 							}
@@ -454,13 +454,13 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 								$next_payment_date = date("Y-m-d h:i:s", strtotime($next_payment_date . " +1 month"));
 								$date = date($this->language->get('date_format_short'), strtotime($next_payment_date));
 
-								$report_content[] = array(
+								$report_content[] = [
 									'instalment'	=> $month,
 									'amount'		=> $this->currency->format($transaction['payment_amounts'], $transaction['currency']),
 									'date'			=> $date,
 									'pp_trans_id'	=> '',
 									'status'		=> $next_payment_status
-								);
+								];
 							}
 						}
 

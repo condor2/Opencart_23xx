@@ -26,33 +26,33 @@ class ControllerExtensionPaymentPPPayflow extends Controller {
 
 		$data['cards'] = [];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text'  => 'Visa',
 			'value' => '0'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text'  => 'MasterCard',
 			'value' => '1'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text'  => 'Maestro',
 			'value' => '9'
-		);
+		];
 
-		$data['cards'][] = array(
+		$data['cards'][] = [
 			'text'  => 'Solo',
 			'value' => 'S'
-		);
+		];
 
 		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = array(
+			$data['months'][] = [
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			);
+			];
 		}
 
 		$today = getdate();
@@ -60,19 +60,19 @@ class ControllerExtensionPaymentPPPayflow extends Controller {
 		$data['year_valid'] = [];
 
 		for ($i = $today['year'] - 10; $i < $today['year'] + 1; $i++) {
-			$data['year_valid'][] = array(
+			$data['year_valid'][] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			);
+			];
 		}
 
 		$data['year_expire'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = array(
+			$data['year_expire'][] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			);
+			];
 		}
 
 		return $this->load->view('extension/payment/pp_payflow', $data);
@@ -129,7 +129,7 @@ class ControllerExtensionPaymentPPPayflow extends Controller {
 		curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
 		curl_setopt($curl, CURLOPT_POST, 1);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, array('X-VPS-REQUEST-ID: ' . md5($this->session->data['order_id'] . mt_rand())));
+		curl_setopt($curl, CURLOPT_HTTPHEADER, ['X-VPS-REQUEST-ID: ' . md5($this->session->data['order_id'] . mt_rand())]);
 
 		$response = curl_exec($curl);
 

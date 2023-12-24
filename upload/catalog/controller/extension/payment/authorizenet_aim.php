@@ -16,10 +16,10 @@ class ControllerExtensionPaymentAuthorizeNetAim extends Controller {
 		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = array(
+			$data['months'][] = [
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			);
+			];
 		}
 
 		$today = getdate();
@@ -27,10 +27,10 @@ class ControllerExtensionPaymentAuthorizeNetAim extends Controller {
 		$data['year_expire'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = array(
+			$data['year_expire'][] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			);
+			];
 		}
 
 		return $this->load->view('extension/payment/authorizenet_aim', $data);

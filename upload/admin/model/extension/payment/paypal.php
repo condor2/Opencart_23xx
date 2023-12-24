@@ -2,7 +2,7 @@
 class ModelExtensionPaymentPayPal extends Model {
 		
 	public function getTotalSales() {
-		$implode =[];
+		$implode = [];
 
 		foreach ($this->config->get('config_complete_status') as $order_status_id) {
 			$implode[] = "'" . (int)$order_status_id . "'";
@@ -14,13 +14,13 @@ class ModelExtensionPaymentPayPal extends Model {
 	}
 	
 	public function getTotalSalesByDay() {
-		$implode =[];
+		$implode = [];
 
 		foreach ($this->config->get('config_complete_status') as $order_status_id) {
 			$implode[] = "'" . (int)$order_status_id . "'";
 		}
 
-		$sale_data =[];
+		$sale_data = [];
 
 		for ($i = 0; $i < 24; $i++) {
 			$sale_data[$i] = [
@@ -44,13 +44,13 @@ class ModelExtensionPaymentPayPal extends Model {
 	}
 
 	public function getTotalSalesByWeek() {
-		$implode =[];
+		$implode = [];
 
 		foreach ($this->config->get('config_complete_status') as $order_status_id) {
 			$implode[] = "'" . (int)$order_status_id . "'";
 		}
 
-		$sale_data =[];
+		$sale_data = [];
 
 		$date_start = strtotime('-' . date('w') . ' days');
 
@@ -78,13 +78,13 @@ class ModelExtensionPaymentPayPal extends Model {
 	}
 
 	public function getTotalSalesByMonth() {
-		$implode =[];
+		$implode = [];
 
 		foreach ($this->config->get('config_complete_status') as $order_status_id) {
 			$implode[] = "'" . (int)$order_status_id . "'";
 		}
 
-		$sale_data =[];
+		$sale_data = [];
 
 		for ($i = 1; $i <= date('t'); $i++) {
 			$date = date('Y') . '-' . date('m') . '-' . $i;
@@ -110,13 +110,13 @@ class ModelExtensionPaymentPayPal extends Model {
 	}
 
 	public function getTotalSalesByYear() {
-		$implode =[];
+		$implode = [];
 
 		foreach ($this->config->get('config_complete_status') as $order_status_id) {
 			$implode[] = "'" . (int)$order_status_id . "'";
 		}
 
-		$sale_data =[];
+		$sale_data = [];
 
 		for ($i = 1; $i <= 12; $i++) {
 			$sale_data[$i] = [

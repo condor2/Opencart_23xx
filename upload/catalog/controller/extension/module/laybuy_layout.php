@@ -38,7 +38,7 @@ class ControllerExtensionModuleLaybuyLayout extends Controller {
 
 						$transaction_info = $this->model_extension_module_laybuy_layout->getTransactionByOrderId($order_id);
 
-						$data['transaction'] = array(
+						$data['transaction'] = [
 							'laybuy_ref_no'      => $transaction_info['laybuy_ref_no'],
 							'paypal_profile_id'  => $transaction_info['paypal_profile_id'],
 							'status'             => $this->model_extension_module_laybuy_layout->getStatusLabel($transaction_info['status']),
@@ -50,7 +50,7 @@ class ControllerExtensionModuleLaybuyLayout extends Controller {
 							'first_payment_due'  => date($this->language->get('date_format_short'), strtotime($transaction_info['first_payment_due'])),
 							'last_payment_due'   => date($this->language->get('date_format_short'), strtotime($transaction_info['last_payment_due'])),
 							'report'             => json_decode($transaction_info['report'], true)
-						);
+						];
 
 						return $this->load->view('extension/module/laybuy_layout', $data);
 					}

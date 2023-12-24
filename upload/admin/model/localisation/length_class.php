@@ -33,7 +33,7 @@ class ModelLocalisationLengthClass extends Model {
 		$this->cache->delete('length_class');
 	}
 
-	public function getLengthClasses($data =[]) {
+	public function getLengthClasses($data = []) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "length_class lc LEFT JOIN " . DB_PREFIX . "length_class_description lcd ON (lc.length_class_id = lcd.length_class_id) WHERE lcd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
@@ -98,7 +98,7 @@ class ModelLocalisationLengthClass extends Model {
 	}
 
 	public function getLengthClassDescriptions($length_class_id) {
-		$length_class_data =[];
+		$length_class_data = [];
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "length_class_description WHERE length_class_id = '" . (int)$length_class_id . "'");
 

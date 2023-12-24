@@ -535,7 +535,7 @@ if (extension_loaded('mbstring')) {
 			}
 
 			if ($chr >= 248 && $chr <= 251) {
-				$unicode[] = ((ord($string[$i]) - 248) * pow(64, 4) + (ord($string[$i + 1]) - 128) * pow(64, 3) + (ord($string[$i + 2]) - 128) * pow(64, 2) + (ord($string[$i + 3]) - 128) * pow(64, 1) + (ord($string[$i + 4]) - 128) * pow(64, 0));
+				$unicode[] = ((ord($string[$i]) - 248) * 64 ** 4 + (ord($string[$i + 1]) - 128) * 64 ** 3 + (ord($string[$i + 2]) - 128) * 64 ** 2 + (ord($string[$i + 3]) - 128) * 64 ** 1 + (ord($string[$i + 4]) - 128) * 64 ** 0);
 			}
 
 			if ($chr == 252 || $chr == 253) {

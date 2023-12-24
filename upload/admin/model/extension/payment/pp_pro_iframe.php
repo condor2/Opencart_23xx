@@ -249,7 +249,7 @@ class ModelExtensionPaymentPPProIframe extends Model {
 	protected function cleanReturn($data) {
 		$data = explode('&', $data);
 
-		$arr =[];
+		$arr = [];
 
 		foreach ($data as $k => $v) {
 			$tmp = explode('=', $v);

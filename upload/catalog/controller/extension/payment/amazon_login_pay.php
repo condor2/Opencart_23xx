@@ -175,11 +175,11 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$total = 0;
 
 		// Because __call can not keep var references so we put them into an array.
-		$total_data = array(
+		$total_data = [
 			'totals' => &$totals,
 			'taxes' => &$taxes,
 			'total' => &$total
-		);
+		];
 
 		$old_taxes = $taxes;
 		$lpa_tax = [];
@@ -353,7 +353,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 					$value = $this->encryption->decrypt($option['value']);
 				}
 
-				$option_data[] = array(
+				$option_data[] = [
 					'product_option_id' => $option['product_option_id'],
 					'product_option_value_id' => $option['product_option_value_id'],
 					'option_id' => $option['option_id'],
@@ -361,10 +361,10 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 					'name' => $option['name'],
 					'value' => $value,
 					'type' => $option['type']
-				);
+				];
 			}
 
-			$product_data[] = array(
+			$product_data[] = [
 				'product_id' => $product['product_id'],
 				'name' => $product['name'],
 				'model' => $product['model'],
@@ -376,7 +376,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 				'total' => $product['total'],
 				'tax' => $this->tax->getTax($product['price'], $product['tax_class_id']),
 				'reward' => $product['reward']
-			);
+			];
 		}
 
 		$order_data['products'] = $product_data;
@@ -470,13 +470,13 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 					$value = utf8_substr($filename, 0, utf8_strrpos($filename, '.'));
 				}
 
-				$option_data[] = array(
+				$option_data[] = [
 					'name' => $option['name'],
 					'value' => ((utf8_strlen($value) > 20) ? utf8_substr($value, 0, 20) . '..' : $value)
-				);
+				];
 			}
 
-			$data['products'][] = array(
+			$data['products'][] = [
 				'product_id' => $product['product_id'],
 				'name' => $product['name'],
 				'model' => $product['model'],
@@ -484,7 +484,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 				'quantity' => $product['quantity'],
 				'price' => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
 				'total' => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'], $this->session->data['currency'])
-			);
+			];
 		}
 
 		$data['vouchers'] = [];
@@ -492,10 +492,10 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$data['totals'] = [];
 
 		foreach ($totals as $total) {
-			$data['totals'][] = array(
+			$data['totals'][] = [
 				'title' => $total['title'],
 				'text' => $this->currency->format($total['value'], $this->session->data['currency'])
-			);
+			];
 		}
 
 		$data['back'] = $this->url->link('extension/payment/amazon_login_pay/paymentMethod', '', true);
@@ -696,7 +696,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			$last_name = array_pop($full_name);
 			$first_name = implode(' ', $full_name);
 
-			$address = array(
+			$address = [
 				'firstname' => $first_name,
 				'lastname' => $last_name,
 				'company' => '',
@@ -715,7 +715,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 				'iso_code_2' => $iso_code2,
 				'iso_code_3' => $iso_code3,
 				'address_format' => $address_format
-			);
+			];
 
 			$quotes = [];
 
@@ -735,12 +735,12 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 					$quote = $this->{'model_extension_shipping_' . $code}->getQuote($address);
 
 					if ($quote && empty($quote['error'])) {
-						$quotes[$code] = array(
+						$quotes[$code] = [
 							'title' => $quote['title'],
 							'quote' => $quote['quote'],
 							'sort_order' => $quote['sort_order'],
 							'error' => $quote['error']
-						);
+						];
 					}
 				}
 			}

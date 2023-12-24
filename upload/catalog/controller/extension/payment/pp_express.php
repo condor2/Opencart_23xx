@@ -61,7 +61,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$max_amount = $this->cart->getTotal() * 1.5;
 		$max_amount = $this->currency->format($max_amount, $this->session->data['currency'], '', false);
 
-		$data = array(
+		$data = [
 			'METHOD'             => 'SetExpressCheckout',
 			'MAXAMT'             => $max_amount,
 			'RETURNURL'          => $this->url->link('extension/payment/pp_express/expressReturn', '', true),
@@ -74,7 +74,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			'HDRIMG'             => $this->model_tool_image->resize($this->config->get('pp_express_logo'), 750, 90),
 			'PAYFLOWCOLOR'       => $this->config->get('pp_express_colour'),
 			'CHANNELTYPE'        => 'Merchant'
-		);
+		];
 
 		if (isset($this->session->data['pp_login']['seamless']['access_token']) && (isset($this->session->data['pp_login']['seamless']['customer_id']) && $this->session->data['pp_login']['seamless']['customer_id'] == $this->customer->getId()) && $this->config->get('pp_login_seamless')) {
 			$data['IDENTITYACCESSTOKEN'] = $this->session->data['pp_login']['seamless']['access_token'];
@@ -116,10 +116,10 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		 * It has no output, instead it sets the data and locates to checkout
 		 */
 		$this->load->model('extension/payment/pp_express');
-		$data = array(
+		$data = [
 			'METHOD' => 'GetExpressCheckoutDetails',
 			'TOKEN'  => $this->session->data['paypal']['token']
-		);
+		];
 
 		$result = $this->model_extension_payment_pp_express->call($data);
 		$this->session->data['paypal']['payerid']   = $result['PAYERID'];
@@ -311,7 +311,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					$country_info = $this->db->query("SELECT * FROM `" . DB_PREFIX . "country` WHERE `iso_code_2` = '" . $this->db->escape($result['PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE']) . "' AND `status` = '1' LIMIT 1")->row;
 					$zone_info = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE (`name` = '" . $this->db->escape($result['PAYMENTREQUEST_0_SHIPTOSTATE']) . "' OR `code` = '" . $this->db->escape($result['PAYMENTREQUEST_0_SHIPTOSTATE']) . "') AND `status` = '1' AND `country_id` = '" . (int)$country_info['country_id'] . "'")->row;
 
-					$address_data = array(
+					$address_data = [
 						'firstname'  => $shipping_first_name,
 						'lastname'   => $shipping_last_name,
 						'company'    => '',
@@ -323,7 +323,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						'city'       => $result['PAYMENTREQUEST_0_SHIPTOCITY'],
 						'zone_id'    => (isset($zone_info['zone_id']) ? $zone_info['zone_id'] : 0),
 						'country_id' => (isset($country_info['country_id']) ? $country_info['country_id'] : 0)
-					);
+					];
 
 					$address_id = $this->model_account_address->addAddress($address_data);
 
@@ -385,20 +385,20 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('common/home'),
 			'text' => $this->language->get('text_home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('extension/payment/pp_express/express'),
 			'text' => $this->language->get('text_title')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('extension/payment/pp_express/expressConfirm'),
 			'text' => $this->language->get('express_text_title')
-		);
+		];
 
 		$points = $this->customer->getRewardPoints();
 
@@ -472,10 +472,10 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					}
 				}
 
-				$option_data[] = array(
+				$option_data[] = [
 					'name'  => $option['name'],
 					'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-				);
+				];
 			}
 
 			// Display prices
@@ -495,13 +495,13 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$recurring_description = '';
 
 			if ($product['recurring']) {
-				$frequencies = array(
+				$frequencies = [
 					'day'        => $this->language->get('text_day'),
 					'week'       => $this->language->get('text_week'),
 					'semi_month' => $this->language->get('text_semi_month'),
 					'month'      => $this->language->get('text_month'),
 					'year'       => $this->language->get('text_year'),
-				);
+				];
 
 				if ($product['recurring']['trial']) {
 					$recurring_price = $this->currency->format($this->tax->calculate($product['recurring']['trial_price'] * $product['quantity'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
@@ -517,7 +517,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				}
 			}
 
-			$data['products'][] = array(
+			$data['products'][] = [
 				'cart_id'               => $product['cart_id'],
 				'thumb'                 => $image,
 				'name'                  => $product['name'],
@@ -533,7 +533,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				'recurring'             => $product['recurring'],
 				'recurring_name'        => (isset($product['recurring']['recurring_name']) ? $product['recurring']['recurring_name'] : ''),
 				'recurring_description' => $recurring_description
-			);
+			];
 		}
 
 		$data['vouchers'] = [];
@@ -567,12 +567,12 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 							$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($shipping_address);
 
 							if ($quote) {
-								$quote_data[$result['code']] = array(
+								$quote_data[$result['code']] = [
 									'title'      => $quote['title'],
 									'quote'      => $quote['quote'],
 									'sort_order' => $quote['sort_order'],
 									'error'      => $quote['error']
-								);
+								];
 							}
 						}
 					}
@@ -621,11 +621,11 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$total = 0;
 
 		// Because __call can not keep var references so we put them into an array.
-		$total_data = array(
+		$total_data = [
 			'totals' => &$totals,
 			'taxes'  => &$taxes,
 			'total'  => &$total
-		);
+		];
 
 		// Display prices
 		if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
@@ -660,10 +660,10 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$data['totals'] = [];
 
 		foreach ($totals as $total) {
-			$data['totals'][] = array(
+			$data['totals'][] = [
 				'title' => $total['title'],
 				'text'  => $this->currency->format($total['value'], $this->session->data['currency']),
-			);
+			];
 		}
 
 		/**
@@ -812,11 +812,11 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$total = 0;
 
 			// Because __call can not keep var references so we put them into an array.
-			$total_data = array(
+			$total_data = [
 				'totals' => &$totals,
 				'taxes'  => &$taxes,
 				'total'  => &$total
-			);
+			];
 
 			$this->load->model('extension/extension');
 
@@ -964,7 +964,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				$option_data = [];
 
 				foreach ($product['option'] as $option) {
-					$option_data[] = array(
+					$option_data[] = [
 						'product_option_id'       => $option['product_option_id'],
 						'product_option_value_id' => $option['product_option_value_id'],
 						'option_id'               => $option['option_id'],
@@ -972,10 +972,10 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						'name'                    => $option['name'],
 						'value'                   => $option['value'],
 						'type'                    => $option['type']
-					);
+					];
 				}
 
-				$product_data[] = array(
+				$product_data[] = [
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
 					'model'      => $product['model'],
@@ -987,7 +987,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					'total'      => $product['total'],
 					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
 					'reward'     => $product['reward']
-				);
+				];
 			}
 
 			// Gift Voucher
@@ -995,7 +995,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			if (!empty($this->session->data['vouchers'])) {
 				foreach ($this->session->data['vouchers'] as $voucher) {
-					$voucher_data[] = array(
+					$voucher_data[] = [
 						'description'      => $voucher['description'],
 						'code'             => token(10),
 						'to_name'          => $voucher['to_name'],
@@ -1005,7 +1005,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						'voucher_theme_id' => $voucher['voucher_theme_id'],
 						'message'          => $voucher['message'],
 						'amount'           => $voucher['amount']
-					);
+					];
 				}
 			}
 
@@ -1084,13 +1084,13 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			$this->load->model('extension/payment/pp_express');
 
-			$paypal_data = array(
+			$paypal_data = [
 				'TOKEN'                      => $this->session->data['paypal']['token'],
 				'PAYERID'                    => $this->session->data['paypal']['payerid'],
 				'METHOD'                     => 'DoExpressCheckoutPayment',
 				'PAYMENTREQUEST_0_NOTIFYURL' => $this->url->link('extension/payment/pp_express/ipn', '', true),
 				'RETURNFMFDETAILS'           => 1
-			);
+			];
 
 			$paypal_data = array_merge($paypal_data, $this->model_extension_payment_pp_express->paymentRequestInfo());
 
@@ -1134,18 +1134,18 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				$this->model_checkout_order->addOrderHistory($order_id, $order_status_id);
 
 				//add order to paypal table
-				$paypal_order_data = array(
+				$paypal_order_data = [
 					'order_id'         => $order_id,
 					'capture_status'   => ($this->config->get('pp_express_transaction') == 'Sale' ? 'Complete' : 'NotComplete'),
 					'currency_code'    => $result['PAYMENTINFO_0_CURRENCYCODE'],
 					'authorization_id' => $result['PAYMENTINFO_0_TRANSACTIONID'],
 					'total'            => $result['PAYMENTINFO_0_AMT']
-				);
+				];
 
 				$paypal_order_id = $this->model_extension_payment_pp_express->addOrder($paypal_order_data);
 
 				//add transaction to paypal transaction table
-				$paypal_transaction_data = array(
+				$paypal_transaction_data = [
 					'paypal_order_id'       => $paypal_order_id,
 					'transaction_id'        => $result['PAYMENTINFO_0_TRANSACTIONID'],
 					'parent_id' => '',
@@ -1158,7 +1158,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					'transaction_entity'    => ($this->config->get('pp_express_transaction') == 'Sale' ? 'payment' : 'auth'),
 					'amount'                => $result['PAYMENTINFO_0_AMT'],
 					'debug_data'            => json_encode($result)
-				);
+				];
 
 				$this->model_extension_payment_pp_express->addTransaction($paypal_transaction_data);
 
@@ -1170,16 +1170,16 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 					$this->load->model('checkout/recurring');
 
-					$billing_period = array(
+					$billing_period = [
 						'day'        => 'Day',
 						'week'       => 'Week',
 						'semi_month' => 'SemiMonth',
 						'month'      => 'Month',
 						'year'       => 'Year'
-					);
+					];
 
 					foreach($recurring_products as $item) {
-						$data = array(
+						$data = [
 							'METHOD'             => 'CreateRecurringPaymentsProfile',
 							'TOKEN'              => $this->session->data['paypal']['token'],
 							'PROFILESTARTDATE'   => gmdate("Y-m-d\TH:i:s\Z", gmmktime(gmdate("H"), gmdate("i")+5, gmdate("s"), gmdate("m"), gmdate("d"), gmdate("y"))),
@@ -1188,16 +1188,16 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 							'TOTALBILLINGCYCLES' => $item['recurring']['duration'],
 							'AMT'                => $this->currency->format($this->tax->calculate($item['recurring']['price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity'],
 							'CURRENCYCODE'       => $this->session->data['currency']
-						);
+						];
 
 						//trial information
 						if ($item['recurring']['trial']) {
-							$data_trial = array(
+							$data_trial = [
 								'TRIALBILLINGPERIOD'      => $billing_period[$item['recurring']['trial_frequency']],
 								'TRIALBILLINGFREQUENCY'   => $item['recurring']['trial_cycle'],
 								'TRIALTOTALBILLINGCYCLES' => $item['recurring']['trial_duration'],
 								'TRIALAMT'                => $this->currency->format($this->tax->calculate($item['recurring']['trial_price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity']
-							);
+							];
 
 							$trial_amt = $this->currency->format($this->tax->calculate($item['recurring']['trial_price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity'] . ' ' . $this->session->data['currency'];
 							$trial_text =  sprintf($this->language->get('text_trial'), $trial_amt, $item['recurring']['trial_cycle'], $item['recurring']['trial_frequency'], $item['recurring']['trial_duration']);
@@ -1285,13 +1285,13 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$shipping = 0;
 
 			// PayPal requires some countries to use zone code (not name) to be sent in SHIPTOSTATE
-			$ship_to_state_codes = array(
+			$ship_to_state_codes = [
 				'30', // Brazil
 				'38', // Canada
 				'105', // Italy
 				'138', // Mexico
 				'223', // USA
-			);
+			];
 
 			if (in_array($order_info['shipping_country_id'], $ship_to_state_codes)) {
 				$ship_to_state = $order_info['shipping_zone_code'];
@@ -1299,7 +1299,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				$ship_to_state = $order_info['shipping_zone'];
 			}
 
-			$data_shipping = array(
+			$data_shipping = [
 				'PAYMENTREQUEST_0_SHIPTONAME'        => html_entity_decode($order_info['shipping_firstname'] . ' ' . $order_info['shipping_lastname'], ENT_QUOTES, 'UTF-8'),
 				'PAYMENTREQUEST_0_SHIPTOSTREET'      => html_entity_decode($order_info['shipping_address_1'], ENT_QUOTES, 'UTF-8'),
 				'PAYMENTREQUEST_0_SHIPTOSTREET2'     => html_entity_decode($order_info['shipping_address_2'], ENT_QUOTES, 'UTF-8'),
@@ -1307,13 +1307,13 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				'PAYMENTREQUEST_0_SHIPTOSTATE'       => html_entity_decode($ship_to_state, ENT_QUOTES, 'UTF-8'),
 				'PAYMENTREQUEST_0_SHIPTOZIP'         => html_entity_decode($order_info['shipping_postcode'], ENT_QUOTES, 'UTF-8'),
 				'PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE' => $order_info['shipping_iso_code_2']
-			);
+			];
 		} else {
 			$shipping = 1;
 			$data_shipping = [];
 		}
 
-		$data = array(
+		$data = [
 			'METHOD'             => 'SetExpressCheckout',
 			'MAXAMT'             => $max_amount,
 			'RETURNURL'          => $this->url->link('extension/payment/pp_express/checkoutReturn', '', true),
@@ -1326,7 +1326,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			'PAYFLOWCOLOR'       => $this->config->get('pp_express_colour'),
 			'CHANNELTYPE'        => 'Merchant',
 			'ALLOWNOTE'          => $this->config->get('pp_express_allow_note')
-		);
+		];
 
 		$data = array_merge($data, $data_shipping);
 
@@ -1368,10 +1368,10 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$this->load->model('extension/payment/pp_express');
 		$this->load->model('checkout/order');
 
-		$data = array(
+		$data = [
 			'METHOD' => 'GetExpressCheckoutDetails',
 			'TOKEN'  => $this->session->data['paypal']['token']
-		);
+		];
 
 		$result = $this->model_extension_payment_pp_express->call($data);
 
@@ -1380,13 +1380,13 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 		$order_id = $this->session->data['order_id'];
 
-		$paypal_data = array(
+		$paypal_data = [
 			'TOKEN'                      => $this->session->data['paypal']['token'],
 			'PAYERID'                    => $this->session->data['paypal']['payerid'],
 			'METHOD'                     => 'DoExpressCheckoutPayment',
 			'PAYMENTREQUEST_0_NOTIFYURL' => $this->url->link('extension/payment/pp_express/ipn', '', true),
 			'RETURNFMFDETAILS'           => 1
-		);
+		];
 
 		$paypal_data = array_merge($paypal_data, $this->model_extension_payment_pp_express->paymentRequestInfo());
 
@@ -1430,18 +1430,18 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$this->model_checkout_order->addOrderHistory($order_id, $order_status_id);
 
 			//add order to paypal table
-			$paypal_order_data = array(
+			$paypal_order_data = [
 				'order_id'         => $order_id,
 				'capture_status'   => ($this->config->get('pp_express_transaction') == 'Sale' ? 'Complete' : 'NotComplete'),
 				'currency_code'    => $result['PAYMENTINFO_0_CURRENCYCODE'],
 				'authorization_id' => $result['PAYMENTINFO_0_TRANSACTIONID'],
 				'total'            => $result['PAYMENTINFO_0_AMT']
-			);
+			];
 
 			$paypal_order_id = $this->model_extension_payment_pp_express->addOrder($paypal_order_data);
 
 			//add transaction to paypal transaction table
-			$paypal_transaction_data = array(
+			$paypal_transaction_data = [
 				'paypal_order_id'       => $paypal_order_id,
 				'transaction_id'        => $result['PAYMENTINFO_0_TRANSACTIONID'],
 				'parent_id' => '',
@@ -1454,7 +1454,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				'transaction_entity'    => ($this->config->get('pp_express_transaction') == 'Sale' ? 'payment' : 'auth'),
 				'amount'                => $result['PAYMENTINFO_0_AMT'],
 				'debug_data'            => json_encode($result)
-			);
+			];
 			$this->model_extension_payment_pp_express->addTransaction($paypal_transaction_data);
 
 			$recurring_products = $this->cart->getRecurringProducts();
@@ -1463,16 +1463,16 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			if ($recurring_products) {
 				$this->load->model('checkout/recurring');
 
-				$billing_period = array(
+				$billing_period = [
 					'day'        => 'Day',
 					'week'       => 'Week',
 					'semi_month' => 'SemiMonth',
 					'month'      => 'Month',
 					'year'       => 'Year'
-				);
+				];
 
 				foreach ($recurring_products as $item) {
-					$data = array(
+					$data = [
 						'METHOD'             => 'CreateRecurringPaymentsProfile',
 						'TOKEN'              => $this->session->data['paypal']['token'],
 						'PROFILESTARTDATE'   => gmdate("Y-m-d\TH:i:s\Z", gmmktime(gmdate('H'), gmdate('i') + 5, gmdate('s'), gmdate('m'), gmdate('d'), gmdate('y'))),
@@ -1481,16 +1481,16 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						'TOTALBILLINGCYCLES' => $item['recurring']['duration'],
 						'AMT'                => $this->currency->format($this->tax->calculate($item['recurring']['price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity'],
 						'CURRENCYCODE'       => $this->session->data['currency']
-					);
+					];
 
 					//trial information
 					if ($item['recurring']['trial'] == 1) {
-						$data_trial = array(
+						$data_trial = [
 							'TRIALBILLINGPERIOD'      => $billing_period[$item['recurring']['trial_frequency']],
 							'TRIALBILLINGFREQUENCY'   => $item['recurring']['trial_cycle'],
 							'TRIALTOTALBILLINGCYCLES' => $item['recurring']['trial_duration'],
 							'TRIALAMT'                => $this->currency->format($this->tax->calculate($item['recurring']['trial_price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity']
-						);
+						];
 
 						$trial_amt = $this->currency->format($this->tax->calculate($item['recurring']['trial_price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity'] . ' ' . $this->session->data['currency'];
 						$trial_text =  sprintf($this->language->get('text_trial'), $trial_amt, $item['recurring']['trial_cycle'], $item['recurring']['trial_frequency'], $item['recurring']['trial_duration']);
@@ -1557,15 +1557,15 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			$data['breadcrumbs'] = [];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'href' => $this->url->link('common/home'),
 				'text' => $this->language->get('text_home')
-			);
+			];
 
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'href' => $this->url->link('checkout/cart'),
 				'text' => $this->language->get('text_cart')
-			);
+			];
 
 			$data['heading_title'] = $this->language->get('error_heading_title');
 
@@ -1616,10 +1616,10 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$response = trim(curl_exec($curl));
 
 		if (!$response) {
-			$this->model_extension_payment_pp_express->log(array('error' => curl_error($curl),'error_no' => curl_errno($curl)), 'Curl failed');
+			$this->model_extension_payment_pp_express->log(['error' => curl_error($curl),'error_no' => curl_errno($curl)], 'Curl failed');
 		}
 
-		$this->model_extension_payment_pp_express->log(array('request' => $request,'response' => $response), 'IPN data');
+		$this->model_extension_payment_pp_express->log(['request' => $request,'response' => $response], 'IPN data');
 
 		if ((string)$response == "VERIFIED")  {
 			if (isset($this->request->post['transaction_entity'])) {
@@ -1657,7 +1657,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					$this->model_extension_payment_pp_express->log('Parent transaction exists', 'IPN data');
 
 					//add new related transaction
-					$transaction = array(
+					$transaction = [
 						'paypal_order_id'       => $parent_transaction['paypal_order_id'],
 						'transaction_id'        => $this->request->post['txn_id'],
 						'parent_id' => $this->request->post['parent_txn_id'],
@@ -1670,7 +1670,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						'amount'                => $this->request->post['mc_gross'],
 						'debug_data'            => json_encode($this->request->post),
 						'transaction_entity'    => (isset($this->request->post['transaction_entity']) ? $this->request->post['transaction_entity'] : '')
-					);
+					];
 
 					$this->model_extension_payment_pp_express->addTransaction($transaction);
 
@@ -1698,7 +1698,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						$this->model_extension_payment_pp_express->log('Remaining: ' . $remaining, 'IPN data');
 
 						if ($remaining > 0.00) {
-							$transaction = array(
+							$transaction = [
 								'paypal_order_id'       => $parent_transaction['paypal_order_id'],
 								'transaction_id'        => '',
 								'parent_id' => $this->request->post['parent_txn_id'],
@@ -1711,7 +1711,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 								'amount'                => '',
 								'debug_data'            => 'Voided after capture',
 								'transaction_entity'    => 'auth'
-							);
+							];
 
 							$this->model_extension_payment_pp_express->addTransaction($transaction);
 						}
@@ -1846,7 +1846,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				}
 			}
 		} elseif ((string)$response == "INVALID") {
-			$this->model_extension_payment_pp_express->log(array('IPN was invalid'), 'IPN fail');
+			$this->model_extension_payment_pp_express->log(['IPN was invalid'], 'IPN fail');
 		} else {
 			$this->model_extension_payment_pp_express->log('Response string unknown: ' . (string)$response, 'IPN data');
 		}

@@ -17,7 +17,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 
 			$data['button_confirm'] = $this->language->get('button_confirm');
 
-			$cards = array(
+			$cards = [
 				'AMEX' => 'American Express',
 				'VISA' => 'Visa',
 				'DELTA' => 'Visa Debit',
@@ -28,13 +28,13 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 				'MASTERCARDDEBIT' => 'MasterCard Debit',
 				'MAESTRO' => 'Maestro',
 				'PAYPAL' => 'PayPal',
-			);
+			];
 
 			for ($i = 1; $i <= 12; $i++) {
-				$data['months'][] = array(
+				$data['months'][] = [
 					'text'  => sprintf('%02d', $i),
 					'value' => sprintf('%02d', $i)
-				);
+				];
 			}
 
 			$today = getdate();
@@ -42,10 +42,10 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 			$data['year_expire'] = [];
 
 			for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-				$data['year_expire'][] = array(
+				$data['year_expire'][] = [
 					'text'  => sprintf('%02d', $i % 100),
 					'value' => sprintf('%04d', $i)
-				);
+				];
 			}
 
 			$data['cards'] = [];
@@ -256,19 +256,19 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 						$authcode = (string)$response_xml->response->authcode;
 						$threed_status = (string)$response_xml->response->threedsecure->status;
 
-						$status_code_mapping = array(
+						$status_code_mapping = [
 							0 => $this->language->get('text_not_given'),
 							1 => $this->language->get('text_not_checked'),
 							2 => $this->language->get('text_match'),
 							4 => $this->language->get('text_not_match'),
-						);
+						];
 
-						$threed_status_mapping = array(
+						$threed_status_mapping = [
 							'Y' => $this->language->get('text_authenticated'),
 							'N' => $this->language->get('text_not_authenticated'),
 							'A' => $this->language->get('text_authentication_not_completed'),
 							'U' => $this->language->get('text_unable_to_perform'),
-						);
+						];
 
 						$message = sprintf($this->language->get('text_auth_code'), $authcode) . "\n";
 						$message .= sprintf($this->language->get('text_postcode_check'), $status_code_mapping[$postcode_status]) . "\n";
@@ -318,12 +318,12 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 					$address_status = (int)$response_xml->response->security->address;
 					$authcode = (string)$response_xml->response->authcode;
 
-					$status_code_mapping = array(
+					$status_code_mapping = [
 						0 => $this->language->get('text_not_given'),
 						1 => $this->language->get('text_not_checked'),
 						2 => $this->language->get('text_match'),
 						4 => $this->language->get('text_not_match'),
-					);
+					];
 
 					$message = sprintf($this->language->get('text_auth_code'), $authcode) . "\n";
 					$message .= sprintf($this->language->get('text_postcode_check'), $status_code_mapping[$postcode_status]) . "\n";

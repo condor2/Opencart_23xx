@@ -38,10 +38,10 @@ class ModelMarketingAffiliate extends Model {
 		return $query->row;
 	}
 
-	public function getAffiliates($data =[]) {
+	public function getAffiliates($data = []) {
 		$sql = "SELECT *, CONCAT(a.firstname, ' ', a.lastname) AS name, (SELECT SUM(at.amount) FROM " . DB_PREFIX . "affiliate_transaction at WHERE at.affiliate_id = a.affiliate_id GROUP BY at.affiliate_id) AS balance FROM " . DB_PREFIX . "affiliate a";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_name'])) {
 			$implode[] = "CONCAT(a.firstname, ' ', a.lastname) LIKE '" . $this->db->escape($data['filter_name']) . "%'";
@@ -148,10 +148,10 @@ class ModelMarketingAffiliate extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalAffiliates($data =[]) {
+	public function getTotalAffiliates($data = []) {
 		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "affiliate";
 
-		$implode =[];
+		$implode = [];
 
 		if (!empty($data['filter_name'])) {
 			$implode[] = "CONCAT(firstname, ' ', lastname) LIKE '%" . $this->db->escape($data['filter_name']) . "%'";

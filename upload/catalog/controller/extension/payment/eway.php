@@ -25,10 +25,10 @@ class ControllerExtensionPaymentEway extends Controller {
 		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = array(
+			$data['months'][] = [
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			);
+			];
 		}
 
 		$today = getdate();
@@ -36,10 +36,10 @@ class ControllerExtensionPaymentEway extends Controller {
 		$data['year_expire'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = array(
+			$data['year_expire'][] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			);
+			];
 		}
 
 		$this->load->model('checkout/order');
@@ -124,7 +124,7 @@ class ControllerExtensionPaymentEway extends Controller {
 
 		$opt1 = new stdClass();
 		$opt1->Value = $order_info['order_id'];
-		$request->Options = array($opt1);
+		$request->Options = [$opt1];
 
 		$request->Payment = new stdClass();
 		$request->Payment->TotalAmount = $this->lowestDenomination($amount, $order_info['currency_code']);
@@ -261,13 +261,13 @@ class ControllerExtensionPaymentEway extends Controller {
 				$order_info = $this->model_checkout_order->getOrder($order_id);
 
 				$this->load->model('extension/payment/eway');
-				$eway_order_data = array(
+				$eway_order_data = [
 					'order_id' => $order_id,
 					'transaction_id' => $result->TransactionID,
 					'amount' => $this->ValidateDenomination($result->TotalAmount, $order_info['currency_code']),
 					'currency_code' => $order_info['currency_code'],
 					'debug_data' => json_encode($result)
-				);
+				];
 
 				$error_array = explode(", ", $result->ResponseMessage);
 				$log_error = '';

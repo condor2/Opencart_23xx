@@ -41,7 +41,7 @@ class ModelDesignBanner extends Model {
 		return $query->row;
 	}
 
-	public function getBanners($data =[]) {
+	public function getBanners($data = []) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "banner";
 
 		$sort_data = [
@@ -79,7 +79,7 @@ class ModelDesignBanner extends Model {
 	}
 
 	public function getBannerImages($banner_id) {
-		$banner_image_data =[];
+		$banner_image_data = [];
 
 		$banner_image_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "banner_image WHERE banner_id = '" . (int)$banner_id . "' ORDER BY sort_order ASC");
 

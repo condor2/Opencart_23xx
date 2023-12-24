@@ -51,7 +51,7 @@ class ControllerExtensionModuleBestSeller extends Controller {
 					$rating = false;
 				}
 
-				$data['products'][] = array(
+				$data['products'][] = [
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
@@ -61,7 +61,7 @@ class ControllerExtensionModuleBestSeller extends Controller {
 					'tax'         => $tax,
 					'rating'      => $rating,
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
-				);
+				];
 			}
 
 			return $this->load->view('extension/module/bestseller', $data);
