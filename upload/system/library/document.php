@@ -81,10 +81,10 @@ class Document {
 	 * @param	string	$rel
      */
 	public function addLink($href, $rel) {
-		$this->links[$href] = array(
+		$this->links[$href] = [
 			'href' => $href,
 			'rel'  => $rel
-		);
+		];
 	}
 
 	/**
@@ -104,11 +104,11 @@ class Document {
 	 * @param	string	$media
      */
 	public function addStyle($href, $rel = 'stylesheet', $media = 'screen') {
-		$this->styles[$href] = array(
+		$this->styles[$href] = [
 			'href'  => $href,
 			'rel'   => $rel,
 			'media' => $media
-		);
+		];
 	}
 
 	/**

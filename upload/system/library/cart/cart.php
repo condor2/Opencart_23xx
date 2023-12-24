@@ -83,7 +83,7 @@ class Cart {
 									$stock = false;
 								}
 
-								$option_data[] = array(
+								$option_data[] = [
 									'product_option_id'       => $product_option_id,
 									'product_option_value_id' => $value,
 									'option_id'               => $option_query->row['option_id'],
@@ -99,7 +99,7 @@ class Cart {
 									'points_prefix'           => $option_value_query->row['points_prefix'],
 									'weight'                  => $option_value_query->row['weight'],
 									'weight_prefix'           => $option_value_query->row['weight_prefix']
-								);
+								];
 							}
 						} elseif ($option_query->row['type'] == 'checkbox' && is_array($value)) {
 							foreach ($value as $product_option_value_id) {
@@ -128,7 +128,7 @@ class Cart {
 										$stock = false;
 									}
 
-									$option_data[] = array(
+									$option_data[] = [
 										'product_option_id'       => $product_option_id,
 										'product_option_value_id' => $product_option_value_id,
 										'option_id'               => $option_query->row['option_id'],
@@ -144,11 +144,11 @@ class Cart {
 										'points_prefix'           => $option_value_query->row['points_prefix'],
 										'weight'                  => $option_value_query->row['weight'],
 										'weight_prefix'           => $option_value_query->row['weight_prefix']
-									);
+									];
 								}
 							}
 						} elseif ($option_query->row['type'] == 'text' || $option_query->row['type'] == 'textarea' || $option_query->row['type'] == 'file' || $option_query->row['type'] == 'date' || $option_query->row['type'] == 'datetime' || $option_query->row['type'] == 'time') {
-							$option_data[] = array(
+							$option_data[] = [
 								'product_option_id'       => $product_option_id,
 								'product_option_value_id' => '',
 								'option_id'               => $option_query->row['option_id'],
@@ -164,7 +164,7 @@ class Cart {
 								'points_prefix'           => '',
 								'weight'                  => '',
 								'weight_prefix'           => ''
-							);
+							];
 						}
 					}
 				}
@@ -208,12 +208,12 @@ class Cart {
 				$download_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_to_download p2d LEFT JOIN " . DB_PREFIX . "download d ON (p2d.download_id = d.download_id) LEFT JOIN " . DB_PREFIX . "download_description dd ON (d.download_id = dd.download_id) WHERE p2d.product_id = '" . (int)$cart['product_id'] . "' AND dd.language_id = '" . (int)$this->config->get('config_language_id') . "'");
 
 				foreach ($download_query->rows as $download) {
-					$download_data[] = array(
+					$download_data[] = [
 						'download_id' => $download['download_id'],
 						'name'        => $download['name'],
 						'filename'    => $download['filename'],
 						'mask'        => $download['mask']
-					);
+					];
 				}
 
 				// Stock
@@ -224,7 +224,7 @@ class Cart {
 				$recurring_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "recurring r LEFT JOIN " . DB_PREFIX . "product_recurring pr ON (r.recurring_id = pr.recurring_id) LEFT JOIN " . DB_PREFIX . "recurring_description rd ON (r.recurring_id = rd.recurring_id) WHERE r.recurring_id = '" . (int)$cart['recurring_id'] . "' AND pr.product_id = '" . (int)$cart['product_id'] . "' AND rd.language_id = " . (int)$this->config->get('config_language_id') . " AND r.status = 1 AND pr.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "'");
 
 				if ($recurring_query->num_rows) {
-					$recurring = array(
+					$recurring = [
 						'recurring_id'    => $cart['recurring_id'],
 						'name'            => $recurring_query->row['name'],
 						'frequency'       => $recurring_query->row['frequency'],
@@ -236,12 +236,12 @@ class Cart {
 						'trial_price'     => $recurring_query->row['trial_price'],
 						'trial_cycle'     => $recurring_query->row['trial_cycle'],
 						'trial_duration'  => $recurring_query->row['trial_duration']
-					);
+					];
 				} else {
 					$recurring = false;
 				}
 
-				$product_data[] = array(
+				$product_data[] = [
 					'cart_id'         => $cart['cart_id'],
 					'product_id'      => $product_query->row['product_id'],
 					'name'            => $product_query->row['name'],
@@ -266,7 +266,7 @@ class Cart {
 					'height'          => $product_query->row['height'],
 					'length_class_id' => $product_query->row['length_class_id'],
 					'recurring'       => $recurring
-				);
+				];
 			} else {
 				$this->remove($cart['cart_id']);
 			}

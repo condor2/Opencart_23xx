@@ -125,3 +125,6 @@ define('DIR_LOGS', DIR_STORAGE . 'logs/');<br>
 define('DIR_MODIFICATION', DIR_STORAGE . 'modification/');<br>
 define('DIR_SESSION', DIR_STORAGE . 'session/');<br>
 define('DIR_UPLOAD', DIR_STORAGE . 'upload/');<br>
+
+
+## Ocmod Compatibility

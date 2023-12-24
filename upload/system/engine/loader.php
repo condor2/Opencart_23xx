@@ -13,7 +13,7 @@ final class Loader {
 		$output = null;
 		
 		// Trigger the pre events
-		$result = $this->registry->get('event')->trigger('controller/' . $route . '/before', array(&$route, &$data, &$output));
+		$result = $this->registry->get('event')->trigger('controller/' . $route . '/before', [&$route, &$data, &$output]);
 		
 		if ($result) {
 			return $result;
@@ -21,11 +21,11 @@ final class Loader {
 		
 		if (!$output) {
 			$action = new Action($route);
-			$output = $action->execute($this->registry, array(&$data));
+			$output = $action->execute($this->registry, [&$data]);
 		}
 			
 		// Trigger the post events
-		$result = $this->registry->get('event')->trigger('controller/' . $route . '/after', array(&$route, &$data, &$output));
+		$result = $this->registry->get('event')->trigger('controller/' . $route . '/after', [&$route, &$data, &$output]);
 		
 		if ($output instanceof Exception) {
 			return false;
@@ -39,9 +39,9 @@ final class Loader {
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 		
 		// Trigger the pre events
-		$this->registry->get('event')->trigger('model/' . $route . '/before', array(&$route));
+		$this->registry->get('event')->trigger('model/' . $route . '/before', [&$route]);
 		
-		if (!$this->registry->has('model_' . str_replace(array('/', '-', '.'), array('_', '', ''), $route))) {
+		if (!$this->registry->has('model_' . str_replace(['/', '-', '.'], ['_', '', ''], $route))) {
 			$file  = DIR_APPLICATION . 'model/' . $route . '.php';
 			$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', $route);
 			
@@ -54,14 +54,14 @@ final class Loader {
 					$proxy->{$method} = $this->callback($this->registry, $route . '/' . $method);
 				}
 				
-				$this->registry->set('model_' . str_replace(array('/', '-', '.'), array('_', '', ''), (string)$route), $proxy);
+				$this->registry->set('model_' . str_replace(['/', '-', '.'], ['_', '', ''], (string)$route), $proxy);
 			} else {
 				throw new \Exception('Error: Could not load model ' . $route . '!');
 			}
 		}
 		
 		// Trigger the post events
-		$this->registry->get('event')->trigger('model/' . $route . '/after', array(&$route));
+		$this->registry->get('event')->trigger('model/' . $route . '/after', [&$route]);
 	}
 
 	public function view($route, $data = []) {
@@ -71,7 +71,7 @@ final class Loader {
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 		
 		// Trigger the pre events
-		$result = $this->registry->get('event')->trigger('view/' . $route . '/before', array(&$route, &$data, &$output));
+		$result = $this->registry->get('event')->trigger('view/' . $route . '/before', [&$route, &$data, &$output]);
 		
 		if ($result) {
 			return $result;
@@ -88,7 +88,7 @@ final class Loader {
 		}
 		
 		// Trigger the post events
-		$result = $this->registry->get('event')->trigger('view/' . $route . '/after', array(&$route, &$data, &$output));
+		$result = $this->registry->get('event')->trigger('view/' . $route . '/after', [&$route, &$data, &$output]);
 		
 		if ($result) {
 			return $result;
@@ -172,7 +172,7 @@ final class Loader {
 
 			$method = substr($route, strrpos($route, '/') + 1);
 			
-			$callable = array($model[$route], $method);
+			$callable = [$model[$route], $method];
 
 			if (is_callable($callable)) {
 				$output = call_user_func_array($callable, $args);
@@ -181,7 +181,7 @@ final class Loader {
 			}
 			
 			// Trigger the post events
-			$result = $registry->get('event')->trigger('model/' . $route . '/after', array(&$route, &$args, &$output));
+			$result = $registry->get('event')->trigger('model/' . $route . '/after', [&$route, &$args, &$output]);
 			
 			if ($result) {
 				return $result;
