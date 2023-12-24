@@ -15,15 +15,15 @@ class ModelExtensionPaymentPPPayflowIframe extends Model {
 			$status = false;
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($status) {
-			$method_data = array(
+			$method_data = [
 				'code' => 'pp_payflow_iframe',
 				'title' => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('pp_payflow_iframe_sort_order')
-			);
+			];
 		}
 
 		return $method_data;
@@ -56,13 +56,13 @@ class ModelExtensionPaymentPPPayflowIframe extends Model {
 	}
 
 	public function call($data) {
-		$default_parameters = array(
+		$default_parameters = [
 			'USER' => $this->config->get('pp_payflow_iframe_user'),
 			'VENDOR' => $this->config->get('pp_payflow_iframe_vendor'),
 			'PWD' => $this->config->get('pp_payflow_iframe_password'),
 			'PARTNER' => $this->config->get('pp_payflow_iframe_partner'),
 			'BUTTONSOURCE' => 'OpenCart_Cart_PFP',
-		);
+		];
 
 		$call_parameters = array_merge($data, $default_parameters);
 
@@ -72,7 +72,7 @@ class ModelExtensionPaymentPPPayflowIframe extends Model {
 			$url = 'https://payflowpro.paypal.com';
 		}
 
-		$query_params = array();
+		$query_params = [];
 
 		foreach ($call_parameters as $key => $value) {
 			$query_params[] = $key . '=' . utf8_decode($value);
@@ -93,7 +93,7 @@ class ModelExtensionPaymentPPPayflowIframe extends Model {
 
 		$this->log('Response data: ' . $response);
 
-		$response_params = array();
+		$response_params = [];
 		parse_str($response, $response_params);
 
 		return $response_params;

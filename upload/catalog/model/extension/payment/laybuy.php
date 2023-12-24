@@ -23,7 +23,7 @@ class ModelExtensionPaymentLaybuy extends Model {
 
 		$maximum = $this->config->get('laybuy_max_deposit') ? $this->config->get('laybuy_max_deposit') : 50;
 
-		$initial_payments = array();
+		$initial_payments = [];
 
 		for ($i = $minimum; $i <= $maximum; $i += 10) {
 			$initial_payments[] = $i;
@@ -77,7 +77,7 @@ class ModelExtensionPaymentLaybuy extends Model {
 			$cart_products = $this->cart->getProducts();
 
 			foreach ($cart_products as $cart_product) {
-				$product = array();
+				$product = [];
 
 				if ($xproducts && in_array($cart_product['product_id'], $xproducts)) {
 					$status = false;
@@ -97,15 +97,15 @@ class ModelExtensionPaymentLaybuy extends Model {
 			}
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($status) {
-			$method_data = array(
+			$method_data = [
 				'code'			=> 'laybuy',
 				'title'			=> $this->language->get('text_title'),
 				'terms'			=> '',
 				'sort_order'	=> $this->config->get('laybuy_sort_order')
-			);
+			];
 		}
 
 		return $method_data;
@@ -124,13 +124,13 @@ class ModelExtensionPaymentLaybuy extends Model {
 			$max_months = 1;
 		}
 
-		$months = array();
+		$months = [];
 
 		for ($i = 1; $i <= $max_months; $i++) {
-			$months[] = array(
+			$months[] = [
 				'value' => $i,
 				'label' => $i . ' ' . (($i > 1) ? $this->language->get('text_months') : $this->language->get('text_month'))
-			);
+			];
 		}
 
 		return $months;
@@ -193,27 +193,27 @@ class ModelExtensionPaymentLaybuy extends Model {
 
 		$months = (int)$data['months'];
 
-		$report_content = array();
+		$report_content = [];
 
-		$report_content[] = array(
+		$report_content[] = [
 			'instalment'	=> 0,
 			'amount'		=> $this->currency->format($data['downpayment_amount'], $data['currency']),
 			'date'			=> $date_added,
 			'pp_trans_id'	=> $data['dp_paypal_txn_id'],
 			'status'		=> 'Completed'
-		);
+		];
 
 		for ($month = 1; $month <= $months; $month++) {
 			$date = date("Y-m-d h:i:s", strtotime($data['first_payment_due'] . " +" . ($month -1) . " month"));
 			$date = date($this->language->get('date_format_short'), strtotime($date));
 
-			$report_content[] = array(
+			$report_content[] = [
 			'instalment'	=> $month,
 			'amount'		=> $this->currency->format($data['payment_amounts'], $data['currency']),
 			'date'			=> $date,
 			'pp_trans_id'	=> '',
 			'status'		=> 'Pending'
-			);
+			];
 		}
 
 		$data['report'] = json_encode($report_content);

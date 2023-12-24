@@ -69,7 +69,7 @@ $_['action_event'] = [
 	'language/extension/shipping/*/before'  => 'event/compatibility/language',
 	'language/extension/theme/*/before'     => 'event/compatibility/language',
 	'language/extension/total/*/before'     => 'event/compatibility/language'	
-	
+
 	//'controller/*/before'                 => 'event/debug/before',
 	//'controller/*/after'                  => 'event/debug/after'
 ];

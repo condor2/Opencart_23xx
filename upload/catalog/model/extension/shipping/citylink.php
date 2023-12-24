@@ -13,7 +13,7 @@ class ModelExtensionShippingCitylink extends Model {
 			$status = false;
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($status) {
 			$cost = 0;
@@ -33,7 +33,7 @@ class ModelExtensionShippingCitylink extends Model {
 				}
 			}
 
-			$quote_data = array();
+			$quote_data = [];
 
 			if ((float)$cost) {
 				$quote_data['citylink'] = array(

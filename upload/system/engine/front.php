@@ -29,7 +29,7 @@ final class Front {
 	 *
 	 * @param	object	$pre_action
  	*/
-	public function addPreAction(Action $pre_action) {
+	public function addPreAction(Action $pre_action): void {
 		$this->pre_action[] = $pre_action;
 	}
 

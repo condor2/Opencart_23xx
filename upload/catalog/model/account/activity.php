@@ -2,7 +2,7 @@
 class ModelAccountActivity extends Model {
 	public function addActivity($key, $data) {
 		if (isset($data['customer_id'])) {
-			$customer_id = $data['customer_id'];
+			$customer_id = (int)$data['customer_id'];
 		} else {
 			$customer_id = 0;
 		}

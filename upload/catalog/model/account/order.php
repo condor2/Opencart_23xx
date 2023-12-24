@@ -40,7 +40,7 @@ class ModelAccountOrder extends Model {
 				$shipping_zone_code = '';
 			}
 
-			return array(
+			return [
 				'order_id'                => $order_query->row['order_id'],
 				'invoice_no'              => $order_query->row['invoice_no'],
 				'invoice_prefix'          => $order_query->row['invoice_prefix'],
@@ -95,9 +95,9 @@ class ModelAccountOrder extends Model {
 				'date_modified'           => $order_query->row['date_modified'],
 				'date_added'              => $order_query->row['date_added'],
 				'ip'                      => $order_query->row['ip']
-			);
+			];
 		} else {
-			return array();
+			return [];
 		}
 	}
 

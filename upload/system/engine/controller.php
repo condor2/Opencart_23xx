@@ -25,7 +25,7 @@ abstract class Controller {
 		}
 	}
 
-	public function __set($key, $value) {
+	public function __set($key, $value): void {
 		$this->registry->set($key, $value);
 	}
 }

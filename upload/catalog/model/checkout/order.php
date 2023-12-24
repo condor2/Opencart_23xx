@@ -165,7 +165,7 @@ class ModelCheckoutOrder extends Model {
 				$language_code = $this->config->get('config_language');
 			}
 
-			return array(
+			return [
 				'order_id'                => $order_query->row['order_id'],
 				'invoice_no'              => $order_query->row['invoice_no'],
 				'invoice_prefix'          => $order_query->row['invoice_prefix'],
@@ -232,9 +232,9 @@ class ModelCheckoutOrder extends Model {
 				'accept_language'         => $order_query->row['accept_language'],
 				'date_added'              => $order_query->row['date_added'],
 				'date_modified'           => $order_query->row['date_modified']
-			);
+			];
 		} else {
-			return array();
+			return [];
 		}
 	}
 
@@ -388,7 +388,7 @@ class ModelCheckoutOrder extends Model {
 				$subject = sprintf($language->get('text_new_subject'), html_entity_decode($order_info['store_name'], ENT_QUOTES, 'UTF-8'), $order_id);
 	
 				// HTML Mail
-				$data = array();
+				$data = [];
 	
 				$data['title'] = sprintf($language->get('text_new_subject'), $order_info['store_name'], $order_id);
 	
@@ -447,7 +447,7 @@ class ModelCheckoutOrder extends Model {
 					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
 				}
 	
-				$find = array(
+				$find = [
 					'{firstname}',
 					'{lastname}',
 					'{company}',
@@ -458,9 +458,9 @@ class ModelCheckoutOrder extends Model {
 					'{zone}',
 					'{zone_code}',
 					'{country}'
-				);
+				];
 	
-				$replace = array(
+				$replace = [
 					'firstname' => $order_info['payment_firstname'],
 					'lastname'  => $order_info['payment_lastname'],
 					'company'   => $order_info['payment_company'],
@@ -471,9 +471,9 @@ class ModelCheckoutOrder extends Model {
 					'zone'      => $order_info['payment_zone'],
 					'zone_code' => $order_info['payment_zone_code'],
 					'country'   => $order_info['payment_country']
-				);
+				];
 	
-				$data['payment_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				$data['payment_address'] = str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\s\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format))));
 	
 				if ($order_info['shipping_address_format']) {
 					$format = $order_info['shipping_address_format'];
@@ -481,7 +481,7 @@ class ModelCheckoutOrder extends Model {
 					$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
 				}
 	
-				$find = array(
+				$find = [
 					'{firstname}',
 					'{lastname}',
 					'{company}',
@@ -492,9 +492,9 @@ class ModelCheckoutOrder extends Model {
 					'{zone}',
 					'{zone_code}',
 					'{country}'
-				);
+				];
 	
-				$replace = array(
+				$replace = [
 					'firstname' => $order_info['shipping_firstname'],
 					'lastname'  => $order_info['shipping_lastname'],
 					'company'   => $order_info['shipping_company'],
@@ -505,17 +505,17 @@ class ModelCheckoutOrder extends Model {
 					'zone'      => $order_info['shipping_zone'],
 					'zone_code' => $order_info['shipping_zone_code'],
 					'country'   => $order_info['shipping_country']
-				);
+				];
 	
-				$data['shipping_address'] = str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\s\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format))));
+				$data['shipping_address'] = str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\s\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format))));
 	
 				$this->load->model('tool/upload');
 	
 				// Products
-				$data['products'] = array();
+				$data['products'] = [];
 	
 				foreach ($order_product_query->rows as $product) {
-					$option_data = array();
+					$option_data = [];
 	
 					$order_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
 	
@@ -532,44 +532,44 @@ class ModelCheckoutOrder extends Model {
 							}
 						}
 	
-						$option_data[] = array(
+						$option_data[] = [
 							'name'  => $option['name'],
 							'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-						);
+						];
 					}
 	
-					$data['products'][] = array(
+					$data['products'][] = [
 						'name'     => $product['name'],
 						'model'    => $product['model'],
 						'option'   => $option_data,
 						'quantity' => $product['quantity'],
 						'price'    => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
 						'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value'])
-					);
+					];
 				}
 	
 				// Vouchers
-				$data['vouchers'] = array();
+				$data['vouchers'] = [];
 	
 				$order_voucher_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_voucher WHERE order_id = '" . (int)$order_id . "'");
 	
 				foreach ($order_voucher_query->rows as $voucher) {
-					$data['vouchers'][] = array(
+					$data['vouchers'][] = [
 						'description' => $voucher['description'],
 						'amount'      => $this->currency->format($voucher['amount'], $order_info['currency_code'], $order_info['currency_value']),
-					);
+					];
 				}
 	
 				// Order Totals
-				$data['totals'] = array();
+				$data['totals'] = [];
 				
 				$order_total_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_total` WHERE order_id = '" . (int)$order_id . "' ORDER BY sort_order ASC");
 	
 				foreach ($order_total_query->rows as $total) {
-					$data['totals'][] = array(
+					$data['totals'][] = [
 						'title' => $total['title'],
 						'text'  => $this->currency->format($total['value'], $order_info['currency_code'], $order_info['currency_value']),
-					);
+					];
 				}
 	
 				// Text Mail

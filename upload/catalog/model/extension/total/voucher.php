@@ -17,7 +17,7 @@ class ModelExtensionTotalVoucher extends Model {
 
 		if ($voucher_query->num_rows) {
 			if ($voucher_query->row['order_id']) {
-				$implode = array();
+				$implode = [];
 
 				foreach ($this->config->get('config_complete_status') as $order_status_id) {
 					$implode[] = "'" . (int)$order_status_id . "'";
@@ -68,7 +68,7 @@ class ModelExtensionTotalVoucher extends Model {
 				'date_added'       => $voucher_query->row['date_added']
 			);
 		} else {
-			return array();
+			return [];
 		}
 	}
 

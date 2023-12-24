@@ -125,9 +125,9 @@ final class Loader {
 
 	public function config($route): void {
 		$this->registry->get('event')->trigger('config/' . $route . '/before', [&$route]);
-		
+
 		$this->registry->get('config')->load($route);
-		
+
 		$this->registry->get('event')->trigger('config/' . $route . '/after', [&$route]);
 	}
 
@@ -144,7 +144,7 @@ final class Loader {
 	}
 
 	protected function callback($registry, $route) {
-		return function($args) use($registry, &$route) {
+		return function($args) use ($registry, &$route) {
 			static $model = [];
 
 			$output = null;
@@ -189,5 +189,5 @@ final class Loader {
 
 			return $output;
 		};
-	}	
+	}
 }

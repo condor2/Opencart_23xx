@@ -15,15 +15,15 @@ class ModelExtensionPaymentFirstdata extends Model {
 			$status = false;
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($status) {
-			$method_data = array(
+			$method_data = [
 				'code'       => 'firstdata',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('firstdata_sort_order')
-			);
+			];
 		}
 
 		return $method_data;
@@ -47,7 +47,7 @@ class ModelExtensionPaymentFirstdata extends Model {
 		return $order->row;
 	}
 
-	public function addTransaction($fd_order_id, $type, $order_info = array()) {
+	public function addTransaction($fd_order_id, $type, $order_info = []) {
 		if (!empty($order_info)) {
 			$amount = $this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false);
 		} else {
@@ -69,11 +69,11 @@ class ModelExtensionPaymentFirstdata extends Model {
 	}
 
 	public function mapCurrency($code) {
-		$currency = array(
+		$currency = [
 			'GBP' => 826,
 			'USD' => 840,
 			'EUR' => 978,
-		);
+		];
 
 		if (array_key_exists($code, $currency)) {
 			return $currency[$code];

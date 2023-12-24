@@ -254,7 +254,7 @@ class ModelExtensionShippingRoyalMail extends Model {
 			$status = false;
 		}
 
-		$quote_data = array();
+		$quote_data = [];
 
 		if ($status) {
 			$weight = $this->cart->getWeight();
@@ -798,7 +798,7 @@ class ModelExtensionShippingRoyalMail extends Model {
 			if ($this->config->get('royal_mail_international_standard_status') && $address['iso_code_2'] != 'GB') {
 				$cost = 0;
 
-				$rates = array();
+				$rates = [];
 
 				// EU
 				if (in_array($address['iso_code_2'], $europe)) {
@@ -893,7 +893,7 @@ class ModelExtensionShippingRoyalMail extends Model {
 			if ($this->config->get('royal_mail_international_tracked_signed_status') && in_array($address['iso_code_2'], $tracked_signed)) {
 				$cost = 0;
 
-				$rates = array();
+				$rates = [];
 
 				// EU
 				if (in_array($address['iso_code_2'], $europe)) {
@@ -979,7 +979,7 @@ class ModelExtensionShippingRoyalMail extends Model {
 			if ($this->config->get('royal_mail_international_tracked_status') && in_array($address['iso_code_2'], $tracked)) {
 				$cost = 0;
 
-				$rates = array();
+				$rates = [];
 
 				// EU
 				if (in_array($address['iso_code_2'], $europe) && !in_array($address['iso_code_2'], $non_eu)) {
@@ -1229,7 +1229,7 @@ class ModelExtensionShippingRoyalMail extends Model {
 			if ($this->config->get('royal_mail_international_signed_status') && in_array($address['iso_code_2'], $signed)) {
 				$cost = 0;
 
-				$rates = array();
+				$rates = [];
 
 				// EU
 				if (in_array($address['iso_code_2'], $europe)) {
@@ -1311,7 +1311,7 @@ class ModelExtensionShippingRoyalMail extends Model {
 			}
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($quote_data) {
 			$method_data = array(

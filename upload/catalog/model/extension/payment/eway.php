@@ -16,15 +16,15 @@ class ModelExtensionPaymentEway extends Model {
 			$status = false;
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($status) {
-			$method_data = array(
+			$method_data = [
 				'code' => 'eway',
 				'title' => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('eway_sort_order')
-			);
+			];
 		}
 
 		return $method_data;
@@ -51,20 +51,20 @@ class ModelExtensionPaymentEway extends Model {
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "eway_card WHERE customer_id = '" . (int)$customer_id . "'");
 
-		$card_data = array();
+		$card_data = [];
 
 		$this->load->model('account/address');
 
 		foreach ($query->rows as $row) {
 
-			$card_data[] = array(
+			$card_data[] = [
 				'card_id' => $row['card_id'],
 				'customer_id' => $row['customer_id'],
 				'token' => $row['token'],
 				'digits' => '**** ' . $row['digits'],
 				'expiry' => $row['expiry'],
 				'type' => $row['type'],
-			);
+			];
 		}
 		return $card_data;
 	}
@@ -139,7 +139,7 @@ class ModelExtensionPaymentEway extends Model {
 		$eway_username = html_entity_decode($this->config->get('eway_username'), ENT_QUOTES, 'UTF-8');
 		$eway_password = html_entity_decode($this->config->get('eway_password'), ENT_QUOTES, 'UTF-8');
 
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
 		curl_setopt($ch, CURLOPT_USERPWD, $eway_username . ":" . $eway_password);
 		if ($is_post) {
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -158,7 +158,7 @@ class ModelExtensionPaymentEway extends Model {
 		if (curl_errno($ch) != CURLE_OK) {
 			$response = new stdClass();
 			$response->Errors = "POST Error: " . curl_error($ch) . " URL: $url";
-			$this->log->write(array('error' => curl_error($ch), 'errno' => curl_errno($ch)), 'cURL failed');
+			$this->log->write(['error' => curl_error($ch), 'errno' => curl_errno($ch)], 'cURL failed');
 			$response = json_encode($response);
 		} else {
 			$info = curl_getinfo($ch);

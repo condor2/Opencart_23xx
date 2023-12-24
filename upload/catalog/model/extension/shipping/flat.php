@@ -13,10 +13,10 @@ class ModelExtensionShippingFlat extends Model {
 			$status = false;
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($status) {
-			$quote_data = array();
+			$quote_data = [];
 
 			$quote_data['flat'] = array(
 				'code'         => 'flat.flat',

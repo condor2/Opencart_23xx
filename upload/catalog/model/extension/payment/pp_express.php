@@ -15,15 +15,15 @@ class ModelExtensionPaymentPPExpress extends Model {
 			$status = false;
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($status) {
-			$method_data = array(
+			$method_data = [
 				'code'       => 'pp_express',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('pp_express_sort_order')
-			);
+			];
 		}
 
 		return $method_data;
@@ -142,20 +142,20 @@ class ModelExtensionPaymentPPExpress extends Model {
 		// Totals
 		$this->load->model('extension/extension');
 
-		$totals = array();
+		$totals = [];
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
 
 		// Because __call can not keep var references so we put them into an array.
-		$total_data = array(
+		$total_data = [
 			'totals' => &$totals,
 			'taxes'  => &$taxes,
 			'total'  => &$total
-		);
+		];
 
 		// Display prices
 		if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-			$sort_order = array();
+			$sort_order = [];
 
 			$results = $this->model_extension_extension->getExtensions('total');
 
@@ -173,7 +173,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 					$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 				}
 
-				$sort_order = array();
+				$sort_order = [];
 
 				foreach ($totals as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];
@@ -184,7 +184,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 		}
 
 		foreach ($total_data['totals'] as $total_row) {
-			if (!in_array($total_row['code'], array('total', 'sub_total'))) {
+			if (!in_array($total_row['code'], ['total', 'sub_total'])) {
 				if ($total_row['value'] != 0) {
 					$item_price = $this->currency->format($total_row['value'], $this->session->data['currency'], false, false);
 
@@ -273,17 +273,17 @@ class ModelExtensionPaymentPPExpress extends Model {
 			$api_signature = $this->config->get('pp_express_signature');
 		}
 
-		$settings = array(
+		$settings = [
 			'USER'         => $api_user,
 			'PWD'          => $api_password,
 			'SIGNATURE'    => $api_signature,
 			'VERSION'      => '109.0',
 			'BUTTONSOURCE' => 'OpenCart_2.0_EC'
-		);
+		];
 
 		$this->log($data, 'Call data');
 
-		$defaults = array(
+		$defaults = [
 			CURLOPT_POST => 1,
 			CURLOPT_HEADER => 0,
 			CURLOPT_URL => $api_url,
@@ -295,14 +295,14 @@ class ModelExtensionPaymentPPExpress extends Model {
 			CURLOPT_SSL_VERIFYPEER => 0,
 			CURLOPT_SSL_VERIFYHOST => 0,
 			CURLOPT_POSTFIELDS => http_build_query(array_merge($data, $settings), '', "&"),
-		);
+		];
 
 		$ch = curl_init();
 
 		curl_setopt_array($ch, $defaults);
 
 		if (!$result = curl_exec($ch)) {
-			$this->log(array('error' => curl_error($ch), 'errno' => curl_errno($ch)), 'cURL failed');
+			$this->log(['error' => curl_error($ch), 'errno' => curl_errno($ch)], 'cURL failed');
 		}
 
 		$this->log($result, 'Result');
@@ -342,7 +342,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 	public function cleanReturn($data) {
 		$data = explode('&', $data);
 
-		$arr = array();
+		$arr = [];
 
 		foreach ($data as $k=>$v) {
 			$tmp = explode('=', $v);

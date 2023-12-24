@@ -12,11 +12,11 @@ class ModelExtensionModulePPLogin extends Model {
 		$request .= '&code=' . $code;
 		$request .= '&redirect_uri=' . urlencode($this->url->link('extension/module/pp_login/login', '', true));
 
-		$additional_opts = array(
+		$additional_opts = [
 			CURLOPT_USERPWD    => $this->config->get('pp_login_client_id') . ':' . $this->config->get('pp_login_secret'),
 			CURLOPT_POST       => true,
 			CURLOPT_POSTFIELDS => $request
-		);
+		];
 
 		$curl = $this->curl($endpoint, $additional_opts);
 
@@ -32,13 +32,13 @@ class ModelExtensionModulePPLogin extends Model {
 			$endpoint = 'https://api.paypal.com/v1/identity/openidconnect/userinfo/?schema=openid';
 		}
 
-		$header   = array();
+		$header   = [];
 		$header[] = 'Content-Type: application/json';
 		$header[] = 'Authorization: Bearer ' . $access_token;
 
-		$additional_opts = array(
+		$additional_opts = [
 			CURLOPT_HTTPHEADER => $header,
-		);
+		];
 
 		$curl = $this->curl($endpoint, $additional_opts);
 
@@ -47,8 +47,8 @@ class ModelExtensionModulePPLogin extends Model {
 		return $curl;
 	}
 
-	private function curl($endpoint, $additional_opts = array()) {
-		$default_opts = array(
+	private function curl($endpoint, $additional_opts = []) {
+		$default_opts = [
 			CURLOPT_PORT           => 443,
 			CURLOPT_HEADER         => 0,
 			CURLOPT_SSL_VERIFYPEER => 0,
@@ -56,7 +56,7 @@ class ModelExtensionModulePPLogin extends Model {
 			CURLOPT_FORBID_REUSE   => 1,
 			CURLOPT_FRESH_CONNECT  => 1,
 			CURLOPT_URL            => $endpoint,
-		);
+		];
 
 		$ch = curl_init($endpoint);
 

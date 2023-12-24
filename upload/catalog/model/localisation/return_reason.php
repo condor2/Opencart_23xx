@@ -1,6 +1,6 @@
 <?php
 class ModelLocalisationReturnReason extends Model {
-	public function getReturnReasons($data = array()) {
+	public function getReturnReasons($data = []) {
 		if ($data) {
 			$sql = "SELECT * FROM `" . DB_PREFIX . "return_reason` WHERE `language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 

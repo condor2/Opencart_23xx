@@ -61,7 +61,7 @@ class ModelExtensionFraudMaxMind extends Model {
 				$order_id = $order_info['order_id'];
 				$customer_id = $order_info['customer_id'];
 
-				$response_info = array();
+				$response_info = [];
 
 				$parts = explode(';', $response);
 

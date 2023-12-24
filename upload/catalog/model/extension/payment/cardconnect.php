@@ -15,69 +15,69 @@ class ModelExtensionPaymentCardConnect extends Model {
 			$status = false;
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		if ($status) {
-			$method_data = array(
+			$method_data = [
 				'code'			=> 'cardconnect',
 				'title'			=> $this->language->get('text_title'),
 				'terms'			=> '',
 				'sort_order'	=> $this->config->get('cardconnect_sort_order')
-			);
+			];
 		}
 
 		return $method_data;
 	}
 
 	public function getCardTypes() {
-		$cards = array();
+		$cards = [];
 
-		$cards[] = array(
+		$cards[] = [
 			'text'  => 'Visa',
 			'value' => 'VISA'
-		);
+		];
 
-		$cards[] = array(
+		$cards[] = [
 			'text'  => 'MasterCard',
 			'value' => 'MASTERCARD'
-		);
+		];
 
-		$cards[] = array(
+		$cards[] = [
 			'text'  => 'Discover Card',
 			'value' => 'DISCOVER'
-		);
+		];
 
-		$cards[] = array(
+		$cards[] = [
 			'text'  => 'American Express',
 			'value' => 'AMEX'
-		);
+		];
 
 		return $cards;
 	}
 
 	public function getMonths() {
-		$months = array();
+		$months = [];
 
 		for ($i = 1; $i <= 12; $i++) {
-			$months[] = array(
+			$months[] = [
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			);
+			];
 		}
 
 		return $months;
 	}
 
 	public function getYears() {
-		$years = array();
+		$years = [];
 
 		$today = getdate();
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$years[] = array(
+			$years[] = [
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%02d', $i % 100)
-			);
+			];
 		}
 
 		return $years;
@@ -122,7 +122,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		$url = 'https://' . $this->config->get('cardconnect_site') . '.cardconnect.com:' . (($this->config->get('cardconnect_environment') == 'live') ? 8443 : 6443) . '/cardconnect/rest/settlestat?merchid=' . $merchant_id . '&date=' . $date;
 
-		$header = array();
+		$header = [];
 
 		$header[] = 'Content-type: application/json';
 		$header[] = 'Authorization: Basic ' . base64_encode($this->config->get('cardconnect_api_username') . ':' . $this->config->get('cardconnect_api_password'));
