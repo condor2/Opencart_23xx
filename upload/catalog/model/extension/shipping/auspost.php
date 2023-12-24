@@ -51,13 +51,13 @@ class ModelExtensionShippingAusPost extends Model {
 							$title .= ' (' . $response_info['days'] . ' ' . $this->language->get('text_eta') . ')';
 						}
 
-						$quote_data['standard'] = array(
+						$quote_data['standard'] = [
 							'code'         => 'auspost.standard',
 							'title'        => $title,
 							'cost'         => $this->currency->convert($response_info['charge'], 'AUD', $this->config->get('config_currency')),
 							'tax_class_id' => $this->config->get('auspost_tax_class_id'),
 							'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($response_info['charge'], 'AUD', $this->session->data['currency']), $this->config->get('auspost_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'], 1.0000000)
-						);
+						];
 					}
 				}
 			}
@@ -93,13 +93,13 @@ class ModelExtensionShippingAusPost extends Model {
 							$title .= ' (' . $response_info['days'] . ' ' . $this->language->get('text_eta') . ')';
 						}
 
-						$quote_data['express'] = array(
+						$quote_data['express'] = [
 							'code'         => 'auspost.express',
 							'title'        => $title,
 							'cost'         => $this->currency->convert($response_info['charge'], 'AUD', $this->config->get('config_currency')),
 							'tax_class_id' => $this->config->get('auspost_tax_class_id'),
 							'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($response_info['charge'], 'AUD', $this->session->data['currency']), $this->config->get('auspost_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'], 1.0000000)
-						);
+						];
 					}
 				}
 			}
@@ -108,13 +108,13 @@ class ModelExtensionShippingAusPost extends Model {
 		$method_data = [];
 
 		if ($quote_data) {
-			$method_data = array(
+			$method_data = [
 				'code'       => 'auspost',
 				'title'      => $this->language->get('text_title'),
 				'quote'      => $quote_data,
 				'sort_order' => $this->config->get('auspost_sort_order'),
 				'error'      => $error
-			);
+			];
 		}
 
 		return $method_data;

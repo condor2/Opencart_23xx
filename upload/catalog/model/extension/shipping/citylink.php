@@ -36,21 +36,21 @@ class ModelExtensionShippingCitylink extends Model {
 			$quote_data = [];
 
 			if ((float)$cost) {
-				$quote_data['citylink'] = array(
+				$quote_data['citylink'] = [
 					'code'         => 'citylink.citylink',
 					'title'        => $this->language->get('text_title') . '  (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')',
 					'cost'         => $cost,
 					'tax_class_id' => $this->config->get('citylink_tax_class_id'),
 					'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('citylink_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-				);
+				];
 
-				$method_data = array(
+				$method_data = [
 					'code'       => 'citylink',
 					'title'      => $this->language->get('text_title'),
 					'quote'      => $quote_data,
 					'sort_order' => $this->config->get('citylink_sort_order'),
 					'error'      => false
-				);
+				];
 			}
 		}
 

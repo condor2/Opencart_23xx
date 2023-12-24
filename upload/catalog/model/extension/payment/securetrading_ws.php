@@ -18,12 +18,12 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 		$method_data = [];
 
 		if ($status) {
-			$method_data = array(
+			$method_data = [
 				'code'       => 'securetrading_ws',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('securetrading_ws_sort_order')
-			);
+			];
 		}
 
 		return $method_data;
@@ -32,7 +32,7 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 	public function call($data) {
 		$ch = curl_init();
 
-		$defaults = array(
+		$defaults = [
 			CURLOPT_POST => 1,
 			CURLOPT_HEADER => 0,
 			CURLOPT_SSL_VERIFYPEER => 0,
@@ -41,13 +41,13 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 			CURLOPT_RETURNTRANSFER => 1,
 			CURLOPT_FORBID_REUSE => 1,
 			CURLOPT_TIMEOUT => 15,
-			CURLOPT_HTTPHEADER => array(
+			CURLOPT_HTTPHEADER => [
 				'User-Agent: OpenCart - Secure Trading WS',
 				'Content-Length: ' . strlen($data),
 				'Authorization: Basic ' . base64_encode($this->config->get('securetrading_ws_username') . ':' . $this->config->get('securetrading_ws_password')),
-			),
+			],
 			CURLOPT_POSTFIELDS => $data,
-		);
+		];
 
 		curl_setopt_array($ch, $defaults);
 

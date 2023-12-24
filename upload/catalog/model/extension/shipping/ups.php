@@ -33,9 +33,9 @@ class ModelExtensionShippingUps extends Model {
 
 			$length_code = strtoupper($this->length->getUnit($this->config->get('ups_length_class_id')));
 
-			$service_code = array(
+			$service_code = [
 				// US Origin
-				'US' => array(
+				'US' => [
 					'01' => $this->language->get('text_us_origin_01'),
 					'02' => $this->language->get('text_us_origin_02'),
 					'03' => $this->language->get('text_us_origin_03'),
@@ -48,9 +48,9 @@ class ModelExtensionShippingUps extends Model {
 					'54' => $this->language->get('text_us_origin_54'),
 					'59' => $this->language->get('text_us_origin_59'),
 					'65' => $this->language->get('text_us_origin_65')
-				),
+				],
 				// Canada Origin
-				'CA' => array(
+				'CA' => [
 					'01' => $this->language->get('text_ca_origin_01'),
 					'02' => $this->language->get('text_ca_origin_02'),
 					'07' => $this->language->get('text_ca_origin_07'),
@@ -61,9 +61,9 @@ class ModelExtensionShippingUps extends Model {
 					'14' => $this->language->get('text_ca_origin_14'),
 					'54' => $this->language->get('text_ca_origin_54'),
 					'65' => $this->language->get('text_ca_origin_65')
-				),
+				],
 				// European Union Origin
-				'EU' => array(
+				'EU' => [
 					'07' => $this->language->get('text_eu_origin_07'),
 					'08' => $this->language->get('text_eu_origin_08'),
 					'11' => $this->language->get('text_eu_origin_11'),
@@ -75,9 +75,9 @@ class ModelExtensionShippingUps extends Model {
 					'84' => $this->language->get('text_eu_origin_84'),
 					'85' => $this->language->get('text_eu_origin_85'),
 					'86' => $this->language->get('text_eu_origin_86')
-				),
+				],
 				// Puerto Rico Origin
-				'PR' => array(
+				'PR' => [
 					'01' => $this->language->get('text_pr_origin_01'),
 					'02' => $this->language->get('text_pr_origin_02'),
 					'03' => $this->language->get('text_pr_origin_03'),
@@ -86,24 +86,24 @@ class ModelExtensionShippingUps extends Model {
 					'14' => $this->language->get('text_pr_origin_14'),
 					'54' => $this->language->get('text_pr_origin_54'),
 					'65' => $this->language->get('text_pr_origin_65')
-				),
+				],
 				// Mexico Origin
-				'MX' => array(
+				'MX' => [
 					'07' => $this->language->get('text_mx_origin_07'),
 					'08' => $this->language->get('text_mx_origin_08'),
 					'54' => $this->language->get('text_mx_origin_54'),
 					'65' => $this->language->get('text_mx_origin_65')
-				),
+				],
 				// All other origins
-				'other' => array(
+				'other' => [
 					// service code 7 seems to be gone after January 2, 2007
 					'07' => $this->language->get('text_other_origin_07'),
 					'08' => $this->language->get('text_other_origin_08'),
 					'11' => $this->language->get('text_other_origin_11'),
 					'54' => $this->language->get('text_other_origin_54'),
 					'65' => $this->language->get('text_other_origin_65')
-				)
-			);
+				]
+			];
 
 			$xml  = '<?xml version="1.0"?>';
 			$xml .= '<AccessRequest xml:lang="en-US">';
@@ -265,13 +265,13 @@ class ModelExtensionShippingUps extends Model {
 						}
 
 						if ($this->config->get('ups_' . strtolower($this->config->get('ups_origin')) . '_' . $code)) {
-							$quote_data[$code] = array(
+							$quote_data[$code] = [
 								'code'         => 'ups.' . $code,
 								'title'        => $service_code[$this->config->get('ups_origin')][$code],
 								'cost'         => $this->currency->convert($cost, $currency, $this->config->get('config_currency')),
 								'tax_class_id' => $this->config->get('ups_tax_class_id'),
 								'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($cost, $currency, $this->session->data['currency']), $this->config->get('ups_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'], 1.0000000)
-							);
+							];
 						}
 					}
 				}
@@ -284,13 +284,13 @@ class ModelExtensionShippingUps extends Model {
 			}
 
 			if ($quote_data || $error) {
-				$method_data = array(
+				$method_data = [
 					'code'       => 'ups',
 					'title'      => $title,
 					'quote'      => $quote_data,
 					'sort_order' => $this->config->get('ups_sort_order'),
 					'error'      => $error
-				);
+				];
 			}
 		}
 

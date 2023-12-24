@@ -76,7 +76,7 @@ class ModelExtensionTotalCoupon extends Model {
 		}
 
 		if ($status) {
-			return array(
+			return [
 				'coupon_id'     => $coupon_query->row['coupon_id'],
 				'code'          => $coupon_query->row['code'],
 				'name'          => $coupon_query->row['name'],
@@ -91,7 +91,7 @@ class ModelExtensionTotalCoupon extends Model {
 				'uses_customer' => $coupon_query->row['uses_customer'],
 				'status'        => $coupon_query->row['status'],
 				'date_added'    => $coupon_query->row['date_added']
-			);
+			];
 		}
 	}
 
@@ -170,12 +170,12 @@ class ModelExtensionTotalCoupon extends Model {
 				}
 
 				if ($discount_total > 0) {
-					$total['totals'][] = array(
+					$total['totals'][] = [
 						'code'       => 'coupon',
 						'title'      => sprintf($this->language->get('text_coupon'), $this->session->data['coupon']),
 						'value'      => -$discount_total,
 						'sort_order' => $this->config->get('coupon_sort_order')
-					);
+					];
 
 					$total['total'] -= $discount_total;
 				}

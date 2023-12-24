@@ -52,7 +52,7 @@ class ModelExtensionTotalVoucher extends Model {
 		}
 
 		if ($status) {
-			return array(
+			return [
 				'voucher_id'       => $voucher_query->row['voucher_id'],
 				'code'             => $voucher_query->row['code'],
 				'from_name'        => $voucher_query->row['from_name'],
@@ -66,7 +66,7 @@ class ModelExtensionTotalVoucher extends Model {
 				'amount'           => $amount,
 				'status'           => $voucher_query->row['status'],
 				'date_added'       => $voucher_query->row['date_added']
-			);
+			];
 		} else {
 			return [];
 		}
@@ -82,12 +82,12 @@ class ModelExtensionTotalVoucher extends Model {
 				$amount = min($voucher_info['amount'], $total['total']);
 				
 				if ($amount > 0) {
-					$total['totals'][] = array(
+					$total['totals'][] = [
 						'code'       => 'voucher',
 						'title'      => sprintf($this->language->get('text_voucher'), $this->session->data['voucher']),
 						'value'      => -$amount,
 						'sort_order' => $this->config->get('voucher_sort_order')
-					);
+					];
 
 					$total['total'] -= $amount;
 				} else {
