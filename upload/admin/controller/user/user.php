@@ -345,7 +345,7 @@ class ControllerUserUser extends Controller {
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
 		];
 
-		$data['breadcrumbs'][] = ]
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('user/user', 'token=' . $this->session->data['token'] . $url, true)
 		];

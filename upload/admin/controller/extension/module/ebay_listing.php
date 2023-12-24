@@ -68,7 +68,7 @@ class ControllerExtensionModuleEbayListing extends Controller {
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
-		);
+		];
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),

@@ -13,7 +13,7 @@ class ControllerCommonProfile extends Controller {
 			$user_data = array_merge($this->request->post, [
 				'user_group_id' => $this->user->getGroupId(),
 				'status'        => 1,
-			)];
+			]);
 
 			$this->model_user_user->editUser($this->user->getId(), $user_data);
 
