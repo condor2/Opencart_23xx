@@ -272,7 +272,7 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 				'Authorization: Basic ' . base64_encode($this->config->get('securetrading_ws_csv_username') . ':' . $this->config->get('securetrading_ws_csv_password')),
 			],
 			CURLOPT_POSTFIELDS => $this->encodePost($post_data),
-		);
+		];
 
 		curl_setopt_array($ch, $defaults);
 
