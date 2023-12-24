@@ -1,8 +1,9 @@
 <?php
 namespace Opencart\System\Engine;
+
 /*
 * Event System Userguide
-* 
+*
 * https://github.com/opencart/opencart/wiki/Events-(script-notifications)-2.2.x.x
 */
 class Event {
@@ -13,10 +14,10 @@ class Event {
 		$this->registry = $registry;
 	}
 
-	public function register($trigger, \Action $action) {
+	public function register($trigger, \Action $action): void {
 		$this->data[$trigger][] = $action;
 	}
-	
+
 	public function trigger($event, array $args = []) {
 		foreach ($this->data as $trigger => $actions) {
 			if (preg_match('/^' . str_replace(['\*', '\?'], ['.*', '.'], preg_quote($trigger, '/')) . '/', $event)) {
@@ -31,7 +32,7 @@ class Event {
 		}
 	}
 
-	public function unregister($trigger, $route = '') {
+	public function unregister($trigger, $route = ''): void {
 		if ($route) {
 			foreach ($this->data[$trigger] as $key => $action) {
 				if ($action->getId() == $route) {
@@ -43,7 +44,7 @@ class Event {
 		}
 	}
 
-	public function removeAction($trigger, $route) {
+	public function removeAction($trigger, $route): void {
 		foreach ($this->data[$trigger] as $key => $action) {
 			if ($action->getId() == $route) {
 				unset($this->data[$trigger][$key]);

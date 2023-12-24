@@ -45,7 +45,6 @@ $registry = new Registry();
 $loader = new Loader($registry);
 $registry->set('load', $loader);
 
-
 function handleError($errno, $errstr, $errfile, $errline, array $errcontext) {
 	// error was suppressed with the @-operator
 	if (!(error_reporting() & $errno)) {
@@ -56,12 +55,11 @@ function handleError($errno, $errstr, $errfile, $errline, array $errcontext) {
 
 set_error_handler('handleError');
 
-
 function usage() {
 	echo "Usage:\n";
 	echo "======\n";
 	echo "\n";
-	$options = implode(" ", array(
+	$options = implode(" ", [
 		'--db_hostname', 'localhost',
 		'--db_username', 'root',
 		'--db_password', 'pass',
@@ -72,22 +70,22 @@ function usage() {
 		'--password', 'admin',
 		'--email', 'youremail@example.com',
 		'--http_server', 'http://localhost/opencart/'
-	));
+	]);
 	echo 'php cli_install.php install ' . $options . "\n\n";
 }
 
 
 function get_options($argv) {
-	$defaults = array(
+	$defaults = [
 		'db_hostname' => 'localhost',
 		'db_database' => 'opencart',
 		'db_prefix' => 'oc_',
 		'db_driver' => 'mysqli',
 		'db_port' => '3306',
 		'username' => 'admin',
-	);
+	];
 
-	$options = array();
+	$options = [];
 	$total = count($argv);
 	for ($i=0; $i < $total; $i=$i+2) {
 		$is_flag = preg_match('/^--(.*)$/', $argv[$i], $match);
@@ -101,7 +99,7 @@ function get_options($argv) {
 
 
 function valid($options) {
-	$required = array(
+	$required = [
 		'db_hostname',
 		'db_username',
 		'db_password',
@@ -112,8 +110,8 @@ function valid($options) {
 		'password',
 		'email',
 		'http_server',
-	);
-	$missing = array();
+	];
+	$missing = [];
 	foreach ($required as $r) {
 		if (!array_key_exists($r, $options)) {
 			$missing[] = $r;
@@ -123,9 +121,8 @@ function valid($options) {
 		$options['http_server'] = $options['http_server'] . '/';
 	}
 	$valid = count($missing) === 0;
-	return array($valid, $missing);
+	return [$valid, $missing];
 }
-
 
 function install($options) {
 	$check = check_requirements();
@@ -138,7 +135,6 @@ function install($options) {
 		exit(1);
 	}
 }
-
 
 function check_requirements() {
 	$error = null;
@@ -231,7 +227,6 @@ function setup_db($data) {
 	}
 }
 
-
 function write_config_files($options) {
 	$output  = '<?php' . "\n";
 	$output .= '// HTTP' . "\n";
@@ -311,7 +306,6 @@ function write_config_files($options) {
 	fclose($file);
 }
 
-
 function dir_permissions() {
 	$dirs = array(
 		DIR_OPENCART . 'image/',
@@ -324,11 +318,9 @@ function dir_permissions() {
 	exec('chmod o+w -R ' . implode(' ', $dirs));
 }
 
-
 $argv = $_SERVER['argv'];
 $script = array_shift($argv);
 $subcommand = array_shift($argv);
-
 
 switch ($subcommand) {
 

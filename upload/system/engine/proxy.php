@@ -13,20 +13,20 @@
 class Proxy extends \stdClass {
 	protected $data = [];
     /**
-     * 
+     *
      *
      * @param	string	$key
-     */	
+     */
 	public function __get($key) {
 		return $this->data[$key];
 	}
 
     /**
-     * 
+     *
      *
      * @param	string	$key
 	 * @param	string	$value
-     */	
+     */
 	public function __set($key, $value) {
 		 $this->data[$key] = $value;
 	}
@@ -37,8 +37,8 @@ class Proxy extends \stdClass {
 		$args = func_get_args();
 
 		foreach ($args as $arg) {
-				$arg_data[] =& $arg;
-			}
+			$arg_data[] =& $arg;
+		}
 
 		if (isset($this->data[$key])) {
 			return call_user_func_array($this->data[$key], $arg_data);

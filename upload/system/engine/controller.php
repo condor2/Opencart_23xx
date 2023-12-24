@@ -17,7 +17,7 @@ abstract class Controller {
 		$this->registry = $registry;
 	}
 
-	public function __get($key) {
+	public function __get($key): void {
 		return $this->registry->get($key);
 	}
 

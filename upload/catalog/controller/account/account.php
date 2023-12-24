@@ -52,11 +52,11 @@ class ControllerAccountAccount extends Controller {
 		$data['edit'] = $this->url->link('account/edit', '', true);
 		$data['password'] = $this->url->link('account/password', '', true);
 		$data['address'] = $this->url->link('account/address', '', true);
-		
+
 		$data['credit_cards'] = [];
-		
+
 		$files = glob(DIR_APPLICATION . 'controller/extension/credit_card/*.php');
-		
+
 		foreach ($files as $file) {
 			$code = basename($file, '.php');
 			
@@ -69,7 +69,7 @@ class ControllerAccountAccount extends Controller {
 				];
 			}
 		}
-		
+
 		$data['wishlist'] = $this->url->link('account/wishlist');
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
@@ -78,13 +78,13 @@ class ControllerAccountAccount extends Controller {
 			$data['reward'] = $this->url->link('account/reward', '', true);
 		} else {
 			$data['reward'] = '';
-		}		
-		
+		}
+
 		$data['return'] = $this->url->link('account/return', '', true);
 		$data['transaction'] = $this->url->link('account/transaction', '', true);
 		$data['newsletter'] = $this->url->link('account/newsletter', '', true);
 		$data['recurring'] = $this->url->link('account/recurring', '', true);
-		
+
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');

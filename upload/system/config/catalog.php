@@ -33,7 +33,7 @@ $_['action_pre_action'] = [
 // Action Events
 $_['action_event'] = [
 	'view/*/before'                         => 'event/theme',
-	
+
 	'model/extension/analytics/*/before'    => 'event/compatibility/beforeModel',
 	'model/extension/captcha/*/before'      => 'event/compatibility/beforeModel',
 	'model/extension/credit_card/*/before'  => 'event/compatibility/beforeModel',
@@ -45,7 +45,7 @@ $_['action_event'] = [
 	'model/extension/shipping/*/before'     => 'event/compatibility/beforeModel',
 	'model/extension/theme/*/before'        => 'event/compatibility/beforeModel',
 	'model/extension/total/*/before'        => 'event/compatibility/beforeModel',
-	 	
+
 	'model/analytics/*/after'               => 'event/compatibility/afterModel',
 	'model/captcha/*/after'                 => 'event/compatibility/afterModel',
 	'model/credit_card/*/after'             => 'event/compatibility/afterModel',
@@ -57,7 +57,7 @@ $_['action_event'] = [
 	'model/shipping/*/after'                => 'event/compatibility/afterModel',
 	'model/theme/*/after'                   => 'event/compatibility/afterModel',
 	'model/total/*/after'                   => 'event/compatibility/afterModel',
-	
+
 	//'language/extension/*/before'         => 'event/translation',
 	'language/extension/analytics/*/before' => 'event/compatibility/language',
 	'language/extension/captcha/*/before'   => 'event/compatibility/language',
