@@ -359,15 +359,15 @@ class ControllerMarketingAffiliate extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketing/affiliate', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$data['approve'] = $this->url->link('marketing/affiliate/approve', 'token=' . $this->session->data['token'] . $url, true);
 		$data['add'] = $this->url->link('marketing/affiliate/add', 'token=' . $this->session->data['token'] . $url, true);
@@ -375,7 +375,7 @@ class ControllerMarketingAffiliate extends Controller {
 
 		$data['affiliates'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_name'       => $filter_name,
 			'filter_email'      => $filter_email,
 			'filter_status'     => $filter_status,
@@ -385,7 +385,7 @@ class ControllerMarketingAffiliate extends Controller {
 			'order'             => $order,
 			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'             => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$affiliate_total = $this->model_marketing_affiliate->getTotalAffiliates($filter_data);
 
@@ -406,7 +406,7 @@ class ControllerMarketingAffiliate extends Controller {
 				$unlock = '';
 			}
 
-			$data['affiliates'][] = array(
+			$data['affiliates'][] = [
 				'affiliate_id' => $result['affiliate_id'],
 				'name'         => $result['name'],
 				'email'        => $result['email'],
@@ -416,7 +416,7 @@ class ControllerMarketingAffiliate extends Controller {
 				'approve'      => $approve,
 				'unlock'       => $unlock,
 				'edit'         => $this->url->link('marketing/affiliate/edit', 'token=' . $this->session->data['token'] . '&affiliate_id=' . $result['affiliate_id'] . $url, true)
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -760,15 +760,15 @@ class ControllerMarketingAffiliate extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketing/affiliate', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		if (!isset($this->request->get['affiliate_id'])) {
 			$data['action'] = $this->url->link('marketing/affiliate/add', 'token=' . $this->session->data['token'] . $url, true);
@@ -1168,11 +1168,11 @@ class ControllerMarketingAffiliate extends Controller {
 		$results = $this->model_marketing_affiliate->getTransactions($this->request->get['affiliate_id'], ($page - 1) * 10, 10);
 
 		foreach ($results as $result) {
-			$data['transactions'][] = array(
+			$data['transactions'][] = [
 				'amount'      => $this->currency->format($result['amount'], $this->config->get('config_currency')),
 				'description' => $result['description'],
 				'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added']))
-			);
+			];
 		}
 
 		$data['balance'] = $this->currency->format($this->model_marketing_affiliate->getTransactionTotal($this->request->get['affiliate_id']), $this->config->get('config_currency'));
@@ -1229,21 +1229,21 @@ class ControllerMarketingAffiliate extends Controller {
 
 			$this->load->model('marketing/affiliate');
 
-			$filter_data = array(
+			$filter_data = [
 				'filter_name'  => $filter_name,
 				'filter_email' => $filter_email,
 				'start'        => 0,
 				'limit'        => 5
-			);
+			];
 
 			$results = $this->model_marketing_affiliate->getAffiliates($filter_data);
 
 			foreach ($results as $result) {
-				$affiliate_data[] = array(
+				$affiliate_data[] = [
 					'affiliate_id' => $result['affiliate_id'],
 					'name'         => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
 					'email'        => $result['email']
-				);
+				];
 			}
 		}
 

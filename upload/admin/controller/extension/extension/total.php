@@ -98,7 +98,7 @@ class ControllerExtensionExtensionTotal extends Controller {
 
 				$this->load->language('extension/total/' . $extension);
 
-				$data['extensions'][] = array(
+				$data['extensions'][] = [
 					'name'       => $this->language->get('heading_title'),
 					'status'     => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 					'sort_order' => $this->config->get($extension . '_sort_order'),
@@ -106,7 +106,7 @@ class ControllerExtensionExtensionTotal extends Controller {
 					'uninstall' => $this->url->link('extension/extension/total/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, true),
 					'installed' => in_array($extension, $extensions),
 					'edit'      => $this->url->link('extension/total/' . $extension, 'token=' . $this->session->data['token'], true)
-				);
+				];
 			}
 		}
 

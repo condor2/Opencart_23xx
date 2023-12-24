@@ -2,7 +2,7 @@
 class ControllerStartupCompatibility extends Controller {
 	public function index() {
 		if (isset($this->request->get['route'])) {
-			$extension = array(
+			$extension = [
 				'extension/analytics',
 				'extension/captcha',
 				'extension/feed',
@@ -12,7 +12,7 @@ class ControllerStartupCompatibility extends Controller {
 				'extension/shipping',
 				'extension/theme',
 				'extension/total'
-			);
+			];
 		
 			$part = explode('/', $this->request->get['route']);
 			

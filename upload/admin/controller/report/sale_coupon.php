@@ -39,39 +39,39 @@ class ControllerReportSaleCoupon extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('report/sale_coupon', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$this->load->model('report/coupon');
 
 		$data['coupons'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_date_start'	=> $filter_date_start,
 			'filter_date_end'	=> $filter_date_end,
 			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'             => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$coupon_total = $this->model_report_coupon->getTotalCoupons($filter_data);
 
 		$results = $this->model_report_coupon->getCoupons($filter_data);
 
 		foreach ($results as $result) {
-			$data['coupons'][] = array(
+			$data['coupons'][] = [
 				'name'   => $result['name'],
 				'code'   => $result['code'],
 				'orders' => $result['orders'],
 				'total'  => $this->currency->format($result['total'], $this->config->get('config_currency')),
 				'edit'   => $this->url->link('marketing/coupon/edit', 'token=' . $this->session->data['token'] . '&coupon_id=' . $result['coupon_id'] . $url, true)
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

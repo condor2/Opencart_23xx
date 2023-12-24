@@ -42,20 +42,20 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=feed', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/feed/google_base', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['action'] = $this->url->link('extension/feed/google_base', 'token=' . $this->session->data['token'], true);
 
@@ -169,10 +169,10 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 
 		$limit = 10;
 
-		$filter_data = array(
+		$filter_data = [
 			'start'       => ($page - 1) * $limit,
 			'limit'       => $limit
-		);
+		];
 
 		$data['google_base_categories'] = [];
 
@@ -181,12 +181,12 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		$results = $this->model_extension_feed_google_base->getCategories($filter_data);
 
 		foreach ($results as $result) {
-			$data['google_base_categories'][] = array(
+			$data['google_base_categories'][] = [
 				'google_base_category_id' => $result['google_base_category_id'],
 				'google_base_category'    => $result['google_base_category'],
 				'category_id'             => $result['category_id'],
 				'category'                => $result['category']
-			);
+			];
 		}
 
 		$category_total = $this->model_extension_feed_google_base->getTotalCategories();
@@ -254,19 +254,19 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 				$filter_name = '';
 			}
 
-			$filter_data = array(
+			$filter_data = [
 				'filter_name' => html_entity_decode($filter_name, ENT_QUOTES, 'UTF-8'),
 				'start'       => 0,
 				'limit'       => 5
-			);
+			];
 
 			$results = $this->model_extension_feed_google_base->getGoogleBaseCategories($filter_data);
 
 			foreach ($results as $result) {
-				$json[] = array(
+				$json[] = [
 					'google_base_category_id' => $result['google_base_category_id'],
 					'name'                    => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
-				);
+				];
 			}
 		}
 

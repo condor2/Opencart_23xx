@@ -100,7 +100,7 @@ class ControllerExtensionExtensionDashboard extends Controller {
 				// Compatibility code for old extension folders
 				$this->load->language('extension/dashboard/' . $extension);
 
-				$data['extensions'][] = array(
+				$data['extensions'][] = [
 					'name'       => $this->language->get('heading_title'),
 					'width'      => $this->config->get('dashboard_' . $extension . '_width'),	
 					'status'     => $this->config->get('dashboard_' . $extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),					
@@ -109,7 +109,7 @@ class ControllerExtensionExtensionDashboard extends Controller {
 					'uninstall'  => $this->url->link('extension/extension/dashboard/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, true),
 					'installed'  => in_array($extension, $extensions),
 					'edit'       => $this->url->link('extension/dashboard/' . $extension, 'token=' . $this->session->data['token'], true)
-				);
+				];
 			}
 		}
 

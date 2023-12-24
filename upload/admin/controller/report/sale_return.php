@@ -59,39 +59,39 @@ class ControllerReportSaleReturn extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('report/sale_return', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$this->load->model('report/return');
 
 		$data['returns'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_date_start'	      => $filter_date_start,
 			'filter_date_end'	      => $filter_date_end,
 			'filter_group'            => $filter_group,
 			'filter_return_status_id' => $filter_return_status_id,
 			'start'                   => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'                   => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$return_total = $this->model_report_return->getTotalReturns($filter_data);
 
 		$results = $this->model_report_return->getReturns($filter_data);
 
 		foreach ($results as $result) {
-			$data['returns'][] = array(
+			$data['returns'][] = [
 				'date_start' => date($this->language->get('date_format_short'), strtotime($result['date_start'])),
 				'date_end'   => date($this->language->get('date_format_short'), strtotime($result['date_end'])),
 				'returns'    => $result['returns']
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -121,25 +121,25 @@ class ControllerReportSaleReturn extends Controller {
 
 		$data['groups'] = [];
 
-		$data['groups'][] = array(
+		$data['groups'][] = [
 			'text'  => $this->language->get('text_year'),
 			'value' => 'year',
-		);
+		];
 
-		$data['groups'][] = array(
+		$data['groups'][] = [
 			'text'  => $this->language->get('text_month'),
 			'value' => 'month',
-		);
+		];
 
-		$data['groups'][] = array(
+		$data['groups'][] = [
 			'text'  => $this->language->get('text_week'),
 			'value' => 'week',
-		);
+		];
 
-		$data['groups'][] = array(
+		$data['groups'][] = [
 			'text'  => $this->language->get('text_day'),
 			'value' => 'day',
-		);
+		];
 
 		$url = '';
 

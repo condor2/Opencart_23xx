@@ -59,28 +59,28 @@ class ControllerReportCustomerActivity extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
 			'text' => $this->language->get('text_home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('report/customer_activity', 'token=' . $this->session->data['token'] . $url, true),
 			'text' => $this->language->get('heading_title')
-		);
+		];
 
 		$this->load->model('report/customer');
 
 		$data['activities'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_customer'   => $filter_customer,
 			'filter_ip'         => $filter_ip,
 			'filter_date_start'	=> $filter_date_start,
 			'filter_date_end'	=> $filter_date_end,
 			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'             => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$activity_total = $this->model_report_customer->getTotalCustomerActivities($filter_data);
 
@@ -89,21 +89,21 @@ class ControllerReportCustomerActivity extends Controller {
 		foreach ($results as $result) {
 			$comment = vsprintf($this->language->get('text_' . $result['key']), json_decode($result['data'], true));
 
-			$find = array(
+			$find = [
 				'customer_id=',
 				'order_id='
-			);
+			];
 
-			$replace = array(
+			$replace = [
 				$this->url->link('customer/customer/edit', 'token=' . $this->session->data['token'] . '&customer_id=', true),
 				$this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=', true)
-			);
+			];
 
-			$data['activities'][] = array(
+			$data['activities'][] = [
 				'comment'    => str_replace($find, $replace, $comment),
 				'ip'         => $result['ip'],
 				'date_added' => date($this->language->get('datetime_format'), strtotime($result['date_added']))
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

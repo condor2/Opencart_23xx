@@ -189,41 +189,41 @@ class ControllerDesignSeoUrl extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('design/seo_url', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$data['add'] = $this->url->link('design/seo_url/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('design/seo_url/delete', 'token=' . $this->session->data['token'] . $url, true);
 
 		$data['seo_urls'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_query'	     => $filter_query,
 			'filter_keyword'	 => $filter_keyword,
 			'sort'               => $sort,
 			'order'              => $order,
 			'start'              => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'              => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$seo_url_total = $this->model_design_seo_url->getTotalSeoUrls($filter_data);
 
 		$results = $this->model_design_seo_url->getSeoUrls($filter_data);
 
 		foreach ($results as $result) {
-			$data['seo_urls'][] = array(
+			$data['seo_urls'][] = [
 				'url_alias_id' => $result['url_alias_id'],
 				'query'        => $result['query'],
 				'keyword'      => $result['keyword'],
 				'edit'         => $this->url->link('design/seo_url/edit', 'token=' . $this->session->data['token'] . '&url_alias_id=' . $result['url_alias_id'] . $url, true)
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -375,15 +375,15 @@ class ControllerDesignSeoUrl extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('design/seo_url', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		if (!isset($this->request->get['url_alias_id'])) {
 			$data['action'] = $this->url->link('design/seo_url/add', 'token=' . $this->session->data['token'] . $url, true);

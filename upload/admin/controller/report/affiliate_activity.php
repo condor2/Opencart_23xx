@@ -59,28 +59,28 @@ class ControllerReportAffiliateActivity extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
 			'text' => $this->language->get('text_home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('report/affiliate_activity', 'token=' . $this->session->data['token'] . $url, true),
 			'text' => $this->language->get('heading_title')
-		);
+		];
 
 		$this->load->model('report/affiliate');
 
 		$data['activities'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_affiliate'   => $filter_affiliate,
 			'filter_ip'         => $filter_ip,
 			'filter_date_start'	=> $filter_date_start,
 			'filter_date_end'	=> $filter_date_end,
 			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'             => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$activity_total = $this->model_report_affiliate->getTotalAffiliateActivities($filter_data);
 
@@ -89,11 +89,11 @@ class ControllerReportAffiliateActivity extends Controller {
 		foreach ($results as $result) {
 			$comment = vsprintf($this->language->get('text_' . $result['key']), json_decode($result['data'], true));
 
-			$data['activities'][] = array(
+			$data['activities'][] = [
 				'comment'    => str_replace('affiliate_id=', $this->url->link('marketing/affiliate/edit', 'token=' . $this->session->data['token'] . '&affiliate_id=', true), $comment),
 				'ip'         => $result['ip'],
 				'date_added' => date($this->language->get('datetime_format'), strtotime($result['date_added']))
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

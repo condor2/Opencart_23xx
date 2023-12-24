@@ -7,15 +7,15 @@ class ControllerExtensionInstaller extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/installer', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -92,18 +92,18 @@ class ControllerExtensionInstaller extends Controller {
 				move_uploaded_file($this->request->files['file']['tmp_name'], $file);
 
 				if (file_exists($file)) {
-					$json['step'][] = array(
+					$json['step'][] = [
 						'text' => $this->language->get('text_xml'),
 						'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/xml', 'token=' . $this->session->data['token'], true)),
 						'path' => $path
-					);
+					];
 
 					// Clear temporary files
-					$json['step'][] = array(
+					$json['step'][] = [
 						'text' => $this->language->get('text_remove'),
 						'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/remove', 'token=' . $this->session->data['token'], true)),
 						'path' => $path
-					);
+					];
 				} else {
 					$json['error'] = $this->language->get('error_file');
 				}
@@ -126,18 +126,18 @@ class ControllerExtensionInstaller extends Controller {
 
 					if ($zip->open($file, $flag)) {
 						// Zip
-						$json['step'][] = array(
+						$json['step'][] = [
 							'text' => $this->language->get('text_unzip'),
 							'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/unzip', 'token=' . $this->session->data['token'], true)),
 							'path' => $path
-						);
+						];
 
 						// FTP
-						$json['step'][] = array(
+						$json['step'][] = [
 							'text' => $this->language->get('text_ftp'),
 							'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/no_ftp', 'token=' . $this->session->data['token'], true)),
 							'path' => $path
-						);
+						];
 
 						// Send make and array of actions to carry out
 						for ($i = 0; $i < $zip->numFiles; $i++) {
@@ -145,29 +145,29 @@ class ControllerExtensionInstaller extends Controller {
 
 							// SQL
 							if (substr($zip_name, 0, 11) == 'install.sql') {
-								$json['step'][] = array(
+								$json['step'][] = [
 									'text' => $this->language->get('text_sql'),
 									'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/sql', 'token=' . $this->session->data['token'], true)),
 									'path' => $path
-								);
+								];
 							}
 
 							// XML
 							if (substr($zip_name, 0, 11) == 'install.xml') {
-								$json['step'][] = array(
+								$json['step'][] = [
 									'text' => $this->language->get('text_xml'),
 									'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/xml', 'token=' . $this->session->data['token'], true)),
 									'path' => $path
-								);
+								];
 							}
 
 							// PHP
 							if (substr($zip_name, 0, 11) == 'install.php') {
-								$json['step'][] = array(
+								$json['step'][] = [
 									'text' => $this->language->get('text_php'),
 									'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/php', 'token=' . $this->session->data['token'], true)),
 									'path' => $path
-								);
+								];
 							}
 
 							// Compare admin files
@@ -200,11 +200,11 @@ class ControllerExtensionInstaller extends Controller {
 						}
 
 						// Clear temporary files
-						$json['step'][] = array(
+						$json['step'][] = [
 							'text' => $this->language->get('text_remove'),
 							'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/remove', 'token=' . $this->session->data['token'], true)),
 							'path' => $path
-						);
+						];
 
 						$zip->close();
 					} else {
@@ -229,7 +229,7 @@ class ControllerExtensionInstaller extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		}
 
-		$directory = DIR_UPLOAD  . str_replace(array('../', '..\\', '..'), '', $this->request->post['path']) . '/upload/';
+		$directory = DIR_UPLOAD  . str_replace(['../', '..\\', '..'], '', $this->request->post['path']) . '/upload/';
 
 		if (!is_dir($directory)) {
 			$json['error'] = $this->language->get('error_directory');
@@ -239,7 +239,7 @@ class ControllerExtensionInstaller extends Controller {
 			// Get a list of files ready to upload
 			$files = [];
 
-			$path = array($directory . '*');
+			$path = [$directory . '*'];
 
 			while (count($path) != 0) {
 				$next = array_shift($path);
@@ -445,7 +445,7 @@ class ControllerExtensionInstaller extends Controller {
 						$link = '';
 					}
 
-					$modification_data = array(
+					$modification_data = [
 						'name'    => $name,
 						'code'    => $code,
 						'author'  => $author,
@@ -453,7 +453,7 @@ class ControllerExtensionInstaller extends Controller {
 						'link'    => $link,
 						'xml'     => $xml,
 						'status'  => 1
-					);
+					];
 
 					if (!$json) {
 						$this->model_extension_modification->addModification($modification_data);
@@ -514,13 +514,13 @@ class ControllerExtensionInstaller extends Controller {
 			// Get a list of files ready to upload
 			$files = [];
 
-			$path = array($directory);
+			$path = [$directory];
 
 			while (count($path) != 0) {
 				$next = array_shift($path);
 
 				// We have to use scandir function because glob will not pick up dot files.
-				foreach (array_diff(scandir($next), array('.', '..')) as $file) {
+				foreach (array_diff(scandir($next), ['.', '..']) as $file) {
 					$file = $next . '/' . $file;
 
 					if (is_dir($file)) {
@@ -570,13 +570,13 @@ class ControllerExtensionInstaller extends Controller {
 					// Get a list of files ready to upload
 					$files = [];
 
-					$path = array($directory);
+					$path = [$directory];
 
 					while (count($path) != 0) {
 						$next = array_shift($path);
 
 						// We have to use scandir function because glob will not pick up dot files.
-						foreach (array_diff(scandir($next), array('.', '..')) as $file) {
+						foreach (array_diff(scandir($next), ['.', '..']) as $file) {
 							$file = $next . '/' . $file;
 
 							if (is_dir($file)) {

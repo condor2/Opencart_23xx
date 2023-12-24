@@ -323,20 +323,20 @@ class ControllerSettingSetting extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_stores'),
 			'href' => $this->url->link('setting/store', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('setting/setting', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
@@ -387,10 +387,10 @@ class ControllerSettingSetting extends Controller {
 		foreach ($extensions as $code) {
 			$this->load->language('extension/theme/' . $code);
 			
-			$data['themes'][] = array(
+			$data['themes'][] = [
 				'text'  => $this->language->get('heading_title'),
 				'value' => $code
-			);
+			];
 		}
 			
 		if (isset($this->request->post['config_layout_id'])) {
@@ -521,10 +521,10 @@ class ControllerSettingSetting extends Controller {
 
 			$hour = ' (' . date('P', $timestamp) . ')';
 
-			$data['timezones'][] = array(
+			$data['timezones'][] = [
 				'text'  => $timezone . $hour,
 				'value' => $timezone
-			);
+			];
 		}
 
 		date_default_timezone_set($this->config->get('config_timezone'));
@@ -577,10 +577,10 @@ class ControllerSettingSetting extends Controller {
 			if ($this->config->get($extension_code . '_status')) {
 				$this->load->language('extension/currency/' . $extension_code);
 
-				$data['currency_engines'][] = array(
+				$data['currency_engines'][] = [
 					'text'  => $this->language->get('heading_title'),
 					'value' => $extension_code
-				);
+				];
 			}
 		}
 
@@ -867,10 +867,10 @@ class ControllerSettingSetting extends Controller {
 			$this->load->language('extension/captcha/' . $code);
 
 			if ($this->config->get($code . '_status')) {
-				$data['captchas'][] = array(
+				$data['captchas'][] = [
 					'text'  => $this->language->get('heading_title'),
 					'value' => $code
-				);
+				];
 			}
 		}
 
@@ -884,30 +884,30 @@ class ControllerSettingSetting extends Controller {
 
 		$data['captcha_pages'] = [];
 
-		$data['captcha_pages'][] = array(
+		$data['captcha_pages'][] = [
 			'text'  => $this->language->get('text_register'),
 			'value' => 'register'
-		);
+		];
 		
-		$data['captcha_pages'][] = array(
+		$data['captcha_pages'][] = [
 			'text'  => $this->language->get('text_guest'),
 			'value' => 'guest'
-		);
+		];
 		
-		$data['captcha_pages'][] = array(
+		$data['captcha_pages'][] = [
 			'text'  => $this->language->get('text_review'),
 			'value' => 'review'
-		);
+		];
 
-		$data['captcha_pages'][] = array(
+		$data['captcha_pages'][] = [
 			'text'  => $this->language->get('text_return'),
 			'value' => 'return'
-		);
+		];
 
-		$data['captcha_pages'][] = array(
+		$data['captcha_pages'][] = [
 			'text'  => $this->language->get('text_contact'),
 			'value' => 'contact'
-		);
+		];
 
 		if (isset($this->request->post['config_logo'])) {
 			$data['config_logo'] = $this->request->post['config_logo'];
@@ -991,25 +991,25 @@ class ControllerSettingSetting extends Controller {
 
 		$data['mail_alerts'] = [];
 
-		$data['mail_alerts'][] = array(
+		$data['mail_alerts'][] = [
 			'text'  => $this->language->get('text_mail_account'),
 			'value' => 'account'
-		);
+		];
 
-		$data['mail_alerts'][] = array(
+		$data['mail_alerts'][] = [
 			'text'  => $this->language->get('text_mail_affiliate'),
 			'value' => 'affiliate'
-		);
+		];
 
-		$data['mail_alerts'][] = array(
+		$data['mail_alerts'][] = [
 			'text'  => $this->language->get('text_mail_order'),
 			'value' => 'order'
-		);
+		];
 
-		$data['mail_alerts'][] = array(
+		$data['mail_alerts'][] = [
 			'text'  => $this->language->get('text_mail_review'),
 			'value' => 'review'
-		);
+		];
 
 		if (isset($this->request->post['config_alert_email'])) {
 			$data['config_alert_email'] = $this->request->post['config_alert_email'];

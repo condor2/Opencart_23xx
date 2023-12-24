@@ -151,22 +151,22 @@ class ControllerExtensionExtensionModule extends Controller {
 				$modules = $this->model_extension_module->getModulesByCode($extension);
 
 				foreach ($modules as $module) {
-					$module_data[] = array(
+					$module_data[] = [
 						'module_id' => $module['module_id'],
 						'name'      => $module['name'],
 						'edit'      => $this->url->link('extension/module/' . $extension, 'token=' . $this->session->data['token'] . '&module_id=' . $module['module_id'], true),
 						'delete'    => $this->url->link('extension/extension/module/delete', 'token=' . $this->session->data['token'] . '&module_id=' . $module['module_id'], true)
-					);
+					];
 				}
 
-				$data['extensions'][] = array(
+				$data['extensions'][] = [
 					'name'      => $this->language->get('heading_title'),
 					'module'    => $module_data,
 					'install'   => $this->url->link('extension/extension/module/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, true),
 					'uninstall' => $this->url->link('extension/extension/module/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, true),
 					'installed' => in_array($extension, $extensions),
 					'edit'      => $this->url->link('extension/module/' . $extension, 'token=' . $this->session->data['token'], true)
-				);
+				];
 			}
 		}
 

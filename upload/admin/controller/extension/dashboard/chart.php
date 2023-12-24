@@ -38,20 +38,20 @@ class ControllerExtensionDashboardChart extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=dashboard', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/dashboard/chart', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['action'] = $this->url->link('extension/dashboard/chart', 'token=' . $this->session->data['token'], true);
 
@@ -141,30 +141,30 @@ class ControllerExtensionDashboardChart extends Controller {
 				$results = $this->model_report_sale->getTotalOrdersByDay();
 
 				foreach ($results as $key => $value) {
-					$json['order']['data'][] = array($key, $value['total']);
+					$json['order']['data'][] = [$key, $value['total']];
 				}
 
 				$results = $this->model_report_customer->getTotalCustomersByDay();
 
 				foreach ($results as $key => $value) {
-					$json['customer']['data'][] = array($key, $value['total']);
+					$json['customer']['data'][] = [$key, $value['total']];
 				}
 
 				for ($i = 0; $i < 24; $i++) {
-					$json['xaxis'][] = array($i, $i);
+					$json['xaxis'][] = [$i, $i];
 				}
 				break;
 			case 'week':
 				$results = $this->model_report_sale->getTotalOrdersByWeek();
 
 				foreach ($results as $key => $value) {
-					$json['order']['data'][] = array($key, $value['total']);
+					$json['order']['data'][] = [$key, $value['total']];
 				}
 
 				$results = $this->model_report_customer->getTotalCustomersByWeek();
 
 				foreach ($results as $key => $value) {
-					$json['customer']['data'][] = array($key, $value['total']);
+					$json['customer']['data'][] = [$key, $value['total']];
 				}
 
 				$date_start = strtotime('-' . date('w') . ' days');
@@ -172,43 +172,43 @@ class ControllerExtensionDashboardChart extends Controller {
 				for ($i = 0; $i < 7; $i++) {
 					$date = date('Y-m-d', $date_start + ($i * 86400));
 
-					$json['xaxis'][] = array(date('w', strtotime($date)), date('D', strtotime($date)));
+					$json['xaxis'][] = [date('w', strtotime($date)), date('D', strtotime($date))];
 				}
 				break;
 			case 'month':
 				$results = $this->model_report_sale->getTotalOrdersByMonth();
 
 				foreach ($results as $key => $value) {
-					$json['order']['data'][] = array($key, $value['total']);
+					$json['order']['data'][] = [$key, $value['total']];
 				}
 
 				$results = $this->model_report_customer->getTotalCustomersByMonth();
 
 				foreach ($results as $key => $value) {
-					$json['customer']['data'][] = array($key, $value['total']);
+					$json['customer']['data'][] = [$key, $value['total']];
 				}
 
 				for ($i = 1; $i <= date('t'); $i++) {
 					$date = date('Y') . '-' . date('m') . '-' . $i;
 
-					$json['xaxis'][] = array(date('j', strtotime($date)), date('d', strtotime($date)));
+					$json['xaxis'][] = [date('j', strtotime($date)), date('d', strtotime($date))];
 				}
 				break;
 			case 'year':
 				$results = $this->model_report_sale->getTotalOrdersByYear();
 
 				foreach ($results as $key => $value) {
-					$json['order']['data'][] = array($key, $value['total']);
+					$json['order']['data'][] = [$key, $value['total']];
 				}
 
 				$results = $this->model_report_customer->getTotalCustomersByYear();
 
 				foreach ($results as $key => $value) {
-					$json['customer']['data'][] = array($key, $value['total']);
+					$json['customer']['data'][] = [$key, $value['total']];
 				}
 
 				for ($i = 1; $i <= 12; $i++) {
-					$json['xaxis'][] = array($i, date('M', mktime(0, 0, 0, $i)));
+					$json['xaxis'][] = [$i, date('M', mktime(0, 0, 0, $i))];
 				}
 				break;
 		}

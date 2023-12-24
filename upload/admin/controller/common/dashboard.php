@@ -9,15 +9,15 @@ class ControllerCommonDashboard extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['token'] = $this->session->data['token'];
 
@@ -42,12 +42,12 @@ class ControllerCommonDashboard extends Controller {
 				$output = $this->load->controller('extension/dashboard/' . $code . '/dashboard');
 
 				if ($output) {
-					$dashboards[] = array(
+					$dashboards[] = [
 						'code'       => $code,
 						'width'      => $this->config->get('dashboard_' . $code . '_width'),
 						'sort_order' => $this->config->get('dashboard_' . $code . '_sort_order'),
 						'output'     => $output
-					);
+					];
 				}
 			}
 		}

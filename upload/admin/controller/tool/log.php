@@ -35,15 +35,15 @@ class ControllerToolLog extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('tool/log', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['download'] = $this->url->link('tool/log/download', 'token=' . $this->session->data['token'], true);
 		$data['clear'] = $this->url->link('tool/log/clear', 'token=' . $this->session->data['token'], true);
@@ -56,7 +56,7 @@ class ControllerToolLog extends Controller {
 			$size = filesize($file);
 
 			if ($size >= 5242880) {
-				$suffix = array(
+				$suffix = [
 					'B',
 					'KB',
 					'MB',
@@ -66,7 +66,7 @@ class ControllerToolLog extends Controller {
 					'EB',
 					'ZB',
 					'YB'
-				);
+				];
 
 				$i = 0;
 

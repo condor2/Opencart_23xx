@@ -70,15 +70,15 @@ class ControllerCommonForgotten extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', '', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('common/forgotten', 'token=' . '', true)
-		);
+		];
 
 		$data['action'] = $this->url->link('common/forgotten', '', true);
 

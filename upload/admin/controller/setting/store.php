@@ -97,15 +97,15 @@ class ControllerSettingStore extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('setting/store', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['add'] = $this->url->link('setting/store/add', 'token=' . $this->session->data['token'], true);
 		$data['delete'] = $this->url->link('setting/store/delete', 'token=' . $this->session->data['token'], true);
@@ -116,30 +116,30 @@ class ControllerSettingStore extends Controller {
 
 		if ($page == 1) {
 			$store_total = 1;
-			$data['stores'][] = array(
+			$data['stores'][] = [
 				'store_id' => 0,
 				'name'     => $this->config->get('config_name') . $this->language->get('text_default'),
 				'url'      => HTTP_CATALOG,
 				'edit'     => $this->url->link('setting/setting', 'token=' . $this->session->data['token'], true)
-			);
+			];
 		}
 
-		$filter_data = array(
+		$filter_data = [
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$store_total += $this->model_setting_store->getTotalStores($filter_data);
 
 		$results = $this->model_setting_store->getStores($filter_data);
 
 		foreach ($results as $result) {
-			$data['stores'][] = array(
+			$data['stores'][] = [
 				'store_id' => $result['store_id'],
 				'name'     => $result['name'],
 				'url'      => $result['url'],
 				'edit'     => $this->url->link('setting/store/edit', 'token=' . $this->session->data['token'] . '&store_id=' . $result['store_id'], true)
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -335,26 +335,26 @@ class ControllerSettingStore extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('setting/store', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		if (!isset($this->request->get['store_id'])) {
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_settings'),
 				'href' => $this->url->link('setting/store/add', 'token=' . $this->session->data['token'], true)
-			);
+			];
 		} else {
-			$data['breadcrumbs'][] = array(
+			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_settings'),
 				'href' => $this->url->link('setting/store/edit', 'token=' . $this->session->data['token'] . '&store_id=' . $this->request->get['store_id'], true)
-			);
+			];
 		}
 
 		if (isset($this->session->data['success'])) {
@@ -438,10 +438,10 @@ class ControllerSettingStore extends Controller {
 		foreach ($extensions as $code) {
 			$this->load->language('extension/theme/' . $code);
 
-			$data['themes'][] = array(
+			$data['themes'][] = [
 				'text'  => $this->language->get('heading_title'),
 				'value' => $code
-			);
+			];
 		}
 
 		if (isset($this->request->post['config_layout_id'])) {

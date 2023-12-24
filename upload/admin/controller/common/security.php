@@ -89,7 +89,7 @@ class ControllerCommonSecurity extends Controller {
 				$files = [];
 
 				// Make path into an array
-				$source = array(DIR_SYSTEM . 'storage/');
+				$source = [DIR_SYSTEM . 'storage/'];
 
 				// While the path array is still populated keep looping through
 				while (count($source) != 0) {
@@ -125,10 +125,10 @@ class ControllerCommonSecurity extends Controller {
 				}
 
 				// Modify the config files
-				$files = array(
+				$files = [
 					DIR_APPLICATION . 'config.php',
 					realpath(DIR_APPLICATION . '/../') . '/config.php'
-				);
+				];
 
 				foreach ($files as $file) {
 					$output = '';

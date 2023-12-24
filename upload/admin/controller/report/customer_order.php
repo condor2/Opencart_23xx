@@ -59,35 +59,35 @@ class ControllerReportCustomerOrder extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('report/customer_order', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$this->load->model('report/customer');
 
 		$data['customers'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_date_start'			=> $filter_date_start,
 			'filter_date_end'			=> $filter_date_end,
 			'filter_customer'			=> $filter_customer,
 			'filter_order_status_id'	=> $filter_order_status_id,
 			'start'						=> ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'						=> $this->config->get('config_limit_admin')
-		);
+		];
 
 		$customer_total = $this->model_report_customer->getTotalOrders($filter_data);
 
 		$results = $this->model_report_customer->getOrders($filter_data);
 
 		foreach ($results as $result) {
-			$data['customers'][] = array(
+			$data['customers'][] = [
 				'customer'       => $result['customer'],
 				'email'          => $result['email'],
 				'customer_group' => $result['customer_group'],
@@ -96,7 +96,7 @@ class ControllerReportCustomerOrder extends Controller {
 				'products'       => $result['products'],
 				'total'          => $this->currency->format($result['total'], $this->config->get('config_currency')),
 				'edit'           => $this->url->link('customer/customer/edit', 'token=' . $this->session->data['token'] . '&customer_id=' . $result['customer_id'] . $url, true)
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

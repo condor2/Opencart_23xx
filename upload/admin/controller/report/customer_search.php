@@ -69,22 +69,22 @@ class ControllerReportCustomerSearch extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
 			'text' => $this->language->get('text_home')
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('report/customer_search', 'token=' . $this->session->data['token'] . $url, true),
 			'text' => $this->language->get('heading_title')
-		);
+		];
 
 		$this->load->model('report/customer');
 		$this->load->model('catalog/category');
 
 		$data['searches'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_date_start'	=> $filter_date_start,
 			'filter_date_end'	=> $filter_date_end,
 			'filter_keyword'    => $filter_keyword,
@@ -92,7 +92,7 @@ class ControllerReportCustomerSearch extends Controller {
 			'filter_ip'         => $filter_ip,
 			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'             => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$search_total = $this->model_report_customer->getTotalCustomerSearches($filter_data);
 
@@ -113,14 +113,14 @@ class ControllerReportCustomerSearch extends Controller {
 				$customer = $this->language->get('text_guest');
 			}
 
-			$data['searches'][] = array(
+			$data['searches'][] = [
 				'keyword'     => $result['keyword'],
 				'products'    => $result['products'],
 				'category'    => $category,
 				'customer'    => $customer,
 				'ip'          => $result['ip'],
 				'date_added'  => date($this->language->get('datetime_format'), strtotime($result['date_added']))
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

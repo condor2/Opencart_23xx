@@ -3,11 +3,11 @@ class ControllerStartupLogin extends Controller {
 	public function index() {
 		$route = isset($this->request->get['route']) ? $this->request->get['route'] : '';
 
-		$ignore = array(
+		$ignore = [
 			'common/login',
 			'common/forgotten',
 			'common/reset'
-		);
+		];
 
 		// User
 		$this->registry->set('user', new Cart\User($this->registry));
@@ -17,14 +17,14 @@ class ControllerStartupLogin extends Controller {
 		}
 
 		if (isset($this->request->get['route'])) {
-			$ignore = array(
+			$ignore = [
 				'common/login',
 				'common/logout',
 				'common/forgotten',
 				'common/reset',
 				'error/not_found',
 				'error/permission'
-			);
+			];
 
 			if (!in_array($route, $ignore) && (!isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token']))) {
 				return new Action('common/login');

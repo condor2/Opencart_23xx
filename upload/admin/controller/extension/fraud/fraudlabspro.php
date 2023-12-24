@@ -59,20 +59,20 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=fraud', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/fraud/fraudlabspro', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['action'] = $this->url->link('extension/fraud/fraudlabspro', 'token=' . $this->session->data['token'], true);
 
@@ -185,20 +185,20 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 
 			//Update history record
 			if (strtolower($flp_status) == 'approve'){
-				$data_temp = array(
+				$data_temp = [
 					'order_status_id'=>$this->config->get('fraudlabspro_approve_status_id'),
 					'notify'=>0,
 					'comment'=>'Approved using FraudLabs Pro.'
-				);
+				];
 
 				$this->model_extension_fraud_fraudlabspro->addOrderHistory($this->request->get['order_id'], $data_temp);
 			}
 			elseif (strtolower($flp_status) == "reject"){
-				$data_temp = array(
+				$data_temp = [
 					'order_status_id'=>$this->config->get('fraudlabspro_reject_status_id'),
 					'notify'=>0,
 					'comment'=>'Rejected using FraudLabs Pro.'
-				);
+				];
 
 				$this->model_extension_fraud_fraudlabspro->addOrderHistory($this->request->get['order_id'], $data_temp);
 			}

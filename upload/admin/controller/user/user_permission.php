@@ -145,38 +145,38 @@ class ControllerUserUserPermission extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('user/user_permission', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$data['add'] = $this->url->link('user/user_permission/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('user/user_permission/delete', 'token=' . $this->session->data['token'] . $url, true);
 
 		$data['user_groups'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$user_group_total = $this->model_user_user_group->getTotalUserGroups();
 
 		$results = $this->model_user_user_group->getUserGroups($filter_data);
 
 		foreach ($results as $result) {
-			$data['user_groups'][] = array(
+			$data['user_groups'][] = [
 				'user_group_id' => $result['user_group_id'],
 				'name'          => $result['name'],
 				'edit'          => $this->url->link('user/user_permission/edit', 'token=' . $this->session->data['token'] . '&user_group_id=' . $result['user_group_id'] . $url, true)
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -298,15 +298,15 @@ class ControllerUserUserPermission extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('user/user_permission', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		if (!isset($this->request->get['user_group_id'])) {
 			$data['action'] = $this->url->link('user/user_permission/add', 'token=' . $this->session->data['token'] . $url, true);
@@ -328,7 +328,7 @@ class ControllerUserUserPermission extends Controller {
 			$data['name'] = '';
 		}
 
-		$ignore = array(
+		$ignore = [
 			'common/dashboard',
 			'common/startup',
 			'common/login',
@@ -339,14 +339,14 @@ class ControllerUserUserPermission extends Controller {
 			'common/header',
 			'error/not_found',
 			'error/permission'
-		);
+		];
 
 		$data['permissions'] = [];
 
 		$files = [];
 
 		// Make path into an array
-		$path = array(DIR_APPLICATION . 'controller/*');
+		$path = [DIR_APPLICATION . 'controller/*'];
 
 		// While the path array is still populated keep looping through
 		while (count($path) != 0) {

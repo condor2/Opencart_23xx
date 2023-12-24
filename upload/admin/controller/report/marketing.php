@@ -49,27 +49,27 @@ class ControllerReportMarketing extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('report/marketing', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$this->load->model('report/marketing');
 
 		$data['marketings'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_date_start'	     => $filter_date_start,
 			'filter_date_end'	     => $filter_date_end,
 			'filter_order_status_id' => $filter_order_status_id,
 			'start'                  => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'                  => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$marketing_total = $this->model_report_marketing->getTotalMarketing($filter_data);
 
@@ -78,19 +78,19 @@ class ControllerReportMarketing extends Controller {
 		foreach ($results as $result) {
 			$action = [];
 
-			$action[] = array(
+			$action[] = [
 				'text' => $this->language->get('text_edit'),
 				'href' => $this->url->link('marketing/marketing/edit', 'token=' . $this->session->data['token'] . '&marketing_id=' . $result['marketing_id'] . $url, true)
-			);
+			];
 
-			$data['marketings'][] = array(
+			$data['marketings'][] = [
 				'campaign' => $result['campaign'],
 				'code'     => $result['code'],
 				'clicks'   => $result['clicks'],
 				'orders'   => $result['orders'],
 				'total'    => $this->currency->format($result['total'], $this->config->get('config_currency')),
 				'action'   => $action
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

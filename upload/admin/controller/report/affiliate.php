@@ -39,33 +39,33 @@ class ControllerReportAffiliate extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('report/affiliate', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$this->load->model('report/affiliate');
 
 		$data['affiliates'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_date_start'	=> $filter_date_start,
 			'filter_date_end'	=> $filter_date_end,
 			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'             => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$affiliate_total = $this->model_report_affiliate->getTotalCommission($filter_data);
 
 		$results = $this->model_report_affiliate->getCommission($filter_data);
 
 		foreach ($results as $result) {
-			$data['affiliates'][] = array(
+			$data['affiliates'][] = [
 				'affiliate'  => $result['affiliate'],
 				'email'      => $result['email'],
 				'status'     => ($result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled')),
@@ -73,7 +73,7 @@ class ControllerReportAffiliate extends Controller {
 				'orders'     => $result['orders'],
 				'total'      => $this->currency->format($result['total'], $this->config->get('config_currency')),
 				'edit'       => $this->url->link('marketing/affiliate/edit', 'token=' . $this->session->data['token'] . '&affiliate_id=' . $result['affiliate_id'] . $url, true)
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

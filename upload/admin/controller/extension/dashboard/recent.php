@@ -38,20 +38,20 @@ class ControllerExtensionDashboardRecent extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=dashboard', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/dashboard/recent', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['action'] = $this->url->link('extension/dashboard/recent', 'token=' . $this->session->data['token'], true);
 
@@ -117,26 +117,26 @@ class ControllerExtensionDashboardRecent extends Controller {
 		// Last 5 Orders
 		$data['orders'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'sort'  => 'o.date_added',
 			'order' => 'DESC',
 			'start' => 0,
 			'limit' => 5
-		);
+		];
 
 		$this->load->model('sale/order');
 		
 		$results = $this->model_sale_order->getOrders($filter_data);
 
 		foreach ($results as $result) {
-			$data['orders'][] = array(
+			$data['orders'][] = [
 				'order_id'   => $result['order_id'],
 				'customer'   => $result['customer'],
 				'status'     => $result['order_status'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'view'       => $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'], true),
-			);
+			];
 		}
 
 		return $this->load->view('extension/dashboard/recent_info', $data);

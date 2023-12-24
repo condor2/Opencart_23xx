@@ -59,40 +59,40 @@ class ControllerReportProductPurchased extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('report/product_purchased', 'token=' . $this->session->data['token'] . $url, true)
-		);
+		];
 
 		$this->load->model('report/product');
 
 		$data['products'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_date_start'	     => $filter_date_start,
 			'filter_date_end'	     => $filter_date_end,
 			'filter_order_status_id' => $filter_order_status_id,
 			'filter_name'            => $filter_name,
 			'start'                  => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'                  => $this->config->get('config_limit_admin')
-		);
+		];
 
 		$product_total = $this->model_report_product->getTotalPurchased($filter_data);
 
 		$results = $this->model_report_product->getPurchased($filter_data);
 
 		foreach ($results as $result) {
-			$data['products'][] = array(
+			$data['products'][] = [
 				'name'       => $result['name'],
 				'model'      => $result['model'],
 				'quantity'   => $result['quantity'],
 				'total'      => $this->currency->format($result['total'], $this->config->get('config_currency'))
-			);
+			];
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

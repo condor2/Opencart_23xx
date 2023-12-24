@@ -56,15 +56,15 @@ class ControllerMarketingContact extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('marketing/contact', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['cancel'] = $this->url->link('marketing/contact', 'token=' . $this->session->data['token'], true);
 
@@ -136,11 +136,11 @@ class ControllerMarketingContact extends Controller {
 
 				switch ($this->request->post['to']) {
 					case 'newsletter':
-						$customer_data = array(
+						$customer_data = [
 							'filter_newsletter' => 1,
 							'start'             => ($page - 1) * 10,
 							'limit'             => 10
-						);
+						];
 
 						$email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
 
@@ -151,10 +151,10 @@ class ControllerMarketingContact extends Controller {
 						}
 						break;
 					case 'customer_all':
-						$customer_data = array(
+						$customer_data = [
 							'start' => ($page - 1) * 10,
 							'limit' => 10
-						);
+						];
 
 						$email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
 
@@ -165,11 +165,11 @@ class ControllerMarketingContact extends Controller {
 						}
 						break;
 					case 'customer_group':
-						$customer_data = array(
+						$customer_data = [
 							'filter_customer_group_id' => $this->request->post['customer_group_id'],
 							'start'                    => ($page - 1) * 10,
 							'limit'                    => 10
-						);
+						];
 
 						$email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
 
@@ -198,10 +198,10 @@ class ControllerMarketingContact extends Controller {
 						}
 						break;
 					case 'affiliate_all':
-						$affiliate_data = array(
+						$affiliate_data = [
 							'start' => ($page - 1) * 10,
 							'limit' => 10
-						);
+						];
 
 						$email_total = $this->model_marketing_affiliate->getTotalAffiliates($affiliate_data);
 

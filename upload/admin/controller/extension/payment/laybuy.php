@@ -23,20 +23,20 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/payment/laybuy', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -172,10 +172,10 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			$category_info = $this->model_catalog_category->getCategory($category_id);
 
 			if ($category_info) {
-				$data['categories'][] = array(
+				$data['categories'][] = [
 					'category_id' 	=> $category_info['category_id'],
 					'name' 			=> ($category_info['path']) ? $category_info['path'] . ' &gt; ' . $category_info['name'] : $category_info['name']
-				);
+				];
 			}
 		}
 
@@ -201,10 +201,10 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			$customer_group_info = $this->model_customer_customer_group->getCustomerGroup($customer_group_id);
 
 			if ($customer_group_info) {
-				$data['customer_groups'][] = array(
+				$data['customer_groups'][] = [
 					'customer_group_id' => $customer_group_info['customer_group_id'],
 					'name'				=> $customer_group_info['name']
-				);
+				];
 			}
 		}
 
@@ -375,7 +375,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 		$data['reports'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'filter_order_id'	=> $filter_order_id,
 			'filter_customer'	=> $filter_customer,
 			'filter_dp_percent'	=> $filter_dp_percent,
@@ -386,7 +386,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			'order'				=> $order,
 			'start'				=> ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'				=> $this->config->get('config_limit_admin')
-		);
+		];
 
 		$report_total = $this->model_extension_payment_laybuy->getTotalTransactions($filter_data);
 
@@ -401,7 +401,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 				$customer_url = $this->url->link('customer/customer/edit', 'token=' . $this->session->data['token'] . '&customer_id=' . (int)$customer_id, true);
 			}
 
-			$data['reports'][] = array(
+			$data['reports'][] = [
 				'id'			=> $result['laybuy_transaction_id'],
 				'order_id'		=> $result['order_id'],
 				'order_url'		=> $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . (int)$result['order_id'], true),
@@ -416,7 +416,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 				'status'		=> $this->model_extension_payment_laybuy->getStatusLabel($result['status']),
 				'date_added'	=> date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'view'			=> $this->url->link('extension/payment/laybuy/transaction', 'token=' . $this->session->data['token'] . '&id=' . (int)$result['laybuy_transaction_id'], true)
-			);
+			];
 		}
 
 		if (isset($this->request->post['selected'])) {
@@ -627,23 +627,23 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 							$next_payment_date = $payment['paymentDate'];
 
 							if ($payment['type'] == 'd') {
-								$report_content[] = array(
+								$report_content[] = [
 									'instalment'	=> 0,
 									'amount'		=> $this->currency->format($payment['amount'], $transaction['currency']),
 									'date'			=> $date,
 									'pp_trans_id'	=> $payment['txnID'],
 									'status'		=> $payment['paymentStatus']
-								);
+								];
 							} elseif ($payment['type'] == 'p') {
 								$pending_flag = true;
 
-								$report_content[] = array(
+								$report_content[] = [
 									'instalment'	=> $month,
 									'amount'		=> $this->currency->format($payment['amount'], $transaction['currency']),
 									'date'			=> $date,
 									'pp_trans_id'	=> $payment['txnID'],
 									'status'		=> $payment['paymentStatus']
-								);
+								];
 
 								$next_payment_status = $payment['paymentStatus'];
 							}
@@ -660,13 +660,13 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 								$next_payment_date = date("Y-m-d h:i:s", strtotime($next_payment_date . " +1 month"));
 								$date = date($this->language->get('date_format_short'), strtotime($next_payment_date));
 
-								$report_content[] = array(
+								$report_content[] = [
 									'instalment'	=> $month,
 									'amount'		=> $this->currency->format($transaction['payment_amounts'], $transaction['currency']),
 									'date'			=> $date,
 									'pp_trans_id'	=> '',
 									'status'		=> $next_payment_status
-								);
+								];
 							}
 						}
 
@@ -748,25 +748,25 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/payment/laybuy', 'token=' . $this->session->data['token'] . '#reportstab', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_transaction_title'),
 			'href' => $this->url->link('extension/payment/laybuy/transaction', 'token=' . $this->session->data['token'] . '&id=' . $id, true)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_transaction_title');
 
@@ -836,13 +836,13 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 			$order = $this->model_sale_order->getOrder($transaction_info['order_id']);
 
-			$data['order_info'] = array(
+			$data['order_info'] = [
 				'currency_value' => $order['currency_value']
-			);
+			];
 
 			$data['total'] = $this->model_extension_payment_laybuy->getRemainingAmount($transaction_info['amount'], $transaction_info['downpayment_amount'], $transaction_info['payment_amounts'], $transaction_info['transaction']);
 
-			$data['transaction'] = array(
+			$data['transaction'] = [
 				'paypal_profile_id' => $transaction_info['paypal_profile_id'],
 				'laybuy_ref_no' 	=> $transaction_info['laybuy_ref_no'],
 				'order_id'        	=> $transaction_info['order_id'],
@@ -865,7 +865,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 				'first_payment_due' => date($this->language->get('date_format_short'), strtotime($transaction_info['first_payment_due'])),
 				'last_payment_due'  => date($this->language->get('date_format_short'), strtotime($transaction_info['last_payment_due'])),
 				'report'        	=> json_decode($transaction_info['report'], true)
-			);
+			];
 		} else {
 			$data['transaction'] = [];
 
@@ -1161,10 +1161,10 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			$results = $this->model_customer_customer_group->getCustomerGroups();
 
 			foreach ($results as $result) {
-				$json[] = array(
+				$json[] = [
 					'customer_group_id' => $result['customer_group_id'],
 					'name'       		=> strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
-				);
+				];
 			}
 		}
 
