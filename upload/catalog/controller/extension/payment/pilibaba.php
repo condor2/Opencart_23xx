@@ -43,7 +43,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				'productId'  => $product['product_id'],
 				'quantity'   => $product['quantity'],
 				'weight'     => $weight
-			)];
+			]);
 		}
 
 		$data['products'] = $products;
