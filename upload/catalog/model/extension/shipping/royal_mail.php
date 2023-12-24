@@ -331,7 +331,7 @@ class ModelExtensionShippingRoyalMail extends Model {
 
 					}
 
-					$quote_data['special_delivery_1000'] = a[
+					$quote_data['special_delivery_1000'] = [
 						'code'         => 'royal_mail.special_delivery_1000',
 						'title'        => $title,
 						'cost'         => $cost,

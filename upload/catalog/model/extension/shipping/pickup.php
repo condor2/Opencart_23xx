@@ -26,7 +26,7 @@ class ModelExtensionShippingPickup extends Model {
 				'text'         => $this->currency->format(0.00, $this->session->data['currency'])
 			];
 
-			$method_data = a[
+			$method_data = [
 				'code'       => 'pickup',
 				'title'      => $this->language->get('text_title'),
 				'quote'      => $quote_data,
