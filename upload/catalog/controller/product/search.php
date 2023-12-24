@@ -73,7 +73,7 @@ class ControllerProductSearch extends Controller {
 			$this->document->setTitle($this->language->get('heading_title'));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -157,17 +157,17 @@ class ControllerProductSearch extends Controller {
 		$data['compare'] = $this->url->link('product/compare');
 
 		// 3 Level Category Search
-		$data['categories'] = array();
+		$data['categories'] = [];
 
 		$categories_1 = $this->model_catalog_category->getCategories(0);
 
 		foreach ($categories_1 as $category_1) {
-			$level_2_data = array();
+			$level_2_data = [];
 
 			$categories_2 = $this->model_catalog_category->getCategories($category_1['category_id']);
 
 			foreach ($categories_2 as $category_2) {
-				$level_3_data = array();
+				$level_3_data = [];
 
 				$categories_3 = $this->model_catalog_category->getCategories($category_2['category_id']);
 
@@ -192,7 +192,7 @@ class ControllerProductSearch extends Controller {
 			);
 		}
 
-		$data['products'] = array();
+		$data['products'] = [];
 
 		if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {
 			$filter_data = array(
@@ -282,7 +282,7 @@ class ControllerProductSearch extends Controller {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
 
-			$data['sorts'] = array();
+			$data['sorts'] = [];
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_default'),
@@ -370,7 +370,7 @@ class ControllerProductSearch extends Controller {
 				$url .= '&order=' . $this->request->get['order'];
 			}
 
-			$data['limits'] = array();
+			$data['limits'] = [];
 
 			$limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
 

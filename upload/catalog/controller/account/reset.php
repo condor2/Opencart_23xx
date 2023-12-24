@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountReset extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		if ($this->customer->isLogged()) {
@@ -51,7 +51,7 @@ class ControllerAccountReset extends Controller {
 			$data['button_continue'] = $this->language->get('button_continue');
 			$data['button_back'] = $this->language->get('button_back');
 
-			$data['breadcrumbs'] = array();
+			$data['breadcrumbs'] = [];
 
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),

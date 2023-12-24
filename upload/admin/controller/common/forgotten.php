@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonForgotten extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
@@ -68,7 +68,7 @@ class ControllerCommonForgotten extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

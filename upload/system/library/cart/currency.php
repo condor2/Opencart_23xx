@@ -3,7 +3,7 @@ namespace Cart;
 class Currency {
 	private $db;
 	private $language;
-	private $currencies = array();
+	private $currencies = [];
 
 	/**
 	 * Constructor

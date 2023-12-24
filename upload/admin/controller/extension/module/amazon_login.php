@@ -1,7 +1,7 @@
 <?php
 class ControllerExtensionModuleAmazonLogin extends Controller {
 
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 
@@ -58,7 +58,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

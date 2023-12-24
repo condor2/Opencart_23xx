@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountRegister extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		if ($this->customer->isLogged()) {
@@ -43,7 +43,7 @@ class ControllerAccountRegister extends Controller {
 			$this->response->redirect($this->url->link('account/success'));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -156,7 +156,7 @@ class ControllerAccountRegister extends Controller {
 		if (isset($this->error['custom_field'])) {
 			$data['error_custom_field'] = $this->error['custom_field'];
 		} else {
-			$data['error_custom_field'] = array();
+			$data['error_custom_field'] = [];
 		}
 
 		if (isset($this->error['password'])) {
@@ -173,7 +173,7 @@ class ControllerAccountRegister extends Controller {
 
 		$data['action'] = $this->url->link('account/register', '', true);
 
-		$data['customer_groups'] = array();
+		$data['customer_groups'] = [];
 
 		if (is_array($this->config->get('config_customer_group_display'))) {
 			$this->load->model('account/customer_group');
@@ -284,18 +284,18 @@ class ControllerAccountRegister extends Controller {
 			if (isset($this->request->post['custom_field']['account'])) {
 				$account_custom_field = $this->request->post['custom_field']['account'];
 			} else {
-				$account_custom_field = array();
+				$account_custom_field = [];
 			}
 
 			if (isset($this->request->post['custom_field']['address'])) {
 				$address_custom_field = $this->request->post['custom_field']['address'];
 			} else {
-				$address_custom_field = array();
+				$address_custom_field = [];
 			}
 
 			$data['register_custom_field'] = $account_custom_field + $address_custom_field;
 		} else {
-			$data['register_custom_field'] = array();
+			$data['register_custom_field'] = [];
 		}
 
 		if (isset($this->request->post['password'])) {
@@ -450,7 +450,7 @@ class ControllerAccountRegister extends Controller {
 	}
 
 	public function customfield() {
-		$json = array();
+		$json = [];
 
 		$this->load->model('account/custom_field');
 

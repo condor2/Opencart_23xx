@@ -1,6 +1,6 @@
 <?php
 class ControllerLocalisationOrderStatus extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('localisation/order_status');
@@ -143,7 +143,7 @@ class ControllerLocalisationOrderStatus extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerLocalisationOrderStatus extends Controller {
 		$data['add'] = $this->url->link('localisation/order_status/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('localisation/order_status/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['order_statuses'] = array();
+		$data['order_statuses'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -209,7 +209,7 @@ class ControllerLocalisationOrderStatus extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -275,7 +275,7 @@ class ControllerLocalisationOrderStatus extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = array();
+			$data['error_name'] = [];
 		}
 
 		$url = '';
@@ -292,7 +292,7 @@ class ControllerLocalisationOrderStatus extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -321,7 +321,7 @@ class ControllerLocalisationOrderStatus extends Controller {
 		} elseif (isset($this->request->get['order_status_id'])) {
 			$data['order_status'] = $this->model_localisation_order_status->getOrderStatusDescriptions($this->request->get['order_status_id']);
 		} else {
-			$data['order_status'] = array();
+			$data['order_status'] = [];
 		}
 
 		$data['header'] = $this->load->controller('common/header');

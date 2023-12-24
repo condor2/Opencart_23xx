@@ -11,7 +11,7 @@
 * Proxy class
 */
 class Proxy extends \stdClass {
-	protected $data = array();
+	protected $data = [];
     /**
      * 
      *
@@ -32,7 +32,7 @@ class Proxy extends \stdClass {
 	}
 
 	public function __call($key, $args) {
-		$arg_data = array();
+		$arg_data = [];
 
 		$args = func_get_args();
 

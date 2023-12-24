@@ -7,7 +7,7 @@ namespace Opencart\System\Engine;
 */
 class Event {
 	protected $registry;
-	protected $data = array();
+	protected $data = [];
 
 	public function __construct($registry) {
 		$this->registry = $registry;
@@ -17,9 +17,9 @@ class Event {
 		$this->data[$trigger][] = $action;
 	}
 	
-	public function trigger($event, array $args = array()) {
+	public function trigger($event, array $args = []) {
 		foreach ($this->data as $trigger => $actions) {
-			if (preg_match('/^' . str_replace(array('\*', '\?'), array('.*', '.'), preg_quote($trigger, '/')) . '/', $event)) {
+			if (preg_match('/^' . str_replace(['\*', '\?'], ['.*', '.'], preg_quote($trigger, '/')) . '/', $event)) {
 				foreach ($actions as $action) {
 					$result = $action->execute($this->registry, $args);
 

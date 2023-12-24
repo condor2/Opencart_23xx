@@ -6,7 +6,7 @@ final class Loader {
 		$this->registry = $registry;
 	}
 	
-	public function controller($route, $data = array()) {
+	public function controller($route, $data = []) {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 		
@@ -64,7 +64,7 @@ final class Loader {
 		$this->registry->get('event')->trigger('model/' . $route . '/after', array(&$route));
 	}
 
-	public function view($route, $data = array()) {
+	public function view($route, $data = []) {
 		$output = null;
 		
 		// Sanitize the call
@@ -124,33 +124,33 @@ final class Loader {
 	}
 	
 	public function config($route) {
-		$this->registry->get('event')->trigger('config/' . $route . '/before', array(&$route));
+		$this->registry->get('event')->trigger('config/' . $route . '/before', [&$route]);
 		
 		$this->registry->get('config')->load($route);
 		
-		$this->registry->get('event')->trigger('config/' . $route . '/after', array(&$route));
+		$this->registry->get('event')->trigger('config/' . $route . '/after', [&$route]);
 	}
 
 	public function language($route) {
 		$output = null;
 		
-		$this->registry->get('event')->trigger('language/' . $route . '/before', array(&$route, &$output));
+		$this->registry->get('event')->trigger('language/' . $route . '/before', [&$route, &$output]);
 		
 		$output = $this->registry->get('language')->load($route);
 		
-		$this->registry->get('event')->trigger('language/' . $route . '/after', array(&$route, &$output));
+		$this->registry->get('event')->trigger('language/' . $route . '/after', [&$route, &$output]);
 		
 		return $output;
 	}
 	
 	protected function callback($registry, $route) {
 		return function($args) use($registry, &$route) {
-			static $model = array(); 			
+			static $model = []; 			
 			
 			$output = null;
 			
 			// Trigger the pre events
-			$result = $registry->get('event')->trigger('model/' . $route . '/before', array(&$route, &$args, &$output));
+			$result = $registry->get('event')->trigger('model/' . $route . '/before', [&$route, &$args, &$output]);
 			
 			if ($result) {
 				return $result;

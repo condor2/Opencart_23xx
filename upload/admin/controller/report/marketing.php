@@ -47,7 +47,7 @@ class ControllerReportMarketing extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -61,7 +61,7 @@ class ControllerReportMarketing extends Controller {
 
 		$this->load->model('report/marketing');
 
-		$data['marketings'] = array();
+		$data['marketings'] = [];
 
 		$filter_data = array(
 			'filter_date_start'	     => $filter_date_start,
@@ -76,7 +76,7 @@ class ControllerReportMarketing extends Controller {
 		$results = $this->model_report_marketing->getMarketing($filter_data);
 
 		foreach ($results as $result) {
-			$action = array();
+			$action = [];
 
 			$action[] = array(
 				'text' => $this->language->get('text_edit'),

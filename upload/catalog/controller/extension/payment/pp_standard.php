@@ -26,10 +26,10 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 			$data['business'] = $this->config->get('pp_standard_email');
 			$data['item_name'] = html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8');
 
-			$data['products'] = array();
+			$data['products'] = [];
 
 			foreach ($this->cart->getProducts() as $product) {
-				$option_data = array();
+				$option_data = [];
 
 				foreach ($product['option'] as $option) {
 					if ($option['type'] != 'file') {
@@ -70,7 +70,7 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 					'model'    => '',
 					'price'    => $total,
 					'quantity' => 1,
-					'option'   => array(),
+					'option'   => [],
 					'weight'   => 0
 				);
 			} else {

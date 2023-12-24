@@ -13,7 +13,7 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -135,7 +135,7 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/sagepay_server');
 
-		$payment_data = array();
+		$payment_data = [];
 
 		if ($this->config->get('sagepay_server_test') == 'live') {
 			$url = 'https://live.sagepay.com/gateway/service/token.vsp';

@@ -17,7 +17,7 @@ class ControllerReportProductViewed extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -36,7 +36,7 @@ class ControllerReportProductViewed extends Controller {
 			'limit' => $this->config->get('config_limit_admin')
 		);
 
-		$data['products'] = array();
+		$data['products'] = [];
 
 		$product_viewed_total = $this->model_report_product->getTotalProductViews();
 

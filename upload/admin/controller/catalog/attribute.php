@@ -1,6 +1,6 @@
 <?php
 class ControllerCatalogAttribute extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('catalog/attribute');
@@ -143,7 +143,7 @@ class ControllerCatalogAttribute extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerCatalogAttribute extends Controller {
 		$data['add'] = $this->url->link('catalog/attribute/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('catalog/attribute/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['attributes'] = array();
+		$data['attributes'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -213,7 +213,7 @@ class ControllerCatalogAttribute extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -283,7 +283,7 @@ class ControllerCatalogAttribute extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = array();
+			$data['error_name'] = [];
 		}
 
 		if (isset($this->error['attribute_group'])) {
@@ -306,7 +306,7 @@ class ControllerCatalogAttribute extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -339,7 +339,7 @@ class ControllerCatalogAttribute extends Controller {
 		} elseif (isset($this->request->get['attribute_id'])) {
 			$data['attribute_description'] = $this->model_catalog_attribute->getAttributeDescriptions($this->request->get['attribute_id']);
 		} else {
-			$data['attribute_description'] = array();
+			$data['attribute_description'] = [];
 		}
 
 		if (isset($this->request->post['attribute_group_id'])) {
@@ -410,7 +410,7 @@ class ControllerCatalogAttribute extends Controller {
 	}
 
 	public function autocomplete() {
-		$json = array();
+		$json = [];
 
 		if (isset($this->request->get['filter_name'])) {
 			$this->load->model('catalog/attribute');
@@ -432,7 +432,7 @@ class ControllerCatalogAttribute extends Controller {
 			}
 		}
 
-		$sort_order = array();
+		$sort_order = [];
 
 		foreach ($json as $key => $value) {
 			$sort_order[$key] = $value['name'];

@@ -13,7 +13,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -108,7 +108,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -134,7 +134,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 		$data['back'] = $this->url->link('extension/credit_card/sagepay_direct', '', true);
 		$data['add'] = $this->url->link('extension/credit_card/sagepay_direct/addCard', '', true);
 
-		$data['cards'] = array();
+		$data['cards'] = [];
 
 		$data['cards'][] = array(
 			'text' => 'Visa',
@@ -181,7 +181,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 			'value' => 'JCB'
 		);
 
-		$data['months'] = array();
+		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
 			$data['months'][] = array(
@@ -192,7 +192,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 
 		$today = getdate();
 
-		$data['year_valid'] = array();
+		$data['year_valid'] = [];
 
 		for ($i = $today['year'] - 10; $i < $today['year'] + 1; $i++) {
 			$data['year_valid'][] = array(
@@ -201,7 +201,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 			);
 		}
 
-		$data['year_expire'] = array();
+		$data['year_expire'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
 			$data['year_expire'][] = array(
@@ -255,7 +255,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/sagepay_direct');
 
-		$payment_data = array();
+		$payment_data = [];
 
 		if ($this->config->get('sagepay_direct_test') == 'live') {
 			$url = 'https://live.sagepay.com/gateway/service/directtoken.vsp';
@@ -277,7 +277,7 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 		$response_data = $this->model_extension_payment_sagepay_direct->sendCurl($url, $payment_data);
 
 		if ($response_data['Status'] == 'OK') {
-			$card_data = array();
+			$card_data = [];
 			$card_data['customer_id'] = $this->customer->getId();
 			$card_data['Token'] = $response_data['Token'];
 			$card_data['Last4Digits'] = substr(str_replace(' ', '', $payment_data['CardNumber']), -4, 4);

@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentWebPaymentSoftware extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/web_payment_software');
@@ -61,7 +61,7 @@ class ControllerExtensionPaymentWebPaymentSoftware extends Controller {
 			$data['error_key'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

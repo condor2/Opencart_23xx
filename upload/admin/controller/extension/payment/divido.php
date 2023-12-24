@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentDivido extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/divido');
@@ -70,7 +70,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -152,7 +152,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		} elseif ($this->config->get('divido_plans_selected')) {
 			$data['divido_plans_selected'] = $this->config->get('divido_plans_selected');
 		} else {
-			$data['divido_plans_selected'] = array();
+			$data['divido_plans_selected'] = [];
 		}
 
 		if (isset($this->request->post['divido_categories'])) {
@@ -160,10 +160,10 @@ class ControllerExtensionPaymentDivido extends Controller {
 		} elseif ($this->config->get('divido_categories')) {
 			$data['divido_categories'] = $this->config->get('divido_categories');
 		} else {
-			$data['divido_categories'] = array();
+			$data['divido_categories'] = [];
 		}
 
-		$data['categories'] = array();
+		$data['categories'] = [];
 
 		$this->load->model('catalog/category');
 
@@ -182,7 +182,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 			$data['divido_plans'] = $this->model_extension_payment_divido->getAllPlans();
 		} catch (Exception $e) {
 			$this->log->write($e->getMessage());
-			$data['divido_plans'] = array();
+			$data['divido_plans'] = [];
 		}
 
 		$data['token'] = $this->session->data['token'];

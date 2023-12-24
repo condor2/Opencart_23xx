@@ -15,7 +15,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 
 			$this->load->model('tool/image');
 
-			$product_data = array();
+			$product_data = [];
 
 			$google_base_categories = $this->model_extension_feed_google_base->getCategories();
 

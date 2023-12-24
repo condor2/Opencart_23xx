@@ -12,7 +12,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
-		$data['months'] = array();
+		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
 			$data['months'][] = array(
@@ -23,7 +23,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 
 		$today = getdate();
 
-		$data['years'] = array();
+		$data['years'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
 			$data['years'][] = array(
@@ -41,7 +41,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 
 		$this->load->language('extension/payment/cardinity');
 
-		$json = array();
+		$json = [];
 
 		$json['error'] = $json['success'] = $json['3ds'] = '';
 
@@ -243,7 +243,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/cardinity');
 
-		$error = array();
+		$error = [];
 
 		if (!$this->session->data['order_id']) {
 			$error['warning'] = $this->language->get('error_process_order');

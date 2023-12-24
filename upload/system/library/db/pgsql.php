@@ -27,7 +27,7 @@ class PgSQL {
 			if (is_resource($resource)) {
 				$i = 0;
 
-				$data = array();
+				$data = [];
 
 				while ($result = pg_fetch_assoc($resource)) {
 					$data[$i] = $result;

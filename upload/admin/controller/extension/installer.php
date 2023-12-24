@@ -5,7 +5,7 @@ class ControllerExtensionInstaller extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -52,7 +52,7 @@ class ControllerExtensionInstaller extends Controller {
 	public function upload() {
 		$this->load->language('extension/installer');
 
-		$json = array();
+		$json = [];
 
 		// Check user has permission
 		if (!$this->user->hasPermission('modify', 'extension/installer')) {
@@ -82,8 +82,8 @@ class ControllerExtensionInstaller extends Controller {
 			}
 
 			// Set the steps required for installation
-			$json['step'] = array();
-			$json['overwrite'] = array();
+			$json['step'] = [];
+			$json['overwrite'] = [];
 
 			if (strrchr($this->request->files['file']['name'], '.') == '.xml') {
 				$file = DIR_UPLOAD . $path . '/install.xml';
@@ -223,7 +223,7 @@ class ControllerExtensionInstaller extends Controller {
 	public function no_ftp() {
 		$this->load->language('extension/installer');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'extension/installer')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -237,7 +237,7 @@ class ControllerExtensionInstaller extends Controller {
 
 		if (!$json) {
 			// Get a list of files ready to upload
-			$files = array();
+			$files = [];
 
 			$path = array($directory . '*');
 
@@ -295,7 +295,7 @@ class ControllerExtensionInstaller extends Controller {
 	public function unzip() {
 		$this->load->language('extension/installer');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'extension/installer')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -330,7 +330,7 @@ class ControllerExtensionInstaller extends Controller {
 	public function sql() {
 		$this->load->language('extension/installer');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'extension/installer')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -375,7 +375,7 @@ class ControllerExtensionInstaller extends Controller {
 	public function xml() {
 		$this->load->language('extension/installer');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'extension/installer')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -471,7 +471,7 @@ class ControllerExtensionInstaller extends Controller {
 	public function php() {
 		$this->load->language('extension/installer');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'extension/installer')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -498,7 +498,7 @@ class ControllerExtensionInstaller extends Controller {
 	public function remove() {
 		$this->load->language('extension/installer');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'extension/installer')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -512,7 +512,7 @@ class ControllerExtensionInstaller extends Controller {
 
 		if (!$json) {
 			// Get a list of files ready to upload
-			$files = array();
+			$files = [];
 
 			$path = array($directory);
 
@@ -556,7 +556,7 @@ class ControllerExtensionInstaller extends Controller {
 	public function clear() {
 		$this->load->language('extension/installer');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'extension/installer')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -568,7 +568,7 @@ class ControllerExtensionInstaller extends Controller {
 			if ($directories) {
 				foreach ($directories as $directory) {
 					// Get a list of files ready to upload
-					$files = array();
+					$files = [];
 
 					$path = array($directory);
 

@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountEdit extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		if (!$this->customer->isLogged()) {
@@ -40,7 +40,7 @@ class ControllerAccountEdit extends Controller {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text'      => $this->language->get('text_home'),
@@ -107,7 +107,7 @@ class ControllerAccountEdit extends Controller {
 		if (isset($this->error['custom_field'])) {
 			$data['error_custom_field'] = $this->error['custom_field'];
 		} else {
-			$data['error_custom_field'] = array();
+			$data['error_custom_field'] = [];
 		}
 
 		$data['action'] = $this->url->link('account/edit', '', true);
@@ -166,7 +166,7 @@ class ControllerAccountEdit extends Controller {
 		} elseif (isset($customer_info)) {
 			$data['account_custom_field'] = json_decode($customer_info['custom_field'], true);
 		} else {
-			$data['account_custom_field'] = array();
+			$data['account_custom_field'] = [];
 		}
 
 		$data['back'] = $this->url->link('account/account', '', true);

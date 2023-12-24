@@ -9,7 +9,7 @@ class ControllerErrorNotFound extends Controller {
 
 		$data['text_not_found'] = $this->language->get('text_not_found');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

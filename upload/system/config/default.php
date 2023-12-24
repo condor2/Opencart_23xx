@@ -7,7 +7,7 @@ $_['url_autostart']        = true;
 
 // Language
 $_['language_default']     = 'en-gb';
-$_['language_autoload']    = array('en-gb');
+$_['language_autoload']    = ['en-gb'];
 
 // Date
 $_['date_timezone']        = 'UTC';
@@ -51,24 +51,24 @@ $_['config_error_log']     = true;
 $_['config_error_filename'] = 'error.log';
 
 // Response
-$_['response_header']      = array('Content-Type: text/html; charset=utf-8');
+$_['response_header']      = ['Content-Type: text/html; charset=utf-8'];
 $_['response_compression'] = 0;
 
 // Autoload Configs
-$_['config_autoload']      = array();
+$_['config_autoload']      = [];
 
 // Autoload Libraries
-$_['library_autoload']     = array();
+$_['library_autoload']     = [];
 
 // Autoload Models
-$_['model_autoload']       = array();
+$_['model_autoload']       = [];
 
 // Autoload Helpers
-$_['helper_autoload']      = array();
+$_['helper_autoload']      = [];
 
 // Actions
 $_['action_default']       = 'common/home';
 $_['action_router']        = 'startup/router';
 $_['action_error']         = 'error/not_found';
-$_['action_pre_action']    = array();
-$_['action_event']         = array();
+$_['action_pre_action']    = [];
+$_['action_event']         = [];

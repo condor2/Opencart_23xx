@@ -11,7 +11,7 @@ class ControllerAccountDownload extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -50,7 +50,7 @@ class ControllerAccountDownload extends Controller {
 
 		$limit = 10;
 
-		$data['downloads'] = array();
+		$data['downloads'] = [];
 
 		$download_total = $this->model_account_download->getTotalDownloads();
 

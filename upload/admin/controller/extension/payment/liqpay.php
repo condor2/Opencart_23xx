@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentLiqPay extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/liqpay');
@@ -64,7 +64,7 @@ class ControllerExtensionPaymentLiqPay extends Controller {
 			$data['error_type'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

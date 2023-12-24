@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS `session` (
 */
 namespace Session;
 final class DB {
-	public $data = array();
-	public $expire = array();
+	public $data = [];
+	public $expire = [];
 	public $db;
 
 	public function __construct($registry) {
@@ -39,7 +39,7 @@ final class DB {
 		if ($query->num_rows) {
 			return $query->row['data'];
 		} else {
-			return array();
+			return [];
 		}
 	}
 

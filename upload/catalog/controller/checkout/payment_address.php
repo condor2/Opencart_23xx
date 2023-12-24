@@ -56,7 +56,7 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		if (isset($this->session->data['payment_address']['custom_field'])) {
 			$data['payment_address_custom_field'] = $this->session->data['payment_address']['custom_field'];
 		} else {
-			$data['payment_address_custom_field'] = array();
+			$data['payment_address_custom_field'] = [];
 		}
 
 		$this->response->setOutput($this->load->view('checkout/payment_address', $data));
@@ -65,7 +65,7 @@ class ControllerCheckoutPaymentAddress extends Controller {
 	public function save() {
 		$this->load->language('checkout/checkout');
 
-		$json = array();
+		$json = [];
 
 		// Validate if customer is logged in.
 		if (!$this->customer->isLogged()) {

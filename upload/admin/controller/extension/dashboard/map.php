@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionDashboardMap extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/dashboard/map');
@@ -36,7 +36,7 @@ class ControllerExtensionDashboardMap extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -63,7 +63,7 @@ class ControllerExtensionDashboardMap extends Controller {
 			$data['dashboard_map_width'] = $this->config->get('dashboard_map_width');
 		}
 
-		$data['columns'] = array();
+		$data['columns'] = [];
 		
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
@@ -110,7 +110,7 @@ class ControllerExtensionDashboardMap extends Controller {
 	}
 
 	public function map() {
-		$json = array();
+		$json = [];
 
 		$this->load->model('report/sale');
 

@@ -8,7 +8,7 @@ class ControllerApiPayment extends Controller {
 		unset($this->session->data['payment_methods']);
 		unset($this->session->data['payment_method']);
 
-		$json = array();
+		$json = [];
 
 		if (!isset($this->session->data['api_id'])) {
 			$json['error']['warning'] = $this->language->get('error_permission');
@@ -123,7 +123,7 @@ class ControllerApiPayment extends Controller {
 					'iso_code_2'     => $iso_code_2,
 					'iso_code_3'     => $iso_code_3,
 					'address_format' => $address_format,
-					'custom_field'   => isset($this->request->post['custom_field']) ? $this->request->post['custom_field'] : array()
+					'custom_field'   => isset($this->request->post['custom_field']) ? $this->request->post['custom_field'] : []
 				);
 
 				$json['success'] = $this->language->get('text_address');
@@ -151,7 +151,7 @@ class ControllerApiPayment extends Controller {
 		unset($this->session->data['payment_methods']);
 		unset($this->session->data['payment_method']);
 
-		$json = array();
+		$json = [];
 
 		if (!isset($this->session->data['api_id'])) {
 			$json['error'] = $this->language->get('error_permission');
@@ -163,7 +163,7 @@ class ControllerApiPayment extends Controller {
 			
 			if (!$json) {
 				// Totals
-				$totals = array();
+				$totals = [];
 				$taxes = $this->cart->getTaxes();
 				$total = 0;
 
@@ -176,7 +176,7 @@ class ControllerApiPayment extends Controller {
 
 				$this->load->model('extension/extension');
 
-				$sort_order = array();
+				$sort_order = [];
 
 				$results = $this->model_extension_extension->getExtensions('total');
 
@@ -196,7 +196,7 @@ class ControllerApiPayment extends Controller {
 				}
 
 				// Payment Methods
-				$json['payment_methods'] = array();
+				$json['payment_methods'] = [];
 
 				$this->load->model('extension/extension');
 
@@ -222,7 +222,7 @@ class ControllerApiPayment extends Controller {
 					}
 				}
 
-				$sort_order = array();
+				$sort_order = [];
 
 				foreach ($json['payment_methods'] as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];
@@ -255,7 +255,7 @@ class ControllerApiPayment extends Controller {
 		// Delete old payment method so not to cause any issues if there is an error
 		unset($this->session->data['payment_method']);
 
-		$json = array();
+		$json = [];
 
 		if (!isset($this->session->data['api_id'])) {
 			$json['error'] = $this->language->get('error_permission');

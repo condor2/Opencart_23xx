@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentCheque extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/cheque');
@@ -48,7 +48,7 @@ class ControllerExtensionPaymentCheque extends Controller {
 			$data['error_payable'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

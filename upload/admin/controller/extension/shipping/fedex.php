@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionShippingFedex extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/shipping/fedex');
@@ -124,7 +124,7 @@ class ControllerExtensionShippingFedex extends Controller {
 			$data['error_dimension'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -186,10 +186,10 @@ class ControllerExtensionShippingFedex extends Controller {
 		} elseif ($this->config->has('fedex_service')) {
 			$data['fedex_service'] = $this->config->get('fedex_service');
 		} else {
-			$data['fedex_service'] = array();
+			$data['fedex_service'] = [];
 		}
 
-		$data['services'] = array();
+		$data['services'] = [];
 
 		$data['services'][] = array(
 			'text'  => $this->language->get('text_europe_first_international_priority'),

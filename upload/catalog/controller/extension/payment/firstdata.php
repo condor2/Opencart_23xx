@@ -79,7 +79,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 			$data['new_hosted_id'] = sha1($this->customer->getId()  . '-' . date("Y-m-d-H-i-s") . rand(10, 500));
 		} else {
 			$data['card_storage'] = 0;
-			$data['stored_cards'] = array();
+			$data['stored_cards'] = [];
 		}
 
 		return $this->load->view('extension/payment/firstdata', $data);

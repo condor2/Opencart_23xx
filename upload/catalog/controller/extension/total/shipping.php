@@ -57,7 +57,7 @@ class ControllerExtensionTotalShipping extends Controller {
 	public function quote() {
 		$this->load->language('extension/total/shipping');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->cart->hasProducts()) {
 			$json['error']['warning'] = $this->language->get('error_product');
@@ -134,7 +134,7 @@ class ControllerExtensionTotalShipping extends Controller {
 				'address_format' => $address_format
 			);
 
-			$quote_data = array();
+			$quote_data = [];
 
 			$this->load->model('extension/extension');
 
@@ -157,7 +157,7 @@ class ControllerExtensionTotalShipping extends Controller {
 				}
 			}
 
-			$sort_order = array();
+			$sort_order = [];
 
 			foreach ($quote_data as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -181,7 +181,7 @@ class ControllerExtensionTotalShipping extends Controller {
 	public function shipping() {
 		$this->load->language('extension/total/shipping');
 
-		$json = array();
+		$json = [];
 
 		if (!empty($this->request->post['shipping_method'])) {
 			$shipping = explode('.', $this->request->post['shipping_method']);
@@ -208,7 +208,7 @@ class ControllerExtensionTotalShipping extends Controller {
 	}
 
 	public function country() {
-		$json = array();
+		$json = [];
 
 		$this->load->model('localisation/country');
 

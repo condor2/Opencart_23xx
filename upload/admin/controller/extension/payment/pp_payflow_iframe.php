@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPPPayflowIframe extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/pp_payflow_iframe');
@@ -94,7 +94,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 			$data['error_partner'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -235,7 +235,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 		if ($transaction) {
 			$this->document->setTitle($this->language->get('heading_refund'));
 
-			$data['breadcrumbs'] = array();
+			$data['breadcrumbs'] = [];
 
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),
@@ -285,7 +285,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 	public function doRefund() {
 		$this->load->model('extension/payment/pp_payflow_iframe');
 		$this->load->language('extension/payment/pp_payflow_iframe');
-		$json = array();
+		$json = [];
 
 		if (isset($this->request->post['transaction_reference']) && isset($this->request->post['amount'])) {
 
@@ -366,7 +366,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 					$this->model_extension_payment_pp_payflow_iframe->addTransaction($data);
 					$this->model_extension_payment_pp_payflow_iframe->updateOrderStatus($order_id, $this->request->post['complete']);
 
-					$actions = array();
+					$actions = [];
 
 					$actions[] = array(
 						'title' => $this->language->get('text_capture'),
@@ -479,12 +479,12 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 			$data['order_id'] = (int)$this->request->get['order_id'];
 			$data['token'] = $this->session->data['token'];
 
-			$data['transactions'] = array();
+			$data['transactions'] = [];
 
 			$transactions = $this->model_extension_payment_pp_payflow_iframe->getTransactions($order_id);
 
 			foreach ($transactions as $transaction) {
-				$actions = array();
+				$actions = [];
 
 				switch ($transaction['transaction_type']) {
 					case 'V':

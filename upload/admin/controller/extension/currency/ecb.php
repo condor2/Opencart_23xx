@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionCurrencyEcb extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/currency/ecb');
@@ -45,7 +45,7 @@ class ControllerExtensionCurrencyEcb extends Controller {
 			$data['error_ip'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

@@ -57,7 +57,7 @@ class ControllerReportAffiliateActivity extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
@@ -71,7 +71,7 @@ class ControllerReportAffiliateActivity extends Controller {
 
 		$this->load->model('report/affiliate');
 
-		$data['activities'] = array();
+		$data['activities'] = [];
 
 		$filter_data = array(
 			'filter_affiliate'   => $filter_affiliate,

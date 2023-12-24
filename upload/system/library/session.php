@@ -1,7 +1,7 @@
 <?php
 class Session {
 	public $session_id = '';
-	public $data = array();
+	public $data = [];
 	public $adaptor;
 
 	public function __construct($adaptor = 'native') {
@@ -42,7 +42,7 @@ class Session {
 		}
 
 		if (!isset($_SESSION[$this->session_id])) {
-			$_SESSION[$this->session_id] = array();
+			$_SESSION[$this->session_id] = [];
 		}
 
 		$this->data = &$_SESSION[$this->session_id];

@@ -57,7 +57,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			if ($order_info) {
 				$this->model_extension_payment_laybuy->log('Order ID: ' . $order_info['order_id']);
 
-				$data = array();
+				$data = [];
 
 				$data['VERSION']      = '0.2';
 				$data['MEMBER']       = $this->config->get('laybuys_membership_id');
@@ -399,7 +399,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 						$report = $reports['report'];
 
-						$transaction = array();
+						$transaction = [];
 
 						$transaction = $this->model_extension_payment_laybuy->getTransactionByLayBuyRefId($laybuy_ref_id);
 
@@ -409,7 +409,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 						$months = $transaction['months'];
 
-						$report_content = array();
+						$report_content = [];
 
 						$pending_flag = false;
 

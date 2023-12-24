@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliatePassword extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		if (!$this->affiliate->isLogged()) {
@@ -35,7 +35,7 @@ class ControllerAffiliatePassword extends Controller {
 			$this->response->redirect($this->url->link('affiliate/account', '', true));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

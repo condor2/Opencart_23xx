@@ -1,6 +1,6 @@
 <?php
 class ControllerMarketingAffiliate extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('marketing/affiliate');
@@ -357,7 +357,7 @@ class ControllerMarketingAffiliate extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -373,7 +373,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$data['add'] = $this->url->link('marketing/affiliate/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('marketing/affiliate/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['affiliates'] = array();
+		$data['affiliates'] = [];
 
 		$filter_data = array(
 			'filter_name'       => $filter_name,
@@ -469,7 +469,7 @@ class ControllerMarketingAffiliate extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -758,7 +758,7 @@ class ControllerMarketingAffiliate extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1163,7 +1163,7 @@ class ControllerMarketingAffiliate extends Controller {
 			$page = 1;
 		}
 
-		$data['transactions'] = array();
+		$data['transactions'] = [];
 
 		$results = $this->model_marketing_affiliate->getTransactions($this->request->get['affiliate_id'], ($page - 1) * 10, 10);
 
@@ -1195,7 +1195,7 @@ class ControllerMarketingAffiliate extends Controller {
 	public function addTransaction() {
 		$this->load->language('marketing/affiliate');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'marketing/affiliate')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -1212,7 +1212,7 @@ class ControllerMarketingAffiliate extends Controller {
 	}
 
 	public function autocomplete() {
-		$affiliate_data = array();
+		$affiliate_data = [];
 
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_email'])) {
 			if (isset($this->request->get['filter_name'])) {

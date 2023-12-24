@@ -1,6 +1,6 @@
 <?php
 class ControllerCustomerCustomerGroup extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('customer/customer_group');
@@ -143,7 +143,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$data['add'] = $this->url->link('customer/customer_group/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('customer/customer_group/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['customer_groups'] = array();
+		$data['customer_groups'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -211,7 +211,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -285,7 +285,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = array();
+			$data['error_name'] = [];
 		}
 
 		$url = '';
@@ -302,7 +302,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -335,7 +335,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		} elseif (isset($this->request->get['customer_group_id'])) {
 			$data['customer_group_description'] = $this->model_customer_customer_group->getCustomerGroupDescriptions($this->request->get['customer_group_id']);
 		} else {
-			$data['customer_group_description'] = array();
+			$data['customer_group_description'] = [];
 		}
 
 		if (isset($this->request->post['approval'])) {

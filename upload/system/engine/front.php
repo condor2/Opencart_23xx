@@ -12,7 +12,7 @@
 */
 final class Front {
 	private $registry;
-	private $pre_action = array();
+	private $pre_action = [];
 	private $error;
 
 	/**

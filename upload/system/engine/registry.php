@@ -11,7 +11,7 @@
 * Registry class
 */
 final class Registry {
-	private $data = array();
+	private $data = [];
 
 	/**
      *

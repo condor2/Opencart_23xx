@@ -25,7 +25,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		$data['signType']     = 'MD5';
 		$data['signMsg']      = strtoupper(md5($data['version'] . $data['merchantNo'] . $data['currencyType'] . $data['orderNo'] . $data['orderAmount'] . $data['orderTime'] . $data['pageUrl'] . $data['serverUrl'] . $data['redirectUrl'] . $data['notifyType'] . $data['shipper'] . $data['tax'] . $data['signType'] . $this->config->get('pilibaba_secret_key')));
 
-		$products = array();
+		$products = [];
 
 		foreach ($this->cart->getProducts() as $product) {
 			// kilograms
@@ -81,9 +81,9 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 
 				$this->response->redirect($this->url->link('checkout/cart'));
 			} else {
-				$order_data = array();
+				$order_data = [];
 
-				$totals = array();
+				$totals = [];
 				$taxes = $this->cart->getTaxes();
 				$total = 0;
 
@@ -96,7 +96,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 
 				$this->load->model('extension/extension');
 
-				$sort_order = array();
+				$sort_order = [];
 
 				$results = $this->model_extension_extension->getExtensions('total');
 
@@ -115,7 +115,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 					}
 				}
 
-				$sort_order = array();
+				$sort_order = [];
 
 				foreach ($totals as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];
@@ -158,7 +158,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$order_data['payment_country'] = '';
 				$order_data['payment_country_id'] = 0;
 				$order_data['payment_address_format'] = '';
-				$order_data['payment_custom_field'] = array();
+				$order_data['payment_custom_field'] = [];
 				$order_data['payment_method'] = $this->language->get('text_title');
 				$order_data['payment_code'] = 'pilibaba';
 
@@ -174,7 +174,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$order_data['shipping_country'] = '';
 				$order_data['shipping_country_id'] = 0;
 				$order_data['shipping_address_format'] = '';
-				$order_data['shipping_custom_field'] = array();
+				$order_data['shipping_custom_field'] = [];
 				$order_data['shipping_method'] = $this->language->get('text_description');
 				$order_data['shipping_code'] = 'pilibaba.pilibaba';
 
@@ -184,12 +184,12 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$this->session->data['guest']['email'] = '';
 				$this->session->data['guest']['telephone'] = '';
 				$this->session->data['guest']['fax'] = '';
-				$this->session->data['guest']['custom_field'] = array();
+				$this->session->data['guest']['custom_field'] = [];
 
-				$order_data['products'] = array();
+				$order_data['products'] = [];
 
 				foreach ($this->cart->getProducts() as $product) {
-					$option_data = array();
+					$option_data = [];
 
 					foreach ($product['option'] as $option) {
 						$option_data[] = array(
@@ -219,7 +219,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				}
 
 				// Gift Voucher
-				$order_data['vouchers'] = array();
+				$order_data['vouchers'] = [];
 
 				if (!empty($this->session->data['vouchers'])) {
 					foreach ($this->session->data['vouchers'] as $voucher) {
@@ -322,7 +322,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$data['signType']     = 'MD5';
 				$data['signMsg']      = strtoupper(md5($data['version'] . $data['merchantNo'] . $data['currencyType'] . $data['orderNo'] . $data['orderAmount'] . $data['orderTime'] . $data['pageUrl'] . $data['serverUrl'] . $data['redirectUrl'] . $data['notifyType'] . $data['shipper'] . $data['tax'] . $data['signType'] . $this->config->get('pilibaba_secret_key')));
 
-				$products = array();
+				$products = [];
 
 				foreach ($this->cart->getProducts() as $product) {
 					// kilograms

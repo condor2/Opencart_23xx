@@ -67,7 +67,7 @@ class ControllerReportCustomerSearch extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
@@ -82,7 +82,7 @@ class ControllerReportCustomerSearch extends Controller {
 		$this->load->model('report/customer');
 		$this->load->model('catalog/category');
 
-		$data['searches'] = array();
+		$data['searches'] = [];
 
 		$filter_data = array(
 			'filter_date_start'	=> $filter_date_start,

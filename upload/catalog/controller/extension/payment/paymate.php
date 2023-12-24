@@ -64,7 +64,7 @@ class ControllerExtensionPaymentPaymate extends Controller {
 		}
 
 		if ($error) {
-			$data['breadcrumbs'] = array();
+			$data['breadcrumbs'] = [];
 
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),

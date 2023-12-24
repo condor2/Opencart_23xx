@@ -1,6 +1,6 @@
 <?php
 class ControllerInformationContact extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('information/contact');
@@ -28,7 +28,7 @@ class ControllerInformationContact extends Controller {
 			$this->response->redirect($this->url->link('information/contact/success'));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -96,7 +96,7 @@ class ControllerInformationContact extends Controller {
 		$data['open'] = nl2br($this->config->get('config_open'));
 		$data['comment'] = $this->config->get('config_comment');
 
-		$data['locations'] = array();
+		$data['locations'] = [];
 
 		$this->load->model('localisation/location');
 
@@ -189,7 +189,7 @@ class ControllerInformationContact extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

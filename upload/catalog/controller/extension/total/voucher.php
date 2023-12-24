@@ -27,7 +27,7 @@ class ControllerExtensionTotalVoucher extends Controller {
 	public function voucher() {
 		$this->load->language('extension/total/voucher');
 
-		$json = array();
+		$json = [];
 
 		$this->load->model('extension/total/voucher');
 
@@ -72,7 +72,7 @@ class ControllerExtensionTotalVoucher extends Controller {
 
 				foreach ($voucher_query->rows as $voucher) {
 					// HTML Mail
-					$data = array();
+					$data = [];
 
 					$data['title'] = sprintf($language->get('text_subject'), $voucher['from_name']);
 

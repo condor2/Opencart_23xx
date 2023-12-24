@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionDashboardSale extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/dashboard/sale');
@@ -36,7 +36,7 @@ class ControllerExtensionDashboardSale extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -63,7 +63,7 @@ class ControllerExtensionDashboardSale extends Controller {
 			$data['dashboard_sale_width'] = $this->config->get('dashboard_sale_width');
 		}
 	
-		$data['columns'] = array();
+		$data['columns'] = [];
 		
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;

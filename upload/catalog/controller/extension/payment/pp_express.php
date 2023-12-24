@@ -383,7 +383,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 		$data['heading_title'] = $this->language->get('express_text_title');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'href' => $this->url->link('common/home'),
@@ -457,7 +457,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				$image = '';
 			}
 
-			$option_data = array();
+			$option_data = [];
 
 			foreach ($product['option'] as $option) {
 				if ($option['type'] != 'file') {
@@ -536,7 +536,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			);
 		}
 
-		$data['vouchers'] = array();
+		$data['vouchers'] = [];
 
 		if ($this->cart->hasShipping()) {
 
@@ -553,7 +553,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			if (!empty($shipping_address)) {
 				// Shipping Methods
-				$quote_data = array();
+				$quote_data = [];
 
 				$this->load->model('extension/extension');
 
@@ -578,7 +578,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					}
 
 					if (!empty($quote_data)) {
-						$sort_order = array();
+						$sort_order = [];
 
 						foreach ($quote_data as $key => $value) {
 							$sort_order[$key] = $value['sort_order'];
@@ -616,7 +616,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		// Totals
 		$this->load->model('extension/extension');
 
-		$totals = array();
+		$totals = [];
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
 
@@ -629,7 +629,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 		// Display prices
 		if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-			$sort_order = array();
+			$sort_order = [];
 
 			$results = $this->model_extension_extension->getExtensions('total');
 
@@ -648,7 +648,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				}
 			}
 
-			$sort_order = array();
+			$sort_order = [];
 
 			foreach ($totals as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -657,7 +657,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			array_multisort($sort_order, SORT_ASC, $totals);
 		}
 
-		$data['totals'] = array();
+		$data['totals'] = [];
 
 		foreach ($totals as $total) {
 			$data['totals'][] = array(
@@ -676,7 +676,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$payment_address = $this->session->data['guest']['payment'];
 		}
 
-		$method_data = array();
+		$method_data = [];
 
 		$this->load->model('extension/extension');
 
@@ -694,7 +694,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			}
 		}
 
-		$sort_order = array();
+		$sort_order = [];
 
 		foreach ($method_data as $key => $value) {
 			$sort_order[$key] = $value['sort_order'];
@@ -807,7 +807,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		}
 
 		if ($redirect == '') {
-			$totals = array();
+			$totals = [];
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
@@ -820,7 +820,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			$this->load->model('extension/extension');
 
-			$sort_order = array();
+			$sort_order = [];
 
 			$results = $this->model_extension_extension->getExtensions('total');
 
@@ -839,7 +839,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				}
 			}
 
-			$sort_order = array();
+			$sort_order = [];
 
 			foreach ($totals as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -849,7 +849,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			$this->load->language('checkout/checkout');
 
-			$data = array();
+			$data = [];
 
 			$data['invoice_prefix'] = $this->config->get('config_invoice_prefix');
 			$data['store_id'] = $this->config->get('config_store_id');
@@ -958,10 +958,10 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				$data['shipping_code'] = '';
 			}
 
-			$product_data = array();
+			$product_data = [];
 
 			foreach ($this->cart->getProducts() as $product) {
-				$option_data = array();
+				$option_data = [];
 
 				foreach ($product['option'] as $option) {
 					$option_data[] = array(
@@ -991,7 +991,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			}
 
 			// Gift Voucher
-			$voucher_data = array();
+			$voucher_data = [];
 
 			if (!empty($this->session->data['vouchers'])) {
 				foreach ($this->session->data['vouchers'] as $voucher) {
@@ -1310,7 +1310,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			);
 		} else {
 			$shipping = 1;
-			$data_shipping = array();
+			$data_shipping = [];
 		}
 
 		$data = array(
@@ -1555,7 +1555,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			$this->load->language('extension/payment/pp_express');
 
-			$data['breadcrumbs'] = array();
+			$data['breadcrumbs'] = [];
 
 			$data['breadcrumbs'][] = array(
 				'href' => $this->url->link('common/home'),

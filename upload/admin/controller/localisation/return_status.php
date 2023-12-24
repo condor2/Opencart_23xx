@@ -1,6 +1,6 @@
 <?php
 class ControllerLocalisationReturnStatus extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('localisation/return_status');
@@ -143,7 +143,7 @@ class ControllerLocalisationReturnStatus extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerLocalisationReturnStatus extends Controller {
 		$data['add'] = $this->url->link('localisation/return_status/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('localisation/return_status/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['return_statuses'] = array();
+		$data['return_statuses'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -209,7 +209,7 @@ class ControllerLocalisationReturnStatus extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -275,7 +275,7 @@ class ControllerLocalisationReturnStatus extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = array();
+			$data['error_name'] = [];
 		}
 
 		$url = '';
@@ -292,7 +292,7 @@ class ControllerLocalisationReturnStatus extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -321,7 +321,7 @@ class ControllerLocalisationReturnStatus extends Controller {
 		} elseif (isset($this->request->get['return_status_id'])) {
 			$data['return_status'] = $this->model_localisation_return_status->getReturnStatusDescriptions($this->request->get['return_status_id']);
 		} else {
-			$data['return_status'] = array();
+			$data['return_status'] = [];
 		}
 
 		$data['header'] = $this->load->controller('common/header');

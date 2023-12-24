@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleGoogleHangouts extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/module/google_hangouts');
@@ -43,7 +43,7 @@ class ControllerExtensionModuleGoogleHangouts extends Controller {
 			$data['error_code'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

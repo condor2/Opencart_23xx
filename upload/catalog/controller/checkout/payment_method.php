@@ -5,7 +5,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 
 		if (isset($this->session->data['payment_address'])) {
 			// Totals
-			$totals = array();
+			$totals = [];
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
@@ -18,7 +18,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			
 			$this->load->model('extension/extension');
 
-			$sort_order = array();
+			$sort_order = [];
 
 			$results = $this->model_extension_extension->getExtensions('total');
 
@@ -38,7 +38,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			}
 
 			// Payment Methods
-			$method_data = array();
+			$method_data = [];
 
 			$this->load->model('extension/extension');
 
@@ -64,7 +64,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				}
 			}
 
-			$sort_order = array();
+			$sort_order = [];
 
 			foreach ($method_data as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -90,7 +90,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		if (isset($this->session->data['payment_methods'])) {
 			$data['payment_methods'] = $this->session->data['payment_methods'];
 		} else {
-			$data['payment_methods'] = array();
+			$data['payment_methods'] = [];
 		}
 
 		if (isset($this->session->data['payment_method']['code'])) {
@@ -133,7 +133,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 	public function save() {
 		$this->load->language('checkout/checkout');
 
-		$json = array();
+		$json = [];
 
 		// Validate if payment address has been set.
 		if (!isset($this->session->data['payment_address'])) {

@@ -17,11 +17,11 @@ class ControllerExtensionPaymentG2APay extends Controller {
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
-		$order_data = array();
+		$order_data = [];
 
 		$this->load->model('extension/extension');
 
-		$totals = array();
+		$totals = [];
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
 

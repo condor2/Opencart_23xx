@@ -5,7 +5,7 @@ class ControllerInformationSitemap extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -34,17 +34,17 @@ class ControllerInformationSitemap extends Controller {
 
 		$this->load->model('catalog/category');
 
-		$data['categories'] = array();
+		$data['categories'] = [];
 
 		$categories_1 = $this->model_catalog_category->getCategories(0);
 
 		foreach ($categories_1 as $category_1) {
-			$level_2_data = array();
+			$level_2_data = [];
 
 			$categories_2 = $this->model_catalog_category->getCategories($category_1['category_id']);
 
 			foreach ($categories_2 as $category_2) {
-				$level_3_data = array();
+				$level_3_data = [];
 
 				$categories_3 = $this->model_catalog_category->getCategories($category_2['category_id']);
 
@@ -83,7 +83,7 @@ class ControllerInformationSitemap extends Controller {
 
 		$this->load->model('catalog/information');
 
-		$data['informations'] = array();
+		$data['informations'] = [];
 
 		foreach ($this->model_catalog_information->getInformations() as $result) {
 			$data['informations'][] = array(

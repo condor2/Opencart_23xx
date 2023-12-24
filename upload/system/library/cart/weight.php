@@ -3,7 +3,7 @@ namespace Cart;
 class Weight {
 	private $db;
 	private $config;
-	private $weights = array();
+	private $weights = [];
 
 	/**
 	 * Constructor

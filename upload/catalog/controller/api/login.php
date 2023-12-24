@@ -3,7 +3,7 @@ class ControllerApiLogin extends Controller {
 	public function index() {
 		$this->load->language('api/login');
 
-		$json = array();
+		$json = [];
 
 		$this->load->model('account/api');
 
@@ -12,7 +12,7 @@ class ControllerApiLogin extends Controller {
 
 		if ($api_info) {
 			// Check if IP is allowed
-			$ip_data = array();
+			$ip_data = [];
 	
 			$results = $this->model_account_api->getApiIps($api_info['api_id']);
 	

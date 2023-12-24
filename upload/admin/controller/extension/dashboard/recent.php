@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionDashboardRecent extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/dashboard/recent');
@@ -36,7 +36,7 @@ class ControllerExtensionDashboardRecent extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -63,7 +63,7 @@ class ControllerExtensionDashboardRecent extends Controller {
 			$data['dashboard_recent_width'] = $this->config->get('dashboard_recent_width');
 		}
 
-		$data['columns'] = array();
+		$data['columns'] = [];
 		
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
@@ -115,7 +115,7 @@ class ControllerExtensionDashboardRecent extends Controller {
 		$data['token'] = $this->session->data['token'];
 
 		// Last 5 Orders
-		$data['orders'] = array();
+		$data['orders'] = [];
 
 		$filter_data = array(
 			'sort'  => 'o.date_added',

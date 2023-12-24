@@ -1,6 +1,6 @@
 <?php
 class ControllerLocalisationTaxRate extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('localisation/tax_rate');
@@ -143,7 +143,7 @@ class ControllerLocalisationTaxRate extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerLocalisationTaxRate extends Controller {
 		$data['add'] = $this->url->link('localisation/tax_rate/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('localisation/tax_rate/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['tax_rates'] = array();
+		$data['tax_rates'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -219,7 +219,7 @@ class ControllerLocalisationTaxRate extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -319,7 +319,7 @@ class ControllerLocalisationTaxRate extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

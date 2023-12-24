@@ -21,7 +21,7 @@ class ControllerAccountNewsletter extends Controller {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

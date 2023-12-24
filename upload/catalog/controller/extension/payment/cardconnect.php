@@ -45,7 +45,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		} else {
 			$data['store_cards'] = false;
 
-			$data['cards'] = array();
+			$data['cards'] = [];
 		}
 
 		$data['echeck'] = $this->config->get('cardconnect_echeck');
@@ -62,7 +62,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 		$this->model_extension_payment_cardconnect->log('Posting order to CardConnect');
 
-		$json = array();
+		$json = [];
 
 		$json['error'] = '';
 
@@ -166,7 +166,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 						$url = 'https://' . $this->config->get('cardconnect_site') . '.cardconnect.com:' . (($this->config->get('cardconnect_environment') == 'live') ? 8443 : 6443) . '/cardconnect/rest/auth';
 
-						$header = array();
+						$header = [];
 
 						$header[] = 'Content-type: application/json';
 						$header[] = 'Content-length: ' . strlen($data_json);
@@ -262,7 +262,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 		$this->model_extension_payment_cardconnect->log('Deleting card');
 
-		$json = array();
+		$json = [];
 
 		if ($this->config->get('cardconnect_status')) {
 			if ($this->customer->isLogged()) {
@@ -333,7 +333,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 		$this->load->model('extension/payment/cardconnect');
 
-		$error = array();
+		$error = [];
 
 		if (!isset($this->request->post['method']) || $this->request->post['method'] == 'card') {
 			if ($this->request->post['card_new']) {

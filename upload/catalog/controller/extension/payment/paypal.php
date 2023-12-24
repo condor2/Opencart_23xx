@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPayPal extends Controller {
-	private $error = array();
+	private $error = [];
 		
 	public function __construct($registry) {
 		parent::__construct($registry);
@@ -75,7 +75,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['client_token'] = $paypal->getClientToken();
 						
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -157,7 +157,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['client_token'] = $paypal->getClientToken();
 						
 		if ($paypal->hasErrors()) {
-			$error_messages = array();
+			$error_messages = [];
 				
 			$errors = $paypal->getErrors();
 								
@@ -229,7 +229,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		
 			$data['decimal_place'] = $setting['currency'][$data['currency_code']]['decimal_place'];
 			
-			$data['components'] = array();
+			$data['components'] = [];
 			
 			if ($this->request->post['page_code'] == 'home') {				
 				if ($setting['message']['home']['status'] && ($data['currency_code'] == $setting['general']['currency_code'])) {
@@ -364,8 +364,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$data['button_shape'] = $setting['button']['checkout']['shape'];
 					$data['button_label'] = $setting['button']['checkout']['label'];
 									
-					$data['button_enable_funding'] = array();
-					$data['button_disable_funding'] = array();
+					$data['button_enable_funding'] = [];
+					$data['button_disable_funding'] = [];
 				
 					foreach ($setting['button_funding'] as $button_funding) {
 						if ($setting['button']['checkout']['funding'][$button_funding['code']] == 1) {
@@ -490,7 +490,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['client_token'] = $paypal->getClientToken();
 						
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -531,7 +531,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$page_code = $this->request->post['page_code'];
 			$payment_type = $this->request->post['payment_type'];
 			
-			$errors = array();
+			$errors = [];
 		
 			$data['order_id'] = '';
 			
@@ -557,7 +557,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					if (isset($product['option'])) {
 						$option = array_filter($product['option']);
 					} else {
-						$option = array();
+						$option = [];
 					}
 
 					$product_options = $this->model_catalog_product->getProductOptions($product_id);
@@ -577,7 +577,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$recurrings = $this->model_catalog_product->getProfiles($product_info['product_id']);
 
 					if ($recurrings) {
-						$recurring_ids = array();
+						$recurring_ids = [];
 
 						foreach ($recurrings as $recurring) {
 							$recurring_ids[] = $recurring['recurring_id'];
@@ -607,7 +607,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				
 				$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 				
-				$shipping_info = array();
+				$shipping_info = [];
 
 				if ($this->cart->hasShipping()) {
 					$shipping_info['name']['full_name'] = $order_info['shipping_firstname'];
@@ -692,7 +692,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				
 				$paypal->setAccessToken($token_info);
 								
-				$item_info = array();
+				$item_info = [];
 			
 				$item_total = 0;
 				$tax_total = 0;
@@ -747,7 +747,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 				} 
 						
-				$amount_info = array();
+				$amount_info = [];
 				
 				$amount_info['currency_code'] = $currency_code;
 				$amount_info['value'] = $order_total;
@@ -779,7 +779,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					);
 				}
 				
-				$paypal_order_info = array();
+				$paypal_order_info = [];
 				
 				$paypal_order_info['intent'] = strtoupper($transaction_method);
 				$paypal_order_info['purchase_units'][0]['reference_id'] = 'default';
@@ -806,7 +806,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$result = $paypal->createOrder($paypal_order_info);
 			
 				if ($paypal->hasErrors()) {
-					$error_messages = array();
+					$error_messages = [];
 				
 					$errors = $paypal->getErrors();
 								
@@ -934,7 +934,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$paypal_order_info = $paypal->getOrder($paypal_order_id);
 				
 				if ($paypal->hasErrors()) {
-					$error_messages = array();
+					$error_messages = [];
 				
 					$errors = $paypal->getErrors();
 								
@@ -985,7 +985,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						$this->session->data['guest']['lastname'] = (isset($paypal_order_info['payer']['name']['surname']) ? $paypal_order_info['payer']['name']['surname'] : '');
 						$this->session->data['guest']['email'] = (isset($paypal_order_info['payer']['email_address']) ? $paypal_order_info['payer']['email_address'] : '');
 						$this->session->data['guest']['telephone'] = '';
-						$this->session->data['guest']['custom_field'] = array();
+						$this->session->data['guest']['custom_field'] = [];
 					}
 								
 					if ($this->customer->isLogged() && $this->customer->getAddressId()) {
@@ -1003,7 +1003,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						$this->session->data['payment_address']['address_format'] = '';
 						$this->session->data['payment_address']['zone'] = '';
 						$this->session->data['payment_address']['zone_id'] = 0;
-						$this->session->data['payment_address']['custom_field'] = array();
+						$this->session->data['payment_address']['custom_field'] = [];
 			
 						if (isset($paypal_order_info['payer']['address']['country_code'])) {
 							$country_info = $this->model_extension_payment_paypal->getCountryByCode($paypal_order_info['payer']['address']['country_code']);
@@ -1038,7 +1038,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$this->session->data['shipping_address']['address_format'] = '';
 							$this->session->data['shipping_address']['zone'] = '';
 							$this->session->data['shipping_address']['zone_id'] = 0;
-							$this->session->data['shipping_address']['custom_field'] = array();
+							$this->session->data['shipping_address']['custom_field'] = [];
 									
 							if (isset($paypal_order_info['purchase_units'][0]['shipping']['address']['country_code'])) {
 								$country_info = $this->model_extension_payment_paypal->getCountryByCode($paypal_order_info['purchase_units'][0]['shipping']['address']['country_code']);
@@ -1078,7 +1078,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$paypal_order_info = $paypal->getOrder($paypal_order_id);
 					
 							if ($paypal->hasErrors()) {
-								$error_messages = array();
+								$error_messages = [];
 				
 								$errors = $paypal->getErrors();
 								
@@ -1156,7 +1156,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 			
 					if ($paypal->hasErrors()) {
-						$error_messages = array();
+						$error_messages = [];
 				
 						$errors = $paypal->getErrors();
 								
@@ -1364,7 +1364,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_confirm'] = $this->language->get('button_confirm');
 		$data['button_shipping'] = $this->language->get('button_shipping');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1422,7 +1422,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$image = '';
 			}
 
-			$option_data = array();
+			$option_data = [];
 
 			foreach ($product['option'] as $option) {
 				if ($option['type'] != 'file') {
@@ -1493,7 +1493,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 
 		// Gift Voucher
-		$data['vouchers'] = array();
+		$data['vouchers'] = [];
 
 		if (!empty($this->session->data['vouchers'])) {
 			foreach ($this->session->data['vouchers'] as $key => $voucher) {
@@ -1511,11 +1511,11 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		if ($this->cart->hasShipping()) {
 			$data['has_shipping'] = true;
 			
-			$data['shipping_address'] = isset($this->session->data['shipping_address']) ? $this->session->data['shipping_address'] : array();
+			$data['shipping_address'] = isset($this->session->data['shipping_address']) ? $this->session->data['shipping_address'] : [];
 			
 			if (!empty($data['shipping_address'])) {
 				// Shipping Methods
-				$quote_data = array();
+				$quote_data = [];
 
 				$results = $this->model_extension_extension->getExtensions('shipping');
 
@@ -1538,7 +1538,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 
 					if (!empty($quote_data)) {
-						$sort_order = array();
+						$sort_order = [];
 
 						foreach ($quote_data as $key => $value) {
 							$sort_order[$key] = $value['sort_order'];
@@ -1575,11 +1575,11 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['has_shipping'] = false;
 		}
 				
-		$data['guest'] = isset($this->session->data['guest']) ? $this->session->data['guest'] : array();
-		$data['payment_address'] = isset($this->session->data['payment_address']) ? $this->session->data['payment_address'] : array();	
+		$data['guest'] = isset($this->session->data['guest']) ? $this->session->data['guest'] : [];
+		$data['payment_address'] = isset($this->session->data['payment_address']) ? $this->session->data['payment_address'] : [];	
 		
 		// Totals
-		$totals = array();
+		$totals = [];
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
 
@@ -1592,7 +1592,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		// Display prices
 		if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-			$sort_order = array();
+			$sort_order = [];
 
 			$results = $this->model_extension_extension->getExtensions('total');
 
@@ -1611,7 +1611,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				}
 			}
 
-			$sort_order = array();
+			$sort_order = [];
 
 			foreach ($totals as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -1623,7 +1623,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		/**
 		 * Payment methods
 		 */
-		$method_data = array();
+		$method_data = [];
 
 		$results = $this->model_extension_extension->getExtensions('payment');
 
@@ -1639,7 +1639,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			}
 		}
 
-		$sort_order = array();
+		$sort_order = [];
 
 		foreach ($method_data as $key => $value) {
 			$sort_order[$key] = $value['sort_order'];
@@ -1664,7 +1664,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['custom_fields'] = $this->model_account_custom_field->getCustomFields();
 
 		// Totals
-		$totals = array();
+		$totals = [];
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
 
@@ -1677,7 +1677,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		// Display prices
 		if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-			$sort_order = array();
+			$sort_order = [];
 
 			$results = $this->model_extension_extension->getExtensions('total');
 
@@ -1696,7 +1696,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				}
 			}
 
-			$sort_order = array();
+			$sort_order = [];
 
 			foreach ($totals as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -1705,7 +1705,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			array_multisort($sort_order, SORT_ASC, $totals);
 		}
 
-		$data['totals'] = array();
+		$data['totals'] = [];
 
 		foreach ($totals as $total) {
 			$data['totals'][] = array(
@@ -1786,9 +1786,9 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 		
 		if (isset($this->session->data['paypal_order_id'])) {			
-			$order_data = array();
+			$order_data = [];
 
-			$totals = array();
+			$totals = [];
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
@@ -1801,7 +1801,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/extension');
 
-			$sort_order = array();
+			$sort_order = [];
 
 			$results = $this->model_extension_extension->getExtensions('total');
 
@@ -1820,7 +1820,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				}
 			}
 
-			$sort_order = array();
+			$sort_order = [];
 
 			foreach ($totals as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -1864,7 +1864,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$order_data['payment_country'] = $this->session->data['payment_address']['country'];
 			$order_data['payment_country_id'] = $this->session->data['payment_address']['country_id'];
 			$order_data['payment_address_format'] = $this->session->data['payment_address']['address_format'];
-			$order_data['payment_custom_field'] = (isset($this->session->data['payment_address']['custom_field']) ? $this->session->data['payment_address']['custom_field'] : array());
+			$order_data['payment_custom_field'] = (isset($this->session->data['payment_address']['custom_field']) ? $this->session->data['payment_address']['custom_field'] : []);
 
 			if (isset($this->session->data['payment_method']['title'])) {
 				$order_data['payment_method'] = $this->session->data['payment_method']['title'];
@@ -1891,7 +1891,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$order_data['shipping_country'] = $this->session->data['shipping_address']['country'];
 				$order_data['shipping_country_id'] = $this->session->data['shipping_address']['country_id'];
 				$order_data['shipping_address_format'] = $this->session->data['shipping_address']['address_format'];
-				$order_data['shipping_custom_field'] = (isset($this->session->data['shipping_address']['custom_field']) ? $this->session->data['shipping_address']['custom_field'] : array());
+				$order_data['shipping_custom_field'] = (isset($this->session->data['shipping_address']['custom_field']) ? $this->session->data['shipping_address']['custom_field'] : []);
 
 				if (isset($this->session->data['shipping_method']['title'])) {
 					$order_data['shipping_method'] = $this->session->data['shipping_method']['title'];
@@ -1917,15 +1917,15 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$order_data['shipping_country'] = '';
 				$order_data['shipping_country_id'] = 0;
 				$order_data['shipping_address_format'] = '';
-				$order_data['shipping_custom_field'] = array();
+				$order_data['shipping_custom_field'] = [];
 				$order_data['shipping_method'] = '';
 				$order_data['shipping_code'] = '';
 			}
 
-			$order_data['products'] = array();
+			$order_data['products'] = [];
 
 			foreach ($this->cart->getProducts() as $product) {
-				$option_data = array();
+				$option_data = [];
 
 				foreach ($product['option'] as $option) {
 					$option_data[] = array(
@@ -1955,7 +1955,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			}
 
 			// Gift Voucher
-			$order_data['vouchers'] = array();
+			$order_data['vouchers'] = [];
 
 			if (!empty($this->session->data['vouchers'])) {
 				foreach ($this->session->data['vouchers'] as $voucher) {
@@ -2086,7 +2086,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			
 			$paypal_order_id = $this->session->data['paypal_order_id'];
 			
-			$paypal_order_info = array();
+			$paypal_order_info = [];
 			
 			$paypal_order_info[] = array(
 				'op' => 'add',
@@ -2100,7 +2100,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				'value' => $this->session->data['order_id'] . '_' . date('Ymd_His')
 			);
 						
-			$shipping_info = array();
+			$shipping_info = [];
 
 			if ($this->cart->hasShipping()) {
 				$shipping_info['name']['full_name'] = (isset($this->session->data['shipping_address']['firstname']) ? $this->session->data['shipping_address']['firstname'] : '');
@@ -2173,7 +2173,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$handling_total = -$rebate;
 			}
 			
-			$amount_info = array();
+			$amount_info = [];
 				
 			$amount_info['currency_code'] = $currency_code;
 			$amount_info['value'] = $order_total;
@@ -2212,7 +2212,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$result = $paypal->updateOrder($paypal_order_id, $paypal_order_info);
 			
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 							
@@ -2245,7 +2245,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				}
 			
 				if ($paypal->hasErrors()) {
-					$error_messages = array();
+					$error_messages = [];
 				
 					$errors = $paypal->getErrors();
 								
@@ -2398,8 +2398,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		
 		$data['button_confirm'] = $this->language->get('button_confirm');
 		
-		$data['guest'] = isset($this->session->data['guest']) ? $this->session->data['guest'] : array();
-		$data['payment_address'] = isset($this->session->data['payment_address']) ? $this->session->data['payment_address'] : array();
+		$data['guest'] = isset($this->session->data['guest']) ? $this->session->data['guest'] : [];
+		$data['payment_address'] = isset($this->session->data['payment_address']) ? $this->session->data['payment_address'] : [];
 		
 		$this->load->model('localisation/country');
 
@@ -2433,7 +2433,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		
 		$data['button_confirm'] = $this->language->get('button_confirm');
 		
-		$data['shipping_address'] = isset($this->session->data['shipping_address']) ? $this->session->data['shipping_address'] : array();
+		$data['shipping_address'] = isset($this->session->data['shipping_address']) ? $this->session->data['shipping_address'] : [];
 				
 		$this->load->model('localisation/country');
 
@@ -2466,7 +2466,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			if (isset($this->request->post['custom_field']['account'])) {
 				$this->session->data['guest']['custom_field'] = $this->request->post['custom_field']['account'];
 			} else {
-				$this->session->data['guest']['custom_field'] = array();
+				$this->session->data['guest']['custom_field'] = [];
 			}
 
 			$this->session->data['payment_address']['firstname'] = $this->request->post['firstname'];
@@ -2498,7 +2498,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			if (isset($this->request->post['custom_field']['address'])) {
 				$this->session->data['payment_address']['custom_field'] = $this->request->post['custom_field']['address'];
 			} else {
-				$this->session->data['payment_address']['custom_field'] = array();
+				$this->session->data['payment_address']['custom_field'] = [];
 			}
 
 			$this->load->model('localisation/zone');
@@ -2567,7 +2567,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			if (isset($this->request->post['custom_field'])) {
 				$this->session->data['shipping_address']['custom_field'] = $this->request->post['custom_field']['address'];
 			} else {
-				$this->session->data['shipping_address']['custom_field'] = array();
+				$this->session->data['shipping_address']['custom_field'] = [];
 			}
 			
 			$data['url'] = $this->url->link('extension/payment/paypal/confirmOrder', '', true);
@@ -2627,12 +2627,12 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			while ($webhook_repeat) {
 				$webhook_event = $paypal->getWebhookEvent($webhook_event_id);
 
-				$errors = array();
+				$errors = [];
 				
 				$webhook_repeat = 0;
 			
 				if ($paypal->hasErrors()) {
-					$error_messages = array();
+					$error_messages = [];
 				
 					$errors = $paypal->getErrors();
 							
@@ -2752,7 +2752,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$route = 'common/home';
 			} 
 			
-			$params = array();
+			$params = [];
 			
 			if (($route == 'common/home') && $setting['message']['home']['status']) {
 				$params['page_code'] = 'home';
@@ -3082,7 +3082,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 	}
 	
 	private function unserialize($str) {
-		$data = array();
+		$data = [];
 				
 		$str = str_replace('&amp;', '&', $str);
 		

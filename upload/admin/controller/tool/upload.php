@@ -1,6 +1,6 @@
 <?php
 class ControllerToolUpload extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('tool/upload');
@@ -114,7 +114,7 @@ class ControllerToolUpload extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -128,7 +128,7 @@ class ControllerToolUpload extends Controller {
 
 		$data['delete'] = $this->url->link('tool/upload/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['uploads'] = array();
+		$data['uploads'] = [];
 
 		$filter_data = array(
 			'filter_name'	    => $filter_name,
@@ -190,7 +190,7 @@ class ControllerToolUpload extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -309,7 +309,7 @@ class ControllerToolUpload extends Controller {
 
 			$data['text_not_found'] = $this->language->get('text_not_found');
 
-			$data['breadcrumbs'] = array();
+			$data['breadcrumbs'] = [];
 
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),
@@ -332,7 +332,7 @@ class ControllerToolUpload extends Controller {
 	public function upload() {
 		$this->load->language('sale/order');
 
-		$json = array();
+		$json = [];
 
 		// Check user has permission
 		if (!$this->user->hasPermission('modify', 'tool/upload')) {
@@ -349,7 +349,7 @@ class ControllerToolUpload extends Controller {
 				}
 
 				// Allowed file extension types
-				$allowed = array();
+				$allowed = [];
 
 				$extension_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_ext_allowed'));
 
@@ -364,7 +364,7 @@ class ControllerToolUpload extends Controller {
 				}
 
 				// Allowed file mime types
-				$allowed = array();
+				$allowed = [];
 
 				$mime_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_mime_allowed'));
 

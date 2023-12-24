@@ -14,9 +14,9 @@ class Document {
 	private $title = '';
 	private $description = '';
 	private $keywords = '';
-	private $links = array();
-	private $styles = array();
-	private $scripts = array();
+	private $links = [];
+	private $styles = [];
+	private $scripts = [];
 
 	/**
      *
@@ -141,7 +141,7 @@ class Document {
 		if (isset($this->scripts[$position])) {
 			return $this->scripts[$position];
 		} else {
-			return array();
+			return [];
 		}
 	}
 }

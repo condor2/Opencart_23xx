@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateRegister extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		if ($this->affiliate->isLogged()) {
@@ -37,7 +37,7 @@ class ControllerAffiliateRegister extends Controller {
 			$this->response->redirect($this->url->link('affiliate/success'));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -430,7 +430,7 @@ class ControllerAffiliateRegister extends Controller {
 	}
 
 	public function country() {
-		$json = array();
+		$json = [];
 
 		$this->load->model('localisation/country');
 

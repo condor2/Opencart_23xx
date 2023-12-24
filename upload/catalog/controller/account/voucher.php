@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountVoucher extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('account/voucher');
@@ -8,7 +8,7 @@ class ControllerAccountVoucher extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (!isset($this->session->data['vouchers'])) {
-			$this->session->data['vouchers'] = array();
+			$this->session->data['vouchers'] = [];
 		}
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
@@ -26,7 +26,7 @@ class ControllerAccountVoucher extends Controller {
 			$this->response->redirect($this->url->link('account/voucher/success'));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -176,7 +176,7 @@ class ControllerAccountVoucher extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

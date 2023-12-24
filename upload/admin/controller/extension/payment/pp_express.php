@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPPExpress extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/pp_express');
@@ -119,7 +119,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$data['error_sandbox_signature'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -476,7 +476,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$data['button_refund'] = $this->language->get('button_refund');
 		$data['button_resend'] = $this->language->get('button_resend');
 
-		$data['transactions'] = array();
+		$data['transactions'] = [];
 
 		if (isset($this->request->get['order_id'])) {
 			$order_id = (int)$this->request->get['order_id'];
@@ -510,7 +510,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 	}
 
 	public function capture() {
-		$json = array();
+		$json = [];
 
 		$this->load->language('extension/payment/pp_express_order');
 
@@ -606,7 +606,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$data['button_refund'] = $this->language->get('button_refund');
 		$data['text_refund'] = $this->language->get('text_refund');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -679,7 +679,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				$paypal_order = $this->model_extension_payment_pp_express->getOrder($order_id);
 
 				if ($paypal_order) {
-					$call_data = array();
+					$call_data = [];
 					$call_data['METHOD'] = 'RefundTransaction';
 					$call_data['TRANSACTIONID'] = $this->request->post['transaction_id'];
 					$call_data['NOTE'] = urlencode($this->request->post['refund_message']);
@@ -754,7 +754,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 	 * used to void an authorised payment
 	 */
 	public function void() {
-		$json = array();
+		$json = [];
 
 		$this->load->language('extension/payment/pp_express_order');
 
@@ -813,7 +813,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 	// Cancel an active recurring
 	public function recurringCancel() {
-		$json = array();
+		$json = [];
 
 		$log = new Log('pp_express.log');
 
@@ -871,7 +871,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			curl_close($curl);
 
-			$response_info = array();
+			$response_info = [];
 
 			parse_str($response, $response_info);
 
@@ -892,7 +892,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 	}
 
 	public function resend() {
-		$json = array();
+		$json = [];
 
 		$this->load->language('extension/payment/pp_express');
 
@@ -1046,7 +1046,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 		$data['token'] = $this->session->data['token'];
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1169,7 +1169,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 		$data['button_cancel'] = $this->language->get('button_cancel');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1209,7 +1209,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			$this->load->model('extension/payment/pp_express');
 
-			$call_data = array();
+			$call_data = [];
 			$call_data['METHOD'] = 'TransactionSearch';
 			$call_data['STARTDATE'] = gmdate($this->request->post['date_start'] . "\TH:i:s\Z");
 
@@ -1352,7 +1352,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 	}
 
 	private function formatRows($data) {
-		$return = array();
+		$return = [];
 
 		foreach ($data as $k => $v) {
 			$elements = preg_split("/(\d+)/", $k, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
@@ -1373,7 +1373,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 		$recurring = $this->model_sale_recurring->getRecurring($this->request->get['order_recurring_id']);
 
-		$data['buttons'] = array();
+		$data['buttons'] = [];
 
 		if ($recurring['status'] == 2 || $recurring['status'] == 3) {
 			$data['buttons'][] = array(

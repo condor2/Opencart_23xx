@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentTwoCheckout extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/twocheckout');
@@ -60,7 +60,7 @@ class ControllerExtensionPaymentTwoCheckout extends Controller {
 			$data['error_secret'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

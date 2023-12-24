@@ -32,7 +32,7 @@ class ControllerCheckoutRegister extends Controller {
 		$data['button_continue'] = $this->language->get('button_continue');
 		$data['button_upload'] = $this->language->get('button_upload');
 
-		$data['customer_groups'] = array();
+		$data['customer_groups'] = [];
 
 		if (is_array($this->config->get('config_customer_group_display'))) {
 			$this->load->model('account/customer_group');
@@ -104,7 +104,7 @@ class ControllerCheckoutRegister extends Controller {
 	public function save() {
 		$this->load->language('checkout/checkout');
 
-		$json = array();
+		$json = [];
 
 		// Validate if customer is already logged out.
 		if ($this->customer->isLogged()) {

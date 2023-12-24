@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSagepayUS extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/sagepay_us');
@@ -55,7 +55,7 @@ class ControllerExtensionPaymentSagepayUS extends Controller {
 			$data['error_merchant_key'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

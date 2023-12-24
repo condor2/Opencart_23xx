@@ -9,7 +9,7 @@ class ControllerErrorPermission extends Controller {
 
 		$data['text_permission'] = $this->language->get('text_permission');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

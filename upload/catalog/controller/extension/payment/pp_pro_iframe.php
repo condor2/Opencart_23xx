@@ -189,7 +189,7 @@ class ControllerExtensionPaymentPPProIframe extends Controller {
 	}
 
 	private function constructButtonData($order_info) {
-		$s_data = array();
+		$s_data = [];
 		$s_data['METHOD'] = 'BMCreateButton';
 		$s_data['VERSION'] = '65.2';
 		$s_data['BUTTONCODE'] = 'TOKEN';
@@ -280,7 +280,7 @@ class ControllerExtensionPaymentPPProIframe extends Controller {
 
 		$response = curl_exec($curl);
 
-		$response_data = array();
+		$response_data = [];
 
 		parse_str($response, $response_data);
 		

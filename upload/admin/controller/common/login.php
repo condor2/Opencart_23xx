@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonLogin extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('common/login');

@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPPPro extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/pp_pro');
@@ -69,7 +69,7 @@ class ControllerExtensionPaymentPPPro extends Controller {
 			$data['error_signature'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

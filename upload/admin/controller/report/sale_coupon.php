@@ -37,7 +37,7 @@ class ControllerReportSaleCoupon extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -51,7 +51,7 @@ class ControllerReportSaleCoupon extends Controller {
 
 		$this->load->model('report/coupon');
 
-		$data['coupons'] = array();
+		$data['coupons'] = [];
 
 		$filter_data = array(
 			'filter_date_start'	=> $filter_date_start,

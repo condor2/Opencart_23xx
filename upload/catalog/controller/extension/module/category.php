@@ -8,7 +8,7 @@ class ControllerExtensionModuleCategory extends Controller {
 		if (isset($this->request->get['path'])) {
 			$parts = explode('_', (string)$this->request->get['path']);
 		} else {
-			$parts = array();
+			$parts = [];
 		}
 
 		if (isset($parts[0])) {
@@ -27,12 +27,12 @@ class ControllerExtensionModuleCategory extends Controller {
 
 		$this->load->model('catalog/product');
 
-		$data['categories'] = array();
+		$data['categories'] = [];
 
 		$categories = $this->model_catalog_category->getCategories(0);
 
 		foreach ($categories as $category) {
-			$children_data = array();
+			$children_data = [];
 
 			if ($category['category_id'] == $data['category_id']) {
 				$children = $this->model_catalog_category->getCategories($category['category_id']);

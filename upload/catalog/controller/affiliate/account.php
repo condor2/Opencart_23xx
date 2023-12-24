@@ -9,7 +9,7 @@ class ControllerAffiliateAccount extends Controller {
 
 		$this->load->language('affiliate/account');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

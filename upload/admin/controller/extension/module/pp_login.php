@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModulePPLogin extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/module/pp_login');
@@ -68,7 +68,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 			$data['error_secret'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -141,7 +141,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
-		$data['locales'] = array();
+		$data['locales'] = [];
 
 		$data['locales'][] = array(
 			'value' => 'en-gb',

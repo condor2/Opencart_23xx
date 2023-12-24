@@ -17,7 +17,7 @@ class ControllerAccountRecurring extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -55,7 +55,7 @@ class ControllerAccountRecurring extends Controller {
 
 		$limit = 10;
 
-		$data['recurrings'] = array();
+		$data['recurrings'] = [];
 
 		$this->load->model('account/recurring');
 
@@ -127,7 +127,7 @@ class ControllerAccountRecurring extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$data['breadcrumbs'] = array();
+			$data['breadcrumbs'] = [];
 
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),
@@ -186,7 +186,7 @@ class ControllerAccountRecurring extends Controller {
 			$data['reference'] = $recurring_info['reference'];
 
 			// Transactions
-			$data['transactions'] = array();
+			$data['transactions'] = [];
 
 			$results = $this->model_account_recurring->getOrderRecurringTransactions($this->request->get['order_recurring_id']);
 
@@ -220,7 +220,7 @@ class ControllerAccountRecurring extends Controller {
 
 			$data['button_continue'] = $this->language->get('button_continue');
 
-			$data['breadcrumbs'] = array();
+			$data['breadcrumbs'] = [];
 
 			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),

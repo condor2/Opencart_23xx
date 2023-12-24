@@ -27,7 +27,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 			'diners' => $this->language->get('text_card_diners'),
 		);
 
-		$data['cards'] = array();
+		$data['cards'] = [];
 
 		foreach ($accounts as $card => $account) {
 			if (isset($account['enabled']) && $account['enabled'] == 1) {
@@ -38,7 +38,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 			}
 		}
 
-		$data['months'] = array();
+		$data['months'] = [];
 
 		for ($i = 1; $i <= 12; $i++) {
 			$data['months'][] = array(
@@ -49,7 +49,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 
 		$today = getdate();
 
-		$data['year_expire'] = array();
+		$data['year_expire'] = [];
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
 			$data['year_expire'][] = array(
@@ -131,7 +131,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 
 					$md = $this->encryption->encrypt(json_encode($enc_data));
 
-					$json = array();
+					$json = [];
 					$json['ACSURL'] = (string)$verify_3ds->url;
 					$json['MD'] = $md;
 					$json['PaReq'] = (string)$verify_3ds->pareq;

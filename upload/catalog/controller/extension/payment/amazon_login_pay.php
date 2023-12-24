@@ -170,7 +170,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		}
 
 		// Totals
-		$totals = array();
+		$totals = [];
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
 
@@ -182,9 +182,9 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		);
 
 		$old_taxes = $taxes;
-		$lpa_tax = array();
+		$lpa_tax = [];
 
-		$sort_order = array();
+		$sort_order = [];
 
 		$results = $this->model_extension_extension->getExtensions('total');
 
@@ -235,7 +235,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			}
 		}
 
-		$sort_order = array();
+		$sort_order = [];
 
 		foreach ($totals as $key => $value) {
 			$sort_order[$key] = $value['sort_order'];
@@ -249,7 +249,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 
 		array_multisort($sort_order, SORT_ASC, $totals);
 
-		$order_data = array();
+		$order_data = [];
 
 		$order_data['invoice_prefix'] = $this->config->get('config_invoice_prefix');
 		$order_data['store_id'] = $this->config->get('config_store_id');
@@ -341,10 +341,10 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			$order_data['shipping_code'] = '';
 		}
 
-		$product_data = array();
+		$product_data = [];
 
 		foreach ($this->cart->getProducts() as $product) {
-			$option_data = array();
+			$option_data = [];
 
 			foreach ($product['option'] as $option) {
 				if ($option['type'] != 'file') {
@@ -380,7 +380,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		}
 
 		$order_data['products'] = $product_data;
-		$order_data['vouchers'] = array();
+		$order_data['vouchers'] = [];
 		$order_data['totals'] = $total_data['totals'];
 
 		$order_data['comment'] = '';
@@ -459,7 +459,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$data['process_order'] = $this->url->link('extension/payment/amazon_login_pay/processorder', '', true);
 
 		foreach ($this->cart->getProducts() as $product) {
-			$option_data = array();
+			$option_data = [];
 
 			foreach ($product['option'] as $option) {
 				if ($option['type'] != 'file') {
@@ -487,9 +487,9 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			);
 		}
 
-		$data['vouchers'] = array();
+		$data['vouchers'] = [];
 
-		$data['totals'] = array();
+		$data['totals'] = [];
 
 		foreach ($totals as $total) {
 			$data['totals'][] = array(
@@ -525,7 +525,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		if (isset($this->session->data['coupon'])) {
 			$coupon = $this->model_extension_total_coupon->getCoupon($this->session->data['coupon']);
 		} else {
-			$coupon = array();
+			$coupon = [];
 		}
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
@@ -630,7 +630,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$this->load->model('extension/extension');
 		$this->load->model('extension/payment/amazon_login_pay');
 
-		$json = array();
+		$json = [];
 
 		if (isset($this->request->get['AmazonOrderReferenceId'])) {
 			$this->session->data['lpa']['AmazonOrderReferenceId'] = $this->request->get['AmazonOrderReferenceId'];
@@ -717,7 +717,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 				'address_format' => $address_format
 			);
 
-			$quotes = array();
+			$quotes = [];
 
 			$results = $this->model_extension_extension->getExtensions('shipping');
 
@@ -745,7 +745,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 				}
 			}
 
-			$sort_order = array();
+			$sort_order = [];
 
 			foreach ($quotes as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -776,7 +776,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 	}
 
 	public function setShipping() {
-		$json = array();
+		$json = [];
 
 		if (isset($this->request->post['shipping_method'])) {
 			$shipping_method = explode('.', $this->request->post['shipping_method']);

@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionExtensionAnalytics extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/extension/analytics');
@@ -95,7 +95,7 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 
 		$stores = $this->model_setting_store->getStores();
 
-		$data['extensions'] = array();
+		$data['extensions'] = [];
 
 		// Compatibility code for old extension folders
 		$files = glob(DIR_APPLICATION . 'controller/extension/analytics/*.php');
@@ -107,7 +107,7 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 				// Compatibility code for old extension folders
 				$this->load->language('extension/analytics/' . $extension);
 				
-				$store_data = array();
+				$store_data = [];
 
 				$store_data[] = array(
 					'name'   => $this->config->get('config_name'),

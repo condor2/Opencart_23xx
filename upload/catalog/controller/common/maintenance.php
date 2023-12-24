@@ -15,7 +15,7 @@ class ControllerCommonMaintenance extends Controller {
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_maintenance'),

@@ -11,7 +11,7 @@
 * Config class
 */
 class Config {
-	private $data = array();
+	private $data = [];
     
 	/**
      * 
@@ -54,7 +54,7 @@ class Config {
 		$file = DIR_CONFIG . $filename . '.php';
 
 		if (file_exists($file)) {
-			$_ = array();
+			$_ = [];
 
 			require($file);
 

@@ -1,6 +1,6 @@
 <?php
 class ControllerSaleVoucherTheme extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('sale/voucher_theme');
@@ -143,7 +143,7 @@ class ControllerSaleVoucherTheme extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerSaleVoucherTheme extends Controller {
 		$data['add'] = $this->url->link('sale/voucher_theme/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('sale/voucher_theme/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['voucher_themes'] = array();
+		$data['voucher_themes'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -209,7 +209,7 @@ class ControllerSaleVoucherTheme extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -276,7 +276,7 @@ class ControllerSaleVoucherTheme extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = array();
+			$data['error_name'] = [];
 		}
 
 		if (isset($this->error['image'])) {
@@ -299,7 +299,7 @@ class ControllerSaleVoucherTheme extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -334,7 +334,7 @@ class ControllerSaleVoucherTheme extends Controller {
 		} elseif (!empty($voucher_theme_info)) {
 			$data['voucher_theme_description'] = $this->model_sale_voucher_theme->getVoucherThemeDescriptions($this->request->get['voucher_theme_id']);
 		} else {
-			$data['voucher_theme_description'] = array();
+			$data['voucher_theme_description'] = [];
 		}
 
 		if (isset($this->request->post['image'])) {

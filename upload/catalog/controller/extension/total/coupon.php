@@ -27,7 +27,7 @@ class ControllerExtensionTotalCoupon extends Controller {
 	public function coupon() {
 		$this->load->language('extension/total/coupon');
 
-		$json = array();
+		$json = [];
 
 		$this->load->model('extension/total/coupon');
 

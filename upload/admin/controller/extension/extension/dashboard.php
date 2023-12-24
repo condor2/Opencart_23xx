@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionExtensionDashboard extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/extension/dashboard');
@@ -88,7 +88,7 @@ class ControllerExtensionExtensionDashboard extends Controller {
 			}
 		}
 
-		$data['extensions'] = array();
+		$data['extensions'] = [];
 
 		// Compatibility code for old extension folders
 		$files = glob(DIR_APPLICATION . 'controller/extension/dashboard/*.php');

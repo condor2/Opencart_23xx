@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPPPayflow extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/pp_payflow');
@@ -81,7 +81,7 @@ class ControllerExtensionPaymentPPPayflow extends Controller {
 			$data['error_partner'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

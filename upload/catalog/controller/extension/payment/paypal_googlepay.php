@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPayPalGooglePay extends Controller {
-	private $error = array();
+	private $error = [];
 			
 	public function index() {
 		$this->load->model('extension/payment/paypal');
@@ -56,7 +56,7 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 			$data['client_token'] = $paypal->getClientToken();
 						
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -133,7 +133,7 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 		$data['client_token'] = $paypal->getClientToken();
 						
 		if ($paypal->hasErrors()) {
-			$error_messages = array();
+			$error_messages = [];
 				
 			$errors = $paypal->getErrors();
 								

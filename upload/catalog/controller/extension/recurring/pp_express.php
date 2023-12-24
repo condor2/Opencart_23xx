@@ -32,7 +32,7 @@ class ControllerExtensionRecurringPPExpress extends Controller {
 	}
 	
 	public function cancel() {
-		$json = array();
+		$json = [];
 		
 		$this->load->language('extension/recurring/pp_express');
 
@@ -90,7 +90,7 @@ class ControllerExtensionRecurringPPExpress extends Controller {
 
 			curl_close($curl);
 
-			$response_info = array();
+			$response_info = [];
 			
 			parse_str($response, $response_info);
 

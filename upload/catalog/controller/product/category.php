@@ -39,7 +39,7 @@ class ControllerProductCategory extends Controller {
 			$limit = $this->config->get($this->config->get('config_theme') . '_product_limit');
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -148,7 +148,7 @@ class ControllerProductCategory extends Controller {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
 
-			$data['categories'] = array();
+			$data['categories'] = [];
 
 			$results = $this->model_catalog_category->getCategories($category_id);
 
@@ -164,7 +164,7 @@ class ControllerProductCategory extends Controller {
 				);
 			}
 
-			$data['products'] = array();
+			$data['products'] = [];
 
 			$filter_data = array(
 				'filter_category_id' => $category_id,
@@ -234,7 +234,7 @@ class ControllerProductCategory extends Controller {
 				$url .= '&limit=' . $this->request->get['limit'];
 			}
 
-			$data['sorts'] = array();
+			$data['sorts'] = [];
 
 			$data['sorts'][] = array(
 				'text'  => $this->language->get('text_default'),
@@ -306,7 +306,7 @@ class ControllerProductCategory extends Controller {
 				$url .= '&order=' . $this->request->get['order'];
 			}
 
-			$data['limits'] = array();
+			$data['limits'] = [];
 
 			$limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
 

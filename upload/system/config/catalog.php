@@ -18,20 +18,20 @@ $_['db_port']          = DB_PORT;
 $_['session_autostart'] = false;
 
 // Autoload Libraries
-$_['library_autoload'] = array();
+$_['library_autoload'] = [];
 
 // Actions
-$_['action_pre_action'] = array(
+$_['action_pre_action'] = [
 	'startup/session',
 	'startup/startup',
 	'startup/error',
 	'startup/event',
 	'startup/maintenance',
 	'startup/seo_url'
-);
+];
 
 // Action Events
-$_['action_event'] = array(
+$_['action_event'] = [
 	'view/*/before'                         => 'event/theme',
 	
 	'model/extension/analytics/*/before'    => 'event/compatibility/beforeModel',
@@ -72,4 +72,4 @@ $_['action_event'] = array(
 	
 	//'controller/*/before'                 => 'event/debug/before',
 	//'controller/*/after'                  => 'event/debug/after'
-);
+];

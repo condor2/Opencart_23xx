@@ -7,7 +7,7 @@ class Mail extends \stdClass {
 	protected $subject;
 	protected $text;
 	protected $html;
-	protected $attachments = array();
+	protected $attachments = [];
 	public $protocol = 'mail';
 	public $smtp_hostname;
 	public $smtp_username;
@@ -17,7 +17,7 @@ class Mail extends \stdClass {
 	public $verp = false;
 	public $parameter = '';
 
-	public function __construct($config = array()) {
+	public function __construct($config = []) {
 		foreach ($config as $key => $value) {
 			$this->$key = $value;
 		}

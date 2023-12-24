@@ -1,6 +1,6 @@
 <?php
 class ControllerSettingStore extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('setting/store');
@@ -95,7 +95,7 @@ class ControllerSettingStore extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -110,7 +110,7 @@ class ControllerSettingStore extends Controller {
 		$data['add'] = $this->url->link('setting/store/add', 'token=' . $this->session->data['token'], true);
 		$data['delete'] = $this->url->link('setting/store/delete', 'token=' . $this->session->data['token'], true);
 
-		$data['stores'] = array();
+		$data['stores'] = [];
 
 		$store_total = 0;
 
@@ -173,7 +173,7 @@ class ControllerSettingStore extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$pagination = new Pagination();
@@ -333,7 +333,7 @@ class ControllerSettingStore extends Controller {
 			$data['error_customer_group_display'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -429,7 +429,7 @@ class ControllerSettingStore extends Controller {
 			$data['config_theme'] = '';
 		}
 
-		$data['themes'] = array();
+		$data['themes'] = [];
 
 		$this->load->model('extension/extension');
 
@@ -555,7 +555,7 @@ class ControllerSettingStore extends Controller {
 		} elseif (isset($store_info['config_location'])) {
 			$data['config_location'] = $this->config->get('config_location');
 		} else {
-			$data['config_location'] = array();
+			$data['config_location'] = [];
 		}
 
 		if (isset($this->request->post['config_country_id'])) {
@@ -643,7 +643,7 @@ class ControllerSettingStore extends Controller {
 		} elseif (isset($store_info['config_customer_group_display'])) {
 			$data['config_customer_group_display'] = $store_info['config_customer_group_display'];
 		} else {
-			$data['config_customer_group_display'] = array();
+			$data['config_customer_group_display'] = [];
 		}
 
 		if (isset($this->request->post['config_customer_price'])) {

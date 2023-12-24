@@ -1,6 +1,6 @@
 <?php
 class ControllerCatalogInformation extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('catalog/information');
@@ -143,7 +143,7 @@ class ControllerCatalogInformation extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerCatalogInformation extends Controller {
 		$data['add'] = $this->url->link('catalog/information/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('catalog/information/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['informations'] = array();
+		$data['informations'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -211,7 +211,7 @@ class ControllerCatalogInformation extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -313,19 +313,19 @@ class ControllerCatalogInformation extends Controller {
 		if (isset($this->error['title'])) {
 			$data['error_title'] = $this->error['title'];
 		} else {
-			$data['error_title'] = array();
+			$data['error_title'] = [];
 		}
 
 		if (isset($this->error['description'])) {
 			$data['error_description'] = $this->error['description'];
 		} else {
-			$data['error_description'] = array();
+			$data['error_description'] = [];
 		}
 
 		if (isset($this->error['meta_title'])) {
 			$data['error_meta_title'] = $this->error['meta_title'];
 		} else {
-			$data['error_meta_title'] = array();
+			$data['error_meta_title'] = [];
 		}
 
 		if (isset($this->error['keyword'])) {
@@ -348,7 +348,7 @@ class ControllerCatalogInformation extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -385,7 +385,7 @@ class ControllerCatalogInformation extends Controller {
 		} elseif (!empty($information_info)) {
 			$data['information_description'] = $this->model_catalog_information->getInformationDescriptions($this->request->get['information_id']);
 		} else {
-			$data['information_description'] = array();
+			$data['information_description'] = [];
 		}
 
 		$this->load->model('setting/store');
@@ -437,7 +437,7 @@ class ControllerCatalogInformation extends Controller {
 		} elseif (!empty($information_info)) {
 			$data['information_layout'] = $this->model_catalog_information->getInformationLayouts($this->request->get['information_id']);
 		} else {
-			$data['information_layout'] = array();
+			$data['information_layout'] = [];
 		}
 
 		$this->load->model('design/layout');

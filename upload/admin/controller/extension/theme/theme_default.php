@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionThemeThemeDefault extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/theme/theme_default');
@@ -128,7 +128,7 @@ class ControllerExtensionThemeThemeDefault extends Controller {
 			$data['error_image_location'] = '';
 		}
 		
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -161,7 +161,7 @@ class ControllerExtensionThemeThemeDefault extends Controller {
 			$data['theme_default_directory'] = 'default';
 		}		
 
-		$data['directories'] = array();
+		$data['directories'] = [];
 
 		$directories = glob(DIR_CATALOG . 'view/theme/*', GLOB_ONLYDIR);
 

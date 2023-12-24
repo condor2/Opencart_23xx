@@ -32,7 +32,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
 		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -93,7 +93,7 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 
 	public function country() {
-		$json = array();
+		$json = [];
 
 		$this->load->model('localisation/country');
 
@@ -119,7 +119,7 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 
 	public function customfield() {
-		$json = array();
+		$json = [];
 
 		$this->load->model('account/custom_field');
 

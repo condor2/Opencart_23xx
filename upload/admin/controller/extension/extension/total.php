@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionExtensionTotal extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/extension/total');
@@ -87,7 +87,7 @@ class ControllerExtensionExtensionTotal extends Controller {
 			}
 		}
 
-		$data['extensions'] = array();
+		$data['extensions'] = [];
 
 		// Compatibility code for old extension folders
 		$files = glob(DIR_APPLICATION . 'controller/extension/total/*.php');

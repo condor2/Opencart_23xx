@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountForgotten extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		if ($this->customer->isLogged()) {
@@ -64,7 +64,7 @@ class ControllerAccountForgotten extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

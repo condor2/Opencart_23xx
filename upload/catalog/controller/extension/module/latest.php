@@ -15,7 +15,7 @@ class ControllerExtensionModuleLatest extends Controller {
 
 		$this->load->model('tool/image');
 
-		$data['products'] = array();
+		$data['products'] = [];
 
 		$results = $this->model_catalog_product->getLatestProducts($setting['limit']);
 

@@ -1,6 +1,6 @@
 <?php
 class ControllerSaleVoucher extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('sale/voucher');
@@ -143,7 +143,7 @@ class ControllerSaleVoucher extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerSaleVoucher extends Controller {
 		$data['add'] = $this->url->link('sale/voucher/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('sale/voucher/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['vouchers'] = array();
+		$data['vouchers'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -232,7 +232,7 @@ class ControllerSaleVoucher extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -373,7 +373,7 @@ class ControllerSaleVoucher extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -564,7 +564,7 @@ class ControllerSaleVoucher extends Controller {
 
 		$limit = 10;
 
-		$data['histories'] = array();
+		$data['histories'] = [];
 
 		$results = $this->model_sale_voucher->getVoucherHistories($this->request->get['voucher_id'], ($page - 1) * $limit, $limit);
 
@@ -595,7 +595,7 @@ class ControllerSaleVoucher extends Controller {
 	public function send() {
 		$this->load->language('sale/voucher');
 
-		$json = array();
+		$json = [];
 
 		if (!$this->user->hasPermission('modify', 'sale/voucher')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -604,7 +604,7 @@ class ControllerSaleVoucher extends Controller {
 		if (!$json) {
 			$this->load->model('sale/voucher');
 
-			$vouchers = array();
+			$vouchers = [];
 
 			if (isset($this->request->post['selected'])) {
 				$vouchers = $this->request->post['selected'];

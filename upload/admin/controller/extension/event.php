@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionEvent extends Controller {
-	private $error = array();
+	private $error = [];
 	
 	public function index() {
 		$this->load->language('extension/event');
@@ -109,7 +109,7 @@ class ControllerExtensionEvent extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -121,7 +121,7 @@ class ControllerExtensionEvent extends Controller {
 			'href' => $this->url->link('extension/event', 'token=' . $this->session->data['token'] . $url, true)
 		);
 
-		$data['events'] = array();
+		$data['events'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -181,7 +181,7 @@ class ControllerExtensionEvent extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';

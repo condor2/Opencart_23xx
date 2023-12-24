@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentFirstdata extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/firstdata');
@@ -110,7 +110,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 			$data['error_demo_url'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

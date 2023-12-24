@@ -1,6 +1,6 @@
 <?php
 class ControllerCatalogRecurring extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('catalog/recurring');
@@ -177,7 +177,7 @@ class ControllerCatalogRecurring extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -193,7 +193,7 @@ class ControllerCatalogRecurring extends Controller {
 		$data['copy'] = $this->url->link('catalog/recurring/copy', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('catalog/recurring/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['recurrings'] = array();
+		$data['recurrings'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -247,7 +247,7 @@ class ControllerCatalogRecurring extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -330,7 +330,7 @@ class ControllerCatalogRecurring extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = array();
+			$data['error_name'] = [];
 		}
 
 		$url = '';
@@ -347,7 +347,7 @@ class ControllerCatalogRecurring extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -382,7 +382,7 @@ class ControllerCatalogRecurring extends Controller {
 		} elseif (!empty($recurring_info)) {
 			$data['recurring_description'] = $this->model_catalog_recurring->getRecurringDescription($recurring_info['recurring_id']);
 		} else {
-			$data['recurring_description'] = array();
+			$data['recurring_description'] = [];
 		}
 
 		if (isset($this->request->post['price'])) {
@@ -393,7 +393,7 @@ class ControllerCatalogRecurring extends Controller {
 			$data['price'] = 0;
 		}
 
-		$data['frequencies'] = array();
+		$data['frequencies'] = [];
 
 		$data['frequencies'][] = array(
 			'text'  => $this->language->get('text_day'),

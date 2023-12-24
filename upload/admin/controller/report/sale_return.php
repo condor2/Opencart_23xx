@@ -57,7 +57,7 @@ class ControllerReportSaleReturn extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -71,7 +71,7 @@ class ControllerReportSaleReturn extends Controller {
 
 		$this->load->model('report/return');
 
-		$data['returns'] = array();
+		$data['returns'] = [];
 
 		$filter_data = array(
 			'filter_date_start'	      => $filter_date_start,
@@ -119,7 +119,7 @@ class ControllerReportSaleReturn extends Controller {
 
 		$data['return_statuses'] = $this->model_localisation_return_status->getReturnStatuses();
 
-		$data['groups'] = array();
+		$data['groups'] = [];
 
 		$data['groups'][] = array(
 			'text'  => $this->language->get('text_year'),

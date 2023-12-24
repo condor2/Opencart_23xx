@@ -72,7 +72,7 @@ class MySQLi {
 			$query = $this->connection->query($sql);
 
 			if ($query instanceof \mysqli_result) {
-				$data = array();
+				$data = [];
 
 				while ($row = $query->fetch_assoc()) {
 					$data[] = $row;

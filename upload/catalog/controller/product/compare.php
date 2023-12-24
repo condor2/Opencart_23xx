@@ -8,7 +8,7 @@ class ControllerProductCompare extends Controller {
 		$this->load->model('tool/image');
 
 		if (!isset($this->session->data['compare'])) {
-			$this->session->data['compare'] = array();
+			$this->session->data['compare'] = [];
 		}
 
 		if (isset($this->request->get['remove'])) {
@@ -25,7 +25,7 @@ class ControllerProductCompare extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -66,9 +66,9 @@ class ControllerProductCompare extends Controller {
 
 		$data['review_status'] = $this->config->get('config_review_status');
 
-		$data['products'] = array();
+		$data['products'] = [];
 
-		$data['attribute_groups'] = array();
+		$data['attribute_groups'] = [];
 
 		foreach ($this->session->data['compare'] as $key => $product_id) {
 			$product_info = $this->model_catalog_product->getProduct($product_id);
@@ -100,7 +100,7 @@ class ControllerProductCompare extends Controller {
 					$availability = $this->language->get('text_instock');
 				}
 
-				$attribute_data = array();
+				$attribute_data = [];
 
 				$attribute_groups = $this->model_catalog_product->getProductAttributes($product_id);
 
@@ -159,10 +159,10 @@ class ControllerProductCompare extends Controller {
 	public function add() {
 		$this->load->language('product/compare');
 
-		$json = array();
+		$json = [];
 
 		if (!isset($this->session->data['compare'])) {
-			$this->session->data['compare'] = array();
+			$this->session->data['compare'] = [];
 		}
 
 		if (isset($this->request->post['product_id'])) {

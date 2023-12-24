@@ -18,7 +18,7 @@ class ControllerExtensionModuleStore extends Controller {
 
 			$data['store_id'] = $this->config->get('config_store_id');
 
-			$data['stores'] = array();
+			$data['stores'] = [];
 
 			$data['stores'][] = array(
 				'store_id' => 0,

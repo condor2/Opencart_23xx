@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountLogin extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->model('account/customer');
@@ -95,7 +95,7 @@ class ControllerAccountLogin extends Controller {
 			}
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),

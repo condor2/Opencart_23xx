@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPayPal extends Controller {
-	private $error = array();
+	private $error = [];
 	
 	public function __construct($registry) {
 		parent::__construct($registry);
@@ -100,7 +100,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			}
 			
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 						
@@ -195,7 +195,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['button_connect'] = $this->language->get('button_connect');
 						
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -326,7 +326,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -535,7 +535,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_disconnect'] = $this->language->get('button_disconnect');
 		$data['button_all_settings'] = $this->language->get('button_all_settings');
 						
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -757,7 +757,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_cart'] = $this->language->get('button_cart');
 		$data['button_checkout'] = $this->language->get('button_checkout');
 			
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -842,7 +842,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['client_token'] = $paypal->getClientToken();
 																	
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -975,7 +975,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_cart'] = $this->language->get('button_cart');
 		$data['button_checkout'] = $this->language->get('button_checkout');
 				
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1060,7 +1060,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['client_token'] = $paypal->getClientToken();
 														
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -1198,7 +1198,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_cart'] = $this->language->get('button_cart');
 		$data['button_checkout'] = $this->language->get('button_checkout');
 				
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1285,7 +1285,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['client_token'] = $paypal->getClientToken();
 														
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -1422,7 +1422,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_checkout'] = $this->language->get('button_checkout');
 		$data['button_pay'] = $this->language->get('button_pay');
 				
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1507,7 +1507,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['client_token'] = $paypal->getClientToken();
 														
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -1668,7 +1668,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_cart'] = $this->language->get('button_cart');
 		$data['button_checkout'] = $this->language->get('button_checkout');
 						
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1761,7 +1761,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['client_token'] = $paypal->getClientToken();
 														
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -1846,7 +1846,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 				
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -1982,7 +1982,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['button_send'] = $this->language->get('button_send');
 			
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -2118,18 +2118,18 @@ class ControllerExtensionPaymentPayPal extends Controller {
 	public function getSaleAnalytics() {
 		$this->load->language('extension/payment/paypal');
 
-		$data = array();
+		$data = [];
 
 		$this->load->model('extension/payment/paypal');
 
-		$data['all_sale'] = array();
-		$data['paypal_sale'] = array();
-		$data['xaxis'] = array();
+		$data['all_sale'] = [];
+		$data['paypal_sale'] = [];
+		$data['xaxis'] = [];
 		
 		$data['all_sale']['label'] = $this->language->get('text_all_sales');
 		$data['paypal_sale']['label'] = $this->language->get('text_paypal_sales');
-		$data['all_sale']['data'] = array();
-		$data['paypal_sale']['data'] = array();
+		$data['all_sale']['data'] = [];
+		$data['paypal_sale']['data'] = [];
 
 		if (isset($this->request->get['range'])) {
 			$range = $this->request->get['range'];
@@ -2491,7 +2491,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$result = $paypal->setPaymentCapture($transaction_id);
 							
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -2582,7 +2582,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$result = $paypal->setPaymentReauthorize($transaction_id);
 								
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 					
@@ -2673,7 +2673,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$result = $paypal->setPaymentVoid($transaction_id);
 				
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								
@@ -2763,7 +2763,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$result = $paypal->setPaymentRefund($transaction_id);
 							
 			if ($paypal->hasErrors()) {
-				$error_messages = array();
+				$error_messages = [];
 				
 				$errors = $paypal->getErrors();
 								

@@ -33,7 +33,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 			$data['worldpay_card'] = false;
 		}
 
-		$data['existing_cards'] = array();
+		$data['existing_cards'] = [];
 		if ($this->customer->isLogged() && $data['worldpay_card']) {
 			$this->load->model('extension/payment/worldpay');
 			$data['existing_cards'] = $this->model_extension_payment_worldpay->getCards($this->customer->getId());
@@ -108,7 +108,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 				$expiry_date = mktime(0, 0, 0, 0, (string)$response->paymentMethod->expiryMonth, (string)$response->paymentMethod->expiryYear);
 
 				if (isset($response->paymentMethod)) {
-					$card_data = array();
+					$card_data = [];
 					$card_data['customer_id'] = $this->customer->getId();
 					$card_data['Token'] = $response->token;
 					$card_data['Last4Digits'] = (string)$response->paymentMethod->maskedCardNumber;

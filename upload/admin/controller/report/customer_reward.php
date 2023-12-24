@@ -47,7 +47,7 @@ class ControllerReportCustomerReward extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -61,7 +61,7 @@ class ControllerReportCustomerReward extends Controller {
 
 		$this->load->model('report/customer');
 
-		$data['customers'] = array();
+		$data['customers'] = [];
 
 		$filter_data = array(
 			'filter_date_start'	=> $filter_date_start,

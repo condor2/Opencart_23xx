@@ -1,6 +1,6 @@
 <?php
 class ControllerDesignLayout extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('design/layout');
@@ -143,7 +143,7 @@ class ControllerDesignLayout extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerDesignLayout extends Controller {
 		$data['add'] = $this->url->link('design/layout/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('design/layout/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['layouts'] = array();
+		$data['layouts'] = [];
 
 		$filter_data = array(
 			'sort'  => $sort,
@@ -209,7 +209,7 @@ class ControllerDesignLayout extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = array();
+			$data['selected'] = [];
 		}
 
 		$url = '';
@@ -308,7 +308,7 @@ class ControllerDesignLayout extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
@@ -351,14 +351,14 @@ class ControllerDesignLayout extends Controller {
 		} elseif (!empty($layout_info)) {
 			$data['layout_routes'] = $this->model_design_layout->getLayoutRoutes($this->request->get['layout_id']);
 		} else {
-			$data['layout_routes'] = array();
+			$data['layout_routes'] = [];
 		}
 
 		$this->load->model('extension/extension');
 
 		$this->load->model('extension/module');
 
-		$data['extensions'] = array();
+		$data['extensions'] = [];
 
 		// Get a list of installed modules
 		$extensions = $this->model_extension_extension->getInstalled('module');
@@ -367,7 +367,7 @@ class ControllerDesignLayout extends Controller {
 		foreach ($extensions as $code) {
 			$this->load->language('extension/module/' . $code);
 
-			$module_data = array();
+			$module_data = [];
 
 			$modules = $this->model_extension_module->getModulesByCode($code);
 
@@ -393,10 +393,10 @@ class ControllerDesignLayout extends Controller {
 		} elseif (!empty($layout_info)) {
 			$layout_modules = $this->model_design_layout->getLayoutModules($this->request->get['layout_id']);
 		} else {
-			$layout_modules = array();
+			$layout_modules = [];
 		}
 
-		$data['layout_modules'] = array();
+		$data['layout_modules'] = [];
 
 		// Add all the modules which have multiple settings for each module
 		foreach ($layout_modules as $layout_module) {

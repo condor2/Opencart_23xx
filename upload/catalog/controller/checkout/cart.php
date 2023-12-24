@@ -5,7 +5,7 @@ class ControllerCheckoutCart extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'href' => $this->url->link('common/home'),
@@ -71,7 +71,7 @@ class ControllerCheckoutCart extends Controller {
 			$this->load->model('tool/image');
 			$this->load->model('tool/upload');
 
-			$data['products'] = array();
+			$data['products'] = [];
 
 			$products = $this->cart->getProducts();
 
@@ -94,7 +94,7 @@ class ControllerCheckoutCart extends Controller {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get($this->config->get('config_theme') . '_image_cart_width'), $this->config->get($this->config->get('config_theme') . '_image_cart_height'));
 				}
 
-				$option_data = array();
+				$option_data = [];
 
 				foreach ($product['option'] as $option) {
 					if ($option['type'] != 'file') {
@@ -165,7 +165,7 @@ class ControllerCheckoutCart extends Controller {
 			}
 
 			// Gift Voucher
-			$data['vouchers'] = array();
+			$data['vouchers'] = [];
 
 			if (!empty($this->session->data['vouchers'])) {
 				foreach ($this->session->data['vouchers'] as $key => $voucher) {
@@ -181,7 +181,7 @@ class ControllerCheckoutCart extends Controller {
 			// Totals
 			$this->load->model('extension/extension');
 
-			$totals = array();
+			$totals = [];
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 			
@@ -194,7 +194,7 @@ class ControllerCheckoutCart extends Controller {
 			
 			// Display prices
 			if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-				$sort_order = array();
+				$sort_order = [];
 
 				$results = $this->model_extension_extension->getExtensions('total');
 
@@ -213,7 +213,7 @@ class ControllerCheckoutCart extends Controller {
 					}
 				}
 
-				$sort_order = array();
+				$sort_order = [];
 
 				foreach ($totals as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];
@@ -222,7 +222,7 @@ class ControllerCheckoutCart extends Controller {
 				array_multisort($sort_order, SORT_ASC, $totals);
 			}
 
-			$data['totals'] = array();
+			$data['totals'] = [];
 
 			foreach ($totals as $total) {
 				$data['totals'][] = array(
@@ -237,7 +237,7 @@ class ControllerCheckoutCart extends Controller {
 
 			$this->load->model('extension/extension');
 
-			$data['modules'] = array();
+			$data['modules'] = [];
 			
 			$files = glob(DIR_APPLICATION . '/controller/extension/total/*.php');
 
@@ -284,7 +284,7 @@ class ControllerCheckoutCart extends Controller {
 	public function add() {
 		$this->load->language('checkout/cart');
 
-		$json = array();
+		$json = [];
 
 		if (isset($this->request->post['product_id'])) {
 			$product_id = (int)$this->request->post['product_id'];
@@ -312,7 +312,7 @@ class ControllerCheckoutCart extends Controller {
 			if (isset($this->request->post['option'])) {
 				$option = array_filter($this->request->post['option']);
 			} else {
-				$option = array();
+				$option = [];
 			}
 
 			$product_options = $this->model_catalog_product->getProductOptions($this->request->post['product_id']);
@@ -332,7 +332,7 @@ class ControllerCheckoutCart extends Controller {
 			$recurrings = $this->model_catalog_product->getProfiles($product_info['product_id']);
 
 			if ($recurrings) {
-				$recurring_ids = array();
+				$recurring_ids = [];
 
 				foreach ($recurrings as $recurring) {
 					$recurring_ids[] = $recurring['recurring_id'];
@@ -357,7 +357,7 @@ class ControllerCheckoutCart extends Controller {
 				// Totals
 				$this->load->model('extension/extension');
 
-				$totals = array();
+				$totals = [];
 				$taxes = $this->cart->getTaxes();
 				$total = 0;
 		
@@ -370,7 +370,7 @@ class ControllerCheckoutCart extends Controller {
 
 				// Display prices
 				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-					$sort_order = array();
+					$sort_order = [];
 
 					$results = $this->model_extension_extension->getExtensions('total');
 
@@ -389,7 +389,7 @@ class ControllerCheckoutCart extends Controller {
 						}
 					}
 
-					$sort_order = array();
+					$sort_order = [];
 
 					foreach ($totals as $key => $value) {
 						$sort_order[$key] = $value['sort_order'];
@@ -411,7 +411,7 @@ class ControllerCheckoutCart extends Controller {
 	public function edit() {
 		$this->load->language('checkout/cart');
 
-		$json = array();
+		$json = [];
 
 		// Update
 		if (!empty($this->request->post['quantity'])) {
@@ -437,7 +437,7 @@ class ControllerCheckoutCart extends Controller {
 	public function remove() {
 		$this->load->language('checkout/cart');
 
-		$json = array();
+		$json = [];
 
 		// Remove
 		if (isset($this->request->post['key'])) {
@@ -456,7 +456,7 @@ class ControllerCheckoutCart extends Controller {
 			// Totals
 			$this->load->model('extension/extension');
 
-			$totals = array();
+			$totals = [];
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
@@ -469,7 +469,7 @@ class ControllerCheckoutCart extends Controller {
 
 			// Display prices
 			if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-				$sort_order = array();
+				$sort_order = [];
 
 				$results = $this->model_extension_extension->getExtensions('total');
 
@@ -488,7 +488,7 @@ class ControllerCheckoutCart extends Controller {
 					}
 				}
 
-				$sort_order = array();
+				$sort_order = [];
 
 				foreach ($totals as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];

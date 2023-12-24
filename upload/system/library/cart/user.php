@@ -10,7 +10,7 @@ class User {
 	private $lastname = '';
 	private $email  = '';
 	private $user_group_id = 0;
-	private $permission = array();
+	private $permission = [];
 
 	/**
 	 * Constructor

@@ -15,7 +15,7 @@ class ControllerExtensionModuleBestSeller extends Controller {
 
 		$this->load->model('tool/image');
 
-		$data['products'] = array();
+		$data['products'] = [];
 
 		$results = $this->model_catalog_product->getBestSellerProducts($setting['limit']);
 

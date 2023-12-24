@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionShippingAusPost extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/shipping/auspost');
@@ -53,7 +53,7 @@ class ControllerExtensionShippingAusPost extends Controller {
 			$data['error_postcode'] = '';
 		}
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
