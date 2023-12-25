@@ -29,7 +29,7 @@ class ControllerAccountAccount extends Controller {
 			unset($this->session->data['success']);
 		} else {
 			$data['success'] = '';
-		} 
+		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -59,7 +59,7 @@ class ControllerAccountAccount extends Controller {
 
 		foreach ($files as $file) {
 			$code = basename($file, '.php');
-			
+
 			if ($this->config->get($code . '_status') && $this->config->get($code . '_card')) {
 				$this->load->language('extension/credit_card/' . $code);
 
@@ -91,7 +91,7 @@ class ControllerAccountAccount extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-		
+
 		$this->response->setOutput($this->load->view('account/account', $data));
 	}
 

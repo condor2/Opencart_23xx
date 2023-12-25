@@ -149,7 +149,7 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 					'email' => $user->email,
 					'telephone' => '',
 					'fax' => '',
-					'password' => uniqid(rand(), true),
+					'password' => uniqid(mt_rand(), true),
 					'company' => '',
 					'address_1' => '',
 					'address_2' => '',

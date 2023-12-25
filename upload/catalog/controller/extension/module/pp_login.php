@@ -116,7 +116,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 					'email'             => $user->email,
 					'telephone'         => $user->phone_number,
 					'fax'               => '',
-					'password'          => uniqid(rand(), true),
+					'password'          => uniqid(mt_rand(), true),
 					'company'           => '',
 					'address_1'         => $user->address->street_address,
 					'address_2'         => '',
