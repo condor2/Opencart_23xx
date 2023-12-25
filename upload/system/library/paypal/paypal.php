@@ -353,7 +353,7 @@ class PayPal {
 				CURLOPT_URL => $this->server[$this->environment] . $command,
 				CURLOPT_HEADER => true,
 				CURLOPT_RETURNTRANSFER => true,
-				CURLOPT_INFILESIZE => Null,
+				CURLOPT_INFILESIZE => null,
 				CURLOPT_HTTPHEADER => [],
 				CURLOPT_CONNECTTIMEOUT => 10,
 				CURLOPT_TIMEOUT => 10,
@@ -443,18 +443,18 @@ class PayPal {
 			
 			if (isset($parts[0]) && isset($parts[1])) {
 				if (($parts[0] == 'HTTP/1.1 100 Continue') && isset($parts[2])) {
-					list($head, $body) = [$parts[1], $parts[2]];
+					[$head, $body] = [$parts[1], $parts[2]];
 				} else {
-					list($head, $body) = [$parts[0], $parts[1]];
+					[$head, $body] = [$parts[0], $parts[1]];
 				}
             }
-			
+
             $response_headers = [];
             $header_lines = explode("\r\n", $head);
             array_shift($header_lines);
 			
             foreach ($header_lines as $line) {
-                list($key, $value) = explode(':', $line, 2);
+                [$key, $value] = explode(':', $line, 2);
                 $response_headers[$key] = $value;
             }
 			

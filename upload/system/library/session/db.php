@@ -22,7 +22,7 @@ final class DB {
 	}
 
 	public function open() {
-		if ($this->db){
+		if ($this->db) {
 			return true;
 		} else {
 			return false;

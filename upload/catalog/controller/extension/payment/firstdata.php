@@ -76,7 +76,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		if ($this->config->get('firstdata_card_storage') == 1 && $this->customer->isLogged()) {
 			$data['card_storage'] = 1;
 			$data['stored_cards'] = $this->model_extension_payment_firstdata->getStoredCards();
-			$data['new_hosted_id'] = sha1($this->customer->getId()  . '-' . date("Y-m-d-H-i-s") . rand(10, 500));
+			$data['new_hosted_id'] = sha1($this->customer->getId()  . '-' . date("Y-m-d-H-i-s") . mt_rand(10, 500));
 		} else {
 			$data['card_storage'] = 0;
 			$data['stored_cards'] = [];
@@ -104,7 +104,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 			if ($local_hash == $this->request->post['notification_hash']) {
 				$order_id_parts = explode('T', $this->request->post['oid']);
 
-				$order_id = str_replace("CON-","",$order_id_parts[0]);
+				$order_id = str_replace("CON-", "", $order_id_parts[0]);
 
 				$order_info = $this->model_checkout_order->getOrder($order_id);
 

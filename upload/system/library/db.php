@@ -24,7 +24,7 @@ class DB {
 	 * @param	int		$port
 	 *
  	*/
-	public function __construct($adaptor, $hostname, $username, $password, $database, $port = NULL) {
+	public function __construct($adaptor, $hostname, $username, $password, $database, $port = null) {
 		$class = 'DB\\' . $adaptor;
 
 		if (class_exists($class)) {

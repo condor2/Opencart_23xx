@@ -179,7 +179,7 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 				}
 
 				// Invalid response from Enrollment Server. No shift in liability. ECI = 7
-				if (isset($verify_3ds->result)  && $verify_3ds->result >= 500 && $verify_3ds->result < 600) {
+				if (isset($verify_3ds->result) && $verify_3ds->result >= 500 && $verify_3ds->result < 600) {
 					if ($this->config->get('realex_remote_liability') != 1) {
 						$this->load->language('extension/payment/realex_remote');
 

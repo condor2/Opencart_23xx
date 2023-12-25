@@ -1621,7 +1621,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 		$this->model_extension_payment_pp_express->log(['request' => $request,'response' => $response], 'IPN data');
 
-		if ((string)$response == "VERIFIED")  {
+		if ((string)$response == "VERIFIED") {
 			if (isset($this->request->post['transaction_entity'])) {
 				$this->log->write($this->request->post['transaction_entity']);
 			}

@@ -10,38 +10,40 @@
 /**
 * Registry class
 */
-final class Registry {
+class Registry {
 	private $data = [];
 
- 	/**
- 	 *
+	/**
+	 * Get
 	 *
-	 * @param	string	$key
+	 * @param string $key
 	 *
- 	 * @return	mixed
+	 * @return ?object
 	 */
-	public function get($key) {
+	public function get(string $key): ?object {
 		return (isset($this->data[$key]) ? $this->data[$key] : null);
 	}
 
-    /**
+	/**
+	 * Set
 	 *
+	 * @param string $key
+	 * @param object $value
 	 *
-	 * @param	string	$key
-	 * @param	string	$value
+	 * @return void
 	 */
-	public function set($key, $value) {
+	public function set(string $key, object $value): void {
 		$this->data[$key] = $value;
 	}
 
 	/**
+	 * Has
 	 *
+	 * @param string $key
 	 *
-	 * @param	string	$key
-	 *
-	 * @return	bool
+	 * @return bool
 	 */
-	public function has($key) {
+	public function has(string $key): bool {
 		return isset($this->data[$key]);
 	}
 }

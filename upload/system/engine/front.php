@@ -39,7 +39,7 @@ class Front {
 	 * @param	object	$action
 	 * @param	object	$error
 	*/
-	public function dispatch(Action $action, Action $error) {
+	public function dispatch(Action $action, Action $error): void {
 		$this->error = $error;
 
 		foreach ($this->pre_action as $pre_action) {

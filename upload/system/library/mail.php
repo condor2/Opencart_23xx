@@ -186,7 +186,7 @@ class Mail extends \stdClass {
 					}
 				}
 
-				fputs($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
+				fwrite($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
 
 				$reply = '';
 
@@ -198,7 +198,7 @@ class Mail extends \stdClass {
 						$reply = '';
 						continue;
 					}
-					else if (substr($line, 3, 1) == ' ') {
+					elseif (substr($line, 3, 1) == ' ') {
 						break;
 					}
 				}
@@ -208,7 +208,7 @@ class Mail extends \stdClass {
 				}
 
 				if (substr($this->smtp_hostname, 0, 3) == 'tls') {
-					fputs($handle, 'STARTTLS' . "\r\n");
+					fwrite($handle, 'STARTTLS' . "\r\n");
 
 					$reply = '';
 
@@ -228,7 +228,7 @@ class Mail extends \stdClass {
 				}
 
 				if (!empty($this->smtp_username)  && !empty($this->smtp_password)) {
-					fputs($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
+					fwrite($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
 
 					$reply = '';
 
@@ -244,7 +244,7 @@ class Mail extends \stdClass {
 						throw new \Exception('Error: EHLO not accepted from server!');
 					}
 
-					fputs($handle, 'AUTH LOGIN' . "\r\n");
+					fwrite($handle, 'AUTH LOGIN' . "\r\n");
 
 					$reply = '';
 
@@ -260,7 +260,7 @@ class Mail extends \stdClass {
 						throw new \Exception('Error: AUTH LOGIN not accepted from server!');
 					}
 
-					fputs($handle, base64_encode($this->smtp_username) . "\r\n");
+					fwrite($handle, base64_encode($this->smtp_username) . "\r\n");
 
 					$reply = '';
 
@@ -276,7 +276,7 @@ class Mail extends \stdClass {
 						throw new \Exception('Error: Username not accepted from server!');
 					}
 
-					fputs($handle, base64_encode($this->smtp_password) . "\r\n");
+					fwrite($handle, base64_encode($this->smtp_password) . "\r\n");
 
 					$reply = '';
 
@@ -292,7 +292,7 @@ class Mail extends \stdClass {
 						throw new \Exception('Error: Password not accepted from server!');
 					}
 				} else {
-					fputs($handle, 'HELO ' . getenv('SERVER_NAME') . "\r\n");
+					fwrite($handle, 'HELO ' . getenv('SERVER_NAME') . "\r\n");
 
 					$reply = '';
 
@@ -310,9 +310,9 @@ class Mail extends \stdClass {
 				}
 
 				if ($this->verp) {
-					fputs($handle, 'MAIL FROM: <' . $this->from . '>XVERP' . "\r\n");
+					fwrite($handle, 'MAIL FROM: <' . $this->from . '>XVERP' . "\r\n");
 				} else {
-					fputs($handle, 'MAIL FROM: <' . $this->from . '>' . "\r\n");
+					fwrite($handle, 'MAIL FROM: <' . $this->from . '>' . "\r\n");
 				}
 
 				$reply = '';
@@ -330,7 +330,7 @@ class Mail extends \stdClass {
 				}
 
 				if (!is_array($this->to)) {
-					fputs($handle, 'RCPT TO: <' . $this->to . '>' . "\r\n");
+					fwrite($handle, 'RCPT TO: <' . $this->to . '>' . "\r\n");
 
 					$reply = '';
 
@@ -347,7 +347,7 @@ class Mail extends \stdClass {
 					}
 				} else {
 					foreach ($this->to as $recipient) {
-						fputs($handle, 'RCPT TO: <' . $recipient . '>' . "\r\n");
+						fwrite($handle, 'RCPT TO: <' . $recipient . '>' . "\r\n");
 
 						$reply = '';
 
@@ -365,7 +365,7 @@ class Mail extends \stdClass {
 					}
 				}
 
-				fputs($handle, 'DATA' . "\r\n");
+				fwrite($handle, 'DATA' . "\r\n");
 
 				$reply = '';
 
@@ -391,11 +391,11 @@ class Mail extends \stdClass {
 					$results = ($line === '') ? [''] : str_split($line, 998);
 					
 					foreach($results as $result) {
-						fputs($handle, $result . "\r\n");
+						fwrite($handle, $result . "\r\n");
 					}
 				}
 
-				fputs($handle, '.' . "\r\n");
+				fwrite($handle, '.' . "\r\n");
 
 				$reply = '';
 
@@ -411,7 +411,7 @@ class Mail extends \stdClass {
 					throw new \Exception('Error: DATA not accepted from server!');
 				}
 
-				fputs($handle, 'QUIT' . "\r\n");
+				fwrite($handle, 'QUIT' . "\r\n");
 
 				$reply = '';
 

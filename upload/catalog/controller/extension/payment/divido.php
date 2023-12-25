@@ -1,16 +1,16 @@
 <?php
 class ControllerExtensionPaymentDivido extends Controller {
-	const
-		STATUS_ACCEPTED = 'ACCEPTED',
-		STATUS_ACTION_LENDER = 'ACTION-LENDER',
-		STATUS_CANCELED = 'CANCELED',
-		STATUS_COMPLETED = 'COMPLETED',
-		STATUS_DEPOSIT_PAID = 'DEPOSIT-PAID',
-		STATUS_DECLINED = 'DECLINED',
-		STATUS_DEFERRED = 'DEFERRED',
-		STATUS_REFERRED = 'REFERRED',
-		STATUS_FULFILLED = 'FULFILLED',
-		STATUS_SIGNED = 'SIGNED';
+	public const
+	STATUS_ACCEPTED = 'ACCEPTED',
+	STATUS_ACTION_LENDER = 'ACTION-LENDER',
+	STATUS_CANCELED = 'CANCELED',
+	STATUS_COMPLETED = 'COMPLETED',
+	STATUS_DEPOSIT_PAID = 'DEPOSIT-PAID',
+	STATUS_DECLINED = 'DECLINED',
+	STATUS_DEFERRED = 'DEFERRED',
+	STATUS_REFERRED = 'REFERRED',
+	STATUS_FULFILLED = 'FULFILLED',
+	STATUS_SIGNED = 'SIGNED';
 
 	private $status_id = [
 		self::STATUS_ACCEPTED => 1,
@@ -47,7 +47,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$key_parts = explode('.', $api_key);
 		$js_key    = strtolower(array_shift($key_parts));
 
-		list($total, $totals) = $this->model_extension_payment_divido->getOrderTotals();
+		[$total, $totals] = $this->model_extension_payment_divido->getOrderTotals();
 
 		$this->model_extension_payment_divido->setMerchant($this->config->get('divido_api_key'));
 
@@ -59,9 +59,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 			}
 		}
 
-		$plans_ids  = array_map(function ($plan) {
-			return $plan->id;
-		}, $plans);
+		$plans_ids  = array_map(fn ($plan) => $plan->id, $plans);
 		$plans_ids  = array_unique($plans_ids);
 		$plans_list = implode(',', $plans_ids);
 
@@ -195,7 +193,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 			];
 		}
 
-		list($total, $totals) = $this->model_extension_payment_divido->getOrderTotals();
+		[$total, $totals] = $this->model_extension_payment_divido->getOrderTotals();
 
 		$sub_total  = $total;
 		$cart_total = $this->cart->getSubTotal();
@@ -296,9 +294,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 			return null;
 		}
 
-		$plans_ids = array_map(function ($plan) {
-			return $plan->id;
-		}, $plans);
+		$plans_ids = array_map(fn ($plan) => $plan->id, $plans);
 
 		$plan_list = implode(',', $plans_ids);
 

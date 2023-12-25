@@ -13,10 +13,22 @@
 class Model {
 	protected $registry;
 
+	/**
+	 * Constructor
+	 *
+	 * @param object $registry
+	 */
 	public function __construct($registry) {
 		$this->registry = $registry;
 	}
 
+	/**
+	 * __get
+	 *
+	 * @param string $key
+	 *
+	 * @return object
+	 */
 	public function __get(string $key): object {
 		if ($this->registry->has($key)) {
 			return $this->registry->get($key);
@@ -25,7 +37,15 @@ class Model {
 		}
 	}
 
-	public function __set($key, $value) {
+	/**
+	 * __set
+	 *
+	 * @param string $key
+	 * @param string $value
+	 *
+	 * @return void
+	 */
+	public function __set(string $key, object $value): void {
 		$this->registry->set($key, $value);
 	}
 }

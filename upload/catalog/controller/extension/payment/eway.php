@@ -186,7 +186,7 @@ class ControllerExtensionPaymentEway extends Controller {
 
 		$value = (float)$value;
 
-		return (int)($value * pow(10, $power));
+		return (int)($value * 10 ** $power);
 	}
 
 	public function ValidateDenomination($value, $currency) {
@@ -194,7 +194,7 @@ class ControllerExtensionPaymentEway extends Controller {
 
 		$value = (float)$value;
 
-		return (int)($value * pow(10, '-' . $power));
+		return (int)($value * 10 ** ('-' . $power));
 	}
 
 	public function callback() {

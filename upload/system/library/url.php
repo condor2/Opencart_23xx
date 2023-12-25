@@ -28,24 +28,30 @@ class Url {
 	}
 
 	/**
+	 * addRewrite
 	 *
+	 * Add a rewrite method to the URL system
 	 *
-	 * @param	object	$rewrite
+	 * @param object $rewrite
+	 *
+	 * @return void
 	 */
-	public function addRewrite($rewrite) {
+	public function addRewrite($rewrite): void {
 		$this->rewrite[] = $rewrite;
 	}
 
 	/**
+	 * Link
 	 *
+	 * Generates a URL
 	 *
-	 * @param	string		$route
-	 * @param	mixed		$args
-	 * @param	bool		$secure
+	 * @param string $route
+	 * @param mixed  $args
+	 * @param bool   $secure
 	 *
-	 * @return	string
+	 * @return string
 	 */
-	public function link($route, $args = '', $secure = false) {
+	public function link(string $route, $args = '', bool $secure = false): string {
 		if ($this->ssl && $secure) {
 			$url = $this->ssl . 'index.php?route=' . $route;
 		} else {

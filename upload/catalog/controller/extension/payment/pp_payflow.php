@@ -109,8 +109,8 @@ class ControllerExtensionPaymentPPPayflow extends Controller {
 		$request .= '&EMAIL=' . urlencode($order_info['email']);
 		$request .= '&ACCT=' . urlencode(str_replace(' ', '', $this->request->post['cc_number']));
 		$request .= '&ACCTTYPE=' . urlencode($this->request->post['cc_type']);
-		$request .= '&CARDSTART=' . urlencode($this->request->post['cc_start_date_month'] . substr($this->request->post['cc_start_date_year'], - 2, 2));
-		$request .= '&EXPDATE=' . urlencode($this->request->post['cc_expire_date_month'] . substr($this->request->post['cc_expire_date_year'], - 2, 2));
+		$request .= '&CARDSTART=' . urlencode($this->request->post['cc_start_date_month'] . substr($this->request->post['cc_start_date_year'], -2, 2));
+		$request .= '&EXPDATE=' . urlencode($this->request->post['cc_expire_date_month'] . substr($this->request->post['cc_expire_date_year'], -2, 2));
 		$request .= '&CVV2=' . urlencode($this->request->post['cc_cvv2']);
 		$request .= '&CARDISSUE=' . urlencode($this->request->post['cc_issue']);
 		$request .= '&BUTTONSOURCE=' . urlencode('OpenCart_2.0_PFP');

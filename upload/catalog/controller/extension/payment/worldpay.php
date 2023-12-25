@@ -79,7 +79,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 		$order = [
 			"token" => $this->request->post['token'],
 			"orderType" => $order_type,
-			"amount" => round($this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false)*100),
+			"amount" => round($this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false) * 100),
 			"currencyCode" => $order_info['currency_code'],
 			"name" => $order_info['firstname'] . ' ' . $order_info['lastname'],
 			"orderDescription" => $order_info['store_name'] . ' - ' . date('Y-m-d H:i:s'),
@@ -120,7 +120,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 
 			//loop through any products that are recurring items
 			foreach ($recurring_products as $item) {
-				$this->model_extension_payment_worldpay->recurringPayment($item, $this->session->data['order_id'] . rand(), $this->request->post['token']);
+				$this->model_extension_payment_worldpay->recurringPayment($item, $this->session->data['order_id'] . mt_rand(), $this->request->post['token']);
 			}
 
 			$this->response->redirect($this->url->link('checkout/success', '', true));
