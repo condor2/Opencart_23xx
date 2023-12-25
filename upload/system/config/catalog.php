@@ -1,18 +1,18 @@
 <?php
 // Site
-$_['site_url']           = HTTP_SERVER;
+$_['site_url']      = HTTP_SERVER;
 
 // Url
-$_['url_autostart']    = false;
+$_['url_autostart'] = false;
 
 // Database
-$_['db_autostart']     = true;
-$_['db_type']          = DB_DRIVER; // mysqli, pdo or pgsql
-$_['db_hostname']      = DB_HOSTNAME;
-$_['db_username']      = DB_USERNAME;
-$_['db_password']      = DB_PASSWORD;
-$_['db_database']      = DB_DATABASE;
-$_['db_port']          = DB_PORT;
+$_['db_autostart']  = true;
+$_['db_type']       = DB_DRIVER; // mysqli, pdo or pgsql
+$_['db_hostname']   = DB_HOSTNAME;
+$_['db_username']   = DB_USERNAME;
+$_['db_password']   = DB_PASSWORD;
+$_['db_database']   = DB_DATABASE;
+$_['db_port']       = DB_PORT;
 
 // Session
 $_['session_autostart'] = false;
@@ -32,7 +32,7 @@ $_['action_pre_action'] = [
 
 // Action Events
 $_['action_event'] = [
-	'view/*/before'                         => 'event/theme',
+	'view/*/before' => 'event/theme',
 
 	'model/extension/analytics/*/before'    => 'event/compatibility/beforeModel',
 	'model/extension/captcha/*/before'      => 'event/compatibility/beforeModel',
@@ -46,17 +46,17 @@ $_['action_event'] = [
 	'model/extension/theme/*/before'        => 'event/compatibility/beforeModel',
 	'model/extension/total/*/before'        => 'event/compatibility/beforeModel',
 
-	'model/analytics/*/after'               => 'event/compatibility/afterModel',
-	'model/captcha/*/after'                 => 'event/compatibility/afterModel',
-	'model/credit_card/*/after'             => 'event/compatibility/afterModel',
-	'model/feed/*/after'                    => 'event/compatibility/afterModel',
-	'model/fraud/*/after'                   => 'event/compatibility/afterModel',
-	'model/module/*/after'                  => 'event/compatibility/afterModel',
-	'model/payment/*/after'                 => 'event/compatibility/afterModel',
-	'model/recurring/*/after'               => 'event/compatibility/afterModel',
-	'model/shipping/*/after'                => 'event/compatibility/afterModel',
-	'model/theme/*/after'                   => 'event/compatibility/afterModel',
-	'model/total/*/after'                   => 'event/compatibility/afterModel',
+	'model/analytics/*/after'   => 'event/compatibility/afterModel',
+	'model/captcha/*/after'     => 'event/compatibility/afterModel',
+	'model/credit_card/*/after' => 'event/compatibility/afterModel',
+	'model/feed/*/after'        => 'event/compatibility/afterModel',
+	'model/fraud/*/after'       => 'event/compatibility/afterModel',
+	'model/module/*/after'      => 'event/compatibility/afterModel',
+	'model/payment/*/after'     => 'event/compatibility/afterModel',
+	'model/recurring/*/after'   => 'event/compatibility/afterModel',
+	'model/shipping/*/after'    => 'event/compatibility/afterModel',
+	'model/theme/*/after'       => 'event/compatibility/afterModel',
+	'model/total/*/after'       => 'event/compatibility/afterModel',
 
 	//'language/extension/*/before'         => 'event/translation',
 	'language/extension/analytics/*/before' => 'event/compatibility/language',
@@ -70,6 +70,6 @@ $_['action_event'] = [
 	'language/extension/theme/*/before'     => 'event/compatibility/language',
 	'language/extension/total/*/before'     => 'event/compatibility/language'
 
-	//'controller/*/before'                 => 'event/debug/before',
-	//'controller/*/after'                  => 'event/debug/after'
+	//'controller/*/before' => 'event/debug/before',
+	//'controller/*/after'  => 'event/debug/after'
 ];
