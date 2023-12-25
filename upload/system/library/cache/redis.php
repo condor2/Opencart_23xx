@@ -13,7 +13,7 @@ class Redis {
 
 	public function get($key) {
 
-        if ($this->cache->exists(CACHE_PREFIX . $key)) {
+		if ($this->cache->exists(CACHE_PREFIX . $key)) {
 			$data = $this->cache->get(CACHE_PREFIX . $key);
 			return json_decode($data, true);
 		}

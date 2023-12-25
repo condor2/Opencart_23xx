@@ -161,7 +161,7 @@ class ModelUpgrade1001 extends Model {
 
 			foreach ($files as $file) {
 				if (!is_writable($file)) {
-					exit(json_encode(array('error' => 'File is read only. Please adjust and try again: ' . $file)));
+					exit(json_encode(['error' => 'File is read only. Please adjust and try again: ' . $file]));
 				}
 
 				$upgrade = true;
@@ -196,7 +196,7 @@ class ModelUpgrade1001 extends Model {
 			// Update the config.php by adding a DIR_UPLOAD
 			foreach ($files as $file) {
 				if (!is_writable($file)) {
-					exit(json_encode(array('error' => 'File is read only. Please adjust and try again: ' . $file)));
+					exit(json_encode(['error' => 'File is read only. Please adjust and try again: ' . $file]));
 				}
 
 				$upgrade = true;
@@ -231,7 +231,7 @@ class ModelUpgrade1001 extends Model {
 			// Update the config.php to change mysql to mysqli
 			foreach ($files as $file) {
 				if (!is_writable($file)) {
-					exit(json_encode(array('error' => 'File is read only. Please adjust and try again: ' . $file)));
+					exit(json_encode(['error' => 'File is read only. Please adjust and try again: ' . $file]));
 				}
 
 				$upgrade = false;

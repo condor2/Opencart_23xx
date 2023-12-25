@@ -13,7 +13,7 @@ class Controller3rdPartyExtension extends Controller {
 		curl_setopt($curl, CURLOPT_TIMEOUT, 30);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, array());
+		curl_setopt($curl, CURLOPT_POSTFIELDS, []);
 
 		$response = curl_exec($curl);
 

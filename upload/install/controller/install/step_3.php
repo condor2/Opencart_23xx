@@ -1,6 +1,6 @@
 <?php
 class ControllerInstallStep3 extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->language->load('install/step_3');
@@ -179,20 +179,20 @@ class ControllerInstallStep3 extends Controller {
 
 		$data['action'] = $this->url->link('install/step_3');
 
-		$db_drivers = array(
+		$db_drivers = [
 			'mysqli',
 			'pdo',
 			'pgsql'
-		);
+		];
 
-		$data['drivers'] = array();
+		$data['drivers'] = [];
 
 		foreach ($db_drivers as $db_driver) {
 			if (extension_loaded($db_driver)) {
-				$data['drivers'][] = array(
+				$data['drivers'][] = [
 					'text'  => $this->language->get('text_' . $db_driver),
 					'value' => $db_driver
-				);
+				];
 			}
 		}
 
@@ -286,11 +286,11 @@ class ControllerInstallStep3 extends Controller {
 			$this->error['db_prefix'] = $this->language->get('error_db_prefix');
 		}
 
-		$db_drivers = array(
+		$db_drivers = [
 			'mysqli',
 			'pdo',
 			'pgsql'
-		);
+		];
 
 		if (!in_array($this->request->post['db_driver'], $db_drivers)) {
 			$this->error['db_driver'] = $this->language->get('error_db_driver');

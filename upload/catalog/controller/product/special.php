@@ -35,10 +35,10 @@ class ControllerProductSpecial extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
 		$url = '';
 
@@ -58,10 +58,10 @@ class ControllerProductSpecial extends Controller {
 			$url .= '&limit=' . $this->request->get['limit'];
 		}
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('product/special', $url)
-		);
+		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -87,12 +87,12 @@ class ControllerProductSpecial extends Controller {
 
 		$data['products'] = [];
 
-		$filter_data = array(
+		$filter_data = [
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $limit,
 			'limit' => $limit
-		);
+		];
 
 		$product_total = $this->model_catalog_product->getTotalProductSpecials();
 
@@ -129,7 +129,7 @@ class ControllerProductSpecial extends Controller {
 				$rating = false;
 			}
 
-			$data['products'][] = array(
+			$data['products'][] = [
 				'product_id'  => $result['product_id'],
 				'thumb'       => $image,
 				'name'        => $result['name'],
@@ -140,7 +140,7 @@ class ControllerProductSpecial extends Controller {
 				'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 				'rating'      => $result['rating'],
 				'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
-			);
+			];
 		}
 
 		$url = '';
@@ -151,61 +151,61 @@ class ControllerProductSpecial extends Controller {
 
 		$data['sorts'] = [];
 
-		$data['sorts'][] = array(
+		$data['sorts'][] = [
 			'text'  => $this->language->get('text_default'),
 			'value' => 'p.sort_order-ASC',
 			'href'  => $this->url->link('product/special', 'sort=p.sort_order&order=ASC' . $url)
-		);
+		];
 
-		$data['sorts'][] = array(
+		$data['sorts'][] = [
 			'text'  => $this->language->get('text_name_asc'),
 			'value' => 'pd.name-ASC',
 			'href'  => $this->url->link('product/special', 'sort=pd.name&order=ASC' . $url)
-		);
+		];
 
-		$data['sorts'][] = array(
+		$data['sorts'][] = [
 			'text'  => $this->language->get('text_name_desc'),
 			'value' => 'pd.name-DESC',
 			'href'  => $this->url->link('product/special', 'sort=pd.name&order=DESC' . $url)
-		);
+		];
 
-		$data['sorts'][] = array(
+		$data['sorts'][] = [
 			'text'  => $this->language->get('text_price_asc'),
 			'value' => 'ps.price-ASC',
 			'href'  => $this->url->link('product/special', 'sort=ps.price&order=ASC' . $url)
-		);
+		];
 
-		$data['sorts'][] = array(
+		$data['sorts'][] = [
 			'text'  => $this->language->get('text_price_desc'),
 			'value' => 'ps.price-DESC',
 			'href'  => $this->url->link('product/special', 'sort=ps.price&order=DESC' . $url)
-		);
+		];
 
 		if ($this->config->get('config_review_status')) {
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_rating_desc'),
 				'value' => 'rating-DESC',
 				'href'  => $this->url->link('product/special', 'sort=rating&order=DESC' . $url)
-			);
+			];
 
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_rating_asc'),
 				'value' => 'rating-ASC',
 				'href'  => $this->url->link('product/special', 'sort=rating&order=ASC' . $url)
-			);
+			];
 		}
 
-		$data['sorts'][] = array(
+		$data['sorts'][] = [
 				'text'  => $this->language->get('text_model_asc'),
 				'value' => 'p.model-ASC',
 				'href'  => $this->url->link('product/special', 'sort=p.model&order=ASC' . $url)
-		);
+		];
 
-		$data['sorts'][] = array(
+		$data['sorts'][] = [
 			'text'  => $this->language->get('text_model_desc'),
 			'value' => 'p.model-DESC',
 			'href'  => $this->url->link('product/special', 'sort=p.model&order=DESC' . $url)
-		);
+		];
 
 		$url = '';
 
@@ -219,16 +219,16 @@ class ControllerProductSpecial extends Controller {
 
 		$data['limits'] = [];
 
-		$limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
+		$limits = array_unique([$this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100]);
 
 		sort($limits);
 
 		foreach($limits as $value) {
-			$data['limits'][] = array(
+			$data['limits'][] = [
 				'text'  => $value,
 				'value' => $value,
 				'href'  => $this->url->link('product/special', $url . '&limit=' . $value)
-			);
+			];
 		}
 
 		$url = '';

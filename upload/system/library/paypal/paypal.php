@@ -349,7 +349,7 @@ class PayPal {
 		$this->errors = [];
 
 		if ($method && $command) {
-			$curl_options = array(
+			$curl_options = [
 				CURLOPT_URL => $this->server[$this->environment] . $command,
 				CURLOPT_HEADER => true,
 				CURLOPT_RETURNTRANSFER => true,
@@ -359,7 +359,7 @@ class PayPal {
 				CURLOPT_TIMEOUT => 10,
 				CURLOPT_SSL_VERIFYHOST => 0,
 				CURLOPT_SSL_VERIFYPEER => 0
-			);
+			];
 			
 			$curl_options[CURLOPT_HTTPHEADER][] = 'Accept-Charset: utf-8';
 			$curl_options[CURLOPT_HTTPHEADER][] = 'Accept: application/json';

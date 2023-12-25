@@ -61,7 +61,7 @@ class ModelUpgrade1002 extends Model {
 		}
 
 		// category
-		$primary_data = array();
+		$primary_data = [];
 
 		$query = $this->db->query("SHOW KEYS FROM `" . DB_PREFIX . "category` WHERE Key_name = 'PRIMARY'");
 

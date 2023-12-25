@@ -10,7 +10,7 @@
 /**
 * Router class
 */
-final class Front {
+class Front {
 	private $registry;
 	private $pre_action = [];
 	private $error;
@@ -19,7 +19,7 @@ final class Front {
 	 * Constructor
 	 *
 	 * @param	object	$route
- 	*/
+	*/
 	public function __construct($registry) {
 		$this->registry = $registry;
 	}
@@ -28,7 +28,7 @@ final class Front {
 	 *
 	 *
 	 * @param	object	$pre_action
- 	*/
+	*/
 	public function addPreAction(Action $pre_action): void {
 		$this->pre_action[] = $pre_action;
 	}
@@ -38,7 +38,7 @@ final class Front {
 	 *
 	 * @param	object	$action
 	 * @param	object	$error
- 	*/
+	*/
 	public function dispatch(Action $action, Action $error) {
 		$this->error = $error;
 
@@ -62,7 +62,7 @@ final class Front {
 	 *
 	 * @param	object	$action
 	 * @return	?object
- 	*/
+	*/
 	private function execute(Action $action) {
 		$result = $action->execute($this->registry);
 

@@ -16,7 +16,7 @@ class Proxy extends \stdClass {
 	 *
 	 *
 	 * @param	string	$key
-	 */
+	*/
 	public function __get($key) {
 		return $this->data[$key];
 	}
@@ -25,7 +25,7 @@ class Proxy extends \stdClass {
 	 *
 	 * @param	string	$key
 	 * @param	string	$value
-     */
+	*/
 	public function __set($key, $value): void {
 		$this->data[$key] = $value;
 	}

@@ -19,7 +19,7 @@ class Action {
 	 * Constructor
 	 *
 	 * @param	string	$route
- 	*/
+	*/
 	public function __construct($route) {
 		$this->id = $route;
 
@@ -44,7 +44,7 @@ class Action {
 	 *
 	 * @return	string
 	 *
- 	*/
+	*/
 	public function getId() {
 		return $this->id;
 	}
@@ -54,7 +54,7 @@ class Action {
 	 *
 	 * @param	object	$registry
 	 * @param	array	$args
- 	*/
+	*/
 	public function execute($registry, array $args = []) {
 		// Stop any magical methods being called
 		if (substr($this->method, 0, 2) == '__') {

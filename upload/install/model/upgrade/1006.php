@@ -87,19 +87,19 @@ class ModelUpgrade1006 extends Model {
 		$this->db->query("UPDATE `" . DB_PREFIX . "modification` SET status = 0");
 
 		// Cleanup files in old directories
-		$directories = array(
+		$directories = [
 			DIR_SYSTEM . 'modification/',
 			DIR_SYSTEM . 'storage/modification/',
 			DIR_SYSTEM . 'logs/',
 			DIR_SYSTEM . 'cache/',
-		);
+		];
 
-        $files = array();
+        $files = [];
 
         foreach ($directories as $dir) {
 			if (is_dir($dir)){
 				// Make path into an array
-				$path = array($dir . '*');
+				$path = [$dir . '*'];
 
 				// While the path array is still populated keep looping through
 				while (count($path) != 0) {

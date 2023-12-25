@@ -26,7 +26,7 @@ class ControllerCommonColumnLeft extends Controller {
 			$data['code'] = $this->config->get('language.default');
 		}
 		
-		$data['languages'] = array();
+		$data['languages'] = [];
 		
 		$languages = glob(DIR_LANGUAGE . '*', GLOB_ONLYDIR);
 		

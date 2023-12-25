@@ -75,10 +75,10 @@ class ControllerProductSearch extends Controller {
 
 		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		);
+		];
 
 		$url = '';
 
@@ -118,10 +118,10 @@ class ControllerProductSearch extends Controller {
 			$url .= '&limit=' . $this->request->get['limit'];
 		}
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('product/search', $url)
-		);
+		];
 
 		if (isset($this->request->get['search'])) {
 			$data['heading_title'] = $this->language->get('heading_title') .  ' - ' . $this->request->get['search'];
@@ -172,30 +172,30 @@ class ControllerProductSearch extends Controller {
 				$categories_3 = $this->model_catalog_category->getCategories($category_2['category_id']);
 
 				foreach ($categories_3 as $category_3) {
-					$level_3_data[] = array(
+					$level_3_data[] = [
 						'category_id' => $category_3['category_id'],
 						'name'        => $category_3['name'],
-					);
+					];
 				}
 
-				$level_2_data[] = array(
+				$level_2_data[] = [
 					'category_id' => $category_2['category_id'],
 					'name'        => $category_2['name'],
 					'children'    => $level_3_data
-				);
+				];
 			}
 
-			$data['categories'][] = array(
+			$data['categories'][] = [
 				'category_id' => $category_1['category_id'],
 				'name'        => $category_1['name'],
 				'children'    => $level_2_data
-			);
+			];
 		}
 
 		$data['products'] = [];
 
 		if (isset($this->request->get['search']) || isset($this->request->get['tag'])) {
-			$filter_data = array(
+			$filter_data = [
 				'filter_name'         => $search,
 				'filter_tag'          => $tag,
 				'filter_description'  => $description,
@@ -205,7 +205,7 @@ class ControllerProductSearch extends Controller {
 				'order'               => $order,
 				'start'               => ($page - 1) * $limit,
 				'limit'               => $limit
-			);
+			];
 
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
@@ -242,7 +242,7 @@ class ControllerProductSearch extends Controller {
 					$rating = false;
 				}
 
-				$data['products'][] = array(
+				$data['products'][] = [
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
@@ -253,7 +253,7 @@ class ControllerProductSearch extends Controller {
 					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
 					'rating'      => $result['rating'],
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
-				);
+				];
 			}
 
 			$url = '';
@@ -284,61 +284,61 @@ class ControllerProductSearch extends Controller {
 
 			$data['sorts'] = [];
 
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_default'),
 				'value' => 'p.sort_order-ASC',
 				'href'  => $this->url->link('product/search', 'sort=p.sort_order&order=ASC' . $url)
-			);
+			];
 
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_name_asc'),
 				'value' => 'pd.name-ASC',
 				'href'  => $this->url->link('product/search', 'sort=pd.name&order=ASC' . $url)
-			);
+			];
 
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_name_desc'),
 				'value' => 'pd.name-DESC',
 				'href'  => $this->url->link('product/search', 'sort=pd.name&order=DESC' . $url)
-			);
+			];
 
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_price_asc'),
 				'value' => 'p.price-ASC',
 				'href'  => $this->url->link('product/search', 'sort=p.price&order=ASC' . $url)
-			);
+			];
 
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_price_desc'),
 				'value' => 'p.price-DESC',
 				'href'  => $this->url->link('product/search', 'sort=p.price&order=DESC' . $url)
-			);
+			];
 
 			if ($this->config->get('config_review_status')) {
-				$data['sorts'][] = array(
+				$data['sorts'][] = [
 					'text'  => $this->language->get('text_rating_desc'),
 					'value' => 'rating-DESC',
 					'href'  => $this->url->link('product/search', 'sort=rating&order=DESC' . $url)
-				);
+				];
 
-				$data['sorts'][] = array(
+				$data['sorts'][] = [
 					'text'  => $this->language->get('text_rating_asc'),
 					'value' => 'rating-ASC',
 					'href'  => $this->url->link('product/search', 'sort=rating&order=ASC' . $url)
-				);
+				];
 			}
 
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_model_asc'),
 				'value' => 'p.model-ASC',
 				'href'  => $this->url->link('product/search', 'sort=p.model&order=ASC' . $url)
-			);
+			];
 
-			$data['sorts'][] = array(
+			$data['sorts'][] = [
 				'text'  => $this->language->get('text_model_desc'),
 				'value' => 'p.model-DESC',
 				'href'  => $this->url->link('product/search', 'sort=p.model&order=DESC' . $url)
-			);
+			];
 
 			$url = '';
 
@@ -372,16 +372,16 @@ class ControllerProductSearch extends Controller {
 
 			$data['limits'] = [];
 
-			$limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
+			$limits = array_unique([$this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100]);
 
 			sort($limits);
 
 			foreach ($limits as $value) {
-				$data['limits'][] = array(
+				$data['limits'][] = [
 					'text'  => $value,
 					'value' => $value,
 					'href'  => $this->url->link('product/search', $url . '&limit=' . $value)
-				);
+				];
 			}
 
 			$url = '';
@@ -443,7 +443,7 @@ class ControllerProductSearch extends Controller {
 					$ip = '';
 				}
 
-				$search_data = array(
+				$search_data = [
 					'keyword'       => $search,
 					'category_id'   => $category_id,
 					'sub_category'  => $sub_category,
@@ -451,7 +451,7 @@ class ControllerProductSearch extends Controller {
 					'products'      => $product_total,
 					'customer_id'   => $customer_id,
 					'ip'            => $ip
-				);
+				];
 
 				$this->model_account_search->addSearch($search_data);
 			}

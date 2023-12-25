@@ -170,7 +170,7 @@ function check_requirements() {
 		$error = 'Warning: ZLIB extension needs to be loaded for OpenCart to work!';
 	}
 
-	return array($error === null, $error);
+	return [$error === null, $error];
 }
 
 
@@ -307,14 +307,14 @@ function write_config_files($options) {
 }
 
 function dir_permissions() {
-	$dirs = array(
+	$dirs = [
 		DIR_OPENCART . 'image/',
 		DIR_OPENCART . 'system/storage/download/',
 		DIR_OPENCART . 'system/storage/upload/',
 		DIR_OPENCART . 'system/storage/cache/',
 		DIR_OPENCART . 'system/storage/logs/',
 		DIR_OPENCART . 'system/storage/modification/',
-	);
+	];
 	exec('chmod o+w -R ' . implode(' ', $dirs));
 }
 

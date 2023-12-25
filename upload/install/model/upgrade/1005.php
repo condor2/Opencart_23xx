@@ -71,7 +71,7 @@ class ModelUpgrade1005 extends Model {
 		}
 
 		// product_image
-		$index_data = array();
+		$index_data = [];
 
 		$query = $this->db->query("SHOW INDEX FROM `" . DB_PREFIX . "product_image` WHERE Key_name != 'PRIMARY'");
 
@@ -84,7 +84,7 @@ class ModelUpgrade1005 extends Model {
 		}
 
 		// product_to_category
-		$index_data = array();
+		$index_data = [];
 
 		$query = $this->db->query("SHOW INDEX FROM `" . DB_PREFIX . "product_to_category` WHERE Key_name != 'PRIMARY'");
 
@@ -135,7 +135,7 @@ class ModelUpgrade1005 extends Model {
 		$this->db->query("ALTER TABLE `" . DB_PREFIX . "order_recurring_transaction` CHANGE `type` `type` varchar(255) NOT NULL AFTER `reference`");
 
 		// url_alias
-		$index_data = array();
+		$index_data = [];
 
 		$query = $this->db->query("SHOW INDEX FROM `" . DB_PREFIX . "url_alias` WHERE Key_name != 'PRIMARY'");
 
