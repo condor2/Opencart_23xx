@@ -74,29 +74,27 @@ function usage() {
 	echo 'php cli_install.php install ' . $options . "\n\n";
 }
 
-
 function get_options($argv) {
 	$defaults = [
 		'db_hostname' => 'localhost',
 		'db_database' => 'opencart',
-		'db_prefix' => 'oc_',
-		'db_driver' => 'mysqli',
-		'db_port' => '3306',
-		'username' => 'admin',
+		'db_prefix'   => 'oc_',
+		'db_driver'   => 'mysqli',
+		'db_port'     => '3306',
+		'username'    => 'admin',
 	];
 
 	$options = [];
 	$total = count($argv);
-	for ($i=0; $i < $total; $i=$i+2) {
+	for ($i = 0; $i < $total; $i = $i + 2) {
 		$is_flag = preg_match('/^--(.*)$/', $argv[$i], $match);
 		if (!$is_flag) {
 			throw new Exception($argv[$i] . ' found in command line args instead of a valid option name starting with \'--\'');
 		}
-		$options[$match[1]] = $argv[$i+1];
+		$options[$match[1]] = $argv[$i + 1];
 	}
 	return array_merge($defaults, $options);
 }
-
 
 function valid($options) {
 	$required = [
@@ -173,7 +171,6 @@ function check_requirements() {
 	return [$error === null, $error];
 }
 
-
 function setup_db($data) {
 	$db = new DB($data['db_driver'], htmlspecialchars_decode($data['db_hostname']), htmlspecialchars_decode($data['db_username']), htmlspecialchars_decode($data['db_password']), htmlspecialchars_decode($data['db_database']), $data['db_port']);
 
@@ -239,7 +236,7 @@ function write_config_files($options) {
 	$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'catalog/\');' . "\n";
 	$output .= 'define(\'DIR_SYSTEM\', \'' . addslashes(DIR_OPENCART) . 'system/\');' . "\n";
 	$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";
-	$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";			
+	$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";
 	$output .= 'define(\'DIR_LANGUAGE\', DIR_APPLICATION . \'language/\');' . "\n";
 	$output .= 'define(\'DIR_TEMPLATE\', DIR_APPLICATION . \'view/theme/\');' . "\n";
 	$output .= 'define(\'DIR_CONFIG\', DIR_SYSTEM . \'config/\');' . "\n";
@@ -277,7 +274,7 @@ function write_config_files($options) {
 	$output .= '// DIR' . "\n";
 	$output .= 'define(\'DIR_APPLICATION\', \'' . addslashes(DIR_OPENCART) . 'admin/\');' . "\n";
 	$output .= 'define(\'DIR_SYSTEM\', \'' . addslashes(DIR_OPENCART) . 'system/\');' . "\n";
-	$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";	
+	$output .= 'define(\'DIR_IMAGE\', \'' . addslashes(DIR_OPENCART) . 'image/\');' . "\n";
 	$output .= 'define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');' . "\n";
 	$output .= 'define(\'DIR_CATALOG\', \'' . addslashes(DIR_OPENCART) . 'catalog/\');' . "\n";
 	$output .= 'define(\'DIR_LANGUAGE\', DIR_APPLICATION . \'language/\');' . "\n";
@@ -324,26 +321,26 @@ $subcommand = array_shift($argv);
 
 switch ($subcommand) {
 
-case "install":
-	try {
-		$options = get_options($argv);
-		define('HTTP_OPENCART', $options['http_server']);
-		$valid = valid($options);
-		if (!$valid[0]) {
-			echo "FAILED! Following inputs were missing or invalid: ";
-			echo implode(', ', $valid[1]) . "\n\n";
-			exit(1);
+	case "install":
+		try {
+			$options = get_options($argv);
+			define('HTTP_OPENCART', $options['http_server']);
+			$valid = valid($options);
+			if (!$valid[0]) {
+				echo "FAILED! Following inputs were missing or invalid: ";
+				echo implode(', ', $valid[1]) . "\n\n";
+				exit(1);
+			}
+			install($options);
+			echo "SUCCESS! Opencart successfully installed on your server\n";
+			echo "Store link: " . $options['http_server'] . "\n";
+			echo "Admin link: " . $options['http_server'] . "admin/\n\n";
+		} catch (ErrorException $e) {
+			echo 'FAILED!: ' . $e->getMessage() . "\n";
+ 			exit(1);
 		}
-		install($options);
-		echo "SUCCESS! Opencart successfully installed on your server\n";
-		echo "Store link: " . $options['http_server'] . "\n";
-		echo "Admin link: " . $options['http_server'] . "admin/\n\n";
-	} catch (ErrorException $e) {
-		echo 'FAILED!: ' . $e->getMessage() . "\n";
-		exit(1);
-	}
-	break;
-case "usage":
-default:
-	echo usage();
+		break;
+	case "usage":
+	default:
+		echo usage();
 }

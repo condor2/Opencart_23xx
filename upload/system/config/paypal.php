@@ -887,12 +887,12 @@ $_['paypal_setting'] = [
 			'name' => 'text_insert_append'
 		],
 		'before' => [
-			'code'	=> 'before',
-			'name'	=> 'text_insert_before'
+			'code' => 'before',
+			'name' => 'text_insert_before'
 		],
 		'after' => [
-			'code'	=> 'after',
-			'name'	=> 'text_insert_after'
+			'code' => 'after',
+			'name' => 'text_insert_after'
 		]
 	],
 	'message_align' => [

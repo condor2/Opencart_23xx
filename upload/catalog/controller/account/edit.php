@@ -43,13 +43,13 @@ class ControllerAccountEdit extends Controller {
 		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = [
-			'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home')
+			'text' => $this->language->get('text_home'),
+			'href' => $this->url->link('common/home')
 		];
 
 		$data['breadcrumbs'][] = [
-			'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', true)
+			'text' => $this->language->get('text_account'),
+			'href' => $this->url->link('account/account', '', true)
 		];
 
 		$data['breadcrumbs'][] = [

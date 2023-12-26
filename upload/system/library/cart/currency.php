@@ -106,7 +106,7 @@ class Currency {
 	 * @param    string  $currency
 	 *
 	 * @return   int
-	 */	
+	 */
 	public function getId($currency) {
 		if (isset($this->currencies[$currency])) {
 			return $this->currencies[$currency]['currency_id'];
@@ -121,7 +121,7 @@ class Currency {
 	 * @param    string  $currency
 	 *
 	 * @return   string
-	 */	
+	 */
 	public function getSymbolLeft($currency) {
 		if (isset($this->currencies[$currency])) {
 			return $this->currencies[$currency]['symbol_left'];

@@ -22,5 +22,5 @@ class PHP {
 
 		trigger_error('Error: Could not load template ' . $file . '!');
 		exit();
-	}	
+	}
 }

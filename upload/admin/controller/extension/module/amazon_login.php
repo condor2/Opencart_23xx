@@ -135,5 +135,4 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		$this->load->model('extension/event');
 		$this->model_extension_event->deleteEvent('amazon_login');
 	}
-
 }

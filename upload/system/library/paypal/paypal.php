@@ -42,7 +42,7 @@ class PayPal {
 		$command = '/v1/oauth2/token';
 
 		$params = $token_info;
-								
+
 		$result = $this->execute('POST', $command, $params);
 
 		if (!empty($result['access_token'])) {
@@ -447,7 +447,7 @@ class PayPal {
 				} else {
 					[$head, $body] = [$parts[0], $parts[1]];
 				}
-            }
+			}
 
 			$response_headers = [];
 			$header_lines = explode("\r\n", $head);
@@ -462,7 +462,7 @@ class PayPal {
 
 			if (isset($buffer) && is_resource($buffer)) {
 				fclose($buffer);
-            }
+			}
 
 			$this->last_response = json_decode($body, true);
 
@@ -470,7 +470,7 @@ class PayPal {
 				$this->errors[] = (array)$this->last_response;
 			}
 
-			return (array)$this->last_response;		
+			return (array)$this->last_response;
 		}
 	}
 
@@ -496,7 +496,7 @@ class PayPal {
 
 		for ($i = 0; $i < $length; $i++) {
 			$token .= $string[mt_rand(0, $max)];
-		}	
+		}
 
 		return $token;
 	}
