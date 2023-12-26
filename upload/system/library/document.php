@@ -26,7 +26,7 @@ class Document {
 	/**
 	 * @var array
 	 */
-	private string $links = [];
+	private array $links = [];
 	/**
 	 * @var array
 	 */
