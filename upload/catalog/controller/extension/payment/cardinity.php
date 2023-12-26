@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentCardinity extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/cardinity');
 
 		$data['entry_holder'] = $this->language->get('entry_holder');

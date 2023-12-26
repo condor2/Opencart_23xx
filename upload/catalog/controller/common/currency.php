@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonCurrency extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('common/currency');
 
 		$data['text_currency'] = $this->language->get('text_currency');

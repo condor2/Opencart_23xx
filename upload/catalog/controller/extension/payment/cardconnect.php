@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentCardConnect extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/cardconnect');
 
 		$this->load->model('extension/payment/cardconnect');

@@ -38,7 +38,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		self::STATUS_SIGNED => 'Contract signed',
 	];
 
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/divido');
 		$this->load->model('extension/payment/divido');
 		$this->load->model('checkout/order');

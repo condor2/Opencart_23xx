@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonMaintenance extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('common/maintenance');
 
 		$this->document->setTitle($this->language->get('heading_title'));

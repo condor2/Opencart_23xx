@@ -1,7 +1,7 @@
 <?php
 
 class ControllerExtensionModuleAmazonLogin extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->model('extension/payment/amazon_login_pay');
 
 		if ($this->config->get('amazon_login_pay_status') && $this->config->get('amazon_login_status') && !$this->customer->isLogged() && !empty($this->request->server['HTTPS'])) {

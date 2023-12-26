@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleStore extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$status = true;
 
 		if ($this->config->get('store_admin')) {

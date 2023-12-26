@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPilibaba extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/pilibaba');
 
 		$this->load->model('checkout/order');

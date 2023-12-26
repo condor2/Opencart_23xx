@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentEway extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/eway');
 
 		$data['button_confirm'] = $this->language->get('button_confirm');

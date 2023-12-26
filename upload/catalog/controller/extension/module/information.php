@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleInformation extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/module/information');
 
 		$data['heading_title'] = $this->language->get('heading_title');

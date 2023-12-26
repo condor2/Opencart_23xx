@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModulePPButton extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$status = true;
 
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout')) || (!$this->customer->isLogged() && ($this->cart->hasRecurringProducts() || $this->cart->hasDownload()))) {

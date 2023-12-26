@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentLaybuy extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/laybuy');
 
 		$this->load->model('extension/payment/laybuy');

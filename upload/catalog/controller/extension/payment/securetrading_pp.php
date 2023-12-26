@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSecureTradingPp extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->model('checkout/order');
 		$this->load->model('localisation/country');
 		$this->load->model('localisation/zone');

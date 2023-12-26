@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentRealex extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/realex');
 
 		$data['entry_cc_type'] = $this->language->get('entry_cc_type');

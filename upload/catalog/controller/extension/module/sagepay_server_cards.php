@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleSagepayServerCards extends Controller {
-	public function index(): void {
+	public function index(): string {
 		if ($this->config->get('sagepay_server_cards_status') && $this->config->get('sagepay_server_status') && $this->customer->isLogged()) {
 			$this->load->language('account/sagepay_server_cards');
 

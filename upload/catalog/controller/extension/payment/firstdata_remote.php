@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentFirstdataRemote extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/firstdata_remote');
 		$this->load->model('extension/payment/firstdata_remote');
 

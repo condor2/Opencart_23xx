@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleAffiliate extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/module/affiliate');
 
 		$data['heading_title'] = $this->language->get('heading_title');

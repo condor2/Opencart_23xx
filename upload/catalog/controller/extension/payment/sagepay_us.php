@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSagepayUS extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('extension/payment/sagepay_us');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');

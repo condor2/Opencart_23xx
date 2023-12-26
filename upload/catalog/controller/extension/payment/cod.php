@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentCod extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
 		$data['text_loading'] = $this->language->get('text_loading');
