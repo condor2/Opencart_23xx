@@ -26,7 +26,7 @@ class Language {
 		array_merge($this->data, $data);
 	}
 
-	public function load(string $filename, &$data = []): void {
+	public function load(string $filename, &$data = []) {
 		$_ = [];
 
 		$file = DIR_LANGUAGE . 'english/' . $filename . '.php';
