@@ -55,7 +55,7 @@ class Mail extends \stdClass {
 		$this->attachments[] = $filename;
 	}
 
-	public function send(): bool {
+	public function send() {
 		if (!$this->to) {
 			throw new \Exception('Error: E-Mail to required!');
 		}
