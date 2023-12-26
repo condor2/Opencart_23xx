@@ -2,7 +2,7 @@
 class ControllerExtensionExtensionFraud extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/fraud');
 
 		$this->load->model('extension/extension');

@@ -2,7 +2,7 @@
 class ControllerExtensionPaymentPPProIframe extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/payment/pp_pro_iframe');
 
 		$this->document->setTitle($this->language->get('heading_title'));

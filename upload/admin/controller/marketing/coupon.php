@@ -2,7 +2,7 @@
 class ControllerMarketingCoupon extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('marketing/coupon');
 
 		$this->document->setTitle($this->language->get('heading_title'));

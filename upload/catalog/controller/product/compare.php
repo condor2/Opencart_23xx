@@ -1,6 +1,6 @@
 <?php
 class ControllerProductCompare extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('product/compare');
 
 		$this->load->model('catalog/product');

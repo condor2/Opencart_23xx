@@ -2,7 +2,7 @@
 class ControllerSaleVoucherTheme extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('sale/voucher_theme');
 
 		$this->document->setTitle($this->language->get('heading_title'));

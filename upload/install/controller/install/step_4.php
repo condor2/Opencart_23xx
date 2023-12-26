@@ -7,7 +7,7 @@ class ControllerInstallStep4 extends Controller {
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
-		$data['text_step_4'] = $this->language->get('text_step_4');		
+		$data['text_step_4'] = $this->language->get('text_step_4');
 		$data['text_catalog'] = $this->language->get('text_catalog');
 		$data['text_admin'] = $this->language->get('text_admin');
 		$data['text_loading'] = $this->language->get('text_loading');

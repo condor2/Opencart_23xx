@@ -11,7 +11,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 	}
 			
-	public function index() {				
+	public function index(): void {				
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$server = HTTPS_SERVER;
 			$catalog = HTTPS_CATALOG;

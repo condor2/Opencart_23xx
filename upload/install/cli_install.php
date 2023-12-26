@@ -85,7 +85,9 @@ function get_options($argv) {
 	];
 
 	$options = [];
+
 	$total = count($argv);
+
 	for ($i = 0; $i < $total; $i = $i + 2) {
 		$is_flag = preg_match('/^--(.*)$/', $argv[$i], $match);
 		if (!$is_flag) {
@@ -93,6 +95,7 @@ function get_options($argv) {
 		}
 		$options[$match[1]] = $argv[$i + 1];
 	}
+
 	return array_merge($defaults, $options);
 }
 
@@ -109,21 +112,27 @@ function valid($options) {
 		'email',
 		'http_server',
 	];
+
 	$missing = [];
+
 	foreach ($required as $r) {
 		if (!array_key_exists($r, $options)) {
 			$missing[] = $r;
 		}
 	}
+
 	if (!preg_match('#/$#', $options['http_server'])) {
 		$options['http_server'] = $options['http_server'] . '/';
 	}
+
 	$valid = count($missing) === 0;
+
 	return [$valid, $missing];
 }
 
 function install($options) {
 	$check = check_requirements();
+
 	if ($check[0]) {
 		setup_db($options);
 		write_config_files($options);
@@ -337,7 +346,7 @@ switch ($subcommand) {
 			echo "Admin link: " . $options['http_server'] . "admin/\n\n";
 		} catch (ErrorException $e) {
 			echo 'FAILED!: ' . $e->getMessage() . "\n";
- 			exit(1);
+			exit(1);
 		}
 		break;
 	case "usage":

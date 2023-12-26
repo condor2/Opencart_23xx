@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutShippingAddress extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('checkout/checkout');
 
 		$data['text_address_existing'] = $this->language->get('text_address_existing');

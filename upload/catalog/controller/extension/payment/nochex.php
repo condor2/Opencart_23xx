@@ -2,7 +2,7 @@
 // Nochex via form will work for both simple "Seller" account and "Merchant" account holders
 // Nochex via APC maybe only avaiable to "Merchant" account holders only - site docs a bit vague on this point
 class ControllerExtensionPaymentNochex extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/payment/nochex');
 
 		$data['button_confirm'] = $this->language->get('button_confirm');

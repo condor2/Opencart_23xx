@@ -2,7 +2,7 @@
 class ControllerExtensionExtensionTheme extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/theme');
 
 		$this->load->model('extension/extension');

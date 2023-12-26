@@ -1,4 +1,3 @@
 <?php
 namespace Session;
-class Native extends \SessionHandler {
-}
+class Native extends \SessionHandler {}

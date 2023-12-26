@@ -2,7 +2,7 @@
 class ControllerExtensionExtensionTotal extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/total');
 
 		$this->load->model('extension/extension');

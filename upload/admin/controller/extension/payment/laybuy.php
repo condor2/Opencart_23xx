@@ -2,7 +2,7 @@
 class ControllerExtensionPaymentLaybuy extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->model('setting/setting');
 
 		$this->load->model('extension/payment/laybuy');

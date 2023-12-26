@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutLogin extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('checkout/checkout');
 
 		$data['text_checkout_account'] = $this->language->get('text_checkout_account');

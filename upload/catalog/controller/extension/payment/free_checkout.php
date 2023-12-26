@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentFreeCheckout extends Controller {
-	public function index() {
+	public function index(): void {
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
 		$data['text_loading'] = $this->language->get('text_loading');

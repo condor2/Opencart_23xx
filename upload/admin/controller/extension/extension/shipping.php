@@ -2,7 +2,7 @@
 class ControllerExtensionExtensionShipping extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/shipping');
 
 		$this->load->model('extension/extension');

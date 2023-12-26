@@ -1,6 +1,6 @@
 <?php
 class ControllerApiVoucher extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('api/voucher');
 
 		// Delete past voucher in case there is an error

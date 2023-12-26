@@ -55,9 +55,9 @@ if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
 // Modification Override
 function modification($filename) {
 	if (defined('DIR_CATALOG')) {
-		$file = DIR_MODIFICATION . 'admin/' .  substr($filename, strlen(DIR_APPLICATION));
+		$file = DIR_MODIFICATION . 'admin/' . substr($filename, strlen(DIR_APPLICATION));
 	} elseif (defined('DIR_OPENCART')) {
-		$file = DIR_MODIFICATION . 'install/' .  substr($filename, strlen(DIR_APPLICATION));
+		$file = DIR_MODIFICATION . 'install/' . substr($filename, strlen(DIR_APPLICATION));
 	} else {
 		$file = DIR_MODIFICATION . 'catalog/' . substr($filename, strlen(DIR_APPLICATION));
 	}

@@ -2,7 +2,7 @@
 class ControllerAccountRegister extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		if ($this->customer->isLogged()) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}

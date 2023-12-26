@@ -2,7 +2,7 @@
 class ControllerDesignBanner extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('design/banner');
 
 		$this->document->setTitle($this->language->get('heading_title'));

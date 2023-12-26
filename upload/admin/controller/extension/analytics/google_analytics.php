@@ -2,7 +2,7 @@
 class ControllerExtensionAnalyticsGoogleAnalytics extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/analytics/google_analytics');
 
 		$this->document->setTitle($this->language->get('heading_title'));

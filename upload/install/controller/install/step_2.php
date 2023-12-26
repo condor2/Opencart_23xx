@@ -71,7 +71,7 @@ class ControllerInstallStep2 extends Controller {
 		} else {
 			$data['error_admin_config'] = '';
 		}
- 
+
 		if (!is_writable(DIR_OPENCART . 'image/')) {
 			$data['error_image'] = $this->language->get('error_unwritable');
 		} else {
@@ -216,11 +216,11 @@ class ControllerInstallStep2 extends Controller {
 		if (!extension_loaded('zip')) {
 			$this->error['warning'] = $this->language->get('error_zip');
 		}
-		
+
 		if (!function_exists('iconv') && !extension_loaded('mbstring')) {
 			$this->error['warning'] = $this->language->get('error_mbstring');
 		}
-		
+
 		if (!file_exists(DIR_OPENCART . 'config.php')) {
 			$this->error['warning'] = $this->language->get('error_catalog_exist');
 		} elseif (!is_writable(DIR_OPENCART . 'config.php')) {
@@ -244,7 +244,7 @@ class ControllerInstallStep2 extends Controller {
 		if (!is_writable(DIR_OPENCART . 'image/catalog')) {
 			$this->error['warning'] = $this->language->get('error_image_catalog');
 		}
-		
+
 		if (!is_writable(DIR_SYSTEM . 'storage/cache')) {
 			$this->error['warning'] = $this->language->get('error_cache');
 		}

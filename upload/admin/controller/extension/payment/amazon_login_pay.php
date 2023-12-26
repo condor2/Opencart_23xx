@@ -3,7 +3,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 
 		$this->load->language('extension/payment/amazon_login_pay');
 

@@ -24,7 +24,7 @@ class Config {
 		return (isset($this->data[$key]) ? $this->data[$key] : null);
 	}
 
-    /**
+	/**
 	 *
 	 *
 	 * @param	string	$key
@@ -34,7 +34,7 @@ class Config {
 		$this->data[$key] = $value;
 	}
 
-    /**
+	/**
 	 *
 	 *
 	 * @param	string	$key
@@ -45,7 +45,7 @@ class Config {
 		return isset($this->data[$key]);
 	}
 
-    /**
+	/**
 	 *
 	 *
 	 * @param	string	$filename

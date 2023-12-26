@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentRealexRemote extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/payment/realex_remote');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');

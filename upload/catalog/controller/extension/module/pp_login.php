@@ -2,7 +2,7 @@
 class ControllerExtensionModulePPLogin extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$data['client_id'] = $this->config->get('pp_login_client_id');
 			$data['return_url'] = $this->url->link('extension/module/pp_login/login', '', true);

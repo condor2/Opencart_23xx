@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleAmazonPay extends Controller {
-	public function index() {
+	public function index(): void {
 
 		$this->load->model('extension/payment/amazon_login_pay');
 

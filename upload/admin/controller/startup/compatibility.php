@@ -1,6 +1,6 @@
 <?php
 class ControllerStartupCompatibility extends Controller {
-	public function index() {
+	public function index(): void {
 		if (isset($this->request->get['route'])) {
 			$extension = [
 				'extension/analytics',

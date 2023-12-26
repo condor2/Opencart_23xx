@@ -2,7 +2,7 @@
 class ControllerAffiliateLogin extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		if ($this->affiliate->isLogged()) {
 			$this->response->redirect($this->url->link('affiliate/account', '', true));
 		}

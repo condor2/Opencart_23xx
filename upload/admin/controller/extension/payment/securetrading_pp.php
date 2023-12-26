@@ -2,7 +2,7 @@
 class ControllerExtensionPaymentSecureTradingPp extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->model('setting/setting');
 		$this->load->model('localisation/geo_zone');
 		$this->load->model('localisation/order_status');

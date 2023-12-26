@@ -2,7 +2,7 @@
 class ControllerProductProduct extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('product/product');
 
 		$data['breadcrumbs'] = [];

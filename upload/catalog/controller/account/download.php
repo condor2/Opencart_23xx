@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountDownload extends Controller {
-	public function index() {
+	public function index(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/download', '', true);
 

@@ -2,7 +2,7 @@
 class ControllerLocalisationStockStatus extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('localisation/stock_status');
 
 		$this->document->setTitle($this->language->get('heading_title'));

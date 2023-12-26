@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionTotalReward extends Controller {
-	public function index() {
+	public function index(): void {
 		$points = $this->customer->getRewardPoints();
 
 		$points_total = 0;

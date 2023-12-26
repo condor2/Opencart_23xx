@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutPaymentMethod extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('checkout/checkout');
 
 		if (isset($this->session->data['payment_address'])) {

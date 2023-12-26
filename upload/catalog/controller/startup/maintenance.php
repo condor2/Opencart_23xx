@@ -1,6 +1,6 @@
 <?php
 class ControllerStartupMaintenance extends Controller {
-	public function index() {
+	public function index(): void {
 		if ($this->config->get('config_maintenance')) {
 			// Route
 			if (isset($this->request->get['route']) && $this->request->get['route'] != 'startup/router') {

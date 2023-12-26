@@ -5,10 +5,10 @@ class Model3rdPartyMaxmind extends Model {
 
 		$this->db->query("INSERT INTO `oc_extension` (`type`, `code`) VALUES ('fraud', 'maxmind')");
 	}
-	
+
 	public function getOrderStatuses() {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_status WHERE language_id = '1' ORDER BY name ASC");
-		
+
 		return $query->rows;
 	}
 }

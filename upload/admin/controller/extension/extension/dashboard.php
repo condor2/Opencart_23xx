@@ -2,7 +2,7 @@
 class ControllerExtensionExtensionDashboard extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/dashboard');
 
 		$this->load->model('extension/extension');

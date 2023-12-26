@@ -2,7 +2,7 @@
 class ControllerExtensionExtensionPayment extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/payment');
 		
 		$this->load->model('extension/extension');

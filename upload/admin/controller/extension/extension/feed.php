@@ -2,7 +2,7 @@
 class ControllerExtensionExtensionFeed extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/extension/feed');
 
 		$this->load->model('extension/extension');

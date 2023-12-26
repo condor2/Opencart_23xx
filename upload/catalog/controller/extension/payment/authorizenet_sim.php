@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentAuthorizeNetSim extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/payment/authorizenet_sim');
 
 		$data['button_confirm'] = $this->language->get('button_confirm');

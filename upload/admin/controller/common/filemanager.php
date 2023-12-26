@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonFileManager extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('common/filemanager');
 
 		// Make sure we have the correct directory

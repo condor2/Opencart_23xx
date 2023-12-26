@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonHeader extends Controller {
-	public function index() {
+	public function index(): void {
 		// Analytics
 		$this->load->model('extension/extension');
 

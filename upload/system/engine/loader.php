@@ -158,7 +158,7 @@ final class Loader {
 
 			// Store the model object
 			if (!isset($model[$route])) {
-				$file = DIR_APPLICATION . 'model/' .  substr($route, 0, strrpos($route, '/')) . '.php';
+				$file = DIR_APPLICATION . 'model/' . substr($route, 0, strrpos($route, '/')) . '.php';
 				$class = 'Model' . preg_replace('/[^a-zA-Z0-9]/', '', substr($route, 0, strrpos($route, '/')));
 
 				if (is_file($file)) {

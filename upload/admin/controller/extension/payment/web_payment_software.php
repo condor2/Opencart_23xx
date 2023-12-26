@@ -2,7 +2,7 @@
 class ControllerExtensionPaymentWebPaymentSoftware extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/payment/web_payment_software');
 
 		$this->document->setTitle($this->language->get('heading_title'));

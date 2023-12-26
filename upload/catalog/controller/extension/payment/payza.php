@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPayza extends Controller {
-	public function index() {
+	public function index(): void {
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
 		$this->load->model('checkout/order');

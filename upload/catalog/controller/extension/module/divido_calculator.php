@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleDividoCalculator extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/divido_calculator');
 		$this->load->model('extension/payment/divido');
 		$this->load->model('catalog/product');

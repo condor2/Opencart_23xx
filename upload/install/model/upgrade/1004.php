@@ -127,7 +127,7 @@ class ModelUpgrade1004 extends Model {
 				$value = json_decode($result['value'], true);
 
 				$module_data = [];
-				if (in_array($result['code'], array('latest', 'bestseller', 'special', 'featured'))) {
+				if (in_array($result['code'], ['latest', 'bestseller', 'special', 'featured'])) {
 					if ($value) {
 						foreach ($value as $k => $v) {
 
@@ -138,9 +138,20 @@ class ModelUpgrade1004 extends Model {
 
 							$module_data['name'] = ($result['key'] . '_' . $k);
 							$module_data['status'] = $v['status'];
-							if (isset($v['image_width'])) {	$module_data['width'] = $v['image_width']; }
-							if (isset($v['image_height'])) { $module_data['height'] = $v['image_height']; }
-							if (isset($v['limit'])) { $module_data['limit'] = $v['limit']; } else { $module_data['limit'] = 4; }
+
+							if (isset($v['image_width'])) {
+								$module_data['width'] = $v['image_width'];
+							}
+
+							if (isset($v['image_height'])) {
+								$module_data['height'] = $v['image_height'];
+							}
+
+							if (isset($v['limit'])) {
+								$module_data['limit'] = $v['limit'];
+							} else {
+								$module_data['limit'] = 4;
+							}
 
 							if ($result['code'] == 'featured') {
 								foreach ($query->rows as $result2) {
@@ -160,7 +171,7 @@ class ModelUpgrade1004 extends Model {
 
 							$this->db->query("INSERT INTO `" . DB_PREFIX . "module` (`name`, `code`, `setting`) values ('" . $this->db->escape($result['key']) . '_' . $k . "', '" . $this->db->escape($result['code']) . "', '" . $this->db->escape(json_encode($module_data)) . "')");
 							$module_id = $this->db->getLastId();
-							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code'] . '.' . $module_id)  . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
+							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code'] . '.' . $module_id) . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
 							$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE store_id = '" . $result['store_id'] . "' AND `code` = '" . $result['code'] . "'");
 						}
 					} else {
@@ -171,7 +182,7 @@ class ModelUpgrade1004 extends Model {
 						$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE store_id = '" . $result['store_id'] . "' AND `code` = '" . $result['code'] . "'");
 						$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET store_id = '" . $result['store_id'] . "', `code` = '" . $result['code'] . "', `key` = '" . ($result['code'] . '_status') . "', value = 1");
 						if ($v['status']) {
-							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code'])  . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
+							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code']) . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
 						}
 					}
 				} elseif (in_array($result['code'], ['banner', 'carousel', 'slideshow'])) {
@@ -180,14 +191,26 @@ class ModelUpgrade1004 extends Model {
 							$module_data['name'] = ($result['key'] . '_' . $k);
 							$module_data['status'] = $v['status'];
 							$module_data['banner_id'] = $v['banner_id'];
-							if (isset($v['image_width'])) {	$module_data['width'] = $v['image_width']; }
-							if (isset($v['image_height'])) { $module_data['height'] = $v['image_height']; }
-							if (isset($v['width'])) {	$module_data['width'] = $v['width']; }
-							if (isset($v['height'])) {	$module_data['height'] = $v['height']; }
+							
+							if (isset($v['image_width'])) {
+								$module_data['width'] = $v['image_width'];
+							}
+
+							if (isset($v['image_height'])) {
+								$module_data['height'] = $v['image_height'];
+							}
+
+							if (isset($v['width'])) {
+								$module_data['width'] = $v['width'];
+							}
+
+							if (isset($v['height'])) {
+								$module_data['height'] = $v['height'];
+							}
 
 							$this->db->query("INSERT INTO `" . DB_PREFIX . "module` (`name`, `code`, `setting`) values ('" . $this->db->escape($result['key']) . '_' . $k . "', '" . $this->db->escape($result['code']) . "', '" . $this->db->escape(json_encode($module_data)) . "')");
 							$module_id = $this->db->getLastId();
-							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code'] . '.' . $module_id)  . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
+							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code'] . '.' . $module_id) . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
 							$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE store_id = '" . $result['store_id'] . "' AND `code` = '" . $result['code'] . "'");
 						}
 					} else {
@@ -211,7 +234,7 @@ class ModelUpgrade1004 extends Model {
 
 							$this->db->query("INSERT INTO `" . DB_PREFIX . "module` (`name`, `code`, `setting`) values ('" . $this->db->escape($result['key']) . '_' . $k . "', '" . $this->db->escape($result['code']) . "', '" . $this->db->escape(json_encode($module_data)) . "')");
 							$module_id = $this->db->getLastId();
-							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code'] . '.' . $module_id)  . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
+							$this->db->query("INSERT INTO `" . DB_PREFIX . "layout_module` (`layout_id`, `code`, `position`, `sort_order`) values ('" . (int)$v['layout_id'] . "', '" . ($result['code'] . '.' . $module_id) . "', '" . $this->db->escape($v['position']) . "', '" . (int)$v['sort_order'] . "')");
 							$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE store_id = '" . $result['store_id'] . "' AND `code` = 'welcome'");
 						}
 					} else {

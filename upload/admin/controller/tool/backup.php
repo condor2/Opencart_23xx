@@ -1,6 +1,6 @@
 <?php
 class ControllerToolBackup extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('tool/backup');
 
 		$this->document->setTitle($this->language->get('heading_title'));

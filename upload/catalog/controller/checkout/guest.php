@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutGuest extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('checkout/checkout');
 
 		$data['text_select'] = $this->language->get('text_select');

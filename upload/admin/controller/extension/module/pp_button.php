@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModulePPButton extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/module/pp_button');
 
 		$this->load->model('setting/setting');

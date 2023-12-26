@@ -1,6 +1,6 @@
 <?php
 class ControllerReportSaleReturn extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('report/sale_return');
 
 		$this->document->setTitle($this->language->get('heading_title'));

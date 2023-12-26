@@ -15,7 +15,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 	}
 	
-	public function index() {
+	public function index(): void {
 		$this->load->model('extension/payment/paypal');
 		
 		$agree_status = $this->model_extension_payment_paypal->getAgreeStatus();

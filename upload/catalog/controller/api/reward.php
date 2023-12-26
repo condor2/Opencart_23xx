@@ -1,6 +1,6 @@
 <?php
 class ControllerApiReward extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->load->language('api/reward');
 
 		// Delete past reward in case there is an error

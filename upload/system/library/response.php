@@ -38,7 +38,7 @@ class Response {
 	}
 
 	/**
-	 * 
+	 *
 	 *
 	 * @param	int		$level
 	 */

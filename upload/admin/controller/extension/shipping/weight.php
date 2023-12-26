@@ -2,7 +2,7 @@
 class ControllerExtensionShippingWeight extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->load->language('extension/shipping/weight');
 
 		$this->document->setTitle($this->language->get('heading_title'));

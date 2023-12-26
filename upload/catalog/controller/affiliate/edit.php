@@ -2,7 +2,7 @@
 class ControllerAffiliateEdit extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		if (!$this->affiliate->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('affiliate/edit', '', true);
 

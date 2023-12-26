@@ -2,7 +2,7 @@
 class ControllerMarketingContact extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');
 
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
