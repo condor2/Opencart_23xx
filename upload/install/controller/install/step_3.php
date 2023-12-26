@@ -301,7 +301,7 @@ class ControllerInstallStep3 extends Controller {
 				$this->error['warning'] = $e->getMessage();
 			}
 		}
-		
+
 		if (!$this->request->post['username']) {
 			$this->error['username'] = $this->language->get('error_username');
 		}

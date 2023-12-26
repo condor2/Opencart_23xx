@@ -97,7 +97,7 @@ class ModelUpgrade1006 extends Model {
 		$files = [];
 
 		foreach ($directories as $dir) {
-			if (is_dir($dir)){
+			if (is_dir($dir)) {
 				// Make path into an array
 				$path = [$dir . '*'];
 
@@ -125,7 +125,7 @@ class ModelUpgrade1006 extends Model {
 							if (is_file($file)) {
 								@unlink($file);
 
-								// If directory use the remove directory function
+							// If directory use the remove directory function
 							} elseif (is_dir($file)) {
 								@rmdir($file);
 							}
@@ -176,7 +176,9 @@ class ModelUpgrade1006 extends Model {
 	private function recursive_move($src, $dest){
 
 		// If source is not a directory stop processing
-		if(!is_dir($src)) return false;
+		if(!is_dir($src)) {
+			return false;
+		}
 
 		// If the destination directory does not exist create it
 		if(!is_dir($dest)) {

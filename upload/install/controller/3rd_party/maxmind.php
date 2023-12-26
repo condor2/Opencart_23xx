@@ -15,7 +15,7 @@ class Controller3rdPartyMaxmind extends Controller {
 			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('install/step_4'));
-		} 
+		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

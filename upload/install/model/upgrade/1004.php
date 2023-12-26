@@ -191,7 +191,7 @@ class ModelUpgrade1004 extends Model {
 							$module_data['name'] = ($result['key'] . '_' . $k);
 							$module_data['status'] = $v['status'];
 							$module_data['banner_id'] = $v['banner_id'];
-							
+
 							if (isset($v['image_width'])) {
 								$module_data['width'] = $v['image_width'];
 							}
