@@ -1,13 +1,13 @@
 <?php
 namespace Template;
-final class PHP {
+class PHP {
 	private $data = [];
-	
+
 	public function set($key, $value) {
 		$this->data[$key] = $value;
 	}
-	
-	public function render($template) {
+
+	public function render(string $template) {
 		$file = DIR_TEMPLATE . $template;
 
 		if (is_file($file)) {

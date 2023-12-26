@@ -47,7 +47,7 @@ class File {
 		return false;
 	}
 
-	public function set($key, $value, $expire = '') {
+	public function set($key, $value, $expire = ''): void {
 		$this->delete($key);
 
 		if (!$expire) {
@@ -69,7 +69,7 @@ class File {
 		fclose($handle);
 	}
 
-	public function delete($key) {
+	public function delete($key): void {
 		$files = glob(DIR_CACHE . 'cache.' . basename($key) . '.*');
 
 		if ($files) {

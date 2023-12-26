@@ -53,7 +53,7 @@ class PgSQL {
 		}
 	}
 
-	public function escape(string $value): string  {
+	public function escape(string $value): string {
 		return pg_escape_string($this->connection, $value);
 	}
 

@@ -11,22 +11,22 @@
 * Pagination class
 */
 class Pagination {
-	public $total = 0;
-	public $page = 1;
-	public $limit = 20;
-	public $num_links = 8;
-	public $url = '';
-	public $text_first = '|&lt;';
-	public $text_last = '&gt;|';
-	public $text_next = '&gt;';
-	public $text_prev = '&lt;';
+	public int $total = 0;
+	public int $page = 1;
+	public int $limit = 20;
+	public int $num_links = 8;
+	public string $url = '';
+	public string $text_first = '|&lt;';
+	public string $text_last = '&gt;|';
+	public string $text_next = '&gt;';
+	public string $text_prev = '&lt;';
 
 	/**
-     * 
-     *
-     * @return	text
-     */
-	public function render() {
+	 * Render
+	 *
+	 * @return string
+	 */
+	public function render(): string {
 		$total = $this->total;
 
 		if ($this->page < 1) {
@@ -50,7 +50,7 @@ class Pagination {
 
 		if ($page > 1) {
 			$output .= '<li><a href="' . str_replace(['&amp;page={page}', '?page={page}', '&page={page}'], '', $this->url) . '">' . $this->text_first . '</a></li>';
-			
+
 			if ($page - 1 === 1) {
 				$output .= '<li><a href="' . str_replace(['&amp;page={page}', '?page={page}', '&page={page}'], '', $this->url) . '">' . $this->text_prev . '</a></li>';
 			} else {

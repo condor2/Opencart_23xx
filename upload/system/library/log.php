@@ -11,23 +11,28 @@
 * Log class
 */
 class Log {
-	private $file;
+	/**
+	 * @var string
+	 */
+	private string $file;
 
 	/**
 	 * Constructor
 	 *
-	 * @param	string	$filename
- 	*/
-	public function __construct($filename) {
+	 * @param string $filename
+	 */
+	public function __construct(string $filename) {
 		$this->file = DIR_LOGS . $filename;
 	}
 
 	/**
-     * 
-     *
-     * @param	string	$message
-     */
-	public function write($message) {
+	 * Write
+	 *
+	 * @param string $message
+	 *
+	 * @return void
+	 */
+	public function write(string $message): void {
 		file_put_contents($this->file, date('Y-m-d H:i:s') . ' - ' . print_r($message, true) . "\n", FILE_APPEND);
 	}
 }

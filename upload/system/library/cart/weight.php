@@ -35,7 +35,7 @@ class Weight {
 	 *
 	 * @return   float
 	 */
-	public function convert($value, $from, $to) {
+	public function convert(float $value, string $from, string $to): float {
 		if ($from == $to) {
 			return $value;
 		}
@@ -54,18 +54,18 @@ class Weight {
 
 		return $value * ($to / $from);
 	}
-	
+
 	/**
 	 * Format
 	 *
-	 * @param    float  $value
-	 * @param    string  $weight_class_id
-	 * @param    string  $decimal_point
-	 * @param    string  $thousand_point
+	 * @param float $value
+	 * @param string $weight_class_id
+	 * @param string $decimal_point
+	 * @param string $thousand_point
 	 *
-	 * @return   string
+	 * @return string
 	 */
-	public function format($value, $weight_class_id, $decimal_point = '.', $thousand_point = ',') {
+	public function format(float $value, string $weight_class_id, string $decimal_point = '.', string $thousand_point = ','): string {
 		if (isset($this->weights[$weight_class_id])) {
 			return number_format($value, 2, $decimal_point, $thousand_point) . $this->weights[$weight_class_id]['unit'];
 		} else {
@@ -76,11 +76,11 @@ class Weight {
 	/**
 	 * getUnit
 	 *
-	 * @param    int  $weight_class_id
+	 * @param int $weight_class_id
 	 *
-	 * @return   string
+	 * @return string
 	 */
-	public function getUnit($weight_class_id) {
+	public function getUnit(int $weight_class_id): string {
 		if (isset($this->weights[$weight_class_id])) {
 			return $this->weights[$weight_class_id]['unit'];
 		} else {

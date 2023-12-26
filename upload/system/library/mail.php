@@ -23,35 +23,35 @@ class Mail extends \stdClass {
 		}
 	}
 
-	public function setTo($to) {
+	public function setTo($to): void {
 		$this->to = $to;
 	}
 
-	public function setFrom($from) {
+	public function setFrom($from): void {
 		$this->from = $from;
 	}
 
-	public function setSender($sender) {
+	public function setSender($sender): void {
 		$this->sender = $sender;
 	}
 
-	public function setReplyTo($reply_to) {
+	public function setReplyTo($reply_to): void {
 		$this->reply_to = $reply_to;
 	}
 
-	public function setSubject($subject) {
+	public function setSubject($subject): void {
 		$this->subject = $subject;
 	}
 
-	public function setText($text) {
+	public function setText($text): void {
 		$this->text = $text;
 	}
 
-	public function setHtml($html) {
+	public function setHtml($html): void {
 		$this->html = $html;
 	}
 
-	public function addAttachment($filename) {
+	public function addAttachment($filename): void {
 		$this->attachments[] = $filename;
 	}
 
@@ -176,7 +176,7 @@ class Mail extends \stdClass {
 				throw new \Exception('Error: ' . $errstr . ' (' . $errno . ')');
 			} else {
 				if (substr(PHP_OS, 0, 3) != 'WIN') {
-					socket_set_timeout($handle, $this->smtp_timeout, 0);
+					stream_set_timeout($handle, $this->smtp_timeout, 0);
 				}
 	
 		
@@ -197,8 +197,7 @@ class Mail extends \stdClass {
 					if (substr($reply, 0, 3) == 220 && substr($line, 3, 1) == ' ') {
 						$reply = '';
 						continue;
-					}
-					elseif (substr($line, 3, 1) == ' ') {
+					} elseif (substr($line, 3, 1) == ' ') {
 						break;
 					}
 				}
@@ -227,7 +226,7 @@ class Mail extends \stdClass {
 					stream_socket_enable_crypto($handle, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
 				}
 
-				if (!empty($this->smtp_username)  && !empty($this->smtp_password)) {
+				if (!empty($this->smtp_username) && !empty($this->smtp_password)) {
 					fwrite($handle, 'EHLO ' . getenv('SERVER_NAME') . "\r\n");
 
 					$reply = '';

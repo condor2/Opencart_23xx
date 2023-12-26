@@ -49,7 +49,7 @@ class File extends \SessionHandler {
 		fclose($handle);
 
 		return true;
-    }
+	}
 
 	#[\ReturnTypeWillChange]
 	public function destroy($session_id) {
@@ -60,5 +60,5 @@ class File extends \SessionHandler {
 		}
 
 		return true;
-    }
+	}
 }

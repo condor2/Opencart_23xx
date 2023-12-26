@@ -5,7 +5,7 @@ $_['paypal_setting'] = [
 		'production' => [
 			'partner_id'             => 'TY2Q25KP2PX9L',
 			'client_id'              => 'AbjxI4a9fMnew8UOMoDFVwSh7h1aeOBaXpd2wcccAnuqecijKIylRnNguGRWDrEPrTYraBQApf_-O3_4',
- 			'partner_attribution_id' => 'OPENCARTLIMITED_Cart_OpenCartPCP'
+			'partner_attribution_id' => 'OPENCARTLIMITED_Cart_OpenCartPCP'
 		],
 		'sandbox' => [
 			'partner_id'             => 'EJNHWRJJNB38L',
@@ -94,10 +94,10 @@ $_['paypal_setting'] = [
 		'type'   => 'buy'
 	],
 	'card' => [
-		'status'        => true,
-		'align'         => 'right',
-		'size'          => 'large',
-		'secure_status' => true,
+		'status'          => true,
+		'align'           => 'right',
+		'size'            => 'large',
+		'secure_status'   => true,
 		'secure_scenario' => [
 			'failed_authentication'    => 0,
 			'rejected_authentication'  => 0,
@@ -167,9 +167,9 @@ $_['paypal_setting'] = [
 	],
 	'order_status' => [
 		'completed' => [
-			'code'  => 'completed',
-			'name'  => 'text_completed_status',
-			'id'    => 5
+			'code' => 'completed',
+			'name' => 'text_completed_status',
+			'id'   => 5
 		],
 		'denied' => [
 			'code' => 'denied',
@@ -462,20 +462,20 @@ $_['paypal_setting'] = [
 	],
 	'button_insert_type' => [
 		'into_begin' => [
-			'code'	=> 'prepend',
-			'name'	=> 'text_insert_prepend'
+			'code' => 'prepend',
+			'name' => 'text_insert_prepend'
 		],
 		'into_end' => [
-			'code'	=> 'append',
-			'name'	=> 'text_insert_append'
+			'code' => 'append',
+			'name' => 'text_insert_append'
 		],
 		'before' => [
-			'code'	=> 'before',
-			'name'	=> 'text_insert_before'
+			'code' => 'before',
+			'name' => 'text_insert_before'
 		],
 		'after' => [
-			'code'	=> 'after',
-			'name'	=> 'text_insert_after'
+			'code' => 'after',
+			'name' => 'text_insert_after'
 		]
 	],
 	'button_align' => [
@@ -829,7 +829,7 @@ $_['paypal_setting'] = [
 	],
 	'card_secure_scenario' => [
 		'failed_authentication' => [
-			'code'         => 'failed_authentication',
+			'code'        => 'failed_authentication',
 			'name'        => 'text_3ds_failed_authentication',
 			'error'       => 'error_3ds_failed_authentication',
 			'recommended' => 0
@@ -879,12 +879,12 @@ $_['paypal_setting'] = [
 	],
 	'message_insert_type' => [
 		'into_begin' => [
-			'code'	=> 'prepend',
-			'name'	=> 'text_insert_prepend'
+			'code' => 'prepend',
+			'name' => 'text_insert_prepend'
 		],
 		'into_end' => [
-			'code'	=> 'append',
-			'name'	=> 'text_insert_append'
+			'code' => 'append',
+			'name' => 'text_insert_append'
 		],
 		'before' => [
 			'code'	=> 'before',
@@ -953,7 +953,7 @@ $_['paypal_setting'] = [
 			'name' => 'text_white'
 		]
 	],
-	'message_text_size' => ['10', '11', '12', '13', '14', '15', '16'],
+	'message_text_size'  => ['10', '11', '12', '13', '14', '15', '16'],
 	'message_flex_color' => [
 		'blue' => [
 			'code' => 'blue',
@@ -969,8 +969,8 @@ $_['paypal_setting'] = [
 		]
 	],
 	'message_flex_ratio' => ['1x1', '1x4', '8x1', '20x1'],
-	'contact_sales' => ['100k - 250k', '250k - 2m', '2m - 10m', '10m - 20m', '20m - 50m', '50m +'],
-	'contact_product' => [
+	'contact_sales'      => ['100k - 250k', '250k - 2m', '2m - 10m', '10m - 20m', '20m - 50m', '50m +'],
+	'contact_product'    => [
 		[
 			'code' => 'BT DCC',
 			'name' => 'text_bt_dcc'

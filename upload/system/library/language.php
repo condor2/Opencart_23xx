@@ -8,32 +8,32 @@ class Language {
 		$this->directory = $directory;
 	}
 
-	public function get($key) {
+	public function get(string $key) {
 		return (isset($this->data[$key]) ? $this->data[$key] : $key);
 	}
-	
-	public function set($key, $value) {
+
+	public function set(string $key, string $value): void {
 		$this->data[$key] = $value;
 	}
-	
+
 	// Please dont use the below function i'm thinking getting rid of it.
-	public function all() {
+	public function all(): array {
 		return $this->data;
 	}
-	
+
 	// Please dont use the below function i'm thinking getting rid of it.
 	public function merge(&$data) {
 		array_merge($this->data, $data);
 	}
-			
-	public function load($filename, &$data = []) {
+
+	public function load(string $filename, &$data = []) {
 		$_ = [];
 
 		$file = DIR_LANGUAGE . 'english/' . $filename . '.php';
-		
+
 		// Compatibility code for old extension folders
 		$old_file = DIR_LANGUAGE . 'english/' . str_replace('extension/', '', $filename) . '.php';
-		
+
 		if (is_file($file)) {
 			require($file);
 		} elseif (is_file($old_file)) {
@@ -44,7 +44,7 @@ class Language {
 
 		// Compatibility code for old extension folders
 		$old_file = DIR_LANGUAGE . $this->default . '/' . str_replace('extension/', '', $filename) . '.php';
-		
+
 		if (is_file($file)) {
 			require($file);
 		} elseif (is_file($old_file)) {
@@ -55,7 +55,7 @@ class Language {
 
 		// Compatibility code for old extension folders
 		$old_file = DIR_LANGUAGE . $this->directory . '/' . str_replace('extension/', '', $filename) . '.php';
-		
+
 		if (is_file($file)) {
 			require($file);
 		} elseif (is_file($old_file)) {

@@ -1,19 +1,19 @@
 <?php
 namespace Cart;
 class Affiliate {
-	private $db;
-	private $config;
-	private $request;
-	private $session;
-	private $affiliate_id = 0;
-	private $firstname = '';
-	private $lastname = '';
-	private $email = '';
-	private $telephone = '';
-	private $fax = '';
-	private $code = '';
+	private object $db;
+	private object $config;
+	private object $request;
+	private object $session;
+	private int $affiliate_id = 0;
+	private string $firstname = '';
+	private string $lastname = '';
+	private string $email = '';
+	private string $telephone = '';
+	private string $fax = '';
+	private string $code = '';
 
-	public function __construct($registry) {
+	public function __construct(object $registry) {
 		$this->db = $registry->get('db');
 		$this->config = $registry->get('config');
 		$this->request = $registry->get('request');
@@ -38,8 +38,8 @@ class Affiliate {
 		}
 	}
 
-	public function login($email, $password) {
-	  $affiliate_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "' AND status = '1' AND approved = '1'");
+	public function login(string $email, string $password): bool {
+			$affiliate_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "' AND status = '1' AND approved = '1'");
 
 		if ($affiliate_query->num_rows) {
 			if (password_verify($password, $affiliate_query->row['password'])) {
@@ -72,7 +72,7 @@ class Affiliate {
 		}
 	}
 
-	public function logout() {
+	public function logout(): void {
 		unset($this->session->data['affiliate_id']);
 
 		$this->affiliate_id = 0;
@@ -83,35 +83,35 @@ class Affiliate {
 		$this->fax = '';
 	}
 
-	public function isLogged() {
+	public function isLogged(): bool {
 		return $this->affiliate_id;
 	}
 
-	public function getId() {
+	public function getId(): int {
 		return $this->affiliate_id;
 	}
 
-	public function getFirstName() {
+	public function getFirstName(): string {
 		return $this->firstname;
 	}
 
-	public function getLastName() {
+	public function getLastName(): string {
 		return $this->lastname;
 	}
 
-	public function getEmail() {
+	public function getEmail(): string {
 		return $this->email;
 	}
 
-	public function getTelephone() {
+	public function getTelephone(): string {
 		return $this->telephone;
 	}
 
-	public function getFax() {
+	public function getFax(): string {
 		return $this->fax;
 	}
 
-	public function getCode() {
+	public function getCode(): string {
 		return $this->code;
 	}
 }
