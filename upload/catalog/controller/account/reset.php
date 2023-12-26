@@ -2,7 +2,7 @@
 class ControllerAccountReset extends Controller {
 	private $error = [];
 
-	public function index(): ?object {
+	public function index() {
 		if ($this->customer->isLogged()) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}

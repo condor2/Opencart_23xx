@@ -1,6 +1,6 @@
 <?php
 class ControllerStartupLogin extends Controller {
-	public function index(): ?object {
+	public function index() {
 		$route = isset($this->request->get['route']) ? $this->request->get['route'] : '';
 
 		$ignore = [

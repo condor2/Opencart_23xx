@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSecureTradingWs extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->model('checkout/order');
 		$this->load->language('extension/payment/securetrading_ws');
 

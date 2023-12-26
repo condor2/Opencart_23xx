@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPPExpress extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/pp_express');
 
 		$data['button_continue'] = $this->language->get('button_continue');
