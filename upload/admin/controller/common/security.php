@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonSecurity extends Controller {
-	public function index(): void {
+	public function index(): string {
 		$this->load->language('common/security');
 
 		$data['heading_title'] = $this->language->get('heading_title');
