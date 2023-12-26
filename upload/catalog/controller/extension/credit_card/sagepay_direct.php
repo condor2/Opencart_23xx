@@ -137,47 +137,47 @@ class ControllerExtensionCreditCardSagepayDirect extends Controller {
 		$data['cards'] = [];
 
 		$data['cards'][] = [
-			'text' => 'Visa',
+			'text'  => 'Visa',
 			'value' => 'VISA'
 		];
 
 		$data['cards'][] = [
-			'text' => 'MasterCard',
+			'text'  => 'MasterCard',
 			'value' => 'MC'
 		];
 
 		$data['cards'][] = [
-			'text' => 'Visa Delta/Debit',
+			'text'  => 'Visa Delta/Debit',
 			'value' => 'DELTA'
 		];
 
 		$data['cards'][] = [
-			'text' => 'Solo',
+			'text'  => 'Solo',
 			'value' => 'SOLO'
 		];
 
 		$data['cards'][] = [
-			'text' => 'Maestro',
+			'text'  => 'Maestro',
 			'value' => 'MAESTRO'
 		];
 
 		$data['cards'][] = [
-			'text' => 'Visa Electron UK Debit',
+			'text'  => 'Visa Electron UK Debit',
 			'value' => 'UKE'
 		];
 
 		$data['cards'][] = [
-			'text' => 'American Express',
+			'text'  => 'American Express',
 			'value' => 'AMEX'
 		];
 
 		$data['cards'][] = [
-			'text' => 'Diners Club',
+			'text'  => 'Diners Club',
 			'value' => 'DC'
 		];
 
 		$data['cards'][] = [
-			'text' => 'Japan Credit Bureau',
+			'text'  => 'Japan Credit Bureau',
 			'value' => 'JCB'
 		];
 

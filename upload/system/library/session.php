@@ -32,7 +32,7 @@ class Session {
 		}
 	}
 
-	public function start($key = 'default', $value = '') {
+	public function start($key = 'default', $value = ''): void {
 		if ($value) {
 			$this->session_id = $value;
 		} elseif (isset($_COOKIE[$key])) {

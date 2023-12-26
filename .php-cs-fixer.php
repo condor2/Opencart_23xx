@@ -65,7 +65,7 @@ return $config
         'random_api_migration' => true,
         'simple_to_complex_string_variable' => true,
         'use_arrow_functions' => true,
-        'void_return' => true,
+        //'void_return' => true,
     ])
     ->setFinder(PhpCsFixer\Finder::create()
         ->in(__DIR__ . '/upload/')

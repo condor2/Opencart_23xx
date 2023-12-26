@@ -259,15 +259,15 @@ class ControllerProductSpecial extends Controller {
 		if ($page == 1) {
 			$this->document->addLink($this->url->link('product/special', '', true), 'canonical');
 		} else {
-			$this->document->addLink($this->url->link('product/special', 'page='. $page , true), 'canonical');
+			$this->document->addLink($this->url->link('product/special', 'page=' . $page , true), 'canonical');
 		}
 
 		if ($page > 1) {
-			$this->document->addLink($this->url->link('product/special', (($page - 2) ? '&page='. ($page - 1) : ''), true), 'prev');
+			$this->document->addLink($this->url->link('product/special', (($page - 2) ? '&page=' . ($page - 1) : ''), true), 'prev');
 		}
 
 		if ($limit && ceil($product_total / $limit) > $page) {
-			$this->document->addLink($this->url->link('product/special', 'page='. ($page + 1), true), 'next');
+			$this->document->addLink($this->url->link('product/special', 'page=' . ($page + 1), true), 'next');
 		}
 
 		$data['sort'] = $sort;

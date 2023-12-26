@@ -98,7 +98,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 
 						$activity_data = [
 							'customer_id' => $this->customer->getId(),
-							'name' => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
+							'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
 						];
 
 						$this->model_account_activity->addActivity('login', $activity_data);
@@ -121,19 +121,19 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 
 				$data = [
 					'customer_group_id' => (int)$this->config->get('config_customer_group_id'),
-					'firstname' => $first_name,
-					'lastname' => $last_name,
-					'email' => $user->email,
-					'telephone' => '',
-					'fax' => '',
-					'password' => uniqid(mt_rand(), true),
-					'company' => '',
-					'address_1' => '',
-					'address_2' => '',
-					'city' => '',
-					'postcode' => '',
-					'country_id' => (int)$country_id,
-					'zone_id' => (int)$zone_id,
+					'firstname'         => $first_name,
+					'lastname'          => $last_name,
+					'email'             => $user->email,
+					'telephone'         => '',
+					'fax'               => '',
+					'password'          => uniqid(mt_rand(), true),
+					'company'           => '',
+					'address_1'         => '',
+					'address_2'         => '',
+					'city'              => '',
+					'postcode'          => '',
+					'country_id'        => (int)$country_id,
+					'zone_id'           => (int)$zone_id,
 				];
 
 				$customer_id = $this->model_extension_payment_amazon_login_pay->addCustomer($data);
@@ -164,7 +164,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 
 						$activity_data = [
 							'customer_id' => $this->customer->getId(),
-							'name' => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
+							'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
 						];
 
 						$this->model_account_activity->addActivity('login', $activity_data);

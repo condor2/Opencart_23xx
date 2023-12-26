@@ -13,29 +13,29 @@ class ControllerApiLogin extends Controller {
 		if ($api_info) {
 			// Check if IP is allowed
 			$ip_data = [];
-	
+
 			$results = $this->model_account_api->getApiIps($api_info['api_id']);
-	
+
 			foreach ($results as $result) {
 				$ip_data[] = trim($result['ip']);
 			}
-	
+
 			if (!in_array($this->request->server['REMOTE_ADDR'], $ip_data)) {
 				$json['error']['ip'] = sprintf($this->language->get('error_ip'), $this->request->server['REMOTE_ADDR']);
 			}				
-				
+
 			if (!$json) {
 				$json['success'] = $this->language->get('text_success');
-			
+
 				// We want to create a seperate session so changes do not interfere with the admin user.
 				$session_id_old = $this->session->getId();
-				
+
 				$session_id_new = $this->session->createId();
-				
+
 				$this->session->start('api', $session_id_new);
-				
+
 				$this->session->data['api_id'] = $api_info['api_id'];
-				
+
 				// Close and write the new session.
 				//$session->close();
 

@@ -38,7 +38,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 						$output .= '<g:id>' . $product['product_id'] . '</g:id>';
 
 						if ($product['image']) {
-							$output .= '  <g:image_link>' .  htmlspecialchars($this->model_tool_image->resize(html_entity_decode($product['image'], ENT_QUOTES, 'UTF-8'), 500, 500), ENT_COMPAT | ENT_XML1) . '</g:image_link>';
+							$output .= '  <g:image_link>' . htmlspecialchars($this->model_tool_image->resize(html_entity_decode($product['image'], ENT_QUOTES, 'UTF-8'), 500, 500), ENT_COMPAT | ENT_XML1) . '</g:image_link>';
 						} else {
 							$output .= '  <g:image_link></g:image_link>';
 						}
@@ -74,7 +74,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 						}
 
 						if ((float)$product['special']) {
-							$output .= '  <g:price>' .  $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
+							$output .= '  <g:price>' . $this->currency->format($this->tax->calculate($product['special'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
 						} else {
 							$output .= '  <g:price>' . $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id']), $currency_code, $currency_value, false) . '</g:price>';
 						}

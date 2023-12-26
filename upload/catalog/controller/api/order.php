@@ -95,7 +95,7 @@ class ControllerApiOrder extends Controller {
 
 			if (!$json) {
 				$json['success'] = $this->language->get('text_success');
-				
+
 				$order_data = [];
 
 				// Store Details
@@ -251,7 +251,7 @@ class ControllerApiOrder extends Controller {
 					'taxes'  => &$taxes,
 					'total'  => &$total
 				];
-			
+
 				$sort_order = [];
 
 				$results = $this->model_extension_extension->getExtensions('total');
@@ -265,7 +265,7 @@ class ControllerApiOrder extends Controller {
 				foreach ($results as $result) {
 					if ($this->config->get($result['code'] . '_status')) {
 						$this->load->model('extension/total/' . $result['code']);
-						
+
 						// We have to put the totals in an array so that they pass by reference.
 						$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 					}
@@ -473,7 +473,7 @@ class ControllerApiOrder extends Controller {
 
 				if (!$json) {
 					$json['success'] = $this->language->get('text_success');
-					
+
 					$order_data = [];
 
 					// Store Details
@@ -622,7 +622,7 @@ class ControllerApiOrder extends Controller {
 					$totals = [];
 					$taxes = $this->cart->getTaxes();
 					$total = 0;
-					
+
 					// Because __call can not keep var references so we put them into an array. 
 					$total_data = [
 						'totals' => &$totals,
@@ -643,7 +643,7 @@ class ControllerApiOrder extends Controller {
 					foreach ($results as $result) {
 						if ($this->config->get($result['code'] . '_status')) {
 							$this->load->model('extension/total/' . $result['code']);
-							
+
 							// We have to put the totals in an array so that they pass by reference.
 							$this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
 						}
