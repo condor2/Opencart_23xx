@@ -13,29 +13,29 @@ class ControllerExtensionPaymentDivido extends Controller {
 	STATUS_SIGNED = 'SIGNED';
 
 	private $status_id = [
-		self::STATUS_ACCEPTED => 1,
+		self::STATUS_ACCEPTED      => 1,
 		self::STATUS_ACTION_LENDER => 2,
-		self::STATUS_CANCELED => 0,
-		self::STATUS_COMPLETED => 2,
-		self::STATUS_DECLINED => 8,
-		self::STATUS_DEFERRED => 1,
-		self::STATUS_REFERRED => 1,
-		self::STATUS_DEPOSIT_PAID => 1,
-		self::STATUS_FULFILLED => 1,
-		self::STATUS_SIGNED => 2,
+		self::STATUS_CANCELED      => 0,
+		self::STATUS_COMPLETED     => 2,
+		self::STATUS_DECLINED      => 8,
+		self::STATUS_DEFERRED      => 1,
+		self::STATUS_REFERRED      => 1,
+		self::STATUS_DEPOSIT_PAID  => 1,
+		self::STATUS_FULFILLED     => 1,
+		self::STATUS_SIGNED        => 2,
 	];
 
 	private $history_messages = [
-		self::STATUS_ACCEPTED => 'Credit request accepted',
+		self::STATUS_ACCEPTED      => 'Credit request accepted',
 		self::STATUS_ACTION_LENDER => 'Lender notified',
-		self::STATUS_CANCELED => 'Credit request canceled',
-		self::STATUS_COMPLETED => 'Credit application completed',
-		self::STATUS_DECLINED => 'Credit request declined',
-		self::STATUS_DEFERRED => 'Credit request deferred',
-		self::STATUS_REFERRED => 'Credit request referred',
-		self::STATUS_DEPOSIT_PAID => 'Deposit paid',
-		self::STATUS_FULFILLED => 'Credit request fulfilled',
-		self::STATUS_SIGNED => 'Contract signed',
+		self::STATUS_CANCELED      => 'Credit request canceled',
+		self::STATUS_COMPLETED     => 'Credit application completed',
+		self::STATUS_DECLINED      => 'Credit request declined',
+		self::STATUS_DEFERRED      => 'Credit request deferred',
+		self::STATUS_REFERRED      => 'Credit request referred',
+		self::STATUS_DEPOSIT_PAID  => 'Deposit paid',
+		self::STATUS_FULFILLED     => 'Credit request fulfilled',
+		self::STATUS_SIGNED        => 'Contract signed',
 	];
 
 	public function index(): string {
@@ -186,10 +186,10 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$products  = [];
 		foreach ($this->cart->getProducts() as $product) {
 			$products[] = [
-				'type' => 'product',
-				'text' => $product['name'],
+				'type'     => 'product',
+				'text'     => $product['name'],
 				'quantity' => $product['quantity'],
-				'value' => $product['price'],
+				'value'    => $product['price'],
 			];
 		}
 

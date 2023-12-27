@@ -44,7 +44,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		return $this->load->view('extension/payment/laybuy', $data);
 	}
 
-	public function postToLaybuy()	{
+	public function postToLaybuy() {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Posting to Laybuy');
@@ -102,7 +102,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 				$this->model_extension_payment_laybuy->log('Response: ' . print_r($result, true));
 
-			 	if (isset($result['ACK']) && isset($result['TOKEN']) && $result['ACK'] == 'SUCCESS') {
+				if (isset($result['ACK']) && isset($result['TOKEN']) && $result['ACK'] == 'SUCCESS') {
 					$this->model_extension_payment_laybuy->log('Success response. Redirecting to PayPal.');
 
 					$this->response->redirect($this->config->get('laybuy_gateway_url') . '?TOKEN=' . $result['TOKEN']);
@@ -422,21 +422,21 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 							if ($payment['type'] == 'd') {
 								$report_content[] = [
-									'instalment'	=> 0,
-									'amount'		=> $this->currency->format($payment['amount'], $transaction['currency']),
-									'date'			=> $date,
-									'pp_trans_id'	=> $payment['txnID'],
-									'status'		=> $payment['paymentStatus']
+									'instalment'  => 0,
+									'amount'      => $this->currency->format($payment['amount'], $transaction['currency']),
+									'date'        => $date,
+									'pp_trans_id' => $payment['txnID'],
+									'status'      => $payment['paymentStatus']
 								];
 							} elseif ($payment['type'] == 'p') {
 								$pending_flag = true;
 
 								$report_content[] = [
-									'instalment'	=> $month,
-									'amount'		=> $this->currency->format($payment['amount'], $transaction['currency']),
-									'date'			=> $date,
-									'pp_trans_id'	=> $payment['txnID'],
-									'status'		=> $payment['paymentStatus']
+									'instalment'  => $month,
+									'amount'      => $this->currency->format($payment['amount'], $transaction['currency']),
+									'date'        => $date,
+									'pp_trans_id' => $payment['txnID'],
+									'status'      => $payment['paymentStatus']
 								];
 
 								$next_payment_status = $payment['paymentStatus'];
@@ -455,11 +455,11 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 								$date = date($this->language->get('date_format_short'), strtotime($next_payment_date));
 
 								$report_content[] = [
-									'instalment'	=> $month,
-									'amount'		=> $this->currency->format($transaction['payment_amounts'], $transaction['currency']),
-									'date'			=> $date,
-									'pp_trans_id'	=> '',
-									'status'		=> $next_payment_status
+									'instalment'  => $month,
+									'amount'      => $this->currency->format($transaction['payment_amounts'], $transaction['currency']),
+									'date'        => $date,
+									'pp_trans_id' => '',
+									'status'      => $next_payment_status
 								];
 							}
 						}

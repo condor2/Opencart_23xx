@@ -75,12 +75,12 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		];
 
 		$cvv_codes = [
-			'M' => $this->language->get('text_card_code_m'),
-			'N' => $this->language->get('text_card_code_n'),
-			'P' => $this->language->get('text_card_code_p'),
-			'S' => $this->language->get('text_card_code_s'),
-			'U' => $this->language->get('text_card_code_u'),
-			'X' => $this->language->get('text_card_code_x'),
+			'M'    => $this->language->get('text_card_code_m'),
+			'N'    => $this->language->get('text_card_code_n'),
+			'P'    => $this->language->get('text_card_code_p'),
+			'S'    => $this->language->get('text_card_code_s'),
+			'U'    => $this->language->get('text_card_code_u'),
+			'X'    => $this->language->get('text_card_code_x'),
 			'NONE' => $this->language->get('text_card_code_blank')
 		];
 

@@ -51,16 +51,16 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 			}
 
 			$cards = [
-				'AMEX' => 'American Express',
-				'VISA' => 'Visa',
-				'DELTA' => 'Visa Debit',
-				'ELECTRON' => 'Visa Electron',
-				'PURCHASING' => 'Visa Purchasing',
-				'VPAY' => 'V Pay',
-				'MASTERCARD' => 'MasterCard',
+				'AMEX'            => 'American Express',
+				'VISA'            => 'Visa',
+				'DELTA'           => 'Visa Debit',
+				'ELECTRON'        => 'Visa Electron',
+				'PURCHASING'      => 'Visa Purchasing',
+				'VPAY'            => 'V Pay',
+				'MASTERCARD'      => 'MasterCard',
 				'MASTERCARDDEBIT' => 'MasterCard Debit',
-				'MAESTRO' => 'Maestro',
-				'PAYPAL' => 'PayPal',
+				'MAESTRO'         => 'Maestro',
+				'PAYPAL'          => 'PayPal',
 			];
 
 			$data['cards'] = [];

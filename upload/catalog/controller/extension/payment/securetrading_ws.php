@@ -18,16 +18,16 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 			$data['button_confirm'] = $this->language->get('button_confirm');
 
 			$cards = [
-				'AMEX' => 'American Express',
-				'VISA' => 'Visa',
-				'DELTA' => 'Visa Debit',
-				'ELECTRON' => 'Visa Electron',
-				'PURCHASING' => 'Visa Purchasing',
-				'VPAY' => 'V Pay',
-				'MASTERCARD' => 'MasterCard',
+				'AMEX'            => 'American Express',
+				'VISA'            => 'Visa',
+				'DELTA'           => 'Visa Debit',
+				'ELECTRON'        => 'Visa Electron',
+				'PURCHASING'      => 'Visa Purchasing',
+				'VPAY'            => 'V Pay',
+				'MASTERCARD'      => 'MasterCard',
 				'MASTERCARDDEBIT' => 'MasterCard Debit',
-				'MAESTRO' => 'Maestro',
-				'PAYPAL' => 'PayPal',
+				'MAESTRO'         => 'Maestro',
+				'PAYPAL'          => 'PayPal',
 			];
 
 			for ($i = 1; $i <= 12; $i++) {

@@ -262,11 +262,11 @@ class ControllerExtensionPaymentEway extends Controller {
 
 				$this->load->model('extension/payment/eway');
 				$eway_order_data = [
-					'order_id' => $order_id,
+					'order_id'       => $order_id,
 					'transaction_id' => $result->TransactionID,
-					'amount' => $this->ValidateDenomination($result->TotalAmount, $order_info['currency_code']),
-					'currency_code' => $order_info['currency_code'],
-					'debug_data' => json_encode($result)
+					'amount'         => $this->ValidateDenomination($result->TotalAmount, $order_info['currency_code']),
+					'currency_code'  => $order_info['currency_code'],
+					'debug_data'     => json_encode($result)
 				];
 
 				$error_array = explode(", ", $result->ResponseMessage);

@@ -94,7 +94,6 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			 * used on the cart or checkout pages - need to be added?
 			 * If PayPal debug log is off then still log error to normal error log.
 			 */
-
 			$this->log->write('Unable to create PayPal call: ' . json_encode($result));
 
 			$this->response->redirect($this->url->link('checkout/checkout', '', true));
@@ -271,7 +270,6 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			/**
 			 * if the user is logged in, add the address to the account and set the ID.
 			 */
-
 			if ($this->cart->hasShipping()) {
 				$this->load->model('account/address');
 
@@ -1148,7 +1146,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 				$paypal_transaction_data = [
 					'paypal_order_id'       => $paypal_order_id,
 					'transaction_id'        => $result['PAYMENTINFO_0_TRANSACTIONID'],
-					'parent_id' => '',
+					'parent_id'             => '',
 					'note'                  => '',
 					'msgsubid'              => '',
 					'receipt_id'            => (isset($result['PAYMENTINFO_0_RECEIPTID']) ? $result['PAYMENTINFO_0_RECEIPTID'] : ''),
@@ -1182,7 +1180,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						$data = [
 							'METHOD'             => 'CreateRecurringPaymentsProfile',
 							'TOKEN'              => $this->session->data['paypal']['token'],
-							'PROFILESTARTDATE'   => gmdate("Y-m-d\TH:i:s\Z", gmmktime(gmdate("H"), gmdate("i")+5, gmdate("s"), gmdate("m"), gmdate("d"), gmdate("y"))),
+							'PROFILESTARTDATE'   => gmdate("Y-m-d\TH:i:s\Z", gmmktime(gmdate("H"), gmdate("i") + 5, gmdate("s"), gmdate("m"), gmdate("d"), gmdate("y"))),
 							'BILLINGPERIOD'      => $billing_period[$item['recurring']['frequency']],
 							'BILLINGFREQUENCY'   => $item['recurring']['cycle'],
 							'TOTALBILLINGCYCLES' => $item['recurring']['duration'],
@@ -1207,7 +1205,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 							$trial_text = '';
 						}
 
-						$recurring_amt = $this->currency->format($this->tax->calculate($item['recurring']['price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false)  * $item['quantity'] . ' ' . $this->session->data['currency'];
+						$recurring_amt = $this->currency->format($this->tax->calculate($item['recurring']['price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity'] . ' ' . $this->session->data['currency'];
 						$recurring_description = $trial_text . sprintf($this->language->get('text_recurring'), $recurring_amt, $item['recurring']['cycle'], $item['recurring']['frequency']);
 
 						if ($item['recurring']['duration'] > 0) {
@@ -1444,7 +1442,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$paypal_transaction_data = [
 				'paypal_order_id'       => $paypal_order_id,
 				'transaction_id'        => $result['PAYMENTINFO_0_TRANSACTIONID'],
-				'parent_id' => '',
+				'parent_id'             => '',
 				'note'                  => '',
 				'msgsubid'              => '',
 				'receipt_id'            => (isset($result['PAYMENTINFO_0_RECEIPTID']) ? $result['PAYMENTINFO_0_RECEIPTID'] : ''),
@@ -1500,7 +1498,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						$trial_text = '';
 					}
 
-					$recurring_amt = $this->currency->format($this->tax->calculate($item['recurring']['price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false)  * $item['quantity'] . ' ' . $this->session->data['currency'];
+					$recurring_amt = $this->currency->format($this->tax->calculate($item['recurring']['price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity'] . ' ' . $this->session->data['currency'];
 					$recurring_description = $trial_text . sprintf($this->language->get('text_recurring'), $recurring_amt, $item['recurring']['cycle'], $item['recurring']['frequency']);
 
 					if ($item['recurring']['duration'] > 0) {
@@ -1660,7 +1658,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					$transaction = [
 						'paypal_order_id'       => $parent_transaction['paypal_order_id'],
 						'transaction_id'        => $this->request->post['txn_id'],
-						'parent_id' => $this->request->post['parent_txn_id'],
+						'parent_id'             => $this->request->post['parent_txn_id'],
 						'note'                  => '',
 						'msgsubid'              => '',
 						'receipt_id'            => (isset($this->request->post['receipt_id']) ? $this->request->post['receipt_id'] : ''),
@@ -1701,7 +1699,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 							$transaction = [
 								'paypal_order_id'       => $parent_transaction['paypal_order_id'],
 								'transaction_id'        => '',
-								'parent_id' => $this->request->post['parent_txn_id'],
+								'parent_id'             => $this->request->post['parent_txn_id'],
 								'note'                  => '',
 								'msgsubid'              => '',
 								'receipt_id'            => '',

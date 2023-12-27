@@ -17,5 +17,5 @@ class ControllerEventDebug extends Controller {
 				$this->log->write($data);
 			}
 		}
-	}	
+	}
 }

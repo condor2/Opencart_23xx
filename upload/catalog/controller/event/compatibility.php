@@ -1,6 +1,6 @@
 <?php
 class ControllerEventCompatibility extends Controller {
-	// 
+	//
 	/*
 	The below code will old extensions compatible with the extension page move
 
@@ -49,10 +49,10 @@ class ControllerEventCompatibility extends Controller {
 	public function language(&$route) {
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 
-		$part = explode('/', $route);	
+		$part = explode('/', $route);
 
 		if (!is_file(DIR_LANGUAGE . $this->config->get('config_language') . '/' . $route . '.php') && is_file(DIR_LANGUAGE . $this->config->get('config_language') . '/' . $part[1] . '/' . $part[2] . '.php')) {
 			$route = $part[1] . '/' . $part[2];
 		}
-	}		
+	}
 }

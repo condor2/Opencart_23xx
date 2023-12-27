@@ -304,8 +304,9 @@ class Image {
 	}
 
 	/**
+	 * Filter
 	 *
-	 *
+	 * @return void
 	 */
 	private function filter() {
 		$args = func_get_args();

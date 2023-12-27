@@ -178,8 +178,7 @@ class Mail extends \stdClass {
 				if (substr(PHP_OS, 0, 3) != 'WIN') {
 					stream_set_timeout($handle, $this->smtp_timeout, 0);
 				}
-	
-		
+
 				while ($line = fgets($handle, 515)) {
 					if (substr($line, 3, 1) == ' ') {
 						break;
@@ -388,7 +387,7 @@ class Mail extends \stdClass {
 
 				foreach ($lines as $line) {
 					$results = ($line === '') ? [''] : str_split($line, 998);
-					
+
 					foreach($results as $result) {
 						fwrite($handle, $result . "\r\n");
 					}

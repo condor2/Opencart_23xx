@@ -36,7 +36,7 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 						$value = $option['value'];
 					} else {
 						$upload_info = $this->model_tool_upload->getUploadByCode($option['value']);
-						
+
 						if ($upload_info) {
 							$value = $upload_info['name'];
 						} else {
@@ -194,11 +194,11 @@ class ControllerExtensionPaymentPPStandard extends Controller {
 						if ($receiver_match && $total_paid_match) {
 							$order_status_id = $this->config->get('pp_standard_completed_status_id');
 						}
-						
+
 						if (!$receiver_match) {
 							$this->log->write('PP_STANDARD :: RECEIVER EMAIL MISMATCH! ' . strtolower($this->request->post['receiver_email']));
 						}
-						
+
 						if (!$total_paid_match) {
 							$this->log->write('PP_STANDARD :: TOTAL PAID MISMATCH! ' . $this->request->post['mc_gross']);
 						}

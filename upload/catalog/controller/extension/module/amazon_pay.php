@@ -187,7 +187,7 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 
 						$activity_data = [
 							'customer_id' => $this->customer->getId(),
-							'name' => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
+							'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
 						];
 
 						$this->model_account_activity->addActivity('login', $activity_data);

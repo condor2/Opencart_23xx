@@ -18,61 +18,63 @@ class Response {
 	/**
 	 * Constructor
 	 *
-	 * @param	string	$header
-	 *
+	 * @param string $header
 	 */
-	public function addHeader($header) {
+	public function addHeader($header): void {
 		$this->headers[] = $header;
 	}
 
 	/**
+	 * Redirect
 	 *
+	 * @param string $url
+	 * @param int    $status
 	 *
-	 * @param	string	$url
-	 * @param	int		$status
-	 *
+	 * @return void
 	 */
-	public function redirect($url, $status = 302) {
+	public function redirect($url, $status = 302): void {
 		header('Location: ' . str_replace(['&amp;', "\n", "\r"], ['&', '', ''], $url), true, $status);
 		exit();
 	}
 
 	/**
+	 * setCompression
 	 *
+	 * @param int $level
 	 *
-	 * @param	int		$level
+	 * @return void
 	 */
-	public function setCompression($level) {
+	public function setCompression($level): void {
 		$this->level = $level;
 	}
 
 	/**
+	 * getOutput
 	 *
-	 *
-	 * @return	array
+	 * @return string
 	 */
-	public function getOutput() {
+	public function getOutput(): string {
 		return $this->output;
 	}
 
 	/**
+	 * setOutput
 	 *
-	 *
-	 * @param	string	$output
+	 * @return void
 	 */
-	public function setOutput($output) {
+	public function setOutput($output): void {
 		$this->output = $output;
 	}
 
 	/**
+	 * Compress
 	 *
+	 * @param string $data
+	 * @param int    $level
 	 *
-	 * @param	string	$data
-	 * @param	int		$level
-	 *
-	 * @return	string
+	 * @return string
 	 */
-	private function compress($data, $level = 0) {
+	private function compress(string $data, int $level = 0): string {
 		if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false)) {
 			$encoding = 'gzip';
 		}
@@ -103,9 +105,13 @@ class Response {
 	}
 
 	/**
+	 * Output
 	 *
+	 * Displays the set HTML output
+	 *
+	 * @return void
 	 */
-	public function output() {
+	public function output(): void {
 		if ($this->output) {
 			$output = $this->level ? $this->compress($this->output, $this->level) : $this->output;
 

@@ -351,7 +351,7 @@ class ControllerApiOrder extends Controller {
 				}
 
 				$this->model_checkout_order->addOrderHistory($json['order_id'], $order_status_id);
-				
+
 				// clear cart since the order has already been successfully stored.
 				//$this->cart->clear();
 			}
@@ -623,7 +623,7 @@ class ControllerApiOrder extends Controller {
 					$taxes = $this->cart->getTaxes();
 					$total = 0;
 
-					// Because __call can not keep var references so we put them into an array. 
+					// Because __call can not keep var references so we put them into an array.
 					$total_data = [
 						'totals' => &$totals,
 						'taxes'  => &$taxes,

@@ -167,7 +167,6 @@ class Currency {
 	 *
 	 * @return   float
 	 */
-
 	public function getValue($currency) {
 		if (isset($this->currencies[$currency])) {
 			return $this->currencies[$currency]['value'];

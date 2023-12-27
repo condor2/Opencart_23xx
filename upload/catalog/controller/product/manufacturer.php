@@ -338,7 +338,7 @@ class ControllerProductManufacturer extends Controller {
 			} else {
 				$this->document->addLink($this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'] . '&page=' . $page, true), 'canonical');
 			}
-			
+
 			if ($page > 1) {
 				$this->document->addLink($this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'] . '&page=' . (($page - 2) ? '&page=' . ($page - 1) : ''), true), 'prev');
 			}

@@ -105,7 +105,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 			$log = new Log('pp_pro_iframe.log');
 			$log->write('POST: ' . print_r($this->request->post, 1));
 		}
-						
+
 		$order_id = $this->model_extension_payment_pp_payflow_iframe->getOrderId($this->request->post['SECURETOKENID']);
 
 		if ($order_id) {

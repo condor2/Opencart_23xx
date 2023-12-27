@@ -362,7 +362,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$this->response->setOutput($this->load->view('extension/payment/pilibaba', $data));
 			}
 		} else {
-		   $this->model_extension_payment_pilibaba->log('Module disabled');
+			$this->model_extension_payment_pilibaba->log('Module disabled');
 		}
 	}
 
