@@ -342,7 +342,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 
 		$arr = [];
 
-		foreach ($data as $k = >$v) {
+		foreach ($data as $k => $v) {
 			$tmp = explode('=', $v);
 			$arr[$tmp[0]] = isset($tmp[1]) ? urldecode($tmp[1]) : '';
 		}
