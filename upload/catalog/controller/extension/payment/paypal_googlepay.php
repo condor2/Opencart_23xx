@@ -1,7 +1,7 @@
 <?php
 class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 	private $error = [];
-			
+
 	public function index() {
 		$this->load->model('extension/payment/paypal');
 
@@ -35,13 +35,13 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 
 			$data['button_confirm'] = $this->language->get('button_confirm');
 
-			require_once DIR_SYSTEM .'library/paypal/paypal.php';
+			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
-				'partner_id' => $data['partner_id'],
-				'client_id' => $data['client_id'],
-				'secret' => $data['secret'],
-				'environment' => $data['environment'],
+				'partner_id'             => $data['partner_id'],
+				'client_id'              => $data['client_id'],
+				'secret'                 => $data['secret'],
+				'environment'            => $data['environment'],
 				'partner_attribution_id' => $data['partner_attribution_id']
 			];
 
@@ -49,7 +49,7 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 
 			$token_info = [
 				'grant_type' => 'client_credentials'
-			];	
+			];
 
 			$paypal->setAccessToken($token_info);
 
@@ -79,7 +79,7 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 
 			if (!empty($this->error['warning'])) {
 				$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
-			}	
+			}
 
 			$data['error'] = $this->error;
 
@@ -112,7 +112,7 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 
 		$data['text_paypal_paylater_title'] = $this->language->get('text_paypal_paylater_title');
 
-		require_once DIR_SYSTEM .'library/paypal/paypal.php';
+		require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 		$paypal_info = [
 			'partner_id'             => $data['partner_id'],
@@ -156,7 +156,7 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 
 		if (!empty($this->error['warning'])) {
 			$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
-		}	
+		}
 
 		$data['error'] = $this->error;
 

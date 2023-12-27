@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionShippingFedex extends Model {
-	function getQuote($address) {
+	public function getQuote($address) {
 		$this->load->language('extension/shipping/fedex');
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('fedex_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
@@ -157,16 +157,16 @@ class ModelExtensionShippingFedex extends Model {
 			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
 			$response = curl_exec($curl);
-			
+
 			curl_close($curl);
 
 			$dom = new DOMDocument('1.0', 'UTF-8');
 			$dom->loadXml($response);
 
 			if ($dom->getElementsByTagName('faultcode')->length > 0) {
-    			$error = $dom->getElementsByTagName('cause')->item(0)->nodeValue;
+				$error = $dom->getElementsByTagName('cause')->item(0)->nodeValue;
 
-    			$this->log->write('FEDEX :: ' . $response);
+				$this->log->write('FEDEX :: ' . $response);
 			} elseif ($dom->getElementsByTagName('HighestSeverity')->item(0)->nodeValue == 'FAILURE' || $dom->getElementsByTagName('HighestSeverity')->item(0)->nodeValue == 'ERROR') {
 				$error = $dom->getElementsByTagName('HighestSeverity')->item(0)->nodeValue;
 
@@ -181,7 +181,7 @@ class ModelExtensionShippingFedex extends Model {
 						$title = $this->language->get('text_' . $code);
 
 						$delivery_time_stamp = $rate_reply_detail->getElementsByTagName('DeliveryTimestamp');
-						
+
 						if ($this->config->get('fedex_display_time') && $delivery_time_stamp->length) {
 							$title .= ' (' . $this->language->get('text_eta') . ' ' . date($this->language->get('date_format_short') . ' ' . $this->language->get('time_format'), strtotime($delivery_time_stamp->item(0)->nodeValue)) . ')';
 						}

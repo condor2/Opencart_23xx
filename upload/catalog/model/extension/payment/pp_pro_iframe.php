@@ -12,7 +12,7 @@ class ModelExtensionPaymentPPProIframe extends Model {
 		} elseif ($query->num_rows) {
 			$status = true;
 		} else {
-		$status = false;
+			$status = false;
 		}
 
 		$method_data = [];

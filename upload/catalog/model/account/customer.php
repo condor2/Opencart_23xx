@@ -61,7 +61,7 @@ class ModelAccountCustomer extends Model {
 			$message .= $this->language->get('text_firstname') . ' ' . $data['firstname'] . "\n";
 			$message .= $this->language->get('text_lastname') . ' ' . $data['lastname'] . "\n";
 			$message .= $this->language->get('text_customer_group') . ' ' . $customer_group_info['name'] . "\n";
-			$message .= $this->language->get('text_email') . ' '  .  $data['email'] . "\n";
+			$message .= $this->language->get('text_email') . ' '  . $data['email'] . "\n";
 			$message .= $this->language->get('text_telephone') . ' ' . $data['telephone'] . "\n";
 
 			$mail = new Mail();

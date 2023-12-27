@@ -156,7 +156,7 @@ class ControllerAccountAddress extends Controller {
 					'customer_id' => $this->customer->getId(),
 					'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
 				];
-				
+
 				$this->model_account_activity->addActivity('address_delete', $activity_data);
 			}
 
@@ -365,7 +365,7 @@ class ControllerAccountAddress extends Controller {
 		} else {
 			$data['error_custom_field'] = [];
 		}
-		
+
 		if (!isset($this->request->get['address_id'])) {
 			$data['action'] = $this->url->link('account/address/add', '', true);
 		} else {
@@ -434,7 +434,7 @@ class ControllerAccountAddress extends Controller {
 
 		if (isset($this->request->post['country_id'])) {
 			$data['country_id'] = (int)$this->request->post['country_id'];
-		}  elseif (!empty($address_info)) {
+		} elseif (!empty($address_info)) {
 			$data['country_id'] = $address_info['country_id'];
 		} else {
 			$data['country_id'] = $this->config->get('config_country_id');
@@ -442,7 +442,7 @@ class ControllerAccountAddress extends Controller {
 
 		if (isset($this->request->post['zone_id'])) {
 			$data['zone_id'] = (int)$this->request->post['zone_id'];
-		}  elseif (!empty($address_info)) {
+		} elseif (!empty($address_info)) {
 			$data['zone_id'] = $address_info['zone_id'];
 		} else {
 			$data['zone_id'] = '';
@@ -528,7 +528,7 @@ class ControllerAccountAddress extends Controller {
 			if (($custom_field['location'] == 'address') && $custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['custom_field_id']])) {
 				$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 			} elseif (($custom_field['location'] == 'address') && ($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !preg_match(html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8'), $this->request->post['custom_field'][$custom_field['custom_field_id']])) {
-                $this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
+				$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
             }
 		}
 

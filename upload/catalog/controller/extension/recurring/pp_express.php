@@ -2,7 +2,7 @@
 class ControllerExtensionRecurringPPExpress extends Controller {
 	public function index() {
 		$this->load->language('extension/recurring/pp_express');
-		
+
 		if (isset($this->request->get['order_recurring_id'])) {
 			$order_recurring_id = (int)$this->request->get['order_recurring_id'];
 		} else {

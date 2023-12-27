@@ -13,10 +13,10 @@ class ModelExtensionPaymentPilibaba extends Model {
 
 		if ($status) {
 			$method_data = [
-				'code'			=> 'pilibaba',
-				'title'			=> $this->language->get('text_title'),
-				'terms'			=> '',
-				'sort_order'	=> $this->config->get('pilibaba_sort_order')
+				'code'       => 'pilibaba',
+				'title'      => $this->language->get('text_title'),
+				'terms'      => '',
+				'sort_order' => $this->config->get('pilibaba_sort_order')
 			];
 		}
 

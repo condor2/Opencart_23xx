@@ -65,7 +65,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			$message .= $this->language->get('text_firstname') . ' ' . $data['firstname'] . "\n";
 			$message .= $this->language->get('text_lastname') . ' ' . $data['lastname'] . "\n";
 			$message .= $this->language->get('text_customer_group') . ' ' . $customer_group_info['name'] . "\n";
-			$message .= $this->language->get('text_email') . ' '  .  $data['email'] . "\n";
+			$message .= $this->language->get('text_email') . ' '  . $data['email'] . "\n";
 			$message .= $this->language->get('text_telephone') . ' ' . $data['telephone'] . "\n";
 
 			$mail = new Mail();
@@ -443,10 +443,10 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		$response = curl_exec($curl);
 		curl_close($curl);
 
-		list($other, $responseBody) = explode("\r\n\r\n", $response, 2);
+		[$other, $responseBody] = explode("\r\n\r\n", $response, 2);
 		$other = preg_split("/\r\n|\n|\r/", $other);
 
-		list($protocol, $code, $text) = explode(' ', trim(array_shift($other)), 3);
+		[$protocol, $code, $text] = explode(' ', trim(array_shift($other)), 3);
 
 		return ['Status' => (int)$code, 'ResponseBody' => $responseBody];
 	}

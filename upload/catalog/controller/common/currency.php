@@ -52,11 +52,11 @@ class ControllerCommonCurrency extends Controller {
 	public function currency() {
 		if (isset($this->request->post['code'])) {
 			$this->session->data['currency'] = $this->request->post['code'];
-		
+
 			unset($this->session->data['shipping_method']);
 			unset($this->session->data['shipping_methods']);
 		}
-		
+
 		if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) === 0 || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) === 0)) {
 			$this->response->redirect($this->request->post['redirect']);
 		} else {

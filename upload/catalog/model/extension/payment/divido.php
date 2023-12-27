@@ -1,9 +1,8 @@
 <?php
 class ModelExtensionPaymentDivido extends Model {
-	const CACHE_KEY_PLANS = 'divido_plans';
+	public const CACHE_KEY_PLANS = 'divido_plans';
 
-	public function setMerchant($api_key) {
-	}
+	public function setMerchant($api_key) {}
 
 	public function getMethod($payment_address, $total) {
 		$this->load->language('extension/payment/divido');
@@ -47,9 +46,9 @@ class ModelExtensionPaymentDivido extends Model {
 		}
 
 		$method_data = [
-			'code' => 'divido',
-			'title' => $title,
-			'terms' => '',
+			'code'       => 'divido',
+			'title'      => $title,
+			'terms'      => '',
 			'sort_order' => $this->config->get('divido_sort_order')
 		];
 
@@ -138,9 +137,7 @@ class ModelExtensionPaymentDivido extends Model {
 		if ($plans = $this->cache->get(self::CACHE_KEY_PLANS)) {
 			// OpenCart 2.1 decodes json objects to associative arrays so we
 			// need to make sure we're getting a list of simple objects back.
-			$plans = array_map(function ($plan) {
-				return (object)$plan;
-			}, $plans);
+			$plans = array_map(fn ($plan) => (object)$plan, $plans);
 
 			return $plans;
 		}
@@ -180,7 +177,7 @@ class ModelExtensionPaymentDivido extends Model {
 		return $plans_plain;
 	}
 
-	public function getCartPlans($cart)	{
+	public function getCartPlans($cart) {
 		$plans = [];
 		$products = $cart->getProducts();
 		foreach ($products as $product) {

@@ -75,9 +75,9 @@ class ModelExtensionPaymentCardinity extends Model {
 
 		if ($status) {
 			$method_data = [
-				'code'		 => 'cardinity',
-				'title'		 => $this->language->get('text_title'),
-				'terms'		 => '',
+				'code'       => 'cardinity',
+				'title'      => $this->language->get('text_title'),
+				'terms'      => '',
 				'sort_order' => $this->config->get('cardinity_sort_order')
 			];
 		}

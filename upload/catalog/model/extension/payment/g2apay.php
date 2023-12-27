@@ -1,6 +1,5 @@
 <?php
 class ModelExtensionPaymentG2APay extends Model {
-
 	public function getMethod($address, $total) {
 		$this->load->language('extension/payment/g2apay');
 
@@ -20,9 +19,9 @@ class ModelExtensionPaymentG2APay extends Model {
 
 		if ($status) {
 			$method_data = [
-				'code' => 'g2apay',
-				'title' => $this->language->get('text_title'),
-				'terms' => '',
+				'code'       => 'g2apay',
+				'title'      => $this->language->get('text_title'),
+				'terms'      => '',
 				'sort_order' => $this->config->get('g2apay_sort_order')
 			];
 		}

@@ -4,7 +4,7 @@ class ControllerStartupStartup extends Controller {
 		// To make sure that calls to isset also support dynamic properties from the registry
 		// See https://www.php.net/manual/en/language.oop5.overloading.php#object.isset
 		if ($this->registry) {
-			if ($this->registry->get($key)!== null) {
+			if ($this->registry->get($key) !== null) {
 				return true;
 			}
 		}
@@ -75,16 +75,16 @@ class ControllerStartupStartup extends Controller {
 				foreach ($languages as $key => $value) {
 					if ($value['status']) {
 						$locale = explode(',', $value['locale']);
-						
+
 						if (in_array($browser_language, $locale)) {
 							$detect = $key;
 							break 2;
 						}
 					}
-				}	
-			}			
+				}
+			}
 
-			if (!$detect) { 
+			if (!$detect) {
 				// Try using language folder to detect the language
 				foreach ($browser_languages as $browser_language) {
 					if (array_key_exists(strtolower($browser_language), $languages)) {
@@ -117,7 +117,7 @@ class ControllerStartupStartup extends Controller {
 		$this->registry->set('language', $language);
 
 		// Set the config language_id
-		$this->config->set('config_language_id', $languages[$code]['language_id']);	
+		$this->config->set('config_language_id', $languages[$code]['language_id']);
 
 		// Customer
 		$customer = new Cart\Customer($this->registry);
@@ -138,7 +138,7 @@ class ControllerStartupStartup extends Controller {
 			setcookie('tracking', $this->request->get['tracking'], time() + 3600 * 24 * 1000, '/');
 
 			$this->db->query("UPDATE `" . DB_PREFIX . "marketing` SET clicks = (clicks + 1) WHERE code = '" . $this->db->escape($this->request->get['tracking']) . "'");
-		}		
+		}
 
 		// Affiliate
 		$this->registry->set('affiliate', new Cart\Affiliate($this->registry));
@@ -168,7 +168,7 @@ class ControllerStartupStartup extends Controller {
 
 		if (!isset($this->request->cookie['currency']) || $this->request->cookie['currency'] != $code) {
 			setcookie('currency', $code, time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
-		}		
+		}
 
 		$this->registry->set('currency', new Cart\Currency($this->registry));
 
@@ -188,17 +188,17 @@ class ControllerStartupStartup extends Controller {
 		}
 
 		$this->tax->setStoreAddress($this->config->get('config_country_id'), $this->config->get('config_zone_id'));
-		
+
 		// Weight
 		$this->registry->set('weight', new Cart\Weight($this->registry));
-		
+
 		// Length
 		$this->registry->set('length', new Cart\Length($this->registry));
-		
+
 		// Cart
 		$this->registry->set('cart', new Cart\Cart($this->registry));
-		
+
 		// Encryption
-		$this->registry->set('encryption', new Encryption($this->config->get('config_encryption')));				
+		$this->registry->set('encryption', new Encryption($this->config->get('config_encryption')));
 	}
 }

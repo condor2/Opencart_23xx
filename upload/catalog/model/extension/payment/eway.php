@@ -20,8 +20,8 @@ class ModelExtensionPaymentEway extends Model {
 
 		if ($status) {
 			$method_data = [
-				'code' => 'eway',
-				'title' => $this->language->get('text_title'),
+				'code'       => 'eway',
+				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('eway_sort_order')
 			];
@@ -56,16 +56,16 @@ class ModelExtensionPaymentEway extends Model {
 		$this->load->model('account/address');
 
 		foreach ($query->rows as $row) {
-
 			$card_data[] = [
-				'card_id' => $row['card_id'],
+				'card_id'     => $row['card_id'],
 				'customer_id' => $row['customer_id'],
-				'token' => $row['token'],
-				'digits' => '**** ' . $row['digits'],
-				'expiry' => $row['expiry'],
-				'type' => $row['type'],
+				'token'       => $row['token'],
+				'digits'      => '**** ' . $row['digits'],
+				'expiry'      => $row['expiry'],
+				'type'        => $row['type'],
 			];
 		}
+
 		return $card_data;
 	}
 
@@ -133,7 +133,7 @@ class ModelExtensionPaymentEway extends Model {
 		return $response;
 	}
 
-	public function sendCurl($url, $data, $is_post=true) {
+	public function sendCurl($url, $data, $is_post = true) {
 		$ch = curl_init($url);
 
 		$eway_username = html_entity_decode($this->config->get('eway_username'), ENT_QUOTES, 'UTF-8');
@@ -142,7 +142,7 @@ class ModelExtensionPaymentEway extends Model {
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
 		curl_setopt($ch, CURLOPT_USERPWD, $eway_username . ":" . $eway_password);
 		if ($is_post) {
-		curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POST, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 		} else {
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');

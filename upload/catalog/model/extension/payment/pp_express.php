@@ -33,7 +33,6 @@ class ModelExtensionPaymentPPExpress extends Model {
 		/**
 		 * 1 to 1 relationship with order table (extends order info)
 		 */
-
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "paypal_order` SET
 			`order_id` = '" . (int)$order_data['order_id'] . "',
 			`date_added` = NOW(),
@@ -50,7 +49,6 @@ class ModelExtensionPaymentPPExpress extends Model {
 		/**
 		 * 1 to many relationship with paypal order table, many transactions per 1 order
 		 */
-
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "paypal_order_transaction` SET
 			`paypal_order_id` = '" . (int)$transaction_data['paypal_order_id'] . "',
 			`transaction_id` = '" . $this->db->escape($transaction_data['transaction_id']) . "',
@@ -219,7 +217,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 					$trial_text = '';
 				}
 
-				$recurring_amt = $this->currency->format($this->tax->calculate($item['recurring']['price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false)  * $item['quantity'] . ' ' . $this->session->data['currency'];
+				$recurring_amt = $this->currency->format($this->tax->calculate($item['recurring']['price'], $item['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency'], false, false) * $item['quantity'] . ' ' . $this->session->data['currency'];
 				$recurring_description = $trial_text . sprintf($this->language->get('text_recurring'), $recurring_amt, $item['recurring']['cycle'], $item['recurring']['frequency']);
 
 				if ($item['recurring']['duration'] > 0) {
@@ -284,17 +282,17 @@ class ModelExtensionPaymentPPExpress extends Model {
 		$this->log($data, 'Call data');
 
 		$defaults = [
-			CURLOPT_POST => 1,
-			CURLOPT_HEADER => 0,
-			CURLOPT_URL => $api_url,
-			CURLOPT_USERAGENT => "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
-			CURLOPT_FRESH_CONNECT => 1,
+			CURLOPT_POST           => 1,
+			CURLOPT_HEADER         => 0,
+			CURLOPT_URL            => $api_url,
+			CURLOPT_USERAGENT      => "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
+			CURLOPT_FRESH_CONNECT  => 1,
 			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_FORBID_REUSE => 1,
-			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FORBID_REUSE   => 1,
+			CURLOPT_TIMEOUT        => 0,
 			CURLOPT_SSL_VERIFYPEER => 0,
 			CURLOPT_SSL_VERIFYHOST => 0,
-			CURLOPT_POSTFIELDS => http_build_query(array_merge($data, $settings), '', "&"),
+			CURLOPT_POSTFIELDS     => http_build_query(array_merge($data, $settings), '', "&"),
 		];
 
 		$ch = curl_init();
@@ -322,11 +320,11 @@ class ModelExtensionPaymentPPExpress extends Model {
 
 	public function createToken($len = 32) {
 		$base = 'ABCDEFGHKLMNOPQRSTWXYZabcdefghjkmnpqrstwxyz123456789';
-		$max = strlen($base)-1;
+		$max = strlen($base) - 1;
 		$activate_code = '';
-		mt_srand((float)microtime()*1000000);
+		mt_srand((float)microtime() * 1000000);
 
-		while (strlen($activate_code)<$len+1) {
+		while (strlen($activate_code) < $len + 1) {
 			$activate_code .= $base[mt_rand(0, $max)];
 		}
 
@@ -344,7 +342,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 
 		$arr = [];
 
-		foreach ($data as $k=>$v) {
+		foreach ($data as $k = >$v) {
 			$tmp = explode('=', $v);
 			$arr[$tmp[0]] = isset($tmp[1]) ? urldecode($tmp[1]) : '';
 		}

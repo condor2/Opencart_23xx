@@ -50,10 +50,10 @@ class ModelAffiliateAffiliate extends Model {
 			}
 
 			if ($data['company']) {
-				$message .= $this->language->get('text_company') . ' '  . $data['company'] . "\n";
+				$message .= $this->language->get('text_company') . ' ' . $data['company'] . "\n";
 			}
 
-			$message .= $this->language->get('text_email') . ' '  .  $data['email'] . "\n";
+			$message .= $this->language->get('text_email') . ' ' . $data['email'] . "\n";
 			$message .= $this->language->get('text_telephone') . ' ' . $data['telephone'] . "\n";
 
 			$mail->setTo($this->config->get('config_email'));
@@ -157,7 +157,7 @@ class ModelAffiliateAffiliate extends Model {
 
 		return (int)$query->row['total'];
 	}
-	
+
 	public function addLoginAttempt($email) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "affiliate_login WHERE email = '" . $this->db->escape(utf8_strtolower((string)$email)) . "' AND ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "'");
 
@@ -176,5 +176,5 @@ class ModelAffiliateAffiliate extends Model {
 
 	public function deleteLoginAttempts($email) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "affiliate_login` WHERE email = '" . $this->db->escape(utf8_strtolower($email)) . "'");
-	}	
+	}
 }

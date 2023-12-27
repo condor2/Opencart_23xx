@@ -2,7 +2,7 @@
 class ModelExtensionFraudFraudLabsPro extends Model {
 	public function check($data) {
 		// Do not perform fraud check if FraudLabs Pro is disabled or API key is not provided.
-		if (!$this->config->get('fraudlabspro_status') ||!$this->config->get('fraudlabspro_key')) {
+		if (!$this->config->get('fraudlabspro_status') || !$this->config->get('fraudlabspro_key')) {
 			return;
 		}
 
@@ -18,12 +18,12 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 		$ip = $data['ip'];
 
 		// Detect client IP is store is behind CloudFlare protection.
-		if(isset($_SERVER['HTTP_CF_CONNECTING_IP']) && filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)){
+		if(isset($_SERVER['HTTP_CF_CONNECTING_IP']) && filter_var($_SERVER['HTTP_CF_CONNECTING_IP'], FILTER_VALIDATE_IP)) {
 			$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
 		}
 
 		// Get real client IP is they are behind proxy server.
-		if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)){
+		if(isset($_SERVER['HTTP_X_FORWARDED_FOR']) && filter_var($_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
 			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 		}
 
@@ -50,7 +50,7 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 			$request['ship_zip_code'] = $data['shipping_postcode'];
 			$request['ship_country'] = $data['shipping_iso_code_2'];
 		}
-		
+
 		$request['email'] = $data['email'];
 		$request['email_hash'] = $this->hashIt($data['email']);
 		$request['amount'] = $this->currency->format($data['total'], $data['currency_code'], $data['currency_value'], false);
@@ -76,8 +76,9 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 
 		$risk_score = 0;
 
-		if (is_null($json = json_decode($response)) === FALSE) {
-			$this->db->query("REPLACE INTO `" . DB_PREFIX . "fraudlabspro` SET order_id = '" . (int)$data['order_id'] . "',
+		if (is_null($json = json_decode($response)) === false) {
+			$this->db->query(
+				"REPLACE INTO `" . DB_PREFIX . "fraudlabspro` SET order_id = '" . (int)$data['order_id'] . "',
 				is_country_match = '" . $this->db->escape($json->is_country_match) . "',
 				is_high_risk_country = '" . $this->db->escape($json->is_high_risk_country) . "',
 				distance_in_km = '" . $this->db->escape($json->distance_in_km) . "',
@@ -121,8 +122,8 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 				fraudlabspro_id = '" . $this->db->escape($json->fraudlabspro_id) . "',
 				fraudlabspro_error = '" . $this->db->escape($json->fraudlabspro_error_code) . "',
 				fraudlabspro_message = '" . $this->db->escape($json->fraudlabspro_message) . "',
-				fraudlabspro_credits = '" .  $this->db->escape($json->fraudlabspro_credits) . "',
-				api_key = '" .  $this->config->get('fraudlabspro_key') . "',
+				fraudlabspro_credits = '" . $this->db->escape($json->fraudlabspro_credits) . "',
+				api_key = '" . $this->config->get('fraudlabspro_key') . "',
 				ip_address = '" .  $ip . "'"
 			);
 
@@ -154,8 +155,9 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 	private function hashIt($s) {
 		$hash = 'fraudlabspro_' . $s;
 
-		for ($i = 0; $i < 65536; $i++)
+		for ($i = 0; $i < 65536; $i++) {
 			$hash = sha1('fraudlabspro_' . $hash);
+		}
 
 		return $hash;
 	}

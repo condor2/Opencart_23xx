@@ -1,7 +1,7 @@
 <?php
 class ControllerExtensionPaymentPayPal extends Controller {
 	private $error = [];
-		
+
 	public function __construct($registry) {
 		parent::__construct($registry);
 
@@ -54,7 +54,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['button_pay'] = $this->language->get('button_pay');
 			$data['button_confirm'] = $this->language->get('button_confirm');
 
-			require_once DIR_SYSTEM .'library/paypal/paypal.php';
+			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
 				'partner_id'             => $data['partner_id'],
@@ -68,7 +68,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$token_info = [
 				'grant_type' => 'client_credentials'
-			];	
+			];
 
 			$paypal->setAccessToken($token_info);
 
@@ -136,7 +136,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['button_pay'] = $this->language->get('button_pay');
 
-		require_once DIR_SYSTEM .'library/paypal/paypal.php';
+		require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 		$paypal_info = [
 			'partner_id'             => $data['partner_id'],
@@ -150,7 +150,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$token_info = [
 			'grant_type' => 'client_credentials'
-		];	
+		];
 
 		$paypal->setAccessToken($token_info);
 
@@ -180,7 +180,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		if (!empty($this->error['warning'])) {
 			$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
-		}			
+		}
 
 		$data['error'] = $this->error;
 
@@ -192,7 +192,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$agree_status = $this->model_extension_payment_paypal->getAgreeStatus();
 
-		if ($this->config->get('paypal_status') && $this->config->get('paypal_client_id') && $this->config->get('paypal_secret') && $agree_status && !empty($this->request->post['page_code'])) {	
+		if ($this->config->get('paypal_status') && $this->config->get('paypal_client_id') && $this->config->get('paypal_secret') && $agree_status && !empty($this->request->post['page_code'])) {
 			$this->load->language('extension/payment/paypal');
 
 			$this->load->model('localisation/country');
@@ -231,7 +231,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$data['components'] = [];
 
-			if ($this->request->post['page_code'] == 'home') {				
+			if ($this->request->post['page_code'] == 'home') {
 				if ($setting['message']['home']['status'] && ($data['currency_code'] == $setting['general']['currency_code'])) {
 					$data['components'][] = 'messages';
 					$data['message_status'] = $setting['message']['home']['status'];
@@ -270,7 +270,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$data['button_color'] = $setting['button']['product']['color'];
 					$data['button_shape'] = $setting['button']['product']['shape'];
 					$data['button_label'] = $setting['button']['product']['label'];
-					$data['button_tagline'] = $setting['button']['product']['tagline'];	
+					$data['button_tagline'] = $setting['button']['product']['tagline'];
 				}
 
 				if ($setting['message']['product']['status'] && ($data['currency_code'] == $setting['general']['currency_code'])) {
@@ -319,7 +319,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$data['button_color'] = $setting['button']['cart']['color'];
 					$data['button_shape'] = $setting['button']['cart']['shape'];
 					$data['button_label'] = $setting['button']['cart']['label'];
-					$data['button_tagline'] = $setting['button']['cart']['tagline'];	
+					$data['button_tagline'] = $setting['button']['cart']['tagline'];
 				}
 
 				if ($setting['message']['cart']['status'] && ($data['currency_code'] == $setting['general']['currency_code'])) {
@@ -370,7 +370,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					foreach ($setting['button_funding'] as $button_funding) {
 						if ($setting['button']['checkout']['funding'][$button_funding['code']] == 1) {
 							$data['button_enable_funding'][] = $button_funding['code'];
-						} 
+						}
 
 						if ($setting['button']['checkout']['funding'][$button_funding['code']] == 2) {
 							$data['button_disable_funding'][] = $button_funding['code'];
@@ -399,7 +399,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 						foreach ($this->cart->getProducts() as $product) {
 							$product_price = $this->tax->calculate($product['price'], $product['tax_class_id'], true);
-									
+
 							$item_total += $product_price * $product['quantity'];
 						}
 
@@ -424,7 +424,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 						foreach ($this->cart->getProducts() as $product) {
 							$product_price = $this->tax->calculate($product['price'], $product['tax_class_id'], true);
-									
+
 							$item_total += $product_price * $product['quantity'];
 						}
 
@@ -432,7 +432,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 				}
 
-				if ($setting['card']['status']) {										
+				if ($setting['card']['status']) {
 					$data['components'][] = 'hosted-fields';
 					$data['card_status'] = $setting['card']['status'];
 					$data['card_align'] = $setting['card']['align'];
@@ -469,7 +469,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				}
 			}
 
-			require_once DIR_SYSTEM .'library/paypal/paypal.php';
+			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
 				'partner_id'             => $data['partner_id'],
@@ -483,7 +483,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$token_info = [
 				'grant_type' => 'client_credentials'
-			];	
+			];
 
 			$paypal->setAccessToken($token_info);
 		
@@ -519,14 +519,14 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['error'] = $this->error;
 
 		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($data));		
+		$this->response->setOutput(json_encode($data));
 	}
 
 	public function createOrder() {
 		$this->load->language('extension/payment/paypal');
 
 		$this->load->model('extension/payment/paypal');
-		
+
 		if (!empty($this->request->post['page_code']) && !empty($this->request->post['payment_type'])) {
 			$page_code = $this->request->post['page_code'];
 			$payment_type = $this->request->post['payment_type'];
@@ -588,7 +588,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						}
 					}
 
-					if (!$errors) {					
+					if (!$errors) {
 						if (!$this->model_extension_payment_paypal->hasProductInCart($product_id, $option, $recurring_id)) {
 							$this->cart->add($product_id, $quantity, $option, $recurring_id);
 						}
@@ -598,7 +598,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						unset($this->session->data['shipping_methods']);
 						unset($this->session->data['payment_method']);
 						unset($this->session->data['payment_methods']);
-					}					
+					}		
 				}
 			}
 
@@ -611,9 +611,9 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 				if ($this->cart->hasShipping()) {
 					$shipping_info['name']['full_name'] = $order_info['shipping_firstname'];
-					$shipping_info['name']['full_name'] .= ($order_info['shipping_lastname'] ? (' ' . $order_info['shipping_lastname']) : '');			
+					$shipping_info['name']['full_name'] .= ($order_info['shipping_lastname'] ? (' ' . $order_info['shipping_lastname']) : '');
 					$shipping_info['address']['address_line_1'] = $order_info['shipping_address_1'];
-					$shipping_info['address']['address_line_2'] = $order_info['shipping_address_2'];			
+					$shipping_info['address']['address_line_2'] = $order_info['shipping_address_2'];
 					$shipping_info['address']['admin_area_1'] = $order_info['shipping_zone'];
 					$shipping_info['address']['admin_area_2'] = $order_info['shipping_city'];
 					$shipping_info['address']['postal_code'] = $order_info['shipping_postcode'];
@@ -630,7 +630,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				}
 			}
 
-			if (!$errors) {					
+			if (!$errors) {
 				// Setting
 				$_config = new Config();
 				$_config->load('paypal');
@@ -645,7 +645,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$environment = $this->config->get('paypal_environment');
 				$partner_id = $setting['partner'][$environment]['partner_id'];
 				$partner_attribution_id = $setting['partner'][$environment]['partner_attribution_id'];
-				$transaction_method = $setting['general']['transaction_method'];	
+				$transaction_method = $setting['general']['transaction_method'];
 
 				$currency_code = $this->session->data['currency'];
 				$currency_value = $this->currency->getValue($this->session->data['currency']);
@@ -688,7 +688,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 				$token_info = [
 					'grant_type' => 'client_credentials'
-				];	
+				];
 
 				$paypal->setAccessToken($token_info);
 
@@ -701,10 +701,10 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$product_price = number_format($product['price'] * $currency_value, $decimal_place, '.', '');
 
 					$item_info[] = [
-						'name'     => $product['name'],
-						'sku'      => $product['model'],
-						'url'      => $this->url->link('product/product', 'product_id=' . $product['product_id'], true),
-						'quantity' => $product['quantity'],
+						'name'        => $product['name'],
+						'sku'         => $product['model'],
+						'url'         => $this->url->link('product/product', 'product_id=' . $product['product_id'], true),
+						'quantity'    => $product['quantity'],
 						'unit_amount' => [
 							'currency_code' => $currency_code,
 							'value'         => $product_price
@@ -795,12 +795,12 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 				}
 
-				if ($this->cart->hasShipping()) {			
+				if ($this->cart->hasShipping()) {
 					$shipping_preference = 'GET_FROM_FILE';
 				} else {
 					$shipping_preference = 'NO_SHIPPING';
 				}
-	
+
 				$paypal_order_info['application_context']['shipping_preference'] = $shipping_preference;
 
 				$result = $paypal->createOrder($paypal_order_info);
@@ -871,7 +871,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			if ($page_code != 'checkout') {
 				if (isset($this->request->post['paypal_order_id'])) {
 					$this->session->data['paypal_order_id'] = $this->request->post['paypal_order_id'];
-				} else {	
+				} else {
 					$data['url'] = $this->url->link('checkout/cart', '', true);
 
 					$this->response->addHeader('Content-Type: application/json');
@@ -924,7 +924,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$token_info = [
 				'grant_type' => 'client_credentials'
-			];	
+			];
 
 			$paypal->setAccessToken($token_info);
 
@@ -1061,7 +1061,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						}
 					}
 
-					$data['url'] = $this->url->link('extension/payment/paypal/confirmOrder', '', true);			
+					$data['url'] = $this->url->link('extension/payment/paypal/confirmOrder', '', true);
 				}
 			} else {
 				if ((($payment_type == 'button') || ($payment_type == 'googlepay_button') || ($payment_type == 'applepay_button')) && !empty($this->request->post['paypal_order_id'])) {
@@ -1074,7 +1074,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					if (isset($payload['orderId'])) {
 						$paypal_order_id = $payload['orderId'];
 						
-						if ($setting['card']['secure_status']) {					
+						if ($setting['card']['secure_status']) {
 							$paypal_order_info = $paypal->getOrder($paypal_order_id);
 
 							if ($paypal->hasErrors()) {
@@ -1148,7 +1148,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 				}
 
-				if (isset($paypal_order_id) && !$this->error) {				
+				if (isset($paypal_order_id) && !$this->error) {
 					if ($transaction_method == 'authorize') {
 						$result = $paypal->setOrderAuthorize($paypal_order_id);
 					} else {
@@ -1185,7 +1185,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
 					}
 
-					if (!$this->error) {	
+					if (!$this->error) {
 						if ($transaction_method == 'authorize') {
 							$this->model_extension_payment_paypal->log($result, 'Authorize Order');
 
@@ -1477,18 +1477,18 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			}
 
 			$data['products'][] = [
-				'cart_id'               => $product['cart_id'],
-				'thumb'                 => $image,
-				'name'                  => $product['name'],
-				'model'                 => $product['model'],
-				'option'                => $option_data,
-				'recurring' 			=> $recurring,
-				'quantity'              => $product['quantity'],
-				'stock'                 => $product['stock'] ? true : !(!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning')),
-				'reward'                => ($product['reward'] ? sprintf($this->language->get('text_points'), $product['reward']) : ''),
-				'price'                 => $price,
-				'total'                 => $total,
-				'href'                  => $this->url->link('product/product', 'product_id=' . $product['product_id'], true)
+				'cart_id'   => $product['cart_id'],
+				'thumb'     => $image,
+				'name'      => $product['name'],
+				'model'     => $product['model'],
+				'option'    => $option_data,
+				'recurring' => $recurring,
+				'quantity'  => $product['quantity'],
+				'stock'     => $product['stock'] ? true : !(!$this->config->get('config_stock_checkout') || $this->config->get('config_stock_warning')),
+				'reward'    => ($product['reward'] ? sprintf($this->language->get('text_points'), $product['reward']) : ''),
+				'price'     => $price,
+				'total'     => $total,
+				'href'      => $this->url->link('product/product', 'product_id=' . $product['product_id'], true)
 			];
 		}
 
@@ -1576,7 +1576,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 
 		$data['guest'] = isset($this->session->data['guest']) ? $this->session->data['guest'] : [];
-		$data['payment_address'] = isset($this->session->data['payment_address']) ? $this->session->data['payment_address'] : [];	
+		$data['payment_address'] = isset($this->session->data['payment_address']) ? $this->session->data['payment_address'] : [];
 
 		// Totals
 		$totals = [];
@@ -1750,7 +1750,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/confirm', $data));
 	}
 
-	public function completeOrder() {		
+	public function completeOrder() {
 		$this->load->language('extension/payment/paypal');
 
 		$this->load->model('extension/payment/paypal');
@@ -1785,7 +1785,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$this->response->redirect($this->url->link('checkout/cart', '', true));
 		}
 
-		if (isset($this->session->data['paypal_order_id'])) {			
+		if (isset($this->session->data['paypal_order_id'])) {
 			$order_data = [];
 
 			$totals = [];
@@ -1876,7 +1876,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$order_data['payment_code'] = $this->session->data['payment_method']['code'];
 			} else {
 				$order_data['payment_code'] = '';
-			}			
+			}
 
 			if ($this->cart->hasShipping()) {
 				$order_data['shipping_firstname'] = $this->session->data['shipping_address']['firstname'];
@@ -2080,7 +2080,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$token_info = [
 				'grant_type' => 'client_credentials'
-			];	
+			];
 
 			$paypal->setAccessToken($token_info);
 			
@@ -2104,9 +2104,9 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			if ($this->cart->hasShipping()) {
 				$shipping_info['name']['full_name'] = (isset($this->session->data['shipping_address']['firstname']) ? $this->session->data['shipping_address']['firstname'] : '');
-				$shipping_info['name']['full_name'] .= (isset($this->session->data['shipping_address']['lastname']) ? (' ' . $this->session->data['shipping_address']['lastname']) : '');			
+				$shipping_info['name']['full_name'] .= (isset($this->session->data['shipping_address']['lastname']) ? (' ' . $this->session->data['shipping_address']['lastname']) : '');
 				$shipping_info['address']['address_line_1'] = (isset($this->session->data['shipping_address']['address_1']) ? $this->session->data['shipping_address']['address_1'] : '');
-				$shipping_info['address']['address_line_2'] = (isset($this->session->data['shipping_address']['address_2']) ? $this->session->data['shipping_address']['address_2'] : '');			
+				$shipping_info['address']['address_line_2'] = (isset($this->session->data['shipping_address']['address_2']) ? $this->session->data['shipping_address']['address_2'] : '');
 				$shipping_info['address']['admin_area_1'] = (isset($this->session->data['shipping_address']['zone']) ? $this->session->data['shipping_address']['zone'] : '');
 				$shipping_info['address']['admin_area_2'] = (isset($this->session->data['shipping_address']['city']) ? $this->session->data['shipping_address']['city'] : '');
 				$shipping_info['address']['postal_code'] = (isset($this->session->data['shipping_address']['postcode']) ? $this->session->data['shipping_address']['postcode'] : '');
@@ -2200,8 +2200,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$amount_info['breakdown']['discount'] = [
 				'currency_code' => $currency_code,
-				'value' => $discount_total
-			];			
+				'value'         => $discount_total
+			];
 
 			$paypal_order_info[] = [
 				'op'    => 'replace',
@@ -2237,7 +2237,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
 			}
 
-			if ($paypal_order_id && !$this->error) {				
+			if ($paypal_order_id && !$this->error) {
 				if ($transaction_method == 'authorize') {
 					$result = $paypal->setOrderAuthorize($paypal_order_id);
 				} else {
@@ -2274,7 +2274,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
 				}
 
-				if (!$this->error) {				
+				if (!$this->error) {
 					if ($transaction_method == 'authorize') {
 						$this->model_extension_payment_paypal->log($result, 'Authorize Order');
 
@@ -2365,7 +2365,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			unset($this->session->data['paypal_order_id']);
 
-			if ($this->error) {								
+			if ($this->error) {		
 				$this->session->data['error'] = $this->error['warning'];
 				
 				$this->response->redirect($this->url->link('checkout/checkout', '', true));
@@ -2457,7 +2457,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['url'] = '';
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validatePaymentAddress()) {			
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validatePaymentAddress()) {
 			$this->session->data['guest']['firstname'] = $this->request->post['firstname'];
 			$this->session->data['guest']['lastname'] = $this->request->post['lastname'];
 			$this->session->data['guest']['email'] = $this->request->post['email'];
@@ -2525,7 +2525,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 	public function confirmShippingAddress() {
 		$this->load->language('extension/payment/paypal');
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateShippingAddress()) {			
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateShippingAddress()) {
 			$this->session->data['shipping_address']['firstname'] = $this->request->post['firstname'];
 			$this->session->data['shipping_address']['lastname'] = $this->request->post['lastname'];
 			$this->session->data['shipping_address']['company'] = $this->request->post['company'];
@@ -2604,7 +2604,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$partner_attribution_id = $setting['partner'][$environment]['partner_attribution_id'];
 			$transaction_method = $setting['general']['transaction_method'];
 
-			require_once DIR_SYSTEM .'library/paypal/paypal.php';
+			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
 				'partner_id'             => $partner_id,
@@ -2618,7 +2618,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$token_info = [
 				'grant_type' => 'client_credentials'
-			];	
+			];
 
 			$paypal->setAccessToken($token_info);
 
@@ -2710,10 +2710,10 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$this->model_extension_payment_paypal->deleteOrder($order_id);
 
 					$paypal_data = [
-						'order_id' => $order_id,
-						'transaction_id' => $transaction_id,
+						'order_id'           => $order_id,
+						'transaction_id'     => $transaction_id,
 						'transaction_status' => $transaction_status,
-						'environment' => $environment
+						'environment'        => $environment
 					];
 
 					$this->model_extension_payment_paypal->addOrder($paypal_data);
@@ -2780,7 +2780,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$this->document->addStyle('catalog/view/theme/default/stylesheet/paypal/paypal.css');
 				}
 
-				if ($params['page_code'] == 'checkout') {			
+				if ($params['page_code'] == 'checkout') {
 					if ($setting['card']['status']) {
 						if (file_exists(DIR_TEMPLATE . $theme . '/stylesheet/paypal/card.css')) {
 							$this->document->addStyle('catalog/view/theme/' . $theme . '/stylesheet/paypal/card.css');
@@ -2846,7 +2846,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					];
 				}
 			}
-		}			
+		}
 	}
 
 	public function order_delete_order_before($route, $data) {
@@ -2938,7 +2938,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			if ($custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']])) {
 				$this->error['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 			} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !preg_match(html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8'), $this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']])) {
-                $this->error['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
+				$this->error['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
             }
 		}
 

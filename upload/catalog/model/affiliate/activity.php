@@ -2,7 +2,7 @@
 class ModelAffiliateActivity extends Model {
 	public function addActivity($key, $data) {
 		if (isset($data['affiliate_id'])) {
-			$affiliate_id = $data['affiliate_id'];
+			$affiliate_id = (int)$data['affiliate_id'];
 		} else {
 			$affiliate_id = 0;
 		}

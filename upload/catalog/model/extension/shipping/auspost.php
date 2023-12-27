@@ -37,7 +37,7 @@ class ModelExtensionShippingAusPost extends Model {
 					$parts = explode("\n", trim($response));
 
 					foreach ($parts as $part) {
-						list($key, $value) = explode('=', $part);
+						[$key, $value] = explode('=', $part);
 
 						$response_info[$key] = $value;
 					}
@@ -79,7 +79,7 @@ class ModelExtensionShippingAusPost extends Model {
 					$parts = explode("\n", trim($response));
 
 					foreach ($parts as $part) {
-						list($key, $value) = explode('=', $part);
+						[$key, $value] = explode('=', $part);
 
 						$response_info[$key] = $value;
 					}

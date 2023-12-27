@@ -19,11 +19,11 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 		$accounts = $this->config->get('realex_remote_account');
 
 		$card_types = [
-			'visa' => $this->language->get('text_card_visa'),
-			'mc' => $this->language->get('text_card_mc'),
-			'amex' => $this->language->get('text_card_amex'),
+			'visa'   => $this->language->get('text_card_visa'),
+			'mc'     => $this->language->get('text_card_mc'),
+			'amex'   => $this->language->get('text_card_amex'),
 			'switch' => $this->language->get('text_card_switch'),
-			'laser' => $this->language->get('text_card_laser'),
+			'laser'  => $this->language->get('text_card_laser'),
 			'diners' => $this->language->get('text_card_diners'),
 		];
 
@@ -116,17 +116,17 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 				// Proceed to 3D secure
 				if (isset($verify_3ds->result) && $verify_3ds->result == '00') {
 					$enc_data = [
-						'account' => $account,
-						'amount' => $amount,
-						'currency' => $currency,
-						'order_id' => $order_id,
+						'account'   => $account,
+						'amount'    => $amount,
+						'currency'  => $currency,
+						'order_id'  => $order_id,
 						'order_ref' => $order_ref,
 						'cc_number' => $this->request->post['cc_number'],
 						'cc_expire' => $this->request->post['cc_expire_date_month'] . $this->request->post['cc_expire_date_year'],
-						'cc_name' => $this->request->post['cc_name'],
-						'cc_type' => $this->request->post['cc_type'],
-						'cc_cvv2' => $this->request->post['cc_cvv2'],
-						'cc_issue' => $this->request->post['cc_issue']
+						'cc_name'   => $this->request->post['cc_name'],
+						'cc_type'   => $this->request->post['cc_type'],
+						'cc_cvv2'   => $this->request->post['cc_cvv2'],
+						'cc_issue'  => $this->request->post['cc_issue']
 					];
 
 					$md = $this->encryption->encrypt(json_encode($enc_data));
@@ -283,7 +283,7 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 				}
 
 				// Invalid response from ACS.  No shift in liability. ECI = 7
-				if (isset($signature_result->result)  && $signature_result->result >= 500 && $signature_result->result < 600) {
+				if (isset($signature_result->result) && $signature_result->result >= 500 && $signature_result->result < 600) {
 					$eci_ref = 9;
 					$xid = '';
 					$cavv = '';

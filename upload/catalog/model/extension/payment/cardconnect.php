@@ -19,10 +19,10 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		if ($status) {
 			$method_data = [
-				'code'			=> 'cardconnect',
-				'title'			=> $this->language->get('text_title'),
-				'terms'			=> '',
-				'sort_order'	=> $this->config->get('cardconnect_sort_order')
+				'code'       => 'cardconnect',
+				'title'      => $this->language->get('text_title'),
+				'terms'      => '',
+				'sort_order' => $this->config->get('cardconnect_sort_order')
 			];
 		}
 

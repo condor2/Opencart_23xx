@@ -126,9 +126,9 @@ class ControllerCheckoutShippingMethod extends Controller {
 
 			$this->session->data['comment'] = '';
 
-        	if (!empty($this->request->post['comment'])) {
-               $this->session->data['comment'] = strip_tags($this->request->post['comment']);
-        	}
+			if (!empty($this->request->post['comment'])) {
+				$this->session->data['comment'] = strip_tags($this->request->post['comment']);
+			}
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

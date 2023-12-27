@@ -629,7 +629,7 @@ class ControllerApiOrder extends Controller {
 						'taxes'  => &$taxes,
 						'total'  => &$total
 					];
-			
+
 					$sort_order = [];
 
 					$results = $this->model_extension_extension->getExtensions('total');

@@ -53,8 +53,8 @@ class ControllerAccountEdit extends Controller {
 		];
 
 		$data['breadcrumbs'][] = [
-			'text'      => $this->language->get('text_edit'),
-			'href'      => $this->url->link('account/edit', '', true)
+			'text' => $this->language->get('text_edit'),
+			'href' => $this->url->link('account/edit', '', true)
 		];
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -211,8 +211,8 @@ class ControllerAccountEdit extends Controller {
 			if (($custom_field['location'] == 'account') && $custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['custom_field_id']])) {
 				$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 			} elseif (($custom_field['location'] == 'account') && ($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !preg_match(html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8'), $this->request->post['custom_field'][$custom_field['custom_field_id']])) {
-                $this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
-            }
+				$this->error['custom_field'][$custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
+			}
 		}
 
 		return !$this->error;

@@ -471,7 +471,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 				}
 
 				$option_data[] = [
-					'name' => $option['name'],
+					'name'  => $option['name'],
 					'value' => ((utf8_strlen($value) > 20) ? utf8_substr($value, 0, 20) . '..' : $value)
 				];
 			}

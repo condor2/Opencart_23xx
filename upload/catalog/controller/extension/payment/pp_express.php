@@ -1144,18 +1144,18 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 				//add transaction to paypal transaction table
 				$paypal_transaction_data = [
-					'paypal_order_id'       => $paypal_order_id,
-					'transaction_id'        => $result['PAYMENTINFO_0_TRANSACTIONID'],
-					'parent_id'             => '',
-					'note'                  => '',
-					'msgsubid'              => '',
-					'receipt_id'            => (isset($result['PAYMENTINFO_0_RECEIPTID']) ? $result['PAYMENTINFO_0_RECEIPTID'] : ''),
-					'payment_type'          => $result['PAYMENTINFO_0_PAYMENTTYPE'],
-					'payment_status'        => $result['PAYMENTINFO_0_PAYMENTSTATUS'],
-					'pending_reason'        => $result['PAYMENTINFO_0_PENDINGREASON'],
-					'transaction_entity'    => ($this->config->get('pp_express_transaction') == 'Sale' ? 'payment' : 'auth'),
-					'amount'                => $result['PAYMENTINFO_0_AMT'],
-					'debug_data'            => json_encode($result)
+					'paypal_order_id'    => $paypal_order_id,
+					'transaction_id'     => $result['PAYMENTINFO_0_TRANSACTIONID'],
+					'parent_id'          => '',
+					'note'               => '',
+					'msgsubid'           => '',
+					'receipt_id'         => (isset($result['PAYMENTINFO_0_RECEIPTID']) ? $result['PAYMENTINFO_0_RECEIPTID'] : ''),
+					'payment_type'       => $result['PAYMENTINFO_0_PAYMENTTYPE'],
+					'payment_status'     => $result['PAYMENTINFO_0_PAYMENTSTATUS'],
+					'pending_reason'     => $result['PAYMENTINFO_0_PENDINGREASON'],
+					'transaction_entity' => ($this->config->get('pp_express_transaction') == 'Sale' ? 'payment' : 'auth'),
+					'amount'             => $result['PAYMENTINFO_0_AMT'],
+					'debug_data'         => json_encode($result)
 				];
 
 				$this->model_extension_payment_pp_express->addTransaction($paypal_transaction_data);
@@ -1440,18 +1440,18 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			//add transaction to paypal transaction table
 			$paypal_transaction_data = [
-				'paypal_order_id'       => $paypal_order_id,
-				'transaction_id'        => $result['PAYMENTINFO_0_TRANSACTIONID'],
-				'parent_id'             => '',
-				'note'                  => '',
-				'msgsubid'              => '',
-				'receipt_id'            => (isset($result['PAYMENTINFO_0_RECEIPTID']) ? $result['PAYMENTINFO_0_RECEIPTID'] : ''),
-				'payment_type'          => $result['PAYMENTINFO_0_PAYMENTTYPE'],
-				'payment_status'        => $result['PAYMENTINFO_0_PAYMENTSTATUS'],
-				'pending_reason'        => $result['PAYMENTINFO_0_PENDINGREASON'],
-				'transaction_entity'    => ($this->config->get('pp_express_transaction') == 'Sale' ? 'payment' : 'auth'),
-				'amount'                => $result['PAYMENTINFO_0_AMT'],
-				'debug_data'            => json_encode($result)
+				'paypal_order_id'    => $paypal_order_id,
+				'transaction_id'     => $result['PAYMENTINFO_0_TRANSACTIONID'],
+				'parent_id'          => '',
+				'note'               => '',
+				'msgsubid'           => '',
+				'receipt_id'         => (isset($result['PAYMENTINFO_0_RECEIPTID']) ? $result['PAYMENTINFO_0_RECEIPTID'] : ''),
+				'payment_type'       => $result['PAYMENTINFO_0_PAYMENTTYPE'],
+				'payment_status'     => $result['PAYMENTINFO_0_PAYMENTSTATUS'],
+				'pending_reason'     => $result['PAYMENTINFO_0_PENDINGREASON'],
+				'transaction_entity' => ($this->config->get('pp_express_transaction') == 'Sale' ? 'payment' : 'auth'),
+				'amount'             => $result['PAYMENTINFO_0_AMT'],
+				'debug_data'         => json_encode($result)
 			];
 			$this->model_extension_payment_pp_express->addTransaction($paypal_transaction_data);
 
@@ -1656,18 +1656,18 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 					//add new related transaction
 					$transaction = [
-						'paypal_order_id'       => $parent_transaction['paypal_order_id'],
-						'transaction_id'        => $this->request->post['txn_id'],
-						'parent_id'             => $this->request->post['parent_txn_id'],
-						'note'                  => '',
-						'msgsubid'              => '',
-						'receipt_id'            => (isset($this->request->post['receipt_id']) ? $this->request->post['receipt_id'] : ''),
-						'payment_type'          => (isset($this->request->post['payment_type']) ? $this->request->post['payment_type'] : ''),
-						'payment_status'        => (isset($this->request->post['payment_status']) ? $this->request->post['payment_status'] : ''),
-						'pending_reason'        => (isset($this->request->post['pending_reason']) ? $this->request->post['pending_reason'] : ''),
-						'amount'                => $this->request->post['mc_gross'],
-						'debug_data'            => json_encode($this->request->post),
-						'transaction_entity'    => (isset($this->request->post['transaction_entity']) ? $this->request->post['transaction_entity'] : '')
+						'paypal_order_id'    => $parent_transaction['paypal_order_id'],
+						'transaction_id'     => $this->request->post['txn_id'],
+						'parent_id'          => $this->request->post['parent_txn_id'],
+						'note'               => '',
+						'msgsubid'           => '',
+						'receipt_id'         => (isset($this->request->post['receipt_id']) ? $this->request->post['receipt_id'] : ''),
+						'payment_type'       => (isset($this->request->post['payment_type']) ? $this->request->post['payment_type'] : ''),
+						'payment_status'     => (isset($this->request->post['payment_status']) ? $this->request->post['payment_status'] : ''),
+						'pending_reason'     => (isset($this->request->post['pending_reason']) ? $this->request->post['pending_reason'] : ''),
+						'amount'             => $this->request->post['mc_gross'],
+						'debug_data'         => json_encode($this->request->post),
+						'transaction_entity' => (isset($this->request->post['transaction_entity']) ? $this->request->post['transaction_entity'] : '')
 					];
 
 					$this->model_extension_payment_pp_express->addTransaction($transaction);
@@ -1697,18 +1697,18 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 						if ($remaining > 0.00) {
 							$transaction = [
-								'paypal_order_id'       => $parent_transaction['paypal_order_id'],
-								'transaction_id'        => '',
-								'parent_id'             => $this->request->post['parent_txn_id'],
-								'note'                  => '',
-								'msgsubid'              => '',
-								'receipt_id'            => '',
-								'payment_type'          => '',
-								'payment_status'        => 'Void',
-								'pending_reason'        => '',
-								'amount'                => '',
-								'debug_data'            => 'Voided after capture',
-								'transaction_entity'    => 'auth'
+								'paypal_order_id'    => $parent_transaction['paypal_order_id'],
+								'transaction_id'     => '',
+								'parent_id'          => $this->request->post['parent_txn_id'],
+								'note'               => '',
+								'msgsubid'           => '',
+								'receipt_id'         => '',
+								'payment_type'       => '',
+								'payment_status'     => 'Void',
+								'pending_reason'     => '',
+								'amount'             => '',
+								'debug_data'         => 'Voided after capture',
+								'transaction_entity' => 'auth'
 							];
 
 							$this->model_extension_payment_pp_express->addTransaction($transaction);

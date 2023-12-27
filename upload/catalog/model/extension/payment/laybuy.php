@@ -101,10 +101,10 @@ class ModelExtensionPaymentLaybuy extends Model {
 
 		if ($status) {
 			$method_data = [
-				'code'			=> 'laybuy',
-				'title'			=> $this->language->get('text_title'),
-				'terms'			=> '',
-				'sort_order'	=> $this->config->get('laybuy_sort_order')
+				'code'       => 'laybuy',
+				'title'      => $this->language->get('text_title'),
+				'terms'	     => '',
+				'sort_order' => $this->config->get('laybuy_sort_order')
 			];
 		}
 
@@ -196,23 +196,23 @@ class ModelExtensionPaymentLaybuy extends Model {
 		$report_content = [];
 
 		$report_content[] = [
-			'instalment'	=> 0,
-			'amount'		=> $this->currency->format($data['downpayment_amount'], $data['currency']),
-			'date'			=> $date_added,
-			'pp_trans_id'	=> $data['dp_paypal_txn_id'],
-			'status'		=> 'Completed'
+			'instalment'  => 0,
+			'amount'      => $this->currency->format($data['downpayment_amount'], $data['currency']),
+			'date'        => $date_added,
+			'pp_trans_id' => $data['dp_paypal_txn_id'],
+			'status'      => 'Completed'
 		];
 
 		for ($month = 1; $month <= $months; $month++) {
-			$date = date("Y-m-d h:i:s", strtotime($data['first_payment_due'] . " +" . ($month -1) . " month"));
+			$date = date("Y-m-d h:i:s", strtotime($data['first_payment_due'] . " + " . ($month - 1) . " month"));
 			$date = date($this->language->get('date_format_short'), strtotime($date));
 
 			$report_content[] = [
-			'instalment'	=> $month,
-			'amount'		=> $this->currency->format($data['payment_amounts'], $data['currency']),
-			'date'			=> $date,
-			'pp_trans_id'	=> '',
-			'status'		=> 'Pending'
+			'instalment'  => $month,
+			'amount'      => $this->currency->format($data['payment_amounts'], $data['currency']),
+			'date'        => $date,
+			'pp_trans_id' => '',
+			'status'      => 'Pending'
 			];
 		}
 
