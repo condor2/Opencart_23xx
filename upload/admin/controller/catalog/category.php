@@ -301,11 +301,11 @@ class ControllerCatalogCategory extends Controller {
 		$this->document->addScript('view/javascript/summernote/summernote-image-attributes.js');
 
 		if (file_exists('view/javascript/summernote/lang/'. $this->language->get('summernote') . '.min.js')) {
-		$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
+			$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
 		}
 
 		if (file_exists('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js')) {
-		$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
+			$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
 		}
 
 		$this->document->addScript('view/javascript/summernote/opencart.js');
@@ -375,7 +375,7 @@ class ControllerCatalogCategory extends Controller {
 		} else {
 			$data['error_parent'] = '';
 		}
-		
+
 		$url = '';
 
 		if (isset($this->request->get['sort'])) {
@@ -575,11 +575,11 @@ class ControllerCatalogCategory extends Controller {
 
 		if (isset($this->request->get['category_id']) && $this->request->post['parent_id']) {
 			$results = $this->model_catalog_category->getCategoryPath($this->request->post['parent_id']);
-			
+
 			foreach ($results as $result) {
 				if ($result['path_id'] == $this->request->get['category_id']) {
 					$this->error['parent'] = $this->language->get('error_parent');
-					
+
 					break;
 				}
 			}

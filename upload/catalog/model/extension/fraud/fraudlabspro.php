@@ -124,7 +124,7 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 				fraudlabspro_message = '" . $this->db->escape($json->fraudlabspro_message) . "',
 				fraudlabspro_credits = '" . $this->db->escape($json->fraudlabspro_credits) . "',
 				api_key = '" . $this->config->get('fraudlabspro_key') . "',
-				ip_address = '" .  $ip . "'"
+				ip_address = '" . $ip . "'"
 			);
 
 			$risk_score = (int)$json->fraudlabspro_score;

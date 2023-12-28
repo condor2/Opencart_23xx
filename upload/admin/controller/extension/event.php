@@ -1,7 +1,7 @@
 <?php
 class ControllerExtensionEvent extends Controller {
 	private $error = [];
-	
+
 	public function index(): void {
 		$this->load->language('extension/event');
 
@@ -75,7 +75,7 @@ class ControllerExtensionEvent extends Controller {
 
 		$this->getList();
 	}
-	
+
 	public function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];

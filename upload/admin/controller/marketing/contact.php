@@ -8,12 +8,12 @@ class ControllerMarketingContact extends Controller {
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
 		$this->document->addScript('view/javascript/summernote/summernote-image-attributes.js');
 
-		if (file_exists('view/javascript/summernote/lang/'. $this->language->get('summernote') . '.min.js')) {
-		$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
+		if (file_exists('view/javascript/summernote/lang/' . $this->language->get('summernote') . '.min.js')) {
+			$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
 		}
 
 		if (file_exists('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js')) {
-		$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
+			$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
 		}
 
 		$this->document->addScript('view/javascript/summernote/opencart.js');
@@ -111,7 +111,7 @@ class ControllerMarketingContact extends Controller {
 				} else {
 					$store_name = $this->config->get('config_name');
 				}
-				
+
 				$this->load->model('setting/setting');
 				$setting = $this->model_setting_setting->getSetting('config', $this->request->post['store_id']);
 				$store_email = isset($setting['config_email']) ? $setting['config_email'] : $this->config->get('config_email');

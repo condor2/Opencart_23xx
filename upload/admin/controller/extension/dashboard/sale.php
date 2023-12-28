@@ -18,7 +18,7 @@ class ControllerExtensionDashboardSale extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
@@ -62,13 +62,13 @@ class ControllerExtensionDashboardSale extends Controller {
 		} else {
 			$data['dashboard_sale_width'] = $this->config->get('dashboard_sale_width');
 		}
-	
+
 		$data['columns'] = [];
-		
+
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
 		}
-				
+
 		if (isset($this->request->post['dashboard_sale_status'])) {
 			$data['dashboard_sale_status'] = $this->request->post['dashboard_sale_status'];
 		} else {
@@ -94,8 +94,8 @@ class ControllerExtensionDashboardSale extends Controller {
 		}
 
 		return !$this->error;
-	}	
-	
+	}
+
 	public function dashboard(): string {
 		$this->load->language('extension/dashboard/sale');
 

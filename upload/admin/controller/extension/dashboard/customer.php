@@ -18,7 +18,7 @@ class ControllerExtensionDashboardCustomer extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
@@ -64,11 +64,11 @@ class ControllerExtensionDashboardCustomer extends Controller {
 		}
 
 		$data['columns'] = [];
-		
+
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
 		}
-				
+
 		if (isset($this->request->post['dashboard_customer_status'])) {
 			$data['dashboard_customer_status'] = $this->request->post['dashboard_customer_status'];
 		} else {
@@ -95,7 +95,7 @@ class ControllerExtensionDashboardCustomer extends Controller {
 
 		return !$this->error;
 	}
-		
+
 	public function dashboard(): string {
 		$this->load->language('extension/dashboard/customer');
 

@@ -1,6 +1,5 @@
 <?php
 class ControllerExtensionPaymentAmazonLoginPay extends Controller {
-
 	private $error = [];
 
 	public function index(): void {
@@ -497,7 +496,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 
 				$total_captured = $this->model_extension_payment_amazon_login_pay->getTotalCaptured($amazon_login_pay_order['amazon_login_pay_order_id']);
 
-				if ($total_captured >= (double)$amazon_login_pay_order['total']) {
+				if ($total_captured >= (float)$amazon_login_pay_order['total']) {
 					$this->model_extension_payment_amazon_login_pay->closeOrderRef($amazon_login_pay_order['amazon_order_reference_id']);
 					$this->model_extension_payment_amazon_login_pay->updateCaptureStatus($amazon_login_pay_order['amazon_login_pay_order_id'], 1);
 					$capture_status = 1;

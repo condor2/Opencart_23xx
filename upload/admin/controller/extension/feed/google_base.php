@@ -170,8 +170,8 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 		$limit = 10;
 
 		$filter_data = [
-			'start'       => ($page - 1) * $limit,
-			'limit'       => $limit
+			'start' => ($page - 1) * $limit,
+			'limit' => $limit
 		];
 
 		$data['google_base_categories'] = [];

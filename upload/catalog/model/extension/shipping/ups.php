@@ -233,11 +233,11 @@ class ModelExtensionShippingUps extends Model {
 				$dom->loadXml($result);
 
 				libxml_use_internal_errors($previous_value);
-				
+
 				if (libxml_get_errors()) {
 					return false;
 				}
-				
+
 				$rating_service_selection_response = $dom->getElementsByTagName('RatingServiceSelectionResponse')->item(0);
 
 				$response = $rating_service_selection_response->getElementsByTagName('Response')->item(0);

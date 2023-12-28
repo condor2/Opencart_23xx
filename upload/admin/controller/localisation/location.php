@@ -146,13 +146,13 @@ class ControllerLocalisationLocation extends Controller {
 		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = [
-			'text' =>  $this->language->get('text_home'),
+			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
 		];
 
 		$data['breadcrumbs'][] = [
-			'text' =>  $this->language->get('heading_title'),
-			'href' =>  $this->url->link('localisation/location', 'token=' . $this->session->data['token'] . $url, true)
+			'text' => $this->language->get('heading_title'),
+			'href' => $this->url->link('localisation/location', 'token=' . $this->session->data['token'] . $url, true)
 		];
 
 		$data['add'] = $this->url->link('localisation/location/add', 'token=' . $this->session->data['token'] . $url, true);
@@ -337,7 +337,7 @@ class ControllerLocalisationLocation extends Controller {
 		if (!isset($this->request->get['location_id'])) {
 			$data['action'] = $this->url->link('localisation/location/add', 'token=' . $this->session->data['token'] . $url, true);
 		} else {
-			$data['action'] = $this->url->link('localisation/location/edit', 'token=' . $this->session->data['token'] .  '&location_id=' . $this->request->get['location_id'] . $url, true);
+			$data['action'] = $this->url->link('localisation/location/edit', 'token=' . $this->session->data['token'] . '&location_id=' . $this->request->get['location_id'] . $url, true);
 		}
 
 		$data['cancel'] = $this->url->link('localisation/location', 'token=' . $this->session->data['token'] . $url, true);
@@ -404,7 +404,7 @@ class ControllerLocalisationLocation extends Controller {
 
 		if (is_file(DIR_IMAGE . html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'))) {
 			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['image'], ENT_QUOTES, 'UTF-8'), 100, 100);
-		} else {			
+		} else {
 			$data['thumb'] = $data['placeholder'];
 		}
 

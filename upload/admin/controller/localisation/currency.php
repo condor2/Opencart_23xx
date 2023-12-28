@@ -119,7 +119,7 @@ class ControllerLocalisationCurrency extends Controller {
 
 		if ($this->validateRefresh()) {
 			$config_currency_engine = $this->config->get('config_currency_engine');
-			$this->load->controller('extension/currency/'.$config_currency_engine.'/currency');
+			$this->load->controller('extension/currency/' . $config_currency_engine.'/currency');
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -309,7 +309,7 @@ class ControllerLocalisationCurrency extends Controller {
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
 		$data['text_iso'] = $this->language->get('text_iso');
-		
+
 		$data['entry_title'] = $this->language->get('entry_title');
 		$data['entry_code'] = $this->language->get('entry_code');
 		$data['entry_value'] = $this->language->get('entry_value');
@@ -317,7 +317,7 @@ class ControllerLocalisationCurrency extends Controller {
 		$data['entry_symbol_right'] = $this->language->get('entry_symbol_right');
 		$data['entry_decimal_place'] = $this->language->get('entry_decimal_place');
 		$data['entry_status'] = $this->language->get('entry_status');
-		
+
 		$data['help_code'] = $this->language->get('help_code');
 		$data['help_value'] = $this->language->get('help_value');
 
@@ -503,7 +503,7 @@ class ControllerLocalisationCurrency extends Controller {
 
 		if (!$config_currency_engine) {
 			$this->error['currency_engine'] = $this->language->get('error_currency_engine');
-		} elseif (!$this->config->get($config_currency_engine.'_status')) {
+		} elseif (!$this->config->get($config_currency_engine . '_status')) {
 			$this->error['currency_engine'] = $this->language->get('error_currency_engine');
 		}
 

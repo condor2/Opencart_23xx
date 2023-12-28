@@ -57,11 +57,9 @@ $_['text_capture_success']		= 'Capture succeeded!';
 $_['text_refund_failed']		= 'Refund failed: ';
 $_['text_capture_failed']		= 'Capture failed: ';
 $_['text_unknown_failure']		= 'Invalid order or amount';
-
 $_['text_confirm_capture']		= 'Are you sure you want to capture the payment?';
 $_['text_confirm_release']		= 'Are you sure you want to release the payment?';
 $_['text_confirm_refund']		= 'Are you sure you want to refund the payment?';
-
 $_['text_empty_refund']			= 'Please enter an amount to refund';
 $_['text_empty_capture']		= 'Please enter an amount to capture';
 

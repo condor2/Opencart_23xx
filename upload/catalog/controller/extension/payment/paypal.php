@@ -486,7 +486,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			];
 
 			$paypal->setAccessToken($token_info);
-		
+
 			$data['client_token'] = $paypal->getClientToken();
 
 			if ($paypal->hasErrors()) {
@@ -598,7 +598,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						unset($this->session->data['shipping_methods']);
 						unset($this->session->data['payment_method']);
 						unset($this->session->data['payment_methods']);
-					}		
+					}
 				}
 			}
 
@@ -620,7 +620,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 					if ($order_info['shipping_country_id']) {
 						$this->load->model('localisation/country');
-				
+
 						$country_info = $this->model_localisation_country->getCountry($order_info['shipping_country_id']);
 
 						if ($country_info) {
@@ -671,7 +671,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$currency_code = $setting['general']['card_currency_code'];
 					$currency_value = $setting['general']['card_currency_value'];
 				}
-				
+
 				$decimal_place = $setting['currency'][$currency_code]['decimal_place'];
 
 				require_once DIR_SYSTEM . 'library/paypal/paypal.php';
@@ -745,7 +745,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					} elseif ($rebate < 0) {
 						$handling_total = -$rebate;
 					}
-				} 
+				}
 
 				$amount_info = [];
 
@@ -1007,7 +1007,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 						if (isset($paypal_order_info['payer']['address']['country_code'])) {
 							$country_info = $this->model_extension_payment_paypal->getCountryByCode($paypal_order_info['payer']['address']['country_code']);
-			
+
 							if ($country_info) {
 								$this->session->data['payment_address']['country'] = $country_info['name'];
 								$this->session->data['payment_address']['country_id'] = $country_info['country_id'];
@@ -1042,12 +1042,12 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 							if (isset($paypal_order_info['purchase_units'][0]['shipping']['address']['country_code'])) {
 								$country_info = $this->model_extension_payment_paypal->getCountryByCode($paypal_order_info['purchase_units'][0]['shipping']['address']['country_code']);
-			
+
 								if ($country_info) {
 									$this->session->data['shipping_address']['country_id'] = $country_info['country_id'];
 									$this->session->data['shipping_address']['country'] = $country_info['name'];
 									$this->session->data['shipping_address']['address_format'] = $country_info['address_format'];
-													
+
 									if (isset($paypal_order_info['purchase_units'][0]['shipping']['address']['admin_area_1'])) {
 										$zone_info = $this->model_extension_payment_paypal->getZoneByCode($country_info['country_id'], $paypal_order_info['purchase_units'][0]['shipping']['address']['admin_area_1']);
 			
@@ -1073,7 +1073,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 					if (isset($payload['orderId'])) {
 						$paypal_order_id = $payload['orderId'];
-						
+
 						if ($setting['card']['secure_status']) {
 							$paypal_order_info = $paypal->getOrder($paypal_order_id);
 
@@ -1208,7 +1208,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 								if ($authorization_status == 'DENIED') {
 									$order_status_id = $setting['order_status']['denied']['id'];
-							
+
 									$this->error['warning'] = $this->language->get('error_authorization_denied');
 								}
 
@@ -1234,7 +1234,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							}
 						} else {
 							$this->model_extension_payment_paypal->log($result, 'Capture Order');
-					
+
 							if (isset($result['purchase_units'][0]['payments']['captures'][0]['status']) && isset($result['purchase_units'][0]['payments']['captures'][0]['seller_protection']['status'])) {
 								$capture_status = $result['purchase_units'][0]['payments']['captures'][0]['status'];
 								$seller_protection_status = $result['purchase_units'][0]['payments']['captures'][0]['seller_protection']['status'];
@@ -1250,7 +1250,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 								if ($capture_status == 'DECLINED') {
 									$order_status_id = $setting['order_status']['denied']['id'];
-							
+
 									$this->error['warning'] = $this->language->get('error_capture_declined');
 								}
 
@@ -1283,7 +1283,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['error'] = $this->error;
 
 		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($data));		
+		$this->response->setOutput(json_encode($data));
 	}
 
 	public function confirmOrder() {
@@ -1561,7 +1561,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					} else {
 						unset($this->session->data['shipping_methods']);
 						unset($this->session->data['shipping_method']);
-						
+
 						$data['error_no_shipping'] = $this->language->get('error_no_shipping');
 					}
 				} else {
@@ -2065,7 +2065,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			}
 
 			$decimal_place = $setting['currency'][$currency_code]['decimal_place'];
-			
+
 			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
@@ -2083,7 +2083,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			];
 
 			$paypal->setAccessToken($token_info);
-			
+
 			$paypal_order_id = $this->session->data['paypal_order_id'];
 
 			$paypal_order_info = [];
@@ -2115,7 +2115,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$this->load->model('localisation/country');
 
 					$country_info = $this->model_localisation_country->getCountry($this->session->data['shipping_address']['country_id']);
-			
+
 					if ($country_info) {
 						$shipping_info['address']['country_code'] = $country_info['iso_code_2'];
 					}
@@ -2177,7 +2177,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$amount_info['currency_code'] = $currency_code;
 			$amount_info['value'] = $order_total;
-								
+
 			$amount_info['breakdown']['item_total'] = [
 				'currency_code' => $currency_code,
 				'value'         => $item_total
@@ -2297,7 +2297,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 							if ($authorization_status == 'DENIED') {
 								$order_status_id = $setting['order_status']['denied']['id'];
-							
+
 								$this->error['warning'] = $this->language->get('error_authorization_denied');
 							}
 
@@ -2321,7 +2321,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						}
 					} else {
 						$this->model_extension_payment_paypal->log($result, 'Capture Order');
-					
+
 						if (isset($result['purchase_units'][0]['payments']['captures'][0]['status']) && isset($result['purchase_units'][0]['payments']['captures'][0]['seller_protection']['status'])) {
 							$capture_status = $result['purchase_units'][0]['payments']['captures'][0]['status'];
 							$seller_protection_status = $result['purchase_units'][0]['payments']['captures'][0]['seller_protection']['status'];
@@ -2337,7 +2337,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 							if ($capture_status == 'DECLINED') {
 								$order_status_id = $setting['order_status']['denied']['id'];
-							
+
 								$this->error['warning'] = $this->language->get('error_capture_declined');
 							}
 
@@ -2365,12 +2365,12 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			unset($this->session->data['paypal_order_id']);
 
-			if ($this->error) {		
+			if ($this->error) {
 				$this->session->data['error'] = $this->error['warning'];
-				
+
 				$this->response->redirect($this->url->link('checkout/checkout', '', true));
 			}
-		}	
+		}
 
 		$this->response->redirect($this->url->link('checkout/cart', '', true));
 	}
@@ -2838,7 +2838,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 				if ($setting['applepay_button']['status'] && $this->isApple()) {
 					$this->config->set('paypal_applepay_status', 1);
-					
+
 					$output[] = [
 						'extension_id' => 0,
 						'type'         => 'payment',
@@ -2991,7 +2991,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$custom_fields = $this->model_account_custom_field->getCustomFields($customer_group_id);
 
 		foreach ($custom_fields as $custom_field) {
-			if ($custom_field['location'] == 'address') { 
+			if ($custom_field['location'] == 'address') {
 				if ($custom_field['required'] && empty($this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']])) {
 					$this->error['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 				} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !preg_match(html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8'), $this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']])) {
@@ -3012,7 +3012,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			return true;
 		} else {
 			$this->session->data['error_warning'] = $this->language->get('error_coupon');
-			
+
 			return false;
 		}
 	}
@@ -3060,7 +3060,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			return true;
 		} else {
 			$this->session->data['error_warning'] = $error;
-			
+
 			return false;
 		}
 	}
@@ -3071,12 +3071,12 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$apple_agents = ['ipod', 'iphone', 'ipad'];
 
-            foreach ($apple_agents as $apple_agent){
-                if (stripos($user_agent, $apple_agent)) {
-                    return true;
-                }
+			foreach ($apple_agents as $apple_agent){
+				if (stripos($user_agent, $apple_agent)) {
+					return true;
+				}
 			}
-        }
+		}
 
 		return false;
 	}

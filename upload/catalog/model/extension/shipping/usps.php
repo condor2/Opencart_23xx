@@ -47,7 +47,7 @@ class ModelExtensionShippingUsps extends Model {
 					$this->config->set('usps_container', 'VARIABLE');
 				}
 
-				$xml .=	'		<Container>' . $this->config->get('usps_container') . '</Container>';
+				$xml .= '		<Container>' . $this->config->get('usps_container') . '</Container>';
 				$xml .= '		<Size>' . $this->config->get('usps_size') . '</Size>';
 				$xml .= '		<Width>' . $this->config->get('usps_width') . '</Width>';
 				$xml .= '		<Length>' . $this->config->get('usps_length') . '</Length>';
@@ -55,7 +55,7 @@ class ModelExtensionShippingUsps extends Model {
 
 				// Calculate girth based on usps calculation
 				$xml .= '		<Girth>' . (round(((float)$this->config->get('usps_length') + (float)$this->config->get('usps_width') * 2 + (float)$this->config->get('usps_height') * 2), 1)) . '</Girth>';
-				$xml .=	'		<Machinable>' . ($this->config->get('usps_machinable') ? 'true' : 'false') . '</Machinable>';
+				$xml .= '		<Machinable>' . ($this->config->get('usps_machinable') ? 'true' : 'false') . '</Machinable>';
 				$xml .= '	</Package>';
 				$xml .= '</RateV4Request>';
 
@@ -302,8 +302,8 @@ class ModelExtensionShippingUsps extends Model {
 						$this->config->set('usps_container', 'NONRECTANGULAR');
 					}
 
-					$xml .=	'		<Container>' . $this->config->get('usps_container') . '</Container>';
-					$xml .=	'		<Size>' . $this->config->get('usps_size') . '</Size>';
+					$xml .= '		<Container>' . $this->config->get('usps_container') . '</Container>';
+					$xml .= '		<Size>' . $this->config->get('usps_size') . '</Size>';
 					$xml .= '		<Width>' . $this->config->get('usps_width') . '</Width>';
 					$xml .= '		<Length>' . $this->config->get('usps_length') . '</Length>';
 					$xml .= '		<Height>' . $this->config->get('usps_height') . '</Height>';

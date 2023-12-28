@@ -145,47 +145,47 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['locales'][] = [
 			'value' => 'en-gb',
-			'text' => 'English (Great Britain)'
+			'text'  => 'English (Great Britain)'
 		];
 
 		$data['locales'][] = [
 			'value' => 'zh-cn',
-			'text' => 'Chinese (People\'s Republic of China)'
+			'text'  => 'Chinese (People\'s Republic of China)'
 		];
 
 		$data['locales'][] = [
 			'value' => 'zh-hk',
-			'text' => 'Chinese (Hong Kong)',
+			'text'  => 'Chinese (Hong Kong)',
 		];
 
 		$data['locales'][] = [
 			'value' => 'zh-tw',
-			'text' => 'Chinese (Taiwan)'
+			'text'  => 'Chinese (Taiwan)'
 		];
 
 		$data['locales'][] = [
 			'value' => 'zh-xc',
-			'text' => 'Chinese (US)'
+			'text'  => 'Chinese (US)'
 		];
 
 		$data['locales'][] = [
 			'value' => 'da-dk',
-			'text' => 'Danish'
+			'text'  => 'Danish'
 		];
 
 		$data['locales'][] = [
 			'value' => 'nl-nl',
-			'text' => 'Dutch'
+			'text'  => 'Dutch'
 		];
 
 		$data['locales'][] = [
 			'value' => 'en-au',
-			'text' => 'English (Australia)'
+			'text'  => 'English (Australia)'
 		];
 
 		$data['locales'][] = [
 			'value' => 'en-us',
-			'text' => 'English (US)',
+			'text'  => 'English (US)',
 		];
 
 		$data['locales'][] = [
@@ -195,12 +195,12 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['locales'][] = [
 			'value' => 'fr-ca',
-			'text' => 'French (Canada)'
+			'text'  => 'French (Canada)'
 		];
 
 		$data['locales'][] = [
 			'value' => 'fr-xc',
-			'text' => 'French (international)'
+			'text'  => 'French (international)'
 		];
 
 		$data['locales'][] = [
@@ -210,37 +210,37 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['locales'][] = [
 			'value' => 'he-il',
-			'text' => 'Hebrew (Israel)'
+			'text'  => 'Hebrew (Israel)'
 		];
 
 		$data['locales'][] = [
 			'value' => 'id-id',
-			'text' => 'Indonesian'
+			'text'  => 'Indonesian'
 		];
 
 		$data['locales'][] = [
 			'value' => 'it-il',
-			'text' => 'Italian'
+			'text'  => 'Italian'
 		];
 
 		$data['locales'][] = [
 			'value' => 'ja-jp' ,
-			'text' => 'Japanese'
+			'text'  => 'Japanese'
 		];
 
 		$data['locales'][] = [
 			'value' => 'no-no',
-			'text' => 'Norwegian'
+			'text'  => 'Norwegian'
 		];
 
 		$data['locales'][] = [
 			'value' => 'pl-pl',
-			'text' => 'Polish'
+			'text'  => 'Polish'
 		];
 
 		$data['locales'][] = [
 			'value' => 'pt-pt',
-			'text' => 'Portuguese'
+			'text'  => 'Portuguese'
 		];
 
 		$data['locales'][] = [
@@ -250,7 +250,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['locales'][] = [
 			'value' => 'ru-ru',
-			'text' => 'Russian'
+			'text'  => 'Russian'
 		];
 
 		$data['locales'][] = [

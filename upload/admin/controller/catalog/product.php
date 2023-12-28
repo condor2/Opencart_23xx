@@ -336,9 +336,9 @@ class ControllerCatalogProduct extends Controller {
 		$data['products'] = [];
 
 		$filter_data = [
-			'filter_name'	  => $filter_name,
-			'filter_model'	  => $filter_model,
-			'filter_price'	  => $filter_price,
+			'filter_name'     => $filter_name,
+			'filter_model'    => $filter_model,
+			'filter_price'    => $filter_price,
 			'filter_quantity' => $filter_quantity,
 			'filter_status'   => $filter_status,
 			'filter_image'    => $filter_image,
@@ -548,11 +548,11 @@ class ControllerCatalogProduct extends Controller {
 		$this->document->addScript('view/javascript/summernote/summernote-image-attributes.js');
 
 		if (file_exists('view/javascript/summernote/lang/'. $this->language->get('summernote') . '.min.js')) {
-		$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
+			$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
 		}
 
 		if (file_exists('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js')) {
-		$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
+			$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
 		}
 
 		$this->document->addScript('view/javascript/summernote/opencart.js');
@@ -1218,7 +1218,7 @@ class ControllerCatalogProduct extends Controller {
 				'date_end'          => ($product_special['date_end'] != '0000-00-00') ? $product_special['date_end'] :  ''
 			];
 		}
-		
+
 		// Image
 		if (isset($this->request->post['image'])) {
 			$data['image'] = html_entity_decode($this->request->post['image'], ENT_QUOTES, 'UTF-8');

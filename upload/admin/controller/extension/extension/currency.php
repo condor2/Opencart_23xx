@@ -49,7 +49,7 @@ class ControllerExtensionExtensionCurrency extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
-		
+
 		$this->getList();
 	}
 
@@ -91,7 +91,7 @@ class ControllerExtensionExtensionCurrency extends Controller {
 		}
 
 		$data['extensions'] = [];
-		
+
 		// Compatibility code for old extension folders
 		$files = glob(DIR_APPLICATION . 'controller/extension/currency/*.php');
 

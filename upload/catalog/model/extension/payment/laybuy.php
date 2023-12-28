@@ -103,7 +103,7 @@ class ModelExtensionPaymentLaybuy extends Model {
 			$method_data = [
 				'code'       => 'laybuy',
 				'title'      => $this->language->get('text_title'),
-				'terms'	     => '',
+				'terms'      => '',
 				'sort_order' => $this->config->get('laybuy_sort_order')
 			];
 		}

@@ -89,7 +89,7 @@ class ControllerStartupSeoUrl extends Controller {
 					if ($query->num_rows && $query->row['keyword']) {
 						$url .= '/' . $query->row['keyword'];
 
-					 	unset($data[$key]);
+						unset($data[$key]);
 					} elseif ($data['route'] == 'common/home') {
 						$url .= '/';
 					}

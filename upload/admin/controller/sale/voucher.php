@@ -172,12 +172,12 @@ class ControllerSaleVoucher extends Controller {
 		$results = $this->model_sale_voucher->getVouchers($filter_data);
 
 		foreach ($results as $result) {
-			if ($result['order_id']) {	
+			if ($result['order_id']) {
 				$order_href = $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $result['order_id'] . $url, true);
 			} else {
 				$order_href = '';
 			}
-			
+
 			$data['vouchers'][] = [
 				'voucher_id' => $result['voucher_id'],
 				'code'       => $result['code'],
@@ -496,7 +496,7 @@ class ControllerSaleVoucher extends Controller {
 		if ($voucher_info) {
 			if (!isset($this->request->get['voucher_id'])) {
 				$this->error['warning'] = $this->language->get('error_exists');
-			} elseif ($voucher_info['voucher_id'] != $this->request->get['voucher_id'])  {
+			} elseif ($voucher_info['voucher_id'] != $this->request->get['voucher_id']) {
 				$this->error['warning'] = $this->language->get('error_exists');
 			}
 		}

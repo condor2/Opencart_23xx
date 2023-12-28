@@ -45,7 +45,7 @@ class ControllerExtensionInstaller extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-		
+
 		$this->response->setOutput($this->load->view('extension/installer', $data));
 	}
 
@@ -229,7 +229,7 @@ class ControllerExtensionInstaller extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		}
 
-		$directory = DIR_UPLOAD  . str_replace(['../', '..\\', '..'], '', $this->request->post['path']) . '/upload/';
+		$directory = DIR_UPLOAD . str_replace(['../', '..\\', '..'], '', $this->request->post['path']) . '/upload/';
 
 		if (!is_dir($directory)) {
 			$json['error'] = $this->language->get('error_directory');
@@ -253,7 +253,7 @@ class ControllerExtensionInstaller extends Controller {
 				}
 			}
 
-			$root = dirname(DIR_APPLICATION).'/';
+			$root = dirname(DIR_APPLICATION) . '/';
 
 			foreach ($files as $file) {
 				// Upload everything in the upload directory
@@ -291,7 +291,7 @@ class ControllerExtensionInstaller extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
- 
+
 	public function unzip() {
 		$this->load->language('extension/installer');
 
@@ -505,7 +505,7 @@ class ControllerExtensionInstaller extends Controller {
 		}
 
 		$directory = DIR_UPLOAD . $this->request->post['path'];
-		
+
 		if (!is_dir($directory) || substr(str_replace('\\', '/', realpath($directory)), 0, strlen(DIR_UPLOAD)) != DIR_UPLOAD) {
 			$json['error'] = $this->language->get('error_directory');
 		}

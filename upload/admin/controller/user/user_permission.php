@@ -180,7 +180,7 @@ class ControllerUserUserPermission extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$data['text_list'] = $this->language->get('text_list');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');
@@ -258,7 +258,7 @@ class ControllerUserUserPermission extends Controller {
 
 	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$data['text_form'] = !isset($this->request->get['user_group_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 		$data['text_select_all'] = $this->language->get('text_select_all');
 		$data['text_unselect_all'] = $this->language->get('text_unselect_all');
@@ -334,7 +334,7 @@ class ControllerUserUserPermission extends Controller {
 			'common/login',
 			'common/logout',
 			'common/forgotten',
-			'common/reset',			
+			'common/reset',
 			'common/footer',
 			'common/header',
 			'error/not_found',
@@ -367,7 +367,7 @@ class ControllerUserUserPermission extends Controller {
 
 		// Sort the file array
 		sort($files);
-					
+
 		foreach ($files as $file) {
 			$controller = substr($file, strlen(DIR_APPLICATION . 'controller/'));
 

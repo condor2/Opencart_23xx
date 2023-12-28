@@ -18,7 +18,7 @@ class ControllerExtensionDashboardRecent extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
@@ -64,11 +64,11 @@ class ControllerExtensionDashboardRecent extends Controller {
 		}
 
 		$data['columns'] = [];
-		
+
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
 		}
-				
+
 		if (isset($this->request->post['dashboard_recent_status'])) {
 			$data['dashboard_recent_status'] = $this->request->post['dashboard_recent_status'];
 		} else {
@@ -95,7 +95,7 @@ class ControllerExtensionDashboardRecent extends Controller {
 
 		return !$this->error;
 	}
-	
+
 	public function dashboard(): string {
 		$this->load->language('extension/dashboard/recent');
 
@@ -125,7 +125,7 @@ class ControllerExtensionDashboardRecent extends Controller {
 		];
 
 		$this->load->model('sale/order');
-		
+
 		$results = $this->model_sale_order->getOrders($filter_data);
 
 		foreach ($results as $result) {

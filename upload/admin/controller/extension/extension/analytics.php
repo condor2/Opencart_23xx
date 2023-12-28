@@ -22,7 +22,7 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/analytics/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/analytics/' . $this->request->get['extension']);
-			
+
 			// Compatibility
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'analytics/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'analytics/' . $this->request->get['extension']);
@@ -103,10 +103,10 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 		if ($files) {
 			foreach ($files as $file) {
 				$extension = basename($file, '.php');
-				
+
 				// Compatibility code for old extension folders
 				$this->load->language('extension/analytics/' . $extension);
-				
+
 				$store_data = [];
 
 				$store_data[] = [
@@ -114,7 +114,7 @@ class ControllerExtensionExtensionAnalytics extends Controller {
 					'edit'   => $this->url->link('extension/analytics/' . $extension, 'token=' . $this->session->data['token'] . '&store_id=0', true),
 					'status' => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled')
 				];
-				
+
 				foreach ($stores as $store) {
 					$store_data[] = [
 						'name'   => $store['name'],

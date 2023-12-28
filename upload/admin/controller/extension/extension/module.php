@@ -34,7 +34,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		} else {
 			$this->session->data['error'] = $this->error['warning'];
 		}
-	
+
 		$this->getList();
 	}
 
@@ -58,7 +58,7 @@ class ControllerExtensionExtensionModule extends Controller {
 
 		$this->getList();
 	}
-	
+
 	public function add() {
 		$this->load->language('extension/extension/module');
 
@@ -68,7 +68,7 @@ class ControllerExtensionExtensionModule extends Controller {
 
 		if ($this->validate()) {
 			$this->load->language('module' . '/' . $this->request->get['extension']);
-			
+
 			$this->model_extension_module->addModule($this->request->get['extension'], $this->language->get('heading_title'));
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -89,7 +89,7 @@ class ControllerExtensionExtensionModule extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
-		
+
 		$this->getList();
 	}
 
@@ -130,7 +130,7 @@ class ControllerExtensionExtensionModule extends Controller {
 				$this->model_extension_extension->uninstall('module', $value);
 
 				unset($extensions[$key]);
-				
+
 				$this->model_extension_module->deleteModulesByCode($value);
 			}
 		}

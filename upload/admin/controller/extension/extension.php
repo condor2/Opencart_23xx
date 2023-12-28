@@ -36,26 +36,26 @@ class ControllerExtensionExtension extends Controller {
 		}
 
 		$data['categories'] = [];
-		
+
 		$files = glob(DIR_APPLICATION . 'controller/extension/extension/*.php', GLOB_BRACE);
 		
 		foreach ($files as $file) {
 			$extension = basename($file, '.php');
-			
+
 			// Compatibility code for old extension folders
 			$this->load->language('extension/extension/' . $extension);
-		
+
 			if ($this->user->hasPermission('access', 'extension/extension/' . $extension)) {
 				$files = glob(DIR_APPLICATION . 'controller/{extension/' . $extension . ',' . $extension . '}/*.php', GLOB_BRACE);
-		
+
 				$data['categories'][] = [
 					'code' => $extension,
-					'text' => $this->language->get('heading_title') . ' (' . count($files) .')',
+					'text' => $this->language->get('heading_title') . ' (' . count($files) . ')',
 					'href' => $this->url->link('extension/extension/' . $extension, 'token=' . $this->session->data['token'], true)
 				];
-			}			
+			}
 		}
-		
+
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');

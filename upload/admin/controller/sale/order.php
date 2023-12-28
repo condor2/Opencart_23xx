@@ -31,7 +31,7 @@ class ControllerSaleOrder extends Controller {
 
 		$this->getForm();
 	}
-	
+
 	public function delete() {
 		$this->load->language('sale/order');
 
@@ -71,11 +71,11 @@ class ControllerSaleOrder extends Controller {
 			if (isset($this->request->get['filter_total'])) {
 				$url .= '&filter_total=' . $this->request->get['filter_total'];
 			}
-	
+
 			if (isset($this->request->get['filter_date_added'])) {
 				$url .= '&filter_date_added=' . $this->request->get['filter_date_added'];
 			}
-	
+
 			if (isset($this->request->get['filter_date_modified'])) {
 				$url .= '&filter_date_modified=' . $this->request->get['filter_date_modified'];
 			}
@@ -85,7 +85,7 @@ class ControllerSaleOrder extends Controller {
 
 		$this->getList();
 	}
-	
+
 	protected function getList() {
 		if (isset($this->request->get['filter_order_id'])) {
 			$filter_order_id = (int)$this->request->get['filter_order_id'];
@@ -220,8 +220,8 @@ class ControllerSaleOrder extends Controller {
 
 		$filter_data = [
 			'filter_order_id'        => $filter_order_id,
-			'filter_store_id'		 => $filter_store_id,
-			'filter_customer'	     => $filter_customer,
+			'filter_store_id'        => $filter_store_id,
+			'filter_customer'        => $filter_customer,
 			'filter_order_status'    => $filter_order_status,
 			'filter_order_status_id' => $filter_order_status_id,
 			'filter_total'           => $filter_total,
@@ -301,7 +301,7 @@ class ControllerSaleOrder extends Controller {
 		} else {
 			$data['success'] = '';
 		}
-		
+
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
@@ -445,7 +445,7 @@ class ControllerSaleOrder extends Controller {
 		$this->load->model('localisation/order_status');
 
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
-		
+
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -690,7 +690,7 @@ class ControllerSaleOrder extends Controller {
 			$data['order_id'] = 0;
 			$data['store_id'] = 0;
 			$data['store_url'] = HTTP_CATALOG;
-			
+
 			$data['customer'] = '';
 			$data['customer_id'] = '';
 			$data['customer_group_id'] = $this->config->get('config_customer_group_id');
@@ -982,7 +982,7 @@ class ControllerSaleOrder extends Controller {
 
 			$data['store_id'] = $order_info['store_id'];
 			$data['store_name'] = $order_info['store_name'];
-			
+
 			if ($order_info['store_id'] == 0) {
 				$data['store_url'] = HTTP_CATALOG;
 			} else {
@@ -1128,13 +1128,13 @@ class ControllerSaleOrder extends Controller {
 				$data['products'][] = [
 					'order_product_id' => $product['order_product_id'],
 					'product_id'       => $product['product_id'],
-					'name'    	 	   => $product['name'],
-					'model'    		   => $product['model'],
-					'option'   		   => $option_data,
-					'quantity'		   => $product['quantity'],
-					'price'    		   => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
-					'total'    		   => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
-					'href'     		   => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $product['product_id'], true)
+					'name'             => $product['name'],
+					'model'            => $product['model'],
+					'option'           => $option_data,
+					'quantity'         => $product['quantity'],
+					'price'            => $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'total'            => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'href'             => $this->url->link('catalog/product/edit', 'token=' . $this->session->data['token'] . '&product_id=' . $product['product_id'], true)
 				];
 			}
 
@@ -1268,8 +1268,8 @@ class ControllerSaleOrder extends Controller {
 
 						if ($custom_field_value_info) {
 							$data['payment_custom_fields'][] = [
-								'name'  => $custom_field['name'],
-								'value' => $custom_field_value_info['name'],
+								'name'       => $custom_field['name'],
+								'value'      => $custom_field_value_info['name'],
 								'sort_order' => $custom_field['sort_order']
 							];
 						}
@@ -1281,8 +1281,8 @@ class ControllerSaleOrder extends Controller {
 
 							if ($custom_field_value_info) {
 								$data['payment_custom_fields'][] = [
-									'name'  => $custom_field['name'],
-									'value' => $custom_field_value_info['name'],
+									'name'       => $custom_field['name'],
+									'value'      => $custom_field_value_info['name'],
 									'sort_order' => $custom_field['sort_order']
 								];
 							}
@@ -1291,8 +1291,8 @@ class ControllerSaleOrder extends Controller {
 
 					if ($custom_field['type'] == 'text' || $custom_field['type'] == 'textarea' || $custom_field['type'] == 'file' || $custom_field['type'] == 'date' || $custom_field['type'] == 'datetime' || $custom_field['type'] == 'time') {
 						$data['payment_custom_fields'][] = [
-							'name'  => $custom_field['name'],
-							'value' => $order_info['payment_custom_field'][$custom_field['custom_field_id']],
+							'name'       => $custom_field['name'],
+							'value'      => $order_info['payment_custom_field'][$custom_field['custom_field_id']],
 							'sort_order' => $custom_field['sort_order']
 						];
 					}
@@ -1302,8 +1302,8 @@ class ControllerSaleOrder extends Controller {
 
 						if ($upload_info) {
 							$data['payment_custom_fields'][] = [
-								'name'  => $custom_field['name'],
-								'value' => $upload_info['name'],
+								'name'       => $custom_field['name'],
+								'value'      => $upload_info['name'],
 								'sort_order' => $custom_field['sort_order']
 							];
 						}
@@ -1321,8 +1321,8 @@ class ControllerSaleOrder extends Controller {
 
 						if ($custom_field_value_info) {
 							$data['shipping_custom_fields'][] = [
-								'name'  => $custom_field['name'],
-								'value' => $custom_field_value_info['name'],
+								'name'       => $custom_field['name'],
+								'value'      => $custom_field_value_info['name'],
 								'sort_order' => $custom_field['sort_order']
 							];
 						}
@@ -1334,8 +1334,8 @@ class ControllerSaleOrder extends Controller {
 
 							if ($custom_field_value_info) {
 								$data['shipping_custom_fields'][] = [
-									'name'  => $custom_field['name'],
-									'value' => $custom_field_value_info['name'],
+									'name'       => $custom_field['name'],
+									'value'      => $custom_field_value_info['name'],
 									'sort_order' => $custom_field['sort_order']
 								];
 							}
@@ -1344,8 +1344,8 @@ class ControllerSaleOrder extends Controller {
 
 					if ($custom_field['type'] == 'text' || $custom_field['type'] == 'textarea' || $custom_field['type'] == 'file' || $custom_field['type'] == 'date' || $custom_field['type'] == 'datetime' || $custom_field['type'] == 'time') {
 						$data['shipping_custom_fields'][] = [
-							'name'  => $custom_field['name'],
-							'value' => $order_info['shipping_custom_field'][$custom_field['custom_field_id']],
+							'name'       => $custom_field['name'],
+							'value'      => $order_info['shipping_custom_field'][$custom_field['custom_field_id']],
 							'sort_order' => $custom_field['sort_order']
 						];
 					}
@@ -1355,8 +1355,8 @@ class ControllerSaleOrder extends Controller {
 
 						if ($upload_info) {
 							$data['shipping_custom_fields'][] = [
-								'name'  => $custom_field['name'],
-								'value' => $upload_info['name'],
+								'name'       => $custom_field['name'],
+								'value'      => $upload_info['name'],
 								'sort_order' => $custom_field['sort_order']
 							];
 						}
@@ -1409,7 +1409,7 @@ class ControllerSaleOrder extends Controller {
 					}
 				}
 			}
-			
+
 			// The URL we send API requests to
 			$data['catalog'] = HTTP_CATALOG;
 			
@@ -1439,7 +1439,7 @@ class ControllerSaleOrder extends Controller {
 			return new Action('error/not_found');
 		}
 	}
-	
+
 	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$this->error['warning'] = $this->language->get('error_permission');
@@ -1447,7 +1447,7 @@ class ControllerSaleOrder extends Controller {
 
 		return !$this->error;
 	}
-	
+
 	public function createInvoiceNo() {
 		$this->load->language('sale/order');
 
@@ -1857,7 +1857,7 @@ class ControllerSaleOrder extends Controller {
 				}
 
 				$data['orders'][] = [
-					'order_id'	       => $order_id,
+					'order_id'         => $order_id,
 					'invoice_no'       => $invoice_no,
 					'date_added'       => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
 					'store_name'       => $order_info['store_name'],
@@ -2059,7 +2059,7 @@ class ControllerSaleOrder extends Controller {
 				}
 
 				$data['orders'][] = [
-					'order_id'	       => $order_id,
+					'order_id'         => $order_id,
 					'invoice_no'       => $invoice_no,
 					'date_added'       => date($this->language->get('date_format_short'), strtotime($order_info['date_added'])),
 					'store_name'       => $order_info['store_name'],

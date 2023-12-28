@@ -81,7 +81,7 @@ class ControllerExtensionPaymentPayPalPayLater extends Controller {
 				$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
 			}
 
-			$data['error'] = $this->error;			
+			$data['error'] = $this->error;
 
 			return $this->load->view('extension/payment/paypal/paypal_paylater', $data);
 		}

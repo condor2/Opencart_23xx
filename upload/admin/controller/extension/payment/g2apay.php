@@ -1,7 +1,5 @@
 <?php
-
 class ControllerExtensionPaymentG2APay extends Controller {
-
 	private $error = [];
 
 	public function index(): void {

@@ -254,22 +254,22 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		$data['cards'] = [
-			'AMEX' => 'American Express',
-			'VISA' => 'Visa',
-			'DELTA' => 'Visa Debit',
-			'ELECTRON' => 'Visa Electron',
-			'PURCHASING' => 'Visa Purchasing',
-			'VPAY' => 'V Pay',
-			'MASTERCARD' => 'MasterCard',
+			'AMEX'            => 'American Express',
+			'VISA'            => 'Visa',
+			'DELTA'           => 'Visa Debit',
+			'ELECTRON'        => 'Visa Electron',
+			'PURCHASING'      => 'Visa Purchasing',
+			'VPAY'            => 'V Pay',
+			'MASTERCARD'      => 'MasterCard',
 			'MASTERCARDDEBIT' => 'MasterCard Debit',
-			'MAESTRO' => 'Maestro',
-			'PAYPAL' => 'PayPal',
+			'MAESTRO'         => 'Maestro',
+			'PAYPAL'          => 'PayPal',
 		];
 
 		$data['settlement_statuses'] = [
-			'0' => $this->language->get('text_pending_settlement'),
-			'1' => $this->language->get('text_pending_settlement_manually_overriden'),
-			'2' => $this->language->get('text_pending_suspended'),
+			'0'   => $this->language->get('text_pending_settlement'),
+			'1'   => $this->language->get('text_pending_settlement_manually_overriden'),
+			'2'   => $this->language->get('text_pending_suspended'),
 			'100' => $this->language->get('text_pending_settled'),
 		];
 
@@ -360,16 +360,16 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		$data['transactions'] = [];
 
 		$status_mapping = [
-			'0' => $this->language->get('text_ok'),
+			'0'     => $this->language->get('text_ok'),
 			'70000' => $this->language->get('text_denied'),
 		];
 
 		$settle_status_mapping = [
-			'0' => $this->language->get('text_pending_settlement'),
-			'1' => $this->language->get('text_manual_settlement'),
-			'2' => $this->language->get('text_suspended'),
-			'3' => $this->language->get('text_cancelled'),
-			'10' => $this->language->get('text_settling'),
+			'0'   => $this->language->get('text_pending_settlement'),
+			'1'   => $this->language->get('text_manual_settlement'),
+			'2'   => $this->language->get('text_suspended'),
+			'3'   => $this->language->get('text_cancelled'),
+			'10'  => $this->language->get('text_settling'),
 			'100' => $this->language->get('text_settled'),
 		];
 
@@ -385,16 +385,16 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 
 			foreach ($csv as $row) {
 				$data['transactions'][] = [
-					'order_id' => $row['orderreference'],
-					'order_href' => $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $row['orderreference'], true),
+					'order_id'              => $row['orderreference'],
+					'order_href'            => $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $row['orderreference'], true),
 					'transaction_reference' => $row['transactionreference'],
-					'customer' => $row['billingfirstname'] . ' ' . $row['billinglastname'],
-					'total' => $row['mainamount'],
-					'currency' => $row['currencyiso3a'],
-					'settle_status' => $settle_status_mapping[$row['settlestatus']],
-					'status' => $status_mapping[$row['errorcode']],
-					'type' => $row['requesttypedescription'],
-					'payment_type' => $row['paymenttypedescription'],
+					'customer'              => $row['billingfirstname'] . ' ' . $row['billinglastname'],
+					'total'                 => $row['mainamount'],
+					'currency'              => $row['currencyiso3a'],
+					'settle_status'         => $settle_status_mapping[$row['settlestatus']],
+					'status'                => $status_mapping[$row['errorcode']],
+					'type'                  => $row['requesttypedescription'],
+					'payment_type'          => $row['paymenttypedescription'],
 				];
 			}
 		}
@@ -475,7 +475,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 
 					$this->data = [
 						'order_status_id' => $this->config->get('securetrading_ws_authorisation_reversed_order_status_id'),
-						'notify' => false,
+						'notify'  => false,
 						'comment' => '',
 					];
 
@@ -547,7 +547,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 					$json['data']['created'] = date("Y-m-d H:i:s");
 					$json['data']['amount'] = $amount;
 					$json['data']['release_status'] = $release_status;
-					$json['data']['total'] = (double)$total_released;
+					$json['data']['total'] = (float)$total_released;
 					$json['error'] = false;
 				}
 			} else {
@@ -613,8 +613,8 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 					$json['data'] = [];
 					$json['data']['created'] = date("Y-m-d H:i:s");
 					$json['data']['amount'] = $amount * -1;
-					$json['data']['total_released'] = (double)$total_released;
-					$json['data']['total_rebated'] = (double)$total_rebated;
+					$json['data']['total_released'] = (float)$total_released;
+					$json['data']['total_rebated'] = (float)$total_rebated;
 					$json['data']['rebate_status'] = $rebate_status;
 					$json['error'] = false;
 				} else {

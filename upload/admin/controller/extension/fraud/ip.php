@@ -112,7 +112,7 @@ class ControllerExtensionFraudIp extends Controller {
 		return !$this->error;
 	}
 
-    public function ip() {
+	public function ip() {
 		$this->load->language('extension/fraud/ip');
 
 		$this->load->model('extension/fraud/ip');

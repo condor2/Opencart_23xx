@@ -449,7 +449,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$data['button_delete'] = $this->language->get('button_delete');
 		$data['button_filter'] = $this->language->get('button_filter');
 		$data['button_unlock'] = $this->language->get('button_unlock');
-		
+
 		$data['token'] = $this->session->data['token'];
 
 		if (isset($this->error['warning'])) {

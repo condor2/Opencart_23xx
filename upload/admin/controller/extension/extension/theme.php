@@ -45,7 +45,7 @@ class ControllerExtensionExtensionTheme extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
-		
+
 		$this->getList();
 	}
 
@@ -92,24 +92,24 @@ class ControllerExtensionExtensionTheme extends Controller {
 		$stores = $this->model_setting_store->getStores();
 
 		$data['extensions'] = [];
-		
+
 		// Compatibility code for old extension folders
 		$files = glob(DIR_APPLICATION . 'controller/extension/theme/*.php');
 
 		if ($files) {
 			foreach ($files as $file) {
 				$extension = basename($file, '.php');
-				
+
 				$this->load->language('extension/theme/' . $extension);
-					
+
 				$store_data = [];
-				
+
 				$store_data[] = [
 					'name'   => $this->config->get('config_name'),
 					'edit'   => $this->url->link('extension/theme/' . $extension, 'token=' . $this->session->data['token'] . '&store_id=0', true),
 					'status' => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled')
 				];
-									
+
 				foreach ($stores as $store) {
 					$store_data[] = [
 						'name'   => $store['name'],
@@ -117,7 +117,7 @@ class ControllerExtensionExtensionTheme extends Controller {
 						'status' => $this->model_setting_setting->getSettingValue($extension . '_status', $store['store_id']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled')
 					];
 				}
-				
+
 				$data['extensions'][] = [
 					'name'      => $this->language->get('heading_title'),
 					'install'   => $this->url->link('extension/extension/theme/install', 'token=' . $this->session->data['token'] . '&extension=' . $extension, true),

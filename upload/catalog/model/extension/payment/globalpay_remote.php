@@ -174,7 +174,7 @@ class ModelExtensionPaymentGlobalpayRemote extends Model {
 			}
 			if ($cavv != '') {
 				$xml .= '<cavv>' . (string)$cavv . '</cavv>';
- 			}
+			}
 			if ($xid != '') {
 				$xml .= '<xid>' . (string)$xid . '</xid>';
 			}
@@ -183,9 +183,9 @@ class ModelExtensionPaymentGlobalpayRemote extends Model {
 
 		$xml .= '<sha1hash>' . $hash . '</sha1hash>';
 
-			if ($this->config->get('globalpay_remote_tss_check') == 1) {
-				$xml .= '<tssinfo>';
-					$xml .= '<custipaddress>' . $order_info['ip'] . '</custipaddress>';
+		if ($this->config->get('globalpay_remote_tss_check') == 1) {
+			$xml .= '<tssinfo>';
+			$xml .= '<custipaddress>' . $order_info['ip'] . '</custipaddress>';
 
 			if ($this->customer->getId() > 0) {
 				$xml .= '<custnum>' . (int)$this->customer->getId() . '</custnum>';
@@ -200,7 +200,7 @@ class ModelExtensionPaymentGlobalpayRemote extends Model {
 					$xml .= '<country>' . $order_info['payment_iso_code_2'] . '</country>';
 				}
 				$xml .= '</address>';
- 			}
+			}
 			if ((isset($order_info['shipping_iso_code_2']) && !empty($order_info['shipping_iso_code_2'])) || (isset($order_info['shipping_postcode']) && !empty($order_info['shipping_postcode']))) {
 				$xml .= '<address type="shipping">';
 				if ((isset($order_info['shipping_postcode']) && !empty($order_info['shipping_postcode']))) {

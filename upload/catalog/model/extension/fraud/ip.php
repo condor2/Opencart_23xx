@@ -6,7 +6,7 @@ class ModelExtensionFraudIp extends Model {
 		$status = false;
 
 		if ($order_info['customer_id']) {
-            $results = $this->model_account_customer->getIps($order_info['customer_id']);
+			$results = $this->model_account_customer->getIps($order_info['customer_id']);
 
 			foreach ($results as $result) {
 				$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "fraud_ip` WHERE ip = '" . $this->db->escape($result['ip']) . "'");

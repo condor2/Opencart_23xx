@@ -142,7 +142,7 @@ class ControllerSaleRecurring extends Controller {
 			} else {
 				$status = '';
 			}
-			
+
 			$data['recurrings'][] = [
 				'order_recurring_id' => $result['order_recurring_id'],
 				'order_id'           => $result['order_id'],
@@ -159,7 +159,7 @@ class ControllerSaleRecurring extends Controller {
 
 		$data['text_list'] = $this->language->get('text_list');
 		$data['text_no_results'] = $this->language->get('text_no_results');
-		
+
 		$data['column_order_recurring_id'] = $this->language->get('column_order_recurring_id');
 		$data['column_order_id'] = $this->language->get('column_order_id');
 		$data['column_reference'] = $this->language->get('column_reference');
@@ -167,7 +167,7 @@ class ControllerSaleRecurring extends Controller {
 		$data['column_status'] = $this->language->get('column_status');
 		$data['column_date_added'] = $this->language->get('column_date_added');
 		$data['column_action'] = $this->language->get('column_action');
-		
+
 		$data['entry_order_recurring_id'] = $this->language->get('entry_order_recurring_id');
 		$data['entry_order_id'] = $this->language->get('entry_order_id');
 		$data['entry_reference'] = $this->language->get('entry_reference');
@@ -196,7 +196,7 @@ class ControllerSaleRecurring extends Controller {
 		} else {
 			$data['success'] = '';
 		}
-		
+
 		$url = '';
 
 		if (isset($this->request->get['filter_order_recurring_id'])) {
@@ -290,22 +290,22 @@ class ControllerSaleRecurring extends Controller {
 		$data['filter_customer'] = $filter_customer;
 		$data['filter_status'] = $filter_status;
 		$data['filter_date_added'] = $filter_date_added;
-		
+
 		$data['sort'] = $sort;
 		$data['order'] = $order;
-		
+
 		$data['recurring_statuses'] = [];
-		
+
 		$data['recurring_statuses'][0] = [
 			'text'  => '',
 			'value' => 0
 		];
-			
+
 		for ($i = 1; $i <= 6; $i++) {
 			$data['recurring_statuses'][$i] = [
 				'text'  => $this->language->get('text_status_' . $i),
 				'value' => 1
-			];		
+			];
 		}
 
 		$data['header'] = $this->load->controller('common/header');
@@ -317,18 +317,18 @@ class ControllerSaleRecurring extends Controller {
 
 	public function info() {
 		$this->load->model('sale/recurring');
-		
+
 		if (isset($this->request->get['order_recurring_id'])) {
 			$order_recurring_id = (int)$this->request->get['order_recurring_id'];
 		} else {
 			$order_recurring_id = 0;
 		}
-		
+
 		$order_recurring_info = $this->model_sale_recurring->getRecurring($order_recurring_id);
 
 		if ($order_recurring_info) {
 			$this->load->language('sale/recurring');
-		
+
 			$this->document->setTitle($this->language->get('heading_title'));
 
 			$data['heading_title'] = $this->language->get('heading_title');
@@ -341,7 +341,7 @@ class ControllerSaleRecurring extends Controller {
 			$data['text_reference'] = $this->language->get('text_reference');
 			$data['text_recurring_name'] = $this->language->get('text_recurring_name');
 			$data['text_recurring_description'] = $this->language->get('text_recurring_description');
-			$data['text_recurring_status'] = $this->language->get('text_recurring_status');			
+			$data['text_recurring_status'] = $this->language->get('text_recurring_status');
 			$data['text_payment_method'] = $this->language->get('text_payment_method');
 			$data['text_order_id'] = $this->language->get('text_order_id');
 			$data['text_customer'] = $this->language->get('text_customer');
@@ -351,7 +351,7 @@ class ControllerSaleRecurring extends Controller {
 			$data['text_product'] = $this->language->get('text_product');
 			$data['text_quantity'] = $this->language->get('text_quantity');
 			$data['text_no_results'] = $this->language->get('text_no_results');
-			
+
 			$data['column_date_added'] = $this->language->get('column_date_added');
 			$data['column_amount'] = $this->language->get('column_amount');
 			$data['column_type'] = $this->language->get('column_type');
@@ -359,7 +359,7 @@ class ControllerSaleRecurring extends Controller {
 			$data['button_cancel'] = $this->language->get('button_cancel');
 
 			$data['token'] = $this->session->data['token'];
-			
+
 			$url = '';
 
 			if (isset($this->request->get['filter_order_recurring_id'])) {
@@ -411,55 +411,55 @@ class ControllerSaleRecurring extends Controller {
 			];
 
 			$data['cancel'] = $this->url->link('sale/recurring', 'token=' . $this->session->data['token'] . $url, true);
-			
+
 			// Recurring
 			$data['order_recurring_id'] = $order_recurring_info['order_recurring_id'];
 			$data['reference'] = $order_recurring_info['reference'];
 			$data['recurring_name'] = $order_recurring_info['recurring_name'];
-			
+
 			if ($order_recurring_info['recurring_id']) {
 				$data['recurring'] = $this->url->link('catalog/recurring/edit', 'token=' . $this->session->data['token'] . '&recurring_id=' . $order_recurring_info['recurring_id'], true);
 			} else {
 				$data['recurring'] = '';
-			}			
-			
+			}
+
 			$data['recurring_description'] = $order_recurring_info['recurring_description'];
-			
+
 			if ($order_recurring_info['status']) {
-				$data['recurring_status']= $this->language->get('text_status_' . $order_recurring_info['status']);
+				$data['recurring_status'] = $this->language->get('text_status_' . $order_recurring_info['status']);
 			} else {
 				$data['recurring_status'] = '';
 			}
-			
+
 			$this->load->model('sale/order');
 
 			$order_info = $this->model_sale_order->getOrder($order_recurring_info['order_id']);
-			
+
 			$data['payment_method'] = $order_info['payment_method'];
-			
+
 			// Order
 			$data['order_id'] = $order_info['order_id'];
 			$data['order'] = $this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $order_info['order_id'], true);
 			$data['firstname'] = $order_info['firstname'];
 			$data['lastname'] = $order_info['lastname'];
-			
+
 			if ($order_info['customer_id']) {
 				$data['customer'] = $this->url->link('customer/customer/edit', 'token=' . $this->session->data['token'] . '&customer_id=' . $order_info['customer_id'], true);
 			} else {
 				$data['customer'] = '';
 			}
-		
+
 			$data['email'] = $order_info['email'];
 			$data['order_status'] = $order_info['order_status'];
 			$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
-			
+
 			// Product
 			$data['product'] = $order_recurring_info['product_name'];
 			$data['quantity'] = $order_recurring_info['product_quantity'];
 
 			// Transactions
 			$data['transactions'] = [];
-			
+
 			$transactions = $this->model_sale_recurring->getRecurringTransactions($order_recurring_info['order_recurring_id']);
 
 			foreach ($transactions as $transaction) {

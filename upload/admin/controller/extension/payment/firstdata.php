@@ -128,7 +128,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		];
 
 		$data['action'] = $this->url->link('extension/payment/firstdata', 'token=' . $this->session->data['token'], true);
-		
+
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
 		if (isset($this->request->post['firstdata_merchant_id'])) {

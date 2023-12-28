@@ -1,10 +1,8 @@
 <?php
 class ControllerExtensionModuleAmazonLogin extends Controller {
-
 	private $error = [];
 
 	public function index(): void {
-
 		$this->load->language('extension/module/amazon_login');
 
 		$this->load->model('setting/setting');
@@ -127,8 +125,8 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 	}
 
 	public function install() {
-			$this->load->model('extension/event');
-			$this->model_extension_event->addEvent('amazon_login', 'catalog/controller/account/logout/after', 'extension/module/amazon_login/logout');
+		$this->load->model('extension/event');
+		$this->model_extension_event->addEvent('amazon_login', 'catalog/controller/account/logout/after', 'extension/module/amazon_login/logout');
 	}
 
 	public function uninstall() {

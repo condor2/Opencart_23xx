@@ -61,19 +61,16 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
-			'separator' => false
 		];
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=module', true),
-			'separator' => ' :: '
 		];
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/module/amazon_pay', 'token=' . $this->session->data['token'], true),
-			'separator' => ' :: '
 		];
 
 		$data['action'] = $this->url->link('extension/module/amazon_pay', 'token=' . $this->session->data['token'], true);

@@ -184,7 +184,7 @@ class ControllerCheckoutCart extends Controller {
 			$totals = [];
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
-			
+
 			// Because __call can not keep var references so we put them into an array.
 			$total_data = [
 				'totals' => &$totals,
@@ -360,7 +360,7 @@ class ControllerCheckoutCart extends Controller {
 				$totals = [];
 				$taxes = $this->cart->getTaxes();
 				$total = 0;
-		
+
 				// Because __call can not keep var references so we put them into an array.
 				$total_data = [
 					'totals' => &$totals,
@@ -460,7 +460,7 @@ class ControllerCheckoutCart extends Controller {
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
-			// Because __call can not keep var references so we put them into an array. 			
+			// Because __call can not keep var references so we put them into an array.
 			$total_data = [
 				'totals' => &$totals,
 				'taxes'  => &$taxes,
