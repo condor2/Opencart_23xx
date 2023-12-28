@@ -1316,7 +1316,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 
 		$agree_status = $this->model_extension_payment_paypal->getAgreeStatus();
-		
+
 		if (!$agree_status) {
 			$this->error['warning'] = $this->language->get('error_agree');
 		}
@@ -1755,7 +1755,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$token_info = [
 				'grant_type' => 'client_credentials'
 			];
-				
+
 			$paypal->setAccessToken($token_info);
 
 			$data['client_token'] = $paypal->getClientToken();
@@ -2235,9 +2235,9 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		if ($environment == 'production') {
 			$file = 'https://www.paypalobjects.com/.well-known/apple-developer-merchantid-domain-association';
-		
+
 			$file_headers = @get_headers($file);
-				
+
 			if (strpos($file_headers[0], '404') !== false) {
 				$file = 'https://www.paypalobjects.com/.well-known/apple-developer-merchantid-domain-association.txt';
 			}
@@ -2446,7 +2446,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($content);
 	}
 
-	public function capturePayment() {				
+	public function capturePayment() {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
@@ -2826,7 +2826,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		for ($i = 0; $i < $length; $i++) {
 			$token .= $string[mt_rand(0, $max)];
-		}	
+		}
 
 		return $token;
 	}

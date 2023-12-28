@@ -27,7 +27,7 @@ class ControllerExtensionThemeThemeDefault extends Controller {
 		$data['text_general'] = $this->language->get('text_general');
 
 		$data['entry_directory'] = $this->language->get('entry_directory');
-		$data['entry_status'] = $this->language->get('entry_status');		
+		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_product_limit'] = $this->language->get('entry_product_limit');
 		$data['entry_product_description_length'] = $this->language->get('entry_product_description_length');
 		$data['entry_image_category'] = $this->language->get('entry_image_category');

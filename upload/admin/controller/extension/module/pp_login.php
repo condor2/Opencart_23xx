@@ -224,7 +224,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 		];
 
 		$data['locales'][] = [
-			'value' => 'ja-jp' ,
+			'value' => 'ja-jp',
 			'text'  => 'Japanese'
 		];
 

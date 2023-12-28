@@ -85,7 +85,7 @@ class ControllerReportCustomerSearch extends Controller {
 		$data['searches'] = [];
 
 		$filter_data = [
-			'filter_date_start'	=> $filter_date_start,
+			'filter_date_start' => $filter_date_start,
 			'filter_date_end'   => $filter_date_end,
 			'filter_keyword'    => $filter_keyword,
 			'filter_customer'   => $filter_customer,
@@ -114,12 +114,12 @@ class ControllerReportCustomerSearch extends Controller {
 			}
 
 			$data['searches'][] = [
-				'keyword'     => $result['keyword'],
-				'products'    => $result['products'],
-				'category'    => $category,
-				'customer'    => $customer,
-				'ip'          => $result['ip'],
-				'date_added'  => date($this->language->get('datetime_format'), strtotime($result['date_added']))
+				'keyword'    => $result['keyword'],
+				'products'   => $result['products'],
+				'category'   => $category,
+				'customer'   => $customer,
+				'ip'         => $result['ip'],
+				'date_added' => date($this->language->get('datetime_format'), strtotime($result['date_added']))
 			];
 		}
 
