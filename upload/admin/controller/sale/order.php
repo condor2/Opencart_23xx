@@ -813,7 +813,7 @@ class ControllerSaleOrder extends Controller {
 		// API login
 		$data['catalog'] = HTTP_CATALOG;
 
-		// API login	
+		// API login
 		$this->load->model('user/api');
 
 		$api_info = $this->model_user_api->getApi($this->config->get('config_api_id'));
@@ -1412,7 +1412,7 @@ class ControllerSaleOrder extends Controller {
 
 			// The URL we send API requests to
 			$data['catalog'] = HTTP_CATALOG;
-			
+
 			// API login
 			$this->load->model('user/api');
 

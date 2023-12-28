@@ -1050,7 +1050,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 									if (isset($paypal_order_info['purchase_units'][0]['shipping']['address']['admin_area_1'])) {
 										$zone_info = $this->model_extension_payment_paypal->getZoneByCode($country_info['country_id'], $paypal_order_info['purchase_units'][0]['shipping']['address']['admin_area_1']);
-			
+
 										if ($zone_info) {
 											$this->session->data['shipping_address']['zone_id'] = $zone_info['zone_id'];
 											$this->session->data['shipping_address']['zone'] = $zone_info['name'];
@@ -1567,7 +1567,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				} else {
 					unset($this->session->data['shipping_methods']);
 					unset($this->session->data['shipping_method']);
-					
+
 					$data['error_no_shipping'] = $this->language->get('error_no_shipping');
 				}
 			}
@@ -2939,7 +2939,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$this->error['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
 			} elseif (($custom_field['type'] == 'text') && !empty($custom_field['validation']) && !preg_match(html_entity_decode($custom_field['validation'], ENT_QUOTES, 'UTF-8'), $this->request->post['custom_field'][$custom_field['location']][$custom_field['custom_field_id']])) {
 				$this->error['custom_field' . $custom_field['custom_field_id']] = sprintf($this->language->get('error_custom_field'), $custom_field['name']);
-            }
+			}
 		}
 
 		return !$this->error;
@@ -3071,7 +3071,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$apple_agents = ['ipod', 'iphone', 'ipad'];
 
-			foreach ($apple_agents as $apple_agent){
+			foreach ($apple_agents as $apple_agent) {
 				if (stripos($user_agent, $apple_agent)) {
 					return true;
 				}

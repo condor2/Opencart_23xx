@@ -12,8 +12,8 @@ class ControllerExtensionModuleHTML extends Controller {
 			$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
 		}
 
-		if (file_exists('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js')) {
-			$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
+		if (file_exists('view/javascript/summernote/img-lang/' . $this->language->get('summernote') . '.js')) {
+			$this->document->addScript('view/javascript/summernote/img-lang/' . $this->language->get('summernote') . '.js');
 		}
 
 		$this->document->addScript('view/javascript/summernote/opencart.js');

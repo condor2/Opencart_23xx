@@ -74,8 +74,8 @@ class ControllerReportProductPurchased extends Controller {
 		$data['products'] = [];
 
 		$filter_data = [
-			'filter_date_start'	     => $filter_date_start,
-			'filter_date_end'	     => $filter_date_end,
+			'filter_date_start'      => $filter_date_start,
+			'filter_date_end'        => $filter_date_end,
 			'filter_order_status_id' => $filter_order_status_id,
 			'filter_name'            => $filter_name,
 			'start'                  => ($page - 1) * $this->config->get('config_limit_admin'),
@@ -88,10 +88,10 @@ class ControllerReportProductPurchased extends Controller {
 
 		foreach ($results as $result) {
 			$data['products'][] = [
-				'name'       => $result['name'],
-				'model'      => $result['model'],
-				'quantity'   => $result['quantity'],
-				'total'      => $this->currency->format($result['total'], $this->config->get('config_currency'))
+				'name'     => $result['name'],
+				'model'    => $result['model'],
+				'quantity' => $result['quantity'],
+				'total'    => $this->currency->format($result['total'], $this->config->get('config_currency'))
 			];
 		}
 

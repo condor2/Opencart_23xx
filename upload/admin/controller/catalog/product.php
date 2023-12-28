@@ -551,8 +551,8 @@ class ControllerCatalogProduct extends Controller {
 			$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
 		}
 
-		if (file_exists('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js')) {
-			$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
+		if (file_exists('view/javascript/summernote/img-lang/' . $this->language->get('summernote') . '.js')) {
+			$this->document->addScript('view/javascript/summernote/img-lang/' . $this->language->get('summernote') . '.js');
 		}
 
 		$this->document->addScript('view/javascript/summernote/opencart.js');
@@ -1215,7 +1215,7 @@ class ControllerCatalogProduct extends Controller {
 				'priority'          => $product_special['priority'],
 				'price'             => $product_special['price'],
 				'date_start'        => ($product_special['date_start'] != '0000-00-00') ? $product_special['date_start'] : '',
-				'date_end'          => ($product_special['date_end'] != '0000-00-00') ? $product_special['date_end'] :  ''
+				'date_end'          => ($product_special['date_end'] != '0000-00-00') ? $product_special['date_end'] : ''
 			];
 		}
 

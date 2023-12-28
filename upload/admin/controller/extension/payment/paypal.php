@@ -11,7 +11,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 	}
 
-	public function index(): void {				
+	public function index(): void {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$server = HTTPS_SERVER;
 			$catalog = HTTPS_CATALOG;
@@ -74,7 +74,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$token_info = [
 				'grant_type' => 'client_credentials'
 			];
-		
+
 			$paypal->setAccessToken($token_info);
 
 			$webhook_info = [
@@ -702,7 +702,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_insert_prepend'] = $this->language->get('text_insert_prepend');
 		$data['text_insert_append'] = $this->language->get('text_insert_append');
 		$data['text_insert_before'] = $this->language->get('text_insert_before');
-		$data['text_insert_after'] = $this->language->get('text_insert_after');	
+		$data['text_insert_after'] = $this->language->get('text_insert_after');
 		$data['text_align_left'] = $this->language->get('text_align_left');
 		$data['text_align_center'] = $this->language->get('text_align_center');
 		$data['text_align_right'] = $this->language->get('text_align_right');
@@ -821,7 +821,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['decimal_place'] = $data['setting']['currency'][$data['currency_code']]['decimal_place'];
 
-		if ($data['client_id'] && $data['secret']) {										
+		if ($data['client_id'] && $data['secret']) {
 			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
@@ -943,7 +943,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_insert_prepend'] = $this->language->get('text_insert_prepend');
 		$data['text_insert_append'] = $this->language->get('text_insert_append');
 		$data['text_insert_before'] = $this->language->get('text_insert_before');
-		$data['text_insert_after'] = $this->language->get('text_insert_after');	
+		$data['text_insert_after'] = $this->language->get('text_insert_after');
 		$data['text_align_left'] = $this->language->get('text_align_left');
 		$data['text_align_center'] = $this->language->get('text_align_center');
 		$data['text_align_right'] = $this->language->get('text_align_right');
@@ -1039,7 +1039,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['decimal_place'] = $data['setting']['currency'][$data['currency_code']]['decimal_place'];
 
-		if ($data['client_id'] && $data['secret']) {										
+		if ($data['client_id'] && $data['secret']) {
 			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
@@ -1161,7 +1161,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_insert_prepend'] = $this->language->get('text_insert_prepend');
 		$data['text_insert_append'] = $this->language->get('text_insert_append');
 		$data['text_insert_before'] = $this->language->get('text_insert_before');
-		$data['text_insert_after'] = $this->language->get('text_insert_after');	
+		$data['text_insert_after'] = $this->language->get('text_insert_after');
 		$data['text_align_left'] = $this->language->get('text_align_left');
 		$data['text_align_center'] = $this->language->get('text_align_center');
 		$data['text_align_right'] = $this->language->get('text_align_right');
@@ -1264,7 +1264,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['decimal_place'] = $data['setting']['currency'][$data['currency_code']]['decimal_place'];
 
-		if ($data['client_id'] && $data['secret']) {										
+		if ($data['client_id'] && $data['secret']) {
 			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
@@ -1370,7 +1370,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_cart'] = $this->language->get('text_cart');
 		$data['text_step_coupon'] = $this->language->get('text_step_coupon');
 		$data['text_step_shipping'] = $this->language->get('text_step_shipping');
-		$data['text_step_payment_method'] = $this->language->get('text_step_payment_method');		
+		$data['text_step_payment_method'] = $this->language->get('text_step_payment_method');
 		$data['text_step_confirm_order'] = $this->language->get('text_step_confirm_order');
 		$data['text_cart_product_price_value'] = $this->language->get('text_cart_product_price_value');
 		$data['text_cart_product_total_value'] = $this->language->get('text_cart_product_total_value');
@@ -1486,7 +1486,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['decimal_place'] = $data['setting']['currency'][$data['currency_code']]['decimal_place'];
 
-		if ($data['client_id'] && $data['secret']) {										
+		if ($data['client_id'] && $data['secret']) {
 			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
@@ -1631,7 +1631,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_insert_prepend'] = $this->language->get('text_insert_prepend');
 		$data['text_insert_append'] = $this->language->get('text_insert_append');
 		$data['text_insert_before'] = $this->language->get('text_insert_before');
-		$data['text_insert_after'] = $this->language->get('text_insert_after');	
+		$data['text_insert_after'] = $this->language->get('text_insert_after');
 		$data['text_align_left'] = $this->language->get('text_align_left');
 		$data['text_align_center'] = $this->language->get('text_align_center');
 		$data['text_align_right'] = $this->language->get('text_align_right');
@@ -1740,7 +1740,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['text_message_footnote'] = $this->language->get('text_message_footnote_us');
 		}
 
-		if ($data['client_id'] && $data['secret']) {										
+		if ($data['client_id'] && $data['secret']) {
 			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
 			$paypal_info = [
@@ -2080,7 +2080,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['error'] = $this->error;
 
 		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($data));	
+		$this->response->setOutput(json_encode($data));
 	}
 
 	public function disconnect() {
@@ -2113,7 +2113,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($data));
-    }
+	}
 
 	public function getSaleAnalytics() {
 		$this->load->language('extension/payment/paypal');
@@ -2286,7 +2286,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function agree() {		
+	public function agree() {
 		$this->load->language('extension/payment/paypal');
 
 		$this->load->model('extension/payment/paypal');
@@ -2301,7 +2301,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function install() {		
+	public function install() {
 		$this->load->model('extension/payment/paypal');
 
 		$this->model_extension_payment_paypal->install();
@@ -2366,7 +2366,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$data['text_transaction_declined'] = $this->language->get('text_transaction_declined');
 				$data['text_transaction_pending'] = $this->language->get('text_transaction_pending');
 				$data['text_transaction_refunded'] = $this->language->get('text_transaction_refunded');
-				$data['text_transaction_reversed'] = $this->language->get('text_transaction_reversed');			
+				$data['text_transaction_reversed'] = $this->language->get('text_transaction_reversed');
 
 				$data['button_capture'] = $this->language->get('button_capture');
 				$data['button_reauthorize'] = $this->language->get('button_reauthorize');
@@ -2417,7 +2417,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$data['text_transaction_declined'] = $this->language->get('text_transaction_declined');
 				$data['text_transaction_pending'] = $this->language->get('text_transaction_pending');
 				$data['text_transaction_refunded'] = $this->language->get('text_transaction_refunded');
-				$data['text_transaction_reversed'] = $this->language->get('text_transaction_reversed');			
+				$data['text_transaction_reversed'] = $this->language->get('text_transaction_reversed');
 
 				$data['button_capture'] = $this->language->get('button_capture');
 				$data['button_reauthorize'] = $this->language->get('button_reauthorize');
@@ -2446,7 +2446,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($content);
 	}
 
-	public function capturePayment() {						
+	public function capturePayment() {				
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 

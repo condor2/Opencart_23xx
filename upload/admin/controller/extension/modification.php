@@ -137,7 +137,7 @@ class ControllerExtensionModification extends Controller {
 				if (empty($xml)){
 					continue;
 				}
-				
+
 				$dom = new DOMDocument('1.0', 'UTF-8');
 				$dom->preserveWhiteSpace = false;
 				$dom->loadXml($xml);
@@ -203,6 +203,9 @@ class ControllerExtensionModification extends Controller {
 
 										// Log
 										$log[] = PHP_EOL . 'FILE: ' . $key;
+									} else {
+										// Log
+										$log[] = PHP_EOL . 'FILE: (sub modification) ' . $key;
 									}
 
 									foreach ($operations as $operation) {
@@ -377,7 +380,7 @@ class ControllerExtensionModification extends Controller {
 											else {
 												// Log
 												$log[] = 'NOT FOUND - OPERATIONS ABORTED!';
-											 	break;
+												break;
 											}
 										}
 									}
@@ -423,9 +426,7 @@ class ControllerExtensionModification extends Controller {
 			$this->model_setting_setting->editSettingValue('config', 'config_maintenance', $maintenance);
 
 			// Do not return success message if refresh() was called with $data
-			if (empty($data['redirect'])) {
-				$this->session->data['success'] = $this->language->get('text_success');
-			}
+			$this->session->data['success'] = $this->language->get('text_success');
 
 			$url = '';
 
@@ -441,7 +442,7 @@ class ControllerExtensionModification extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-		//	$this->response->redirect($this->url->link(!empty($data['redirect']) ? $data['redirect'] : 'extension/modification', 'token=' . $this->session->data['token'] . $url, true));
+			$this->response->redirect($this->url->link(!empty($data['redirect']) ? $data['redirect'] : 'extension/modification', 'token=' . $this->session->data['token'] . $url, true));
 		}
 
 		$this->getList();
@@ -580,6 +581,10 @@ class ControllerExtensionModification extends Controller {
 
 	public function clearlog() {
 		$this->load->language('extension/modification');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('extension/modification');
 
 		if ($this->validate()) {
 			$handle = fopen(DIR_LOGS . 'ocmod.log', 'w+');

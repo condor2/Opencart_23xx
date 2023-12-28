@@ -6,7 +6,7 @@ class ModelLocalisationCurrency extends Model {
 		$currency_id = $this->db->getLastId();
 
 		$this->cache->delete('currency');
-		
+
 		return $currency_id;
 	}
 
@@ -40,7 +40,7 @@ class ModelLocalisationCurrency extends Model {
 		return $query->row;
 	}
 
-	public function getCurrencies(array $data =[]) {
+	public function getCurrencies(array $data = []) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "currency";
 

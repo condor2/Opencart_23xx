@@ -40,7 +40,7 @@ class ModelUserApi extends Model {
 		return $query->row;
 	}
 
-	public function getApis(array $data =[]) {
+	public function getApis(array $data = []) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "api`";
 
 		$sort_data = [

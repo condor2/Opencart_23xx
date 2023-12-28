@@ -411,4 +411,4 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 
 		return $s;
 	}
- }
+}

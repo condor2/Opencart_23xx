@@ -74,12 +74,12 @@ class ControllerReportCustomerOrder extends Controller {
 		$data['customers'] = [];
 
 		$filter_data = [
-			'filter_date_start'			=> $filter_date_start,
-			'filter_date_end'			=> $filter_date_end,
-			'filter_customer'			=> $filter_customer,
-			'filter_order_status_id'	=> $filter_order_status_id,
-			'start'						=> ($page - 1) * $this->config->get('config_limit_admin'),
-			'limit'						=> $this->config->get('config_limit_admin')
+			'filter_date_start'      => $filter_date_start,
+			'filter_date_end'        => $filter_date_end,
+			'filter_customer'        => $filter_customer,
+			'filter_order_status_id' => $filter_order_status_id,
+			'start'                  => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit'                  => $this->config->get('config_limit_admin')
 		];
 
 		$customer_total = $this->model_report_customer->getTotalOrders($filter_data);

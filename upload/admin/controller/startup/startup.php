@@ -22,7 +22,7 @@ class ControllerStartupStartup extends Controller {
 
 		// Language
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "language` WHERE code = '" . $this->db->escape($this->config->get('config_admin_language')) . "'");
-		
+
 		if ($query->num_rows) {
 			$this->config->set('config_language_id', $query->row['language_id']);
 		}
@@ -64,6 +64,6 @@ class ControllerStartupStartup extends Controller {
 		$this->registry->set('cart', new Cart\Cart($this->registry));
 
 		// Encryption
-		$this->registry->set('encryption', new Encryption($this->config->get('config_encryption')));				
+		$this->registry->set('encryption', new Encryption($this->config->get('config_encryption')));
 	}
 }

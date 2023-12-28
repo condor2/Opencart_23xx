@@ -269,7 +269,7 @@ class ControllerExtensionInstaller extends Controller {
 				} elseif (substr($destination, 0, 6) == 'system') {
 					$destination = DIR_SYSTEM . substr($destination, 6);
 				} else {
-					$destination = $root.$destination;
+					$destination = $root . $destination;
 				}
 
 				if (is_dir($file)) {

@@ -133,7 +133,7 @@ class ModelSaleVoucher extends Model {
 				$mail->send();
 
 			// If voucher does not belong to an order
-			}  else {
+			} else {
 				$this->load->language('mail/voucher');
 
 				$data = [];

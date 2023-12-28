@@ -378,7 +378,7 @@ class ControllerDesignBanner extends Controller {
 					$image = '';
 					$thumb = 'no_image.png';
 				}
-				
+
 				$data['banner_images'][$key][] = [
 					'title'      => $banner_image['title'],
 					'link'       => $banner_image['link'],

@@ -205,12 +205,12 @@ class ControllerDesignSeoUrl extends Controller {
 		$data['seo_urls'] = [];
 
 		$filter_data = [
-			'filter_query'	     => $filter_query,
-			'filter_keyword'	 => $filter_keyword,
-			'sort'               => $sort,
-			'order'              => $order,
-			'start'              => ($page - 1) * $this->config->get('config_limit_admin'),
-			'limit'              => $this->config->get('config_limit_admin')
+			'filter_query'   => $filter_query,
+			'filter_keyword' => $filter_keyword,
+			'sort'           => $sort,
+			'order'          => $order,
+			'start'          => ($page - 1) * $this->config->get('config_limit_admin'),
+			'limit'          => $this->config->get('config_limit_admin')
 		];
 
 		$seo_url_total = $this->model_design_seo_url->getTotalSeoUrls($filter_data);
@@ -430,7 +430,7 @@ class ControllerDesignSeoUrl extends Controller {
 		} else {
 			$seo_urls = $this->model_design_seo_url->getSeoUrlsByQuery($this->request->post['query']);
 		}
-		
+
 		foreach ($seo_urls as $seo_url) {
 			if ($seo_url['query'] == $this->request->post['query']) {
 				$this->error['query'] = $this->language->get('error_query_exists');

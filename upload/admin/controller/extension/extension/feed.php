@@ -45,7 +45,7 @@ class ControllerExtensionExtensionFeed extends Controller {
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
-		
+
 		$this->getList();
 	}
 

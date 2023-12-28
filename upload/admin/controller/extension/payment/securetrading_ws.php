@@ -443,7 +443,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 
 				$data['order_id'] = (int)$this->request->get['order_id'];
 				$data['token'] = $this->session->data['token'];
-				
+
 				return $this->load->view('extension/payment/securetrading_ws_order', $data);
 			}
 		}
@@ -475,8 +475,8 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 
 					$this->data = [
 						'order_status_id' => $this->config->get('securetrading_ws_authorisation_reversed_order_status_id'),
-						'notify'  => false,
-						'comment' => '',
+						'notify'          => false,
+						'comment'         => '',
 					];
 
 					$this->load->model('sale/order');

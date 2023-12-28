@@ -38,7 +38,7 @@ class ControllerExtensionExtension extends Controller {
 		$data['categories'] = [];
 
 		$files = glob(DIR_APPLICATION . 'controller/extension/extension/*.php', GLOB_BRACE);
-		
+
 		foreach ($files as $file) {
 			$extension = basename($file, '.php');
 

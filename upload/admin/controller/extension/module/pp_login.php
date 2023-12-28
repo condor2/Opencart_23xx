@@ -190,7 +190,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['locales'][] = [
 			'value' => 'fr-fr',
-			'text' => 'French'
+			'text'  => 'French'
 		];
 
 		$data['locales'][] = [
@@ -205,7 +205,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['locales'][] = [
 			'value' => 'de-de',
-			'text' => 'German'
+			'text'  => 'German'
 		];
 
 		$data['locales'][] = [
@@ -245,7 +245,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['locales'][] = [
 			'value' => 'pt-br',
-			'text' => 'Portuguese (Brazil)'
+			'text'  => 'Portuguese (Brazil)'
 		];
 
 		$data['locales'][] = [

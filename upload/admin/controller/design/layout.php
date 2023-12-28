@@ -269,7 +269,7 @@ class ControllerDesignLayout extends Controller {
 		$data['text_column_right'] = $this->language->get('text_column_right');
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_remove'] = $this->language->get('text_remove');
-		
+
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_store'] = $this->language->get('entry_store');
 		$data['entry_route'] = $this->language->get('entry_route');
@@ -374,7 +374,7 @@ class ControllerDesignLayout extends Controller {
 			foreach ($modules as $module) {
 				$module_data[] = [
 					'name' => strip_tags($module['name']),
-					'code' => $code . '.' .  $module['module_id']
+					'code' => $code . '.' . $module['module_id']
 				];
 			}
 

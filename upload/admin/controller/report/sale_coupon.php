@@ -54,8 +54,8 @@ class ControllerReportSaleCoupon extends Controller {
 		$data['coupons'] = [];
 
 		$filter_data = [
-			'filter_date_start'	=> $filter_date_start,
-			'filter_date_end'	=> $filter_date_end,
+			'filter_date_start' => $filter_date_start,
+			'filter_date_end'   => $filter_date_end,
 			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'             => $this->config->get('config_limit_admin')
 		];

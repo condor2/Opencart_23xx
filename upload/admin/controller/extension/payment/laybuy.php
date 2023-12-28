@@ -661,11 +661,11 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 								$date = date($this->language->get('date_format_short'), strtotime($next_payment_date));
 
 								$report_content[] = [
-									'instalment'	=> $month,
-									'amount'		=> $this->currency->format($transaction['payment_amounts'], $transaction['currency']),
-									'date'			=> $date,
-									'pp_trans_id'	=> '',
-									'status'		=> $next_payment_status
+									'instalment'  => $month,
+									'amount'      => $this->currency->format($transaction['payment_amounts'], $transaction['currency']),
+									'date'        => $date,
+									'pp_trans_id' => '',
+									'status'      => $next_payment_status
 								];
 							}
 						}

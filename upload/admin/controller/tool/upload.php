@@ -131,8 +131,8 @@ class ControllerToolUpload extends Controller {
 		$data['uploads'] = [];
 
 		$filter_data = [
-			'filter_name'	    => $filter_name,
-			'filter_date_added'	=> $filter_date_added,
+			'filter_name'       => $filter_name,
+			'filter_date_added' => $filter_date_added,
 			'sort'              => $sort,
 			'order'             => $order,
 			'start'             => ($page - 1) * $this->config->get('config_limit_admin'),
@@ -154,7 +154,7 @@ class ControllerToolUpload extends Controller {
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$data['text_list'] = $this->language->get('text_list');
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_confirm'] = $this->language->get('text_confirm');

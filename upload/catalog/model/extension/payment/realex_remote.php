@@ -200,7 +200,7 @@ class ModelExtensionPaymentRealexRemote extends Model {
 					$xml .= '<country>' . $order_info['payment_iso_code_2'] . '</country>';
 				}
 				$xml .= '</address>';
- 			}
+			}
 			if ((isset($order_info['shipping_iso_code_2']) && !empty($order_info['shipping_iso_code_2'])) || (isset($order_info['shipping_postcode']) && !empty($order_info['shipping_postcode']))) {
 				$xml .= '<address type="shipping">';
 				if ((isset($order_info['shipping_postcode']) && !empty($order_info['shipping_postcode']))) {

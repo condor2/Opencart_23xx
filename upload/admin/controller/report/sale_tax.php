@@ -74,8 +74,8 @@ class ControllerReportSaleTax extends Controller {
 		$data['orders'] = [];
 
 		$filter_data = [
-			'filter_date_start'	     => $filter_date_start,
-			'filter_date_end'	     => $filter_date_end,
+			'filter_date_start'      => $filter_date_start,
+			'filter_date_end'        => $filter_date_end,
 			'filter_group'           => $filter_group,
 			'filter_order_status_id' => $filter_order_status_id,
 			'start'                  => ($page - 1) * $this->config->get('config_limit_admin'),

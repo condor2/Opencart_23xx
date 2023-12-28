@@ -34,7 +34,7 @@ class ControllerStartupPermission extends Controller {
 				$route .= '/' . $part[2];
 			}
 
-			// We want to ingore some pages from having its permission checked. 
+			// We want to ingore some pages from having its permission checked.
 			$ignore = [
 				'common/dashboard',
 				'common/login',

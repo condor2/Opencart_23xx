@@ -216,8 +216,8 @@ class ControllerExtensionPaymentCardinity extends Controller {
 
 					$data['refunds'][] = [
 						'date_added'  => date($this->language->get('datetime_format'), strtotime($refund->getCreated())),
-						'amount'	  => $this->currency->format($refund->getAmount(), $refund->getCurrency(), '1.00000000', true),
-						'status'	  => $refund->getStatus(),
+						'amount'      => $this->currency->format($refund->getAmount(), $refund->getCurrency(), '1.00000000', true),
+						'status'      => $refund->getStatus(),
 						'description' => $refund->getDescription()
 					];
 				}

@@ -32,7 +32,7 @@ class ModelSaleRecurring extends Model {
 		if ($implode) {
 			$sql .= " WHERE " . implode(" AND ", $implode);
 		} 
-			 
+
 		$sort_data = [
 			'or.order_recurring_id',
 			'or.order_id',
@@ -156,7 +156,7 @@ class ModelSaleRecurring extends Model {
 
 		return $result;
 	}
-	
+
 	public function getTotalRecurrings($data) {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "order_recurring` `or` LEFT JOIN `" . DB_PREFIX . "order` o ON (`or`.order_id = `o`.order_id)";
 		
@@ -185,10 +185,10 @@ class ModelSaleRecurring extends Model {
 		if (!empty($data['filter_date_added'])) {
 			$implode[] = "DATE(or.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
 		}
-		
+
 		if ($implode) {
 			$sql .= " WHERE " . implode(" AND ", $implode);
-		} 
+		}
 		
 		$query = $this->db->query($sql);
 

@@ -386,7 +386,7 @@ class ControllerSettingSetting extends Controller {
 
 		foreach ($extensions as $code) {
 			$this->load->language('extension/theme/' . $code);
-			
+
 			$data['themes'][] = [
 				'text'  => $this->language->get('heading_title'),
 				'value' => $code
@@ -457,7 +457,7 @@ class ControllerSettingSetting extends Controller {
 
 		if (is_file(DIR_IMAGE . html_entity_decode($data['config_image'], ENT_QUOTES, 'UTF-8'))) {
 			$data['thumb'] = $this->model_tool_image->resize(html_entity_decode($data['config_image'], ENT_QUOTES, 'UTF-8'), 100, 100);
-		} else {			
+		} else {
 			$data['thumb'] = $data['placeholder'];
 		}
 
@@ -877,7 +877,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_captcha_page'])) {
 			$data['config_captcha_page'] = $this->request->post['config_captcha_page'];
 		} elseif ($this->config->has('config_captcha_page')) {
-		   	$data['config_captcha_page'] = $this->config->get('config_captcha_page');
+			$data['config_captcha_page'] = $this->config->get('config_captcha_page');
 		} else {
 			$data['config_captcha_page'] = [];
 		}
@@ -893,7 +893,7 @@ class ControllerSettingSetting extends Controller {
 			'text'  => $this->language->get('text_guest'),
 			'value' => 'guest'
 		];
-		
+
 		$data['captcha_pages'][] = [
 			'text'  => $this->language->get('text_review'),
 			'value' => 'review'
@@ -984,7 +984,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_mail_alert'])) {
 			$data['config_mail_alert'] = $this->request->post['config_mail_alert'];
 		} elseif ($this->config->has('config_mail_alert')) {
-		   	$data['config_mail_alert'] = $this->config->get('config_mail_alert');
+			$data['config_mail_alert'] = $this->config->get('config_mail_alert');
 		} else {
 			$data['config_mail_alert'] = [];
 		}
@@ -1185,7 +1185,7 @@ class ControllerSettingSetting extends Controller {
 
 		return !$this->error;
 	}
-	
+
 	public function theme() {
 		// This is only here for compatibility with old themes.
 		if ($this->request->get['theme'] == 'theme_default') {
@@ -1199,5 +1199,5 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$this->response->setOutput(HTTP_CATALOG . 'image/no_image.png');
 		}
-	}	
+	}
 }

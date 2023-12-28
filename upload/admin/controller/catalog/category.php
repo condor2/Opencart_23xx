@@ -304,8 +304,8 @@ class ControllerCatalogCategory extends Controller {
 			$this->document->addScript('view/javascript/summernote/lang/summernote/summernote-' . $this->language->get('summernote') . '.min.js');
 		}
 
-		if (file_exists('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js')) {
-			$this->document->addScript('view/javascript/summernote/img-lang/'. $this->language->get('summernote') . '.js');
+		if (file_exists('view/javascript/summernote/img-lang/' . $this->language->get('summernote') . '.js')) {
+			$this->document->addScript('view/javascript/summernote/img-lang/' . $this->language->get('summernote') . '.js');
 		}
 
 		$this->document->addScript('view/javascript/summernote/opencart.js');
@@ -598,11 +598,11 @@ class ControllerCatalogCategory extends Controller {
 				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
 			}
 		}
-		
+
 		if ($this->error && !isset($this->error['warning'])) {
 			$this->error['warning'] = $this->language->get('error_warning');
 		}
-		
+
 		return !$this->error;
 	}
 

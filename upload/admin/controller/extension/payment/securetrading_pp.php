@@ -380,8 +380,8 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 
 					$this->data = [
 						'order_status_id' => $this->config->get('securetrading_pp_authorisation_reversed_order_status_id'),
-						'notify'  => false,
-						'comment' => '',
+						'notify'          => false,
+						'comment'         => '',
 					];
 
 					$this->load->model('sale/order');

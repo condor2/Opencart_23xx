@@ -262,13 +262,13 @@ class ModelCatalogCategory extends Model {
 
 		return $category_description_data;
 	}
-	
+
 	public function getCategoryPath($category_id) {
 		$query = $this->db->query("SELECT `category_id`, `path_id`, `level` FROM `" . DB_PREFIX . "category_path` WHERE `category_id` = '" . (int)$category_id . "'");
 
 		return $query->rows;
 	}
-	
+
 	public function getCategoryFilters($category_id) {
 		$category_filter_data = [];
 
@@ -315,5 +315,5 @@ class ModelCatalogCategory extends Model {
 		$query = $this->db->query("SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "category_to_layout` WHERE `layout_id` = '" . (int)$layout_id . "'");
 
 		return (int)$query->row['total'];
-	}	
+	}
 }
