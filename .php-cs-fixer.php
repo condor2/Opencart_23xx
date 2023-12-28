@@ -70,8 +70,7 @@ return $config
     ->setFinder(PhpCsFixer\Finder::create()
         ->in(__DIR__ . '/upload/')
          ->exclude([
-             __DIR__ . '/upload/system/storage/vendor/',
-             __DIR__ . '/upload/admin/language/',
+             __DIR__ . '/upload/system/storage/vendor/', '/upload/admin/language/',
          ])
         // ->append([
         //     'file-to-include',
