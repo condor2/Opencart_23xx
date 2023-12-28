@@ -121,7 +121,7 @@ class ControllerCommonColumnLeft extends Controller {
 			if ($catalog) {
 				$data['menus'][] = [
 					'id'       => 'menu-catalog',
-					'icon'     => 'fa-tags', 
+					'icon'     => 'fa-tags',
 					'name'     => $this->language->get('text_catalog'),
 					'href'     => '',
 					'children' => $catalog
@@ -137,7 +137,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'href'     => $this->url->link('extension/installer', 'token=' . $this->session->data['token'], true),
 					'children' => []
 				];
-			}	
+			}
 
 			if ($this->user->hasPermission('access', 'extension/extension')) {
 				$extension[] = [
@@ -298,7 +298,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'name'     => $this->language->get('text_custom_field'),
 					'href'     => $this->url->link('customer/custom_field', 'token=' . $this->session->data['token'], true),
 					'children' => []
-				];	
+				];
 			}
 
 			if ($customer) {
@@ -335,7 +335,7 @@ class ControllerCommonColumnLeft extends Controller {
 					'name'     => $this->language->get('text_coupon'),
 					'href'     => $this->url->link('marketing/coupon', 'token=' . $this->session->data['token'], true),
 					'children' => []
-				];	
+				];
 			}
 
 			if ($this->user->hasPermission('access', 'marketing/contact')) {
@@ -551,7 +551,7 @@ class ControllerCommonColumnLeft extends Controller {
 				$system[] = [
 					'name'     => $this->language->get('text_localisation'),
 					'href'     => '',
-					'children' => $localisation	
+					'children' => $localisation
 				];
 			}
 
@@ -604,7 +604,7 @@ class ControllerCommonColumnLeft extends Controller {
 			$report = [];
 
 			// Report Sales
-			$report_sale = [];	
+			$report_sale = [];
 
 			if ($this->user->hasPermission('access', 'report/sale_order')) {
 				$report_sale[] = [

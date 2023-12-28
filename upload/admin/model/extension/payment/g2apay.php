@@ -1,7 +1,5 @@
 <?php
-
 class ModelExtensionPaymentG2aPay extends Model {
-
 	public function install() {
 		$this->db->query("
 			CREATE TABLE `" . DB_PREFIX . "g2apay_order` (
@@ -51,7 +49,7 @@ class ModelExtensionPaymentG2aPay extends Model {
 	public function getTotalReleased($g2apay_order_id) {
 		$query = $this->db->query("SELECT SUM(`amount`) AS `total` FROM `" . DB_PREFIX . "g2apay_order_transaction` WHERE `g2apay_order_id` = '" . (int)$g2apay_order_id . "' AND (`type` = 'payment' OR `type` = 'refund')");
 
-		return (double)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 
 	public function refund($g2apay_order, $amount) {
@@ -70,7 +68,7 @@ class ModelExtensionPaymentG2aPay extends Model {
 			$fields = [
 				'action' => 'refund',
 				'amount' => $refunded_amount,
-				'hash' => $hash,
+				'hash'   => $hash,
 			];
 
 			return $this->sendCurl($url, $fields);
@@ -99,13 +97,13 @@ class ModelExtensionPaymentG2aPay extends Model {
 	}
 
 	public function addTransaction($g2apay_order_id, $type, $total) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "g2apay_order_transaction` SET `g2apay_order_id` = '" . (int)$g2apay_order_id . "',`date_added` = now(), `type` = '" . $this->db->escape($type) . "', `amount` = '" . (double)$total . "'");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "g2apay_order_transaction` SET `g2apay_order_id` = '" . (int)$g2apay_order_id . "',`date_added` = now(), `type` = '" . $this->db->escape($type) . "', `amount` = '" . (float)$total . "'");
 	}
 
 	public function getTotalRefunded($g2apay_order_id) {
 		$query = $this->db->query("SELECT SUM(`amount`) AS `total` FROM `" . DB_PREFIX . "g2apay_order_transaction` WHERE `g2apay_order_id` = '" . (int)$g2apay_order_id . "' AND 'refund'");
 
-		return (double)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 
 	public function sendCurl($url, $fields) {
@@ -118,7 +116,9 @@ class ModelExtensionPaymentG2aPay extends Model {
 		$auth_hash = hash('sha256', $this->config->get('g2apay_api_hash') . $this->config->get('g2apay_username') . html_entity_decode($this->config->get('g2apay_secret')));
 		$authorization = $this->config->get('g2apay_api_hash') . ";" . $auth_hash;
 		curl_setopt(
-				$curl, CURLOPT_HTTPHEADER, [
+			$curl,
+			CURLOPT_HTTPHEADER,
+			[
 			"Authorization: " . $authorization
 				]
 		);

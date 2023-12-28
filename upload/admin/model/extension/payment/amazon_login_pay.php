@@ -1,6 +1,5 @@
 <?php
 class ModelExtensionPaymentAmazonLoginPay extends Model {
-
 	public function install() {
 		$this->db->query("
 			CREATE TABLE `" . DB_PREFIX . "amazon_login_pay_order` (
@@ -230,19 +229,19 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 	}
 
 	public function addTransaction($amazon_login_pay_order_id, $type, $status, $total, $amazon_authorization_id = null, $amazon_capture_id = null, $amazon_refund_id = null) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "amazon_login_pay_order_transaction` SET `amazon_login_pay_order_id` = '" . (int)$amazon_login_pay_order_id . "',`amazon_authorization_id` = '" . $this->db->escape($amazon_authorization_id) . "',`amazon_capture_id` = '" . $this->db->escape($amazon_capture_id) . "',`amazon_refund_id` = '" . $this->db->escape($amazon_refund_id) . "',  `date_added` = now(), `type` = '" . $this->db->escape($type) . "', `amount` = '" . (double)$total . "', `status` = '" . $this->db->escape($status) . "'");
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "amazon_login_pay_order_transaction` SET `amazon_login_pay_order_id` = '" . (int)$amazon_login_pay_order_id . "',`amazon_authorization_id` = '" . $this->db->escape($amazon_authorization_id) . "',`amazon_capture_id` = '" . $this->db->escape($amazon_capture_id) . "',`amazon_refund_id` = '" . $this->db->escape($amazon_refund_id) . "',  `date_added` = now(), `type` = '" . $this->db->escape($type) . "', `amount` = '" . (float)$total . "', `status` = '" . $this->db->escape($status) . "'");
 	}
 
 	public function getTotalCaptured($amazon_login_pay_order_id) {
 		$query = $this->db->query("SELECT SUM(`amount`) AS `total` FROM `" . DB_PREFIX . "amazon_login_pay_order_transaction` WHERE `amazon_login_pay_order_id` = '" . (int)$amazon_login_pay_order_id . "' AND (`type` = 'capture' OR `type` = 'refund') AND (`status` = 'Completed' OR `status` = 'Closed')");
 
-		return (double)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 
 	public function getTotalRefunded($amazon_login_pay_order_id) {
 		$query = $this->db->query("SELECT SUM(`amount`) AS `total` FROM `" . DB_PREFIX . "amazon_login_pay_order_transaction` WHERE `amazon_login_pay_order_id` = '" . (int)$amazon_login_pay_order_id . "' AND 'refund'");
 
-		return (double)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 
 	public function validateDetails($data) {
@@ -252,13 +251,13 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		$validate_paramter_data['AmazonOrderReferenceId'] = 'validate details';
 		$validate_details = $this->offAmazon('GetOrderReferenceDetails', $validate_paramter_data);
 		$validate_response = $this->validateResponse('GetOrderReferenceDetails', $validate_details);
-		if($validate_response['error_code'] && $validate_response['error_code'] != 'InvalidOrderReferenceId'){
+		if ($validate_response['error_code'] && $validate_response['error_code'] != 'InvalidOrderReferenceId') {
 			return $validate_response;
 		}
 	}
 
-	public function offAmazon($Action, $parameter_data, $post_data =[]) {
-		if(!empty($post_data)){
+	public function offAmazon($Action, $parameter_data, $post_data = []) {
+		if (!empty($post_data)) {
 			$merchant_id = $post_data['amazon_login_pay_merchant_id'];
 			$access_key = $post_data['amazon_login_pay_access_key'];
 			$access_secret = $post_data['amazon_login_pay_access_secret'];
@@ -365,10 +364,10 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		$response = curl_exec($curl);
 		curl_close($curl);
 
-		list($other, $responseBody) = explode("\r\n\r\n", $response, 2);
+		[$other, $responseBody] = explode("\r\n\r\n", $response, 2);
 		$other = preg_split("/\r\n|\n|\r/", $other);
 
-		list($protocol, $code, $text) = explode(' ', trim(array_shift($other)), 3);
+		[$protocol, $code, $text] = explode(' ', trim(array_shift($other)), 3);
 		return ['status' => (int)$code, 'ResponseBody' => $responseBody];
 	}
 
@@ -390,7 +389,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		if (!isset($uri)) {
 			$uri = "/";
 		}
-		$uriencoded = implode("/", array_map(array($this, "urlencode"), explode("/", $uri)));
+		$uriencoded = implode("/", array_map([$this, "urlencode"], explode("/", $uri)));
 		$data .= $uriencoded;
 		$data .= "\n";
 		uksort($parameters, 'strcmp');

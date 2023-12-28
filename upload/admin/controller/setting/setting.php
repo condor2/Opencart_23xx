@@ -392,7 +392,7 @@ class ControllerSettingSetting extends Controller {
 				'value' => $code
 			];
 		}
-			
+
 		if (isset($this->request->post['config_layout_id'])) {
 			$data['config_layout_id'] = (int)$this->request->post['config_layout_id'];
 		} else {
@@ -888,7 +888,7 @@ class ControllerSettingSetting extends Controller {
 			'text'  => $this->language->get('text_register'),
 			'value' => 'register'
 		];
-		
+
 		$data['captcha_pages'][] = [
 			'text'  => $this->language->get('text_guest'),
 			'value' => 'guest'
@@ -919,7 +919,7 @@ class ControllerSettingSetting extends Controller {
 
 		if (is_file(DIR_IMAGE . html_entity_decode($data['config_logo'], ENT_QUOTES, 'UTF-8'))) {
 			$data['logo'] = $this->model_tool_image->resize(html_entity_decode($data['config_logo'], ENT_QUOTES, 'UTF-8'), 100, 100);
-		} else {			
+		} else {
 			$data['logo'] = $data['placeholder'];
 		}
 

@@ -69,5 +69,5 @@ class ModelExtensionFraudMaxMind extends Model {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "maxmind` WHERE order_id = '" . (int)$order_id . "'");
 
 		return $query->row;
-	}	
+	}
 }

@@ -9,7 +9,7 @@ class ModelExtensionEvent extends Model {
 	public function deleteEvent($code) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "event` WHERE `code` = '" . $this->db->escape($code) . "'");
 	}
-	
+
 	public function getEvent($code, $trigger, $action) {
 		$event = $this->db->query("SELECT * FROM `" . DB_PREFIX . "event` WHERE `code` = '" . $this->db->escape($code) . "' AND `trigger` = '" . $this->db->escape($trigger) . "' AND `action` = '" . $this->db->escape($action) . "'");
 
@@ -74,5 +74,4 @@ class ModelExtensionEvent extends Model {
 
 		return (int)$query->row['total'];
 	}
-	
 }

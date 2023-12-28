@@ -169,7 +169,7 @@ class ModelExtensionPaymentSagepayServer extends Model {
 
 			$refund_data['TxType'] = 'REFUND';
 			$refund_data['Vendor'] = $this->config->get('sagepay_server_vendor');
-			$refund_data['VendorTxCode'] = $sagepay_server_order['sagepay_server_order_id'] . rand();
+			$refund_data['VendorTxCode'] = $sagepay_server_order['sagepay_server_order_id'] . mt_rand();
 			$refund_data['Amount'] = $amount;
 			$refund_data['Currency'] = $sagepay_server_order['currency_code'];
 			$refund_data['Description'] = substr($this->config->get('config_name'), 0, 100);

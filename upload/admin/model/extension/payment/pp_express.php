@@ -52,7 +52,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 		$this->db->query("UPDATE `" . DB_PREFIX . "paypal_order` SET `capture_status` = '" . $this->db->escape($capture_status) . "', `date_modified` = NOW() WHERE `order_id` = '" . (int)$order_id . "'");
 	}
 
-	public function addTransaction($transaction_data, $request_data =[]) {
+	public function addTransaction($transaction_data, $request_data = []) {
 		if ($request_data) {
 			$serialized_data = json_encode($request_data);
 
@@ -94,7 +94,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 
 	public function getTransaction($transaction_id) {
 		$call_data = [
-			'METHOD' => 'GetTransactionDetails',
+			'METHOD'        => 'GetTransactionDetails',
 			'TRANSACTIONID' => $transaction_id,
 		];
 
@@ -216,8 +216,8 @@ class ModelExtensionPaymentPPExpress extends Model {
 		$request .= '&grant_type=client_credentials';
 
 		$additional_opts = [
-			CURLOPT_USERPWD => $client_id . ':' . $client_secret,
-			CURLOPT_POST => true,
+			CURLOPT_USERPWD    => $client_id . ':' . $client_secret,
+			CURLOPT_POST       => true,
 			CURLOPT_POSTFIELDS => $request
 		];
 
@@ -280,27 +280,27 @@ class ModelExtensionPaymentPPExpress extends Model {
 		}
 
 		$settings = [
-			'USER' => $user,
-			'PWD' => $password,
-			'SIGNATURE' => $signature,
-			'VERSION' => '84',
+			'USER'         => $user,
+			'PWD'          => $password,
+			'SIGNATURE'    => $signature,
+			'VERSION'      => '84',
 			'BUTTONSOURCE' => 'OpenCart_Cart_EC',
 		];
 
 		$this->log($data, 'Call data');
 
 		$defaults = [
-			CURLOPT_POST => 1,
-			CURLOPT_HEADER => 0,
-			CURLOPT_URL => $api_endpoint,
-			CURLOPT_USERAGENT => "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
-			CURLOPT_FRESH_CONNECT => 1,
+			CURLOPT_POST           => 1,
+			CURLOPT_HEADER         => 0,
+			CURLOPT_URL            => $api_endpoint,
+			CURLOPT_USERAGENT      => "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1",
+			CURLOPT_FRESH_CONNECT  => 1,
 			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_FORBID_REUSE => 1,
-			CURLOPT_TIMEOUT => 0,
+			CURLOPT_FORBID_REUSE   => 1,
+			CURLOPT_TIMEOUT        => 0,
 			CURLOPT_SSL_VERIFYPEER => 0,
 			CURLOPT_SSL_VERIFYHOST => 0,
-			CURLOPT_POSTFIELDS => http_build_query(array_merge($data, $settings), '', "&")
+			CURLOPT_POSTFIELDS     => http_build_query(array_merge($data, $settings), '', "&")
 		];
 
 		$ch = curl_init();
@@ -326,13 +326,13 @@ class ModelExtensionPaymentPPExpress extends Model {
 
 	private function curl($endpoint, $additional_opts =[]) {
 		$default_opts = [
-			CURLOPT_PORT => 443,
-			CURLOPT_HEADER => 0,
+			CURLOPT_PORT           => 443,
+			CURLOPT_HEADER         => 0,
 			CURLOPT_SSL_VERIFYPEER => 0,
 			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_FORBID_REUSE => 1,
-			CURLOPT_FRESH_CONNECT => 1,
-			CURLOPT_URL => $endpoint,
+			CURLOPT_FORBID_REUSE   => 1,
+			CURLOPT_FRESH_CONNECT  => 1,
+			CURLOPT_URL            => $endpoint,
 		];
 
 		$ch = curl_init($endpoint);
