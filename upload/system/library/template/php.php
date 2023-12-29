@@ -3,7 +3,7 @@ namespace Template;
 class PHP {
 	private $data = [];
 
-	public function set($key, $value) {
+	public function set($key, $value): void {
 		$this->data[$key] = $value;
 	}
 

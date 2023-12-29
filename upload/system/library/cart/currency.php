@@ -8,7 +8,7 @@ class Currency {
 	/**
 	 * Constructor
 	 *
-	 * @param    object  $registry
+	 * @param object $registry
 	 */
 	public function __construct($registry) {
 		$this->db = $registry->get('db');
@@ -31,12 +31,12 @@ class Currency {
 	/**
 	 * Format
 	 *
-	 * @param    float  $number
-	 * @param    string  $currency
-	 * @param    float  $value
-	 * @param    bool  $format
+	 * @param float $number
+	 * @param string $currency
+	 * @param float $value
+	 * @param bool $format
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function format($number, $currency, $value = 0, $format = true) {
 		if (!isset($this->currencies[$currency])) {
@@ -78,11 +78,11 @@ class Currency {
 	/**
 	 * Convert
 	 *
-	 * @param    float  $value
-	 * @param    string  $from
-	 * @param    string  $to
+	 * @param float $value
+	 * @param string $from
+	 * @param string $to
 	 *
-	 * @return   float
+	 * @return float
 	 */
 	public function convert($value, $from, $to) {
 		if (isset($this->currencies[$from])) {
@@ -103,9 +103,9 @@ class Currency {
 	/**
 	 * getId
 	 *
-	 * @param    string  $currency
+	 * @param string $currency
 	 *
-	 * @return   int
+	 * @return int
 	 */
 	public function getId($currency) {
 		if (isset($this->currencies[$currency])) {
@@ -118,9 +118,9 @@ class Currency {
 	/**
 	 * getSymbolLeft
 	 *
-	 * @param    string  $currency
+	 * @param string $currency
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function getSymbolLeft($currency) {
 		if (isset($this->currencies[$currency])) {
@@ -133,9 +133,9 @@ class Currency {
 	/**
 	 * getSymbolRight
 	 *
-	 * @param    string  $currency
+	 * @param string $currency
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function getSymbolRight($currency) {
 		if (isset($this->currencies[$currency])) {
@@ -148,9 +148,9 @@ class Currency {
 	/**
 	 * getDecimalPlace
 	 *
-	 * @param    string  $currency
+	 * @param string $currency
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function getDecimalPlace($currency) {
 		if (isset($this->currencies[$currency])) {
@@ -163,9 +163,9 @@ class Currency {
 	/**
 	 * getValue
 	 *
-	 * @param    string  $currency
+	 * @param string $currency
 	 *
-	 * @return   float
+	 * @return float
 	 */
 	public function getValue($currency) {
 		if (isset($this->currencies[$currency])) {
@@ -178,9 +178,9 @@ class Currency {
 	/**
 	 * Has
 	 *
-	 * @param    string  $currency
+	 * @param string $currency
 	 *
-	 * @return   bool
+	 * @return bool
 	 */
 	public function has($currency) {
 		return isset($this->currencies[$currency]);

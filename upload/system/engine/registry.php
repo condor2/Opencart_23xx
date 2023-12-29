@@ -2,14 +2,14 @@
 /**
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
- * @see		https://www.opencart.com
+ * @see			https://www.opencart.com
 */
 
 /**
-* Registry class
-*/
+ * Registry class
+ */
 class Registry {
 	private $data = [];
 
@@ -21,7 +21,7 @@ class Registry {
 	 * @return ?object
 	 */
 	public function get(string $key): ?object {
-		return (isset($this->data[$key]) ? $this->data[$key] : null);
+		return $this->data[$key] ?? null;
 	}
 
 	/**

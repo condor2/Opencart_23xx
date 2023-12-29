@@ -15,7 +15,7 @@ class User {
 	/**
 	 * Constructor
 	 *
-	 * @param    object  $registry
+	 * @param object $registry
 	 */
 	public function __construct($registry) {
 		$this->db = $registry->get('db');
@@ -53,10 +53,10 @@ class User {
 	/**
 	 * Login
 	 *
-	 * @param    string  $username
-	 * @param    string  $password
+	 * @param string $username
+	 * @param string $password
 	 *
-	 * @return   bool
+	 * @return bool
 	 */
 	public function login($username, $password) {
 		$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND status = '1'");
@@ -104,9 +104,9 @@ class User {
 	/**
 	 * Logout
 	 *
-	  * @return   void
+	  * @return void
 	 */
-	public function logout() {
+	public function logout(): void {
 		unset($this->session->data['user_id']);
 
 		$this->user_id = 0;
@@ -120,10 +120,10 @@ class User {
 	/**
 	 * hasPermission
 	 *
-	 * @param    string  $key
-	 * @param    mixed  $value
+	 * @param string $key
+	 * @param mixed $value
 	 *
-	 * @return   bool
+	 * @return bool
 	 */
 	public function hasPermission($key, $value) {
 		if (isset($this->permission[$key])) {
@@ -136,7 +136,7 @@ class User {
 	/**
 	 * isLogged
 	 *
-	 * @return   bool
+	 * @return bool
 	 */
 	public function isLogged() {
 		return $this->user_id ? true : false;
@@ -145,7 +145,7 @@ class User {
 	/**
 	 * getId
 	 *
-	 * @return   int
+	 * @return int
 	 */
 	public function getId() {
 		return $this->user_id;
@@ -154,7 +154,7 @@ class User {
 	/**
 	 * getUserName
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function getUserName() {
 		return $this->username;
@@ -163,7 +163,7 @@ class User {
 	/**
 	 * getFirstName
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function getFirstName() {
 		return $this->firstname;
@@ -172,7 +172,7 @@ class User {
 	/**
 	 * getLastName
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function getLastName() {
 		return $this->lastname;
@@ -181,7 +181,7 @@ class User {
 	/**
 	 * getEmail
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function getEmail() {
 		return $this->email;
@@ -190,7 +190,7 @@ class User {
 	/**
 	 * getGroupId
 	 *
-	 * @return   int
+	 * @return int
 	 */
 	public function getGroupId() {
 		return $this->user_group_id;

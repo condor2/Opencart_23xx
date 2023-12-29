@@ -9,7 +9,7 @@ class Language {
 	}
 
 	public function get(string $key) {
-		return (isset($this->data[$key]) ? $this->data[$key] : $key);
+		return $this->data[$key] ?? $key;
 	}
 
 	public function set(string $key, string $value): void {
@@ -22,7 +22,7 @@ class Language {
 	}
 
 	// Please dont use the below function i'm thinking getting rid of it.
-	public function merge(&$data) {
+	public function merge(&$data): void {
 		array_merge($this->data, $data);
 	}
 

@@ -2,14 +2,14 @@
 /**
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
- * @see		https://www.opencart.com
+ * @see			https://www.opencart.com
 */
 
 /**
-* Template class
-*/
+ * Template class
+ */
 class Template {
 	private object $adaptor;
 
@@ -32,8 +32,8 @@ class Template {
 	/**
 	 *
 	 *
-	 * @param	string	$key
-	 * @param	mixed	$value
+	 * @param string $key
+	 * @param mixed	$value
 	 */
 	public function set(string $key, $value): void {
 		$this->adaptor->set($key, $value);
@@ -42,10 +42,10 @@ class Template {
 	/**
 	 *
 	 *
-	 * @param	string	$template
-	 * @param	bool	$cache
+	 * @param string $template
+	 * @param bool $cache
 	 *
-	 * @return	string
+	 * @return string
 	 */
 	public function render(string $template): string {
 		return $this->adaptor->render($template);

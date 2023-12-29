@@ -2,14 +2,14 @@
 /**
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
- * @see		https://www.opencart.com
+ * @see			https://www.opencart.com
 */
 
 /**
-* Image class
-*/
+ * Image class
+ */
 class Image {
 	private $file;
 	private $image;
@@ -36,8 +36,8 @@ class Image {
 
 			$this->width = $info[0];
 			$this->height = $info[1];
-			$this->bits = isset($info['bits']) ? $info['bits'] : '';
-			$this->mime = isset($info['mime']) ? $info['mime'] : '';
+			$this->bits = $info['bits'] ?? '';
+			$this->mime = $info['mime'] ?? '';
 
 			if ($this->mime == 'image/gif') {
 				$this->image = imagecreatefromgif($file);
@@ -54,8 +54,6 @@ class Image {
 	}
 
 	/**
-	 *
-	 *
 	 * @return string
 	 */
 	public function getFile() {
@@ -63,35 +61,27 @@ class Image {
 	}
 
 	/**
-	 *
-	 *
-	 * @return	array
+	 * @return array
 	 */
 	public function getImage() {
 		return $this->image;
 	}
 
 	/**
-	 *
-	 *
-	 * @return	int
+	 * @return int
 	 */
 	public function getWidth() {
 		return $this->width;
 	}
 
 	/**
-	 *
-	 *
-	 * @return	int
+	 * @return int
 	 */
 	public function getHeight() {
 		return $this->height;
 	}
 
 	/**
-	 *
-	 *
 	 * @return	string
 	 */
 	public function getBits() {
@@ -99,19 +89,15 @@ class Image {
 	}
 
 	/**
-	 *
-	 *
-	 * @return	string
+	 * @return string
 	 */
 	public function getMime() {
 		return $this->mime;
 	}
 
 	/**
-	 *
-	 *
-	 * @param	string	$file
-	 * @param	int		$quality
+	 * @param string $file
+	 * @param int $quality
 	 */
 	public function save(string $file, int $quality = 90): void {
 		$info = pathinfo($file);
@@ -134,11 +120,9 @@ class Image {
 	}
 
 	/**
-	 *
-	 *
-	 * @param	int	$width
-	 * @param	int	$height
-	 * @param	string	$default
+	 * @param int $width
+	 * @param int $height
+	 * @param string $default
 	 */
 	public function resize(int $width = 0, int $height = 0, string $default = ''): void {
 		if (!$this->width || !$this->height) {
@@ -217,47 +201,45 @@ class Image {
 	}
 
 	/**
-	 *
-	 *
-	 * @param	string	$watermark
-	 * @param	string	$position
+	 * @param string $watermark
+	 * @param string $position
 	 */
-	public function watermark($watermark, $position = 'bottomright') {
+	public function watermark($watermark, $position = 'bottomright'): void {
 		switch($position) {
-			case 'topleft':
-				$watermark_pos_x = 0;
+			case 'topleft'
+			:$watermark_pos_x = 0;
+ 				$watermark_pos_y = 0;
+ 				break;
+			case 'topcenter'
+			:$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
 				$watermark_pos_y = 0;
 				break;
-			case 'topcenter':
-				$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
+			case 'topright'
+			:$watermark_pos_x = ($this->width - $watermark->getWidth());
 				$watermark_pos_y = 0;
 				break;
-			case 'topright':
-				$watermark_pos_x = ($this->width - $watermark->getWidth());
-				$watermark_pos_y = 0;
-				break;
-			case 'middleleft':
-				$watermark_pos_x = 0;
+			case 'middleleft'
+			:$watermark_pos_x = 0;
 				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
-			case 'middlecenter':
-				$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
+			case 'middlecenter'
+			:$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
 				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
-			case 'middleright':
-				$watermark_pos_x = ($this->width - $watermark->getWidth());
+			case 'middleright'
+			:$watermark_pos_x = ($this->width - $watermark->getWidth());
 				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
-			case 'bottomleft':
-				$watermark_pos_x = 0;
+			case 'bottomleft'
+			:$watermark_pos_x = 0;
 				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
-			case 'bottomcenter':
-				$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
+			case 'bottomcenter'
+			:$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
 				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
-			case 'bottomright':
-				$watermark_pos_x = ($this->width - $watermark->getWidth());
+			case 'bottomright'
+			:$watermark_pos_x = ($this->width - $watermark->getWidth());
 				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
 		}
@@ -270,12 +252,10 @@ class Image {
 	}
 
 	/**
-	 *
-	 *
-	 * @param	int		$top_x
-	 * @param	int		$top_y
-	 * @param	int		$bottom_x
-	 * @param	int		$bottom_y
+	 * @param int $top_x
+	 * @param int $top_y
+	 * @param int $bottom_x
+	 * @param int $bottom_y
 	 */
 	public function crop(int $top_x, $top_y, int $bottom_x, int $bottom_y): void {
 		$image_old = $this->image;
@@ -289,10 +269,8 @@ class Image {
 	}
 
 	/**
-	 *
-	 *
-	 * @param	int		$degree
-	 * @param	string	$color
+	 * @param int $degree
+	 * @param string $color
 	 */
 	public function rotate(int $degree, $color = 'FFFFFF'): void {
 		$rgb = $this->html2rgb($color);
@@ -308,20 +286,18 @@ class Image {
 	 *
 	 * @return void
 	 */
-	private function filter() {
+	private function filter(): void {
 		$args = func_get_args();
 
 		call_user_func_array('imagefilter', $args);
 	}
 
 	/**
-	 *
-	 *
-	 * @param	string	$text
-	 * @param	int		$x
-	 * @param	int		$y
-	 * @param	int		$size
-	 * @param	string	$color
+	 * @param string $text
+	 * @param int $x
+	 * @param int $y
+	 * @param int $size
+	 * @param string $color
 	 */
 	private function text($text, int $x = 0, int $y = 0, int $size = 5, $color = '000000'): void {
 		$rgb = $this->html2rgb($color);
@@ -330,23 +306,19 @@ class Image {
 	}
 
 	/**
-	 *
-	 *
-	 * @param	object	$merge
-	 * @param	int	$x
-	 * @param	int	$y
-	 * @param	int	$opacity
+	 * @param object $merge
+	 * @param int $x
+	 * @param int $y
+	 * @param int $opacity
 	 */
-	private function merge($merge, int $x = 0, int $y = 0, int $opacity = 100) {
+	private function merge($merge, int $x = 0, int $y = 0, int $opacity = 100): void {
 		imagecopymerge($this->image, $merge->getImage(), $x, $y, 0, 0, $merge->getWidth(), $merge->getHeight(), $opacity);
 	}
 
 	/**
+	 * @param string $color
 	 *
-	 *
-	 * @param	string	$color
-	 *
-	 * @return	array
+	 * @return array
 	 */
 	private function html2rgb($color) {
 		if ($color[0] == '#') {

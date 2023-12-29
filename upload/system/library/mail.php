@@ -19,7 +19,7 @@ class Mail extends \stdClass {
 
 	public function __construct($config = []) {
 		foreach ($config as $key => $value) {
-			$this->$key = $value;
+			$this->{$key} = $value;
 		}
 	}
 
@@ -388,7 +388,7 @@ class Mail extends \stdClass {
 				foreach ($lines as $line) {
 					$results = ($line === '') ? [''] : str_split($line, 998);
 
-					foreach($results as $result) {
+					foreach ($results as $result) {
 						fwrite($handle, $result . "\r\n");
 					}
 				}

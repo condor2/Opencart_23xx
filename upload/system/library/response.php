@@ -2,14 +2,14 @@
 /**
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
- * @see		https://www.opencart.com
+ * @see			https://www.opencart.com
 */
 
 /**
-* Response class
-*/
+ * Response class
+ */
 class Response {
 	private $headers = [];
 	private $level = 0;
@@ -28,7 +28,7 @@ class Response {
 	 * Redirect
 	 *
 	 * @param string $url
-	 * @param int    $status
+	 * @param int $status
 	 *
 	 * @return void
 	 */

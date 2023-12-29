@@ -35,7 +35,7 @@ class PDO {
 					$data = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
 					$result = new \stdClass();
-					$result->row = isset($data[0]) ? $data[0] : [];
+					$result->row = $data[0] ?? [];
 					$result->rows = $data;
 					$result->num_rows = count($data);
 					$this->affected = 0;
@@ -86,9 +86,8 @@ class PDO {
 	 * __destruct
 	 *
 	 * Closes the DB connection when this object is destroyed.
-	 *
 	 */
 	public function __destruct() {
-		unset($this->connection);
+		$this->connection = null;
 	}
 }

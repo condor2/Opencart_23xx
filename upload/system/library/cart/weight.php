@@ -8,7 +8,7 @@ class Weight {
 	/**
 	 * Constructor
 	 *
-	 * @param    object  $registry
+	 * @param object $registry
 	 */
 	public function __construct($registry) {
 		$this->db = $registry->get('db');
@@ -29,11 +29,11 @@ class Weight {
 	/**
 	 * Convert
 	 *
-	 * @param    float  $value
-	 * @param    string  $from
-	 * @param    string  $to
+	 * @param float $value
+	 * @param string $from
+	 * @param string $to
 	 *
-	 * @return   float
+	 * @return float
 	 */
 	public function convert(float $value, string $from, string $to): float {
 		if ($from == $to) {

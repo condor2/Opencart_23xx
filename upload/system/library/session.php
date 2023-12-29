@@ -68,7 +68,7 @@ class Session {
 		}
 	}
 
-	public function destroy($key = 'default') {
+	public function destroy($key = 'default'): void {
 		if (isset($_SESSION[$key])) {
 			unset($_SESSION[$key]);
 		}

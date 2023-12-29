@@ -3,10 +3,9 @@
  *
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
- *
- * @see		https://www.opencart.com
+ * @see			https://www.opencart.com
  */
 
 /**
@@ -27,8 +26,6 @@ class Front {
 	}
 
 	/**
-	 *
-	 *
 	 * @param object $pre_action
 	 */
 	public function addPreAction(Action $pre_action): void {
@@ -36,8 +33,6 @@ class Front {
 	}
 
 	/**
-	 *
-	 *
 	 * @param object $action
 	 * @param object $error
 	 */

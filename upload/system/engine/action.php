@@ -2,14 +2,14 @@
 /**
  * @package		OpenCart
  * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
+ * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
- * @see		https://www.opencart.com
-*/
+ * @see			https://www.opencart.com
+ */
 
 /**
-* Action class
-*/
+ * Action class
+ */
 class Action {
 	private $id;
 	private $route;
@@ -18,8 +18,8 @@ class Action {
 	/**
 	 * Constructor
 	 *
-	 * @param	string	$route
-	*/
+	 * @param string $route
+	 */
 	public function __construct($route) {
 		$this->id = $route;
 
@@ -42,9 +42,9 @@ class Action {
 	/**
 	 *
 	 *
-	 * @return	string
+	 * @return string
 	 *
-	*/
+	 */
 	public function getId() {
 		return $this->id;
 	}
@@ -52,9 +52,9 @@ class Action {
 	/**
 	 *
 	 *
-	 * @param	object	$registry
-	 * @param	array	$args
-	*/
+	 * @param object $registry
+	 * @param array $args
+	 */
 	public function execute($registry, array $args = []) {
 		// Stop any magical methods being called
 		if (substr($this->method, 0, 2) == '__') {
