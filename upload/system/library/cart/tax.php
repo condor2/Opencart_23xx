@@ -94,7 +94,7 @@ class Tax {
 	 *
 	 * @return float
 	 */
-	public function calculate($value, $tax_class_id, $calculate = true): void {
+	public function calculate($value, $tax_class_id, $calculate = true): float {
 		if ($tax_class_id && $calculate) {
 			$amount = 0;
 

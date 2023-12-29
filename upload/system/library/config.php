@@ -39,9 +39,9 @@ class Config {
 	 *
 	 * @param string $key
 	 *
-	 * @return mixed
+	 * @return bool
 	 */
-	public function has($key): void {
+	public function has(string $key): bool {
 		return isset($this->data[$key]);
 	}
 
