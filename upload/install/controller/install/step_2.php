@@ -2,7 +2,7 @@
 class ControllerInstallStep2 extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): void {
 		$this->language->load('install/step_2');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {

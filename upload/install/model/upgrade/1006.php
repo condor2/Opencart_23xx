@@ -1,6 +1,6 @@
 <?php
 class ModelUpgrade1006 extends Model {
-	public function upgrade() {
+	public function upgrade(): void {
 		// Update some language settings
 		$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `value` = 'en-gb' WHERE `key` = 'config_language' AND `value` = 'en'");
 		$this->db->query("UPDATE `" . DB_PREFIX . "setting` SET `value` = 'en-gb' WHERE `key` = 'config_admin_language' AND `value` = 'en'");

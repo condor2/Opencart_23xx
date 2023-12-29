@@ -1,6 +1,6 @@
 <?php
 class ControllerInstallStep4 extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->language->load('install/step_4');
 
 		$this->document->setTitle($this->language->get('heading_title'));

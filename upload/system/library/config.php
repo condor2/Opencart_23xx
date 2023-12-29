@@ -44,7 +44,7 @@ class Config {
 	/**
 	 * @param string $filename
 	 */
-	public function load($filename) {
+	public function load(string $filename): void {
 		$file = DIR_CONFIG . $filename . '.php';
 
 		if (file_exists($file)) {

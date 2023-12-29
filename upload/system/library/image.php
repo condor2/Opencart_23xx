@@ -20,7 +20,7 @@ class Image {
 	private $bits;
 	private $mime;
 
-	/**
+	/*
 	 * Constructor
 	 *
 	 * @param string $file

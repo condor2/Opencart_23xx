@@ -1,6 +1,6 @@
 <?php
 class ModelUpgrade1004 extends Model {
-	public function upgrade() {
+	public function upgrade(): void {
 		// custom_field
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "custom_field' AND COLUMN_NAME = 'required'");
 

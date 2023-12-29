@@ -1,6 +1,6 @@
 <?php
 class ControllerUpgradeUpgrade extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->language->load('upgrade/upgrade');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -32,7 +32,7 @@ class ControllerUpgradeUpgrade extends Controller {
 		$this->response->setOutput($this->load->view('upgrade/upgrade', $data));
 	}
 
-	public function next() {
+	public function next(): void {
 		$this->load->language('upgrade/upgrade');
 
 		$json = [];

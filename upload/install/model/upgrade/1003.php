@@ -1,6 +1,6 @@
 <?php
 class ModelUpgrade1003 extends Model {
-	public function upgrade() {
+	public function upgrade(): void {
 
 		// affiliate_activity
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate_activity' AND COLUMN_NAME = 'activity_id'");

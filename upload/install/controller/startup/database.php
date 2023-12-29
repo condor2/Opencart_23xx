@@ -1,6 +1,6 @@
 <?php
 class ControllerStartupDatabase extends Controller {
-	public function index() {
+	public function index(): void {
 		if (is_file(DIR_OPENCART . 'config.php') && filesize(DIR_OPENCART . 'config.php') > 0) {
 			$lines = file(DIR_OPENCART . 'config.php');
 

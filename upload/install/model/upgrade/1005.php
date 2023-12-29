@@ -1,6 +1,6 @@
 <?php
 class ModelUpgrade1005 extends Model {
-	public function upgrade() {
+	public function upgrade(): void {
 		// api
 		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "api' AND COLUMN_NAME = 'username'");
 

@@ -1,6 +1,6 @@
 <?php
 class ModelUpgrade1001 extends Model {
-	public function upgrade() {
+	public function upgrade(): void {
 		// address
 		$this->db->query("ALTER TABLE `" . DB_PREFIX . "address` CHANGE `company` `company` VARCHAR(40) NOT NULL");
 

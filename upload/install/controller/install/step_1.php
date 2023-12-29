@@ -1,6 +1,6 @@
 <?php
 class ControllerInstallStep1 extends Controller {
-	public function index() {
+	public function index(): void {
 		$this->language->load('install/step_1');
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {

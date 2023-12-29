@@ -1,6 +1,6 @@
 <?php
 class Controller3rdPartyExtension extends Controller {
-	public function index() {
+	public function index(): void {
 		$curl = curl_init();
 
 		curl_setopt($curl, CURLOPT_POST, true);

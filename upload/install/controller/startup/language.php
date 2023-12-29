@@ -1,6 +1,6 @@
 <?php
 class ControllerStartupLanguage extends Controller {
-	public function index() {
+	public function index(): void {
 		// Default language code
 		$code = $this->config->get('language_default');
 
