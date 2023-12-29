@@ -101,6 +101,7 @@ class ModelExtensionPaymentEway extends Model {
 			$url = 'https://api.ewaypayments.com/AccessCodes';
 		}
 
+		$response = $this->sendCurl($url, $request);
 		return json_decode($response);
 	}
 
@@ -111,6 +112,7 @@ class ModelExtensionPaymentEway extends Model {
 			$url = 'https://api.ewaypayments.com/AccessCodesShared';
 		}
 
+		$response = $this->sendCurl($url, $request);
 		return json_decode($response);
 	}
 
