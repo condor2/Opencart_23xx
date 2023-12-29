@@ -13,6 +13,8 @@ return $config
         '@PER-CS2.0' => true,
         '@DoctrineAnnotation' => true,
         '@PHPUnit100Migration:risky' => true,
+        '@PHP74Migration' => true,
+        '@PHP74Migration:risky' => true,
         'array_syntax' => true,
         'assign_null_coalescing_to_coalesce_equal' => true,
         'binary_operator_spaces' => ['default' => 'single_space','operators' => ['=' => 'at_least_single_space','=>' => 'align_single_space_minimal']],
@@ -65,6 +67,8 @@ return $config
         'random_api_migration' => true,
         'simple_to_complex_string_variable' => true,
         'use_arrow_functions' => true,
+		'declare_strict_types' => false,
+        'trailing_comma_in_multiline' => false,
         //'void_return' => true,
     ])
     ->setFinder(PhpCsFixer\Finder::create()
