@@ -23,9 +23,7 @@ class ModelExtensionPaymentCardinity extends Model {
 		$method = new Payment\Create($payment_data);
 
 		try {
-			$payment = $client->call($method);
-
-			return $payment;
+			return $client->call($method);
 		} catch (Exception $exception) {
 			$this->exception($exception);
 
@@ -42,9 +40,7 @@ class ModelExtensionPaymentCardinity extends Model {
 		$method = new Payment\Finalize($payment_id, $pares);
 
 		try {
-			$payment = $client->call($method);
-
-			return $payment;
+			return $client->call($method);
 		} catch (Exception $exception) {
 			$this->exception($exception);
 

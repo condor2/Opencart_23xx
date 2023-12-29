@@ -58,10 +58,10 @@ class ControllerExtensionPaymentEway extends Controller {
 		$this->load->model('localisation/zone');
 
 		$payment_zone_info = $this->model_localisation_zone->getZone($order_info['payment_zone_id']);
-		$payment_zone_code = isset($payment_zone_info['code']) ? $payment_zone_info['code'] : '';
+		$payment_zone_code = $payment_zone_info['code'] ?? '';
 
 		$shipping_zone_info = $this->model_localisation_zone->getZone($order_info['shipping_zone_id']);
-		$shipping_zone_code = isset($shipping_zone_info['code']) ? $shipping_zone_info['code'] : '';
+		$shipping_zone_code = $shipping_zone_info['code'] ?? '';
 
 		$request = new stdClass();
 
@@ -99,7 +99,7 @@ class ControllerExtensionPaymentEway extends Controller {
 			$item = new stdClass();
 			$item->SKU = (string)substr($product['product_id'], 0, 12);
 			$item->Description = (string)substr($product['name'], 0, 26);
-			$item->Quantity = strval($product['quantity']);
+			$item->Quantity = (string)($product['quantity']);
 			$item->UnitCost = $this->lowestDenomination($item_price, $order_info['currency_code']);
 			$item->Total = $this->lowestDenomination($item_total, $order_info['currency_code']);
 			$request->Items[] = $item;
@@ -313,5 +313,4 @@ class ControllerExtensionPaymentEway extends Controller {
 			}
 		}
 	}
-
 }

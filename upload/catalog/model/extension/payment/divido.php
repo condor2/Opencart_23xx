@@ -45,14 +45,12 @@ class ModelExtensionPaymentDivido extends Model {
 			$title = $title_override;
 		}
 
-		$method_data = [
+		return [
 			'code'       => 'divido',
 			'title'      => $title,
 			'terms'      => '',
 			'sort_order' => $this->config->get('divido_sort_order')
 		];
-
-		return $method_data;
 	}
 
 	public function getProductSettings($product_id) {
@@ -137,9 +135,7 @@ class ModelExtensionPaymentDivido extends Model {
 		if ($plans = $this->cache->get(self::CACHE_KEY_PLANS)) {
 			// OpenCart 2.1 decodes json objects to associative arrays so we
 			// need to make sure we're getting a list of simple objects back.
-			$plans = array_map(fn ($plan) => (object)$plan, $plans);
-
-			return $plans;
+			return array_map(fn ($plan) => (object)$plan, $plans);
 		}
 
 		$api_key = $this->config->get('divido_api_key');
@@ -289,8 +285,7 @@ class ModelExtensionPaymentDivido extends Model {
 		}
 
 		if ($settings['display'] == 'default') {
-			$plans = $this->getPlans(true);
-			return $plans;
+			return $this->getPlans(true);
 		}
 
 		// If the product has non-default plans, fetch all of them.
@@ -310,5 +305,4 @@ class ModelExtensionPaymentDivido extends Model {
 
 		return $plans;
 	}
-
 }

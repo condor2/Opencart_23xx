@@ -47,7 +47,7 @@ class ModelExtensionPaymentLaybuy extends Model {
 			$status = false;
 		}
 
-		/* Condition for customer group */
+		// Condition for customer group
 		if ($status && $this->config->get('laybuy_customer_group')) {
 			if (isset($this->session->data['guest']) && in_array(0, $this->config->get('laybuy_customer_group'))) {
 				$status = true;
@@ -68,7 +68,7 @@ class ModelExtensionPaymentLaybuy extends Model {
 			}
 		}
 
-		/* Condition for categories and products */
+		// Condition for categories and products
 		if ($status && $this->config->get('laybuy_category')) {
 			$allowed_categories = $this->config->get('laybuy_category');
 
@@ -208,11 +208,11 @@ class ModelExtensionPaymentLaybuy extends Model {
 			$date = date($this->language->get('date_format_short'), strtotime($date));
 
 			$report_content[] = [
-			'instalment'  => $month,
-			'amount'      => $this->currency->format($data['payment_amounts'], $data['currency']),
-			'date'        => $date,
-			'pp_trans_id' => '',
-			'status'      => 'Pending'
+				'instalment'  => $month,
+				'amount'      => $this->currency->format($data['payment_amounts'], $data['currency']),
+				'date'        => $date,
+				'pp_trans_id' => '',
+				'status'      => 'Pending'
 			];
 		}
 

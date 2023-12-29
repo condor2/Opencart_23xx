@@ -48,6 +48,7 @@ class ModelExtensionPaymentBluePayRedirect extends Model {
 				'type'        => $row['type'],
 			];
 		}
+
 		return $card_data;
 	}
 
@@ -119,5 +120,4 @@ class ModelExtensionPaymentBluePayRedirect extends Model {
 
 		return json_decode($response_data, true);
 	}
-
 }

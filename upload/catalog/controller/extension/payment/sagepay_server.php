@@ -132,13 +132,13 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		$cart_rows = 0;
 		$str_basket = "";
 		foreach ($order_products as $product) {
-			$str_basket .=
-					":" . str_replace(":", " ", $product['name'] . " " . $product['model']) .
-					":" . $product['quantity'] .
-					":" . $this->currency->format($product['price'], $order_info['currency_code'], false, false) .
-					":" . $this->currency->format($product['tax'], $order_info['currency_code'], false, false) .
-					":" . $this->currency->format(($product['price'] + $product['tax']), $order_info['currency_code'], false, false) .
-					":" . $this->currency->format(($product['price'] + $product['tax']) * $product['quantity'], $order_info['currency_code'], false, false);
+			$str_basket
+					.= ":" . str_replace(":", " ", $product['name'] . " " . $product['model'])
+					. ":" . $product['quantity']
+					. ":" . $this->currency->format($product['price'], $order_info['currency_code'], false, false)
+					. ":" . $this->currency->format($product['tax'], $order_info['currency_code'], false, false)
+					. ":" . $this->currency->format(($product['price'] + $product['tax']), $order_info['currency_code'], false, false)
+					. ":" . $this->currency->format(($product['price'] + $product['tax']) * $product['quantity'], $order_info['currency_code'], false, false);
 			$cart_rows++;
 		}
 
@@ -368,7 +368,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 
 		$str_my_signature = strtoupper(md5($str_message));
 
-		/** We can now compare our MD5 Hash signature with that from Sage Pay Server * */
+		// We can now compare our MD5 Hash signature with that from Sage Pay Server
 		if ($str_my_signature != $str_vps_signature) {
 			$this->model_extension_payment_sagepay_server->deleteOrder($order_id);
 
@@ -498,5 +498,4 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 			$this->model_extension_payment_sagepay_server->logger('Repeat Orders', $orders);
 		}
 	}
-
 }

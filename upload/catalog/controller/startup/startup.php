@@ -8,6 +8,7 @@ class ControllerStartupStartup extends Controller {
 				return true;
 			}
 		}
+
 		return false;
 	}
 

@@ -31,10 +31,10 @@ class Currency {
 	/**
 	 * Format
 	 *
-	 * @param float $number
+	 * @param float  $number
 	 * @param string $currency
-	 * @param float $value
-	 * @param bool $format
+	 * @param float  $value
+	 * @param bool   $format
 	 *
 	 * @return string
 	 */
@@ -78,7 +78,7 @@ class Currency {
 	/**
 	 * Convert
 	 *
-	 * @param float $value
+	 * @param float  $value
 	 * @param string $from
 	 * @param string $to
 	 *

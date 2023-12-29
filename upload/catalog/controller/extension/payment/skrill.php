@@ -81,7 +81,7 @@ class ControllerExtensionPaymentSkrill extends Controller {
 			}
 
 			if ($verified) {
-				switch($this->request->post['status']) {
+				switch ($this->request->post['status']) {
 					case '2':
 						$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('skrill_order_status_id'), '', true);
 						break;

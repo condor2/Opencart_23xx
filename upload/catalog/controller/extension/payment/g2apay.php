@@ -162,6 +162,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 				$hash = hash('sha256', $string);
 				if ($hash != $this->request->post['hash']) {
 					$this->model_extension_payment_g2apay->logger('Hashes do not match, possible tampering!');
+
 					return;
 				}
 

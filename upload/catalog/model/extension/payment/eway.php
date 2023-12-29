@@ -101,8 +101,7 @@ class ModelExtensionPaymentEway extends Model {
 			$url = 'https://api.ewaypayments.com/AccessCodes';
 		}
 
-		$response = $this->sendCurl($url, $request);
-		$response = json_decode($response);
+		return json_decode($response);
 
 		return $response;
 	}
@@ -114,8 +113,7 @@ class ModelExtensionPaymentEway extends Model {
 			$url = 'https://api.ewaypayments.com/AccessCodesShared';
 		}
 
-		$response = $this->sendCurl($url, $request);
-		$response = json_decode($response);
+		return json_decode($response);
 
 		return $response;
 	}
@@ -128,9 +126,7 @@ class ModelExtensionPaymentEway extends Model {
 		}
 
 		$response = $this->sendCurl($url, '', false);
-		$response = json_decode($response);
-
-		return $response;
+		return json_decode($response);
 	}
 
 	public function sendCurl($url, $data, $is_post = true) {
@@ -157,7 +153,7 @@ class ModelExtensionPaymentEway extends Model {
 
 		if (curl_errno($ch) != CURLE_OK) {
 			$response = new stdClass();
-			$response->Errors = "POST Error: " . curl_error($ch) . " URL: $url";
+			$response->Errors = "POST Error: " . curl_error($ch) . " URL: {$url}";
 			$this->log->write(['error' => curl_error($ch), 'errno' => curl_errno($ch)], 'cURL failed');
 			$response = json_encode($response);
 		} else {
@@ -177,5 +173,4 @@ class ModelExtensionPaymentEway extends Model {
 
 		return $response;
 	}
-
 }

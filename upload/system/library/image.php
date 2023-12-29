@@ -1,11 +1,13 @@
 <?php
 /**
  * @package		OpenCart
+ *
  * @author		Daniel Kerr
  * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
+ *
  * @see			https://www.opencart.com
-*/
+ */
 
 /**
  * Image class
@@ -97,7 +99,7 @@ class Image {
 
 	/**
 	 * @param string $file
-	 * @param int $quality
+	 * @param int    $quality
 	 */
 	public function save(string $file, int $quality = 90): void {
 		$info = pathinfo($file);
@@ -120,8 +122,8 @@ class Image {
 	}
 
 	/**
-	 * @param int $width
-	 * @param int $height
+	 * @param int    $width
+	 * @param int    $height
 	 * @param string $default
 	 */
 	public function resize(int $width = 0, int $height = 0, string $default = ''): void {
@@ -206,40 +208,31 @@ class Image {
 	 */
 	public function watermark($watermark, $position = 'bottomright'): void {
 		switch($position) {
-			case 'topleft'
-			:$watermark_pos_x = 0;
+			case 'topleft':$watermark_pos_x = 0;
  				$watermark_pos_y = 0;
  				break;
-			case 'topcenter'
-			:$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
+			case 'topcenter':$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
 				$watermark_pos_y = 0;
 				break;
-			case 'topright'
-			:$watermark_pos_x = ($this->width - $watermark->getWidth());
+			case 'topright':$watermark_pos_x = ($this->width - $watermark->getWidth());
 				$watermark_pos_y = 0;
 				break;
-			case 'middleleft'
-			:$watermark_pos_x = 0;
+			case 'middleleft':$watermark_pos_x = 0;
 				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
-			case 'middlecenter'
-			:$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
+			case 'middlecenter':$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
 				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
-			case 'middleright'
-			:$watermark_pos_x = ($this->width - $watermark->getWidth());
+			case 'middleright':$watermark_pos_x = ($this->width - $watermark->getWidth());
 				$watermark_pos_y = (int)(($this->height - $watermark->getHeight()) / 2);
 				break;
-			case 'bottomleft'
-			:$watermark_pos_x = 0;
+			case 'bottomleft':$watermark_pos_x = 0;
 				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
-			case 'bottomcenter'
-			:$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
+			case 'bottomcenter':$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
 				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
-			case 'bottomright'
-			:$watermark_pos_x = ($this->width - $watermark->getWidth());
+			case 'bottomright':$watermark_pos_x = ($this->width - $watermark->getWidth());
 				$watermark_pos_y = ($this->height - $watermark->getHeight());
 				break;
 		}
@@ -269,7 +262,7 @@ class Image {
 	}
 
 	/**
-	 * @param int $degree
+	 * @param int    $degree
 	 * @param string $color
 	 */
 	public function rotate(int $degree, $color = 'FFFFFF'): void {
@@ -294,9 +287,9 @@ class Image {
 
 	/**
 	 * @param string $text
-	 * @param int $x
-	 * @param int $y
-	 * @param int $size
+	 * @param int    $x
+	 * @param int    $y
+	 * @param int    $size
 	 * @param string $color
 	 */
 	private function text($text, int $x = 0, int $y = 0, int $size = 5, $color = '000000'): void {
@@ -307,9 +300,9 @@ class Image {
 
 	/**
 	 * @param object $merge
-	 * @param int $x
-	 * @param int $y
-	 * @param int $opacity
+	 * @param int    $x
+	 * @param int    $y
+	 * @param int    $opacity
 	 */
 	private function merge($merge, int $x = 0, int $y = 0, int $opacity = 100): void {
 		imagecopymerge($this->image, $merge->getImage(), $x, $y, 0, 0, $merge->getWidth(), $merge->getHeight(), $opacity);

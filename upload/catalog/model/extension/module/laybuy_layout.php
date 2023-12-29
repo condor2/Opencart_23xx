@@ -23,7 +23,7 @@ class ModelExtensionModuleLaybuyLayout extends Model {
 	public function getTransactionStatuses() {
 		$this->load->language('extension/payment/laybuy');
 
-		$transaction_statuses = [
+		return [
 			[
 				'status_id'   => 1,
 				'status_name' => $this->language->get('text_status_1')
@@ -46,7 +46,6 @@ class ModelExtensionModuleLaybuyLayout extends Model {
 			]
 		];
 
-		return $transaction_statuses;
 	}
 
 	public function isLayBuyOrder($order_id) {

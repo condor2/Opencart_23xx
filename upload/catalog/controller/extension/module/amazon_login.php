@@ -209,5 +209,4 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 
 		return !$this->error;
 	}
-
 }

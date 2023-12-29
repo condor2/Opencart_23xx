@@ -981,9 +981,9 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					} else {
 						$this->session->data['guest']['customer_id'] = 0;
 						$this->session->data['guest']['customer_group_id'] = $this->config->get('config_customer_group_id');
-						$this->session->data['guest']['firstname'] = (isset($paypal_order_info['payer']['name']['given_name']) ? $paypal_order_info['payer']['name']['given_name'] : '');
-						$this->session->data['guest']['lastname'] = (isset($paypal_order_info['payer']['name']['surname']) ? $paypal_order_info['payer']['name']['surname'] : '');
-						$this->session->data['guest']['email'] = (isset($paypal_order_info['payer']['email_address']) ? $paypal_order_info['payer']['email_address'] : '');
+						$this->session->data['guest']['firstname'] = ($paypal_order_info['payer']['name']['given_name'] ?? '');
+						$this->session->data['guest']['lastname'] = ($paypal_order_info['payer']['name']['surname'] ?? '');
+						$this->session->data['guest']['email'] = ($paypal_order_info['payer']['email_address'] ?? '');
 						$this->session->data['guest']['telephone'] = '';
 						$this->session->data['guest']['custom_field'] = [];
 					}
@@ -991,8 +991,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					if ($this->customer->isLogged() && $this->customer->getAddressId()) {
 						$this->session->data['payment_address'] = $this->model_account_address->getAddress($this->customer->getAddressId());
 					} else {
-						$this->session->data['payment_address']['firstname'] = (isset($paypal_order_info['payer']['name']['given_name']) ? $paypal_order_info['payer']['name']['given_name'] : '');
-						$this->session->data['payment_address']['lastname'] = (isset($paypal_order_info['payer']['name']['surname']) ? $paypal_order_info['payer']['name']['surname'] : '');
+						$this->session->data['payment_address']['firstname'] = ($paypal_order_info['payer']['name']['given_name'] ?? '');
+						$this->session->data['payment_address']['lastname'] = ($paypal_order_info['payer']['name']['surname'] ?? '');
 						$this->session->data['payment_address']['company'] = '';
 						$this->session->data['payment_address']['address_1'] = '';
 						$this->session->data['payment_address']['address_2'] = '';
@@ -1026,13 +1026,13 @@ class ControllerExtensionPaymentPayPal extends Controller {
 								$shipping_lastname = implode(' ', $shipping_name);
 							}
 
-							$this->session->data['shipping_address']['firstname'] = (isset($shipping_firstname) ? $shipping_firstname : '');
-							$this->session->data['shipping_address']['lastname'] = (isset($shipping_lastname) ? $shipping_lastname : '');
+							$this->session->data['shipping_address']['firstname'] = ($shipping_firstname ?? '');
+							$this->session->data['shipping_address']['lastname'] = ($shipping_lastname ?? '');
 							$this->session->data['shipping_address']['company'] = '';
-							$this->session->data['shipping_address']['address_1'] = (isset($paypal_order_info['purchase_units'][0]['shipping']['address']['address_line_1']) ? $paypal_order_info['purchase_units'][0]['shipping']['address']['address_line_1'] : '');
-							$this->session->data['shipping_address']['address_2'] = (isset($paypal_order_info['purchase_units'][0]['shipping']['address']['address_line_2']) ? $paypal_order_info['purchase_units'][0]['shipping']['address']['address_line_2'] : '');
-							$this->session->data['shipping_address']['city'] = (isset($paypal_order_info['purchase_units'][0]['shipping']['address']['admin_area_2']) ? $paypal_order_info['purchase_units'][0]['shipping']['address']['admin_area_2'] : '');
-							$this->session->data['shipping_address']['postcode'] = (isset($paypal_order_info['purchase_units'][0]['shipping']['address']['postal_code']) ? $paypal_order_info['purchase_units'][0]['shipping']['address']['postal_code'] : '');
+							$this->session->data['shipping_address']['address_1'] = ($paypal_order_info['purchase_units'][0]['shipping']['address']['address_line_1'] ?? '');
+							$this->session->data['shipping_address']['address_2'] = ($paypal_order_info['purchase_units'][0]['shipping']['address']['address_line_2'] ?? '');
+							$this->session->data['shipping_address']['city'] = ($paypal_order_info['purchase_units'][0]['shipping']['address']['admin_area_2'] ?? '');
+							$this->session->data['shipping_address']['postcode'] = ($paypal_order_info['purchase_units'][0]['shipping']['address']['postal_code'] ?? '');
 							$this->session->data['shipping_address']['country'] = '';
 							$this->session->data['shipping_address']['country_id'] = 0;
 							$this->session->data['shipping_address']['address_format'] = '';
@@ -1102,9 +1102,9 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							if (isset($paypal_order_info['payment_source']['card']) && !$this->error) {
 								$this->model_extension_payment_paypal->log($paypal_order_info['payment_source']['card'], 'Card');
 
-								$liability_shift = (isset($paypal_order_info['payment_source']['card']['authentication_result']['liability_shift']) ? $paypal_order_info['payment_source']['card']['authentication_result']['liability_shift'] : '');
-								$enrollment_status = (isset($paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['enrollment_status']) ? $paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['enrollment_status'] : '');
-								$authentication_status = (isset($paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['authentication_status']) ? $paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['authentication_status'] : '');
+								$liability_shift = ($paypal_order_info['payment_source']['card']['authentication_result']['liability_shift'] ?? '');
+								$enrollment_status = ($paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['enrollment_status'] ?? '');
+								$authentication_status = ($paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['authentication_status'] ?? '');
 
 								if ($enrollment_status == 'Y') {
 									if (($authentication_status == 'N') && !$setting['card']['secure_scenario']['failed_authentication']) {
@@ -1511,7 +1511,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		if ($this->cart->hasShipping()) {
 			$data['has_shipping'] = true;
 
-			$data['shipping_address'] = isset($this->session->data['shipping_address']) ? $this->session->data['shipping_address'] : [];
+			$data['shipping_address'] = $this->session->data['shipping_address'] ?? [];
 
 			if (!empty($data['shipping_address'])) {
 				// Shipping Methods
@@ -1575,8 +1575,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['has_shipping'] = false;
 		}
 
-		$data['guest'] = isset($this->session->data['guest']) ? $this->session->data['guest'] : [];
-		$data['payment_address'] = isset($this->session->data['payment_address']) ? $this->session->data['payment_address'] : [];
+		$data['guest'] = $this->session->data['guest'] ?? [];
+		$data['payment_address'] = $this->session->data['payment_address'] ?? [];
 
 		// Totals
 		$totals = [];
@@ -1864,7 +1864,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$order_data['payment_country'] = $this->session->data['payment_address']['country'];
 			$order_data['payment_country_id'] = $this->session->data['payment_address']['country_id'];
 			$order_data['payment_address_format'] = $this->session->data['payment_address']['address_format'];
-			$order_data['payment_custom_field'] = (isset($this->session->data['payment_address']['custom_field']) ? $this->session->data['payment_address']['custom_field'] : []);
+			$order_data['payment_custom_field'] = ($this->session->data['payment_address']['custom_field'] ?? []);
 
 			if (isset($this->session->data['payment_method']['title'])) {
 				$order_data['payment_method'] = $this->session->data['payment_method']['title'];
@@ -1891,7 +1891,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$order_data['shipping_country'] = $this->session->data['shipping_address']['country'];
 				$order_data['shipping_country_id'] = $this->session->data['shipping_address']['country_id'];
 				$order_data['shipping_address_format'] = $this->session->data['shipping_address']['address_format'];
-				$order_data['shipping_custom_field'] = (isset($this->session->data['shipping_address']['custom_field']) ? $this->session->data['shipping_address']['custom_field'] : []);
+				$order_data['shipping_custom_field'] = ($this->session->data['shipping_address']['custom_field'] ?? []);
 
 				if (isset($this->session->data['shipping_method']['title'])) {
 					$order_data['shipping_method'] = $this->session->data['shipping_method']['title'];
@@ -1973,7 +1973,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				}
 			}
 
-			$order_data['comment'] = (isset($this->session->data['comment']) ? $this->session->data['comment'] : '');
+			$order_data['comment'] = ($this->session->data['comment'] ?? '');
 			$order_data['total'] = $total_data['total'];
 
 			if (isset($this->request->cookie['tracking'])) {
@@ -2103,13 +2103,13 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$shipping_info = [];
 
 			if ($this->cart->hasShipping()) {
-				$shipping_info['name']['full_name'] = (isset($this->session->data['shipping_address']['firstname']) ? $this->session->data['shipping_address']['firstname'] : '');
+				$shipping_info['name']['full_name'] = ($this->session->data['shipping_address']['firstname'] ?? '');
 				$shipping_info['name']['full_name'] .= (isset($this->session->data['shipping_address']['lastname']) ? (' ' . $this->session->data['shipping_address']['lastname']) : '');
-				$shipping_info['address']['address_line_1'] = (isset($this->session->data['shipping_address']['address_1']) ? $this->session->data['shipping_address']['address_1'] : '');
-				$shipping_info['address']['address_line_2'] = (isset($this->session->data['shipping_address']['address_2']) ? $this->session->data['shipping_address']['address_2'] : '');
-				$shipping_info['address']['admin_area_1'] = (isset($this->session->data['shipping_address']['zone']) ? $this->session->data['shipping_address']['zone'] : '');
-				$shipping_info['address']['admin_area_2'] = (isset($this->session->data['shipping_address']['city']) ? $this->session->data['shipping_address']['city'] : '');
-				$shipping_info['address']['postal_code'] = (isset($this->session->data['shipping_address']['postcode']) ? $this->session->data['shipping_address']['postcode'] : '');
+				$shipping_info['address']['address_line_1'] = ($this->session->data['shipping_address']['address_1'] ?? '');
+				$shipping_info['address']['address_line_2'] = ($this->session->data['shipping_address']['address_2'] ?? '');
+				$shipping_info['address']['admin_area_1'] = ($this->session->data['shipping_address']['zone'] ?? '');
+				$shipping_info['address']['admin_area_2'] = ($this->session->data['shipping_address']['city'] ?? '');
+				$shipping_info['address']['postal_code'] = ($this->session->data['shipping_address']['postcode'] ?? '');
 
 				if (isset($this->session->data['shipping_address']['country_id'])) {
 					$this->load->model('localisation/country');
@@ -2398,8 +2398,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
-		$data['guest'] = isset($this->session->data['guest']) ? $this->session->data['guest'] : [];
-		$data['payment_address'] = isset($this->session->data['payment_address']) ? $this->session->data['payment_address'] : [];
+		$data['guest'] = $this->session->data['guest'] ?? [];
+		$data['payment_address'] = $this->session->data['payment_address'] ?? [];
 
 		$this->load->model('localisation/country');
 
@@ -2433,7 +2433,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
-		$data['shipping_address'] = isset($this->session->data['shipping_address']) ? $this->session->data['shipping_address'] : [];
+		$data['shipping_address'] = $this->session->data['shipping_address'] ?? [];
 
 		$this->load->model('localisation/country');
 

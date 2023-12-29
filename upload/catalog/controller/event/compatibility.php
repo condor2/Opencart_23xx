@@ -1,6 +1,5 @@
 <?php
 class ControllerEventCompatibility extends Controller {
-	//
 	/*
 	The below code will old extensions compatible with the extension page move
 

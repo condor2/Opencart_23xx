@@ -80,7 +80,7 @@ class ControllerExtensionPaymentAuthorizeNetAim extends Controller {
 		$data['x_invoice_num'] = $this->session->data['order_id'];
 		$data['x_solution_id'] = 'A1000015';
 
-		/* Customer Shipping Address Fields */
+		// Customer Shipping Address Fields
 		if ($order_info['shipping_method']) {
 			$data['x_ship_to_first_name'] = html_entity_decode($order_info['shipping_firstname'], ENT_QUOTES, 'UTF-8');
 			$data['x_ship_to_last_name'] = html_entity_decode($order_info['shipping_lastname'], ENT_QUOTES, 'UTF-8');

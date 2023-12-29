@@ -117,6 +117,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 	public function setOrderShipping($order_id, $has_free_shipping) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "amazon_login_pay_order` SET `order_id` = '" . (int)$order_id . "', `free_shipping` = '" . (int)$has_free_shipping . "',`date_added` = now(), `modified` = now() ");
+
 		return $this->db->getLastId();
 	}
 
@@ -270,6 +271,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			if (isset($capture_response->CaptureResult)) {
 				$response['status'] = (string)$capture_response->CaptureResult->CaptureDetails->CaptureStatus->State;
 				$response['amazon_capture_id'] = (string)$capture_response->CaptureResult->CaptureDetails->AmazonCaptureId;
+
 				return $response;
 			}
 
@@ -290,6 +292,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		if ($qry->num_rows) {
 			$order = $qry->row;
 			$order['transactions'] = $this->getTransactions($order['amazon_login_pay_order_id'], $qry->row['currency_code']);
+
 			return $order;
 		} else {
 			return false;
@@ -347,6 +350,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		if (!isset($decoded_token->aud) || $decoded_token->aud != $this->config->get('amazon_login_pay_client_id')) {
 			$this->logger($decoded_token);
 			$this->logger('the access token does not belong to us');
+
 			return;
 		}
 
@@ -355,9 +359,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 		$response_profile = curl_exec($curl_profile);
 		curl_close($curl_profile);
-		$decoded_profile = json_decode($response_profile);
-
-		return $decoded_profile;
+		return json_decode($response_profile);
 	}
 
 	private function validateResponse($action, $details) {
@@ -371,6 +373,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		if (isset($details_xml->Error)) {
 			$this->logger($action . ' : ' . (string)$details_xml->Error->Message);
 			$response['redirect'] = 'failure';
+
 			return $response;
 		} elseif (!empty($error_set)) {
 			$reason_code = (string)$error_set[0];
@@ -381,8 +384,10 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 				return $details_xml;
 			}
 			$this->logger($action . ' : ' . $reason_code);
+
 			return $response;
 		}
+
 		return $details_xml;
 	}
 
@@ -456,6 +461,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		foreach ($parameters as $key => $value) {
 			$queryParameters[] = $key . '=' . $this->urlencode($value);
 		}
+
 		return implode('&', $queryParameters);
 	}
 
@@ -474,6 +480,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		$data .= "\n";
 		uksort($parameters, 'strcmp');
 		$data .= $this->getParametersAsString($parameters);
+
 		return $data;
 	}
 
@@ -493,27 +500,29 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		$json_error = json_last_error();
 
 		if ($json_error != 0) {
-			$errorMsg = "Error with message - content is not in json format" .
-					$json_error . " " .
-					$json;
+			$errorMsg = "Error with message - content is not in json format"
+					. $json_error . " "
+					. $json;
 			$this->logger($errorMsg);
 		}
+
 		return $message;
 	}
 
 	private function parseIpnMessage($ipnMsg) {
-		$xmlDocumentElement = $this->getXmlFromIpnMessage($ipnMsg);
-		return $xmlDocumentElement;
+		return $this->getXmlFromIpnMessage($ipnMsg);
 	}
 
 	private function getXmlFromIpnMessage($ipnMsg) {
 		$notificationData = $this->getField("NotificationData", $this->buildMessage($ipnMsg));
 		libxml_use_internal_errors(true);
+
 		try {
 			$xml = simplexml_load_string($notificationData);
 		} catch (Exception $ex) {
 			$this->logger($notificationData);
 		}
+
 		return $xml;
 	}
 
@@ -543,6 +552,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 				$amazon_payment_js = 'https://static-eu.payments-amazon.com/OffAmazonPayments/de/lpa/js/Widgets.js';
 			}
 		}
+
 		return $amazon_payment_js . '?sellerId=' . $this->config->get('amazon_login_pay_merchant_id');
 	}
 

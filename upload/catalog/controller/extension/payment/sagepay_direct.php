@@ -230,13 +230,13 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 		$cart_rows = 0;
 		$str_basket = "";
 		foreach ($order_products as $product) {
-			$str_basket .=
-					":" . str_replace(":", " ", $product['name'] . " " . $product['model']) .
-					":" . $product['quantity'] .
-					":" . $this->currency->format($product['price'], $order_info['currency_code'], false, false) .
-					":" . $this->currency->format($product['tax'], $order_info['currency_code'], false, false) .
-					":" . $this->currency->format(($product['price'] + $product['tax']), $order_info['currency_code'], false, false) .
-					":" . $this->currency->format(($product['price'] + $product['tax']) * $product['quantity'], $order_info['currency_code'], false, false);
+			$str_basket
+					.= ":" . str_replace(":", " ", $product['name'] . " " . $product['model'])
+					. ":" . $product['quantity']
+					. ":" . $this->currency->format($product['price'], $order_info['currency_code'], false, false)
+					. ":" . $this->currency->format($product['tax'], $order_info['currency_code'], false, false)
+				. ":" . $this->currency->format(($product['price'] + $product['tax']), $order_info['currency_code'], false, false)
+					. ":" . $this->currency->format(($product['price'] + $product['tax']) * $product['quantity'], $order_info['currency_code'], false, false);
 			$cart_rows++;
 		}
 
@@ -488,5 +488,4 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 			$this->model_extension_payment_sagepay_direct->logger('Repeat Orders', $orders);
 		}
 	}
-
 }

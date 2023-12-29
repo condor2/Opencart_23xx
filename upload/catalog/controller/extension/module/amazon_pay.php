@@ -231,5 +231,4 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 
 		return !$this->error;
 	}
-
 }

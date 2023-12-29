@@ -13,7 +13,7 @@ class ControllerExtensionModuleEbayListing extends Controller {
 
 			$products = $this->model_extension_openbay_ebay_product->getDisplayProducts();
 
-			foreach($products['products'] as $product) {
+			foreach ($products['products'] as $product) {
 				if (isset($product['pictures'][0])) {
 					$image = $this->model_extension_openbay_ebay_product->resize($product['pictures'][0], $this->config->get('ebay_listing_width'), $this->config->get('ebay_listing_height'));
 				} else {

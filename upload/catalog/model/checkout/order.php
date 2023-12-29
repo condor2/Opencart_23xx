@@ -323,7 +323,7 @@ class ModelCheckoutOrder extends Model {
 				// Restock
 				$product_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_product WHERE order_id = '" . (int)$order_id . "'");
 
-				foreach($product_query->rows as $product) {
+				foreach ($product_query->rows as $product) {
 					$this->db->query("UPDATE `" . DB_PREFIX . "product` SET quantity = (quantity + " . (int)$product['quantity'] . ") WHERE product_id = '" . (int)$product['product_id'] . "' AND subtract = '1'");
 
 					$option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_option WHERE order_id = '" . (int)$order_id . "' AND order_product_id = '" . (int)$product['order_product_id'] . "'");
@@ -473,7 +473,7 @@ class ModelCheckoutOrder extends Model {
 					'country'   => $order_info['payment_country']
 				];
 
-				$data['payment_address'] = str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\s\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format))));
+				$data['payment_address'] = str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\\s\\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format))));
 
 				if ($order_info['shipping_address_format']) {
 					$format = $order_info['shipping_address_format'];
@@ -507,7 +507,7 @@ class ModelCheckoutOrder extends Model {
 					'country'   => $order_info['shipping_country']
 				];
 
-				$data['shipping_address'] = str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\s\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format))));
+				$data['shipping_address'] = str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\\s\\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format))));
 
 				$this->load->model('tool/upload');
 

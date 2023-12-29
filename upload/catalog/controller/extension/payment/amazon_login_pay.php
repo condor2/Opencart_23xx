@@ -562,7 +562,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$this->model_extension_payment_amazon_login_pay->logger($response);
 
 		if (isset($response['redirect'])) {
-			$this->$response['redirect']($this->language->get('error_process_order'));
+			$this->{$response}['redirect']($this->language->get('error_process_order'));
 			$this->session->data['lpa']['error'] = $this->language->get('error_process_order');
 			$this->response->redirect($this->url->link('extension/payment/amazon_login_pay/' . $response['redirect'], '', true));
 		}
@@ -856,14 +856,11 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			if ($body) {
 				$ipn_details_xml = $this->model_extension_payment_amazon_login_pay->parseRawMessage($body);
 				switch ($ipn_details_xml->getName()) {
-					case 'AuthorizationNotification':
-						$this->model_extension_payment_amazon_login_pay->authorizationIpn($ipn_details_xml);
+					case 'AuthorizationNotification':$this->model_extension_payment_amazon_login_pay->authorizationIpn($ipn_details_xml);
 						break;
-					case 'CaptureNotification':
-						$this->model_extension_payment_amazon_login_pay->captureIpn($ipn_details_xml);
+					case 'CaptureNotification':$this->model_extension_payment_amazon_login_pay->captureIpn($ipn_details_xml);
 						break;
-					case 'RefundNotification':
-						$this->model_extension_payment_amazon_login_pay->refundIpn($ipn_details_xml);
++					case 'RefundNotification':$this->model_extension_payment_amazon_login_pay->refundIpn($ipn_details_xml);
 						break;
 				}
 			}
@@ -892,5 +889,4 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			}
 		}
 	}
-
 }

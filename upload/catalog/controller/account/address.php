@@ -245,7 +245,7 @@ class ControllerAccountAddress extends Controller {
 
 			$data['addresses'][] = [
 				'address_id' => $result['address_id'],
-				'address'    => str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\s\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format)))),
+				'address'    => str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\\s\\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format)))),
 				'update'     => $this->url->link('account/address/edit', 'address_id=' . $result['address_id'], true),
 				'delete'     => $this->url->link('account/address/delete', 'address_id=' . $result['address_id'], true)
 			];
@@ -481,7 +481,6 @@ class ControllerAccountAddress extends Controller {
 		$data['content_bottom'] = $this->load->controller('common/content_bottom');
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
-
 
 		$this->response->setOutput($this->load->view('account/address_form', $data));
 	}

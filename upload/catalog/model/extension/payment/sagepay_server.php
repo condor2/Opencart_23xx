@@ -111,6 +111,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 
 	public function getRecurringOrders($order_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order_recurring` WHERE order_id = '" . (int)$order_id . "'");
+
 		return $query->rows;
 	}
 
@@ -307,6 +308,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 		}
 		$log = new Log('sagepay_server_recurring_orders.log');
 		$log->write(print_r($cron_data, 1));
+
 		return $cron_data;
 	}
 
@@ -324,8 +326,8 @@ class ModelExtensionPaymentSagePayServer extends Model {
 			$minus_even = $cycle / 2;
 
 			if ($day == 1) {
-				$odd = $odd - 1;
-				$plus_even = $plus_even - 1;
+				$odd--;
+				$plus_even--;
 				$day = 16;
 			}
 
@@ -345,6 +347,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 		} else {
 			$next_payment->modify('+' . $cycle . ' ' . $frequency);
 		}
+
 		return $next_payment;
 	}
 
@@ -358,6 +361,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 
 	private function getRecurringOrder($order_recurring_id) {
 		$qry = $this->db->query("SELECT * FROM " . DB_PREFIX . "sagepay_server_order_recurring WHERE order_recurring_id = '" . (int)$order_recurring_id . "'");
+
 		return $qry->row;
 	}
 
@@ -385,6 +389,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 
 	private function getProfile($order_recurring_id) {
 		$qry = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_recurring WHERE order_recurring_id = " . (int)$order_recurring_id);
+
 		return $qry->row;
 	}
 
@@ -421,6 +426,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 				$data[trim($parts[0])] = trim($parts[1]);
 			}
 		}
+
 		return $data;
 	}
 

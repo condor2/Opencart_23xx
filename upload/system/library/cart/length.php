@@ -29,7 +29,7 @@ class Length {
 	/**
 	 * Convert
 	 *
-	 * @param float $value
+	 * @param float  $value
 	 * @param string $from
 	 * @param string $to
 	 *
@@ -58,8 +58,8 @@ class Length {
 	/**
 	 * Format
 	 *
-	 * @param float $value
-	 * @param int $length_class_id
+	 * @param float  $value
+	 * @param int    $length_class_id
 	 * @param string $decimal_point
 	 * @param string $thousand_point
 	 *

@@ -30,9 +30,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 	}
 
 	public function addOrder($order_data) {
-		/**
-		 * 1 to 1 relationship with order table (extends order info)
-		 */
+		// 1 to 1 relationship with order table (extends order info)
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "paypal_order` SET
 			`order_id` = '" . (int)$order_data['order_id'] . "',
 			`date_added` = NOW(),
@@ -46,9 +44,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 	}
 
 	public function addTransaction($transaction_data) {
-		/**
-		 * 1 to many relationship with paypal order table, many transactions per 1 order
-		 */
+		// 1 to many relationship with paypal order table, many transactions per 1 order
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "paypal_order_transaction` SET
 			`paypal_order_id` = '" . (int)$transaction_data['paypal_order_id'] . "',
 			`transaction_id` = '" . $this->db->escape($transaction_data['transaction_id']) . "',
@@ -191,7 +187,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 					$data['L_PAYMENTREQUEST_0_AMT' . $i] = $this->currency->format($total_row['value'], $this->session->data['currency'], false, false);
 					$data['L_PAYMENTREQUEST_0_QTY' . $i] = 1;
 
-					$item_total = $item_total + $item_price;
+					$item_total += $item_price;
 					$i++;
 				}
 			}

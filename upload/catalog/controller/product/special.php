@@ -196,9 +196,9 @@ class ControllerProductSpecial extends Controller {
 		}
 
 		$data['sorts'][] = [
-				'text'  => $this->language->get('text_model_asc'),
-				'value' => 'p.model-ASC',
-				'href'  => $this->url->link('product/special', 'sort=p.model&order=ASC' . $url)
+			'text'  => $this->language->get('text_model_asc'),
+			'value' => 'p.model-ASC',
+			'href'  => $this->url->link('product/special', 'sort=p.model&order=ASC' . $url)
 		];
 
 		$data['sorts'][] = [
@@ -223,7 +223,7 @@ class ControllerProductSpecial extends Controller {
 
 		sort($limits);
 
-		foreach($limits as $value) {
+		foreach ($limits as $value) {
 			$data['limits'][] = [
 				'text'  => $value,
 				'value' => $value,

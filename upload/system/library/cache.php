@@ -1,11 +1,13 @@
 <?php
 /**
  * @package		OpenCart
+ *
  * @author		Daniel Kerr
  * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
+ *
  * @see			https://www.opencart.com
-*/
+ */
 
 /**
  * Cache class
@@ -18,7 +20,6 @@ class Cache {
 	 *
 	 * @param string $adaptor The type of storage for the cache.
 	 * @param int $expire Optional parameters
-	 *
 	 */
 	public function __construct($adaptor, $expire = 3600) {
 		$class = 'Cache\\' . $adaptor;
@@ -42,10 +43,8 @@ class Cache {
 	}
 
 	/**
-	 *
-	 *
-	 * @param string $key The cache key
-	 * @param string $value	The cache value
+	 * @param string $key   The cache key
+	 * @param string $value The cache value
 	 *
 	 * @return string
 	 */

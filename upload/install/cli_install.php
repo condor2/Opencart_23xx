@@ -88,7 +88,7 @@ function get_options($argv) {
 
 	$total = count($argv);
 
-	for ($i = 0; $i < $total; $i = $i + 2) {
+	for ($i = 0; $i < $total; $i += 2) {
 		$is_flag = preg_match('/^--(.*)$/', $argv[$i], $match);
 		if (!$is_flag) {
 			throw new Exception($argv[$i] . ' found in command line args instead of a valid option name starting with \'--\'');
@@ -122,7 +122,7 @@ function valid($options) {
 	}
 
 	if (!preg_match('#/$#', $options['http_server'])) {
-		$options['http_server'] = $options['http_server'] . '/';
+		$options['http_server'] .= '/';
 	}
 
 	$valid = count($missing) === 0;

@@ -63,7 +63,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 				$data['MEMBER']       = $this->config->get('laybuys_membership_id');
 				$data['RETURNURL']    = $this->url->link('extension/payment/laybuy/callback', '', true);
 				$data['CANCELURL']    = $this->url->link('extension/payment/laybuy/cancel', '', true);
-				$data['AMOUNT']       = round(floatval($order_info['total']), 2, PHP_ROUND_HALF_DOWN);
+				$data['AMOUNT']       = round((float)($order_info['total']), 2, PHP_ROUND_HALF_DOWN);
 				$data['CURRENCY']     = $order_info['currency_code'];
 				$data['INIT']         = (int)$this->request->post['INIT'];
 				$data['MONTHS']       = (int)$this->request->post['MONTHS'];

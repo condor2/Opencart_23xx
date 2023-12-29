@@ -312,7 +312,7 @@ class ControllerProductCategory extends Controller {
 
 			sort($limits);
 
-			foreach($limits as $value) {
+			foreach ($limits as $value) {
 				$data['limits'][] = [
 					'text'  => $value,
 					'value' => $value,

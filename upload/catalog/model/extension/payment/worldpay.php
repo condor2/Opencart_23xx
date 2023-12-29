@@ -235,6 +235,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 		}
 		$log = new Log('worldpay_recurring_orders.log');
 		$log->write(print_r($cron_data, 1));
+
 		return $cron_data;
 	}
 
@@ -252,8 +253,8 @@ class ModelExtensionPaymentWorldpay extends Model {
 			$minus_even = $cycle / 2;
 
 			if ($day == 1) {
-				$odd = $odd - 1;
-				$plus_even = $plus_even - 1;
+				$odd--;
+				$plus_even--;
 				$day = 16;
 			}
 
@@ -273,6 +274,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 		} else {
 			$next_payment->modify('+' . $cycle . ' ' . $frequency);
 		}
+
 		return $next_payment;
 	}
 
@@ -286,6 +288,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 
 	private function getRecurringOrder($order_recurring_id) {
 		$qry = $this->db->query("SELECT * FROM " . DB_PREFIX . "worldpay_order_recurring WHERE order_recurring_id = '" . (int)$order_recurring_id . "'");
+
 		return $qry->row;
 	}
 
@@ -307,16 +310,19 @@ class ModelExtensionPaymentWorldpay extends Model {
 		foreach ($qry->rows as $profile) {
 			$order_recurring[] = $this->getProfile($profile['order_recurring_id']);
 		}
+
 		return $order_recurring;
 	}
 
 	private function getProfile($order_recurring_id) {
 		$qry = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_recurring WHERE order_recurring_id = " . (int)$order_recurring_id);
+
 		return $qry->row;
 	}
 
 	public function getWorldpayOrder($worldpay_order_id) {
 		$qry = $this->db->query("SELECT * FROM " . DB_PREFIX . "worldpay_order WHERE order_code = " . (int)$worldpay_order_id);
+
 		return $qry->row;
 	}
 
@@ -343,14 +349,15 @@ class ModelExtensionPaymentWorldpay extends Model {
 			$curl,
 			CURLOPT_HTTPHEADER,
 			[
-			"Authorization: " . $this->config->get('worldpay_service_key'),
-			"Content-Type: application/json",
-			"Content-Length: " . $content_length
+				"Authorization: " . $this->config->get('worldpay_service_key'),
+				"Content-Type: application/json",
+				"Content-Length: " . $content_length
 			]
 		);
 
 		$result = json_decode(curl_exec($curl));
 		curl_close($curl);
+
 		return $result;
 	}
 
@@ -369,5 +376,4 @@ class ModelExtensionPaymentWorldpay extends Model {
 		 */
 		return true;
 	}
-
 }

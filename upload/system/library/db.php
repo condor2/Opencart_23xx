@@ -1,11 +1,13 @@
 <?php
 /**
  * @package		OpenCart
+ *
  * @author		Daniel Kerr
  * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
+ *
  * @see			https://www.opencart.com
-*/
+ */
 
 /**
  * DB Class
@@ -22,7 +24,6 @@ class DB {
 	 * @param string $password
 	 * @param string $database
 	 * @param int $port
-	 *
 	 */
 	public function __construct($adaptor, $hostname, $username, $password, $database, $port = null) {
 		$class = 'DB\\' . $adaptor;
@@ -48,7 +49,7 @@ class DB {
 	/**
 	 * Escape
 	 *
-	 * @param string $value	Value to be protected against SQL injections
+	 * @param string $value Value to be protected against SQL injections
 	 *
 	 * @return string returns escaped value
 	 */
@@ -61,7 +62,7 @@ class DB {
 	 *
 	 * Gets the total number of affected rows from the last query
 	 *
-	 * @return int	returns the total number of affected rows.
+	 * @return int returns the total number of affected rows
 	 */
 	public function countAffected() {
 		return $this->adaptor->countAffected();

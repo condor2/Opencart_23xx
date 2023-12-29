@@ -142,7 +142,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 							'account'    => $account,
 							'expiry'     => $expiry,
 							'cvv2'       => $cvv2,
-							'amount'     => round(floatval($order_info['total']), 2, PHP_ROUND_HALF_DOWN),
+							'amount'     => round((float)($order_info['total']), 2, PHP_ROUND_HALF_DOWN),
 							'currency'   => $order_info['currency_code'],
 							'orderid'    => $order_info['order_id'],
 							'name'       => $order_info['payment_firstname'] . ' ' . $order_info['payment_lastname'],
@@ -313,8 +313,8 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 				$responses = $this->model_extension_payment_cardconnect->getSettlementStatuses($this->config->get('cardconnect_merchant_id'), $date);
 
-				foreach($responses as $response) {
-					foreach($response['txns'] as $transaction) {
+				foreach ($responses as $response) {
+					foreach ($response['txns'] as $transaction) {
 						$this->model_extension_payment_cardconnect->updateTransactionStatusByRetref($transaction['retref'], $transaction['setlstat']);
 					}
 				}

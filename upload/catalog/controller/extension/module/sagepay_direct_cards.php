@@ -10,5 +10,4 @@ class ControllerExtensionModuleSagepayDirectCards extends Controller {
 			return $this->load->view('extension/module/sagepay_direct_cards', $data);
 		}
 	}
-
 }

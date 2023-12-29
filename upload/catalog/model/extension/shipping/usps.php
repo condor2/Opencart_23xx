@@ -379,7 +379,7 @@ class ModelExtensionShippingUsps extends Model {
 
 											foreach ($firstclasses as $k => $firstclass) {
 												if ($firstclass == $mailservice) {
-													$classid = $classid . $k;
+													$classid .= $k;
 													break;
 												}
 											}

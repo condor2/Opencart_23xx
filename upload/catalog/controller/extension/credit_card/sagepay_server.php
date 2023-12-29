@@ -25,7 +25,6 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 			'href' => $this->url->link('account/account', '', true)
 		];
 
-
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
 			unset($this->session->data['success']);
@@ -241,7 +240,7 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 
 		$str_my_signature = strtoupper(md5($str_message));
 
-		/** We can now compare our MD5 Hash signature with that from Sage Pay Server * */
+		// We can now compare our MD5 Hash signature with that from Sage Pay Server
 		if ($str_my_signature != $str_vps_signature) {
 
 			echo "Status=INVALID" . $end_ln;

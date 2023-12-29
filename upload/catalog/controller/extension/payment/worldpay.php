@@ -214,5 +214,4 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 			$this->model_extension_payment_worldpay->logger($orders);
 		}
 	}
-
 }

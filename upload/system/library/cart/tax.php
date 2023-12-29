@@ -89,8 +89,8 @@ class Tax {
 	 * Calculate
 	 *
 	 * @param float $value
-	 * @param int $tax_class_id
-	 * @param bool $calculate
+	 * @param int   $tax_class_id
+	 * @param bool  $calculate
 	 *
 	 * @return float
 	 */
@@ -118,7 +118,7 @@ class Tax {
 	 * getTax
 	 *
 	 * @param float $value
-	 * @param int $tax_class_id
+	 * @param int   $tax_class_id
 	 *
 	 * @return float
 	 */
@@ -137,9 +137,9 @@ class Tax {
 	/**
 	 * getRateName
 	 *
-	 * @param    int  $tax_rate_id
+	 * @param int $tax_rate_id
 	 *
-	 * @return   string
+	 * @return string
 	 */
 	public function getRateName($tax_rate_id) {
 		$tax_query = $this->db->query("SELECT `name` FROM `" . DB_PREFIX . "tax_rate` WHERE `tax_rate_id` = '" . (int)$tax_rate_id . "'");
@@ -154,10 +154,10 @@ class Tax {
 	/**
 	 * getRates
 	 *
-	 * @param    float  $value
-	 * @param    int  $tax_class_id
+	 * @param float $value
+	 * @param int   $tax_class_id
 	 *
-	 * @return   array
+	 * @return array
 	 */
 	public function getRates($value, $tax_class_id) {
 		$tax_rate_data = [];

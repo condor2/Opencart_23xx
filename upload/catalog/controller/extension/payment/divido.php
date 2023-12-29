@@ -96,18 +96,21 @@ class ControllerExtensionPaymentDivido extends Controller {
 
 		if (!isset($data->status)) {
 			$this->response->setOutput('');
+
 			return;
 		}
 
 		$lookup = $this->model_extension_payment_divido->getLookupByOrderId($data->metadata->order_id);
 		if ($lookup->num_rows != 1) {
 			$this->response->setOutput('');
+
 			return;
 		}
 
 		$hash = $this->model_extension_payment_divido->hashOrderId($data->metadata->order_id, $lookup->row['salt']);
 		if ($hash !== $data->metadata->order_hash) {
 			$this->response->setOutput('');
+
 			return;
 		}
 
@@ -146,6 +149,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 
 		ini_set('html_errors', 0);
 		if (!$this->session->data['payment_method']['code'] == 'divido') {
+
 			return false;
 		}
 

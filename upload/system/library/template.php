@@ -1,11 +1,13 @@
 <?php
 /**
  * @package		OpenCart
+ *
  * @author		Daniel Kerr
  * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
+ *
  * @see			https://www.opencart.com
-*/
+ */
 
 /**
  * Template class
@@ -16,8 +18,7 @@ class Template {
 	/**
 	 * Constructor
 	 *
-	 * @param	string	$adaptor
-	 *
+	 * @param string $adaptor
 	 */
 	public function __construct(string $adaptor) {
 		$class = 'Template\\' . $adaptor;
@@ -30,8 +31,6 @@ class Template {
 	}
 
 	/**
-	 *
-	 *
 	 * @param string $key
 	 * @param mixed	$value
 	 */
@@ -40,8 +39,6 @@ class Template {
 	}
 
 	/**
-	 *
-	 *
 	 * @param string $template
 	 * @param bool $cache
 	 *
