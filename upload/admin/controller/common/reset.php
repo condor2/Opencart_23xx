@@ -2,7 +2,7 @@
 class ControllerCommonReset extends Controller {
 	private $error = [];
 
-	public function index() {
+	public function index(): ?object {
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
 			$this->response->redirect($this->url->link('common/dashboard', '', true));
 		}
@@ -97,6 +97,8 @@ class ControllerCommonReset extends Controller {
 
 			return new Action('common/login');
 		}
+
+		return null;
 	}
 
 	protected function validate() {

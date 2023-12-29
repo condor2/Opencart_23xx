@@ -45,7 +45,7 @@ class ControllerCommonSecurity extends Controller {
 		return $this->load->view('common/security', $data);
 	}
 
-	public function move() {
+	public function move(): void {
 		$this->load->language('common/security');
 
 		$json = [];

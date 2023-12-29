@@ -196,7 +196,7 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput($this->load->view('common/filemanager', $data));
 	}
 
-	public function upload() {
+	public function upload(): void {
 		$this->load->language('common/filemanager');
 
 		$json = [];
@@ -299,7 +299,7 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function folder() {
+	public function folder(): void {
 		$this->load->language('common/filemanager');
 
 		$json = [];
@@ -349,7 +349,7 @@ class ControllerCommonFileManager extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('common/filemanager');
 
 		$json = [];

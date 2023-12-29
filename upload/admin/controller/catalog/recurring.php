@@ -12,7 +12,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getForm();
 	}
 
-	public function edit() {
+	public function edit(): void {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getForm();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	public function copy() {
+	public function copy(): void {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -144,7 +144,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -295,7 +295,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->response->setOutput($this->load->view('catalog/recurring_list', $data));
 	}
 
-	protected function getForm() {
+	protected function getForm(): void {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['recurring_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');

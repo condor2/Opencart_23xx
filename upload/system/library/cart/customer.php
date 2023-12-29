@@ -91,15 +91,15 @@ class Customer {
 	public function logout(): void {
 		unset($this->session->data['customer_id']);
 
-		$this->customer_id = '';
+		$this->customer_id = 0;
 		$this->firstname = '';
 		$this->lastname = '';
-		$this->customer_group_id = '';
+		$this->customer_group_id = 0;
 		$this->email = '';
 		$this->telephone = '';
 		$this->fax = '';
-		$this->newsletter = '';
-		$this->address_id = '';
+		$this->newsletter = false;
+		$this->address_id = 0;
 	}
 
 	public function isLogged(): bool {

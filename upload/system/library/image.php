@@ -20,11 +20,10 @@ class Image {
 	private $bits;
 	private $mime;
 
-	/*
+	/**
 	 * Constructor
 	 *
 	 * @param string $file
-	 *
 	 */
 	public function __construct($file) {
 		if (!extension_loaded('gd')) {

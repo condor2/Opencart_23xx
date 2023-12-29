@@ -12,7 +12,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getList();
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getForm();
 	}
 
-	public function edit() {
+	public function edit(): void {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getForm();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -259,7 +259,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->response->setOutput($this->load->view('catalog/filter_list', $data));
 	}
 
-	protected function getForm() {
+	protected function getForm(): void {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['filter_group_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -406,7 +406,7 @@ class ControllerCatalogFilter extends Controller {
 		return !$this->error;
 	}
 
-	public function autocomplete() {
+	public function autocomplete(): void {
 		$json = [];
 
 		if (isset($this->request->get['filter_name'])) {
