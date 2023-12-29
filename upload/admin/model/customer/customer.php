@@ -169,7 +169,7 @@ class ModelCustomerCustomer extends Model {
 			}
 
 			$this->load->model('localisation/language');
-			
+
 			$language_info = $this->model_localisation_language->getLanguage($customer_info['language_id']);
 
 			if ($language_info) {
@@ -181,7 +181,7 @@ class ModelCustomerCustomer extends Model {
 			$language = new Language($language_code);
 			$language->load($language_code);
 			$language->load('mail/customer');
-				
+
 			$message  = sprintf($language->get('text_approve_welcome'), html_entity_decode($store_name, ENT_QUOTES, 'UTF-8')) . "\n\n";
 			$message .= $language->get('text_approve_login') . "\n";
 			$message .= $store_url . "\n\n";
@@ -525,7 +525,7 @@ class ModelCustomerCustomer extends Model {
 		}
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_ip WHERE customer_id = '" . (int)$customer_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
-		
+
 		return $query->rows;
 	}
 

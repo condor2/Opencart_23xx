@@ -47,11 +47,11 @@ class ModelToolBackup extends Model {
 						if ($value !== null) {
 							$value = str_replace(["\x00", "\x0a", "\x0d", "\x1a"], ['\0', '\n', '\r', '\Z'], $value);
 							$value = str_replace(["\n", "\r", "\t"], ['\n', '\r', '\t'], $value);
-							$value = str_replace('\\', '\\\\',	$value);
-							$value = str_replace('\'', '\\\'',	$value);
-							$value = str_replace('\\\n', '\n',	$value);
-							$value = str_replace('\\\r', '\r',	$value);
-							$value = str_replace('\\\t', '\t',	$value);
+							$value = str_replace('\\', '\\\\', $value);
+							$value = str_replace('\'', '\\\'', $value);
+							$value = str_replace('\\\n', '\n', $value);
+							$value = str_replace('\\\r', '\r', $value);
+							$value = str_replace('\\\t', '\t', $value);
 							$values .= '\'' . $value . '\', ';
 						} else {
 							$values .= 'NULL, ';

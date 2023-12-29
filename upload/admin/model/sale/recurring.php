@@ -189,7 +189,7 @@ class ModelSaleRecurring extends Model {
 		if ($implode) {
 			$sql .= " WHERE " . implode(" AND ", $implode);
 		}
-		
+
 		$query = $this->db->query($sql);
 
 		return (int)$query->row['total'];

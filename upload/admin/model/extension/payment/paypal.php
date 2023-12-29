@@ -7,12 +7,12 @@ class ModelExtensionPaymentPayPal extends Model {
 		foreach ($this->config->get('config_complete_status') as $order_status_id) {
 			$implode[] = "'" . (int)$order_status_id . "'";
 		}
-		
+
 		$query = $this->db->query("SELECT SUM(total) AS paypal_total FROM `" . DB_PREFIX . "order` WHERE order_status_id IN(" . implode(',', $implode) . ") AND payment_code = 'paypal'");
 
 		return $query->row['paypal_total'];
 	}
-	
+
 	public function getTotalSalesByDay() {
 		$implode = [];
 
@@ -24,9 +24,9 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		for ($i = 0; $i < 24; $i++) {
 			$sale_data[$i] = [
-				'hour'  		=> $i,
-				'total' 		=> 0,
-				'paypal_total' 	=> 0
+				'hour'         => $i,
+				'total'        => 0,
+				'paypal_total' => 0
 			];
 		}
 
@@ -58,9 +58,9 @@ class ModelExtensionPaymentPayPal extends Model {
 			$date = date('Y-m-d', $date_start + ($i * 86400));
 
 			$sale_data[date('w', strtotime($date))] = [
-				'day'   		=> date('D', strtotime($date)),
-				'total' 		=> 0,
-				'paypal_total' 	=> 0
+				'day'          => date('D', strtotime($date)),
+				'total'        => 0,
+				'paypal_total' => 0
 			];
 		}
 
@@ -68,9 +68,9 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		foreach ($query->rows as $result) {
 			$sale_data[date('w', strtotime($result['date_added']))] = [
-				'day'   		=> date('D', strtotime($result['date_added'])),
-				'total' 		=> $result['total'],
-				'paypal_total'  => $result['paypal_total']
+				'day'          => date('D', strtotime($result['date_added'])),
+				'total'        => $result['total'],
+				'paypal_total' => $result['paypal_total']
 			];
 		}
 
@@ -90,9 +90,9 @@ class ModelExtensionPaymentPayPal extends Model {
 			$date = date('Y') . '-' . date('m') . '-' . $i;
 
 			$sale_data[date('j', strtotime($date))] = [
-				'day'   		=> date('d', strtotime($date)),
-				'total' 		=> 0,
-				'paypal_total' 	=> 0
+				'day'          => date('d', strtotime($date)),
+				'total'        => 0,
+				'paypal_total' => 0
 			];
 		}
 
@@ -100,9 +100,9 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		foreach ($query->rows as $result) {
 			$sale_data[date('j', strtotime($result['date_added']))] = [
-				'day'   => date('d', strtotime($result['date_added'])),
-				'total' 		=> $result['total'],
-				'paypal_total'  => $result['paypal_total']
+				'day'          => date('d', strtotime($result['date_added'])),
+				'total'        => $result['total'],
+				'paypal_total' => $result['paypal_total']
 			];
 		}
 
@@ -120,9 +120,9 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		for ($i = 1; $i <= 12; $i++) {
 			$sale_data[$i] = [
-				'month' 		=> date('M', mktime(0, 0, 0, $i)),
-				'total' 		=> 0,
-				'paypal_total' 	=> 0
+				'month'        => date('M', mktime(0, 0, 0, $i)),
+				'total'        => 0,
+				'paypal_total' => 0
 			];
 		}
 
@@ -130,29 +130,29 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		foreach ($query->rows as $result) {
 			$sale_data[date('n', strtotime($result['date_added']))] = [
-				'month' => date('M', strtotime($result['date_added'])),
-				'total' 		=> $result['total'],
-				'paypal_total'  => $result['paypal_total']
+				'month'        => date('M', strtotime($result['date_added'])),
+				'total'        => $result['total'],
+				'paypal_total' => $result['paypal_total']
 			];
 		}
 
 		return $sale_data;
 	}
-		
+
 	public function getCountryByCode($code) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE iso_code_2 = '" . $this->db->escape($code) . "'");
 				
 		return $query->row;
 	}
-	
+
 	public function addOrder($data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "paypal_checkout_integration_order` SET `order_id` = '" . (int)$data['order_id'] . "', `transaction_id` = '" . $this->db->escape($data['transaction_id']) . "', `transaction_status` = '" . $this->db->escape($data['transaction_status']) . "', `environment` = '" . $this->db->escape($data['environment']) . "'");
 	}
-		
+
 	public function deleteOrder($order_id) {
 		$query = $this->db->query("DELETE FROM `" . DB_PREFIX . "paypal_checkout_integration_order` WHERE `order_id` = '" . (int)$order_id . "'");
 	}
-	
+
 	public function getOrder($order_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "paypal_checkout_integration_order` WHERE `order_id` = '" . (int)$order_id . "'");
 		
@@ -162,33 +162,33 @@ class ModelExtensionPaymentPayPal extends Model {
 			return[];
 		}
 	}
-	
+
 	public function setAgreeStatus() {
 		$this->db->query("UPDATE " . DB_PREFIX . "country SET status = '0' WHERE (iso_code_2 = 'CU' OR iso_code_2 = 'IR' OR iso_code_2 = 'SY' OR iso_code_2 = 'KP')");
 		$this->db->query("UPDATE " . DB_PREFIX . "zone SET status = '0' WHERE country_id = '220' AND (`code` = '43' OR `code` = '14' OR `code` = '09')");
 	}
-	
+
 	public function getAgreeStatus() {
 		$agree_status = true;
-		
+
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE status = '1' AND (iso_code_2 = 'CU' OR iso_code_2 = 'IR' OR iso_code_2 = 'SY' OR iso_code_2 = 'KP')");
-		
+
 		if ($query->rows) {
 			$agree_status = false;
 		}
-		
+
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone WHERE country_id = '220' AND status = '1' AND (`code` = '43' OR `code` = '14' OR `code` = '09')");
-		
+
 		if ($query->rows) {
 			$agree_status = false;
 		}
-		
+
 		return $agree_status;
 	}
-	
+
 	public function checkVersion($opencart_version, $paypal_version) {
 		$curl = curl_init();
-			
+
 		curl_setopt($curl, CURLOPT_URL, 'https://www.opencart.com/index.php?route=api/promotion/paypalCheckoutIntegration&opencart=' . $opencart_version . '&paypal=' . $paypal_version);
 		curl_setopt($curl, CURLOPT_HEADER, 0);
 		curl_setopt($curl, CURLOPT_HEADER, 0);
@@ -197,20 +197,20 @@ class ModelExtensionPaymentPayPal extends Model {
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
 		curl_setopt($curl, CURLOPT_FORBID_REUSE, 1);
 		curl_setopt($curl, CURLOPT_FRESH_CONNECT, 1);
-							
+
 		$response = curl_exec($curl);
-			
+
 		curl_close($curl);
-			
+
 		$result = json_decode($response, true);
-		
+
 		if ($result) {
 			return $result;
 		} else {
 			return false;
 		}
 	}
-	
+
 	public function sendContact($data) {
 		$curl = curl_init();
 
@@ -228,26 +228,26 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		curl_close($curl);
 	}
-	
+
 	public function log($data, $title = null) {
 		// Setting
 		$_config = new Config();
 		$_config->load('paypal');
-			
+
 		$config_setting = $_config->get('paypal_setting');
-		
+
 		$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('paypal_setting'));
-			
+
 		if ($setting['general']['debug']) {
 			$log = new Log('paypal.log');
 			$log->write('PayPal debug (' . $title . '): ' . json_encode($data));
 		}
 	}
-	
+
 	public function install() {
 		$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order` (`order_id` INT(11) NOT NULL, `transaction_id` VARCHAR(20) NOT NULL, `transaction_status` VARCHAR(20) NOT NULL, `environment` VARCHAR(20) NOT NULL, PRIMARY KEY (`order_id`, `transaction_id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
 	}
-	
+
 	public function uninstall() {
 		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order`");
 	}

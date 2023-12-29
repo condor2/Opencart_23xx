@@ -11,7 +11,7 @@ class ModelDesignSeoUrl extends Model {
 	public function deleteSeoUrl($url_alias_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "url_alias` WHERE url_alias_id = '" . (int)$url_alias_id . "'");
 	}
-	
+
 	public function getSeoUrl($url_alias_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE url_alias_id = '" . (int)$url_alias_id . "'");
 
@@ -30,11 +30,11 @@ class ModelDesignSeoUrl extends Model {
 		if (!empty($data['filter_keyword'])) {
 			$implode[] = "`keyword` LIKE '%" . $this->db->escape((string)$data['filter_keyword']) . "%'";
 		}
-		
+
 		if ($implode) {
 			$sql .= " WHERE " . implode(" AND ", $implode);
-		}	
-		
+		}
+
 		$sort_data = [
 			'query',
 			'keyword',
@@ -71,38 +71,38 @@ class ModelDesignSeoUrl extends Model {
 
 	public function getTotalSeoUrls($data = []) {
 		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "url_alias`";
-		
+
 		$implode = [];
 
 		if (!empty($data['filter_query'])) {
 			$implode[] = "query LIKE '" . $this->db->escape($data['filter_query']) . "'";
 		}
-		
+
 		if (!empty($data['filter_keyword'])) {
 			$implode[] = "keyword LIKE '%" . $this->db->escape($data['filter_keyword']) . "%'";
 		}
-		
+
 		if ($implode) {
 			$sql .= " WHERE " . implode(" AND ", $implode);
-		}		
-		
+		}
+
 		$query = $this->db->query($sql);
 
 		return (int)$query->row['total'];
 	}
-	
+
 	public function getSeoUrlsByKeyword($keyword) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE keyword = '" . $this->db->escape($keyword) . "'");
 
 		return $query->rows;
-	}	
-	
+	}
+
 	public function getSeoUrlsByQuery($query) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE query = '" . $this->db->escape($query) . "'");
 
 		return $query->rows;
 	}
-	
+
 	public function getSeoUrlsByQueryId($url_alias_id, $query) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE query = '" . $this->db->escape($query) . "' AND url_alias_id != '" . (int)$url_alias_id . "'");
 
@@ -113,5 +113,5 @@ class ModelDesignSeoUrl extends Model {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE keyword = '" . $this->db->escape($keyword) . "' AND url_alias_id != '" . (int)$url_alias_id . "'");
 
 		return $query->rows;
-	}	
+	}
 }

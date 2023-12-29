@@ -67,8 +67,8 @@ class ModelExtensionPaymentRealexRemote extends Model {
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			$response = curl_exec ($ch);
-			curl_close ($ch);
+			$response = curl_exec($ch);
+			curl_close($ch);
 
 			return simplexml_load_string($response);
 		} else {
@@ -89,26 +89,26 @@ class ModelExtensionPaymentRealexRemote extends Model {
 			$secret = $this->config->get('realex_remote_secret');
 
 			if ($realex_order['settle_type'] == 2) {
-				$this->logger('Capture hash construct: ' . $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '.' . (int)round($amount*100) . '.' . (string)$realex_order['currency_code'] . '.');
+				$this->logger('Capture hash construct: ' . $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '.' . (int)round($amount * 100) . '.' . (string)$realex_order['currency_code'] . '.');
 
-				$tmp = $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '.' . (int)round($amount*100) . '.' . (string)$realex_order['currency_code'] . '.';
+				$tmp = $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '.' . (int)round($amount * 100) . '.' . (string)$realex_order['currency_code'] . '.';
 				$hash = sha1($tmp);
 				$tmp = $hash . '.' . $secret;
 				$hash = sha1($tmp);
 
 				$settle_type = 'multisettle';
-				$xml_amount = '<amount currency="' . (string)$realex_order['currency_code'] . '">' . (int)round($amount*100) . '</amount>';
+				$xml_amount = '<amount currency="' . (string)$realex_order['currency_code'] . '">' . (int)round($amount * 100) . '</amount>';
 			} else {
 				//$this->logger('Capture hash construct: ' . $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '...');
-				$this->logger('Capture hash construct: ' . $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '.' . (int)round($amount*100) . '.' . (string)$realex_order['currency_code'] . '.');
+				$this->logger('Capture hash construct: ' . $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '.' . (int)round($amount * 100) . '.' . (string)$realex_order['currency_code'] . '.');
 
-				$tmp = $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '.' . (int)round($amount*100) . '.' . (string)$realex_order['currency_code'] . '.';
+				$tmp = $timestamp . '.' . $merchant_id . '.' . $realex_order['order_ref'] . '.' . (int)round($amount * 100) . '.' . (string)$realex_order['currency_code'] . '.';
 				$hash = sha1($tmp);
 				$tmp = $hash . '.' . $secret;
 				$hash = sha1($tmp);
 
 				$settle_type = 'settle';
-				$xml_amount = '<amount currency="' . (string)$realex_order['currency_code'] . '">' . (int)round($amount*100) . '</amount>';
+				$xml_amount = '<amount currency="' . (string)$realex_order['currency_code'] . '">' . (int)round($amount * 100) . '</amount>';
 			}
 
 			$xml = '';
@@ -131,8 +131,8 @@ class ModelExtensionPaymentRealexRemote extends Model {
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			$response = curl_exec ($ch);
-			curl_close ($ch);
+			$response = curl_exec($ch);
+			curl_close($ch);
 
 			return simplexml_load_string($response);
 		} else {
@@ -169,9 +169,9 @@ class ModelExtensionPaymentRealexRemote extends Model {
 				$pas_ref = $realex_order['pasref'];
 			}
 
-			$this->logger('Rebate hash construct: ' . $timestamp . '.' . $merchant_id . '.' . $order_ref . '.' . (int)round($amount*100) . '.' . $realex_order['currency_code'] . '.');
+			$this->logger('Rebate hash construct: ' . $timestamp . '.' . $merchant_id . '.' . $order_ref . '.' . (int)round($amount * 100) . '.' . $realex_order['currency_code'] . '.');
 
-			$tmp = $timestamp . '.' . $merchant_id . '.' . $order_ref . '.' . (int)round($amount*100) . '.' . $realex_order['currency_code'] . '.';
+			$tmp = $timestamp . '.' . $merchant_id . '.' . $order_ref . '.' . (int)round($amount * 100) . '.' . $realex_order['currency_code'] . '.';
 			$hash = sha1($tmp);
 			$tmp = $hash . '.' . $secret;
 			$hash = sha1($tmp);
@@ -185,7 +185,7 @@ class ModelExtensionPaymentRealexRemote extends Model {
 			$xml .= '<orderid>' . $order_ref . '</orderid>';
 			$xml .= '<pasref>' . $pas_ref . '</pasref>';
 			$xml .= '<authcode>' . $realex_order['authcode'] . '</authcode>';
-			$xml .= '<amount currency="' . (string)$realex_order['currency_code'] . '">' . (int)round($amount*100) . '</amount>';
+			$xml .= '<amount currency="' . (string)$realex_order['currency_code'] . '">' . (int)round($amount * 100) . '</amount>';
 			$xml .= '<refundhash>' . $rebatehash . '</refundhash>';
 			$xml .= '<sha1hash>' . $hash . '</sha1hash>';
 			$xml .= '</request>';
@@ -199,8 +199,8 @@ class ModelExtensionPaymentRealexRemote extends Model {
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			$response = curl_exec ($ch);
-			curl_close ($ch);
+			$response = curl_exec($ch);
+			curl_close($ch);
 
 			return simplexml_load_string($response);
 		} else {
@@ -255,6 +255,6 @@ class ModelExtensionPaymentRealexRemote extends Model {
 	public function getTotalRebated($realex_order_id) {
 		$query = $this->db->query("SELECT SUM(`amount`) AS `total` FROM `" . DB_PREFIX . "realex_remote_order_transaction` WHERE `realex_remote_order_id` = '" . (int)$realex_order_id . "' AND 'rebate'");
 
-		return (double)$query->row['total'];
+		return (float)$query->row['total'];
 	}
 }

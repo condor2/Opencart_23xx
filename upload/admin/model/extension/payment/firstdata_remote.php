@@ -64,7 +64,7 @@ class ModelExtensionPaymentFirstdataRemote extends Model {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 		//curl_setopt($ch, CURLOPT_STDERR, fopen(DIR_LOGS . "/headers.txt", "w+"));
 		curl_setopt($ch, CURLOPT_VERBOSE, true);
-		$response = curl_exec ($ch);
+		$response = curl_exec($ch);
 
 		$this->logger('Post data: ' . print_r($this->request->post, 1));
 		$this->logger('Request: ' . $xml);
@@ -73,7 +73,7 @@ class ModelExtensionPaymentFirstdataRemote extends Model {
 		$this->logger('Curl response info: ' . print_r(curl_getinfo($ch), 1));
 		$this->logger('Curl response: ' . $response);
 
-		curl_close ($ch);
+		curl_close($ch);
 
 		return $response;
 	}
@@ -81,20 +81,20 @@ class ModelExtensionPaymentFirstdataRemote extends Model {
 	public function void($order_ref, $tdate) {
 		$xml = '<?xml version="1.0" encoding="UTF-8"?>';
 		$xml .= '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">';
-			$xml .= '<SOAP-ENV:Header />';
-			$xml .= '<SOAP-ENV:Body>';
-			$xml .= '<ipgapi:IPGApiOrderRequest xmlns:v1="http://ipg-online.com/ipgapi/schemas/v1" xmlns:ipgapi="http://ipg-online.com/ipgapi/schemas/ipgapi">';
-			$xml .= '<v1:Transaction>';
-				$xml .= '<v1:CreditCardTxType>';
-					$xml .= '<v1:Type>void</v1:Type>';
-				$xml .= '</v1:CreditCardTxType>';
-				$xml .= '<v1:TransactionDetails>';
-					$xml .= '<v1:OrderId>' . $order_ref . '</v1:OrderId>';
-					$xml .= '<v1:TDate>' . $tdate . '</v1:TDate>';
-				$xml .= '</v1:TransactionDetails>';
-			$xml .= '</v1:Transaction>';
-			$xml .= '</ipgapi:IPGApiOrderRequest>';
-			$xml .= '</SOAP-ENV:Body>';
+		$xml .= '<SOAP-ENV:Header />';
+		$xml .= '<SOAP-ENV:Body>';
+		$xml .= '<ipgapi:IPGApiOrderRequest xmlns:v1="http://ipg-online.com/ipgapi/schemas/v1" xmlns:ipgapi="http://ipg-online.com/ipgapi/schemas/ipgapi">';
+		$xml .= '<v1:Transaction>';
+		$xml .= '<v1:CreditCardTxType>';
+		$xml .= '<v1:Type>void</v1:Type>';
+		$xml .= '</v1:CreditCardTxType>';
+		$xml .= '<v1:TransactionDetails>';
+		$xml .= '<v1:OrderId>' . $order_ref . '</v1:OrderId>';
+		$xml .= '<v1:TDate>' . $tdate . '</v1:TDate>';
+		$xml .= '</v1:TransactionDetails>';
+		$xml .= '</v1:Transaction>';
+		$xml .= '</ipgapi:IPGApiOrderRequest>';
+		$xml .= '</SOAP-ENV:Body>';
 		$xml .= '</SOAP-ENV:Envelope>';
 
 		$xml = simplexml_load_string($this->call($xml));
@@ -125,23 +125,23 @@ class ModelExtensionPaymentFirstdataRemote extends Model {
 	public function capture($order_ref, $total, $currency_code) {
 		$xml = '<?xml version="1.0" encoding="UTF-8"?>';
 		$xml .= '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">';
-			$xml .= '<SOAP-ENV:Header />';
-			$xml .= '<SOAP-ENV:Body>';
-				$xml .= '<ipgapi:IPGApiOrderRequest xmlns:v1="http://ipg-online.com/ipgapi/schemas/v1" xmlns:ipgapi="http://ipg-online.com/ipgapi/schemas/ipgapi">';
-					$xml .= '<v1:Transaction>';
-						$xml .= '<v1:CreditCardTxType>';
-							$xml .= '<v1:Type>postAuth</v1:Type>';
-						$xml .= '</v1:CreditCardTxType>';
-						$xml .= '<v1:Payment>';
-							$xml .= '<v1:ChargeTotal>' . $total . '</v1:ChargeTotal>';
-							$xml .= '<v1:Currency>' . $this->mapCurrency($currency_code) . '</v1:Currency>';
-						$xml .= '</v1:Payment>';
-						$xml .= '<v1:TransactionDetails>';
-							$xml .= '<v1:OrderId>' . $order_ref . '</v1:OrderId>';
-						$xml .= '</v1:TransactionDetails>';
-					$xml .= '</v1:Transaction>';
-				$xml .= '</ipgapi:IPGApiOrderRequest>';
-			$xml .= '</SOAP-ENV:Body>';
+		$xml .= '<SOAP-ENV:Header />';
+		$xml .= '<SOAP-ENV:Body>';
+		$xml .= '<ipgapi:IPGApiOrderRequest xmlns:v1="http://ipg-online.com/ipgapi/schemas/v1" xmlns:ipgapi="http://ipg-online.com/ipgapi/schemas/ipgapi">';
+		$xml .= '<v1:Transaction>';
+		$xml .= '<v1:CreditCardTxType>';
+		$xml .= '<v1:Type>postAuth</v1:Type>';
+		$xml .= '</v1:CreditCardTxType>';
+		$xml .= '<v1:Payment>';
+		$xml .= '<v1:ChargeTotal>' . $total . '</v1:ChargeTotal>';
+		$xml .= '<v1:Currency>' . $this->mapCurrency($currency_code) . '</v1:Currency>';
+		$xml .= '</v1:Payment>';
+		$xml .= '<v1:TransactionDetails>';
+		$xml .= '<v1:OrderId>' . $order_ref . '</v1:OrderId>';
+		$xml .= '</v1:TransactionDetails>';
+		$xml .= '</v1:Transaction>';
+		$xml .= '</ipgapi:IPGApiOrderRequest>';
+		$xml .= '</SOAP-ENV:Body>';
 		$xml .= '</SOAP-ENV:Envelope>';
 
 		$xml = simplexml_load_string($this->call($xml));

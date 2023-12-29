@@ -324,7 +324,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 		return $this->cleanReturn($result);
 	}
 
-	private function curl($endpoint, $additional_opts =[]) {
+	private function curl($endpoint, $additional_opts = []) {
 		$default_opts = [
 			CURLOPT_PORT           => 443,
 			CURLOPT_HEADER         => 0,
