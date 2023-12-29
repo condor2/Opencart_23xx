@@ -56,7 +56,7 @@ function handleError($errno, $errstr, $errfile, $errline, array $errcontext) {
 
 set_error_handler('handleError');
 
-function usage(): void {
+function usage() {
 	echo "Usage:\n";
 	echo "======\n";
 	echo "\n";
@@ -131,7 +131,7 @@ function valid($options) {
 	return [$valid, $missing];
 }
 
-function install($options): void {
+function install($options) {
 	$check = check_requirements();
 
 	if ($check[0]) {
@@ -181,7 +181,7 @@ function check_requirements() {
 	return [$error === null, $error];
 }
 
-function setup_db($data): void {
+function setup_db($data) {
 	$db = new DB($data['db_driver'], htmlspecialchars_decode($data['db_hostname']), htmlspecialchars_decode($data['db_username']), htmlspecialchars_decode($data['db_password']), htmlspecialchars_decode($data['db_database']), $data['db_port']);
 
 	$file = DIR_APPLICATION . 'opencart.sql';
@@ -234,7 +234,7 @@ function setup_db($data): void {
 	}
 }
 
-function write_config_files($options): void {
+function write_config_files($options) {
 	$output  = '<?php' . "\n";
 	$output .= '// HTTP' . "\n";
 	$output .= 'define(\'HTTP_SERVER\', \'' . $options['http_server'] . '\');' . "\n";
