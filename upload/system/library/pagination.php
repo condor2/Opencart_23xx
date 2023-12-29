@@ -1,11 +1,13 @@
 <?php
 /**
  * @package		OpenCart
+ *
  * @author		Daniel Kerr
  * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
+ *
  * @see			https://www.opencart.com
-*/
+ */
 
 /**
  * Pagination class

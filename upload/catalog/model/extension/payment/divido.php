@@ -108,6 +108,7 @@ class ModelExtensionPaymentDivido extends Model {
 	public function getLookupByOrderId($order_id) {
 		return $this->db->query("SELECT * FROM `" . DB_PREFIX . "divido_lookup` WHERE `order_id` = " . $order_id);
 	}
+
 	public function getGlobalSelectedPlans() {
 		$all_plans     = $this->getAllPlans();
 		$display_plans = $this->config->get('divido_planselection');

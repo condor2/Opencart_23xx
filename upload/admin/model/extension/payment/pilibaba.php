@@ -91,7 +91,7 @@ class ModelExtensionPaymentPilibaba extends Model {
 
 		$this->log('Data: ' . print_r($data, true));
 
-		$headers = ['Accept: application/json','Content-Type: application/json'];
+		$headers = ['Accept: application/json', 'Content-Type: application/json'];
 
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);

@@ -23,7 +23,7 @@ class DB {
 	 * @param string $username
 	 * @param string $password
 	 * @param string $database
-	 * @param int $port
+	 * @param int    $port
 	 */
 	public function __construct($adaptor, $hostname, $username, $password, $database, $port = null) {
 		$class = 'DB\\' . $adaptor;

@@ -558,7 +558,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						'receipt_id'         => '',
 						'payment_type'       => $response['PAYMENTTYPE'],
 						'payment_status'     => $response['PAYMENTSTATUS'],
-						'pending_reason'     => (isset($response['PENDINGREASON']) ? $response['PENDINGREASON'] : ''),
+						'pending_reason'     => ($response['PENDINGREASON'] ?? ''),
 						'transaction_entity' => 'payment',
 						'amount'             => $response['AMT'],
 						'debug_data'         => json_encode($response)
@@ -581,7 +581,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 					$json['success'] = $this->language->get('text_success');
 				} else {
-					$json['error'] = (isset($response['L_SHORTMESSAGE0']) ? $response['L_SHORTMESSAGE0'] : $this->language->get('error_transaction'));
+					$json['error'] = ($response['L_SHORTMESSAGE0'] ?? $this->language->get('error_transaction'));
 				}
 			} else {
 				$json['error'] = $this->language->get('error_not_found');
@@ -662,7 +662,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 	}
 
 	public function doRefund() {
-		/**
+		/*
 		 * used to issue a refund for a captured payment
 		 *
 		 * refund can be full or partial
@@ -708,7 +708,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						'payment_status'        => 'Refunded',
 						'transaction_entity'    => 'payment',
 						'pending_reason'        => '',
-						'amount'                => '-' . (isset($call_data['AMT']) ? $call_data['AMT'] : $current_transaction['amount']),
+						'amount'                => '-' . ($call_data['AMT'] ?? $current_transaction['amount']),
 						'debug_data'            => json_encode($result)
 					];
 
@@ -736,7 +736,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						$this->response->redirect($this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=' . $paypal_order['order_id'], true));
 					} else {
 						$this->model_extension_payment_pp_express->log(json_encode($result));
-						$this->session->data['error'] = (isset($result['L_SHORTMESSAGE0']) ? $result['L_SHORTMESSAGE0'] : 'There was an error') . (isset($result['L_LONGMESSAGE0']) ? '<br />' . $result['L_LONGMESSAGE0'] : '');
+						$this->session->data['error'] = ($result['L_SHORTMESSAGE0'] ?? 'There was an error') . (isset($result['L_LONGMESSAGE0']) ? '<br />' . $result['L_LONGMESSAGE0'] : '');
 						$this->response->redirect($this->url->link('extension/payment/pp_express/refund', 'token=' . $this->session->data['token'] . '&transaction_id=' . $this->request->post['transaction_id'], true));
 					}
 				} else {
@@ -801,7 +801,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 				$json['success'] = $this->language->get('text_success');
 			} else {
-				$json['error'] = (isset($response_info['L_SHORTMESSAGE0']) ? $response_info['L_SHORTMESSAGE0'] : $this->language->get('error_transaction'));
+				$json['error'] = ($response_info['L_SHORTMESSAGE0'] ?? $this->language->get('error_transaction'));
 			}
 		} else {
 			$json['error'] = $this->language->get('error_not_found');
@@ -946,7 +946,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					$transaction['amount'] = $transaction['amount'];
 				}
 
-				$transaction['pending_reason'] = (isset($result['PENDINGREASON']) ? $result['PENDINGREASON'] : '');
+				$transaction['pending_reason'] = ($result['PENDINGREASON'] ?? '');
 
 				$this->model_extension_payment_pp_express->updateTransaction($transaction);
 
@@ -961,7 +961,6 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
-
 
 	public function search() {
 		$this->load->language('extension/payment/pp_express_search');
@@ -1202,7 +1201,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 	}
 
 	public function doSearch() {
-		/**
+		/*
 		 * used to search for transactions from a user account
 		 */
 		if (isset($this->request->post['date_start'])) {
@@ -1211,10 +1210,10 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 
 			$call_data = [];
 			$call_data['METHOD'] = 'TransactionSearch';
-			$call_data['STARTDATE'] = gmdate($this->request->post['date_start'] . "\TH:i:s\Z");
+			$call_data['STARTDATE'] = gmdate($this->request->post['date_start'] . "\\TH:i:s\\Z");
 
 			if (!empty($this->request->post['date_end'])) {
-				$call_data['ENDDATE'] = gmdate($this->request->post['date_end'] . "\TH:i:s\Z");
+				$call_data['ENDDATE'] = gmdate($this->request->post['date_end'] . "\\TH:i:s\\Z");
 			}
 
 			if (!empty($this->request->post['transaction_class'])) {
@@ -1355,7 +1354,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		$return = [];
 
 		foreach ($data as $k => $v) {
-			$elements = preg_split("/(\d+)/", $k, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+			$elements = preg_split("/(\\d+)/", $k, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 			if (isset($elements[1]) && isset($elements[0])) {
 				if ($elements[0] == 'L_TIMESTAMP') {
 					$v = str_replace('T', ' ', $v);

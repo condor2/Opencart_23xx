@@ -158,7 +158,7 @@ class ModelExtensionPaymentPayPal extends Model {
 		if ($query->num_rows) {
 			return $query->row;
 		} else {
-			return[];
+			return [];
 		}
 	}
 

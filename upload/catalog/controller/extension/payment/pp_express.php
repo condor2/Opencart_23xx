@@ -1073,35 +1073,25 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			if ($result['ACK'] == 'Success') {
 				//handle order status
 				switch ($result['PAYMENTINFO_0_PAYMENTSTATUS']) {
-					case 'Canceled_Reversal'
-					:$order_status_id = $this->config->get('pp_express_canceled_reversal_status_id');
+					case 'Canceled_Reversal':$order_status_id = $this->config->get('pp_express_canceled_reversal_status_id');
 						break;
-					case 'Completed'
-					:$order_status_id = $this->config->get('pp_express_completed_status_id');
+					case 'Completed':$order_status_id = $this->config->get('pp_express_completed_status_id');
 						break;
-					case 'Denied'
-					:$order_status_id = $this->config->get('pp_express_denied_status_id');
+					case 'Denied':$order_status_id = $this->config->get('pp_express_denied_status_id');
 						break;
-					case 'Expired'
-					:$order_status_id = $this->config->get('pp_express_expired_status_id');
+					case 'Expired':$order_status_id = $this->config->get('pp_express_expired_status_id');
 						break;
-					case 'Failed'
-					:$order_status_id = $this->config->get('pp_express_failed_status_id');
+					case 'Failed':$order_status_id = $this->config->get('pp_express_failed_status_id');
 						break;
-					case 'Pending'
-					:$order_status_id = $this->config->get('pp_express_pending_status_id');
+					case 'Pending':$order_status_id = $this->config->get('pp_express_pending_status_id');
 						break;
-					case 'Processed'
-					:$order_status_id = $this->config->get('pp_express_processed_status_id');
+					case 'Processed':$order_status_id = $this->config->get('pp_express_processed_status_id');
 						break;
-					case 'Refunded'
-					:$order_status_id = $this->config->get('pp_express_refunded_status_id');
+					case 'Refunded':$order_status_id = $this->config->get('pp_express_refunded_status_id');
 						break;
-					case 'Reversed'
-					:$order_status_id = $this->config->get('pp_express_reversed_status_id');
+					case 'Reversed':$order_status_id = $this->config->get('pp_express_reversed_status_id');
 						break;
-					case 'Voided'
-					:$order_status_id = $this->config->get('pp_express_voided_status_id');
+					case 'Voided':$order_status_id = $this->config->get('pp_express_voided_status_id');
 						break;
 				}
 
@@ -1367,35 +1357,25 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 		if ($result['ACK'] == 'Success') {
 			//handle order status
 			switch ($result['PAYMENTINFO_0_PAYMENTSTATUS']) {
-				case 'Canceled_Reversal'
-				:$order_status_id = $this->config->get('pp_express_canceled_reversal_status_id');
+				case 'Canceled_Reversal':$order_status_id = $this->config->get('pp_express_canceled_reversal_status_id');
 					break;
-				case 'Completed'
-				:$order_status_id = $this->config->get('pp_express_completed_status_id');
+				case 'Completed':$order_status_id = $this->config->get('pp_express_completed_status_id');
 					break;
-				case 'Denied'
-				:$order_status_id = $this->config->get('pp_express_denied_status_id');
+				case 'Denied':$order_status_id = $this->config->get('pp_express_denied_status_id');
 					break;
-				case 'Expired'
-				:$order_status_id = $this->config->get('pp_express_expired_status_id');
+				case 'Expired':$order_status_id = $this->config->get('pp_express_expired_status_id');
 					break;
-				case 'Failed'
-				:$order_status_id = $this->config->get('pp_express_failed_status_id');
+				case 'Failed':$order_status_id = $this->config->get('pp_express_failed_status_id');
 					break;
-				case 'Pending'
-				:$order_status_id = $this->config->get('pp_express_pending_status_id');
+				case 'Pending':$order_status_id = $this->config->get('pp_express_pending_status_id');
 					break;
-				case 'Processed'
-				:$order_status_id = $this->config->get('pp_express_processed_status_id');
+				case 'Processed':$order_status_id = $this->config->get('pp_express_processed_status_id');
 					break;
-				case 'Refunded'
-				:$order_status_id = $this->config->get('pp_express_refunded_status_id');
+				case 'Refunded':$order_status_id = $this->config->get('pp_express_refunded_status_id');
 					break;
-				case 'Reversed'
-				:$order_status_id = $this->config->get('pp_express_reversed_status_id');
+				case 'Reversed':$order_status_id = $this->config->get('pp_express_reversed_status_id');
 					break;
-				case 'Voided'
-				:$order_status_id = $this->config->get('pp_express_voided_status_id');
+				case 'Voided':$order_status_id = $this->config->get('pp_express_voided_status_id');
 					break;
 			}
 

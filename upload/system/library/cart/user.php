@@ -104,7 +104,7 @@ class User {
 	/**
 	 * Logout
 	 *
-	  * @return void
+	 * @return void
 	 */
 	public function logout(): void {
 		unset($this->session->data['user_id']);

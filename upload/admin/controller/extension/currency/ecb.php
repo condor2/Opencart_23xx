@@ -91,7 +91,6 @@ class ControllerExtensionCurrencyEcb extends Controller {
 		$this->response->setOutput($this->load->view('extension/currency/ecb', $data));
 	}
 
-
 	protected function validate() {
 		if (!$this->user->hasPermission('modify', 'extension/currency/ecb')) {
 			$this->error['warning'] = $this->language->get('error_permission');
@@ -109,6 +108,7 @@ class ControllerExtensionCurrencyEcb extends Controller {
 				}
 			}
 		}
+
 		return !$this->error;
 	}
 
@@ -167,6 +167,7 @@ class ControllerExtensionCurrencyEcb extends Controller {
 
 					$this->cache->delete('currency');
 				}
+
 				return true;
 			}
 		}

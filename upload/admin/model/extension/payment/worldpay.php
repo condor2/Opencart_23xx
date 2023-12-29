@@ -69,9 +69,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 
 			$url = $worldpay_order['order_code'] . '/refund';
 
-			$response_data = $this->sendCurl($url, $order);
-
-			return $response_data;
+			return $this->sendCurl($url, $order);
 		} else {
 			return false;
 		}
@@ -104,6 +102,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 				$row['amount'] = $this->currency->format($row['amount'], $currency_code, false);
 				$transactions[] = $row;
 			}
+
 			return $transactions;
 		} else {
 			return false;
@@ -143,10 +142,10 @@ class ModelExtensionPaymentWorldpay extends Model {
 			$curl,
 			CURLOPT_HTTPHEADER,
 			[
-			"Authorization: " . $this->config->get('worldpay_service_key'),
-			"Content-Type: application/json",
-			"Content-Length: " . strlen($json)
-				]
+				"Authorization: " . $this->config->get('worldpay_service_key'),
+				"Content-Type: application/json",
+				"Content-Length: " . strlen($json)
+			]
 		);
 
 		$result = json_decode(curl_exec($curl));

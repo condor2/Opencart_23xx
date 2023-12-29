@@ -511,7 +511,7 @@ class ControllerExtensionPaymentPPPayflowIframe extends Controller {
 						break;
 
 					case 'C':
-						$transaction_type = $this->language->get('text_refund');#
+						$transaction_type = $this->language->get('text_refund');
 						break;
 
 					default:

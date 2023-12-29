@@ -54,6 +54,7 @@ class ModelExtensionPaymentEway extends Model {
 		if ($query->num_rows) {
 			$order = $query->row;
 			$order['transactions'] = $this->getTransactions($order['eway_order_id']);
+
 			return $order;
 		} else {
 			return false;
@@ -93,7 +94,6 @@ class ModelExtensionPaymentEway extends Model {
 			$response = $this->sendCurl($url, $capture_data);
 
 			return json_decode($response);
-
 		} else {
 			return false;
 		}
@@ -179,7 +179,7 @@ class ModelExtensionPaymentEway extends Model {
 
 		if (curl_errno($ch) != CURLE_OK) {
 			$response = new stdClass();
-			$response->Errors = "POST Error: " . curl_error($ch) . " URL: $url";
+			$response->Errors = "POST Error: " . curl_error($ch) . " URL: {$url}";
 			$response = json_encode($response);
 		} else {
 			$info = curl_getinfo($ch);
@@ -220,5 +220,4 @@ class ModelExtensionPaymentEway extends Model {
 
 		return (float)$query->row['total'];
 	}
-
 }

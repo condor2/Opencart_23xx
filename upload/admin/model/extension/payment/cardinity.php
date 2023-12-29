@@ -35,9 +35,7 @@ class ModelExtensionPaymentCardinity extends Model {
 		$method = new Payment\Get($payment_id);
 
 		try {
-			$payment = $client->call($method);
-
-			return $payment;
+			return $client->call($method);
 		} catch (Exception $e) {
 			$this->log($e->getMessage());
 
@@ -49,9 +47,7 @@ class ModelExtensionPaymentCardinity extends Model {
 		$method = new Refund\GetAll($payment_id);
 
 		try {
-			$refunds = $client->call($method);
-
-			return $refunds;
+			return $client->call($method);
 		} catch (Exception $e) {
 			$this->log($e->getMessage());
 
@@ -63,9 +59,7 @@ class ModelExtensionPaymentCardinity extends Model {
 		$method = new Refund\Create($payment_id, $amount, $description);
 
 		try {
-			$refund = $client->call($method);
-
-			return $refund;
+			return $client->call($method);
 		} catch (Exception $e) {
 			$this->log($e->getMessage());
 

@@ -43,7 +43,6 @@ class Action {
 
 	/**
 	 * @return string
-	 *
 	 */
 	public function getId() {
 		return $this->id;
@@ -51,7 +50,7 @@ class Action {
 
 	/**
 	 * @param object $registry
-	 * @param array $args
+	 * @param array  $args
 	 */
 	public function execute($registry, array $args = []) {
 		// Stop any magical methods being called

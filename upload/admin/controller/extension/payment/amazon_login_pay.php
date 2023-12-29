@@ -638,5 +638,4 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 
 		return !$this->error;
 	}
-
 }

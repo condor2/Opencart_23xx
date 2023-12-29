@@ -14,12 +14,14 @@
  */
 class Proxy extends \stdClass {
 	protected $data = [];
+
 	/**
 	 * @param string $key
 	 */
 	public function __get($key) {
 		return $this->data[$key];
 	}
+
 	/**
 	 * @param string $key
 	 * @param string $value

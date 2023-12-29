@@ -16,8 +16,6 @@ class Config {
 	private $data = [];
 
 	/**
-	 *
-	 *
 	 * @param string $key
 	 *
 	 * @return mixed
@@ -27,8 +25,6 @@ class Config {
 	}
 
 	/**
-	 *
-	 *
 	 * @param string $key
 	 * @param string $value
 	 */
@@ -37,8 +33,6 @@ class Config {
 	}
 
 	/**
-	 *
-	 *
 	 * @param string $key
 	 *
 	 * @return bool
@@ -48,8 +42,6 @@ class Config {
 	}
 
 	/**
-	 *
-	 *
 	 * @param string $filename
 	 */
 	public function load($filename) {

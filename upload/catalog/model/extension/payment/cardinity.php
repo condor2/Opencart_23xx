@@ -1,7 +1,7 @@
 <?php
 use Cardinity\Client;
-use Cardinity\Method\Payment;
 use Cardinity\Exception as CardinityException;
+use Cardinity\Method\Payment;
 
 class ModelExtensionPaymentCardinity extends Model {
 	public function addOrder($data) {

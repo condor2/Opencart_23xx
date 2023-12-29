@@ -114,7 +114,7 @@ class ControllerMarketingContact extends Controller {
 
 				$this->load->model('setting/setting');
 				$setting = $this->model_setting_setting->getSetting('config', $this->request->post['store_id']);
-				$store_email = isset($setting['config_email']) ? $setting['config_email'] : $this->config->get('config_email');
+				$store_email = $setting['config_email'] ?? $this->config->get('config_email');
 
 				$this->load->model('customer/customer');
 
@@ -135,12 +135,12 @@ class ControllerMarketingContact extends Controller {
 				$emails = [];
 
 				switch ($this->request->post['to']) {
-					case 'newsletter':
-						$customer_data = [
-							'filter_newsletter' => 1,
-							'start'             => ($page - 1) * 10,
-							'limit'             => 10
-						];
+					case 'newsletter'
+					:$customer_data = [
+						'filter_newsletter' => 1,
+						'start'             => ($page - 1) * 10,
+						'limit'             => 10
+					];
 
 						$email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
 
@@ -150,11 +150,11 @@ class ControllerMarketingContact extends Controller {
 							$emails[] = $result['email'];
 						}
 						break;
-					case 'customer_all':
-						$customer_data = [
-							'start' => ($page - 1) * 10,
-							'limit' => 10
-						];
+					case 'customer_all'
+					:$customer_data = [
+						'start' => ($page - 1) * 10,
+						'limit' => 10
+					];
 
 						$email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
 
@@ -164,12 +164,12 @@ class ControllerMarketingContact extends Controller {
 							$emails[] = $result['email'];
 						}
 						break;
-					case 'customer_group':
-						$customer_data = [
-							'filter_customer_group_id' => $this->request->post['customer_group_id'],
-							'start'                    => ($page - 1) * 10,
-							'limit'                    => 10
-						];
+					case 'customer_group'
+					:$customer_data = [
+						'filter_customer_group_id' => $this->request->post['customer_group_id'],
+						'start'                    => ($page - 1) * 10,
+						'limit'                    => 10
+					];
 
 						$email_total = $this->model_customer_customer->getTotalCustomers($customer_data);
 
@@ -179,29 +179,29 @@ class ControllerMarketingContact extends Controller {
 							$emails[$result['customer_id']] = $result['email'];
 						}
 						break;
-					case 'customer':
-						if (!empty($this->request->post['customer'])) {
-							$start = ($page - 1) * 10;
+					case 'customer'
+					:if (!empty($this->request->post['customer'])) {
+						$start = ($page - 1) * 10;
 
-							for ($i = 0; $i < 10; $i++) {
-								if (isset($this->request->post['customer'][($start + $i)])) {
-									$customer_id = $this->request->post['customer'][($start + $i)];
-									$customer_info = $this->model_customer_customer->getCustomer($customer_id);
+						for ($i = 0; $i < 10; $i++) {
+							if (isset($this->request->post['customer'][($start + $i)])) {
+								$customer_id = $this->request->post['customer'][($start + $i)];
+								$customer_info = $this->model_customer_customer->getCustomer($customer_id);
 
-									if ($customer_info) {
-										$emails[] = $customer_info['email'];
-									}
-								}
-							}
-
-							$email_total = count($this->request->post['customer']);
+								if ($customer_info) {
+									$emails[] = $customer_info['email'];
+ 								}
+ 							}
 						}
+
+						$email_total = count($this->request->post['customer']);
+					}
 						break;
-					case 'affiliate_all':
-						$affiliate_data = [
-							'start' => ($page - 1) * 10,
-							'limit' => 10
-						];
+					case 'affiliate_all'
+					:$affiliate_data = [
+						'start' => ($page - 1) * 10,
+						'limit' => 10
+					];
 
 						$email_total = $this->model_marketing_affiliate->getTotalAffiliates($affiliate_data);
 
@@ -211,36 +211,36 @@ class ControllerMarketingContact extends Controller {
 							$emails[] = $result['email'];
 						}
 						break;
-					case 'affiliate':
-						if (!empty($this->request->post['affiliate'])) {
-							$start = ($page - 1) * 10;
+					case 'affiliate'
+					:if (!empty($this->request->post['affiliate'])) {
+						$start = ($page - 1) * 10;
 
-							for ($i = 0; $i < 10; $i++) {
-								if (isset($this->request->post['affiliate'][($start + $i)])) {
-									$affiliate_id = $this->request->post['affiliate'][($start + $i)];
-									$affiliate_info = $this->model_marketing_affiliate->getAffiliate($affiliate_id);
+						for ($i = 0; $i < 10; $i++) {
+							if (isset($this->request->post['affiliate'][($start + $i)])) {
+								$affiliate_id = $this->request->post['affiliate'][($start + $i)];
+								$affiliate_info = $this->model_marketing_affiliate->getAffiliate($affiliate_id);
 
-									if ($affiliate_info) {
-										$emails[] = $affiliate_info['email'];
-									}
-								}
-							}
-						}
+								if ($affiliate_info) {
+									$emails[] = $affiliate_info['email'];
+ 								}
+ 							}
+ 						}
+					}
 
 						$email_total = count($this->request->post['affiliate']);
 						break;
-					case 'product':
-						if (isset($this->request->post['product'])) {
-							$email_total = $this->model_sale_order->getTotalEmailsByProductsOrdered($this->request->post['product']);
+					case 'product'
+					:if (isset($this->request->post['product'])) {
+						$email_total = $this->model_sale_order->getTotalEmailsByProductsOrdered($this->request->post['product']);
 
-							$results = $this->model_sale_order->getEmailsByProductsOrdered($this->request->post['product'], ($page - 1) * 10, 10);
+						$results = $this->model_sale_order->getEmailsByProductsOrdered($this->request->post['product'], ($page - 1) * 10, 10);
 
-							foreach ($results as $result) {
-								$emails[] = $result['email'];
-							}
-						}
-						break;
-				}
+						foreach ($results as $result) {
+							$emails[] = $result['email'];
+ 						}
+					}
+ 						break;
+ 				}
 
 				if ($emails) {
 					$json['success'] = $this->language->get('text_success');

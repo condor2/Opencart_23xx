@@ -19,7 +19,7 @@ class Cache {
 	 * Constructor
 	 *
 	 * @param string $adaptor The type of storage for the cache.
-	 * @param int $expire Optional parameters
+	 * @param int    $expire Optional parameters
 	 */
 	public function __construct($adaptor, $expire = 3600) {
 		$class = 'Cache\\' . $adaptor;

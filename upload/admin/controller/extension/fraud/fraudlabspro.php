@@ -174,7 +174,7 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 			//Feedback FLP status to server
 			$fraudlabspro_key = $this->config->get('fraudlabspro_key');
 
-			for($i = 0; $i < 3; $i++) {
+			for ($i = 0; $i < 3; $i++) {
 				$result = @file_get_contents('https://api.fraudlabspro.com/v1/order/feedback?key=' . $fraudlabspro_key . '&format=json&id=' . $_POST['flp_id'] . '&action=' . $flp_status);
 
 				if ($result) {
@@ -407,8 +407,6 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 
 	private function fix_case($s) {
 		$s = ucwords(strtolower($s));
-		$s = preg_replace_callback("/( [ a-zA-Z]{1}')([a-zA-Z0-9]{1})/s", fn ($matches) => $matches[1] . strtoupper($matches[2]), $s);
-
-		return $s;
+		return preg_replace_callback("/( [ a-zA-Z]{1}')([a-zA-Z0-9]{1})/s", fn ($matches) => $matches[1] . strtoupper($matches[2]), $s);
 	}
 }

@@ -58,6 +58,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		if ($query->num_rows) {
 			$order = $query->row;
 			$order['transactions'] = $this->getTransactions($order['amazon_login_pay_order_id'], $query->row['currency_code']);
+
 			return $order;
 		} else {
 			return false;
@@ -82,6 +83,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			} else {
 				$cancel_response['status'] = 'Completed';
 			}
+
 			return $cancel_response;
 		} else {
 			return false;
@@ -118,6 +120,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 			$capture_response = $this->validateResponse('Capture', $capture_details);
 			$capture_response['AmazonAuthorizationId'] = $amazon_authorization_id;
+
 			return $capture_response;
 		} else {
 			return false;
@@ -197,6 +200,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 				unset($uncaptured[$row['amazon_capture_id']]);
 			}
 		}
+
 		return array_values($uncaptured);
 	}
 
@@ -222,6 +226,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 				$row['amount'] = $this->currency->format($row['amount'], $currency_code, true, true);
 				$transactions[] = $row;
 			}
+
 			return $transactions;
 		} else {
 			return false;
@@ -336,11 +341,11 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			$response['error_code'] = (string)$details_xml->Error->Code;
 			$response['status_detail'] = (string)$details_xml->Error->Code . ': ' . (string)$details_xml->Error->Message;
 		} elseif (!empty($error_set)) {
-			$response['status'] = (string)$details_xml->$result->$details->$status->State;
-			$response['status_detail'] = (string)$details_xml->$result->$details->$status->ReasonCode;
+			$response['status'] = (string)$details_xml->{$result}->{$details}->{$status}->State;
+			$response['status_detail'] = (string)$details_xml->{$result}->{$details}->{$status}->ReasonCode;
 		} else {
-			$response['status'] = (string)$details_xml->$result->$details->$status->State;
-			$response[$amazon_id] = (string)$details_xml->$result->$details->$amazon_id;
+			$response['status'] = (string)$details_xml->{$result}->{$details}->{$status}->State;
+			$response[$amazon_id] = (string)$details_xml->{$result}->{$details}->{$amazon_id};
 		}
 
 		return $response;
@@ -368,6 +373,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		$other = preg_split("/\r\n|\n|\r/", $other);
 
 		[$protocol, $code, $text] = explode(' ', trim(array_shift($other)), 3);
+
 		return ['status' => (int)$code, 'ResponseBody' => $responseBody];
 	}
 
@@ -376,6 +382,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		foreach ($parameters as $key => $value) {
 			$queryParameters[] = $key . '=' . $this->urlencode($value);
 		}
+
 		return implode('&', $queryParameters);
 	}
 
@@ -394,6 +401,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		$data .= "\n";
 		uksort($parameters, 'strcmp');
 		$data .= $this->getParametersAsString($parameters);
+
 		return $data;
 	}
 

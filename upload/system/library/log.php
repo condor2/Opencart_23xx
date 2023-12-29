@@ -23,7 +23,7 @@ class Log {
 	 *
 	 * @param string $filename
 	 */
-	public function __construct(string $filename) {
+	public function __construct($filename) {
 		$this->file = DIR_LOGS . $filename;
 	}
 

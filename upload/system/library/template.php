@@ -32,7 +32,7 @@ class Template {
 
 	/**
 	 * @param string $key
-	 * @param mixed	$value
+	 * @param mixed	 $value
 	 */
 	public function set(string $key, $value): void {
 		$this->adaptor->set($key, $value);
@@ -40,7 +40,7 @@ class Template {
 
 	/**
 	 * @param string $template
-	 * @param bool $cache
+	 * @param bool   $cache
 	 *
 	 * @return string
 	 */

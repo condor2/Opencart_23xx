@@ -318,7 +318,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 		$data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 
-		/* Reports tab */
+		// Reports tab
 		if (isset($this->request->get['filter_order_id'])) {
 			$filter_order_id = (int)$this->request->get['filter_order_id'];
 		} else {
@@ -527,7 +527,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		$data['order'] = $order;
 
 		$data['transaction_statuses'] = $this->model_extension_payment_laybuy->getTransactionStatuses();
-		/* End of Reports Tab */
+		// End of Reports Tab
 
 		$data['token'] = $this->session->data['token'];
 

@@ -71,7 +71,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 		if ($query->num_rows) {
 			return $query->rows;
 		} else {
-			return[];
+			return [];
 		}
 	}
 
@@ -130,7 +130,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		$shipping_cost = '';
 
-		foreach($totals as $total) {
+		foreach ($totals as $total) {
 			if ($total['code'] == 'shipping') {
 				$shipping_cost = $total['value'];
 			}
@@ -164,7 +164,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 			'retref'        => $order_info['retref'],
 			'authcode'      => $order_info['authcode'],
 			'ponumber'      => $order_info['order_id'],
-			'amount'        => round(floatval($amount), 2, PHP_ROUND_HALF_DOWN),
+			'amount'        => round((float)$amount, 2, PHP_ROUND_HALF_DOWN),
 			'currency'      => $order_info['currency_code'],
 			'frtamnt'       => $shipping_cost,
 			'dutyamnt'      => '',
@@ -219,7 +219,7 @@ class ModelExtensionPaymentCardConnect extends Model {
 
 		$data = [
 			'merchid'  => $this->config->get('cardconnect_merchant_id'),
-			'amount'   => round(floatval($amount), 2, PHP_ROUND_HALF_DOWN),
+			'amount'   => round((float)$amount, 2, PHP_ROUND_HALF_DOWN),
 			'currency' => $order_info['currency_code'],
 			'retref'   => $order_info['retref']
 		];

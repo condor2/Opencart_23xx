@@ -84,7 +84,7 @@ class Image {
 	}
 
 	/**
-	 * @return	string
+	 * @return string
 	 */
 	public function getBits() {
 		return $this->bits;
@@ -207,10 +207,10 @@ class Image {
 	 * @param string $position
 	 */
 	public function watermark($watermark, $position = 'bottomright'): void {
-		switch($position) {
+		switch ($position) {
 			case 'topleft':$watermark_pos_x = 0;
- 				$watermark_pos_y = 0;
- 				break;
+				$watermark_pos_y = 0;
+				break;
 			case 'topcenter':$watermark_pos_x = (int)(($this->width - $watermark->getWidth()) / 2);
 				$watermark_pos_y = 0;
 				break;

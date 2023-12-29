@@ -122,7 +122,6 @@ $_['error_upload']                 = 'Upload failed';
 $_['error_data_missing'] 		   = 'Required data is missing';
 $_['error_credentials'] 		   = 'Please enter the keys in a valid JSON format';
 
-
 // Buttons
 $_['button_capture']			   = 'Capture';
 $_['button_refund']				   = 'Refund';

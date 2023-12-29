@@ -165,7 +165,7 @@ class ModelSaleOrder extends Model {
 				'date_modified'           => $order_query->row['date_modified']
 			];
 		} else {
-			return[];
+			return [];
 		}
 	}
 

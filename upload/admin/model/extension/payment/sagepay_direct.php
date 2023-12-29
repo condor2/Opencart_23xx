@@ -94,9 +94,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 			$void_data['SecurityKey'] = $sagepay_direct_order['SecurityKey'];
 			$void_data['TxAuthNo'] = $sagepay_direct_order['TxAuthNo'];
 
-			$response_data = $this->sendCurl($url, $void_data);
-
-			return $response_data;
+			return $this->sendCurl($url, $void_data);
 		} else {
 			return false;
 		}
@@ -132,9 +130,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 			$release_data['TxAuthNo'] = $sagepay_direct_order['TxAuthNo'];
 			$release_data['Amount'] = $amount;
 
-			$response_data = $this->sendCurl($url, $release_data);
-
-			return $response_data;
+			return $this->sendCurl($url, $release_data);
 		} else {
 			return false;
 		}
@@ -173,9 +169,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 			$refund_data['RelatedSecurityKey'] = $sagepay_direct_order['SecurityKey'];
 			$refund_data['RelatedTxAuthNo'] = $sagepay_direct_order['TxAuthNo'];
 
-			$response_data = $this->sendCurl($url, $refund_data);
-
-			return $response_data;
+			return $this->sendCurl($url, $refund_data);
 		} else {
 			return false;
 		}
@@ -253,6 +247,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 				$data[trim($parts[0])] = trim($parts[1]);
 			}
 		}
+
 		return $data;
 	}
 

@@ -50,6 +50,7 @@ function handleError($errno, $errstr, $errfile, $errline, array $errcontext) {
 	if (!(error_reporting() & $errno)) {
 		return false;
 	}
+
 	throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
 }
 

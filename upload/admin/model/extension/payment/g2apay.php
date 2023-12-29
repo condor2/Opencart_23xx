@@ -34,12 +34,12 @@ class ModelExtensionPaymentG2aPay extends Model {
 	}
 
 	public function getOrder($order_id) {
-
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "g2apay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
 		if ($query->num_rows) {
 			$order = $query->row;
 			$order['transactions'] = $this->getTransactions($order['g2apay_order_id'], $query->row['currency_code']);
+
 			return $order;
 		} else {
 			return false;
@@ -90,6 +90,7 @@ class ModelExtensionPaymentG2aPay extends Model {
 				$row['amount'] = $this->currency->format($row['amount'], $currency_code, true, true);
 				$transactions[] = $row;
 			}
+
 			return $transactions;
 		} else {
 			return false;
@@ -119,8 +120,8 @@ class ModelExtensionPaymentG2aPay extends Model {
 			$curl,
 			CURLOPT_HTTPHEADER,
 			[
-			"Authorization: " . $authorization
-				]
+				"Authorization: " . $authorization
+			]
 		);
 
 		$response = json_decode(curl_exec($curl));
@@ -141,5 +142,4 @@ class ModelExtensionPaymentG2aPay extends Model {
 			$log->write(print_r($message, 1));
 		}
 	}
-
 }

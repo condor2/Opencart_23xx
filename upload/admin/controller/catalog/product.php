@@ -1156,7 +1156,7 @@ class ControllerCatalogProduct extends Controller {
 				'option_id'            => $product_option['option_id'],
 				'name'                 => $product_option['name'],
 				'type'                 => $product_option['type'],
-				'value'                => isset($product_option['value']) ? $product_option['value'] : '',
+				'value'                => $product_option['value'] ?? '',
 				'required'             => $product_option['required']
 			];
 		}
@@ -1374,11 +1374,11 @@ class ControllerCatalogProduct extends Controller {
 			$url_alias_info = $this->model_catalog_url_alias->getUrlAlias($this->request->post['keyword']);
 
 			if ($url_alias_info && isset($this->request->get['product_id']) && $url_alias_info['query'] != 'product_id=' . (int)$this->request->get['product_id']) {
-				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+				$this->error['keyword'] = $this->language->get('error_keyword');
 			}
 
 			if ($url_alias_info && !isset($this->request->get['product_id'])) {
-				$this->error['keyword'] = sprintf($this->language->get('error_keyword'));
+				$this->error['keyword'] = $this->language->get('error_keyword');
 			}
 		}
 

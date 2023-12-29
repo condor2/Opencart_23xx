@@ -68,9 +68,7 @@ class ModelExtensionPaymentBluepayredirect extends Model {
 
 			$void_data["TAMPER_PROOF_SEAL"] = md5($tamper_proof_data);
 
-			$response_data = $this->sendCurl('https://secure.bluepay.com/interfaces/bp10emu', $void_data);
-
-			return $response_data;
+			return $this->sendCurl('https://secure.bluepay.com/interfaces/bp10emu', $void_data);
 		} else {
 			return false;
 		}
@@ -104,9 +102,7 @@ class ModelExtensionPaymentBluepayredirect extends Model {
 
 			$release_data["TAMPER_PROOF_SEAL"] = md5($tamper_proof_data);
 
-			$response_data = $this->sendCurl('https://secure.bluepay.com/interfaces/bp10emu', $release_data);
-
-			return $response_data;
+			return $this->sendCurl('https://secure.bluepay.com/interfaces/bp10emu', $release_data);
 		} else {
 			return false;
 		}
@@ -139,9 +135,7 @@ class ModelExtensionPaymentBluepayredirect extends Model {
 
 			$rebate_data["TAMPER_PROOF_SEAL"] = md5($tamper_proof_data);
 
-			$response_data = $this->sendCurl('https://secure.bluepay.com/interfaces/bp10emu', $rebate_data);
-
-			return $response_data;
+			return $this->sendCurl('https://secure.bluepay.com/interfaces/bp10emu', $rebate_data);
 		} else {
 			return false;
 		}

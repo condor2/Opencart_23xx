@@ -102,6 +102,7 @@ class ModelExtensionPaymentEway extends Model {
 		}
 
 		$response = $this->sendCurl($url, $request);
+
 		return json_decode($response);
 	}
 
@@ -113,6 +114,7 @@ class ModelExtensionPaymentEway extends Model {
 		}
 
 		$response = $this->sendCurl($url, $request);
+
 		return json_decode($response);
 	}
 
@@ -124,6 +126,7 @@ class ModelExtensionPaymentEway extends Model {
 		}
 
 		$response = $this->sendCurl($url, '', false);
+
 		return json_decode($response);
 	}
 

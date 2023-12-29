@@ -108,7 +108,6 @@ class ControllerExtensionExtensionFraud extends Controller {
 			}
 		}
 
-
 		$this->response->setOutput($this->load->view('extension/extension/fraud', $data));
 	}
 
