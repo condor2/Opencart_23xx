@@ -313,7 +313,7 @@ function write_config_files($options): void {
 	fclose($file);
 }
 
-function dir_permissions(): void {
+function dir_permissions() {
 	$dirs = [
 		DIR_OPENCART . 'image/',
 		DIR_OPENCART . 'system/storage/download/',
@@ -322,6 +322,7 @@ function dir_permissions(): void {
 		DIR_OPENCART . 'system/storage/logs/',
 		DIR_OPENCART . 'system/storage/modification/',
 	];
+
 	exec('chmod o+w -R ' . implode(' ', $dirs));
 }
 
@@ -330,18 +331,22 @@ $script = array_shift($argv);
 $subcommand = array_shift($argv);
 
 switch ($subcommand) {
-
 	case "install":
 		try {
 			$options = get_options($argv);
+
 			define('HTTP_OPENCART', $options['http_server']);
+
 			$valid = valid($options);
+
 			if (!$valid[0]) {
 				echo "FAILED! Following inputs were missing or invalid: ";
 				echo implode(', ', $valid[1]) . "\n\n";
 				exit(1);
 			}
+
 			install($options);
+
 			echo "SUCCESS! Opencart successfully installed on your server\n";
 			echo "Store link: " . $options['http_server'] . "\n";
 			echo "Admin link: " . $options['http_server'] . "admin/\n\n";
