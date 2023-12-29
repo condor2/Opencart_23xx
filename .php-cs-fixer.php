@@ -67,7 +67,7 @@ return $config
         'random_api_migration' => true,
         'simple_to_complex_string_variable' => true,
         'use_arrow_functions' => true,
-		'declare_strict_types' => false,
+        //'declare_strict_types' => false,
         'trailing_comma_in_multiline' => false,
         //'void_return' => true,
     ])
