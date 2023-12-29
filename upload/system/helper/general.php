@@ -3,7 +3,7 @@ function token($length = 32) {
 	return substr(bin2hex(random_bytes($length)), 0, $length);
 }
 
-/**
+/*
  * Backwards support for timing safe hash string comparisons
  *
  * http://php.net/manual/en/function.hash-equals.php

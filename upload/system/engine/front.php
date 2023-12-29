@@ -1,15 +1,17 @@
 <?php
 /**
+ *
  * @package		OpenCart
  * @author		Daniel Kerr
  * @copyright	Copyright (c) 2005 - 2023, OpenCart, Ltd. (https://www.opencart.com/)
  * @license		https://opensource.org/licenses/GPL-3.0
- * @link		https://www.opencart.com
-*/
+ *
+ * @see		https://www.opencart.com
+ */
 
 /**
-* Router class
-*/
+ * Router class
+ */
 class Front {
 	private $registry;
 	private $pre_action = [];
@@ -18,8 +20,8 @@ class Front {
 	/**
 	 * Constructor
 	 *
-	 * @param	object	$route
-	*/
+	 * @param object $route
+	 */
 	public function __construct($registry) {
 		$this->registry = $registry;
 	}
@@ -27,8 +29,8 @@ class Front {
 	/**
 	 *
 	 *
-	 * @param	object	$pre_action
-	*/
+	 * @param object $pre_action
+	 */
 	public function addPreAction(Action $pre_action): void {
 		$this->pre_action[] = $pre_action;
 	}
@@ -36,9 +38,9 @@ class Front {
 	/**
 	 *
 	 *
-	 * @param	object	$action
-	 * @param	object	$error
-	*/
+	 * @param object $action
+	 * @param object $error
+	 */
 	public function dispatch(Action $action, Action $error): void {
 		$this->error = $error;
 
@@ -58,11 +60,10 @@ class Front {
 	}
 
 	/**
+	 * @param object $action
 	 *
-	 *
-	 * @param	object	$action
-	 * @return	?object
-	*/
+	 * @return ?object
+	 */
 	private function execute(Action $action) {
 		$result = $action->execute($this->registry);
 
