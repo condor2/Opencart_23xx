@@ -102,8 +102,6 @@ class ModelExtensionPaymentEway extends Model {
 		}
 
 		return json_decode($response);
-
-		return $response;
 	}
 
 	public function getSharedAccessCode($request) {
@@ -114,8 +112,6 @@ class ModelExtensionPaymentEway extends Model {
 		}
 
 		return json_decode($response);
-
-		return $response;
 	}
 
 	public function getAccessCodeResult($access_code) {
