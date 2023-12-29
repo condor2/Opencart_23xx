@@ -92,7 +92,7 @@ class ModelExtensionPaymentPPPayflowIFrame extends Model {
 
 	public function call($data) {
 		$default_parameters = [
-			'USER' => $this->config->get('pp_payflow_iframe_user'),
+			'USER'         => $this->config->get('pp_payflow_iframe_user'),
 			'VENDOR'       => $this->config->get('pp_payflow_iframe_vendor'),
 			'PWD'          => $this->config->get('pp_payflow_iframe_password'),
 			'PARTNER'      => $this->config->get('pp_payflow_iframe_partner'),

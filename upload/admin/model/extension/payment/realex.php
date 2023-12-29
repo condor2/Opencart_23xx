@@ -186,7 +186,7 @@ class ModelExtensionPaymentRealex extends Model {
 			$xml .= '<orderid>' . $order_ref . '</orderid>';
 			$xml .= '<pasref>' . $pas_ref . '</pasref>';
 			$xml .= '<authcode>' . $realex_order['authcode'] . '</authcode>';
-			$xml .= '<amount currency="' . (string)$realex_order['currency_code'] . '">' . (int)round($amount*100) . '</amount>';
+			$xml .= '<amount currency="' . (string)$realex_order['currency_code'] . '">' . (int)round($amount * 100) . '</amount>';
 			$xml .= '<refundhash>' . $rebate_hash . '</refundhash>';
 			$xml .= '<sha1hash>' . $hash . '</sha1hash>';
 			$xml .= '</request>';

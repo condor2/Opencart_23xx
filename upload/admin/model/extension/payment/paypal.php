@@ -1,6 +1,5 @@
 <?php
 class ModelExtensionPaymentPayPal extends Model {
-		
 	public function getTotalSales() {
 		$implode = [];
 
@@ -34,9 +33,9 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		foreach ($query->rows as $result) {
 			$sale_data[$result['hour']] = [
-				'hour'  		=> $result['hour'],
-				'total' 		=> $result['total'],
-				'paypal_total'  => $result['paypal_total']
+				'hour'         => $result['hour'],
+				'total'        => $result['total'],
+				'paypal_total' => $result['paypal_total']
 			];
 		}
 
@@ -141,7 +140,7 @@ class ModelExtensionPaymentPayPal extends Model {
 
 	public function getCountryByCode($code) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "country WHERE iso_code_2 = '" . $this->db->escape($code) . "'");
-				
+
 		return $query->row;
 	}
 
@@ -155,7 +154,7 @@ class ModelExtensionPaymentPayPal extends Model {
 
 	public function getOrder($order_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "paypal_checkout_integration_order` WHERE `order_id` = '" . (int)$order_id . "'");
-		
+
 		if ($query->num_rows) {
 			return $query->row;
 		} else {

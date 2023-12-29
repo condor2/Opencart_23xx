@@ -107,7 +107,7 @@ class ModelDesignSeoUrl extends Model {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE query = '" . $this->db->escape($query) . "' AND url_alias_id != '" . (int)$url_alias_id . "'");
 
 		return $query->rows;
-	}	
+	}
 
 	public function getSeoUrlsByKeywordId($url_alias_id, $keyword) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "url_alias` WHERE keyword = '" . $this->db->escape($keyword) . "' AND url_alias_id != '" . (int)$url_alias_id . "'");
