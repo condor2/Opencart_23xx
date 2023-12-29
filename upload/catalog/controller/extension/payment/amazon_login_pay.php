@@ -860,7 +860,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 						break;
 					case 'CaptureNotification':$this->model_extension_payment_amazon_login_pay->captureIpn($ipn_details_xml);
 						break;
-+					case 'RefundNotification':$this->model_extension_payment_amazon_login_pay->refundIpn($ipn_details_xml);
+					case 'RefundNotification':$this->model_extension_payment_amazon_login_pay->refundIpn($ipn_details_xml);
 						break;
 				}
 			}
