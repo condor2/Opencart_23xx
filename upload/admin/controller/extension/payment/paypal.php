@@ -2537,7 +2537,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function reauthorizePayment(): void { {
+	public function reauthorizePayment(): void {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
@@ -2628,7 +2628,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function voidPayment(): void { {
+	public function voidPayment(): void {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
@@ -2718,7 +2718,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function refundPayment(): void { {
+	public function refundPayment(): void {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
