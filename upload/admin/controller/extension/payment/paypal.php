@@ -2397,7 +2397,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 	}
 
-	public function getPaymentInfo(): void { {
+	public function getPaymentInfo(): void {
 		$content = '';
 
 		if ($this->config->get('paypal_status') && !empty($this->request->get['order_id'])) {
