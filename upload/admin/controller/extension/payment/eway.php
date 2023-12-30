@@ -218,12 +218,12 @@ class ControllerExtensionPaymentEway extends Controller {
 	}
 
 	// Legacy 2.0.0
-	public function orderAction(): void {
+	public function orderAction() {
 		return $this->order();
 	}
 
 	// Legacy 2.0.3
-	public function action(): void {
+	public function action() {
 		return $this->order();
 	}
 

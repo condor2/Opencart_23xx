@@ -2446,7 +2446,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($content);
 	}
 
-	public function capturePayment(): void { {
+	public function capturePayment(): void {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
