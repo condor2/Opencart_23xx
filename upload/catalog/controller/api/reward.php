@@ -51,7 +51,7 @@ class ControllerApiReward extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function maximum() {
+	public function maximum(): void {
 		$this->load->language('api/reward');
 
 		$json = [];

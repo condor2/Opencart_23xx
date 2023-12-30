@@ -34,7 +34,7 @@ class ControllerCheckoutLogin extends Controller {
 		$this->response->setOutput($this->load->view('checkout/login', $data));
 	}
 
-	public function save() {
+	public function save(): void {
 		$this->load->language('checkout/checkout');
 
 		$json = [];

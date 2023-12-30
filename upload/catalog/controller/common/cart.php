@@ -143,7 +143,7 @@ class ControllerCommonCart extends Controller {
 		return $this->load->view('common/cart', $data);
 	}
 
-	public function info() {
+	public function info(): string {
 		$this->response->setOutput($this->index());
 	}
 }

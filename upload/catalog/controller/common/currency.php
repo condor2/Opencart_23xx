@@ -49,7 +49,7 @@ class ControllerCommonCurrency extends Controller {
 		return $this->load->view('common/currency', $data);
 	}
 
-	public function currency() {
+	public function currency(): void {
 		if (isset($this->request->post['code'])) {
 			$this->session->data['currency'] = $this->request->post['code'];
 

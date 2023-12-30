@@ -429,7 +429,7 @@ class ControllerAffiliateRegister extends Controller {
 		return !$this->error;
 	}
 
-	public function country() {
+	public function country(): void {
 		$json = [];
 
 		$this->load->model('localisation/country');

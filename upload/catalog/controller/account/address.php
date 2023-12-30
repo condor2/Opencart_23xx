@@ -18,7 +18,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getList();
 	}
 
-	public function add() {
+	public function add(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -59,7 +59,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getForm();
 	}
 
-	public function edit() {
+	public function edit(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -116,7 +116,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getForm();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/address', '', true);
 
@@ -166,7 +166,7 @@ class ControllerAccountAddress extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
@@ -264,7 +264,7 @@ class ControllerAccountAddress extends Controller {
 		$this->response->setOutput($this->load->view('account/address_list', $data));
 	}
 
-	protected function getForm() {
+	protected function getForm(): void {
 		$data['breadcrumbs'] = [];
 
 		$data['breadcrumbs'][] = [

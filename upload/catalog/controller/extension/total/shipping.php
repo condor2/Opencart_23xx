@@ -54,7 +54,7 @@ class ControllerExtensionTotalShipping extends Controller {
 		return '';
 	}
 
-	public function quote() {
+	public function quote(): void {
 		$this->load->language('extension/total/shipping');
 
 		$json = [];
@@ -178,7 +178,7 @@ class ControllerExtensionTotalShipping extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function shipping() {
+	public function shipping(): void {
 		$this->load->language('extension/total/shipping');
 
 		$json = [];
@@ -207,7 +207,7 @@ class ControllerExtensionTotalShipping extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function country() {
+	public function country(): void {
 		$json = [];
 
 		$this->load->model('localisation/country');

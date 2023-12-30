@@ -101,7 +101,7 @@ class ControllerCheckoutRegister extends Controller {
 		$this->response->setOutput($this->load->view('checkout/register', $data));
 	}
 
-	public function save() {
+	public function save(): void {
 		$this->load->language('checkout/checkout');
 
 		$json = [];

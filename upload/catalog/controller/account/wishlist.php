@@ -128,7 +128,7 @@ class ControllerAccountWishList extends Controller {
 		$this->response->setOutput($this->load->view('account/wishlist', $data));
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('account/wishlist');
 
 		$json = [];

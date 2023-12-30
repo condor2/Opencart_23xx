@@ -95,7 +95,7 @@ class ControllerAccountAccount extends Controller {
 		$this->response->setOutput($this->load->view('account/account', $data));
 	}
 
-	public function country() {
+	public function country(): void {
 		$json = [];
 
 		$this->load->model('localisation/country');

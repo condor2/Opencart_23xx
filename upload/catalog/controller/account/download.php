@@ -111,7 +111,7 @@ class ControllerAccountDownload extends Controller {
 		$this->response->setOutput($this->load->view('account/download', $data));
 	}
 
-	public function download() {
+	public function download(): void {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/download', '', true);
 

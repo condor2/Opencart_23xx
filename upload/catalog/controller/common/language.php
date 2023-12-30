@@ -47,7 +47,7 @@ class ControllerCommonLanguage extends Controller {
 		return $this->load->view('common/language', $data);
 	}
 
-	public function language() {
+	public function language(): void {
 		if (isset($this->request->post['code'])) {
 			$this->session->data['language'] = $this->request->post['code'];
 		}

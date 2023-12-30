@@ -62,7 +62,7 @@ class ControllerCheckoutPaymentAddress extends Controller {
 		$this->response->setOutput($this->load->view('checkout/payment_address', $data));
 	}
 
-	public function save() {
+	public function save(): void {
 		$this->load->language('checkout/checkout');
 
 		$json = [];

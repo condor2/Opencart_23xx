@@ -120,9 +120,9 @@ class ControllerInstallStep2 extends Controller {
 			$data['error_modification'] = '';
 		}
 
-		$data['php_version'] = phpversion();
+		$data['php_version'] = PHP_VERSION;
 
-		if (version_compare(phpversion(), '7.4.0', '<')) {
+		if (version_compare(PHP_VERSION, '7.4.0', '<')) {
 			$data['version'] = false;
 		} else {
 			$data['version'] = true;
@@ -175,7 +175,7 @@ class ControllerInstallStep2 extends Controller {
 	}
 
 	private function validate() {
-		if (version_compare(phpversion(), '7.4.0', '<')) {
+		if (version_compare(PHP_VERSION, '7.4.0', '<')) {
 			$this->error['warning'] = $this->language->get('error_version');
 		}
 

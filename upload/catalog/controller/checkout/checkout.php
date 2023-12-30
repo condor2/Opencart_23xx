@@ -92,7 +92,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->response->setOutput($this->load->view('checkout/checkout', $data));
 	}
 
-	public function country() {
+	public function country(): void {
 		$json = [];
 
 		$this->load->model('localisation/country');
@@ -118,7 +118,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function customfield() {
+	public function customfield(): void {
 		$json = [];
 
 		$this->load->model('account/custom_field');

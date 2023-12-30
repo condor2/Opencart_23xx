@@ -41,7 +41,7 @@ class ControllerApiVoucher extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('api/voucher');
 
 		$json = [];

@@ -130,7 +130,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		$this->response->setOutput($this->load->view('checkout/payment_method', $data));
 	}
 
-	public function save() {
+	public function save(): void {
 		$this->load->language('checkout/checkout');
 
 		$json = [];

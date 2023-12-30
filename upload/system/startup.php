@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 
 // Check Version
-if (version_compare(phpversion(), '7.4.0', '<')) {
+if (version_compare(PHP_VERSION, '7.4.0', '<')) {
 	exit('PHP 7.4+ Required');
 }
 

@@ -99,7 +99,7 @@ class ControllerAccountRecurring extends Controller {
 		$this->response->setOutput($this->load->view('account/recurring_list', $data));
 	}
 
-	public function info() {
+	public function info(): void {
 		$this->load->language('account/recurring');
 
 		if (isset($this->request->get['order_recurring_id'])) {

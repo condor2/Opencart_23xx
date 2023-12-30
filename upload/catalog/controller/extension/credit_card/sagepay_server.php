@@ -95,7 +95,7 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 		$this->response->setOutput($this->load->view('extension/credit_card/sagepay_server_list', $data));
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('extension/credit_card/sagepay_server');
 
 		$this->load->model('extension/payment/sagepay_server');
@@ -129,7 +129,7 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 		$this->response->redirect($this->url->link('extension/credit_card/sagepay_server', '', true));
 	}
 
-	public function addCard() {
+	public function addCard(): void {
 		$this->load->language('extension/payment/sagepay_server');
 
 		$this->load->model('checkout/order');
@@ -175,7 +175,7 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function callback() {
+	public function callback(): void {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/sagepay_server');
 
@@ -271,14 +271,14 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 		echo "RedirectURL=" . $success_page . $end_ln;
 	}
 
-	public function success() {
+	public function success() : void {
 		$this->load->model('extension/payment/sagepay_server');
 		$this->model_extension_payment_sagepay_server->logger('Success', '');
 		$this->session->data['success'] = 'Success';
 		$this->response->redirect($this->url->link('extension/credit_card/sagepay_server', '', true));
 	}
 
-	public function failure() {
+	public function failure(): void {
 		$this->load->model('extension/payment/sagepay_server');
 		$this->model_extension_payment_sagepay_server->logger('Failure', '');
 		$this->session->data['error_warning'] = 'Failure';
