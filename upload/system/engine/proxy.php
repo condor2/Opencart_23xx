@@ -40,7 +40,7 @@ class Proxy extends \stdClass {
 		}
 
 		if (isset($this->data[$key])) {
-			return call_user_func_array($this->data[$key], $arg_data);
+			return ($this->data[$key])(...$arg_data);
 		} else {
 			$trace = debug_backtrace();
 

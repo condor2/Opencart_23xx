@@ -25,8 +25,8 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // DIR
-define('DIR_APPLICATION', str_replace('\\', '/', realpath(dirname(__FILE__))) . '/');
-define('DIR_SYSTEM', str_replace('\\', '/', realpath(dirname(__FILE__) . '/../')) . '/system/');
+define('DIR_APPLICATION', str_replace('\\', '/', realpath(__DIR__)) . '/');
+define('DIR_SYSTEM', str_replace('\\', '/', realpath(__DIR__ . '/../')) . '/system/');
 define('DIR_OPENCART', str_replace('\\', '/', realpath(DIR_APPLICATION . '../')) . '/');
 define('DIR_STORAGE', DIR_SYSTEM . 'storage/');
 define('DIR_DATABASE', DIR_SYSTEM . 'database/');
@@ -146,7 +146,7 @@ function install($options) {
 
 function check_requirements() {
 	$error = null;
-	if (version_compare(phpversion(), '7.4.0', '<')) {
+	if (version_compare(PHP_VERSION, '7.4.0', '<')) {
 		$error .= 'ERROR: You need to use PHP 7.4+ or above for OpenCart to work!' . "\n";
 	}
 

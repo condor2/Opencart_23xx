@@ -82,7 +82,7 @@ class Mail extends \stdClass {
 			$to = $this->to;
 		}
 
-		if (version_compare(phpversion(), '8.0', '>=') || substr(PHP_OS, 0, 3) == 'WIN') {
+		if (version_compare(PHP_VERSION, '8.0', '>=') || substr(PHP_OS, 0, 3) == 'WIN') {
 			$eol = "\r\n";
 		} else {
 			$eol = PHP_EOL;
@@ -107,7 +107,7 @@ class Mail extends \stdClass {
 		}
 
 		$header .= 'Return-Path: ' . $this->from . $eol;
-		$header .= 'X-Mailer: PHP/' . phpversion() . $eol;
+		$header .= 'X-Mailer: PHP/' . PHP_VERSION . $eol;
 		$header .= 'Content-Type: multipart/mixed; boundary="' . $boundary . '"' . $eol . $eol;
 
 		if (!$this->html) {
