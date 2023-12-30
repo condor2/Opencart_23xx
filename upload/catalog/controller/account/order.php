@@ -380,7 +380,7 @@ class ControllerAccountOrder extends Controller {
 
 			return null;
 		} else {
-			return new \Opencart\System\Engine\Action('error/not_found');
+			return new Action('error/not_found');
 		}
 	}
 
