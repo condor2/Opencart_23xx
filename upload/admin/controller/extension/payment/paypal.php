@@ -174,7 +174,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 	}
 
-	public function auth() {
+	public function auth(): void {
 		$this->load->language('extension/payment/paypal');
 
 		$this->load->model('extension/payment/paypal');
@@ -280,7 +280,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/auth', $data));
 	}
 
-	public function dashboard() {
+	public function dashboard(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -441,7 +441,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/dashboard', $data));
 	}
 
-	public function general() {
+	public function general(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -637,7 +637,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/general', $data));
 	}
 
-	public function button() {
+	public function button(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -891,7 +891,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/button', $data));
 	}
 
-	public function googlepay_button() {
+	public function googlepay_button(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -1109,7 +1109,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/googlepay_button', $data));
 	}
 
-	public function applepay_button() {
+	public function applepay_button(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -1334,7 +1334,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/applepay_button', $data));
 	}
 
-	public function card() {
+	public function card(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -1556,7 +1556,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/card', $data));
 	}
 
-	public function message() {
+	public function message(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -1810,7 +1810,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/message', $data));
 	}
 
-	public function order_status() {
+	public function order_status(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -1925,7 +1925,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/order_status', $data));
 	}
 
-	public function contact() {
+	public function contact(): void {
 		if (!$this->config->get('paypal_client_id')) {
 			$this->response->redirect($this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		}
@@ -2062,7 +2062,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/paypal/contact', $data));
 	}
 
-	public function save() {
+	public function save(): void {
 		$this->load->language('extension/payment/paypal');
 
 		$this->load->model('setting/setting');
@@ -2083,7 +2083,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function disconnect() {
+	public function disconnect(): void {
 		$this->load->model('setting/setting');
 
 		$setting = $this->model_setting_setting->getSetting('paypal');
@@ -2101,7 +2101,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function callback() {
+	public function callback(): void {
 		if (isset($this->request->post['environment']) && isset($this->request->post['authorization_code']) && isset($this->request->post['shared_id']) && isset($this->request->post['seller_nonce'])) {
 			$this->session->data['environment'] = $this->request->post['environment'];
 			$this->session->data['authorization_code'] = $this->request->post['authorization_code'];
@@ -2115,7 +2115,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function getSaleAnalytics() {
+	public function getSaleAnalytics(): void {
 		$this->load->language('extension/payment/paypal');
 
 		$data = [];
@@ -2203,7 +2203,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function downloadAssociationFile() {
+	public function downloadAssociationFile(): void {
 		$environment = $this->config->get('paypal_environment');
 
 		if ($environment == 'production') {
@@ -2228,7 +2228,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		readfile($file);
 	}
 
-	public function downloadHostAssociationFile() {
+	public function downloadHostAssociationFile(): void {
 		$this->load->language('extension/payment/paypal');
 
 		$environment = $this->config->get('paypal_environment');
@@ -2269,7 +2269,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function sendContact() {
+	public function sendContact(): void {
 		$this->load->language('extension/payment/paypal');
 
 		$this->load->model('extension/payment/paypal');
@@ -2286,7 +2286,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function agree() {
+	public function agree(): void {
 		$this->load->language('extension/payment/paypal');
 
 		$this->load->model('extension/payment/paypal');
@@ -2301,7 +2301,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/paypal');
 
 		$this->model_extension_payment_paypal->install();
@@ -2331,7 +2331,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->model_setting_setting->editSetting('paypal_version', $setting);
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/payment/paypal');
 
 		$this->model_extension_payment_paypal->uninstall();
@@ -2397,7 +2397,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		}
 	}
 
-	public function getPaymentInfo() {
+	public function getPaymentInfo(): void { {
 		$content = '';
 
 		if ($this->config->get('paypal_status') && !empty($this->request->get['order_id'])) {
@@ -2446,7 +2446,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput($content);
 	}
 
-	public function capturePayment() {
+	public function capturePayment(): void { {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
@@ -2537,7 +2537,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function reauthorizePayment() {
+	public function reauthorizePayment(): void { {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
@@ -2628,7 +2628,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function voidPayment() {
+	public function voidPayment(): void { {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
@@ -2718,7 +2718,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function refundPayment() {
+	public function refundPayment(): void { {
 		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 

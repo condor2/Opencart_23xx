@@ -109,7 +109,7 @@ class ControllerExtensionDashboardMap extends Controller {
 		return $this->load->view('extension/dashboard/map_info', $data);
 	}
 
-	public function map() {
+	public function map(): void {
 		$json = [];
 
 		$this->load->model('report/sale');

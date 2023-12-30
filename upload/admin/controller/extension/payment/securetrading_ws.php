@@ -301,17 +301,17 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/securetrading_ws', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/securetrading_ws');
 		$this->model_extension_payment_securetrading_ws->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/payment/securetrading_ws');
 		$this->model_extension_payment_securetrading_ws->uninstall();
 	}
 
-	public function downloadTransactions() {
+	public function downloadTransactions(): void {
 		$this->load->model('extension/payment/securetrading_ws');
 		$this->load->language('extension/payment/securetrading_ws');
 
@@ -335,7 +335,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		exit();
 	}
 
-	public function showTransactions() {
+	public function showTransactions(): void {
 		$this->load->model('extension/payment/securetrading_ws');
 		$this->load->language('extension/payment/securetrading_ws');
 
@@ -402,7 +402,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		return $this->load->view('extension/payment/securetrading_ws_transactions', $data);
 	}
 
-	public function order() {
+	public function order(): string {
 
 		if ($this->config->get('securetrading_ws_status')) {
 			$this->load->model('extension/payment/securetrading_ws');
@@ -445,11 +445,15 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/securetrading_ws_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function void() {
+	public function void(): void {
 		$this->load->language('extension/payment/securetrading_ws');
 		$json = [];
 
@@ -499,7 +503,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function release() {
+	public function release(): void {
 		$this->load->language('extension/payment/securetrading_ws');
 		$json = [];
 
@@ -562,7 +566,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function rebate() {
+	public function rebate(): void {
 		$this->load->language('extension/payment/securetrading_ws');
 		$json = [];
 

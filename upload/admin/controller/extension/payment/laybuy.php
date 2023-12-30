@@ -552,7 +552,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/laybuy', $data));
 	}
 
-	public function fetch() {
+	public function fetch(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Fetching transactions');
@@ -713,7 +713,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function install() {
+	public function install(): void {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/laybuy');
 
@@ -721,7 +721,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/laybuy');
 
@@ -901,7 +901,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/laybuy_transaction', $data));
 	}
 
-	public function cancel() {
+	public function cancel(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Canceling transaction');
@@ -996,7 +996,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function revise() {
+	public function revise(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Revising transaction');
@@ -1152,7 +1152,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function autocomplete() {
+	public function autocomplete(): void {
 		$json = [];
 
 		if (isset($this->request->get['filter_customer_group'])) {
@@ -1172,7 +1172,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function order() {
+	public function order(): string {
 		if ($this->config->get('laybuy_status')) {
 			$this->load->model('extension/payment/laybuy');
 
@@ -1195,6 +1195,8 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			$data['api_key'] = $this->getApiKey();
 
 			return $this->load->view('extension/payment/laybuy_order', $data);
+		} else {
+			return '';
 		}
 	}
 
@@ -1214,7 +1216,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		} else {
 			$this->model_extension_payment_laybuy->log('No API info');
 
-			return;
+			return '';
 		}
 	}
 

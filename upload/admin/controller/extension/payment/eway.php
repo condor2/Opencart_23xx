@@ -207,27 +207,27 @@ class ControllerExtensionPaymentEway extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/eway', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/eway');
 		$this->model_extension_payment_eway->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/payment/eway');
 		$this->model_extension_payment_eway->uninstall();
 	}
 
 	// Legacy 2.0.0
-	public function orderAction() {
+	public function orderAction(): void {
 		return $this->order();
 	}
 
 	// Legacy 2.0.3
-	public function action() {
+	public function action(): void {
 		return $this->order();
 	}
 
-	public function order() {
+	public function order(): string {
 		if ($this->config->get('eway_status')) {
 			$this->load->model('extension/payment/eway');
 
@@ -275,11 +275,15 @@ class ControllerExtensionPaymentEway extends Controller {
 				$data['order_id'] = (int)$this->request->get['order_id'];
 
 				return $this->load->view('extension/payment/eway_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function refund() {
+	public function refund(): void {
 		$this->load->language('extension/payment/eway');
 
 		$order_id = $this->request->post['order_id'];
@@ -334,7 +338,7 @@ class ControllerExtensionPaymentEway extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function capture() {
+	public function capture(): void {
 		$this->load->language('extension/payment/eway');
 
 		$order_id = $this->request->post['order_id'];

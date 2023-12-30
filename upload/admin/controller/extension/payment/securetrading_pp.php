@@ -297,17 +297,17 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/securetrading_pp', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/securetrading_pp');
 		$this->model_extension_payment_securetrading_pp->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/payment/securetrading_pp');
 		$this->model_extension_payment_securetrading_pp->uninstall();
 	}
 
-	public function order() {
+	public function order(): string {
 
 		if ($this->config->get('securetrading_pp_status')) {
 			$this->load->model('extension/payment/securetrading_pp');
@@ -350,11 +350,15 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/securetrading_pp_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function void() {
+	public function void(): void {
 		$this->load->language('extension/payment/securetrading_pp');
 		$json = [];
 
@@ -404,7 +408,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function release() {
+	public function release(): void {
 		$this->load->language('extension/payment/securetrading_pp');
 		$json = [];
 
@@ -467,7 +471,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function rebate() {
+	public function rebate(): void {
 		$this->load->language('extension/payment/securetrading_pp');
 		$json = [];
 

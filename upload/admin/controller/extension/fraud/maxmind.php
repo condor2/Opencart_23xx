@@ -105,13 +105,13 @@ class ControllerExtensionFraudMaxMind extends Controller {
 		$this->response->setOutput($this->load->view('extension/fraud/maxmind', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/fraud/maxmind');
 
 		$this->model_extension_fraud_maxmind->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/fraud/maxmind');
 
 		$this->model_extension_fraud_maxmind->uninstall();

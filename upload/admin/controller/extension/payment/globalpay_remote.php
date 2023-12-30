@@ -254,12 +254,12 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/globalpay_remote', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/globalpay_remote');
 		$this->model_extension_payment_globalpay_remote->install();
 	}
 
-	public function order() {
+	public function order(): string {
 		if ($this->config->get('globalpay_remote_status')) {
 			$this->load->model('extension/payment/globalpay_remote');
 
@@ -301,11 +301,15 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/globalpay_remote_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function void() {
+	public function void(): void {
 		$this->load->language('extension/payment/globalpay_remote');
 		$json = [];
 
@@ -339,7 +343,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function capture() {
+	public function capture(): void {
 		$this->load->language('extension/payment/globalpay');
 		$json = [];
 
@@ -388,7 +392,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function rebate() {
+	public function rebate(): void {
 		$this->load->language('extension/payment/globalpay_remote');
 		$json = [];
 

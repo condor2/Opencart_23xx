@@ -88,7 +88,7 @@ class ControllerToolLog extends Controller {
 		$this->response->setOutput($this->load->view('tool/log', $data));
 	}
 
-	public function download() {
+	public function download(): void {
 		$this->load->language('tool/log');
 
 		$file = DIR_LOGS . $this->config->get('config_error_filename');
@@ -109,7 +109,7 @@ class ControllerToolLog extends Controller {
 		}
 	}
 
-	public function clear() {
+	public function clear(): void {
 		$this->load->language('tool/log');
 
 		if (!$this->user->hasPermission('modify', 'tool/log')) {

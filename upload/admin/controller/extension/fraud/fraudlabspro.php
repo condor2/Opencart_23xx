@@ -137,7 +137,7 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 		$this->response->setOutput($this->load->view('extension/fraud/fraudlabspro', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/fraud/fraudlabspro');
 
 		$this->model_extension_fraud_fraudlabspro->install();

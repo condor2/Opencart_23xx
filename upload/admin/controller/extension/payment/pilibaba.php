@@ -219,7 +219,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/pilibaba', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/pilibaba');
 
@@ -227,7 +227,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		}
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/pilibaba');
 
@@ -235,7 +235,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		}
 	}
 
-	public function register() {
+	public function register(): void {
 		$this->load->language('extension/payment/pilibaba');
 
 		$json = [];
@@ -282,7 +282,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function order() {
+	public function order(): string {
 		if ($this->config->get('pilibaba_status')) {
 			$this->load->model('extension/payment/pilibaba');
 
@@ -327,11 +327,15 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/pilibaba_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function tracking() {
+	public function tracking(): void {
 		$this->load->language('extension/payment/pilibaba');
 
 		$json = [];
@@ -358,7 +362,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function barcode() {
+	public function barcode(): void {
 		if ($this->config->get('pilibaba_status')) {
 			if (isset($this->request->get['order_id'])) {
 				if ($this->config->get('pilibaba_environment') == 'live') {

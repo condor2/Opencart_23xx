@@ -124,12 +124,12 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 		return !$this->error;
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/event');
 		$this->model_extension_event->addEvent('amazon_pay', 'catalog/controller/account/logout/after', 'extension/module/amazon_pay/logout');
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/event');
 		$this->model_extension_event->deleteEvent('amazon_pay');
 	}

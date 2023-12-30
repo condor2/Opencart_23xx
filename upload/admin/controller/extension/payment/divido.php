@@ -194,9 +194,9 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/divido', $data));
 	}
 
-	public function order() {
+	public function order(): string {
 		if (!$this->config->get('divido_status')) {
-			return null;
+			return '';
 		}
 
 		$this->load->model('extension/payment/divido');
@@ -205,9 +205,9 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$order_id = (int)$this->request->get['order_id'];
 
 		$lookup = $this->model_extension_payment_divido->getLookupByOrderId($order_id);
-		$proposal_id = null;
-		$application_id = null;
-		$deposit_amount = null;
+		$proposal_id = '';
+		$application_id = '';
+		$deposit_amount = '';
 		if ($lookup->num_rows == 1) {
 			$lookup_data = $lookup->row;
 			$proposal_id = $lookup_data['proposal_id'];
@@ -227,12 +227,12 @@ class ControllerExtensionPaymentDivido extends Controller {
 		return $this->load->view('extension/payment/divido_order', $data);
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/divido');
 		$this->model_extension_payment_divido->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/payment/divido');
 		$this->model_extension_payment_divido->uninstall();
 	}

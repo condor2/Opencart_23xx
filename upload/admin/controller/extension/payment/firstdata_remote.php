@@ -315,17 +315,17 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/firstdata_remote', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/firstdata_remote');
 		$this->model_extension_payment_firstdata_remote->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/payment/firstdata_remote');
 		$this->model_extension_payment_firstdata_remote->uninstall();
 	}
 
-	public function order() {
+	public function order(): string {
 		if ($this->config->get('firstdata_remote_status')) {
 			$this->load->model('extension/payment/firstdata_remote');
 
@@ -366,11 +366,15 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/firstdata_remote_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function void() {
+	public function void(): void {
 		$this->load->language('extension/payment/firstdata_remote');
 
 		$json = [];
@@ -406,7 +410,7 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function capture() {
+	public function capture(): void {
 		$this->load->language('extension/payment/firstdata');
 		$json = [];
 
@@ -447,7 +451,7 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function refund() {
+	public function refund(): void {
 		$this->load->language('extension/payment/firstdata_remote');
 
 		$json = [];

@@ -264,7 +264,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/cardconnect', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/cardconnect');
 
@@ -272,7 +272,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		}
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/cardconnect');
 
@@ -280,7 +280,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		}
 	}
 
-	public function order() {
+	public function order(): string {
 		if ($this->config->get('cardconnect_status')) {
 			$this->load->model('extension/payment/cardconnect');
 
@@ -371,11 +371,15 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/cardconnect_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function inquire() {
+	public function inquire(): void {
 		$this->load->language('extension/payment/cardconnect');
 
 		$json = [];
@@ -414,7 +418,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function capture() {
+	public function capture(): void {
 		$this->load->language('extension/payment/cardconnect');
 
 		$json = [];
@@ -464,7 +468,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function refund() {
+	public function refund(): void {
 		$this->load->language('extension/payment/cardconnect');
 
 		$json = [];
@@ -514,7 +518,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function void() {
+	public function void(): void {
 		$this->load->language('extension/payment/cardconnect');
 
 		$json = [];

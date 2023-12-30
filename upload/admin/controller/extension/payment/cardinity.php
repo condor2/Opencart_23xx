@@ -143,7 +143,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/cardinity', $data));
 	}
 
-	public function order() {
+	public function order(): string {
 		$this->load->language('extension/payment/cardinity');
 
 		$data['text_payment_info'] = $this->language->get('text_payment_info');
@@ -153,7 +153,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		return $this->load->view('extension/payment/cardinity_order', $data);
 	}
 
-	public function getPayment() {
+	public function getPayment(): void {
 		$this->load->language('extension/payment/cardinity');
 
 		$this->load->model('extension/payment/cardinity');
@@ -237,7 +237,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/cardinity_order_ajax', $data));
 	}
 
-	public function refund() {
+	public function refund(): void {
 		$this->load->language('extension/payment/cardinity');
 
 		$this->load->model('extension/payment/cardinity');
@@ -271,7 +271,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 
 		$check_credentials = true;
 
-		if (version_compare(phpversion(), '5.4.0', '<')) {
+		if (version_compare(phpversion(), '7.4.0', '<')) {
 			$this->error['warning'] = $this->language->get('error_php_version');
 		}
 
@@ -319,13 +319,13 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		return !$this->error;
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/cardinity');
 
 		$this->model_extension_payment_cardinity->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/payment/cardinity');
 
 		$this->model_extension_payment_cardinity->uninstall();

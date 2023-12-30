@@ -12,7 +12,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getList();
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -22,7 +22,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getForm();
 	}
 
-	public function edit() {
+	public function edit(): void {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -32,7 +32,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getForm();
 	}
 
-	public function delete() {
+	public function delete(): void {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -86,7 +86,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		if (isset($this->request->get['filter_order_id'])) {
 			$filter_order_id = (int)$this->request->get['filter_order_id'];
 		} else {
@@ -453,7 +453,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_list', $data));
 	}
 
-	public function getForm() {
+	public function getForm(): void {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['order_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -836,7 +836,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_form', $data));
 	}
 
-	public function info() {
+	public function info(): ?object {
 		$this->load->model('sale/order');
 
 		if (isset($this->request->get['order_id'])) {
@@ -1434,10 +1434,11 @@ class ControllerSaleOrder extends Controller {
 
 			$this->response->setOutput($this->load->view('sale/order_info', $data));
 
-			return null;
 		} else {
 			return new Action('error/not_found');
 		}
+
+		return null;
 	}
 
 	protected function validate() {
@@ -1448,7 +1449,7 @@ class ControllerSaleOrder extends Controller {
 		return !$this->error;
 	}
 
-	public function createInvoiceNo() {
+	public function createInvoiceNo(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1477,7 +1478,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function addReward() {
+	public function addReward(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1512,7 +1513,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function removeReward() {
+	public function removeReward(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1543,7 +1544,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function addCommission() {
+	public function addCommission(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1578,7 +1579,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function removeCommission() {
+	public function removeCommission(): void {
 		$this->load->language('sale/order');
 
 		$json = [];
@@ -1609,7 +1610,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function history() {
+	public function history(): void {
 		$this->load->language('sale/order');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
@@ -1657,7 +1658,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_history', $data));
 	}
 
-	public function invoice() {
+	public function invoice(): void {
 		$this->load->language('sale/order');
 
 		$data['title'] = $this->language->get('text_invoice');
@@ -1883,7 +1884,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_invoice', $data));
 	}
 
-	public function shipping() {
+	public function shipping(): void {
 		$this->load->language('sale/order');
 
 		$data['title'] = $this->language->get('text_shipping');

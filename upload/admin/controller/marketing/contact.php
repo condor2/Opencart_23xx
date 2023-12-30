@@ -83,7 +83,7 @@ class ControllerMarketingContact extends Controller {
 		$this->response->setOutput($this->load->view('marketing/contact', $data));
 	}
 
-	public function send() {
+	public function send(): void {
 		$this->load->language('marketing/contact');
 
 		$json = [];

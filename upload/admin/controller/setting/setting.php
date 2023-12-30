@@ -1186,7 +1186,7 @@ class ControllerSettingSetting extends Controller {
 		return !$this->error;
 	}
 
-	public function theme() {
+	public function theme(): void {
 		// This is only here for compatibility with old themes.
 		if ($this->request->get['theme'] == 'theme_default') {
 			$theme = $this->config->get('theme_default_directory');

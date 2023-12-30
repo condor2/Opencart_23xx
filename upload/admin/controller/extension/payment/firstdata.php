@@ -244,17 +244,17 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/firstdata', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/firstdata');
 		$this->model_extension_payment_firstdata->install();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->model('extension/payment/firstdata');
 		$this->model_extension_payment_firstdata->uninstall();
 	}
 
-	public function order() {
+	public function order(): string {
 		if ($this->config->get('firstdata_status')) {
 			$this->load->model('extension/payment/firstdata');
 
@@ -339,11 +339,15 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/firstdata_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function void() {
+	public function void(): void {
 		$this->load->language('extension/payment/firstdata');
 
 		if ($this->request->post['status'] == 'FAILED') {
@@ -361,7 +365,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		$this->response->redirect($this->url->link('sale/order/info', 'order_id=' . $this->request->post['order_id'] . '&token=' . $this->session->data['token'], true));
 	}
 
-	public function capture() {
+	public function capture(): void {
 		$this->load->language('extension/payment/firstdata');
 
 		if ($this->request->post['status'] == 'FAILED') {

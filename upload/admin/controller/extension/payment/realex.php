@@ -288,13 +288,13 @@ class ControllerExtensionPaymentRealex extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/realex', $data));
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->model('extension/payment/realex');
 
 		$this->model_extension_payment_realex->install();
 	}
 
-	public function order() {
+	public function order(): string {
 		if ($this->config->get('realex_status')) {
 			$this->load->model('extension/payment/realex');
 
@@ -336,11 +336,15 @@ class ControllerExtensionPaymentRealex extends Controller {
 				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/realex_order', $data);
+			} else {
+				return '';
 			}
+		} else {
+			return '';
 		}
 	}
 
-	public function void() {
+	public function void(): void {
 		$this->load->language('extension/payment/realex');
 		$json = [];
 
@@ -374,7 +378,7 @@ class ControllerExtensionPaymentRealex extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function capture() {
+	public function capture(): void {
 		$this->load->language('extension/payment/realex');
 		$json = [];
 
@@ -422,7 +426,7 @@ class ControllerExtensionPaymentRealex extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function rebate() {
+	public function rebate(): void {
 		$this->load->language('extension/payment/realex');
 		$json = [];
 

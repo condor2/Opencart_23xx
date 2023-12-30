@@ -10,7 +10,7 @@ class ControllerExtensionExtensionCurrency extends Controller {
 		$this->getList();
 	}
 
-	public function install() {
+	public function install(): void {
 		$this->load->language('extension/extension/currency');
 
 		$this->load->model('extension/extension');
@@ -36,7 +36,7 @@ class ControllerExtensionExtensionCurrency extends Controller {
 		$this->getList();
 	}
 
-	public function uninstall() {
+	public function uninstall(): void {
 		$this->load->language('extension/extension/currency');
 
 		$this->load->model('extension/extension');
@@ -53,7 +53,7 @@ class ControllerExtensionExtensionCurrency extends Controller {
 		$this->getList();
 	}
 
-	protected function getList() {
+	protected function getList(): void {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
