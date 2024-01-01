@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleSpecial extends Controller {
-	public function index($setting) {
+	public function index(array $setting): string {
 		$this->load->language('extension/module/special');
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -72,6 +72,8 @@ class ControllerExtensionModuleSpecial extends Controller {
 			}
 
 			return $this->load->view('extension/module/special', $data);
+		} else {
+			return '';
 		}
 	}
 }

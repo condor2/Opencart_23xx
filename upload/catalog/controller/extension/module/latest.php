@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleLatest extends Controller {
-	public function index($setting) {
+	public function index(array $setting): string {
 		$this->load->language('extension/module/latest');
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -65,6 +65,8 @@ class ControllerExtensionModuleLatest extends Controller {
 			}
 
 			return $this->load->view('extension/module/latest', $data);
+		} else {
+			return '';
 		}
 	}
 }

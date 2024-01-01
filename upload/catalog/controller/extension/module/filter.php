@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleFilter extends Controller {
-	public function index() {
+	public function index(): string {
 		if (isset($this->request->get['path'])) {
 			$parts = explode('_', (string)$this->request->get['path']);
 		} else {
@@ -74,5 +74,7 @@ class ControllerExtensionModuleFilter extends Controller {
 				return $this->load->view('extension/module/filter', $data);
 			}
 		}
+
+        return '';
 	}
 }

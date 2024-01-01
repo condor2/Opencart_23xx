@@ -38,7 +38,10 @@ class ControllerExtensionModuleCategory extends Controller {
 				$children = $this->model_catalog_category->getCategories($category['category_id']);
 
 				foreach ($children as $child) {
-					$filter_data = ['filter_category_id' => $child['category_id'], 'filter_sub_category' => true];
+					$filter_data = [
+						'filter_category_id'  => $child['category_id'],
+						'filter_sub_category' => true
+					];
 
 					$children_data[] = [
 						'category_id' => $child['category_id'],

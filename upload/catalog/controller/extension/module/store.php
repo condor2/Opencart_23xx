@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleStore extends Controller {
-	public function index() {
+	public function index(): string {
 		$status = true;
 
 		if ($this->config->get('store_admin')) {
@@ -39,6 +39,8 @@ class ControllerExtensionModuleStore extends Controller {
 			}
 
 			return $this->load->view('extension/module/store', $data);
+		} else {
+			return '';
 		}
 	}
 }

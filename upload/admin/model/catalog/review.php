@@ -84,7 +84,7 @@ class ModelCatalogReview extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalReviews(array $data = []): array {
+	public function getTotalReviews(array $data = []): int {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "review` r LEFT JOIN `" . DB_PREFIX . "product_description` pd ON (r.`product_id` = pd.`product_id`) WHERE pd.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_product'])) {

@@ -177,9 +177,9 @@ class ControllerApiOrder extends Controller {
 					$order_data['shipping_city'] = '';
 					$order_data['shipping_postcode'] = '';
 					$order_data['shipping_zone'] = '';
-					$order_data['shipping_zone_id'] = '';
+					$order_data['shipping_zone_id'] = 0;
 					$order_data['shipping_country'] = '';
-					$order_data['shipping_country_id'] = '';
+					$order_data['shipping_country_id'] = 0;
 					$order_data['shipping_address_format'] = '';
 					$order_data['shipping_custom_field'] = [];
 					$order_data['shipping_method'] = '';
@@ -555,9 +555,9 @@ class ControllerApiOrder extends Controller {
 						$order_data['shipping_city'] = '';
 						$order_data['shipping_postcode'] = '';
 						$order_data['shipping_zone'] = '';
-						$order_data['shipping_zone_id'] = '';
+						$order_data['shipping_zone_id'] = 0;
 						$order_data['shipping_country'] = '';
-						$order_data['shipping_country_id'] = '';
+						$order_data['shipping_country_id'] = 0;
 						$order_data['shipping_address_format'] = '';
 						$order_data['shipping_custom_field'] = [];
 						$order_data['shipping_method'] = '';

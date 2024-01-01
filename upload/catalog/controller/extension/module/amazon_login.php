@@ -1,7 +1,7 @@
 <?php
 
 class ControllerExtensionModuleAmazonLogin extends Controller {
-	public function index() {
+	public function index(): string {
 		$this->load->model('extension/payment/amazon_login_pay');
 
 		if ($this->config->get('amazon_login_pay_status') && $this->config->get('amazon_login_status') && !$this->customer->isLogged() && !empty($this->request->server['HTTPS'])) {
@@ -44,10 +44,12 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 			}
 
 			return $this->load->view('extension/module/amazon_login', $data);
+		} else {
+			return '';
 		}
 	}
 
-	public function login() {
+	public function login(): void {
 		$this->load->model('extension/payment/amazon_login_pay');
 		$this->load->model('account/customer');
 		$this->load->model('account/customer_group');
@@ -186,7 +188,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		}
 	}
 
-	public function logout() {
+	public function logout(): void {
 		unset($this->session->data['lpa']);
 		unset($this->session->data['access_token']);
 
@@ -196,7 +198,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		}
 	}
 
-	protected function validate($email) {
+	protected function validate(string $email) {
 		if (!$this->customer->login($email, '', true)) {
 			$this->error['warning'] = $this->language->get('error_login');
 		}

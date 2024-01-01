@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleFeatured extends Controller {
-	public function index($setting) {
+	public function index(array $setting): string {
 		$this->load->language('extension/module/featured');
 
 		$data['heading_title'] = $setting['name'];
@@ -75,6 +75,8 @@ class ControllerExtensionModuleFeatured extends Controller {
 
 		if ($data['products']) {
 			return $this->load->view('extension/module/featured', $data);
+		} else {
+			return '';
 		}
 	}
 }
