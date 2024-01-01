@@ -365,7 +365,7 @@ class ControllerCatalogProduct extends Controller {
 
 			$product_specials = $this->model_catalog_product->getProductSpecials($result['product_id']);
 
-			foreach ($product_specials  as $product_special) {
+			foreach ($product_specials as $product_special) {
 				if (($product_special['date_start'] == '0000-00-00' || strtotime($product_special['date_start']) < time()) && ($product_special['date_end'] == '0000-00-00' || strtotime($product_special['date_end']) > time())) {
 					$special = $product_special['price'];
 

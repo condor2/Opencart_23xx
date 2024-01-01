@@ -67,8 +67,8 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 				$data['CURRENCY']     = $order_info['currency_code'];
 				$data['INIT']         = (int)$this->request->post['INIT'];
 				$data['MONTHS']       = (int)$this->request->post['MONTHS'];
-				$data['MIND']         = ((int)$this->config->get('laybuy_min_deposit')) ? (int)$this->config->get('laybuy_min_deposit') : 20;
-				$data['MAXD']         = ((int)$this->config->get('laybuy_max_deposit')) ? (int)$this->config->get('laybuy_max_deposit') : 50;
+				$data['MIND']         = ((int)$this->config->get('laybuy_min_deposit')) ?: 20;
+				$data['MAXD']         = ((int)$this->config->get('laybuy_max_deposit')) ?: 50;
 				$data['CUSTOM']       = $order_info['order_id'] . ':' . md5($this->config->get('laybuy_token'));
 				$data['EMAIL']        = $order_info['email'];
 

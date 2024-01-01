@@ -81,7 +81,7 @@ class ModelExtensionPaymentDivido extends Model {
 		if ($result_get_lookup->num_rows == 0) {
 			$proposal_id = ($proposal_id) ? "'" . $proposal_id . "'" : 'NULL';
 			$application_id = ($application_id) ? "'" . $application_id . "'" : 'NULL';
-			$deposit_amount = ($deposit_amount) ? $deposit_amount : 'NULL';
+			$deposit_amount = ($deposit_amount) ?: 'NULL';
 
 			$query_upsert = "INSERT INTO `" . DB_PREFIX . "divido_lookup` (`order_id`, `salt`, `proposal_id`, `application_id`, `deposit_amount`) VALUES (" . $order_id . ", '" . $salt . "', " . $proposal_id . ", " . $application_id . ", " . $deposit_amount . ")";
 		} else {
