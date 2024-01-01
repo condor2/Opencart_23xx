@@ -1,6 +1,6 @@
 <?php
 class ModelSettingStore extends Model {
-	public function getStores() {
+	public function getStores(): array {
 		$store_data = $this->cache->get('store');
 
 		if (!$store_data) {

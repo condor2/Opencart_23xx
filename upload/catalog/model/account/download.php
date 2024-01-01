@@ -1,6 +1,6 @@
 <?php
 class ModelAccountDownload extends Model {
-	public function getDownload($download_id) {
+	public function getDownload(int $download_id): array {
 		$implode = [];
 
 		$order_statuses = (array)$this->config->get('config_complete_status');
@@ -18,7 +18,7 @@ class ModelAccountDownload extends Model {
 		return [];
 	}
 
-	public function getDownloads($start = 0, $limit = 20) {
+	public function getDownloads(int $start = 0, int $limit = 20): array {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -44,7 +44,7 @@ class ModelAccountDownload extends Model {
 		return [];
 	}
 
-	public function getTotalDownloads() {
+	public function getTotalDownloads(): int {
 		$implode = [];
 
 		$order_statuses = (array)$this->config->get('config_complete_status');
@@ -57,8 +57,9 @@ class ModelAccountDownload extends Model {
 			$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "order` o LEFT JOIN `" . DB_PREFIX . "order_product` op ON (o.`order_id` = op.`order_id`) LEFT JOIN `" . DB_PREFIX . "product_to_download` p2d ON (op.`product_id` = p2d.`product_id`) WHERE o.`customer_id` = '" . (int)$this->customer->getId() . "' AND (" . implode(" OR ", $implode) . ")");
 
 			return (int)$query->row['total'];
-		} else {
-			return 0;
+
 		}
+
+		return 0;
 	}
 }

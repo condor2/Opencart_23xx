@@ -1,6 +1,6 @@
 <?php
 class ModelAffiliateActivity extends Model {
-	public function addActivity($key, $data) {
+	public function addActivity(string $key, array $data): int {
 		if (isset($data['affiliate_id'])) {
 			$affiliate_id = (int)$data['affiliate_id'];
 		} else {

@@ -564,7 +564,7 @@ class ControllerProductProduct extends Controller {
 		}
 	}
 
-	public function review() {
+	public function review(): void {
 		$this->load->language('product/product');
 
 		$this->load->model('catalog/review');
@@ -605,7 +605,7 @@ class ControllerProductProduct extends Controller {
 		$this->response->setOutput($this->load->view('product/review', $data));
 	}
 
-	public function write() {
+	public function write(): void {
 		$this->load->language('product/product');
 
 		$json = [];

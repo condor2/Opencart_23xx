@@ -1,6 +1,6 @@
 <?php
 class ModelAffiliateTransaction extends Model {
-	public function getTransactions($data = []) {
+	public function getTransactions(array $data = []): array {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "affiliate_transaction` WHERE `affiliate_id` = '" . (int)$this->affiliate->getId() . "'";
 
 		$sort_data = [
@@ -38,13 +38,13 @@ class ModelAffiliateTransaction extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalTransactions() {
+	public function getTotalTransactions(): int {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "affiliate_transaction` WHERE `affiliate_id` = '" . (int)$this->affiliate->getId() . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getBalance() {
+	public function getBalance(): int {
 		$query = $this->db->query("SELECT SUM(amount) AS total FROM `" . DB_PREFIX . "affiliate_transaction` WHERE `affiliate_id` = '" . (int)$this->affiliate->getId() . "' GROUP BY `affiliate_id`");
 
 		if ($query->num_rows) {

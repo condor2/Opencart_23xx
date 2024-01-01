@@ -96,7 +96,7 @@ class ControllerStartupStartup extends Controller {
 				}
 			}
 
-			$code = $detect ? $detect : '';
+			$code = $detect ?: '';
 		}
 
 		if (!array_key_exists($code, $languages)) {

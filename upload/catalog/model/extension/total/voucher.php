@@ -1,16 +1,16 @@
 <?php
 class ModelExtensionTotalVoucher extends Model {
-	public function addVoucher($order_id, $data) {
+	public function addVoucher(int $order_id, array $data): int {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "voucher SET order_id = '" . (int)$order_id . "', code = '" . $this->db->escape($data['code']) . "', from_name = '" . $this->db->escape($data['from_name']) . "', from_email = '" . $this->db->escape($data['from_email']) . "', to_name = '" . $this->db->escape($data['to_name']) . "', to_email = '" . $this->db->escape($data['to_email']) . "', voucher_theme_id = '" . (int)$data['voucher_theme_id'] . "', message = '" . $this->db->escape($data['message']) . "', amount = '" . (float)$data['amount'] . "', status = '1', date_added = NOW()");
 
 		return $this->db->getLastId();
 	}
 
-	public function disableVoucher($order_id) {
+	public function disableVoucher(int $order_id): void {
 		$this->db->query("UPDATE " . DB_PREFIX . "voucher SET status = '0' WHERE order_id = '" . (int)$order_id . "'");
 	}
 
-	public function getVoucher(string $code) {
+	public function getVoucher(string $code): array {
 		$status = true;
 
 		$voucher_query = $this->db->query("SELECT *, vtd.name AS theme FROM " . DB_PREFIX . "voucher v LEFT JOIN " . DB_PREFIX . "voucher_theme vt ON (v.voucher_theme_id = vt.voucher_theme_id) LEFT JOIN " . DB_PREFIX . "voucher_theme_description vtd ON (vt.voucher_theme_id = vtd.voucher_theme_id) WHERE v.code = '" . $this->db->escape($code) . "' AND vtd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND v.status = '1'");
@@ -72,7 +72,7 @@ class ModelExtensionTotalVoucher extends Model {
 		}
 	}
 
-	public function getTotal($total) {
+	public function getTotal(array $total): void {
 		if (isset($this->session->data['voucher'])) {
 			$this->load->language('extension/total/voucher');
 
@@ -99,7 +99,7 @@ class ModelExtensionTotalVoucher extends Model {
 		}
 	}
 
-	public function confirm($order_info, $order_total) {
+	public function confirm(array $order_info, array $order_total): int {
 		$code = '';
 
 		$start = strpos($order_total['title'], '(') + 1;
@@ -122,7 +122,7 @@ class ModelExtensionTotalVoucher extends Model {
 		return 0;
 	}
 
-	public function unconfirm($order_id) {
+	public function unconfirm(int $order_id): void {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "voucher_history` WHERE order_id = '" . (int)$order_id . "'");
 	}
 }

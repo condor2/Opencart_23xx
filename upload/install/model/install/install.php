@@ -1,6 +1,6 @@
 <?php
 class ModelInstallInstall extends Model {
-	public function database($data) {
+	public function database(array $data): void {
 		$db = new DB($data['db_driver'], html_entity_decode($data['db_hostname'], ENT_QUOTES, 'UTF-8'), html_entity_decode($data['db_username'], ENT_QUOTES, 'UTF-8'), html_entity_decode($data['db_password'], ENT_QUOTES, 'UTF-8'), html_entity_decode($data['db_database'], ENT_QUOTES, 'UTF-8'), $data['db_port']);
 
 		$file = DIR_APPLICATION . 'opencart.sql';

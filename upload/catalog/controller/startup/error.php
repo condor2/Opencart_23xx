@@ -6,7 +6,7 @@ class ControllerStartupError extends Controller {
 		set_error_handler([$this, 'handler']);
 	}
 
-	public function handler(string $code, string $message, string $file, string $line) {
+	public function handler(string $code, string $message, string $file, string $line): bool {
 		// error suppressed with @
 		if (!(error_reporting() & $code)) {
 			return false;

@@ -1,9 +1,9 @@
 <?php
 class ModelExtensionFraudFraudLabsPro extends Model {
-	public function check($data) {
+	public function check(array $data): int {
 		// Do not perform fraud check if FraudLabs Pro is disabled or API key is not provided.
 		if (!$this->config->get('fraudlabspro_status') || !$this->config->get('fraudlabspro_key')) {
-			return;
+			return 0;
 		}
 
 		$risk_score = 0;
@@ -12,7 +12,7 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 
 		// Do not call FraudLabs Pro API if order is already screened.
 		if ($query->num_rows) {
-			return;
+			return 0;
 		}
 
 		$ip = $data['ip'];
@@ -132,7 +132,7 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 
 		// Do not perform any action if error found
 		if ($json->fraudlabspro_error_code) {
-			return;
+			return 0;
 		}
 
 		if ($risk_score > $this->config->get('fraudlabspro_score')) {
@@ -150,6 +150,8 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 		if ($json->fraudlabspro_status == 'REJECT') {
 			return $this->config->get('fraudlabspro_reject_status_id');
 		}
+
+		return 0;
 	}
 
 	private function hashIt($s) {

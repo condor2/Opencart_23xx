@@ -1,6 +1,6 @@
 <?php
 class ModelCheckoutRecurring extends Model {
-	public function create($order_id, $description, $data) {
+	public function create(int $order_id, string $description, array $data): int {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "order_recurring` SET
 		`order_id` = '" . (int)$order_id . "',
 		`date_added` = NOW(),
@@ -25,11 +25,11 @@ class ModelCheckoutRecurring extends Model {
 		return $this->db->getLastId();
 	}
 
-	public function addReference($order_recurring_id, $reference) {
+	public function addReference(int $order_recurring_id, string $reference): void {
 		$this->db->query("REPLACE INTO `" . DB_PREFIX . "order_recurring` SET `reference` = '" . $this->db->escape($reference) . "', `order_recurring_id` = '" . (int)$order_recurring_id . "', `date_added` = NOW()");
 	}
 
-	public function editReference($order_recurring_id, $reference) {
+	public function editReference(int $order_recurring_id, string $reference): void {
 		$this->db->query("UPDATE `" . DB_PREFIX . "order_recurring` SET `reference` = '" . $this->db->escape($reference) . "' WHERE `order_recurring_id` = '" . (int)$order_recurring_id . "' LIMIT 1");
 
 		if ($this->db->countAffected() > 0) {

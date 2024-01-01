@@ -156,7 +156,7 @@ class ControllerProductCompare extends Controller {
 		$this->response->setOutput($this->load->view('product/compare', $data));
 	}
 
-	public function add() {
+	public function add(): void {
 		$this->load->language('product/compare');
 
 		$json = [];
