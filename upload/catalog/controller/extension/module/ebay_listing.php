@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleEbayListing extends Controller {
-	public function index(): string {
+	public function index() {
 		if ($this->config->get('ebay_status') == 1) {
 			$this->load->language('extension/module/ebay');
 
