@@ -101,6 +101,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			}
 
 			return $this->load->view('extension/payment/paypal/paypal', $data);
+		} else {
+			return '';
 		}
 	}
 

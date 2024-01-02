@@ -138,8 +138,10 @@ class ControllerExtensionPaymentDivido extends Controller {
 		}
 
 		$this->model_extension_payment_divido->saveLookup($data->metadata->order_id, $lookup->row['salt'], null, $data->application);
+
 		$this->model_checkout_order->addOrderHistory($order_id, $status_id, $message, false);
-		$this->response->setOutput('ok');
+
+		return $this->response->setOutput('ok');
 	}
 
 	public function confirm(): void {
