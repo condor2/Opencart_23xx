@@ -87,7 +87,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		return $this->load->view('extension/payment/divido', $data);
 	}
 
-	public function update(): void {
+	public function update(): string {
 		$this->load->language('extension/payment/divido');
 		$this->load->model('extension/payment/divido');
 		$this->load->model('checkout/order');
@@ -150,7 +150,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		ini_set('html_errors', 0);
 		if (!$this->session->data['payment_method']['code'] == 'divido') {
 
-			return false;
+			return;
 		}
 
 		$this->model_extension_payment_divido->setMerchant($this->config->get('divido_api_key'));
@@ -278,7 +278,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$this->load->model('extension/payment/divido');
 
 		if (!$this->model_extension_payment_divido->isEnabled()) {
-			return null;
+			return '';
 		}
 
 		$this->model_extension_payment_divido->setMerchant($this->config->get('divido_api_key'));
@@ -290,12 +290,12 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$type              = $args['type'];
 
 		if ($product_selection == 'threshold' && $product_price < $price_threshold) {
-			return null;
+			return '';
 		}
 
 		$plans = $this->model_extension_payment_divido->getProductPlans($product_id);
 		if (empty($plans)) {
-			return null;
+			return '';
 		}
 
 		$plans_ids = array_map(fn ($plan) => $plan->id, $plans);

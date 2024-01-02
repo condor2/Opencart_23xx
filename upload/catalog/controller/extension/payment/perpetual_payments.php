@@ -49,7 +49,7 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 		return $this->load->view('extension/payment/perpetual_payments', $data);
 	}
 
-	public function send()Ș void {
+	public function send(): void {
 		$this->load->language('extension/payment/perpetual_payments');
 
 		$this->load->model('checkout/order');

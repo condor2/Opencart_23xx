@@ -21,7 +21,7 @@ class ControllerExtensionPaymentPayza extends Controller {
 		return $this->load->view('extension/payment/payza', $data);
 	}
 
-	public function callback()Ș void {
+	public function callback(): void {
 		if (isset($this->request->post['ap_securitycode']) && ($this->request->post['ap_securitycode'] == $this->config->get('payza_security'))) {
 			$this->load->model('checkout/order');
 
