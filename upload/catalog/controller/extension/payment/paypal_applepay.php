@@ -84,6 +84,8 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 			$data['error'] = $this->error;
 
 			return $this->load->view('extension/payment/paypal/paypal_applepay', $data);
+		} else {
+			return '';
 		}
 	}
 
