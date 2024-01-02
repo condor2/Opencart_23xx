@@ -85,7 +85,7 @@ class ControllerExtensionPaymentRealex extends Controller {
 		return $this->load->view('extension/payment/realex', $data);
 	}
 
-	public function notify() {
+	public function notify()Ș void {
 		$this->load->model('extension/payment/realex');
 
 		$this->model_extension_payment_realex->logger(print_r($this->request->post, 1));

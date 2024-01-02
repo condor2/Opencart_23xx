@@ -10,7 +10,7 @@ class ControllerExtensionPaymentCod extends Controller {
 		return $this->load->view('extension/payment/cod', $data);
 	}
 
-	public function confirm() {
+	public function confirm(): void {
 		if ($this->session->data['payment_method']['code'] == 'cod') {
 			$this->load->model('checkout/order');
 

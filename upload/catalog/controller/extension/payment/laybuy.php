@@ -44,7 +44,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		return $this->load->view('extension/payment/laybuy', $data);
 	}
 
-	public function postToLaybuy() {
+	public function postToLaybuy(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Posting to Laybuy');
@@ -123,7 +123,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function callback() {
+	public function callback(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Receiving callback');
@@ -181,7 +181,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function cancel() {
+	public function cancel(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Transaction canceled by user. Redirecting to checkout/checkout.');
@@ -189,7 +189,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		$this->response->redirect($this->url->link('checkout/checkout', '', true));
 	}
 
-	public function reviseCallback() {
+	public function reviseCallback(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->load->language('extension/payment/laybuy');
@@ -328,7 +328,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function reviseCancel() {
+	public function reviseCancel(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Revise canceled. Redirecting to checkout/checkout.');
@@ -348,7 +348,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function cron() {
+	public function cron(): void {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->load->language('extension/payment/laybuy');

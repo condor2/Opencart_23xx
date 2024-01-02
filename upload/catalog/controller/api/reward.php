@@ -79,7 +79,7 @@ class ControllerApiReward extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function available() {
+	public function available(): void {
 		$this->load->language('api/reward');
 
 		$json = [];

@@ -36,11 +36,11 @@ class ControllerExtensionPaymentPaymate extends Controller {
 		return $this->load->view('extension/payment/paymate', $data);
 	}
 
-	public function callback() {
+	public function callback(): void {
 		$this->load->language('extension/payment/paymate');
 
 		if (isset($this->request->post['ref'])) {
-			$order_id = $this->request->post['ref'];
+			$order_id = (int)$this->request->post['ref'];
 		} else {
 			$order_id = 0;
 		}

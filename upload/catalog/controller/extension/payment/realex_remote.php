@@ -61,7 +61,7 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 		return $this->load->view('extension/payment/realex_remote', $data);
 	}
 
-	public function send() {
+	public function send()Ș void {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/realex_remote');
 
@@ -231,7 +231,7 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function acsReturn() {
+	public function acsReturn()Ș void {
 		if (isset($this->session->data['order_id'])) {
 			$this->load->model('checkout/order');
 			$this->load->model('extension/payment/realex_remote');

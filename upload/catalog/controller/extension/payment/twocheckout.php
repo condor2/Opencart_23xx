@@ -75,7 +75,7 @@ class ControllerExtensionPaymentTwoCheckout extends Controller {
 		return $this->load->view('extension/payment/twocheckout', $data);
 	}
 
-	public function callback() {
+	public function callback(): void {
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($this->request->post['cart_order_id']);

@@ -75,6 +75,6 @@ class ControllerExtensionModuleFilter extends Controller {
 			}
 		}
 
-        return '';
+		return '';
 	}
 }

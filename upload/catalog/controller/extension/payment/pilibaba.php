@@ -66,7 +66,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		return $this->load->view('extension/payment/pilibaba', $data);
 	}
 
-	public function express() {
+	public function express()Ș void {
 		$this->load->language('extension/shipping/pilibaba');
 
 		$this->load->language('extension/payment/pilibaba');
@@ -366,7 +366,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		}
 	}
 
-	public function callback() {
+	public function callback()Ș void {
 		$this->load->language('extension/payment/pilibaba');
 
 		$this->load->model('checkout/order');

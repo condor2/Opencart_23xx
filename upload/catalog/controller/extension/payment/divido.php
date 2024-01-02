@@ -87,7 +87,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		return $this->load->view('extension/payment/divido', $data);
 	}
 
-	public function update() {
+	public function update(): void {
 		$this->load->language('extension/payment/divido');
 		$this->load->model('extension/payment/divido');
 		$this->load->model('checkout/order');
@@ -142,7 +142,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$this->response->setOutput('ok');
 	}
 
-	public function confirm() {
+	public function confirm(): void {
 		$this->load->language('extension/payment/divido');
 
 		$this->load->model('extension/payment/divido');
@@ -272,7 +272,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
-	public function calculator($args) {
+	public function calculator(array $args): string {
 		$this->load->language('extension/payment/divido');
 
 		$this->load->model('extension/payment/divido');

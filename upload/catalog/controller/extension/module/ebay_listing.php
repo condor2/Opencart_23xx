@@ -33,6 +33,6 @@ class ControllerExtensionModuleEbayListing extends Controller {
 			return $this->load->view('extension/module/ebay', $data);
 		}
 
-        return '';
+		return '';
 	}
 }

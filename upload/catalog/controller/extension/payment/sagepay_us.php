@@ -36,7 +36,7 @@ class ControllerExtensionPaymentSagepayUS extends Controller {
 		return $this->load->view('extension/payment/sagepay_us', $data);
 	}
 
-	public function send() {
+	public function send(): void {
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);

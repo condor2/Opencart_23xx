@@ -85,7 +85,7 @@ class ControllerExtensionPaymentGlobalpay extends Controller {
 		return $this->load->view('extension/payment/globalpay', $data);
 	}
 
-	public function notify() {
+	public function notify(): void {
 		$this->load->model('extension/payment/globalpay');
 
 		$this->model_extension_payment_globalpay->logger(print_r($this->request->post, 1));

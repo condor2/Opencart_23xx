@@ -66,9 +66,9 @@ class ControllerExtensionPaymentPaypoint extends Controller {
 		return $this->load->view('extension/payment/paypoint', $data);
 	}
 
-	public function callback() {
+	public function callback(): void {
 		if (isset($this->request->get['trans_id'])) {
-			$order_id = $this->request->get['trans_id'];
+			$order_id = (int)$this->request->get['trans_id'];
 		} else {
 			$order_id = 0;
 		}

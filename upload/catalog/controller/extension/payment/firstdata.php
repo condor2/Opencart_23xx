@@ -85,7 +85,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		return $this->load->view('extension/payment/firstdata', $data);
 	}
 
-	public function notify() {
+	public function notify(): void {
 		$this->load->model('extension/payment/firstdata');
 
 		$this->load->model('checkout/order');
@@ -233,7 +233,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		}
 	}
 
-	public function fail() {
+	public function fail(): void {
 		$this->load->language('extension/payment/firstdata');
 
 		if (isset($this->request->post['fail_reason']) && !empty($this->request->post['fail_reason'])) {

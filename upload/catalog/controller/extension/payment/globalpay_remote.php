@@ -61,7 +61,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 		return $this->load->view('extension/payment/globalpay_remote', $data);
 	}
 
-	public function send() {
+	public function send(): void {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/globalpay_remote');
 

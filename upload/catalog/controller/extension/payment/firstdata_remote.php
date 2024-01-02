@@ -58,7 +58,7 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		return $this->load->view('extension/payment/firstdata_remote', $data);
 	}
 
-	public function send() {
+	public function send(): void {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/firstdata_remote');
 		$this->load->language('extension/payment/firstdata_remote');

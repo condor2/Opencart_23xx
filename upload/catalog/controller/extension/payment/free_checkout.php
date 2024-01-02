@@ -10,7 +10,7 @@ class ControllerExtensionPaymentFreeCheckout extends Controller {
 		return $this->load->view('extension/payment/free_checkout', $data);
 	}
 
-	public function confirm() {
+	public function confirm(): void {
 		if ($this->session->data['payment_method']['code'] == 'free_checkout') {
 			$this->load->model('checkout/order');
 

@@ -47,9 +47,9 @@ class ControllerExtensionPaymentSkrill extends Controller {
 		return $this->load->view('extension/payment/skrill', $data);
 	}
 
-	public function callback() {
+	public function callback(): void {
 		if (isset($this->request->post['order_id'])) {
-			$order_id = $this->request->post['order_id'];
+			$order_id = (int)$this->request->post['order_id'];
 		} else {
 			$order_id = 0;
 		}

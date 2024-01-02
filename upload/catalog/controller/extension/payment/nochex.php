@@ -69,7 +69,7 @@ class ControllerExtensionPaymentNochex extends Controller {
 		return $this->load->view('extension/payment/nochex', $data);
 	}
 
-	public function callback() {
+	public function callback(): void {
 		$this->load->language('extension/payment/nochex');
 
 		if (isset($this->request->get['method']) && $this->request->get['method'] == 'decline') {
@@ -79,7 +79,7 @@ class ControllerExtensionPaymentNochex extends Controller {
 		}
 
 		if (isset($this->request->post['order_id'])) {
-			$order_id = $this->request->post['order_id'];
+			$order_id = (int)$this->request->post['order_id'];
 		} else {
 			$order_id = 0;
 		}
