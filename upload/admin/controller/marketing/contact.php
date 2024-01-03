@@ -188,7 +188,7 @@ class ControllerMarketingContact extends Controller {
 									$emails[] = $customer_info['email'];
 								}
 							}
- 						}
+						}
 
 						$email_total = count($this->request->post['customer']);
 					}
@@ -219,7 +219,7 @@ class ControllerMarketingContact extends Controller {
 								}
 							}
 						}
- 					}
+					}
 
 						$email_total = count($this->request->post['affiliate']);
 						break;
@@ -231,7 +231,7 @@ class ControllerMarketingContact extends Controller {
 						foreach ($results as $result) {
 							$emails[] = $result['email'];
 						}
- 					}
+					}
 						break;
 				}
 
