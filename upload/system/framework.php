@@ -53,7 +53,7 @@ set_error_handler(function(string $code, string $message, string $file, string $
 });
 
 // Event
-$event = new \Opencart\System\Engine\Event($registry);
+$event = new \Event($registry);
 $registry->set('event', $event);
 
 // Event Register

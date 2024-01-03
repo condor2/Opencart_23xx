@@ -1,6 +1,4 @@
 <?php
-namespace Opencart\System\Engine;
-
 /*
 * Event System Userguide
 *
