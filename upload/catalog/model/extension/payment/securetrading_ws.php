@@ -107,7 +107,7 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 
 		$amount = $this->currency->format($order_info['total'], $order_info['currency_code'], false, false);
 
-		switch($this->config->get('securetrading_ws_settle_status')) {
+		switch ($this->config->get('securetrading_ws_settle_status')) {
 			case 0:
 				$trans_type = 'auth';
 				break;

@@ -17,9 +17,9 @@ class ModelExtensionPaymentLaybuy extends Model {
 	}
 
 	public function getInitialPayments() {
-		$minimum = $this->config->get('laybuy_min_deposit') ? $this->config->get('laybuy_min_deposit') : 20;
+		$minimum = $this->config->get('laybuy_min_deposit') ?: 20;
 
-		$maximum = $this->config->get('laybuy_max_deposit') ? $this->config->get('laybuy_max_deposit') : 50;
+		$maximum = $this->config->get('laybuy_max_deposit') ?: 50;
 
 		$initial_payments = [];
 

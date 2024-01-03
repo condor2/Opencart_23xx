@@ -310,6 +310,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 				$transactions[] = $row;
 			}
+
 			return $transactions;
 		} else {
 			return false;
@@ -359,6 +360,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 		$response_profile = curl_exec($curl_profile);
 		curl_close($curl_profile);
+
 		return json_decode($response_profile);
 	}
 
@@ -568,5 +570,4 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			$log->write($backtrace[6]['class'] . '::' . $backtrace[6]['function'] . ' Data:  ' . print_r($data, 1));
 		}
 	}
-
 }

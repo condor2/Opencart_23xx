@@ -197,7 +197,6 @@ class ModelExtensionPaymentPPExpress extends Model {
 		return $query->rows;
 	}
 
-
 	public function getTokens($test) {
 		if ($test == 'sandbox') {
 			$endpoint = 'https://api.sandbox.paypal.com/v1/oauth2/token';
@@ -313,6 +312,7 @@ class ModelExtensionPaymentPPExpress extends Model {
 			];
 
 			$this->log($log_data, 'CURL failed');
+
 			return false;
 		}
 

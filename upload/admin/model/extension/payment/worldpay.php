@@ -170,5 +170,4 @@ class ModelExtensionPaymentWorldpay extends Model {
 			$log->write($message);
 		}
 	}
-
 }

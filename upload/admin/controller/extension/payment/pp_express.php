@@ -1201,9 +1201,7 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 	}
 
 	public function doSearch() {
-		/*
-		 * used to search for transactions from a user account
-		 */
+		// used to search for transactions from a user account
 		if (isset($this->request->post['date_start'])) {
 
 			$this->load->model('extension/payment/pp_express');

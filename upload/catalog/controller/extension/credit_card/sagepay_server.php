@@ -271,7 +271,7 @@ class ControllerExtensionCreditCardSagepayServer extends Controller {
 		echo "RedirectURL=" . $success_page . $end_ln;
 	}
 
-	public function success() : void {
+	public function success(): void {
 		$this->load->model('extension/payment/sagepay_server');
 		$this->model_extension_payment_sagepay_server->logger('Success', '');
 		$this->session->data['success'] = 'Success';

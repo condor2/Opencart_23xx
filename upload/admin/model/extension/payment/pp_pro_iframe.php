@@ -75,6 +75,7 @@ class ModelExtensionPaymentPPProIframe extends Model {
 			$order = $query->row;
 			$order['transactions'] = $this->getTransactions($order['paypal_iframe_order_id']);
 			$order['captured'] = $this->getTotalCaptured($order['paypal_iframe_order_id']);
+
 			return $order;
 		} else {
 			return false;

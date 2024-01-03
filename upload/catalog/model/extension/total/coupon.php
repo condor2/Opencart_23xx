@@ -97,7 +97,6 @@ class ModelExtensionTotalCoupon extends Model {
 		}
 	}
 
-
 	public function getTotal(array $total): void {
 		if (isset($this->session->data['coupon'])) {
 			$this->load->language('extension/total/coupon');
