@@ -170,7 +170,6 @@ return $config
         'types_spaces' => true,
         'unary_operator_spaces' => true,
         'use_arrow_functions' => true,
-        'void_return' => true,
         'whitespace_after_comma_in_array' => true,
         'yield_from_array_to_yields' => true,
     ])
