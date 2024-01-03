@@ -37,8 +37,8 @@ return $config
         'concat_space' => ['spacing' => 'one'],
         'date_time_create_from_format_call' => true,
         'declare_parentheses' => true,
-        'dir_constant' => true,
         'declare_strict_types' => false,
+        'dir_constant' => true,
         'echo_tag_syntax' => true,
         'empty_loop_body' => true,
         'empty_loop_condition' => true,
@@ -170,6 +170,7 @@ return $config
         'types_spaces' => true,
         'unary_operator_spaces' => true,
         'use_arrow_functions' => true,
+        'void_return' => false,
         'whitespace_after_comma_in_array' => true,
         'yield_from_array_to_yields' => true,
     ])
