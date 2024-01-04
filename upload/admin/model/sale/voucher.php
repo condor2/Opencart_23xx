@@ -132,7 +132,7 @@ class ModelSaleVoucher extends Model {
 				$mail->setHtml($this->load->view('mail/voucher', $data));
 				$mail->send();
 
-			// If voucher does not belong to an order
+				// If voucher does not belong to an order
 			} else {
 				$this->load->language('mail/voucher');
 

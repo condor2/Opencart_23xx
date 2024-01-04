@@ -100,7 +100,7 @@ class ControllerExtensionModification extends Controller {
 					if (is_file($file)) {
 						unlink($file);
 
-					// If directory use the remove directory function
+						// If directory use the remove directory function
 					} elseif (is_dir($file)) {
 						rmdir($file);
 					}
@@ -486,7 +486,7 @@ class ControllerExtensionModification extends Controller {
 					if (is_file($file)) {
 						unlink($file);
 
-					// If directory use the remove directory function
+						// If directory use the remove directory function
 					} elseif (is_dir($file)) {
 						rmdir($file);
 					}
