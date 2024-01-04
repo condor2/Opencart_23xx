@@ -22,7 +22,7 @@ class Event {
 				foreach ($actions as $action) {
 					$result = $action->execute($this->registry, $args);
 
-					if (null !== $result && !($result instanceof \Exception)) {
+					if ($result !== null && !($result instanceof \Exception)) {
 						return $result;
 					}
 				}
