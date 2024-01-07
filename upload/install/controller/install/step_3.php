@@ -38,6 +38,25 @@ class ControllerInstallStep3 extends Controller {
 			$output .= 'define(\'DB_HOSTNAME\', \'' . addslashes($this->request->post['db_hostname']) . '\');' . "\n";
 			$output .= 'define(\'DB_USERNAME\', \'' . addslashes($this->request->post['db_username']) . '\');' . "\n";
 			$output .= 'define(\'DB_PASSWORD\', \'' . addslashes(html_entity_decode($this->request->post['db_password'], ENT_QUOTES, 'UTF-8')) . '\');' . "\n";
+
+			if (!empty($this->request->post['db_ssl_key'])) {
+				$output .= 'define(\'DB_SSL_KEY\', \'' . addslashes($this->request->post['db_ssl_key']) . '\');' . "\n";
+			} else {
+				$output .= 'define(\'DB_SSL_KEY\', \'\');' . "\n";
+			}
+
+			if (!empty($this->request->post['db_ssl_cert'])) {
+				$output .= 'define(\'DB_SSL_CERT\', \'' . addslashes($this->request->post['db_ssl_cert']) . '\');' . "\n";
+			} else {
+				$output .= 'define(\'DB_SSL_CERT\', \'\');' . "\n";
+			}
+
+			if (!empty($this->request->post['db_ssl_ca'])) {
+				$output .= 'define(\'DB_SSL_CA\', \'' . addslashes($this->request->post['db_ssl_ca']) . '\');' . "\n";
+			} else {
+				$output .= 'define(\'DB_SSL_CA\', \'\');' . "\n";
+			}
+
 			$output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['db_database']) . '\');' . "\n";
 			$output .= 'define(\'DB_PORT\', \'' . addslashes($this->request->post['db_port']) . '\');' . "\n";
 			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');';
@@ -79,6 +98,25 @@ class ControllerInstallStep3 extends Controller {
 			$output .= 'define(\'DB_HOSTNAME\', \'' . addslashes($this->request->post['db_hostname']) . '\');' . "\n";
 			$output .= 'define(\'DB_USERNAME\', \'' . addslashes($this->request->post['db_username']) . '\');' . "\n";
 			$output .= 'define(\'DB_PASSWORD\', \'' . addslashes(html_entity_decode($this->request->post['db_password'], ENT_QUOTES, 'UTF-8')) . '\');' . "\n";
+
+			if ((isset($this->request->post['db_ssl_key']) && $this->request->post['db_ssl_key'] !== '')) {
+				$output .= 'define(\'DB_SSL_KEY\', \'' . addslashes($this->request->post['db_ssl_key']) . '\');' . "\n";
+			} else {
+				$output .= 'define(\'DB_SSL_KEY\', \'\');' . "\n";
+			}
+
+			if ((isset($this->request->post['db_ssl_cert']) && $this->request->post['db_ssl_cert'] !== '')) {
+				$output .= 'define(\'DB_SSL_CERT\', \'' . addslashes($this->request->post['db_ssl_cert']) . '\');' . "\n";
+			} else {
+				$output .= 'define(\'DB_SSL_CERT\', \'\');' . "\n";
+			}
+
+			if ((isset($this->request->post['db_ssl_ca']) && $this->request->post['db_ssl_ca'] !== '')) {
+				$output .= 'define(\'DB_SSL_CA\', \'' . addslashes($this->request->post['db_ssl_ca']) . '\');' . "\n";
+			} else {
+				$output .= 'define(\'DB_SSL_CA\', \'\');' . "\n";
+			}
+
 			$output .= 'define(\'DB_DATABASE\', \'' . addslashes($this->request->post['db_database']) . '\');' . "\n";
 			$output .= 'define(\'DB_PORT\', \'' . addslashes($this->request->post['db_port']) . '\');' . "\n";
 			$output .= 'define(\'DB_PREFIX\', \'' . addslashes($this->request->post['db_prefix']) . '\');' . "\n\n";
@@ -107,6 +145,11 @@ class ControllerInstallStep3 extends Controller {
 		$data['entry_db_hostname'] = $this->language->get('entry_db_hostname');
 		$data['entry_db_username'] = $this->language->get('entry_db_username');
 		$data['entry_db_password'] = $this->language->get('entry_db_password');
+		$data['entry_db_advanced'] = $this->language->get('entry_db_advanced');
+		$data['entry_db_ssl_key'] = $this->language->get('entry_db_ssl_key');
+		$data['entry_db_ssl_cert'] = $this->language->get('entry_db_ssl_cert');
+		$data['entry_db_ssl_ca'] = $this->language->get('entry_db_ssl_ca');
+		$data['entry_db_ssl_info'] = $this->language->get('entry_db_ssl_info');
 		$data['entry_db_database'] = $this->language->get('entry_db_database');
 		$data['entry_db_port'] = $this->language->get('entry_db_port');
 		$data['entry_db_prefix'] = $this->language->get('entry_db_prefix');
@@ -182,7 +225,6 @@ class ControllerInstallStep3 extends Controller {
 		$db_drivers = [
 			'mysqli',
 			'pdo',
-			'pgsql'
 		];
 
 		$data['drivers'] = [];
@@ -218,6 +260,24 @@ class ControllerInstallStep3 extends Controller {
 			$data['db_password'] = $this->request->post['db_password'];
 		} else {
 			$data['db_password'] = '';
+		}
+
+		if (isset($this->request->post['db_ssl_key'])) {
+			$data['db_ssl_key'] = $this->request->post['db_ssl_key'];
+		} else {
+			$data['db_ssl_key'] = '';
+		}
+
+		if (isset($this->request->post['db_ssl_cert'])) {
+			$data['db_ssl_cert'] = $this->request->post['db_ssl_cert'];
+		} else {
+			$data['db_ssl_cert'] = '';
+		}
+
+		if (isset($this->request->post['db_ssl_ca'])) {
+			$data['db_ssl_ca'] = $this->request->post['db_ssl_ca'];
+		} else {
+			$data['db_ssl_ca'] = '';
 		}
 
 		if (isset($this->request->post['db_database'])) {
@@ -296,8 +356,8 @@ class ControllerInstallStep3 extends Controller {
 			$this->error['db_driver'] = $this->language->get('error_db_driver');
 		} else {
 			try {
-				$db = new \DB($this->request->post['db_driver'], html_entity_decode($this->request->post['db_hostname'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_username'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_password'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_database'], ENT_QUOTES, 'UTF-8'), $this->request->post['db_port']);
-			} catch (Exception $e) {
+				$db = new \DB($this->request->post['db_driver'], html_entity_decode($this->request->post['db_hostname'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_username'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_password'], ENT_QUOTES, 'UTF-8'), html_entity_decode($this->request->post['db_database'], ENT_QUOTES, 'UTF-8'), $this->request->post['db_port'], $this->request->post['db_ssl_key'], $this->request->post['db_ssl_cert'], $this->request->post['db_ssl_ca']);
+			} catch (\Exception $e) {
 				$this->error['warning'] = $e->getMessage();
 			}
 		}
