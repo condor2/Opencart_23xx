@@ -3,7 +3,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 	public function index() {
 		if ($this->config->get('opayo_vendor')) {
 			$this->load->language('extension/payment/opayo');
-			
+
 			$data['text_credit_card'] = $this->language->get('text_credit_card');
 			$data['text_loading'] = $this->language->get('text_loading');
 			$data['text_card_type'] = $this->language->get('text_card_type');
@@ -25,72 +25,72 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 			$data['button_confirm'] = $this->language->get('button_confirm');
 			$data['button_delete_card'] = $this->language->get('button_delete_card');
-		
+
 			// Setting
 			$_config = new Config();
 			$_config->load('opayo');
-			
+
 			$config_setting = $_config->get('opayo_setting');
-		
+
 			$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
 			$data['card_types'] = $setting['card_type'];
 			$data['card_save'] = (bool)$setting['general']['card_save'];
-		
+
 			$data['logged'] = $this->customer->isLogged();
 
-			$data['cards'] = array();			
-		
+			$data['cards'] = [];
+
 			if ($data['logged'] && $data['card_save']) {
 				$this->load->model('extension/payment/opayo');
-			
+
 				$data['cards'] = $this->model_extension_payment_opayo->getCards($this->customer->getId());
 			}
-		
-			$data['months'] = array();
+
+			$data['months'] = [];
 
 			for ($i = 1; $i <= 12; $i++) {
-				$data['months'][] = array(
+				$data['months'][] = [
 					'code' => sprintf('%02d', $i),
-					'name'  => sprintf('%02d', $i)
-				);
+					'name' => sprintf('%02d', $i)
+				];
 			}
 
 			$today = getdate();
 
-			$data['years'] = array();
+			$data['years'] = [];
 
 			for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-				$data['years'][] = array(
+				$data['years'][] = [
 					'code' => sprintf('%04d', $i),
-					'name'  => sprintf('%02d', $i % 100)
-				);
+					'name' => sprintf('%02d', $i % 100)
+				];
 			}
 
 			return $this->load->view('extension/payment/opayo', $data);
 		}
 	}
-	
+
 	public function getForm() {
 		$this->response->setOutput($this->index());
 	}
 
 	public function confirm() {
 		$this->load->language('extension/payment/opayo');
-		
+
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/opayo');
 		$this->load->model('account/order');
-		
+
 		// Setting
 		$_config = new Config();
 		$_config->load('opayo');
-			
+
 		$config_setting = $_config->get('opayo_setting');
-		
+
 		$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
-		$payment_data = array();
+		$payment_data = [];
 
 		if ($setting['general']['environment'] == 'live') {
 			$url = 'https://live.opayo.eu.elavon.com/gateway/service/vspdirect-register.vsp';
@@ -109,7 +109,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		$payment_data['Currency'] = $this->session->data['currency'];
 		$payment_data['Description'] = substr($this->config->get('config_name'), 0, 100);
 		$payment_data['TxType'] = $setting['general']['transaction_method'];
-		
+
 		if (!empty($this->request->post['opayo_card_existing']) && !empty($this->request->post['opayo_card_token'])) {
 			$payment_data['Token'] = $this->request->post['opayo_card_token'];
 			$payment_data['CV2'] = $this->request->post['opayo_card_cvv2_1'];
@@ -122,7 +122,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			$payment_data['CardType'] = $this->request->post['opayo_card_type'];
 			$payment_data['CV2'] = $this->request->post['opayo_card_cvv2_2'];
 			$payment_data['COFUsage'] = 'FIRST';
-			
+
 			if (!empty($this->request->post['opayo_card_save'])) {
 				$payment_data['CreateToken'] = '1';
 				$payment_data['StoreToken'] = '1';
@@ -187,29 +187,29 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		}
 
 		$order_products = $this->model_account_order->getOrderProducts($this->session->data['order_id']);
-		
+
 		$cart_rows = 0;
-		
+
 		$str_basket = "";
-		
+
 		foreach ($order_products as $product) {
-			$str_basket .=
-					":" . str_replace(":", " ", $product['name'] . " " . $product['model']) .
-					":" . $product['quantity'] .
-					":" . $this->currency->format($product['price'], $order_info['currency_code'], false, false) .
-					":" . $this->currency->format($product['tax'], $order_info['currency_code'], false, false) .
-					":" . $this->currency->format(($product['price'] + $product['tax']), $order_info['currency_code'], false, false) .
-					":" . $this->currency->format(($product['price'] + $product['tax']) * $product['quantity'], $order_info['currency_code'], false, false);
+			$str_basket
+					.= ":" . str_replace(":", " ", $product['name'] . " " . $product['model'])
+					. ":" . $product['quantity']
+					. ":" . $this->currency->format($product['price'], $order_info['currency_code'], false, false)
+					. ":" . $this->currency->format($product['tax'], $order_info['currency_code'], false, false)
+					. ":" . $this->currency->format(($product['price'] + $product['tax']), $order_info['currency_code'], false, false)
+					. ":" . $this->currency->format(($product['price'] + $product['tax']) * $product['quantity'], $order_info['currency_code'], false, false);
 			$cart_rows++;
 		}
 
 		$order_totals = $this->model_account_order->getOrderTotals($this->session->data['order_id']);
-		
+
 		foreach ($order_totals as $total) {
 			$str_basket .= ":" . str_replace(":", " ", $total['title']) . ":::::" . $this->currency->format($total['value'], $order_info['currency_code'], false, false);
 			$cart_rows++;
 		}
-		
+
 		$str_basket = $cart_rows . $str_basket;
 
 		$payment_data['Basket'] = $str_basket;
@@ -219,12 +219,12 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		$payment_data['ChallengeWindowSize'] = '01';
 		$payment_data['Apply3DSecure'] = '0';
 		$payment_data['ThreeDSNotificationURL'] = str_replace('&amp;', '&', $this->url->link('extension/payment/opayo/threeDSnotify', 'order_id=' . $this->session->data['order_id'], true));
-		
+
 		$payment_data['InitiatedType'] = 'CIT';
 
 		$browser_languages = explode(',', $this->request->server['HTTP_ACCEPT_LANGUAGE']);
 		$browser_language = strtolower(reset($browser_languages));
-		
+
 		$payment_data['BrowserAcceptHeader'] = $this->request->server['HTTP_ACCEPT'];
 		$payment_data['BrowserColorDepth'] = $this->request->post['BrowserColorDepth'];
 		$payment_data['BrowserJavaEnabled'] = '1';
@@ -236,8 +236,8 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		$payment_data['BrowserUserAgent'] = $this->request->server['HTTP_USER_AGENT'];
 
 		$response_data = $this->model_extension_payment_opayo->sendCurl($url, $payment_data);
-		
-		$json = array();
+
+		$json = [];
 
 		if ($response_data['Status'] == '3DAUTH') {
 			$json['ACSURL'] = $response_data['ACSURL'];
@@ -250,26 +250,26 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			$response_data['VPSTxId'] = !empty($response_data['VPSTxId']) ? $response_data['VPSTxId'] : '';
 			$response_data['SecurityKey'] = !empty($response_data['SecurityKey']) ? $response_data['SecurityKey'] : '';
 			$response_data['TxAuthNo'] = !empty($response_data['TxAuthNo']) ? $response_data['TxAuthNo'] : '';
-			
+
 			$card_id = '';
-			
+
 			if (!empty($payment_data['CreateToken']) && $this->customer->isLogged()) {
-				$card_data = array();
-				
+				$card_data = [];
+
 				$card_data['customer_id'] = $this->customer->getId();
 				$card_data['Token'] = '';
 				$card_data['Last4Digits'] = substr(str_replace(' ', '', $payment_data['CardNumber']), -4, 4);
 				$card_data['ExpiryDate'] = $this->request->post['opayo_card_expire_date_month'] . '/' . substr($this->request->post['opayo_card_expire_date_year'], 2);
 				$card_data['CardType'] = $payment_data['CardType'];
-				
+
 				$card_id = $this->model_extension_payment_opayo->addCard($card_data);
 			} elseif (!empty($payment_data['Token'])) {
 				$card = $this->model_extension_payment_opayo->getCard(false, $payment_data['Token']);
 				$card_id = $card['card_id'];
 			}
-			
+
 			$this->model_extension_payment_opayo->addOrder($this->session->data['order_id'], $response_data, $payment_data, $card_id);
-			
+
 			$this->model_extension_payment_opayo->log('Response Data', $response_data);
 			$this->model_extension_payment_opayo->log('Payment Data', $payment_data);
 			$this->model_extension_payment_opayo->log('Order Id', $this->session->data['order_id']);
@@ -307,18 +307,18 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			if (isset($response_data['CAVV'])) {
 				$message .= 'CAVV: ' . $response_data['CAVV'] . "\n";
 			}
-			
+
 			$card_id = '';
-			
+
 			if (!empty($payment_data['CreateToken']) && !empty($response_data['Token']) && $this->customer->isLogged()) {
-				$card_data = array();
-				
+				$card_data = [];
+
 				$card_data['customer_id'] = $this->customer->getId();
 				$card_data['Token'] = $response_data['Token'];
 				$card_data['Last4Digits'] = substr(str_replace(' ', '', $payment_data['CardNumber']), -4, 4);
 				$card_data['ExpiryDate'] = $this->request->post['opayo_card_expire_date_month'] . '/' . substr($this->request->post['opayo_card_expire_date_year'], 2);
 				$card_data['CardType'] = $payment_data['CardType'];
-				
+
 				$card_id = $this->model_extension_payment_opayo->addCard($card_data);
 			} elseif (!empty($payment_data['Token'])) {
 				$card = $this->model_extension_payment_opayo->getCard(false, $payment_data['Token']);
@@ -326,7 +326,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			}
 
 			$opayo_order_id = $this->model_extension_payment_opayo->addOrder($order_info['order_id'], $response_data, $payment_data, $card_id);
-			
+
 			$this->model_extension_payment_opayo->log('Response Data', $response_data);
 			$this->model_extension_payment_opayo->log('Payment Data', $payment_data);
 			$this->model_extension_payment_opayo->log('Order Id', $this->session->data['order_id']);
@@ -337,17 +337,17 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 			if ($setting['general']['transaction_method'] == 'PAYMENT') {
 				$recurring_products = $this->cart->getRecurringProducts();
-					
+
 				//loop through any products that are recurring items
 				foreach ($recurring_products as $item) {
 					$this->model_extension_payment_opayo->recurringPayment($item, $payment_data['VendorTxCode']);
-				} 
+				}
 			}
 
 			$json['redirect'] = $this->url->link('checkout/success', '', true);
 		} else {
 			$json['error'] = $response_data['Status'] . ': ' . $response_data['StatusDetail'];
-			
+
 			$this->model_extension_payment_opayo->log('Response data', $json['error']);
 		}
 
@@ -357,31 +357,31 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 	public function threeDSnotify() {
 		$this->load->language('extension/payment/opayo');
-		
+
 		$this->load->model('extension/payment/opayo');
 		$this->load->model('checkout/order');
-		
+
 		// Setting
 		$_config = new Config();
 		$_config->load('opayo');
-			
+
 		$config_setting = $_config->get('opayo_setting');
-		
+
 		$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
 		if (isset($this->request->get['order_id'])) {
 			$opayo_order_info = $this->model_extension_payment_opayo->getOrder($this->request->get['order_id']);
-			
+
 			if ($setting['general']['environment'] == 'live') {
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/direct3dcallback.vsp';
 			} elseif ($setting['general']['environment'] == 'test') {
 				$url = 'https://sandbox.opayo.eu.elavon.com/gateway/service/direct3dcallback.vsp';
 			}
-			
+
 			$this->request->post['VPSTxId'] = $opayo_order_info['VPSTxId'];
 
 			$response_data = $this->model_extension_payment_opayo->sendCurl($url, $this->request->post);
-			
+
 			$this->model_extension_payment_opayo->log('Response Data', $response_data);
 
 			if ($response_data['Status'] == 'OK' || $response_data['Status'] == 'AUTHENTICATED' || $response_data['Status'] == 'REGISTERED') {
@@ -432,10 +432,10 @@ class ControllerExtensionPaymentOpayo extends Controller {
 				} else {
 					$this->model_extension_payment_opayo->deleteCard($opayo_order_info['card_id']);
 				}
-				
+
 				if ($setting['general']['transaction_method'] == 'PAYMENT') {
 					$recurring_products = $this->cart->getRecurringProducts();
-					
+
 					//loop through any products that are recurring items
 					foreach ($recurring_products as $item) {
 						$this->model_extension_payment_opayo->recurringPayment($item, $opayo_order_info['VendorTxCode']);
@@ -452,18 +452,18 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 	}
-	
+
 	public function deleteCard() {
 		$this->load->language('extension/payment/opayo');
 
 		$this->load->model('extension/payment/opayo');
-		
+
 		// Setting
 		$_config = new Config();
 		$_config->load('opayo');
-			
+
 		$config_setting = $_config->get('opayo_setting');
-		
+
 		$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
 		$card = $this->model_extension_payment_opayo->getCard(false, $this->request->post['opayo_card_token']);
@@ -474,19 +474,19 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			} elseif ($setting['general']['environment'] == 'test') {
 				$url = 'https://sandbox.opayo.eu.elavon.com/gateway/service/removetoken.vsp';
 			}
-				
+
 			$payment_data['VPSProtocol'] = '4.00';
 			$payment_data['Vendor'] = $this->config->get('opayo_vendor');
 			$payment_data['TxType'] = 'REMOVETOKEN';
 			$payment_data['Token'] = $card['token'];
-			
+
 			$response_data = $this->model_extension_payment_opayo->sendCurl($url, $payment_data);
-			
+
 			if ($response_data['Status'] == 'OK') {
 				$this->model_extension_payment_opayo->deleteCard($card['card_id']);
 
 				$this->session->data['success'] = $this->language->get('text_success_card');
-					
+
 				$json['success'] = true;
 			} else {
 				$json['error'] = $this->language->get('text_fail_card');
@@ -494,7 +494,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		} else {
 			$json['error'] = $this->language->get('text_fail_card');
 		}
-			
+
 		$this->response->setOutput(json_encode($json));
 	}
 
@@ -502,14 +502,14 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		// Setting
 		$_config = new Config();
 		$_config->load('opayo');
-		
+
 		$config_setting = $_config->get('opayo_setting');
-		
+
 		$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
-			
+
 		if (isset($this->request->get['token']) && hash_equals($setting['cron']['token'], $this->request->get['token'])) {
 			$this->load->model('extension/payment/opayo');
-	
+
 			$orders = $this->model_extension_payment_opayo->cronPayment();
 
 			$this->model_extension_payment_opayo->updateCronRunTime();
@@ -517,5 +517,4 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			$this->model_extension_payment_opayo->log('Repeat Orders', $orders);
 		}
 	}
-
 }

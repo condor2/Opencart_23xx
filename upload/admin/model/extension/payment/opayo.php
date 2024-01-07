@@ -1,6 +1,5 @@
 <?php
 class ModelExtensionPaymentOpayo extends Model {
-	
 	public function install() {
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "opayo_order` (
@@ -53,7 +52,7 @@ class ModelExtensionPaymentOpayo extends Model {
 			  PRIMARY KEY (`opayo_order_recurring_id`),
 			  KEY (`order_id`)
 			) ENGINE=MyISAM DEFAULT COLLATE=utf8_general_ci;");
-		
+
 		$this->db->query("
 			CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "opayo_card` (
 			  `card_id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -79,14 +78,14 @@ class ModelExtensionPaymentOpayo extends Model {
 		$opayo_order = $this->getOrder($order_id);
 
 		if (!empty($opayo_order) && $opayo_order['release_status'] == 0) {
-			$void_data = array();
-			
+			$void_data = [];
+
 			// Setting
 			$_config = new Config();
 			$_config->load('opayo');
-			
+
 			$config_setting = $_config->get('opayo_setting');
-		
+
 			$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
 			if ($setting['general']['environment'] == 'live') {
@@ -104,9 +103,7 @@ class ModelExtensionPaymentOpayo extends Model {
 			$void_data['SecurityKey'] = $opayo_order['SecurityKey'];
 			$void_data['TxAuthNo'] = $opayo_order['TxAuthNo'];
 
-			$response_data = $this->sendCurl($url, $void_data);
-
-			return $response_data;
+			return $this->sendCurl($url, $void_data);
 		} else {
 			return false;
 		}
@@ -121,14 +118,14 @@ class ModelExtensionPaymentOpayo extends Model {
 		$total_released = $this->getTotalReleased($opayo_order['opayo_order_id']);
 
 		if (!empty($opayo_order) && $opayo_order['release_status'] == 0 && ($total_released + $amount <= $opayo_order['total'])) {
-			$release_data = array();
+			$release_data = [];
 
 			// Setting
 			$_config = new Config();
 			$_config->load('opayo');
-			
+
 			$config_setting = $_config->get('opayo_setting');
-		
+
 			$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
 			if ($setting['general']['environment'] == 'live') {
@@ -147,9 +144,7 @@ class ModelExtensionPaymentOpayo extends Model {
 			$release_data['TxAuthNo'] = $opayo_order['TxAuthNo'];
 			$release_data['Amount'] = $amount;
 
-			$response_data = $this->sendCurl($url, $release_data);
-
-			return $response_data;
+			return $this->sendCurl($url, $release_data);
 		} else {
 			return false;
 		}
@@ -163,14 +158,14 @@ class ModelExtensionPaymentOpayo extends Model {
 		$opayo_order = $this->getOrder($order_id);
 
 		if (!empty($opayo_order) && $opayo_order['rebate_status'] != 1) {
-			$refund_data = array();
+			$refund_data = [];
 
 			// Setting
 			$_config = new Config();
 			$_config->load('opayo');
-			
+
 			$config_setting = $_config->get('opayo_setting');
-		
+
 			$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
 			if ($setting['general']['environment'] == 'live') {
@@ -183,7 +178,7 @@ class ModelExtensionPaymentOpayo extends Model {
 
 			$refund_data['TxType'] = 'REFUND';
 			$refund_data['Vendor'] = $this->config->get('opayo_vendor');
-			$refund_data['VendorTxCode'] = $opayo_order['opayo_order_id'] . rand();
+			$refund_data['VendorTxCode'] = $opayo_order['opayo_order_id'] . mt_rand();
 			$refund_data['Amount'] = $amount;
 			$refund_data['Currency'] = $opayo_order['currency_code'];
 			$refund_data['Description'] = substr($this->config->get('config_name'), 0, 100);
@@ -192,9 +187,7 @@ class ModelExtensionPaymentOpayo extends Model {
 			$refund_data['RelatedSecurityKey'] = $opayo_order['SecurityKey'];
 			$refund_data['RelatedTxAuthNo'] = $opayo_order['TxAuthNo'];
 
-			$response_data = $this->sendCurl($url, $refund_data);
-
-			return $response_data;
+			return $this->sendCurl($url, $refund_data);
 		} else {
 			return false;
 		}
@@ -271,21 +264,21 @@ class ModelExtensionPaymentOpayo extends Model {
 				$data[trim($parts[0])] = trim($parts[1]);
 			}
 		}
-		
+
 		return $data;
 	}
 
 	public function log($title, $data) {
 		$_config = new Config();
 		$_config->load('opayo');
-		
+
 		$config_setting = $_config->get('opayo_setting');
-		
+
 		$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
-		
+
 		if ($setting['general']['debug']) {
 			$log = new Log('opayo.log');
-			
+
 			$log->write($title . ': ' . print_r($data, 1));
 		}
 	}

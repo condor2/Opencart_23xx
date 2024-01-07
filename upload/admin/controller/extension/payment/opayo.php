@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentOpayo extends Controller {
-	private $error = array();
+	private $error = [];
 
 	public function index() {
 		$this->load->language('extension/payment/opayo');
@@ -13,7 +13,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			$this->model_setting_setting->editSetting('opayo', $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('success_save');
-			
+
 			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true));
 		}
 
@@ -28,9 +28,9 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		} else {
 			$data['error_vendor'] = '';
 		}
-		
+
 		$data['heading_title'] = $this->language->get('heading_title');
-		
+
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
@@ -39,13 +39,13 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_tab_general'] = $this->language->get('text_tab_general');
 		$data['text_tab_cron'] = $this->language->get('text_tab_cron');
-		
+
 		$data['text_test'] = $this->language->get('text_test');
 		$data['text_live'] = $this->language->get('text_live');
 		$data['text_defered'] = $this->language->get('text_defered');
 		$data['text_authenticate'] = $this->language->get('text_authenticate');
 		$data['text_payment'] = $this->language->get('text_payment');
-				
+
 		$data['entry_vendor'] = $this->language->get('entry_vendor');
 		$data['entry_environment'] = $this->language->get('entry_environment');
 		$data['entry_transaction_method'] = $this->language->get('entry_transaction_method');
@@ -59,38 +59,38 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		$data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
-				
+
 		$data['help_total'] = $this->language->get('help_total');
 		$data['help_debug'] = $this->language->get('help_debug');
 		$data['help_transaction_method'] = $this->language->get('help_transaction_method');
 		$data['help_card_save'] = $this->language->get('help_card_save');
 		$data['help_cron_token'] = $this->language->get('help_cron_token');
 		$data['help_cron_url'] = $this->language->get('help_cron_url');
-						
+
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
 
-		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'] = [];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_extensions'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true)
-		);
+		];
 
-		$data['breadcrumbs'][] = array(
+		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/payment/opayo', 'token=' . $this->session->data['token'], true)
-		);
-						
+		];
+
 		$data['action'] = $this->url->link('extension/payment/opayo', 'token=' . $this->session->data['token'], true);
-		
+
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
-		
+
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$server = HTTPS_SERVER;
 			$catalog = HTTPS_CATALOG;
@@ -98,19 +98,19 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			$server = HTTP_SERVER;
 			$catalog = HTTP_CATALOG;
 		}
-		
-		// Setting 		
+
+		// Setting
 		$_config = new Config();
 		$_config->load('opayo');
-		
+
 		$data['setting'] = $_config->get('opayo_setting');
-		
+
 		if (isset($this->request->post['opayo_setting'])) {
 			$data['setting'] = array_replace_recursive((array)$data['setting'], (array)$this->request->post['opayo_setting']);
 		} else {
 			$data['setting'] = array_replace_recursive((array)$data['setting'], (array)$this->config->get('opayo_setting'));
 		}
-		
+
 		if (isset($this->request->post['opayo_vendor'])) {
 			$data['vendor'] = $this->request->post['opayo_vendor'];
 		} else {
@@ -148,7 +148,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		} else {
 			$data['sort_order'] = $this->config->get('opayo_sort_order');
 		}
-		
+
 		if (!$data['setting']['cron']['token']) {
 			$data['setting']['cron']['token'] = sha1(uniqid(mt_rand(), 1));
 		}
@@ -166,13 +166,13 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 	public function install() {
 		$this->load->model('extension/payment/opayo');
-		
+
 		$this->model_extension_payment_opayo->install();
 	}
 
 	public function uninstall() {
 		$this->load->model('extension/payment/opayo');
-		
+
 		$this->model_extension_payment_opayo->uninstall();
 	}
 
@@ -184,7 +184,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 			if (!empty($opayo_order)) {
 				$this->load->language('extension/payment/opayo');
-				
+
 				$data['text_payment_info'] = $this->language->get('text_payment_info');
 				$data['text_order_ref'] = $this->language->get('text_order_ref');
 				$data['text_order_total'] = $this->language->get('text_order_total');
@@ -215,7 +215,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 				$data['auto_settle'] = $opayo_order['settle_type'];
 
 				$data['order_id'] = $this->request->get['order_id'];
-				
+
 				$data['token'] = $this->request->get['token'];
 
 				return $this->load->view('extension/payment/opayo/order', $data);
@@ -225,8 +225,8 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 	public function void() {
 		$this->load->language('extension/payment/opayo');
-		
-		$json = array();
+
+		$json = [];
 
 		if (!empty($this->request->post['order_id'])) {
 			$this->load->model('extension/payment/opayo');
@@ -243,7 +243,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 				$json['msg'] = $this->language->get('success_void_ok');
 
-				$json['data'] = array();
+				$json['data'] = [];
 				$json['data']['date_added'] = date('Y-m-d H:i:s');
 				$json['error'] = false;
 			} else {
@@ -261,8 +261,8 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 	public function release() {
 		$this->load->language('extension/payment/opayo');
-		
-		$json = array();
+
+		$json = [];
 
 		if (!empty($this->request->post['order_id']) && !empty($this->request->post['amount']) && $this->request->post['amount'] > 0) {
 			$this->load->model('extension/payment/opayo');
@@ -287,7 +287,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 					$json['msg'] = $this->language->get('success_release_ok');
 				}
 
-				$json['data'] = array();
+				$json['data'] = [];
 				$json['data']['date_added'] = date('Y-m-d H:i:s');
 				$json['data']['amount'] = $this->request->post['amount'];
 				$json['data']['release_status'] = $release_status;
@@ -308,8 +308,8 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 	public function rebate() {
 		$this->load->language('extension/payment/opayo');
-		
-		$json = array();
+
+		$json = [];
 
 		if (!empty($this->request->post['order_id'])) {
 			$this->load->model('extension/payment/opayo');
@@ -335,7 +335,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 					$json['msg'] = $this->language->get('success_rebate_ok');
 				}
 
-				$json['data'] = array();
+				$json['data'] = [];
 				$json['data']['date_added'] = date('Y-m-d H:i:s');
 				$json['data']['amount'] = $this->request->post['amount'] * -1;
 				$json['data']['total_released'] = (float)$total_released;
@@ -359,13 +359,13 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		if (!$this->user->hasPermission('modify', 'extension/payment/opayo')) {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
-		
+
 		$this->request->post['opayo_vendor'] = trim($this->request->post['opayo_vendor']);
 
 		if (!$this->request->post['opayo_vendor']) {
 			$this->error['vendor'] = $this->language->get('error_vendor');
 			$this->error['warning'] = $this->language->get('error_warning');
-		} 
+		}
 
 		return !$this->error;
 	}
