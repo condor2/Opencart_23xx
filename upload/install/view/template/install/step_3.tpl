@@ -25,7 +25,6 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-db-driver"><?php echo $entry_db_driver; ?></label>
             <div class="col-sm-10">
-              <!--<select name="db_driver" id="input-db-driver" class="form-control">-->
               <select name="db_driver" id="input-db-driver" class="form-control" onchange="javascript:document.getElementById('db-advanced').style.display=(this.value=='mysqli')?'block':'none';">
                 <?php foreach ($drivers as $driver) { ?>
                   <?php if ($db_driver == $driver['value']) { ?>
