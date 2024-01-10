@@ -5,7 +5,6 @@ parameters:
     excludePaths:
         - ./system/storage/vendor/
         - ./upload/system/storage/vendor/
-        - ./upload/admin/controller/extension/module/pp_login.php
     tmpDir: .cache
     ignoreErrors:
         - '#Class Event constructor invoked with 1 parameter, 4-5 required\.#'
