@@ -144,7 +144,7 @@ class ControllerExtensionCurrencyEcb extends Controller {
 						}
 					}
 
-					if ($currencies) {
+					if (count($currencies) > 1) {
 						$this->load->model('localisation/currency');
 						$this->load->model('extension/currency/ecb');
 
