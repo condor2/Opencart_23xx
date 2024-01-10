@@ -89,6 +89,8 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=module', true);
 
+		$data['token'] = $this->session->data['token'];
+
 		if (isset($this->request->post['pp_login_client_id'])) {
 			$data['pp_login_client_id'] = $this->request->post['pp_login_client_id'];
 		} else {
