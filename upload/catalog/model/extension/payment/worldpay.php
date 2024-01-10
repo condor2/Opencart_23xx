@@ -105,7 +105,6 @@ class ModelExtensionPaymentWorldpay extends Model {
 		}
 	}
 
-
 	public function recurringPayment($item, $order_id_rand, $token) {
 
 		$this->load->model('checkout/recurring');
