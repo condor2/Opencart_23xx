@@ -382,9 +382,9 @@ class ModelExtensionPaymentOpayo extends Model {
 	}
 
 	private function getRecurringOrder($order_recurring_id) {
-		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "opayo_order_recurring` WHERE `order_recurring_id` = '" . (int)$order_recurring_id . "'");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "opayo_order_recurring` WHERE `order_recurring_id` = '" . (int)$order_recurring_id . "'");
 
-		return $qry->row;
+		return $query->row;
 	}
 
 	private function addRecurringTransaction($order_recurring_id, $response_data, $type) {

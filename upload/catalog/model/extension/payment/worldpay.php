@@ -72,10 +72,10 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function getOrder($order_id) {
-		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
-		if ($qry->num_rows) {
-			$order = $qry->row;
+		if ($query->num_rows) {
+			$order = $query->row;
 			$order['transactions'] = $this->getTransactions($order['worldpay_order_id']);
 
 			return $order;
@@ -89,10 +89,10 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	public function getTransactions($worldpay_order_id) {
-		$qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order_transaction` WHERE `worldpay_order_id` = '" . (int)$worldpay_order_id . "'");
+		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order_transaction` WHERE `worldpay_order_id` = '" . (int)$worldpay_order_id . "'");
 
-		if ($qry->num_rows) {
-			return $qry->rows;
+		if ($query->num_rows) {
+			return $query->rows;
 		} else {
 			return false;
 		}
@@ -287,9 +287,9 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	private function getRecurringOrder($order_recurring_id) {
-		$qry = $this->db->query("SELECT * FROM " . DB_PREFIX . "worldpay_order_recurring WHERE order_recurring_id = '" . (int)$order_recurring_id . "'");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "worldpay_order_recurring WHERE order_recurring_id = '" . (int)$order_recurring_id . "'");
 
-		return $qry->row;
+		return $query->row;
 	}
 
 	private function addProfileTransaction($order_recurring_id, $order_code, $price, $type) {
@@ -303,11 +303,11 @@ class ModelExtensionPaymentWorldpay extends Model {
 			JOIN `" . DB_PREFIX . "order` `o` USING(`order_id`)
 			WHERE o.payment_code = 'worldpay'";
 
-		$qry = $this->db->query($sql);
+		$query = $this->db->query($sql);
 
 		$order_recurring = [];
 
-		foreach ($qry->rows as $profile) {
+		foreach ($query->rows as $profile) {
 			$order_recurring[] = $this->getProfile($profile['order_recurring_id']);
 		}
 
@@ -315,15 +315,15 @@ class ModelExtensionPaymentWorldpay extends Model {
 	}
 
 	private function getProfile($order_recurring_id) {
-		$qry = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_recurring WHERE order_recurring_id = " . (int)$order_recurring_id);
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "order_recurring WHERE order_recurring_id = " . (int)$order_recurring_id);
 
-		return $qry->row;
+		return $query->row;
 	}
 
 	public function getWorldpayOrder($worldpay_order_id) {
-		$qry = $this->db->query("SELECT * FROM " . DB_PREFIX . "worldpay_order WHERE order_code = " . (int)$worldpay_order_id);
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "worldpay_order WHERE order_code = " . (int)$worldpay_order_id);
 
-		return $qry->row;
+		return $query->row;
 	}
 
 	public function updateCronJobRunTime() {
