@@ -30,9 +30,7 @@ class RegistryPropertyReflectionExtension implements PropertiesClassReflectionEx
 		$type = null;
 		if ($broker->hasClass($className)) {
 			$found = new ObjectType($className);
-			if ($classType === 'Model') {
-				$found = new GenericObjectType('\Proxy', [$found]);
-			}
+			$found = new GenericObjectType('\Proxy', [$found]);
 			$type = $type ? TypeCombinator::union($type, $found) : $found;
 		}
 		if ($type) {
