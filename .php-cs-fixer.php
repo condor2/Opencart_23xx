@@ -119,6 +119,7 @@ return $config
         'php_unit_strict' => true,
         'php_unit_test_annotation' => true,
         'php_unit_test_case_static_method_calls' => true,
+        'phpdoc_add_missing_param_annotation' => ['only_untyped' => false],
         'phpdoc_align' => true,
         'phpdoc_annotation_without_dot' => true,
         'phpdoc_indent' => true,
