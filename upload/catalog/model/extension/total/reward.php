@@ -56,10 +56,11 @@ class ModelExtensionTotalReward extends Model {
 
 		$points = 0;
 
-		$start = strpos($order_total['title'], '(') + 1;
+		$start = strpos($order_total['title'], '(');
 		$end = strrpos($order_total['title'], ')');
 
-		if ($start && $end) {
+		if ($start !== false && $end !== false) {
+			$start++;
 			$points = substr($order_total['title'], $start, $end - $start);
 		}
 
