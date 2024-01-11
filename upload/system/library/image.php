@@ -274,40 +274,6 @@ class Image {
 	}
 
 	/**
-	 * Filter
-	 *
-	 * @return void
-	 */
-	private function filter(): void {
-		$args = func_get_args();
-
-		imagefilter(...$args);
-	}
-
-	/**
-	 * @param string $text
-	 * @param int    $x
-	 * @param int    $y
-	 * @param int    $size
-	 * @param string $color
-	 */
-	private function text($text, int $x = 0, int $y = 0, int $size = 5, $color = '000000'): void {
-		$rgb = $this->html2rgb($color);
-
-		imagestring($this->image, $size, $x, $y, $text, imagecolorallocate($this->image, $rgb[0], $rgb[1], $rgb[2]));
-	}
-
-	/**
-	 * @param object $merge
-	 * @param int    $x
-	 * @param int    $y
-	 * @param int    $opacity
-	 */
-	private function merge($merge, int $x = 0, int $y = 0, int $opacity = 100): void {
-		imagecopymerge($this->image, $merge->getImage(), $x, $y, 0, 0, $merge->getWidth(), $merge->getHeight(), $opacity);
-	}
-
-	/**
 	 * @param string $color
 	 *
 	 * @return array
