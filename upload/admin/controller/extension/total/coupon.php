@@ -1,7 +1,5 @@
 <?php
 class ControllerExtensionTotalCoupon extends Controller {
-	private $error = [];
-
 	public function index(): void {
 		$this->load->language('extension/total/coupon');
 

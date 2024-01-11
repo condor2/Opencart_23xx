@@ -1,7 +1,5 @@
 <?php
 class ControllerExtensionTotalTotal extends Controller {
-	private $error = [];
-
 	public function index(): void {
 		$this->load->language('extension/total/total');
 

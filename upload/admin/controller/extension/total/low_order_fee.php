@@ -1,7 +1,5 @@
 <?php
 class ControllerExtensionTotalLowOrderFee extends Controller {
-	private $error = [];
-
 	public function index(): void {
 		$this->load->language('extension/total/low_order_fee');
 
