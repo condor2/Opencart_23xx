@@ -16,7 +16,7 @@
 /**
  * Class Registry
  *
- * @property \Catalog\Controller\Catalog\Attribute $load
+ * @property \Admin\Controller\Catalog\Attribute $load
  */
 
 class Registry {
