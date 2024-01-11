@@ -460,7 +460,7 @@ class ModelExtensionPaymentOpayo extends Model {
 		if ($setting['general']['debug']) {
 			$log = new Log('opayo.log');
 
-			$log->write($title . ': ' . print_r($data, 1));
+			$log->write($title . ': ' . print_r($data, true));
 		}
 	}
 
