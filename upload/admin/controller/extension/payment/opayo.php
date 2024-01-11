@@ -214,9 +214,9 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 				$data['auto_settle'] = $opayo_order['settle_type'];
 
-				$data['order_id'] = $this->request->get['order_id'];
+				$data['order_id'] = (int)$this->request->get['order_id'];
 
-				$data['token'] = $this->request->get['token'];
+				$data['token'] = $this->session->data['token'];
 
 				return $this->load->view('extension/payment/opayo/order', $data);
 			}
