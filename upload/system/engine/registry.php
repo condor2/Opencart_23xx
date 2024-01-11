@@ -12,6 +12,13 @@
 /**
  * Registry class
  */
+
+/**
+ * Class Registry
+ *
+ * @property \Catalog\Controller\Catalog\Attribute $load
+ */
+
 class Registry {
 	private $data = [];
 
