@@ -496,6 +496,9 @@ class ControllerCatalogDownload extends Controller {
 		}
 
 		if (!$json) {
+			// Sanitize the filename
+			$filename = basename(html_entity_decode($this->request->files['file']['name'], ENT_QUOTES, 'UTF-8'));
+
 			$file = $filename . '.' . token(32);
 
 			move_uploaded_file($this->request->files['file']['tmp_name'], DIR_DOWNLOAD . $file);
