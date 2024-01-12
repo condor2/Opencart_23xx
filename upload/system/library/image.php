@@ -44,6 +44,8 @@ class Image {
 				$this->image = imagecreatefromgif($file);
 			} elseif ($this->mime == 'image/png') {
 				$this->image = imagecreatefrompng($file);
+
+				imageinterlace($this->image, false);
 			} elseif ($this->mime == 'image/jpeg') {
 				$this->image = imagecreatefromjpeg($file);
 			} elseif ($this->mime == 'image/webp') {
@@ -284,17 +286,37 @@ class Image {
 		}
 
 		if (strlen($color) == 6) {
-			[$r, $g, $b] = [$color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5]];
+			[
+				$r,
+				$g,
+				$b
+			] = [
+				$color[0] . $color[1],
+				$color[2] . $color[3],
+				$color[4] . $color[5]
+			];
 		} elseif (strlen($color) == 3) {
-			[$r, $g, $b] = [$color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2]];
+			[
+				$r,
+				$g,
+				$b
+			] = [
+				$color[0] . $color[0],
+				$color[1] . $color[1],
+				$color[2] . $color[2]
+			];
 		} else {
-			return false;
+			return [];
 		}
 
 		$r = hexdec($r);
 		$g = hexdec($g);
 		$b = hexdec($b);
 
-		return [$r, $g, $b];
+		return [
+			$r,
+			$g,
+			$b
+		];
 	}
 }
