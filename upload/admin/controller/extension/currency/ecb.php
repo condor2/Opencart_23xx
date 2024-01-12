@@ -163,6 +163,8 @@ class ControllerExtensionCurrencyEcb extends Controller {
 						}
 					}
 
+					$default = $this->config->get('config_currency');
+
 					$this->model_extension_currency_ecb->editValueByCode($default, '1.00000');
 
 					$this->cache->delete('currency');
