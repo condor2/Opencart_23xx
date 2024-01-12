@@ -1,6 +1,8 @@
 <?php
 class ModelLocalisationStockStatus extends Model {
 	public function addStockStatus($data) {
+		$stock_status_id = null;
+
 		foreach ($data['stock_status'] as $language_id => $value) {
 			if (isset($stock_status_id)) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "stock_status SET stock_status_id = '" . (int)$stock_status_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
