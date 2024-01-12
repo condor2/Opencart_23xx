@@ -11,6 +11,8 @@
 
 /**
  * Controller class
+ *
+ * @mixin Registry
  */
 abstract class Controller {
 	protected $registry;

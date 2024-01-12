@@ -11,14 +11,19 @@
 
 /**
  * Model class
+ *
+ * @mixin Registry
  */
 class Model {
+	/**
+	 * @var Registry
+	 */
 	protected $registry;
 
 	/**
 	 * Constructor
 	 *
-	 * @param object $registry
+	 * @param Registry $registry
 	 */
 	public function __construct($registry) {
 		$this->registry = $registry;
