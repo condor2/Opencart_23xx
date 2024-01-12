@@ -25,11 +25,11 @@ class DB {
 	 * @param string $database
 	 * @param int    $port
 	 */
-	public function __construct($adaptor, $hostname, $username, $password, $database, $port = null) {
+	public function __construct($adaptor, $hostname, $username, $password, $database, $port = '', $ssl_key = '', $ssl_cert = '', $ssl_ca = '') {
 		$class = 'DB\\' . $adaptor;
 
 		if (class_exists($class)) {
-			$this->adaptor = new $class($hostname, $username, $password, $database, $port);
+			$this->adaptor = new $class($hostname, $username, $password, $database, $port, $ssl_key, $ssl_cert, $ssl_ca);
 		} else {
 			throw new \Exception('Error: Could not load database adaptor ' . $adaptor . '!');
 		}
