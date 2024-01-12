@@ -50,7 +50,13 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 	}
 
 	public function send(): void {
+		if (!isset($this->session->data['order_id'])) {
+			return;
+		}
+
 		$this->load->language('extension/payment/perpetual_payments');
+
+		$json = [];
 
 		$this->load->model('checkout/order');
 

@@ -88,6 +88,8 @@ class ModelExtensionPaymentOpayo extends Model {
 
 			$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
+			$url = '';
+
 			if ($setting['general']['environment'] == 'live') {
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/void.vsp';
 				$void_data['VPSProtocol'] = '4.00';
@@ -128,6 +130,8 @@ class ModelExtensionPaymentOpayo extends Model {
 
 			$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
+			$url = '';
+
 			if ($setting['general']['environment'] == 'live') {
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/release.vsp';
 				$release_data['VPSProtocol'] = '4.00';
@@ -167,6 +171,8 @@ class ModelExtensionPaymentOpayo extends Model {
 			$config_setting = $_config->get('opayo_setting');
 
 			$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
+
+			$url = '';
 
 			if ($setting['general']['environment'] == 'live') {
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/refund.vsp';

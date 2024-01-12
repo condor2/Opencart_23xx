@@ -1,6 +1,10 @@
 <?php
 class ControllerExtensionPaymentSkrill extends Controller {
 	public function index(): string {
+		if (!isset($this->session->data['order_id'])) {
+			return '';
+		}
+
 		$this->load->model('checkout/order');
 
 		$this->load->language('extension/payment/skrill');
@@ -12,7 +16,7 @@ class ControllerExtensionPaymentSkrill extends Controller {
 		$data['pay_to_email'] = $this->config->get('skrill_email');
 		$data['platform'] = '31974336';
 		$data['description'] = $this->config->get('config_name');
-		$data['transaction_id'] = $this->session->data['order_id'];
+		$data['transaction_id'] = (int)$this->session->data['order_id'];
 		$data['return_url'] = $this->url->link('checkout/success');
 		$data['cancel_url'] = $this->url->link('checkout/checkout', '', true);
 		$data['status_url'] = $this->url->link('extension/payment/skrill/callback');
@@ -42,7 +46,7 @@ class ControllerExtensionPaymentSkrill extends Controller {
 
 		$data['detail1_text'] = $products;
 
-		$data['order_id'] = $this->session->data['order_id'];
+		$data['order_id'] = (int)$this->session->data['order_id'];
 
 		return $this->load->view('extension/payment/skrill', $data);
 	}
@@ -65,7 +69,7 @@ class ControllerExtensionPaymentSkrill extends Controller {
 
 			// md5sig validation
 			if ($this->config->get('skrill_secret')) {
-				$hash  = $this->request->post['merchant_id'];
+				$hash = $this->request->post['merchant_id'];
 				$hash .= $this->request->post['transaction_id'];
 				$hash .= strtoupper(md5($this->config->get('skrill_secret')));
 				$hash .= $this->request->post['mb_amount'];
@@ -98,7 +102,7 @@ class ControllerExtensionPaymentSkrill extends Controller {
 						$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('skrill_chargeback_status_id'), '', true);
 						break;
 				}
-			} else {
+			} elseif (isset($md5sig) && isset($md5hash)) {
 				$this->log->write('md5sig returned (' + $md5sig + ') does not match generated (' + $md5hash + '). Verify Manually. Current order state: ' . $this->config->get('config_order_status_id'));
 			}
 		}

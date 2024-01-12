@@ -37,6 +37,8 @@ class ControllerExtensionPaymentAuthorizeNetAim extends Controller {
 	}
 
 	public function send() {
+		$url = '';
+
 		if ($this->config->get('authorizenet_aim_server') == 'live') {
 			$url = 'https://secure.authorize.net/gateway/transact.dll';
 		} elseif ($this->config->get('authorizenet_aim_server') == 'test') {

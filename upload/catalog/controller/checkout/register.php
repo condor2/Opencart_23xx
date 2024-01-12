@@ -230,7 +230,7 @@ class ControllerCheckoutRegister extends Controller {
 			}
 		}
 
-		if (!$json) {
+		if (!$json && isset($customer_group_id)) {
 			$customer_id = $this->model_account_customer->addCustomer($this->request->post);
 
 			// Clear any previous login attempts for unregistered accounts.
