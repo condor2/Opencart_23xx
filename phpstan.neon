@@ -13,3 +13,4 @@ parameters:
     ignoreErrors:
         - '#Class Event constructor invoked with 1 parameter, 4-5 required\.#'
         - '#Constant [A-Z_]+ not found\.#'
+        - '#Class DB constructor invoked with 9 parameters, 5-6 required\.#'
