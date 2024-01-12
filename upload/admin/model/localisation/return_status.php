@@ -1,6 +1,8 @@
 <?php
 class ModelLocalisationReturnStatus extends Model {
 	public function addReturnStatus($data) {
+		$return_status_id = null;
+
 		foreach ($data['return_status'] as $language_id => $value) {
 			if (isset($return_status_id)) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "return_status SET return_status_id = '" . (int)$return_status_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
