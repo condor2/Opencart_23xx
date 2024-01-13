@@ -1,6 +1,15 @@
 <?php
-
+/**
+ * Class Amazon Login
+ *
+ * @package Catalog\Controller\Extension\Module
+ */
 class ControllerExtensionModuleAmazonLogin extends Controller {
+	private $error = [];
+
+	/**
+	 * @return string
+	 */
 	public function index(): string {
 		$this->load->model('extension/payment/amazon_login_pay');
 

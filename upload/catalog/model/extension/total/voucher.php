@@ -51,7 +51,7 @@ class ModelExtensionTotalVoucher extends Model {
 			$status = false;
 		}
 
-		if ($status) {
+		if ($status && isset($amount)) {
 			return [
 				'voucher_id'       => $voucher_query->row['voucher_id'],
 				'code'             => $voucher_query->row['code'],

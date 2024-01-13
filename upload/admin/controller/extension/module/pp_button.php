@@ -1,5 +1,15 @@
 <?php
+/**
+ * Class PP Button
+ *
+ * @package Admin\Controller\Extension\Module
+ */
 class ControllerExtensionModulePPButton extends Controller {
+	private array $error = [];
+
+	/**
+	 * @return void
+	 */
 	public function index(): void {
 		$this->load->language('extension/module/pp_button');
 

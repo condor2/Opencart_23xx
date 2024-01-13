@@ -1,5 +1,15 @@
 <?php
+/**
+ * Class Low Order Fee
+ *
+ * @package Admin\Controller\Extension\Total
+ */
 class ControllerExtensionTotalLowOrderFee extends Controller {
+	private array $error = [];
+
+	/**
+	 * @return void
+	 */
 	public function index(): void {
 		$this->load->language('extension/total/low_order_fee');
 

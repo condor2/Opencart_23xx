@@ -156,11 +156,16 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 	public function webhook(): void {
 		if (isset($this->request->get['token']) && hash_equals($this->config->get('worldpay_secret_token'), $this->request->get['token'])) {
 			$this->load->model('extension/payment/worldpay');
+
 			$message = json_decode(file_get_contents('php://input'), true);
 
 			if (isset($message['orderCode'])) {
 				$order = $this->model_extension_payment_worldpay->getWorldpayOrder($message['orderCode']);
+
 				$this->model_extension_payment_worldpay->logger($order);
+
+				$order_status_id = 0;
+
 				switch ($message['paymentStatus']) {
 					case 'SUCCESS':
 						$order_status_id = $this->config->get('worldpay_entry_success_status_id');
@@ -192,8 +197,10 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 				}
 
 				$this->model_extension_payment_worldpay->logger($order_status_id);
+
 				if (isset($order['order_id'])) {
 					$this->load->model('checkout/order');
+
 					$this->model_checkout_order->addOrderHistory($order['order_id'], $order_status_id);
 				}
 			}

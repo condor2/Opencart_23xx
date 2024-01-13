@@ -159,10 +159,10 @@ class ControllerExtensionPaymentEway extends Controller {
 		// Check if any error returns
 		if (isset($result->Errors)) {
 			$error_array = explode(",", $result->Errors);
-			$lbl_error = "";
+			$lbl_error = '';
 			foreach ($error_array as $error) {
 				$error = $this->language->get('text_card_message_' . $error);
-				$lbl_error .= $error . "<br />\n";
+				$lbl_error .= $error . "<br/>\n";
 			}
 			$this->log->write('eWAY Payment error: ' . $lbl_error);
 		}
@@ -225,6 +225,9 @@ class ControllerExtensionPaymentEway extends Controller {
 				}
 				$this->log->write('eWAY error: ' . $lbl_error);
 			}
+
+			$fraud = false;
+
 			if (!$is_error) {
 				$fraud = false;
 				if (!$result->TransactionStatus) {

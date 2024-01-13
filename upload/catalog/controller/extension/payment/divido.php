@@ -150,6 +150,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$this->load->model('extension/payment/divido');
 
 		ini_set('html_errors', 0);
+
 		if (!$this->session->data['payment_method']['code'] == 'divido') {
 
 			return;
@@ -163,6 +164,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$finance = $this->request->post['finance'];
 
 		$address = $this->session->data['payment_address'];
+
 		if (isset($this->session->data['shipping_address'])) {
 			$address = $this->session->data['shipping_address'];
 		}
@@ -170,7 +172,13 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$country  = $address['iso_code_2'];
 		$language = strtoupper($this->language->get('code'));
 		$currency = strtoupper($this->session->data['currency']);
-		$order_id = $this->session->data['order_id'];
+
+		$order_id = (int)$this->session->data['order_id'];
+
+		$firstname = '';
+		$lastname = '';
+		$email = '';
+		$telephone = '';
 
 		if ($this->customer->isLogged()) {
 			$this->load->model('account/customer');
@@ -190,6 +198,7 @@ class ControllerExtensionPaymentDivido extends Controller {
 		$postcode  = $address['postcode'];
 
 		$products  = [];
+
 		foreach ($this->cart->getProducts() as $product) {
 			$products[] = [
 				'type'     => 'product',

@@ -261,6 +261,8 @@ class ModelExtensionPaymentOpayo extends Model {
 
 		$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
+		$url = '';
+
 		if ($setting['general']['environment'] == 'live') {
 			$url = 'https://live.opayo.eu.elavon.com/gateway/service/repeat.vsp';
 			$payment_data['VPSProtocol'] = '4.00';
@@ -415,6 +417,8 @@ class ModelExtensionPaymentOpayo extends Model {
 	}
 
 	public function sendCurl($url, $payment_data, $i = null) {
+		$data = [];
+
 		$curl = curl_init($url);
 
 		curl_setopt($curl, CURLOPT_PORT, 443);

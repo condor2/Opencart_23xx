@@ -1,6 +1,16 @@
 <?php
+/**
+ * Class Amazon Pay
+ *
+ * @package Catalog\Controller\Extension\Module
+ */
 class ControllerExtensionModuleAmazonPay extends Controller {
-	public function index() {
+	private $error = [];
+
+	/**
+	 * @return string
+	 */
+	public function index(): string {
 
 		$this->load->model('extension/payment/amazon_login_pay');
 
@@ -45,7 +55,9 @@ class ControllerExtensionModuleAmazonPay extends Controller {
 				$data['amazon_login_pay_language'] = 'en-US';
 			}
 
-			return $this->load->view('extension/module/amazon_pay', $data);
+			return $this->load->view('extension/module/amazon_login', $data);
+		} else {
+			return '';
 		}
 	}
 

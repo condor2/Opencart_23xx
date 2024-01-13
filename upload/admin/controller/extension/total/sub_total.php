@@ -1,5 +1,15 @@
 <?php
+/**
+ * Class Sub Total
+ *
+ * @package Admin\Controller\Extension\Total
+ */
 class ControllerExtensionTotalSubTotal extends Controller {
+	private array $error = [];
+
+	/**
+	 * @return void
+	 */
 	public function index(): void {
 		$this->load->language('extension/total/sub_total');
 

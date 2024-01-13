@@ -66,7 +66,7 @@ class ControllerExtensionModification extends Controller {
 
 			$this->model_setting_setting->editSettingValue('config', 'config_maintenance', true);
 
-			//Log
+			// Log
 			$log = [];
 
 			// Clear all modification files
@@ -149,7 +149,7 @@ class ControllerExtensionModification extends Controller {
 				$recovery = [];
 
 				// Set the a recovery of the modification code in case we need to use it if an abort attribute is used.
-				if (isset($modification)) {
+				if ($modification) {
 					$recovery = $modification;
 				}
 
@@ -181,6 +181,8 @@ class ControllerExtensionModification extends Controller {
 
 							if ($files) {
 								foreach ($files as $file) {
+									$key = '';
+
 									// Get the key to be used for the modification cache filename.
 									if (substr($file, 0, strlen(DIR_CATALOG)) == DIR_CATALOG) {
 										$key = 'catalog/' . substr($file, strlen(DIR_CATALOG));
@@ -401,7 +403,7 @@ class ControllerExtensionModification extends Controller {
 			// Write all modification files
 			foreach ($modification as $key => $value) {
 				// Only create a file if there are changes
-				if ($original[$key] != $value) {
+				if (isset($original[$key]) && $original[$key] != $value) {
 					$path = '';
 
 					$directories = explode('/', dirname($key));

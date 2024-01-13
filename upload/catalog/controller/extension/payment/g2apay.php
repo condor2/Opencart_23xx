@@ -11,8 +11,17 @@ class ControllerExtensionPaymentG2APay extends Controller {
 	}
 
 	public function checkout(): void {
-		$this->load->model('checkout/order');
+		if (!isset($this->session->data['order_id'])) {
+			return;
+		}
+
+		// Account Order
 		$this->load->model('account/order');
+
+		// Checkout Order
+		$this->load->model('checkout/order');
+
+		// G2apay
 		$this->load->model('extension/payment/g2apay');
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
@@ -46,6 +55,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 				if (isset($order_data['totals'][$i])) {
 					if (strstr(strtolower($order_data['totals'][$i]['code']), 'total') === false) {
 						$item = new stdClass();
+
 						$item->sku = $order_data['totals'][$i]['code'];
 						$item->name = $order_data['totals'][$i]['title'];
 						$item->amount = number_format($order_data['totals'][$i]['value'], 2);
@@ -53,6 +63,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 						$item->id = $order_data['totals'][$i]['code'];
 						$item->price = $order_data['totals'][$i]['value'];
 						$item->url = $this->url->link('common/home', '', true);
+
 						$items[] = $item;
 					}
 
@@ -72,6 +83,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 			$item->id = $product['product_id'];
 			$item->price = $product['price'];
 			$item->url = $this->url->link('product/product', 'product_id=' . $product['product_id'], true);
+
 			$items[] = $item;
 		}
 
@@ -94,14 +106,17 @@ class ControllerExtensionPaymentG2APay extends Controller {
 			'email'       => $order_info['email'],
 			'url_failure' => $this->url->link('checkout/failure'),
 			'url_ok'      => $this->url->link('extension/payment/g2apay/success'),
-			'items'       => json_encode($items)
+			'items'       => isset($items) ? json_encode($items) : ''
 		];
 
 		$response_data = $this->model_extension_payment_g2apay->sendCurl($url, $fields);
 
 		$this->model_extension_payment_g2apay->logger($order_total);
-		$this->model_extension_payment_g2apay->logger($items);
 		$this->model_extension_payment_g2apay->logger($fields);
+
+		if (isset($items)) {
+			$this->model_extension_payment_g2apay->logger($items);
+		}
 
 		if ($response_data === false) {
 			$this->response->redirect($this->url->link('extension/payment/failure', '', true));
@@ -121,7 +136,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 	}
 
 	public function success(): void {
-		$order_id = $this->session->data['order_id'];
+		$order_id = (int)$this->session->data['order_id'];
 
 		if (isset($this->request->post['transaction_id'])) {
 			$g2apay_transaction_id = $this->request->post['transaction_id'];
@@ -150,6 +165,8 @@ class ControllerExtensionPaymentG2APay extends Controller {
 
 	public function ipn(): void {
 		$this->load->model('extension/payment/g2apay');
+		$this->load->model('checkout/order');
+
 		$this->model_extension_payment_g2apay->logger('ipn');
 
 		if (isset($this->request->get['token']) && hash_equals($this->config->get('g2apay_secret_token'), $this->request->get['token'])) {
@@ -165,6 +182,8 @@ class ControllerExtensionPaymentG2APay extends Controller {
 
 					return;
 				}
+
+				$order_status_id = 0;
 
 				switch ($this->request->post['status']) {
 					case 'complete':
@@ -184,7 +203,6 @@ class ControllerExtensionPaymentG2APay extends Controller {
 						break;
 				}
 
-				$this->load->model('checkout/order');
 				$this->model_checkout_order->addOrderHistory($this->request->post['userOrderId'], $order_status_id);
 			}
 		}

@@ -1,7 +1,15 @@
 <?php
+/**
+ * Class PP Login
+ *
+ * @package Admin\Controller\Extension\Module
+ */
 class ControllerExtensionModulePPLogin extends Controller {
 	private $error = [];
 
+	/**
+	 * @return void
+	 */
 	public function index(): void {
 		$this->load->language('extension/module/pp_login');
 

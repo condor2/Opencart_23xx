@@ -92,6 +92,8 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 		$payment_data = [];
 
+		$url = '';
+
 		if ($setting['general']['environment'] == 'live') {
 			$url = 'https://live.opayo.eu.elavon.com/gateway/service/vspdirect-register.vsp';
 			$payment_data['VPSProtocol'] = '4.00';
@@ -372,6 +374,8 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		if (isset($this->request->get['order_id'])) {
 			$opayo_order_info = $this->model_extension_payment_opayo->getOrder($this->request->get['order_id']);
 
+			$url = '';
+
 			if ($setting['general']['environment'] == 'live') {
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/direct3dcallback.vsp';
 			} elseif ($setting['general']['environment'] == 'test') {
@@ -469,6 +473,9 @@ class ControllerExtensionPaymentOpayo extends Controller {
 		$card = $this->model_extension_payment_opayo->getCard(false, $this->request->post['opayo_card_token']);
 
 		if (!empty($card['token'])) {
+
+			$url = '';
+
 			if ($setting['general']['environment'] == 'live') {
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/removetoken.vsp';
 			} elseif ($setting['general']['environment'] == 'test') {

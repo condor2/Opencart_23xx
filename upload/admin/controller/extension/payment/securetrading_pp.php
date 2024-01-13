@@ -314,7 +314,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 
 			$securetrading_pp_order = $this->model_extension_payment_securetrading_pp->getOrder($this->request->get['order_id']);
 
-			if (!empty($securetrading_pp_order)) {
+			if ($securetrading_pp_order) {
 				$this->load->language('extension/payment/securetrading_pp');
 
 				$securetrading_pp_order['total_released'] = $this->model_extension_payment_securetrading_pp->getTotalReleased($securetrading_pp_order['securetrading_pp_order_id']);
@@ -414,7 +414,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 
 		$amount = number_format($this->request->post['amount'], 2);
 
-		if (isset($this->request->post['order_id']) && $this->request->post['order_id'] != '' && isset($amount) && $amount > 0) {
+		if (isset($this->request->post['order_id']) && $this->request->post['order_id'] != '' && $amount > 0) {
 			$this->load->model('extension/payment/securetrading_pp');
 
 			$securetrading_pp_order = $this->model_extension_payment_securetrading_pp->getOrder($this->request->post['order_id']);

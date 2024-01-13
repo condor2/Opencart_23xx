@@ -261,6 +261,8 @@ class ModelExtensionPaymentOpayo extends Model {
 
 		$response_info = explode(chr(10), $response);
 
+		$data = [];
+
 		foreach ($response_info as $i => $string) {
 			if (strpos($string, '=') === false) {
 				continue;
