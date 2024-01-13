@@ -312,7 +312,9 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 
 	private function validateResponse($action, $details) {
 		$details_xml = simplexml_load_string($details['ResponseBody']);
+
 		$this->logger($details_xml);
+
 		switch ($action) {
 			case 'Authorize':
 				$result = 'AuthorizeResult';
@@ -334,18 +336,23 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		}
 
 		$details_xml->registerXPathNamespace('m', 'http://mws.amazonservices.com/schema/OffAmazonPayments/2013-01-01');
+
 		$error_set = $details_xml->xpath('//m:ReasonCode');
+
+		$response = [];
 
 		if (isset($details_xml->Error)) {
 			$response['status'] = 'Error';
 			$response['error_code'] = (string)$details_xml->Error->Code;
 			$response['status_detail'] = (string)$details_xml->Error->Code . ': ' . (string)$details_xml->Error->Message;
-		} elseif (!empty($error_set)) {
-			$response['status'] = (string)$details_xml->{$result}->{$details}->{$status}->State;
-			$response['status_detail'] = (string)$details_xml->{$result}->{$details}->{$status}->ReasonCode;
-		} else {
-			$response['status'] = (string)$details_xml->{$result}->{$details}->{$status}->State;
-			$response[$amazon_id] = (string)$details_xml->{$result}->{$details}->{$amazon_id};
+		} elseif (isset($result) && isset($details) && isset($status) && isset($amazon_id)) {
+			if (!empty($error_set)) {
+				$response['status'] = (string)$details_xml->{$result}->{$details}->{$status}->State;
+				$response['status_detail'] = (string)$details_xml->{$result}->{$details}->{$status}->ReasonCode;
+			} else {
+				$response['status'] = (string)$details_xml->{$result}->{$details}->{$status}->State;
+				$response[$amazon_id] = (string)$details_xml->{$result}->{$details}->{$amazon_id};
+			}
 		}
 
 		return $response;

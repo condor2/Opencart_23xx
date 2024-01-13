@@ -1,6 +1,10 @@
 <?php
 class ControllerExtensionPaymentLaybuy extends Controller {
 	public function index(): string {
+		if (!isset($this->session->data['order_id'])) {
+			return '';
+		}
+
 		$this->load->language('extension/payment/laybuy');
 
 		$this->load->model('extension/payment/laybuy');
@@ -403,7 +407,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 						$transaction = $this->model_extension_payment_laybuy->getTransactionByLayBuyRefId($laybuy_ref_id);
 
-						$order_id = $transaction['order_id'];
+						$order_id = (int)$transaction['order_id'];
 
 						$paypal_profile_id = $transaction['paypal_profile_id'];
 
@@ -451,7 +455,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 
 						if ($month < $months) {
 							for ($month = 1; $month <= $months; $month++) {
-								$next_payment_date = date("Y-m-d h:i:s", strtotime($next_payment_date . " +1 month"));
+								$next_payment_date = date('Y-m-d h:i:s', strtotime($next_payment_date . ' +1 month'));
 								$date = date($this->language->get('date_format_short'), strtotime($next_payment_date));
 
 								$report_content[] = [

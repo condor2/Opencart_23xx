@@ -85,7 +85,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 			exit();
 		}
 
-		$order_id = $this->session->data['order_id'];
+		$order_id = (int)$this->session->data['order_id'];
 
 		$order_ref = $order_id . 'T' . date('YmdHis') . mt_rand(1, 999);
 
@@ -261,36 +261,36 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 					$eci = 7;
 				}
 
-				// Enrolled but invalid response from ACS.  No shift in liability. ECI = 7
+				// Enrolled but invalid response from ACS. No shift in liability. ECI = 7
 				if ($signature_result->result == '110' && strtoupper($signature_result->threedsecure->status) == 'Y') {
 					$eci_ref = 4;
 					$cavv = (string)$signature_result->threedsecure->cavv;
 					$xid = (string)$signature_result->threedsecure->xid;
 				}
 
-				// Incorrect password entered.  No shift in liability. ECI = 7
+				// Incorrect password entered. No shift in liability. ECI = 7
 				if ($signature_result->result == '00' && strtoupper($signature_result->threedsecure->status) == 'N') {
 					$eci_ref = 7;
 					$xid = (string)$signature_result->threedsecure->xid;
 					$cavv = '';
 				}
 
-				// Authentication Unavailable.  No shift in liability. ECI = 7
+				// Authentication Unavailable. No shift in liability. ECI = 7
 				if ($signature_result->result == '00' && strtoupper($signature_result->threedsecure->status) == 'U') {
 					$eci_ref = 8;
 					$xid = (string)$signature_result->threedsecure->xid;
 					$cavv = '';
 				}
 
-				// Invalid response from ACS.  No shift in liability. ECI = 7
+				// Invalid response from ACS. No shift in liability. ECI = 7
 				if (isset($signature_result->result) && $signature_result->result >= 500 && $signature_result->result < 600) {
 					$eci_ref = 9;
 					$xid = '';
 					$cavv = '';
 				}
 
-				if ($this->config->get('globalpay_remote_liability') != 1) {
-					// this is the check for liability shift - if the merchant does not want to accept, redirect to checkout with message
+				if ($this->config->get('globalpay_remote_liability') != 1 && isset($eci_ref) && isset($xid) && isset($cavv)) {
+					// This is the check for liability shift - if the merchant does not want to accept, redirect to checkout with message
 					$this->load->language('extension/payment/globalpay_remote');
 
 					$message = $this->language->get('error_3d_unsuccessful');
@@ -314,33 +314,35 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 				}
 			}
 
-			$capture_result = $this->model_extension_payment_globalpay_remote->capturePayment(
-				$md['account'],
-				$md['amount'],
-				$md['currency'],
-				$md['order_id'],
-				$md['order_ref'],
-				$md['cc_number'],
-				$md['cc_expire'],
-				$md['cc_name'],
-				$md['cc_type'],
-				$md['cc_cvv2'],
-				$md['cc_issue'],
-				$eci_ref,
-				$eci,
-				$cavv,
-				$xid
-			);
+			if (isset($cavv) && isset($eci_ref) && isset($xid)) {
+				$capture_result = $this->model_extension_payment_globalpay_remote->capturePayment(
+					$md['account'],
+					$md['amount'],
+					$md['currency'],
+					$md['order_id'],
+					$md['order_ref'],
+					$md['cc_number'],
+					$md['cc_expire'],
+					$md['cc_name'],
+					$md['cc_type'],
+					$md['cc_cvv2'],
+					$md['cc_issue'],
+					$eci_ref,
+					$eci,
+					$cavv,
+					$xid
+				);
 
-			$this->model_extension_payment_globalpay_remote->logger('Capture result:\r\n' . print_r($capture_result, 1));
+				$this->model_extension_payment_globalpay_remote->logger('Capture result:\r\n' . print_r($capture_result, 1));
 
-			if ($capture_result->result != '00') {
-				$this->session->data['error'] = (string)$capture_result->message . ' (' . (int)$capture_result->result . ')';
+				if ($capture_result->result != '00') {
+					$this->session->data['error'] = (string)$capture_result->message . ' (' . (int)$capture_result->result . ')';
 
-				$this->response->redirect($this->url->link('checkout/checkout', '', true));
-			} else {
-				$this->response->redirect($this->url->link('checkout/success'));
-			}
+					$this->response->redirect($this->url->link('checkout/checkout', '', true));
+				} else {
+					$this->response->redirect($this->url->link('checkout/success'));
+					}
+				}
 		} else {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}

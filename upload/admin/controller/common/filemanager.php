@@ -285,7 +285,7 @@ class ControllerCommonFileManager extends Controller {
 					$json['error'] = $this->language->get('error_upload');
 				}
 
-				if (!$json) {
+				if (!$json && isset($filename)) {
 					move_uploaded_file($file['tmp_name'], $directory . $filename);
 				}
 			}
@@ -336,7 +336,7 @@ class ControllerCommonFileManager extends Controller {
 			}
 		}
 
-		if (!isset($json['error'])) {
+		if (!$json && isset($folder)) {
 			mkdir($directory . '/' . $folder, 0755);
 			chmod($directory . '/' . $folder, 0755);
 

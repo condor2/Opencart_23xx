@@ -297,16 +297,10 @@ class ControllerCheckoutCart extends Controller {
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
 		if ($product_info) {
-			if (is_numeric($this->request->post['quantity'])) {
-				$quantity = round($this->request->post['quantity']);
-
-				if ($quantity < 1) {
-					// Post Error Message when it is not bigger than 1
-					$json['error']['quantity'] = $this->language->get('error_quantity_required_zero');
-				}
+			if (isset($this->request->post['quantity'])) {
+				$quantity = (int)$this->request->post['quantity'];
 			} else {
-				// Post Error Message when it is not text
-				$json['error']['quantity'] = $this->language->get('error_quantity_required');
+				$quantity = 1;
 			}
 
 			if (isset($this->request->post['option'])) {

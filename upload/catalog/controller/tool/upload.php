@@ -59,7 +59,7 @@ class ControllerToolUpload extends Controller {
 			$json['error'] = $this->language->get('error_upload');
 		}
 
-		if (!$json) {
+		if (!$json && isset($filename)) {
 			$file = $filename . '.' . token(32);
 
 			move_uploaded_file($this->request->files['file']['tmp_name'], DIR_UPLOAD . $file);
