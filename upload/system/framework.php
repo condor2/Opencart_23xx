@@ -1,4 +1,9 @@
 <?php
+/**
+ * Used as a parameter from start()
+ *
+ * @var string $application_config
+ */
 // Registry
 $registry = new Registry();
 
