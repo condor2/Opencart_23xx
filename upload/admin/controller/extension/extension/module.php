@@ -27,6 +27,10 @@ class ControllerExtensionExtensionModule extends Controller {
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/module/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/module/' . $this->request->get['extension']);
 
+			// Compatibility
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'module/' . $this->request->get['extension']);
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'module/' . $this->request->get['extension']);
+
 			// Call install method if it exists
 			$this->load->controller('extension/module/' . $this->request->get['extension'] . '/install');
 
@@ -52,6 +56,13 @@ class ControllerExtensionExtensionModule extends Controller {
 
 			// Call uninstall method if it exists
 			$this->load->controller('extension/module/' . $this->request->get['extension'] . '/uninstall');
+
+			$this->load->model('user/user_group');
+
+			$this->model_user_user_group->removePermissions('extension/module/' . $this->request->get['extension']);
+
+			// Compatibility
+			$this->model_user_user_group->removePermissions('module/' . $this->request->get['extension']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}

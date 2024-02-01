@@ -23,7 +23,11 @@ class ControllerExtensionExtensionDashboard extends Controller {
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/dashboard/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/dashboard/' . $this->request->get['extension']);
 
-			// Call install method if it exsits
+			// Compatibility
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'dashboard/' . $this->request->get['extension']);
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'dashboard/' . $this->request->get['extension']);
+
+			// Call install method if it exists
 			$this->load->controller('extension/dashboard/' . $this->request->get['extension'] . '/install');
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -40,8 +44,15 @@ class ControllerExtensionExtensionDashboard extends Controller {
 		if ($this->validate()) {
 			$this->model_extension_extension->uninstall('dashboard', $this->request->get['extension']);
 
-			// Call uninstall method if it exsits
+			// Call uninstall method if it exists
 			$this->load->controller('extension/dashboard/' . $this->request->get['extension'] . '/uninstall');
+
+			$this->load->model('user/user_group');
+
+			$this->model_user_user_group->removePermissions('extension/dashboard/' . $this->request->get['extension']);
+
+			// Compatibility
+			$this->model_user_user_group->removePermissions('dashboard/' . $this->request->get['extension']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}

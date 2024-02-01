@@ -23,6 +23,11 @@ class ControllerExtensionExtensionTotal extends Controller {
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/total/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/total/' . $this->request->get['extension']);
 
+			// Compatibility
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'total/' . $this->request->get['extension']);
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'total/' . $this->request->get['extension']);
+
+			// Call install method if it exists
 			$this->load->controller('extension/total/' . $this->request->get['extension'] . '/install');
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -40,6 +45,13 @@ class ControllerExtensionExtensionTotal extends Controller {
 			$this->model_extension_extension->uninstall('total', $this->request->get['extension']);
 
 			$this->load->controller('extension/total/' . $this->request->get['extension'] . '/uninstall');
+
+			$this->load->model('user/user_group');
+
+			$this->model_user_user_group->removePermissions('extension/total/' . $this->request->get['extension']);
+
+			// Compatibility
+			$this->model_user_user_group->removePermissions('total/' . $this->request->get['extension']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}

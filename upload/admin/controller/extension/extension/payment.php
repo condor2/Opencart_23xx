@@ -23,7 +23,11 @@ class ControllerExtensionExtensionPayment extends Controller {
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'extension/payment/' . $this->request->get['extension']);
 			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'extension/payment/' . $this->request->get['extension']);
 
-			// Call install method if it exsits
+			// Compatibility
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'payment/' . $this->request->get['extension']);
+			$this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'payment/' . $this->request->get['extension']);
+
+			// Call install method if it exists
 			$this->load->controller('extension/payment/' . $this->request->get['extension'] . '/install');
 
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -40,8 +44,15 @@ class ControllerExtensionExtensionPayment extends Controller {
 		if ($this->validate()) {
 			$this->model_extension_extension->uninstall('payment', $this->request->get['extension']);
 
-			// Call uninstall method if it exsits
+			// Call uninstall method if it exists
 			$this->load->controller('extension/payment/' . $this->request->get['extension'] . '/uninstall');
+
+			$this->load->model('user/user_group');
+
+			$this->model_user_user_group->removePermissions('extension/payment/' . $this->request->get['extension']);
+
+			// Compatibility
+			$this->model_user_user_group->removePermissions('payment/' . $this->request->get['extension']);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
