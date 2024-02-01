@@ -178,7 +178,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			}
 		}
 
-		$confirm_details = $this->offAmazon('ConfirmOrderReference');
+		$confirm_details = $this->offAmazon('ConfirmOrderReference', []);
 		$confirm_details_response = $this->validateResponse('Confirm', $confirm_details);
 		if ($confirm_details_response['redirect']) {
 			return $confirm_details_response;
@@ -523,6 +523,8 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			$xml = simplexml_load_string($notificationData);
 		} catch (Exception $ex) {
 			$this->logger($notificationData);
+
+			return null;
 		}
 
 		return $xml;

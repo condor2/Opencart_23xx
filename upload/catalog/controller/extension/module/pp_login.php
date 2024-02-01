@@ -79,7 +79,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 			$customer_info = $this->model_account_customer->getCustomerByEmail($user->email);
 
 			if ($customer_info) {
-				if ($this->validate($user->email)) {
+				if (isset($tokens) && $this->validate($user->email)) {
 					$this->completeLogin($customer_info['customer_id'], $customer_info['email'], $tokens->access_token);
 				} else {
 					$this->model_extension_module_pp_login->log('Could not login to - ID: ' . $customer_info['customer_id'] . ', Email: ' . $customer_info['email']);
@@ -130,7 +130,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 				$this->model_extension_module_pp_login->log('Customer ID date_added: ' . $customer_id);
 
-				if ($this->validate($user->email)) {
+				if (isset($tokens) && $this->validate($user->email)) {
 					$this->completeLogin($customer_id, $user->email, $tokens->access_token);
 				} else {
 					$this->model_extension_module_pp_login->log('Could not login to - ID: ' . $customer_id . ', Email: ' . $user->email);

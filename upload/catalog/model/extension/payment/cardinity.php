@@ -98,18 +98,18 @@ class ModelExtensionPaymentCardinity extends Model {
 	}
 
 	private function exception(Exception $exception) {
-		$this->log($exception->getMessage(), 1, 2);
+		$this->log($exception->getMessage());
 
 		switch (true) {
 			case $exception instanceof CardinityException\Request:
 				if ($exception->getErrorsAsString()) {
-					$this->log($exception->getErrorsAsString(), 1, 2);
+					$this->log($exception->getErrorsAsString());
 				}
 
 				break;
 			case $exception instanceof CardinityException\InvalidAttributeValue:
 				foreach ($exception->getViolations() as $violation) {
-					$this->log($violation->getMessage(), 1, 2);
+					$this->log($violation->getMessage());
 				}
 
 				break;

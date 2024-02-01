@@ -161,7 +161,7 @@ class ModelExtensionPaymentEway extends Model {
 		$this->db->query("UPDATE `" . DB_PREFIX . "eway_order` SET `refund_status` = '" . (int)$status . "' WHERE `eway_order_id` = '" . (int)$eway_order_id . "'");
 	}
 
-	public function sendCurl($url, $data) {
+	public function sendCurl($url, $data, $is_post = true) {
 		$ch = curl_init($url);
 
 		$eway_username = html_entity_decode($this->config->get('eway_username'), ENT_QUOTES, 'UTF-8');

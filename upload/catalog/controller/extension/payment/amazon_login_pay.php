@@ -170,6 +170,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		}
 
 		// Totals
+		/** @var array<int, mixed> */
 		$totals = [];
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
@@ -690,6 +691,8 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			} elseif ($AddressLine1 != '') {
 				$address_1 = $AddressLine1;
 				$address_2 = '';
+			} else {
+				throw new \Exception('Missing address information');
 			}
 
 			$full_name = explode(' ', (string)$address_xml->Name);
@@ -821,6 +824,8 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		} elseif ($AddressLine1 != '') {
 			$address_1 = $AddressLine1;
 			$address_2 = '';
+		} else {
+			throw new \Exception('Missing address information');
 		}
 
 		$result = $this->model_extension_payment_amazon_login_pay->getCountry((string)$billing_address->CountryCode);
@@ -831,6 +836,8 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			$address_format = $result['address_format'];
 			$country_name = $result['name'];
 			$country_id = (int)$result['country_id'];
+		} else {
+			throw new \Exception('Missing amazon country information');
 		}
 
 		$order_info['payment_firstname'] = $first_name;

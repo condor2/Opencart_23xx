@@ -20,7 +20,8 @@ class Front {
 	/**
 	 * Constructor
 	 *
-	 * @param object $route
+	 * @param Registry $registry
+	 * @param object   $route
 	 */
 	public function __construct($registry) {
 		$this->registry = $registry;

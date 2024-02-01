@@ -62,6 +62,8 @@ class Response {
 	/**
 	 * setOutput
 	 *
+	 * @param string $output
+	 *
 	 * @return void
 	 */
 	public function setOutput($output): void {

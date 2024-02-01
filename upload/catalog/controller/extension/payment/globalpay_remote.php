@@ -341,8 +341,8 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 					$this->response->redirect($this->url->link('checkout/checkout', '', true));
 				} else {
 					$this->response->redirect($this->url->link('checkout/success'));
-					}
 				}
+			}
 		} else {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
