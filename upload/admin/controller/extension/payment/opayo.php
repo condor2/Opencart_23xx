@@ -417,7 +417,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 			$this->model_extension_payment_opayo->editRecurringStatus($order_recurring_id, 2);
 
-			$data['success'] = $this->language->get('success_disable_recurring');	
+			$data['success'] = $this->language->get('success_disable_recurring');
 		}
 
 		$data['error'] = $this->error;
