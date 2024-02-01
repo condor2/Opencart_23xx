@@ -242,6 +242,10 @@ class ModelExtensionPaymentOpayo extends Model {
 		return (float)$query->row['total'];
 	}
 
+	public function editRecurringStatus($order_recurring_id, $status) {
+		$this->db->query("UPDATE `" . DB_PREFIX . "order_recurring` SET `status` = '" . (int)$status . "' WHERE `order_recurring_id` = '" . (int)$order_recurring_id . "'");
+	}
+
 	public function sendCurl($url, $payment_data, $is_post = true) {
 		$curl = curl_init($url);
 
