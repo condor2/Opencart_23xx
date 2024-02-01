@@ -81,7 +81,7 @@ class ModelUserUserGroup extends Model {
 		}
 	}
 
-	public function removePermissions($route ) {
+	public function removePermissions($route) {
 		$user_groups = $this->getUserGroups();
 
 		foreach ($user_groups as $user_group) {
