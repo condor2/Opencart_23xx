@@ -155,7 +155,7 @@ class ModelExtensionPaymentOpayo extends Model {
 			$next_payment = $this->calculateSchedule($item['recurring']['trial_frequency'], $next_payment, $item['recurring']['trial_cycle']);
 			$trial_end = new DateTime('0000-00-00');
 		}
-			
+
 		if (date_format($trial_end, 'Y-m-d H:i:s') > date_format($subscription_end, 'Y-m-d H:i:s') && $item['recurring']['duration'] != 0) {
 			$subscription_end = new DateTime(date_format($trial_end, 'Y-m-d H:i:s'));
 			$subscription_end = $this->calculateSchedule($item['recurring']['frequency'], $subscription_end, $item['recurring']['cycle'] * $item['recurring']['duration']);
@@ -399,7 +399,7 @@ class ModelExtensionPaymentOpayo extends Model {
 
 		return $this->db->getLastId();
 	}
-	
+
 	public function editRecurringStatus($order_recurring_id, $status) {
 		$this->db->query("UPDATE `" . DB_PREFIX . "order_recurring` SET `status` = '" . (int)$status . "' WHERE `order_recurring_id` = '" . (int)$order_recurring_id . "'");
 	}

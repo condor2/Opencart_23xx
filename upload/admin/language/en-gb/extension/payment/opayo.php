@@ -68,7 +68,6 @@ $_['success_void_ok']            = 'Success: Void was successful, order status u
 $_['success_enable_recurring']   = 'Success: Recurring payment was enabled!';
 $_['success_disable_recurring']  = 'Success: Recurring payment was disabled!';
 
-
 // Error
 $_['error_warning']              = 'Warning: Please check the form carefully for errors!';
 $_['error_permission']           = 'Warning: You do not have permission to modify payment Opayo!';

@@ -383,7 +383,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 		return $content;
 	}
-		
+
 	public function getRecurringInfo() {
 		$this->response->setOutput($this->recurringButtons());
 	}
@@ -398,7 +398,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 			$this->model_extension_payment_opayo->editRecurringStatus($order_recurring_id, 1);
 
-			$data['success'] = $this->language->get('success_enable_recurring');	
+			$data['success'] = $this->language->get('success_enable_recurring');
 		}
 
 		$data['error'] = $this->error;
