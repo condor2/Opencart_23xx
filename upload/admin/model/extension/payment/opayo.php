@@ -242,7 +242,7 @@ class ModelExtensionPaymentOpayo extends Model {
 		return (float)$query->row['total'];
 	}
 
-	public function sendCurl($url, $payment_data) {
+	public function sendCurl($url, $payment_data, $is_post = true) {
 		$curl = curl_init($url);
 
 		curl_setopt($curl, CURLOPT_PORT, 443);

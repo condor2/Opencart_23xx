@@ -24,6 +24,9 @@ class DB {
 	 * @param string $password
 	 * @param string $database
 	 * @param int    $port
+	 * @param string $ssl_key
+	 * @param string $ssl_cert
+	 * @param string $ssl_ca
 	 */
 	public function __construct($adaptor, $hostname, $username, $password, $database, $port = '', $ssl_key = '', $ssl_cert = '', $ssl_ca = '') {
 		$class = 'DB\\' . $adaptor;

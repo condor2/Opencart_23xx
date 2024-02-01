@@ -648,6 +648,8 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 			$payment_address = $this->model_account_address->getAddress($this->session->data['payment_address_id']);
 		} elseif (isset($this->session->data['guest'])) {
 			$payment_address = $this->session->data['guest']['payment'];
+		} else {
+			throw new \Exception('Missing session data');
 		}
 
 		$method_data = [];
@@ -1093,6 +1095,8 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 						break;
 					case 'Voided':$order_status_id = $this->config->get('pp_express_voided_status_id');
 						break;
+					default:
+						throw new \Exception('Unknown payment status');
 				}
 
 				$this->model_checkout_order->addOrderHistory($order_id, $order_status_id);
@@ -1377,6 +1381,8 @@ class ControllerExtensionPaymentPPExpress extends Controller {
 					break;
 				case 'Voided':$order_status_id = $this->config->get('pp_express_voided_status_id');
 					break;
+				default:
+					throw new \Exception('Unknown payment status');
 			}
 
 			$this->model_checkout_order->addOrderHistory($order_id, $order_status_id);
