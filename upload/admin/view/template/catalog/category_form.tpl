@@ -85,7 +85,7 @@
                 <label class="col-sm-2 control-label" for="input-parent"><?php echo $entry_parent; ?></label>
                 <div class="col-sm-10">
                   <input type="text" name="path" value="<?php echo $path; ?>" placeholder="<?php echo $entry_parent; ?>" id="input-parent" class="form-control" />
-				  <small><?php echo $help_parent; ?></small>
+                  <small><?php echo $help_parent; ?></small>
                   <input type="hidden" name="parent_id" value="<?php echo $parent_id; ?>" />
                   <?php if ($error_parent) { ?>
                   <div class="text-danger"><?php echo $error_parent; ?></div>
@@ -141,7 +141,7 @@
                 <label class="col-sm-2 control-label" for="input-keyword"><span data-toggle="tooltip" title="<?php echo $help_keyword; ?>"><?php echo $entry_keyword; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="<?php echo $entry_keyword; ?>" id="input-keyword" class="form-control" />
-				  <small><?php echo $help_keyword; ?></small>
+                  <small><?php echo $help_keyword; ?></small>
                   <?php if ($error_keyword) { ?>
                   <div class="text-danger"><?php echo $error_keyword; ?></div>
                   <?php } ?>
