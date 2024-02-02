@@ -85,6 +85,7 @@
                 <label class="col-sm-2 control-label" for="input-parent"><?php echo $entry_parent; ?></label>
                 <div class="col-sm-10">
                   <input type="text" name="path" value="<?php echo $path; ?>" placeholder="<?php echo $entry_parent; ?>" id="input-parent" class="form-control" />
+				  <small><?php echo $help_parent; ?></small>
                   <input type="hidden" name="parent_id" value="<?php echo $parent_id; ?>" />
                   <?php if ($error_parent) { ?>
                   <div class="text-danger"><?php echo $error_parent; ?></div>
@@ -95,6 +96,7 @@
                 <label class="col-sm-2 control-label" for="input-filter"><span data-toggle="tooltip" title="<?php echo $help_filter; ?>"><?php echo $entry_filter; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="filter" value="" placeholder="<?php echo $entry_filter; ?>" id="input-filter" class="form-control" />
+                  <small><?php echo $help_filter; ?></small>
                   <div id="category-filter" class="well well-sm" style="height: 150px; overflow: auto;">
                     <?php foreach ($category_filters as $category_filter) { ?>
                     <div id="category-filter<?php echo $category_filter['filter_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $category_filter['name']; ?>
@@ -139,6 +141,7 @@
                 <label class="col-sm-2 control-label" for="input-keyword"><span data-toggle="tooltip" title="<?php echo $help_keyword; ?>"><?php echo $entry_keyword; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="<?php echo $entry_keyword; ?>" id="input-keyword" class="form-control" />
+				  <small><?php echo $help_keyword; ?></small>
                   <?php if ($error_keyword) { ?>
                   <div class="text-danger"><?php echo $error_keyword; ?></div>
                   <?php } ?>
@@ -160,14 +163,17 @@
                       <?php } else { ?>
                       <input type="checkbox" name="top" value="1" id="input-top" />
                       <?php } ?>
-                      &nbsp; </label>
+                      &nbsp;
+                    </label>
                   </div>
+                  <small><?php echo $help_top; ?></small>
                 </div>
               </div>
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-column"><span data-toggle="tooltip" title="<?php echo $help_column; ?>"><?php echo $entry_column; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="column" value="<?php echo $column; ?>" placeholder="<?php echo $entry_column; ?>" id="input-column" class="form-control" />
+                  <small><?php echo $help_column; ?></small>
                 </div>
               </div>
               <div class="form-group">

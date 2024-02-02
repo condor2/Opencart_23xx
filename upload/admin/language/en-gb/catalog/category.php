@@ -32,6 +32,7 @@ $_['entry_status']           = 'Status';
 $_['entry_layout']           = 'Layout Override';
 
 // Help
+$_['help_parent']            = '(Autocomplete)';
 $_['help_filter']            = '(Autocomplete)';
 $_['help_keyword']           = 'Do not use spaces, instead replace spaces with - and make sure the SEO URL is globally unique.';
 $_['help_top']               = 'Display in the top menu bar. Only works for the top parent categories.';

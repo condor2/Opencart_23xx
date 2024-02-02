@@ -334,6 +334,7 @@ class ControllerCatalogCategory extends Controller {
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_layout'] = $this->language->get('entry_layout');
 
+		$data['help_parent'] = $this->language->get('help_parent');
 		$data['help_filter'] = $this->language->get('help_filter');
 		$data['help_keyword'] = $this->language->get('help_keyword');
 		$data['help_top'] = $this->language->get('help_top');
