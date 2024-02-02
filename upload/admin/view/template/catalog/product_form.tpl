@@ -213,7 +213,7 @@
                     <?php } ?>
                     <?php } ?>
                   </select>
-				  <small><?php echo $help_stock_status; ?></small>
+                  <small><?php echo $help_stock_status; ?></small>
                 </div>
               </div>
               <div class="form-group">
@@ -243,7 +243,7 @@
                 <label class="col-sm-2 control-label" for="input-keyword"><span data-toggle="tooltip" title="<?php echo $help_keyword; ?>"><?php echo $entry_keyword; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="<?php echo $entry_keyword; ?>" id="input-keyword" class="form-control" />
-				  <small><?php echo $help_keyword; ?></small>
+                  <small><?php echo $help_keyword; ?></small>
                   <?php if ($error_keyword) { ?>
                   <div class="text-danger"><?php echo $error_keyword; ?></div>
                   <?php } ?>
@@ -335,7 +335,7 @@
                 <label class="col-sm-2 control-label" for="input-manufacturer"><span data-toggle="tooltip" title="<?php echo $help_manufacturer; ?>"><?php echo $entry_manufacturer; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="manufacturer" value="<?php echo $manufacturer; ?>" placeholder="<?php echo $entry_manufacturer; ?>" id="input-manufacturer" class="form-control" />
-				  <small><?php echo $help_manufacturer; ?></small>
+                  <small><?php echo $help_manufacturer; ?></small>
                   <input type="hidden" name="manufacturer_id" value="<?php echo $manufacturer_id; ?>" />
                 </div>
               </div>
@@ -343,7 +343,7 @@
                 <label class="col-sm-2 control-label" for="input-category"><span data-toggle="tooltip" title="<?php echo $help_category; ?>"><?php echo $entry_category; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="category" value="" placeholder="<?php echo $entry_category; ?>" id="input-category" class="form-control" />
-				  <small><?php echo $help_category; ?></small>
+                  <small><?php echo $help_category; ?></small>
                   <div id="product-category" class="well well-sm" style="height: 150px; overflow: auto;">
                     <?php foreach ($product_categories as $product_category) { ?>
                     <div id="product-category<?php echo $product_category['category_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $product_category['name']; ?>
@@ -357,7 +357,7 @@
                 <label class="col-sm-2 control-label" for="input-filter"><span data-toggle="tooltip" title="<?php echo $help_filter; ?>"><?php echo $entry_filter; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="filter" value="" placeholder="<?php echo $entry_filter; ?>" id="input-filter" class="form-control" />
-				  <small><?php echo $help_filter; ?></small>
+                  <small><?php echo $help_filter; ?></small>
                   <div id="product-filter" class="well well-sm" style="height: 150px; overflow: auto;">
                     <?php foreach ($product_filters as $product_filter) { ?>
                     <div id="product-filter<?php echo $product_filter['filter_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $product_filter['name']; ?>
@@ -869,7 +869,7 @@
                 <label class="col-sm-2 control-label" for="input-points"><span data-toggle="tooltip" title="<?php echo $help_points; ?>"><?php echo $entry_points; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="points" value="<?php echo $points; ?>" placeholder="<?php echo $entry_points; ?>" id="input-points" class="form-control" />
-				  <small><?php echo $help_points; ?></small>
+                  <small><?php echo $help_points; ?></small>
                 </div>
               </div>
               <div class="table-responsive">

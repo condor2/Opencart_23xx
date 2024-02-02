@@ -119,6 +119,7 @@
                 <label class="col-sm-2 control-label" for="input-keyword"><span data-toggle="tooltip" title="<?php echo $help_keyword; ?>"><?php echo $entry_keyword; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="<?php echo $entry_keyword; ?>" id="input-keyword" class="form-control" />
+                  <small><?php echo $help_keyword; ?></small>
                   <?php if ($error_keyword) { ?>
                   <div class="text-danger"><?php echo $error_keyword; ?></div>
                   <?php } ?>
@@ -134,8 +135,10 @@
                       <?php } else { ?>
                       <input type="checkbox" name="bottom" value="1" id="input-bottom" />
                       <?php } ?>
-                      &nbsp; </label>
+                      &nbsp;
+                    </label>
                   </div>
+                  <small><?php echo $help_bottom; ?></small>
                 </div>
               </div>
               <div class="form-group">
