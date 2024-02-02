@@ -125,6 +125,7 @@
             <label class="col-sm-2 control-label" for="input-validation"><span data-toggle="tooltip" title="<?php echo $help_regex; ?>"><?php echo $entry_validation; ?></span></label>
             <div class="col-sm-10">
               <input type="text" name="validation" id="input-validation" value="<?php echo $validation; ?>" placeholder="<?php echo $text_regex; ?>"  class="form-control"/>
+              <small><?php echo $help_regex; ?></small>
             </div>
           </div>
           <div class="form-group">
@@ -185,6 +186,7 @@
             <label class="col-sm-2 control-label" for="input-sort-order"><span data-toggle="tooltip" title="<?php echo $help_sort_order; ?>"><?php echo $entry_sort_order; ?></span></label>
             <div class="col-sm-10">
               <input type="text" name="sort_order" value="<?php echo $sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" id="input-sort-order" class="form-control" />
+              <small><?php echo $help_sort_order; ?></small>
             </div>
           </div>
           <table id="custom-field-value" class="table table-striped table-bordered table-hover">

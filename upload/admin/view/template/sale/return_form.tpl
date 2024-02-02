@@ -104,6 +104,7 @@
                 <label class="col-sm-2 control-label" for="input-product"><span data-toggle="tooltip" title="<?php echo $help_product; ?>"><?php echo $entry_product; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="product" value="<?php echo $product; ?>" placeholder="<?php echo $entry_product; ?>" id="input-product" class="form-control" />
+                  <small><?php echo $help_product; ?></small>
                   <input type="hidden" name="product_id" value="<?php echo $product_id; ?>" />
                   <?php if ($error_product) { ?>
                   <div class="text-danger"><?php echo $error_product; ?></div>

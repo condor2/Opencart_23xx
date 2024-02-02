@@ -40,6 +40,7 @@
                 <label class="col-sm-2 control-label" for="input-code"><span data-toggle="tooltip" title="<?php echo $help_code; ?>"><?php echo $entry_code; ?></span></label>
                 <div class="col-sm-10">
                   <input type="text" name="code" value="<?php echo $code; ?>" placeholder="<?php echo $entry_code; ?>" id="input-code" class="form-control" />
+                  <small><?php echo $help_code; ?></small>
                   <?php if ($error_code) { ?>
                   <div class="text-danger"><?php echo $error_code; ?></div>
                   <?php } ?>
