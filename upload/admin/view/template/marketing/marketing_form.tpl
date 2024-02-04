@@ -44,6 +44,7 @@
             <label class="col-sm-2 control-label" for="input-code"><span data-toggle="tooltip" title="<?php echo $help_code; ?>"><?php echo $entry_code; ?></span></label>
             <div class="col-sm-10">
               <input type="text" name="code" value="<?php echo $code; ?>" placeholder="<?php echo $entry_code; ?>" id="input-code" class="form-control" />
+              <small><?php echo $help_code; ?></small>
               <?php if ($error_code) { ?>
               <div class="text-danger"><?php echo $error_code; ?></div>
               <?php } ?>
@@ -55,18 +56,22 @@
               <input type="text" placeholder="<?php echo $entry_example; ?>" id="input-example1" class="form-control" />
               <br />
               <input type="text" placeholder="<?php echo $entry_example; ?>" id="input-example2" class="form-control" />
+              <small><?php echo $help_example; ?></small>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
-$('#input-code').on('keyup', function() {
-	$('#input-example1').val('<?php echo $store; ?>?tracking=' + $('#input-code').val());
-	$('#input-example2').val('<?php echo $store; ?>index.php?route=common/home&tracking=' + $('#input-code').val());
-});
+<script type="text/javascript"><!--
+$(document).ready(function() {
+    $('#input-code').on('keyup', function() {
+        $('#input-example1').val('<?php echo $store; ?>?tracking=' + $('#input-code').val());
+        $('#input-example2').val('<?php echo $store; ?>index.php?route=common/home&tracking=' + $('#input-code').val());
+    });
 
-$('#input-code').trigger('keyup');
-//--></script></div>
+    $('#input-code').trigger('keyup');
+});
+//--></script>
+</div>
 <?php echo $footer; ?>
