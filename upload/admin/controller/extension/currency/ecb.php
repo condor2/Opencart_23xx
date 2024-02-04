@@ -67,8 +67,8 @@ class ControllerExtensionCurrencyEcb extends Controller {
 		$data['refresh'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true);
 
 		$data['text_edit'] = $this->language->get('text_edit');
-		$data['text_edit'] = str_replace('%1', $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true), $data['text_edit']);
-		$data['text_edit'] = str_replace('%2', $this->url->link('setting/store', 'token=' . $this->session->data['token'], true), $data['text_edit']);
+		$data['text_support'] = str_replace('%1', $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true), $data['text_support']);
+		$data['text_support'] = str_replace('%2', $this->url->link('setting/store', 'token=' . $this->session->data['token'], true), $data['text_support']);
 
 		$data['ecb_cron'] = 'curl -s &quot;' . HTTPS_CATALOG . 'index.php?route=extension/currency/ecb/refresh&quot;';
 
