@@ -364,7 +364,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$geo_zone_ids = [];
 
 		foreach ($data['zone_to_geo_zones'] as $zone_to_geo_zone) {
-			if (!in_array($zone_to_geo_zone['geo_zone_id'],$geo_zone_ids)) {
+			if (!in_array($zone_to_geo_zone['geo_zone_id'], $geo_zone_ids)) {
 				$geo_zone_ids[] = $zone_to_geo_zone['geo_zone_id'];
 			}
 		}

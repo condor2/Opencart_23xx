@@ -134,9 +134,9 @@ class ModelLocalisationGeoZone extends Model {
 		}
 
 		$sql  = "SELECT DISTINCT zgz.country_id, z.zone_id, c.`name` AS country, z.`name` AS zone ";
-		$sql .= "FROM `".DB_PREFIX."zone_to_geo_zone` AS zgz ";
-		$sql .= "LEFT JOIN `".DB_PREFIX."country` c ON c.country_id=zgz.country_id ";
-		$sql .= "LEFT JOIN `".DB_PREFIX."zone` z ON z.country_id=c.country_id ";
+		$sql .= "FROM `" . DB_PREFIX . "zone_to_geo_zone` AS zgz ";
+		$sql .= "LEFT JOIN `" . DB_PREFIX . "country` c ON c.country_id=zgz.country_id ";
+		$sql .= "LEFT JOIN `" . DB_PREFIX . "zone` z ON z.country_id=c.country_id ";
 		$sql .= "WHERE zgz.geo_zone_id IN (" . implode(',', $geo_zone_ids) . ") ";
 		$sql .= "ORDER BY country_id ASC, zone ASC;";
 

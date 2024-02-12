@@ -82,7 +82,7 @@
             <tfoot>
               <tr>
                 <td colspan="2"></td>
-				<td class="text-left"><button type="button" id="button-geo-zone" data-toggle="tooltip" title="<?php echo $button_geo_zone_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                <td class="text-left"><button type="button" id="button-geo-zone" data-toggle="tooltip" title="<?php echo $button_geo_zone_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
               </tr>
             </tfoot>
           </table>
