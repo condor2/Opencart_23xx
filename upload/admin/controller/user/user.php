@@ -497,13 +497,19 @@ class ControllerUserUser extends Controller {
 		}
 
 		if ($this->request->post['password'] || (!isset($this->request->get['user_id']))) {
-			if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
+			if ((utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 4) || (utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 20)) {
 				$this->error['password'] = $this->language->get('error_password');
 			}
 
 			if ($this->request->post['password'] != $this->request->post['confirm']) {
 				$this->error['confirm'] = $this->language->get('error_confirm');
 			}
+		}
+
+		$total_users = $this->model_user_user->getTotalUsers();
+
+		if ($total_users <= 1 && isset($this->request->post['status']) && $this->request->post['status'] == 0) {
+			$this->error['warning'] = $this->language->get('error_single_user');
 		}
 
 		return !$this->error;
