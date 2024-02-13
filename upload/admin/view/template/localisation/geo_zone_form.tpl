@@ -43,6 +43,8 @@
               <?php } ?>
             </div>
           </div>
+          <fieldset>
+          <legend><?php echo $text_geo_zone; ?></legend>
           <table id="zone-to-geo-zone" class="table table-striped table-bordered table-hover">
             <thead>
               <tr>
@@ -67,7 +69,7 @@
                 <td class="text-left"><select name="zone_to_geo_zone[<?php echo $zone_to_geo_zone_row; ?>][zone_id]" class="form-control">
                     <option value="0"><?php echo $text_all_zones; ?></option>
                     <?php foreach ($zones[$zone_to_geo_zone['country_id']] as $zone_id => $zone) { ?>
-                    <?php if ($zone_id == zone_to_geo_zone['zone_id']) { ?>
+                    <?php if ($zone_id == $zone_to_geo_zone['zone_id']) { ?>
                     <option value="<?php echo $zone_id; ?>" selected="selected"><?php echo $zone; ?></option>
                     <?php } else { ?>
                     <option value="<?php echo $zone_id; ?>"><?php echo $zone; ?></option>

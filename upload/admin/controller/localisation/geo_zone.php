@@ -264,6 +264,7 @@ class ControllerLocalisationGeoZone extends Controller {
 
 		$data['text_form'] = !isset($this->request->get['geo_zone_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
 		$data['text_all_zones'] = $this->language->get('text_all_zones');
+		$data['text_geo_zone'] = $this->language->get('text_geo_zone');
 
 		$data['entry_name'] = $this->language->get('entry_name');
 		$data['entry_description'] = $this->language->get('entry_description');
@@ -364,7 +365,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$geo_zone_ids = [];
 
 		foreach ($data['zone_to_geo_zones'] as $zone_to_geo_zone) {
-			if (!in_array($zone_to_geo_zone['geo_zone_id'], $geo_zone_ids)) {
+			if (isset($zone_to_geo_zone['geo_zone_id']) && !in_array($zone_to_geo_zone['geo_zone_id'], $geo_zone_ids)) {
 				$geo_zone_ids[] = $zone_to_geo_zone['geo_zone_id'];
 			}
 		}
