@@ -392,6 +392,10 @@ class ControllerLocalisationGeoZone extends Controller {
 			$this->error['description'] = $this->language->get('error_description');
 		}
 
+		if ((!isset($this->request->post['zone_to_geo_zone']))) {
+			$this->error['warning'] = $this->language->get('error_country');
+		}
+
 		return !$this->error;
 	}
 

@@ -48,7 +48,7 @@
           <table id="zone-to-geo-zone" class="table table-striped table-bordered table-hover">
             <thead>
               <tr>
-                <td class="text-left"><?php echo $entry_country; ?></td>
+                <td class="text-left required"><?php echo $entry_country; ?></td>
                 <td class="text-left"><?php echo $entry_zone; ?></td>
                 <td></td>
               </tr>
