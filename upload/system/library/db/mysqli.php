@@ -3,9 +3,9 @@ namespace DB;
 class MySQLi {
 	private $connection;
 
-	public function __construct($hostname, $username, $password, $database, $port = '', $ssl_key = '', $ssl_cert = '', $ssl_ca = '') {
+	public function __construct($hostname, $username, $password, $database, $port = 0, $ssl_key = '', $ssl_cert = '', $ssl_ca = '') {
 		if (!$port) {
-			$port = '3306';
+			$port = 3306;
 		}
 
 		// MYSQLI SSL connection
