@@ -18,7 +18,10 @@ class ControllerAccountForgotten extends Controller {
 
 			$code = token(40);
 
-			$this->model_account_customer->editCode($this->request->post['email'], $code);
+			$customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
+
+			// For better security use existing validated customer email address instead of the posted one
+			$this->model_account_customer->editCode($customer_info['email'], $code);
 
 			$subject = sprintf($this->language->get('text_subject'), html_entity_decode($this->config->get('config_name'), ENT_QUOTES, 'UTF-8'));
 
@@ -124,6 +127,7 @@ class ControllerAccountForgotten extends Controller {
 			$this->error['warning'] = $this->language->get('error_email');
 		}
 
+		// Check if customer has been approved.
 		$customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
 
 		if ($customer_info && !$customer_info['approved']) {
