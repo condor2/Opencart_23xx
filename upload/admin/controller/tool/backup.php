@@ -118,7 +118,7 @@ class ControllerToolBackup extends Controller {
 					break;
 				}
 
-				if ($start) {
+				if (isset($sql) && $start) {
 					$sql .= $line;
 				}
 
