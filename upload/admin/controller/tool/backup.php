@@ -118,12 +118,16 @@ class ControllerToolBackup extends Controller {
 					break;
 				}
 
-				if (isset($sql) && $start) {
+				if ($start) {
 					$sql .= $line;
 				}
 
-				if (isset($sql) && $sql && $start && substr($line, -2) == ";\n") {
-					$this->db->query(substr($sql, 0, strlen($sql) - 2));
+				if ($start && substr($line, -2) == ";\n") {
+					$this->db->query(substr($sql, 0, strlen($sql) -2));
+
+					$start = false;
+				} else if ($start && substr($line, -3) == ";\r\n") {
+					$this->db->query(substr($sql, 0, strlen($sql) -3));
 
 					$start = false;
 				}
