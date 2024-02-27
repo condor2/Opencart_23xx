@@ -35,29 +35,62 @@
 						<li class="nav-tab"><a href="<?php echo $href_applepay_button; ?>" class="tab"><i class="tab-icon tab-icon-applepay-button"></i><span class="tab-title"><?php echo $text_tab_applepay_button; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_card; ?>" class="tab"><i class="tab-icon tab-icon-card"></i><span class="tab-title"><?php echo $text_tab_card; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_message_configurator; ?>" class="tab"><i class="tab-icon tab-icon-message-configurator"></i><span class="tab-title"><?php echo $text_tab_message_configurator; ?></span></a></li>
-						<li class="nav-tab"><a href="<?php echo $href_message_setting; ?>" class="tab"><i class="tab-icon tab-icon-message-setting"></i><span class="tab-title"><?php echo $text_tab_message_setting; ?></span></a></li>
-						<li class="nav-tab active"><a href="<?php echo $href_order_status; ?>" class="tab"><i class="tab-icon tab-icon-order-status"></i><span class="tab-title"><?php echo $text_tab_order_status; ?></span></a></li>
+						<li class="nav-tab active"><a href="<?php echo $href_message_setting; ?>" class="tab"><i class="tab-icon tab-icon-message-setting"></i><span class="tab-title"><?php echo $text_tab_message_setting; ?></span></a></li>
+						<li class="nav-tab"><a href="<?php echo $href_order_status; ?>" class="tab"><i class="tab-icon tab-icon-order-status"></i><span class="tab-title"><?php echo $text_tab_order_status; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_contact; ?>" class="tab"><i class="tab-icon tab-icon-contact"></i><span class="tab-title"><?php echo $text_tab_contact; ?></span></a></li>
 					</ul>
-					<div class="section-content">
-						<div class="row">
-							<?php foreach (array_chunk($setting['order_status'], ceil(count($setting['order_status']) / 2)) as $column_paypal_order_status) { ?>
-							<div class="col col-md-6">
-								<?php foreach ($column_paypal_order_status as $paypal_order_status) { ?>
-								<div class="form-group">
-									<label class="control-label" for="input_order_status_<?php echo $paypal_order_status['code']; ?>"><?php echo ${$paypal_order_status['name']}; ?></label>
-									<select name="paypal_setting[order_status][<?php echo $paypal_order_status['code']; ?>][id]" id="input_<?php echo $paypal_order_status['code']; ?>_status" class="form-control">
-										<?php foreach ($order_statuses as $order_status) { ?>
-										<?php if ($order_status['order_status_id'] == $paypal_order_status['id']) { ?>
-										<option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
-										<?php } else { ?>
-										<option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
-										<?php } ?>
-										<?php } ?>
-									</select>
+					<div class="section-content">				
+						<ul class="nav nav-pills">
+							<?php foreach ($setting['message'] as $message) { ?>
+							<?php if ($message['page_code'] != 'checkout') { ?>
+							<li class="nav-pill <?php if ($message['page_code'] == 'cart') { ?>active<?php } ?>"><a href="#pill_<?php echo $message['page_code']; ?>" class="pill" data-toggle="tab"><?php echo ${$message['page_name']}; ?></a></li>
+							<?php } ?>
+							<?php } ?>
+						</ul>
+						<hr class="hr" />
+						<div class="tab-content">
+							<?php foreach ($setting['message'] as $message) { ?>
+							<?php if ($message['page_code'] != 'checkout') { ?>
+							<div id="pill_<?php echo $message['page_code']; ?>" class="tab-pane <?php if ($message['page_code'] == 'cart') { ?>active<?php } ?>">
+								<div class="section-message-setting">
+									<div class="row">
+										<div class="col col-md-6">
+											<legend class="legend"><?php echo $text_message_settings; ?></legend>
+										</div>
+									</div>
+									<?php if ($text_message_alert) { ?>
+									<div class="form-group">
+										<p class="alert alert-info"><?php echo $text_message_alert; ?></p>
+									</div>
+									<div class="form-group">
+										<p class="footnote"><?php echo $text_message_footnote; ?></p>
+									</div>
+									<?php } ?>
+									<div class="row">
+										<div class="col col-md-6">
+											<div class="form-group">
+												<label class="control-label" for="input_message_<?php echo $message['page_code']; ?>_insert_tag"><?php echo $entry_message_insert_tag; ?></label>
+												<input type="text" name="paypal_setting[message][<?php echo $message['page_code']; ?>][insert_tag]" value="<?php echo $message['insert_tag']; ?>" id="input_message_<?php echo $message['page_code']; ?>_insert_tag" class="form-control" />
+											</div>
+										</div>
+										<div class="col col-md-6">
+											<div class="form-group">
+												<label class="control-label" for="input_message_<?php echo $message['page_code']; ?>_insert_type"><?php echo $entry_message_insert_type; ?></label>
+												<select name="paypal_setting[message][<?php echo $message['page_code']; ?>][insert_type]" id="input_message_<?php echo $message['page_code']; ?>_insert_type" class="form-control">
+													<?php foreach ($setting['message_insert_type'] as $message_insert_type) { ?>
+													<?php if ($message_insert_type['code'] == $message['insert_type']) { ?>
+													<option value="<?php echo $message_insert_type['code']; ?>" selected="selected"><?php echo ${$message_insert_type['name']}; ?></option>
+													<?php } else { ?>
+													<option value="<?php echo $message_insert_type['code']; ?>"><?php echo ${$message_insert_type['name']}; ?></option>
+													<?php } ?>
+													<?php } ?>
+												</select>
+											</div>
+										</div>
+									</div>
 								</div>
-								<?php } ?>
 							</div>
+							<?php } ?>
 							<?php } ?>
 						</div>
 					</div>

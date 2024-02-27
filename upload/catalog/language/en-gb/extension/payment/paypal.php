@@ -13,12 +13,12 @@ $_['text_your_details']              		= 'Your Personal Details';
 $_['text_your_address']              		= 'Your Address';
 $_['text_cart']               				= 'Shopping Cart';
 $_['text_shipping_updated']   				= 'Shipping service updated';
-$_['text_order_message']					= 'PayPal Seller Protection - %s';
 $_['text_day']                 				= 'day';
 $_['text_week']                				= 'week';
 $_['text_semi_month']          				= 'half-month';
 $_['text_month']               				= 'month';
 $_['text_year']                				= 'year';
+$_['text_card_number']          			= '%s ending in %s';
 $_['text_trial']               				= '%s every %s %s for %s payments then ';
 $_['text_recurring']          				= '%s every %s %s';
 $_['text_recurring_item']      				= 'Recurring Item';
@@ -26,9 +26,12 @@ $_['text_payment_recurring']   				= 'Payment Profile';
 $_['text_trial_description']   				= '%s every %d %s(s) for %d payment(s) then';
 $_['text_payment_description'] 				= '%s every %d %s(s) for %d payment(s)';
 $_['text_payment_cancel']      				= '%s every %d %s(s) until canceled';
+$_['text_length']							= ' for %s payments';
 $_['text_order_message']					= 'PayPal Seller Protection - %s';
 $_['text_wait']								= 'Please wait!';
 $_['text_loading']          				= 'Loading...';
+$_['text_failure_page_title']				= 'Your order is failed!';
+$_['text_failure_page_message']				= 'Sorry, but the transaction failed! Please choose another payment method or <a href="%s" target="_blank">contact us</a>';
 
 // Column
 $_['column_image']             				= 'Image';
@@ -53,6 +56,7 @@ $_['entry_zone']                    		= 'Region / State';
 $_['entry_card_number']						= 'Card Number';
 $_['entry_expiration_date']					= 'Expiration Date';
 $_['entry_cvv']								= 'CVV';
+$_['entry_card_save']						= 'Save your card';
 
 // Button
 $_['button_confirm']  						= 'Confirm';
@@ -73,7 +77,7 @@ $_['error_firstname']                		= 'First Name must be between 1 and 32 ch
 $_['error_lastname']                 		= 'Last Name must be between 1 and 32 characters!';
 $_['error_email']                    		= 'E-Mail address does not appear to be valid!';
 $_['error_telephone']                		= 'Telephone must be between 3 and 32 characters!';
-$_['error_password']                 		= 'Password must be between 4 and 40 characters!';
+$_['error_password']                 		= 'Password must be between 4 and 20 characters!';
 $_['error_confirm']                  		= 'Password confirmation does not match password!';
 $_['error_address_1']                		= 'Address 1 must be between 3 and 128 characters!';
 $_['error_city']                     		= 'City must be between 2 and 128 characters!';

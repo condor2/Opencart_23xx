@@ -34,7 +34,8 @@
 						<li class="nav-tab"><a href="<?php echo $href_googlepay_button; ?>" class="tab"><i class="tab-icon tab-icon-googlepay-button"></i><span class="tab-title"><?php echo $text_tab_googlepay_button; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_applepay_button; ?>" class="tab"><i class="tab-icon tab-icon-applepay-button"></i><span class="tab-title"><?php echo $text_tab_applepay_button; ?></span></a></li>
 						<li class="nav-tab active"><a href="<?php echo $href_card; ?>" class="tab"><i class="tab-icon tab-icon-card"></i><span class="tab-title"><?php echo $text_tab_card; ?></span></a></li>
-						<li class="nav-tab"><a href="<?php echo $href_message; ?>" class="tab"><i class="tab-icon tab-icon-message"></i><span class="tab-title"><?php echo $text_tab_message; ?></span></a></li>
+						<li class="nav-tab"><a href="<?php echo $href_message_configurator; ?>" class="tab"><i class="tab-icon tab-icon-message-configurator"></i><span class="tab-title"><?php echo $text_tab_message_configurator; ?></span></a></li>
+						<li class="nav-tab"><a href="<?php echo $href_message_setting; ?>" class="tab"><i class="tab-icon tab-icon-message-setting"></i><span class="tab-title"><?php echo $text_tab_message_setting; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_order_status; ?>" class="tab"><i class="tab-icon tab-icon-order-status"></i><span class="tab-title"><?php echo $text_tab_order_status; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_contact; ?>" class="tab"><i class="tab-icon tab-icon-contact"></i><span class="tab-title"><?php echo $text_tab_contact; ?></span></a></li>
 					</ul>
@@ -125,11 +126,16 @@
 										</select>
 									</div>
 									<div class="form-group">
-										<label class="control-label" for="input_card_secure_status"><span data-toggle="tooltip" title="<?php echo $help_card_secure_status; ?>"><?php echo $entry_card_secure_status; ?></span></label>
-										<div id="input_secure_status">
-											<input type="hidden" name="paypal_setting[card][secure_status]" value="0" />
-											<input type="checkbox" name="paypal_setting[card][secure_status]" value="1" class="switch" <?php if ($setting['card']['secure_status']) { ?>checked="checked"<?php } ?> />
-										</div>
+										<label class="control-label" for="input_card_secure_method"><span data-toggle="tooltip" title="<?php echo $help_card_secure_method; ?>"><?php echo $entry_card_secure_method; ?></span></label>
+										<select name="paypal_setting[card][secure_method]" id="input_card_secure_method" class="form-control">
+											<?php foreach ($setting['card_secure_method'] as $card_secure_method) { ?>
+											<?php if ($card_secure_method['code'] == $setting['card']['secure_method']) { ?>
+											<option value="<?php echo $card_secure_method['code']; ?>" selected="selected"><?php echo ${$card_secure_method['name']}; ?></option>
+											<?php } else { ?>
+											<option value="<?php echo $card_secure_method['code']; ?>"><?php echo ${$card_secure_method['name']}; ?></option>
+											<?php } ?>
+											<?php } ?>
+										</select>
 									</div>
 									<hr class="hr" />
 									<button type="button" href="#all_settings" class="btn btn-default button-all-settings collapsed" data-toggle="collapse" role="button"><?php echo $button_all_settings; ?><i class="icon icon-all-settings"></i></button>	
@@ -185,7 +191,7 @@ $('.payment-paypal').on('click', '.button-save', function() {
 			if (json['success']) {
 				$('.payment-paypal > .container-fluid').prepend('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i><button type="button" class="close" data-dismiss="alert">&times;</button> ' + json['success'] + '</div>');
 				
-				$('html, body').animate({ scrollTop: $('.payment-paypal > .container-fluid .alert-success').offset().top}, 'slow');
+				$('html, body').animate({scrollTop: $('.payment-paypal > .container-fluid .alert-success').offset().top}, 'slow');
 			}
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
