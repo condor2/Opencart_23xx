@@ -1330,6 +1330,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 								$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
 								$card_last_digits = '';
 								$card_expiry = '';
+								$paypal_order_data = [];
 
 								if (!$this->cart->hasShipping()) {
 									$seller_protection_status = 'NOT_ELIGIBLE';
@@ -3432,6 +3433,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									$order_status_id = 0;
 									$transaction_status = '';
 									$payment_method = 'card';
+									$paypal_order_data = [];
 
 									if (!$this->cart->hasShipping()) {
 										$seller_protection_status = 'NOT_ELIGIBLE';
