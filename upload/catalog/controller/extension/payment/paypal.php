@@ -3330,6 +3330,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									$order_status_id = 0;
 									$transaction_status = '';
 									$payment_method = 'card';
+									$paypal_order_data = [];
 
 									if (!$this->cart->hasShipping()) {
 										$seller_protection_status = 'NOT_ELIGIBLE';
