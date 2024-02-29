@@ -23,7 +23,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		if ($this->config->get('paypal_status') && $this->config->get('paypal_client_id') && $this->config->get('paypal_secret') && !$this->callback() && !$this->webhook() && !$this->cron() && $agree_status) {
 			$this->load->language('extension/payment/paypal');
 
-			$_config = new Config();
+			$_config = new \Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -111,7 +111,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 	public function modal() {
 		$this->load->language('extension/payment/paypal');
 
-		$_config = new Config();
+		$_config = new \Config();
 		$_config->load('paypal');
 
 		$config_setting = $_config->get('paypal_setting');
@@ -201,7 +201,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$this->load->model('localisation/country');
 			$this->load->model('checkout/order');
 
-			$_config = new Config();
+			$_config = new \Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -804,7 +804,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			}
 
 			if (!$errors) {
-				$_config = new Config();
+				$_config = new \Config();
 				$_config->load('paypal');
 
 				$config_setting = $_config->get('paypal_setting');
@@ -863,7 +863,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$item_info[] = [
 						'name'        => $product['name'],
 						'sku'         => $product['model'],
-						'url'         => $this->url->link('product/product', 'product_id=' . $product['product_id'], true),
+						'url'         => $this->url->link('product/product', 'product_id = ' . $product['product_id'], true),
 						'quantity'    => $product['quantity'],
 						'unit_amount' => [
 							'currency_code' => $currency_code,
@@ -901,7 +901,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$tax_total = number_format($tax_total * $currency_value, $decimal_place, '.', '');
 				$order_total = number_format($item_total + $tax_total, $decimal_place, '.', '');
 
-				if ($page_code == 'checkout') {
+				if ($page_code == 'checkout' && isset($order_info)) {
 					$discount_total = 0;
 					$handling_total = 0;
 					$shipping_total = 0;
@@ -937,7 +937,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					'value'         => $tax_total
 				];
 
-				if ($page_code == 'checkout') {
+				if ($page_code == 'checkout' && isset($shipping_total) && isset($handling_total) && isset($discount_total) && isset($order_info) && isset($shipping_info)) {
 					$amount_info['breakdown']['shipping'] = [
 						'currency_code' => $currency_code,
 						'value'         => $shipping_total
@@ -961,11 +961,11 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$paypal_order_info['purchase_units'][0]['items'] = $item_info;
 				$paypal_order_info['purchase_units'][0]['amount'] = $amount_info;
 
-				if ($page_code == 'checkout') {
+				if ($page_code == 'checkout' && isset($order_info)) {
 					$paypal_order_info['purchase_units'][0]['description'] = 'Your order ' . $order_info['order_id'];
 					$paypal_order_info['purchase_units'][0]['invoice_id'] = $order_info['order_id'] . '_' . date('Ymd_His');
 
-					if ($this->cart->hasShipping()) {
+					if ($this->cart->hasShipping() && isset($shipping_info)) {
 						$paypal_order_info['purchase_units'][0]['shipping'] = $shipping_info;
 					}
 				}
@@ -1438,6 +1438,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 								$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
 								$card_last_digits = '';
 								$card_expiry = '';
+								$paypal_order_data = [];
 
 								if (!$this->cart->hasShipping()) {
 									$seller_protection_status = 'NOT_ELIGIBLE';
@@ -1569,6 +1570,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 								$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
 								$card_last_digits = '';
 								$card_expiry = '';
+								$paypal_order_data = [];
 
 								if (!$this->cart->hasShipping()) {
 									$seller_protection_status = 'NOT_ELIGIBLE';
@@ -2451,7 +2453,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$order_data['order_id'] = $this->session->data['order_id'];
 
-			$_config = new Config();
+			$_config = new \Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -2837,6 +2839,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$card_nice_type = '';
 							$card_last_digits = '';
 							$card_expiry = '';
+							$paypal_order_data = [];
 
 							if (!$this->cart->hasShipping()) {
 								$seller_protection_status = 'NOT_ELIGIBLE';
