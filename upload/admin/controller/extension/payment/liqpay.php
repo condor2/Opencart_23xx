@@ -110,9 +110,9 @@ class ControllerExtensionPaymentLiqPay extends Controller {
 		}
 
 		if (isset($this->request->post['liqpay_order_status_id'])) {
-			$data['liqpay_order_status_id'] = $this->request->post['liqpay_order_status_id'];
+			$data['liqpay_order_status_id'] = (int)$this->request->post['liqpay_order_status_id'];
 		} else {
-			$data['liqpay_order_status_id'] = $this->config->get('liqpay_order_status_id');
+			$data['liqpay_order_status_id'] = (int)$this->config->get('liqpay_order_status_id');
 		}
 
 		$this->load->model('localisation/order_status');
@@ -120,9 +120,9 @@ class ControllerExtensionPaymentLiqPay extends Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		if (isset($this->request->post['liqpay_geo_zone_id'])) {
-			$data['liqpay_geo_zone_id'] = $this->request->post['liqpay_geo_zone_id'];
+			$data['liqpay_geo_zone_id'] = (int)$this->request->post['liqpay_geo_zone_id'];
 		} else {
-			$data['liqpay_geo_zone_id'] = $this->config->get('liqpay_geo_zone_id');
+			$data['liqpay_geo_zone_id'] = (int)$this->config->get('liqpay_geo_zone_id');
 		}
 
 		$this->load->model('localisation/geo_zone');

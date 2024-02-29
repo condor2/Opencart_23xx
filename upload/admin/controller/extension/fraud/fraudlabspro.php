@@ -91,27 +91,27 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 		}
 
 		if (isset($this->request->post['fraudlabspro_order_status_id'])) {
-			$data['fraudlabspro_order_status_id'] = $this->request->post['fraudlabspro_order_status_id'];
+			$data['fraudlabspro_order_status_id'] = (int)$this->request->post['fraudlabspro_order_status_id'];
 		} else {
-			$data['fraudlabspro_order_status_id'] = $this->config->get('fraudlabspro_order_status_id');
+			$data['fraudlabspro_order_status_id'] = (int)$this->config->get('fraudlabspro_order_status_id');
 		}
 
 		if (isset($this->request->post['fraudlabspro_review_status_id'])) {
-			$data['fraudlabspro_review_status_id'] = $this->request->post['fraudlabspro_review_status_id'];
+			$data['fraudlabspro_review_status_id'] = (int)$this->request->post['fraudlabspro_review_status_id'];
 		} else {
-			$data['fraudlabspro_review_status_id'] = $this->config->get('fraudlabspro_review_status_id');
+			$data['fraudlabspro_review_status_id'] = (int)$this->config->get('fraudlabspro_review_status_id');
 		}
 
 		if (isset($this->request->post['fraudlabspro_approve_status_id'])) {
-			$data['fraudlabspro_approve_status_id'] = $this->request->post['fraudlabspro_approve_status_id'];
+			$data['fraudlabspro_approve_status_id'] = (int)$this->request->post['fraudlabspro_approve_status_id'];
 		} else {
-			$data['fraudlabspro_approve_status_id'] = $this->config->get('fraudlabspro_approve_status_id');
+			$data['fraudlabspro_approve_status_id'] = (int)$this->config->get('fraudlabspro_approve_status_id');
 		}
 
 		if (isset($this->request->post['fraudlabspro_reject_status_id'])) {
-			$data['fraudlabspro_reject_status_id'] = $this->request->post['fraudlabspro_reject_status_id'];
+			$data['fraudlabspro_reject_status_id'] = (int)$this->request->post['fraudlabspro_reject_status_id'];
 		} else {
-			$data['fraudlabspro_reject_status_id'] = $this->config->get('fraudlabspro_reject_status_id');
+			$data['fraudlabspro_reject_status_id'] = (int)$this->config->get('fraudlabspro_reject_status_id');
 		}
 
 		if (isset($this->request->post['fraudlabspro_simulate_ip'])) {

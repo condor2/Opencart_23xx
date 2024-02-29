@@ -59,9 +59,9 @@ class ControllerExtensionPaymentFreeCheckout extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
 		if (isset($this->request->post['free_checkout_order_status_id'])) {
-			$data['free_checkout_order_status_id'] = $this->request->post['free_checkout_order_status_id'];
+			$data['free_checkout_order_status_id'] = (int)$this->request->post['free_checkout_order_status_id'];
 		} else {
-			$data['free_checkout_order_status_id'] = $this->config->get('free_checkout_order_status_id');
+			$data['free_checkout_order_status_id'] = (int)$this->config->get('free_checkout_order_status_id');
 		}
 
 		$this->load->model('localisation/order_status');

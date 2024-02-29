@@ -132,9 +132,9 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
 		if (isset($this->request->post['firstdata_merchant_id'])) {
-			$data['firstdata_merchant_id'] = $this->request->post['firstdata_merchant_id'];
+			$data['firstdata_merchant_id'] = (int)$this->request->post['firstdata_merchant_id'];
 		} else {
-			$data['firstdata_merchant_id'] = $this->config->get('firstdata_merchant_id');
+			$data['firstdata_merchant_id'] = (int)$this->config->get('firstdata_merchant_id');
 		}
 
 		if (isset($this->request->post['firstdata_secret'])) {
@@ -150,9 +150,9 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		}
 
 		if (isset($this->request->post['firstdata_geo_zone_id'])) {
-			$data['firstdata_geo_zone_id'] = $this->request->post['firstdata_geo_zone_id'];
+			$data['firstdata_geo_zone_id'] = (int)$this->request->post['firstdata_geo_zone_id'];
 		} else {
-			$data['firstdata_geo_zone_id'] = $this->config->get('firstdata_geo_zone_id');
+			$data['firstdata_geo_zone_id'] = (int)$this->config->get('firstdata_geo_zone_id');
 		}
 
 		if (isset($this->request->post['firstdata_total'])) {
@@ -188,27 +188,27 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		}
 
 		if (isset($this->request->post['firstdata_order_status_success_settled_id'])) {
-			$data['firstdata_order_status_success_settled_id'] = $this->request->post['firstdata_order_status_success_settled_id'];
+			$data['firstdata_order_status_success_settled_id'] = (int)$this->request->post['firstdata_order_status_success_settled_id'];
 		} else {
-			$data['firstdata_order_status_success_settled_id'] = $this->config->get('firstdata_order_status_success_settled_id');
+			$data['firstdata_order_status_success_settled_id'] = (int)$this->config->get('firstdata_order_status_success_settled_id');
 		}
 
 		if (isset($this->request->post['firstdata_order_status_success_unsettled_id'])) {
-			$data['firstdata_order_status_success_unsettled_id'] = $this->request->post['firstdata_order_status_success_unsettled_id'];
+			$data['firstdata_order_status_success_unsettled_id'] = (int)$this->request->post['firstdata_order_status_success_unsettled_id'];
 		} else {
-			$data['firstdata_order_status_success_unsettled_id'] = $this->config->get('firstdata_order_status_success_unsettled_id');
+			$data['firstdata_order_status_success_unsettled_id'] = (int)$this->config->get('firstdata_order_status_success_unsettled_id');
 		}
 
 		if (isset($this->request->post['firstdata_order_status_decline_id'])) {
-			$data['firstdata_order_status_decline_id'] = $this->request->post['firstdata_order_status_decline_id'];
+			$data['firstdata_order_status_decline_id'] = (int)$this->request->post['firstdata_order_status_decline_id'];
 		} else {
-			$data['firstdata_order_status_decline_id'] = $this->config->get('firstdata_order_status_decline_id');
+			$data['firstdata_order_status_decline_id'] = (int)$this->config->get('firstdata_order_status_decline_id');
 		}
 
 		if (isset($this->request->post['firstdata_order_status_void_id'])) {
-			$data['firstdata_order_status_void_id'] = $this->request->post['firstdata_order_status_void_id'];
+			$data['firstdata_order_status_void_id'] = (int)$this->request->post['firstdata_order_status_void_id'];
 		} else {
-			$data['firstdata_order_status_void_id'] = $this->config->get('firstdata_order_status_void_id');
+			$data['firstdata_order_status_void_id'] = (int)$this->config->get('firstdata_order_status_void_id');
 		}
 
 		if (isset($this->request->post['firstdata_live_url'])) {

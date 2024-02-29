@@ -107,9 +107,9 @@ class ControllerExtensionPaymentPayMate extends Controller {
 		}
 
 		if (isset($this->request->post['paymate_order_status_id'])) {
-			$data['paymate_order_status_id'] = $this->request->post['paymate_order_status_id'];
+			$data['paymate_order_status_id'] = (int)$this->request->post['paymate_order_status_id'];
 		} else {
-			$data['paymate_order_status_id'] = $this->config->get('paymate_order_status_id');
+			$data['paymate_order_status_id'] = (int)$this->config->get('paymate_order_status_id');
 		}
 
 		$this->load->model('localisation/order_status');
@@ -117,9 +117,9 @@ class ControllerExtensionPaymentPayMate extends Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		if (isset($this->request->post['paymate_geo_zone_id'])) {
-			$data['paymate_geo_zone_id'] = $this->request->post['paymate_geo_zone_id'];
+			$data['paymate_geo_zone_id'] = (int)$this->request->post['paymate_geo_zone_id'];
 		} else {
-			$data['paymate_geo_zone_id'] = $this->config->get('paymate_geo_zone_id');
+			$data['paymate_geo_zone_id'] = (int)$this->config->get('paymate_geo_zone_id');
 		}
 
 		$this->load->model('localisation/geo_zone');

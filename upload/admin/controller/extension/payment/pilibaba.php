@@ -113,9 +113,9 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		}
 
 		if (isset($this->request->post['pilibaba_order_status_id'])) {
-			$data['pilibaba_order_status_id'] = $this->request->post['pilibaba_order_status_id'];
+			$data['pilibaba_order_status_id'] = (int)$this->request->post['pilibaba_order_status_id'];
 		} elseif ($this->config->has('pilibaba_order_status_id')) {
-			$data['pilibaba_order_status_id'] = $this->config->get('pilibaba_order_status_id');
+			$data['pilibaba_order_status_id'] = (int)$this->config->get('pilibaba_order_status_id');
 		} else {
 			$data['pilibaba_order_status_id'] = '2';
 		}

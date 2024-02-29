@@ -83,9 +83,9 @@ class ControllerExtensionTotalHandling extends Controller {
 		}
 
 		if (isset($this->request->post['handling_tax_class_id'])) {
-			$data['handling_tax_class_id'] = $this->request->post['handling_tax_class_id'];
+			$data['handling_tax_class_id'] = (int)$this->request->post['handling_tax_class_id'];
 		} else {
-			$data['handling_tax_class_id'] = $this->config->get('handling_tax_class_id');
+			$data['handling_tax_class_id'] = (int)$this->config->get('handling_tax_class_id');
 		}
 
 		$this->load->model('localisation/tax_class');

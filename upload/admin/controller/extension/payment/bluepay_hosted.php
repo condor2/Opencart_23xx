@@ -106,9 +106,9 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 		}
 
 		if (isset($this->request->post['bluepay_hosted_account_id'])) {
-			$data['bluepay_hosted_account_id'] = $this->request->post['bluepay_hosted_account_id'];
+			$data['bluepay_hosted_account_id'] = (int)$this->request->post['bluepay_hosted_account_id'];
 		} else {
-			$data['bluepay_hosted_account_id'] = $this->config->get('bluepay_hosted_account_id');
+			$data['bluepay_hosted_account_id'] = (int)$this->config->get('bluepay_hosted_account_id');
 		}
 
 		if (isset($this->request->post['bluepay_hosted_secret_key'])) {

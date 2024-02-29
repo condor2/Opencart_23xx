@@ -94,9 +94,9 @@ class ControllerExtensionPaymentBankTransfer extends Controller {
 		}
 
 		if (isset($this->request->post['bank_transfer_order_status_id'])) {
-			$data['bank_transfer_order_status_id'] = $this->request->post['bank_transfer_order_status_id'];
+			$data['bank_transfer_order_status_id'] = (int)$this->request->post['bank_transfer_order_status_id'];
 		} else {
-			$data['bank_transfer_order_status_id'] = $this->config->get('bank_transfer_order_status_id');
+			$data['bank_transfer_order_status_id'] = (int)$this->config->get('bank_transfer_order_status_id');
 		}
 
 		$this->load->model('localisation/order_status');

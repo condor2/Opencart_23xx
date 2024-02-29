@@ -105,7 +105,7 @@ class ControllerExtensionModuleBanner extends Controller {
 		}
 
 		if (isset($this->request->post['banner_id'])) {
-			$data['banner_id'] = $this->request->post['banner_id'];
+			$data['banner_id'] = (int)$this->request->post['banner_id'];
 		} elseif (!empty($module_info)) {
 			$data['banner_id'] = $module_info['banner_id'];
 		} else {

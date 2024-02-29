@@ -118,9 +118,9 @@ class ControllerExtensionPaymentAuthorizeNetSim extends Controller {
 		}
 
 		if (isset($this->request->post['authorizenet_sim_order_status_id'])) {
-			$data['authorizenet_sim_order_status_id'] = $this->request->post['authorizenet_sim_order_status_id'];
+			$data['authorizenet_sim_order_status_id'] = (int)$this->request->post['authorizenet_sim_order_status_id'];
 		} else {
-			$data['authorizenet_sim_order_status_id'] = $this->config->get('authorizenet_sim_order_status_id');
+			$data['authorizenet_sim_order_status_id'] = (int)$this->config->get('authorizenet_sim_order_status_id');
 		}
 
 		$this->load->model('localisation/order_status');

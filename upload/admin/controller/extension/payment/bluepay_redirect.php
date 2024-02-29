@@ -89,9 +89,9 @@ class ControllerExtensionPaymentBluepayredirect extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
 		if (isset($this->request->post['bluepay_redirect_account_id'])) {
-			$data['bluepay_redirect_account_id'] = $this->request->post['bluepay_redirect_account_id'];
+			$data['bluepay_redirect_account_id'] = (int)$this->request->post['bluepay_redirect_account_id'];
 		} else {
-			$data['bluepay_redirect_account_id'] = $this->config->get('bluepay_redirect_account_id');
+			$data['bluepay_redirect_account_id'] = (int)$this->config->get('bluepay_redirect_account_id');
 		}
 
 		if (isset($this->request->post['bluepay_redirect_secret_key'])) {

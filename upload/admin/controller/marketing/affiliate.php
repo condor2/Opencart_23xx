@@ -879,7 +879,7 @@ class ControllerMarketingAffiliate extends Controller {
 		}
 
 		if (isset($this->request->post['country_id'])) {
-			$data['country_id'] = $this->request->post['country_id'];
+			$data['country_id'] = (int)$this->request->post['country_id'];
 		} elseif (!empty($affiliate_info)) {
 			$data['country_id'] = $affiliate_info['country_id'];
 		} else {
@@ -891,7 +891,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$data['countries'] = $this->model_localisation_country->getCountries();
 
 		if (isset($this->request->post['zone_id'])) {
-			$data['zone_id'] = $this->request->post['zone_id'];
+			$data['zone_id'] = (int)$this->request->post['zone_id'];
 		} elseif (!empty($affiliate_info)) {
 			$data['zone_id'] = $affiliate_info['zone_id'];
 		} else {

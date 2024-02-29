@@ -84,9 +84,9 @@ class ControllerExtensionShippingWeight extends Controller {
 		$data['geo_zones'] = $geo_zones;
 
 		if (isset($this->request->post['weight_tax_class_id'])) {
-			$data['weight_tax_class_id'] = $this->request->post['weight_tax_class_id'];
+			$data['weight_tax_class_id'] = (int)$this->request->post['weight_tax_class_id'];
 		} else {
-			$data['weight_tax_class_id'] = $this->config->get('weight_tax_class_id');
+			$data['weight_tax_class_id'] = (int)$this->config->get('weight_tax_class_id');
 		}
 
 		$this->load->model('localisation/tax_class');

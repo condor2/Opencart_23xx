@@ -100,9 +100,9 @@ class ControllerExtensionModulePPLogin extends Controller {
 		$data['token'] = $this->session->data['token'];
 
 		if (isset($this->request->post['pp_login_client_id'])) {
-			$data['pp_login_client_id'] = $this->request->post['pp_login_client_id'];
+			$data['pp_login_client_id'] = (int)$this->request->post['pp_login_client_id'];
 		} else {
-			$data['pp_login_client_id'] = $this->config->get('pp_login_client_id');
+			$data['pp_login_client_id'] = (int)$this->config->get('pp_login_client_id');
 		}
 
 		if (isset($this->request->post['pp_login_secret'])) {

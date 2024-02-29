@@ -98,9 +98,9 @@ class ControllerExtensionPaymentDivido extends Controller {
 		}
 
 		if (isset($this->request->post['divido_order_status_id'])) {
-			$data['divido_order_status_id'] = $this->request->post['divido_order_status_id'];
+			$data['divido_order_status_id'] = (int)$this->request->post['divido_order_status_id'];
 		} elseif ($this->config->get('divido_order_status_id')) {
-			$data['divido_order_status_id'] = $this->config->get('divido_order_status_id');
+			$data['divido_order_status_id'] = (int)$this->config->get('divido_order_status_id');
 		} else {
 			$data['divido_order_status_id'] = 2;
 		}

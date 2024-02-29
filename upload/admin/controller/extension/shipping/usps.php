@@ -142,9 +142,9 @@ class ControllerExtensionShippingUsps extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=shipping', true);
 
 		if (isset($this->request->post['usps_user_id'])) {
-			$data['usps_user_id'] = $this->request->post['usps_user_id'];
+			$data['usps_user_id'] = (int)$this->request->post['usps_user_id'];
 		} else {
-			$data['usps_user_id'] = $this->config->get('usps_user_id');
+			$data['usps_user_id'] = (int)$this->config->get('usps_user_id');
 		}
 
 		if (isset($this->request->post['usps_postcode'])) {
@@ -465,9 +465,9 @@ class ControllerExtensionShippingUsps extends Controller {
 		}
 
 		if (isset($this->request->post['usps_weight_class_id'])) {
-			$data['usps_weight_class_id'] = $this->request->post['usps_weight_class_id'];
+			$data['usps_weight_class_id'] = (int)$this->request->post['usps_weight_class_id'];
 		} else {
-			$data['usps_weight_class_id'] = $this->config->get('usps_weight_class_id');
+			$data['usps_weight_class_id'] = (int)$this->config->get('usps_weight_class_id');
 		}
 
 		$this->load->model('localisation/weight_class');
@@ -475,9 +475,9 @@ class ControllerExtensionShippingUsps extends Controller {
 		$data['weight_classes'] = $this->model_localisation_weight_class->getWeightClasses();
 
 		if (isset($this->request->post['usps_tax_class_id'])) {
-			$data['usps_tax_class_id'] = $this->request->post['usps_tax_class_id'];
+			$data['usps_tax_class_id'] = (int)$this->request->post['usps_tax_class_id'];
 		} else {
-			$data['usps_tax_class_id'] = $this->config->get('usps_tax_class_id');
+			$data['usps_tax_class_id'] = (int)$this->config->get('usps_tax_class_id');
 		}
 
 		$this->load->model('localisation/tax_class');
@@ -485,9 +485,9 @@ class ControllerExtensionShippingUsps extends Controller {
 		$data['tax_classes'] = $this->model_localisation_tax_class->getTaxClasses();
 
 		if (isset($this->request->post['usps_geo_zone_id'])) {
-			$data['usps_geo_zone_id'] = $this->request->post['usps_geo_zone_id'];
+			$data['usps_geo_zone_id'] = (int)$this->request->post['usps_geo_zone_id'];
 		} else {
-			$data['usps_geo_zone_id'] = $this->config->get('usps_geo_zone_id');
+			$data['usps_geo_zone_id'] = (int)$this->config->get('usps_geo_zone_id');
 		}
 
 		$this->load->model('localisation/geo_zone');

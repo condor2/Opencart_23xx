@@ -92,9 +92,9 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
 		if (isset($this->request->post['cardconnect_merchant_id'])) {
-			$data['cardconnect_merchant_id'] = $this->request->post['cardconnect_merchant_id'];
+			$data['cardconnect_merchant_id'] = (int)$this->request->post['cardconnect_merchant_id'];
 		} else {
-			$data['cardconnect_merchant_id'] = $this->config->get('cardconnect_merchant_id');
+			$data['cardconnect_merchant_id'] = (int)$this->config->get('cardconnect_merchant_id');
 		}
 
 		if (isset($this->request->post['cardconnect_api_username'])) {

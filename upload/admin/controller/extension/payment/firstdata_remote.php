@@ -147,15 +147,15 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
 		if (isset($this->request->post['firstdata_remote_merchant_id'])) {
-			$data['firstdata_remote_merchant_id'] = $this->request->post['firstdata_remote_merchant_id'];
+			$data['firstdata_remote_merchant_id'] = (int)$this->request->post['firstdata_remote_merchant_id'];
 		} else {
-			$data['firstdata_remote_merchant_id'] = $this->config->get('firstdata_remote_merchant_id');
+			$data['firstdata_remote_merchant_id'] = (int)$this->config->get('firstdata_remote_merchant_id');
 		}
 
 		if (isset($this->request->post['firstdata_remote_user_id'])) {
-			$data['firstdata_remote_user_id'] = $this->request->post['firstdata_remote_user_id'];
+			$data['firstdata_remote_user_id'] = (int)$this->request->post['firstdata_remote_user_id'];
 		} else {
-			$data['firstdata_remote_user_id'] = $this->config->get('firstdata_remote_user_id');
+			$data['firstdata_remote_user_id'] = (int)$this->config->get('firstdata_remote_user_id');
 		}
 
 		if (isset($this->request->post['firstdata_remote_password'])) {
@@ -189,9 +189,9 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		}
 
 		if (isset($this->request->post['firstdata_remote_geo_zone_id'])) {
-			$data['firstdata_remote_geo_zone_id'] = $this->request->post['firstdata_remote_geo_zone_id'];
+			$data['firstdata_remote_geo_zone_id'] = (int)$this->request->post['firstdata_remote_geo_zone_id'];
 		} else {
-			$data['firstdata_remote_geo_zone_id'] = $this->config->get('firstdata_remote_geo_zone_id');
+			$data['firstdata_remote_geo_zone_id'] = (int)$this->config->get('firstdata_remote_geo_zone_id');
 		}
 
 		if (isset($this->request->post['firstdata_remote_total'])) {
@@ -238,33 +238,33 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		}
 
 		if (isset($this->request->post['firstdata_remote_order_status_success_settled_id'])) {
-			$data['firstdata_remote_order_status_success_settled_id'] = $this->request->post['firstdata_remote_order_status_success_settled_id'];
+			$data['firstdata_remote_order_status_success_settled_id'] = (int)$this->request->post['firstdata_remote_order_status_success_settled_id'];
 		} else {
-			$data['firstdata_remote_order_status_success_settled_id'] = $this->config->get('firstdata_remote_order_status_success_settled_id');
+			$data['firstdata_remote_order_status_success_settled_id'] = (int)$this->config->get('firstdata_remote_order_status_success_settled_id');
 		}
 
 		if (isset($this->request->post['firstdata_remote_order_status_success_unsettled_id'])) {
-			$data['firstdata_remote_order_status_success_unsettled_id'] = $this->request->post['firstdata_remote_order_status_success_unsettled_id'];
+			$data['firstdata_remote_order_status_success_unsettled_id'] = (int)$this->request->post['firstdata_remote_order_status_success_unsettled_id'];
 		} else {
-			$data['firstdata_remote_order_status_success_unsettled_id'] = $this->config->get('firstdata_remote_order_status_success_unsettled_id');
+			$data['firstdata_remote_order_status_success_unsettled_id'] = (int)$this->config->get('firstdata_remote_order_status_success_unsettled_id');
 		}
 
 		if (isset($this->request->post['firstdata_remote_order_status_decline_id'])) {
-			$data['firstdata_remote_order_status_decline_id'] = $this->request->post['firstdata_remote_order_status_decline_id'];
+			$data['firstdata_remote_order_status_decline_id'] = (int)$this->request->post['firstdata_remote_order_status_decline_id'];
 		} else {
-			$data['firstdata_remote_order_status_decline_id'] = $this->config->get('firstdata_remote_order_status_decline_id');
+			$data['firstdata_remote_order_status_decline_id'] = (int)$this->config->get('firstdata_remote_order_status_decline_id');
 		}
 
 		if (isset($this->request->post['firstdata_remote_order_status_void_id'])) {
-			$data['firstdata_remote_order_status_void_id'] = $this->request->post['firstdata_remote_order_status_void_id'];
+			$data['firstdata_remote_order_status_void_id'] = (int)$this->request->post['firstdata_remote_order_status_void_id'];
 		} else {
-			$data['firstdata_remote_order_status_void_id'] = $this->config->get('firstdata_remote_order_status_void_id');
+			$data['firstdata_remote_order_status_void_id'] = (int)$this->config->get('firstdata_remote_order_status_void_id');
 		}
 
 		if (isset($this->request->post['firstdata_remote_order_status_refunded_id'])) {
-			$data['firstdata_remote_order_status_refunded_id'] = $this->request->post['firstdata_remote_order_status_refunded_id'];
+			$data['firstdata_remote_order_status_refunded_id'] = (int)$this->request->post['firstdata_remote_order_status_refunded_id'];
 		} else {
-			$data['firstdata_remote_order_status_refunded_id'] = $this->config->get('firstdata_remote_order_status_refunded_id');
+			$data['firstdata_remote_order_status_refunded_id'] = (int)$this->config->get('firstdata_remote_order_status_refunded_id');
 		}
 
 		if (isset($this->request->post['firstdata_remote_card_storage'])) {

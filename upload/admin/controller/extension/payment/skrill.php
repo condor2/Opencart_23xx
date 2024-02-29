@@ -95,33 +95,33 @@ class ControllerExtensionPaymentSkrill extends Controller {
 		}
 
 		if (isset($this->request->post['skrill_order_status_id'])) {
-			$data['skrill_order_status_id'] = $this->request->post['skrill_order_status_id'];
+			$data['skrill_order_status_id'] = (int)$this->request->post['skrill_order_status_id'];
 		} else {
-			$data['skrill_order_status_id'] = $this->config->get('skrill_order_status_id');
+			$data['skrill_order_status_id'] = (int)$this->config->get('skrill_order_status_id');
 		}
 
 		if (isset($this->request->post['skrill_pending_status_id'])) {
-			$data['skrill_pending_status_id'] = $this->request->post['skrill_pending_status_id'];
+			$data['skrill_pending_status_id'] = (int)$this->request->post['skrill_pending_status_id'];
 		} else {
-			$data['skrill_pending_status_id'] = $this->config->get('skrill_pending_status_id');
+			$data['skrill_pending_status_id'] = (int)$this->config->get('skrill_pending_status_id');
 		}
 
 		if (isset($this->request->post['skrill_canceled_status_id'])) {
-			$data['skrill_canceled_status_id'] = $this->request->post['skrill_canceled_status_id'];
+			$data['skrill_canceled_status_id'] = (int)$this->request->post['skrill_canceled_status_id'];
 		} else {
-			$data['skrill_canceled_status_id'] = $this->config->get('skrill_canceled_status_id');
+			$data['skrill_canceled_status_id'] = (int)$this->config->get('skrill_canceled_status_id');
 		}
 
 		if (isset($this->request->post['skrill_failed_status_id'])) {
-			$data['skrill_failed_status_id'] = $this->request->post['skrill_failed_status_id'];
+			$data['skrill_failed_status_id'] = (int)$this->request->post['skrill_failed_status_id'];
 		} else {
-			$data['skrill_failed_status_id'] = $this->config->get('skrill_failed_status_id');
+			$data['skrill_failed_status_id'] = (int)$this->config->get('skrill_failed_status_id');
 		}
 
 		if (isset($this->request->post['skrill_chargeback_status_id'])) {
-			$data['skrill_chargeback_status_id'] = $this->request->post['skrill_chargeback_status_id'];
+			$data['skrill_chargeback_status_id'] = (int)$this->request->post['skrill_chargeback_status_id'];
 		} else {
-			$data['skrill_chargeback_status_id'] = $this->config->get('skrill_chargeback_status_id');
+			$data['skrill_chargeback_status_id'] = (int)$this->config->get('skrill_chargeback_status_id');
 		}
 
 		$this->load->model('localisation/order_status');
@@ -129,9 +129,9 @@ class ControllerExtensionPaymentSkrill extends Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		if (isset($this->request->post['skrill_geo_zone_id'])) {
-			$data['skrill_geo_zone_id'] = $this->request->post['skrill_geo_zone_id'];
+			$data['skrill_geo_zone_id'] = (int)$this->request->post['skrill_geo_zone_id'];
 		} else {
-			$data['skrill_geo_zone_id'] = $this->config->get('skrill_geo_zone_id');
+			$data['skrill_geo_zone_id'] = (int)$this->config->get('skrill_geo_zone_id');
 		}
 
 		$this->load->model('localisation/geo_zone');

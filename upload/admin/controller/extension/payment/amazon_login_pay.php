@@ -157,9 +157,9 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
 		if (isset($this->request->post['amazon_login_pay_merchant_id'])) {
-			$data['amazon_login_pay_merchant_id'] = $this->request->post['amazon_login_pay_merchant_id'];
+			$data['amazon_login_pay_merchant_id'] = (int)$this->request->post['amazon_login_pay_merchant_id'];
 		} elseif ($this->config->get('amazon_login_pay_merchant_id')) {
-			$data['amazon_login_pay_merchant_id'] = $this->config->get('amazon_login_pay_merchant_id');
+			$data['amazon_login_pay_merchant_id'] = (int)$this->config->get('amazon_login_pay_merchant_id');
 		} else {
 			$data['amazon_login_pay_merchant_id'] = '';
 		}

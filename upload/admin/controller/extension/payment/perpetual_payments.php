@@ -81,9 +81,9 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 
 		if (isset($this->request->post['perpetual_payments_auth_id'])) {
-			$data['perpetual_payments_auth_id'] = $this->request->post['perpetual_payments_auth_id'];
+			$data['perpetual_payments_auth_id'] = (int)$this->request->post['perpetual_payments_auth_id'];
 		} else {
-			$data['perpetual_payments_auth_id'] = $this->config->get('perpetual_payments_auth_id');
+			$data['perpetual_payments_auth_id'] = (int)$this->config->get('perpetual_payments_auth_id');
 		}
 
 		if (isset($this->request->post['perpetual_payments_auth_pass'])) {
@@ -105,9 +105,9 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 		}
 
 		if (isset($this->request->post['perpetual_payments_order_status_id'])) {
-			$data['perpetual_payments_order_status_id'] = $this->request->post['perpetual_payments_order_status_id'];
+			$data['perpetual_payments_order_status_id'] = (int)$this->request->post['perpetual_payments_order_status_id'];
 		} else {
-			$data['perpetual_payments_order_status_id'] = $this->config->get('perpetual_payments_order_status_id');
+			$data['perpetual_payments_order_status_id'] = (int)$this->config->get('perpetual_payments_order_status_id');
 		}
 
 		$this->load->model('localisation/order_status');
@@ -115,9 +115,9 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		if (isset($this->request->post['perpetual_payments_geo_zone_id'])) {
-			$data['perpetual_payments_geo_zone_id'] = $this->request->post['perpetual_payments_geo_zone_id'];
+			$data['perpetual_payments_geo_zone_id'] = (int)$this->request->post['perpetual_payments_geo_zone_id'];
 		} else {
-			$data['perpetual_payments_geo_zone_id'] = $this->config->get('perpetual_payments_geo_zone_id');
+			$data['perpetual_payments_geo_zone_id'] = (int)$this->config->get('perpetual_payments_geo_zone_id');
 		}
 
 		$this->load->model('localisation/geo_zone');

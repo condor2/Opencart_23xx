@@ -70,9 +70,9 @@ class ControllerExtensionFraudIp extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=fraud', true);
 
 		if (isset($this->request->post['ip_order_status_id'])) {
-			$data['ip_order_status_id'] = $this->request->post['ip_order_status_id'];
+			$data['ip_order_status_id'] = (int)$this->request->post['ip_order_status_id'];
 		} else {
-			$data['ip_order_status_id'] = $this->config->get('ip_order_status_id');
+			$data['ip_order_status_id'] = (int)$this->config->get('ip_order_status_id');
 		}
 
 		$this->load->model('localisation/order_status');

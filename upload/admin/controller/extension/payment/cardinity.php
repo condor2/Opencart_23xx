@@ -115,9 +115,9 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		if (isset($this->request->post['cardinity_geo_zone_id'])) {
-			$data['cardinity_geo_zone_id'] = $this->request->post['cardinity_geo_zone_id'];
+			$data['cardinity_geo_zone_id'] = (int)$this->request->post['cardinity_geo_zone_id'];
 		} else {
-			$data['cardinity_geo_zone_id'] = $this->config->get('cardinity_geo_zone_id');
+			$data['cardinity_geo_zone_id'] = (int)$this->config->get('cardinity_geo_zone_id');
 		}
 
 		$this->load->model('localisation/geo_zone');

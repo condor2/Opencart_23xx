@@ -112,9 +112,9 @@ class ControllerExtensionPaymentTwoCheckout extends Controller {
 		}
 
 		if (isset($this->request->post['twocheckout_order_status_id'])) {
-			$data['twocheckout_order_status_id'] = $this->request->post['twocheckout_order_status_id'];
+			$data['twocheckout_order_status_id'] = (int)$this->request->post['twocheckout_order_status_id'];
 		} else {
-			$data['twocheckout_order_status_id'] = $this->config->get('twocheckout_order_status_id');
+			$data['twocheckout_order_status_id'] = (int)$this->config->get('twocheckout_order_status_id');
 		}
 
 		$this->load->model('localisation/order_status');
@@ -122,9 +122,9 @@ class ControllerExtensionPaymentTwoCheckout extends Controller {
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
 		if (isset($this->request->post['twocheckout_geo_zone_id'])) {
-			$data['twocheckout_geo_zone_id'] = $this->request->post['twocheckout_geo_zone_id'];
+			$data['twocheckout_geo_zone_id'] = (int)$this->request->post['twocheckout_geo_zone_id'];
 		} else {
-			$data['twocheckout_geo_zone_id'] = $this->config->get('twocheckout_geo_zone_id');
+			$data['twocheckout_geo_zone_id'] = (int)$this->config->get('twocheckout_geo_zone_id');
 		}
 
 		$this->load->model('localisation/geo_zone');
