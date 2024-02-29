@@ -563,7 +563,7 @@ class ControllerSettingStore extends Controller {
 		} elseif (isset($store_info['config_country_id'])) {
 			$data['config_country_id'] = $store_info['config_country_id'];
 		} else {
-			$data['config_country_id'] = $this->config->get('config_country_id');
+			$data['config_country_id'] = (int)$this->config->get('config_country_id');
 		}
 
 		$this->load->model('localisation/country');
@@ -575,7 +575,7 @@ class ControllerSettingStore extends Controller {
 		} elseif (isset($store_info['config_zone_id'])) {
 			$data['config_zone_id'] = $store_info['config_zone_id'];
 		} else {
-			$data['config_zone_id'] = $this->config->get('config_zone_id');
+			$data['config_zone_id'] = (int)$this->config->get('config_zone_id');
 		}
 
 		if (isset($this->request->post['config_language'])) {

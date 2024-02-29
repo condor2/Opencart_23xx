@@ -396,7 +396,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_layout_id'])) {
 			$data['config_layout_id'] = (int)$this->request->post['config_layout_id'];
 		} else {
-			$data['config_layout_id'] = $this->config->get('config_layout_id');
+			$data['config_layout_id'] = (int)$this->config->get('config_layout_id');
 		}
 
 		$this->load->model('design/layout');
@@ -488,7 +488,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_country_id'])) {
 			$data['config_country_id'] = (int)$this->request->post['config_country_id'];
 		} else {
-			$data['config_country_id'] = $this->config->get('config_country_id');
+			$data['config_country_id'] = (int)$this->config->get('config_country_id');
 		}
 
 		$this->load->model('localisation/country');
@@ -498,7 +498,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_zone_id'])) {
 			$data['config_zone_id'] = (int)$this->request->post['config_zone_id'];
 		} else {
-			$data['config_zone_id'] = $this->config->get('config_zone_id');
+			$data['config_zone_id'] = (int)$this->config->get('config_zone_id');
 		}
 
 		if (isset($this->request->post['config_timezone'])) {
@@ -587,7 +587,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_length_class_id'])) {
 			$data['config_length_class_id'] = (int)$this->request->post['config_length_class_id'];
 		} else {
-			$data['config_length_class_id'] = $this->config->get('config_length_class_id');
+			$data['config_length_class_id'] = (int)$this->config->get('config_length_class_id');
 		}
 
 		$this->load->model('localisation/length_class');
@@ -597,7 +597,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_weight_class_id'])) {
 			$data['config_weight_class_id'] = (int)$this->request->post['config_weight_class_id'];
 		} else {
-			$data['config_weight_class_id'] = $this->config->get('config_weight_class_id');
+			$data['config_weight_class_id'] = (int)$this->config->get('config_weight_class_id');
 		}
 
 		$this->load->model('localisation/weight_class');
@@ -613,19 +613,19 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_product_count'])) {
 			$data['config_product_count'] = (int)$this->request->post['config_product_count'];
 		} else {
-			$data['config_product_count'] = $this->config->get('config_product_count');
+			$data['config_product_count'] = (int)$this->config->get('config_product_count');
 		}
 
 		if (isset($this->request->post['config_review_status'])) {
 			$data['config_review_status'] = (int)$this->request->post['config_review_status'];
 		} else {
-			$data['config_review_status'] = $this->config->get('config_review_status');
+			$data['config_review_status'] = (int)$this->config->get('config_review_status');
 		}
 
 		if (isset($this->request->post['config_review_guest'])) {
 			$data['config_review_guest'] = (int)$this->request->post['config_review_guest'];
 		} else {
-			$data['config_review_guest'] = $this->config->get('config_review_guest');
+			$data['config_review_guest'] = (int)$this->config->get('config_review_guest');
 		}
 
 		if (isset($this->request->post['config_voucher_min'])) {
@@ -679,7 +679,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_customer_group_id'])) {
 			$data['config_customer_group_id'] = (int)$this->request->post['config_customer_group_id'];
 		} else {
-			$data['config_customer_group_id'] = $this->config->get('config_customer_group_id');
+			$data['config_customer_group_id'] = (int)$this->config->get('config_customer_group_id');
 		}
 
 		$this->load->model('customer/customer_group');
@@ -711,7 +711,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_account_id'])) {
 			$data['config_account_id'] = (int)$this->request->post['config_account_id'];
 		} else {
-			$data['config_account_id'] = $this->config->get('config_account_id');
+			$data['config_account_id'] = (int)$this->config->get('config_account_id');
 		}
 
 		$this->load->model('catalog/information');
@@ -733,7 +733,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_checkout_id'])) {
 			$data['config_checkout_id'] = (int)$this->request->post['config_checkout_id'];
 		} else {
-			$data['config_checkout_id'] = $this->config->get('config_checkout_id');
+			$data['config_checkout_id'] = (int)$this->config->get('config_checkout_id');
 		}
 
 		if (isset($this->request->post['config_invoice_prefix'])) {
@@ -747,7 +747,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_order_status_id'])) {
 			$data['config_order_status_id'] = (int)$this->request->post['config_order_status_id'];
 		} else {
-			$data['config_order_status_id'] = $this->config->get('config_order_status_id');
+			$data['config_order_status_id'] = (int)$this->config->get('config_order_status_id');
 		}
 
 		if (isset($this->request->post['config_processing_status'])) {
@@ -769,7 +769,7 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_fraud_status_id'])) {
 			$data['config_fraud_status_id'] = (int)$this->request->post['config_fraud_status_id'];
 		} else {
-			$data['config_fraud_status_id'] = $this->config->get('config_fraud_status_id');
+			$data['config_fraud_status_id'] = (int)$this->config->get('config_fraud_status_id');
 		}
 
 		$this->load->model('localisation/order_status');
@@ -831,19 +831,19 @@ class ControllerSettingSetting extends Controller {
 		if (isset($this->request->post['config_affiliate_id'])) {
 			$data['config_affiliate_id'] = (int)$this->request->post['config_affiliate_id'];
 		} else {
-			$data['config_affiliate_id'] = $this->config->get('config_affiliate_id');
+			$data['config_affiliate_id'] = (int)$this->config->get('config_affiliate_id');
 		}
 
 		if (isset($this->request->post['config_return_id'])) {
 			$data['config_return_id'] = (int)$this->request->post['config_return_id'];
 		} else {
-			$data['config_return_id'] = $this->config->get('config_return_id');
+			$data['config_return_id'] = (int)$this->config->get('config_return_id');
 		}
 
 		if (isset($this->request->post['config_return_status_id'])) {
 			$data['config_return_status_id'] = (int)$this->request->post['config_return_status_id'];
 		} else {
-			$data['config_return_status_id'] = $this->config->get('config_return_status_id');
+			$data['config_return_status_id'] = (int)$this->config->get('config_return_status_id');
 		}
 
 		$this->load->model('localisation/return_status');
