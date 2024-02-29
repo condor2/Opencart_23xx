@@ -395,13 +395,13 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$data['button_status'] = 0;
 		}
 
-		if ($data['setting']['googlepay_button']['status']) {
+		if ($data['setting']['googlepay_button']['product']['status'] || $data['setting']['googlepay_button']['cart']['status'] || $data['setting']['googlepay_button']['checkout']['status']) {
 			$data['googlepay_button_status'] = 1;
 		} else {
 			$data['googlepay_button_status'] = 0;
 		}
 
-		if ($data['setting']['applepay_button']['status']) {
+		if ($data['setting']['applepay_button']['product']['status'] || $data['setting']['applepay_button']['cart']['status'] || $data['setting']['applepay_button']['checkout']['status']) {
 			$data['applepay_button_status'] = 1;
 		} else {
 			$data['applepay_button_status'] = 0;
@@ -945,6 +945,20 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_step_shipping'] = $this->language->get('text_step_shipping');
 		$data['text_step_payment_method'] = $this->language->get('text_step_payment_method');
 		$data['text_step_confirm_order'] = $this->language->get('text_step_confirm_order');
+		$data['text_product_name'] = $this->language->get('text_product_name');
+		$data['text_product_price'] = $this->language->get('text_product_price');
+		$data['text_product_manufacturer'] = $this->language->get('text_product_manufacturer');
+		$data['text_product_model'] = $this->language->get('text_product_model');
+		$data['text_product_stock'] = $this->language->get('text_product_stock');
+		$data['text_cart_product_image'] = $this->language->get('text_cart_product_image');
+		$data['text_cart_product_name'] = $this->language->get('text_cart_product_name');
+		$data['text_cart_product_model'] = $this->language->get('text_cart_product_model');
+		$data['text_cart_product_quantity'] = $this->language->get('text_cart_product_quantity');
+		$data['text_cart_product_price'] = $this->language->get('text_cart_product_price');
+		$data['text_cart_product_total'] = $this->language->get('text_cart_product_total');
+		$data['text_cart_product_name_value'] = $this->language->get('text_cart_product_name_value');
+		$data['text_cart_product_model_value'] = $this->language->get('text_cart_product_model_value');
+		$data['text_cart_product_quantity_value'] = $this->language->get('text_cart_product_quantity_value');
 		$data['text_cart_product_price_value'] = $this->language->get('text_cart_product_price_value');
 		$data['text_cart_product_total_value'] = $this->language->get('text_cart_product_total_value');
 		$data['text_cart_sub_total'] = $this->language->get('text_cart_sub_total');
@@ -979,6 +993,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_check_out'] = $this->language->get('text_check_out');
 
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_googlepay_button_insert_tag'] = $this->language->get('entry_googlepay_button_insert_tag');
+		$data['entry_googlepay_button_insert_type'] = $this->language->get('entry_googlepay_button_insert_type');
 		$data['entry_googlepay_button_align'] = $this->language->get('entry_googlepay_button_align');
 		$data['entry_googlepay_button_size'] = $this->language->get('entry_googlepay_button_size');
 		$data['entry_googlepay_button_color'] = $this->language->get('entry_googlepay_button_color');
@@ -1164,6 +1180,20 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_step_shipping'] = $this->language->get('text_step_shipping');
 		$data['text_step_payment_method'] = $this->language->get('text_step_payment_method');
 		$data['text_step_confirm_order'] = $this->language->get('text_step_confirm_order');
+		$data['text_product_name'] = $this->language->get('text_product_name');
+		$data['text_product_price'] = $this->language->get('text_product_price');
+		$data['text_product_manufacturer'] = $this->language->get('text_product_manufacturer');
+		$data['text_product_model'] = $this->language->get('text_product_model');
+		$data['text_product_stock'] = $this->language->get('text_product_stock');
+		$data['text_cart_product_image'] = $this->language->get('text_cart_product_image');
+		$data['text_cart_product_name'] = $this->language->get('text_cart_product_name');
+		$data['text_cart_product_model'] = $this->language->get('text_cart_product_model');
+		$data['text_cart_product_quantity'] = $this->language->get('text_cart_product_quantity');
+		$data['text_cart_product_price'] = $this->language->get('text_cart_product_price');
+		$data['text_cart_product_total'] = $this->language->get('text_cart_product_total');
+		$data['text_cart_product_name_value'] = $this->language->get('text_cart_product_name_value');
+		$data['text_cart_product_model_value'] = $this->language->get('text_cart_product_model_value');
+		$data['text_cart_product_quantity_value'] = $this->language->get('text_cart_product_quantity_value');
 		$data['text_cart_product_price_value'] = $this->language->get('text_cart_product_price_value');
 		$data['text_cart_product_total_value'] = $this->language->get('text_cart_product_total_value');
 		$data['text_cart_sub_total'] = $this->language->get('text_cart_sub_total');
@@ -1201,6 +1231,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_applepay_step_2'] = $this->language->get('text_applepay_step_2');
 
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_applepay_button_insert_tag'] = $this->language->get('entry_applepay_button_insert_tag');
+		$data['entry_applepay_button_insert_type'] = $this->language->get('entry_applepay_button_insert_type');
 		$data['entry_applepay_button_align'] = $this->language->get('entry_applepay_button_align');
 		$data['entry_applepay_button_size'] = $this->language->get('entry_applepay_button_size');
 		$data['entry_applepay_button_color'] = $this->language->get('entry_applepay_button_color');
@@ -2603,7 +2635,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = $this->request->post['order_id'];
+			$order_id = (int)$this->request->post['order_id'];
 			$transaction_id = $this->request->post['transaction_id'];
 
 			$_config = new Config();
@@ -2690,7 +2722,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = $this->request->post['order_id'];
+			$order_id = (int)$this->request->post['order_id'];
 			$transaction_id = $this->request->post['transaction_id'];
 
 			$_config = new Config();
@@ -2779,7 +2811,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = $this->request->post['order_id'];
+			$order_id = (int)$this->request->post['order_id'];
 			$transaction_id = $this->request->post['transaction_id'];
 
 			$_config = new Config();
@@ -2866,7 +2898,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = $this->request->post['order_id'];
+			$order_id = (int)$this->request->post['order_id'];
 			$transaction_id = $this->request->post['transaction_id'];
 
 			$_config = new Config();

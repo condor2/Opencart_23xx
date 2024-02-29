@@ -80,20 +80,76 @@ $_['paypal_setting'] = [
 		]
 	],
 	'googlepay_button' => [
-		'status' => false,
-		'align'  => 'right',
-		'size'   => 'large',
-		'color'  => 'black',
-		'shape'  => 'rect',
-		'type'   => 'buy'
+		'checkout' => [
+			'page_code' => 'checkout',
+			'page_name' => 'text_checkout',
+			'status'    => false,
+			'align'     => 'right',
+			'size'      => 'large',
+			'color'     => 'black',
+			'shape'     => 'rect',
+			'type'      => 'buy'
+		],
+		'cart' => [
+			'page_code'   => 'cart',
+			'page_name'   => 'text_cart',
+			'status'      => false,
+			'insert_tag'  => '#content',
+			'insert_type' => 'append',
+			'align'       => 'right',
+			'size'        => 'large',
+			'color'       => 'black',
+			'shape'       => 'rect',
+			'type'        => 'buy'
+		],
+		'product' => [
+			'page_code'   => 'product',
+			'page_name'   => 'text_product',
+			'status'      => false,
+			'insert_tag'  => '#content #product #button-cart',
+			'insert_type' => 'after',
+			'align'       => 'center',
+			'size'        => 'responsive',
+			'color'       => 'black',
+			'shape'       => 'rect',
+			'type'        => 'buy'
+		]
 	],
 	'applepay_button' => [
-		'status' => false,
-		'align'  => 'right',
-		'size'   => 'large',
-		'color'  => 'black',
-		'shape'  => 'rect',
-		'type'   => 'buy'
+		'checkout' => [
+			'page_code' => 'checkout',
+			'page_name' => 'text_checkout',
+			'status'    => false,
+			'align'     => 'right',
+			'size'      => 'large',
+			'color'     => 'black',
+			'shape'     => 'rect',
+			'type'      => 'buy',
+		],
+		'cart' => [
+			'page_code'   => 'cart',
+			'page_name'   => 'text_cart',
+			'status'      => false,
+			'insert_tag'  => '#content',
+			'insert_type' => 'append',
+			'align'       => 'right',
+			'size'        => 'large',
+			'color'       => 'black',
+			'shape'       => 'rect',
+			'type'        => 'buy',
+		],
+		'product' => [
+			'page_code'   => 'product',
+			'page_name'   => 'text_product',
+			'status'      => false,
+			'insert_tag'  => '#content #product #button-cart',
+			'insert_type' => 'after',
+			'align'       => 'center',
+			'size'        => 'responsive',
+			'color'       => 'black',
+			'shape'       => 'rect',
+			'type'        => 'buy',
+		]
 	],
 	'card' => [
 		'status'          => true,
@@ -632,6 +688,24 @@ $_['paypal_setting'] = [
 			'name' => 'text_venmo'
 		]
 	],
+	'googlepay_button_insert_type' => [
+		'into_begin' => [
+			'code' => 'prepend',
+			'name' => 'text_insert_prepend'
+		],
+		'into_end' => [
+			'code' => 'append',
+			'name' => 'text_insert_append'
+		],
+		'before' => [
+			'code' => 'before',
+			'name' => 'text_insert_before'
+		],
+		'after' => [
+			'code' => 'after',
+			'name' => 'text_insert_after'
+		]
+	],
 	'googlepay_button_align' => [
 		'left' => [
 			'code' => 'left',
@@ -711,6 +785,24 @@ $_['paypal_setting'] = [
 		'medium'     => '250px',
 		'large'      => '350px',
 		'responsive' => ''
+	],
+	'applepay_button_insert_type' => [
+		'into_begin' => [
+			'code' => 'prepend',
+			'name' => 'text_insert_prepend'
+		],
+		'into_end' => [
+			'code' => 'append',
+			'name' => 'text_insert_append'
+		],
+		'before' => [
+			'code' => 'before',
+			'name' => 'text_insert_before'
+		],
+		'after' => [
+			'code' => 'after',
+			'name' => 'text_insert_after'
+		]
 	],
 	'applepay_button_align' => [
 		'left' => [
