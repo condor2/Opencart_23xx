@@ -146,7 +146,7 @@ class ControllerMarketingContact extends Controller {
 							$emails[] = $result['email'];
 						}
 						break;
-					case 'customer_all'
+					case 'customer_all':
 						$customer_data = [
 							'start' => ($page - 1) * 10,
 							'limit' => 10
