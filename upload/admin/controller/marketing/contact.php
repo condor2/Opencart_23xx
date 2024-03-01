@@ -186,7 +186,7 @@ class ControllerMarketingContact extends Controller {
 
 							$email_total = count($emails);
 						}
-						// no break
+						break;
 					case 'affiliate_all':$affiliate_data = [
 						'start' => ($page - 1) * 10,
 						'limit' => 10
