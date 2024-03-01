@@ -198,9 +198,6 @@ function send(url) {
 		beforeSend: function() {
 			$('#button-send').button('loading');
 		},
-		complete: function() {
-			$('#button-send').button('reset');
-		},
 		success: function(json) {
 			$('.alert, .text-danger').remove();
 
@@ -228,6 +225,8 @@ function send(url) {
 				
 			if (json['next']) {
 				send(json['next']);
+			} else {
+				$('#button-send').button('reset');
 			}
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
