@@ -372,6 +372,8 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 		$this->load->model('checkout/order');
 
 		if (isset($this->session->data['order_id']) && $this->config->get('sagepay_direct_status')) {
+			$url = '';
+
 			if ($this->config->get('sagepay_direct_test') == 'live') {
 				//$url = 'https://live.sagepay.com/gateway/service/direct3dcallback.vsp';
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/direct3dcallback.vsp';
