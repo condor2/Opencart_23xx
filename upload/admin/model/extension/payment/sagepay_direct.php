@@ -76,6 +76,8 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			$void_data = [];
 
+			$url = '';
+
 			if ($this->config->get('sagepay_direct_test') == 'live') {
 				//$url = 'https://live.sagepay.com/gateway/service/void.vsp';
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/void.vsp';
@@ -97,7 +99,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			return $this->sendCurl($url, $void_data);
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -111,6 +113,8 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 		if (!empty($sagepay_direct_order) && $sagepay_direct_order['release_status'] == 0 && ($total_released + $amount <= $sagepay_direct_order['total'])) {
 			$release_data = [];
+
+			$url = '';
 
 			if ($this->config->get('sagepay_direct_test') == 'live') {
 				//$url = 'https://live.sagepay.com/gateway/service/release.vsp';
@@ -134,7 +138,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			return $this->sendCurl($url, $release_data);
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -148,6 +152,8 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 		if (!empty($sagepay_direct_order) && $sagepay_direct_order['rebate_status'] != 1) {
 
 			$refund_data = [];
+
+			$url = '';
 
 			if ($this->config->get('sagepay_direct_test') == 'live') {
 				//$url = 'https://live.sagepay.com/gateway/service/refund.vsp';
@@ -174,7 +180,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			return $this->sendCurl($url, $refund_data);
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -183,7 +189,6 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 	}
 
 	public function getOrder($order_id) {
-
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "sagepay_direct_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
 		if ($query->num_rows) {
@@ -192,7 +197,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			return $order;
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -202,7 +207,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 		if ($query->num_rows) {
 			return $query->rows;
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -223,6 +228,8 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 	}
 
 	public function sendCurl($url, $payment_data) {
+		$data = [];
+
 		$curl = curl_init($url);
 
 		curl_setopt($curl, CURLOPT_PORT, 443);
@@ -242,7 +249,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 		$response_info = explode(chr(10), $response);
 
 		foreach ($response_info as $i => $string) {
-			if (strpos($string, '=') && isset($i)) {
+			if (strpos($string, '=')) {
 				$parts = explode('=', $string, 2);
 				$data['RepeatResponseData_' . $i][trim($parts[0])] = trim($parts[1]);
 			} elseif (strpos($string, '=')) {

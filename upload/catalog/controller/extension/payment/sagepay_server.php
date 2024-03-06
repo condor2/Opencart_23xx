@@ -41,6 +41,8 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 	public function send(): void {
 		$payment_data = [];
 
+		$url = '';
+
 		if ($this->config->get('sagepay_server_test') == 'live') {
 			//$url = 'https://live.sagepay.com/gateway/service/vspserver-register.vsp';
 			$url = 'https://live.opayo.eu.elavon.com/gateway/service/vspdirect-register.vsp';
@@ -128,6 +130,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		$order_products = $this->model_account_order->getOrderProducts($this->session->data['order_id']);
 		$cart_rows = 0;
 		$str_basket = "";
+
 		foreach ($order_products as $product) {
 			$str_basket
 					.= ":" . str_replace(":", " ", $product['name'] . " " . $product['model'])
@@ -140,10 +143,12 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		}
 
 		$order_totals = $this->model_account_order->getOrderTotals($this->session->data['order_id']);
+
 		foreach ($order_totals as $total) {
 			$str_basket .= ":" . str_replace(":", " ", $total['title']) . ":::::" . $this->currency->format($total['value'], $order_info['currency_code'], false, false);
 			$cart_rows++;
 		}
+
 		$str_basket = $cart_rows . $str_basket;
 
 		$payment_data['Basket'] = $str_basket;
@@ -460,6 +465,8 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		$card = $this->model_extension_payment_sagepay_server->getCard(false, $this->request->post['Token']);
 
 		if (!empty($card['token'])) {
+			$url = '';
+
 			if ($this->config->get('sagepay_server_test') == 'live') {
 				//$url = 'https://live.sagepay.com/gateway/service/removetoken.vsp';
 				$url = 'https://live.opayo.eu.elavon.com/gateway/service/removetoken.vsp';

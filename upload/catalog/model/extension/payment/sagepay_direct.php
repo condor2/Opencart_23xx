@@ -30,7 +30,6 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 	}
 
 	public function getCards($customer_id) {
-
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "sagepay_direct_card WHERE customer_id = '" . (int)$customer_id . "' ORDER BY card_id");
 
 		$card_data = [];
@@ -67,7 +66,7 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 		if ($qry->num_rows) {
 			return $qry->row;
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -90,7 +89,7 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 
 			return $order;
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -114,7 +113,7 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 		if ($qry->num_rows) {
 			return $qry->rows;
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -186,6 +185,10 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 	}
 
 	private function setPaymentData($order_info, $sagepay_order_info, $price, $order_recurring_id, $recurring_name, $i = null) {
+		$payment_data = [];
+
+		$url = '';
+
 		if ($this->config->get('sagepay_direct_test') == 'live') {
 			//$url = 'https://live.sagepay.com/gateway/service/repeat.vsp';
 			$url = 'https://live.opayo.eu.elavon.com/gateway/service/repeat.vsp';
@@ -256,14 +259,13 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 	}
 
 	public function cronPayment() {
-
 		$this->load->model('account/order');
+
 		$recurrings = $this->getProfiles();
 		$cron_data = [];
 		$i = 0;
 
 		foreach ($recurrings as $recurring) {
-
 			$recurring_order = $this->getRecurringOrder($recurring['order_recurring_id']);
 
 			$today = new DateTime('now');
@@ -301,6 +303,7 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 				$this->addRecurringTransaction($recurring['order_recurring_id'], $response_data, 4);
 			}
 		}
+
 		$log = new Log('sagepay_direct_recurring_orders.log');
 		$log->write(print_r($cron_data, 1));
 
@@ -395,6 +398,8 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 	}
 
 	public function sendCurl($url, $payment_data, $i = null) {
+		$data = [];
+
 		$curl = curl_init($url);
 
 		curl_setopt($curl, CURLOPT_PORT, 443);
@@ -413,8 +418,8 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 
 		$response_info = explode(chr(10), $response);
 
-		foreach ($response_info as $string) {
-			if (strpos($string, '=') && isset($i)) {
+		foreach ($response_info as $i => $string) {
+			if (strpos($string, '=') && $i !== null) {
 				$parts = explode('=', $string, 2);
 				$data['RepeatResponseData_' . $i][trim($parts[0])] = trim($parts[1]);
 			} elseif (strpos($string, '=')) {

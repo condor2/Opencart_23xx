@@ -57,7 +57,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 		if ($qry->num_rows) {
 			return $qry->row;
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -82,7 +82,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 
 			return $order;
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -105,7 +105,7 @@ class ModelExtensionPaymentSagePayServer extends Model {
 		if ($qry->num_rows) {
 			return $qry->rows;
 		} else {
-			return false;
+			return [];
 		}
 	}
 
@@ -192,6 +192,10 @@ class ModelExtensionPaymentSagePayServer extends Model {
 	}
 
 	private function setPaymentData($order_info, $sagepay_order_info, $price, $order_recurring_id, $recurring_name, $i = null) {
+		$payment_data = [];
+
+		$url = '';
+
 		if ($this->config->get('sagepay_server_test') == 'live') {
 			//$url = 'https://live.sagepay.com/gateway/service/repeat.vsp';
 			$url = 'https://live.opayo.eu.elavon.com/gateway/service/repeat.vsp';
@@ -401,6 +405,8 @@ class ModelExtensionPaymentSagePayServer extends Model {
 	}
 
 	public function sendCurl($url, $payment_data, $i = null) {
+		$data = [];
+
 		$curl = curl_init($url);
 
 		curl_setopt($curl, CURLOPT_PORT, 443);
@@ -419,8 +425,8 @@ class ModelExtensionPaymentSagePayServer extends Model {
 
 		$response_info = explode(chr(10), $response);
 
-		foreach ($response_info as $string) {
-			if (strpos($string, '=') && isset($i)) {
+		foreach ($response_info as $i => $string) {
+			if (strpos($string, '=') && $i !== null) {
 				$parts = explode('=', $string, 2);
 				$data['RepeatResponseData_' . $i][trim($parts[0])] = trim($parts[1]);
 			} elseif (strpos($string, '=')) {
