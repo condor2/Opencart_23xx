@@ -57,6 +57,13 @@
 											<input type="checkbox" name="paypal_status" value="1" class="switch" <?php if ($status) { ?>checked="checked"<?php } ?> />
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="control-label" for="input_vault_status"><span data-toggle="tooltip" title="<?php echo $help_vault_status; ?>"><?php echo $entry_vault_status; ?></span></label>
+										<div id="input_vault_status">
+											<input type="hidden" name="paypal_setting[general][vault_status]" value="0" />
+											<input type="checkbox" name="paypal_setting[general][vault_status]" value="1" class="switch" <?php if ($setting['general']['vault_status']) { ?>checked="checked"<?php } ?> />
+										</div>
+									</div>
 								</div>
 								<div class="col col-md-6">
 									<div class="form-group">
@@ -71,18 +78,6 @@
 							<div class="row">
 								<div class="col col-md-6">
 									<div class="form-group">
-										<label class="control-label" for="input_general_sale_analytics_range"><?php echo $entry_sale_analytics_range; ?></label>
-										<select name="paypal_setting[general][sale_analytics_range]" id="input_general_sale_analytics_range" class="form-control">
-											<?php foreach ($setting['sale_analytics_range'] as $sale_analytics_range) { ?>
-											<?php if ($sale_analytics_range['code'] == $setting['general']['sale_analytics_range']) { ?>
-											<option value="<?php echo $sale_analytics_range['code']; ?>" selected="selected"><?php echo ${$sale_analytics_range['name']}; ?></option>
-											<?php } else { ?>
-											<option value="<?php echo $sale_analytics_range['code']; ?>"><?php echo ${$sale_analytics_range['name']}; ?></option>
-											<?php } ?>
-											<?php } ?>
-										</select>
-									</div>
-									<div class="form-group">
 										<label class="control-label" for="input_general_checkout_mode"><span data-toggle="tooltip" title="<?php echo $help_checkout_mode; ?>"><?php echo $entry_checkout_mode; ?></span></label>
 										<select name="paypal_setting[general][checkout_mode]" id="input_general_checkout_mode" class="form-control">
 											<?php foreach ($setting['checkout_mode'] as $checkout_mode) { ?>
@@ -93,6 +88,10 @@
 											<?php } ?>
 											<?php } ?>
 										</select>
+									</div>
+									<div class="form-group">
+										<label class="control-label" for="input_general_checkout_route"><span data-toggle="tooltip" title="<?php echo $help_checkout_route; ?>"><?php echo $entry_checkout_route; ?></span></label>
+										<input type="text" name="paypal_setting[general][checkout_route]" value="<?php echo $setting['general']['checkout_route']; ?>" placeholder="<?php echo $entry_currency_value; ?>" id="input_general_checkout_route" class="form-control" />
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="input_general_transaction_method"><?php echo $entry_transaction_method; ?></label>
@@ -129,6 +128,18 @@
 									</div>
 								</div>
 								<div class="col col-md-6">
+									<div class="form-group">
+										<label class="control-label" for="input_general_sale_analytics_range"><?php echo $entry_sale_analytics_range; ?></label>
+										<select name="paypal_setting[general][sale_analytics_range]" id="input_general_sale_analytics_range" class="form-control">
+											<?php foreach ($setting['sale_analytics_range'] as $sale_analytics_range) { ?>
+											<?php if ($sale_analytics_range['code'] == $setting['general']['sale_analytics_range']) { ?>
+											<option value="<?php echo $sale_analytics_range['code']; ?>" selected="selected"><?php echo ${$sale_analytics_range['name']}; ?></option>
+											<?php } else { ?>
+											<option value="<?php echo $sale_analytics_range['code']; ?>"><?php echo ${$sale_analytics_range['name']}; ?></option>
+											<?php } ?>
+											<?php } ?>
+										</select>
+									</div>
 									<div class="form-group">
 										<label class="control-label" for="input_general_country_code"><span data-toggle="tooltip" title="<?php echo $help_country_code; ?>"><?php echo $entry_country_code; ?></span></label>
 										<select name="paypal_setting[general][country_code]" id="input_general_country_code" class="form-control">
@@ -179,13 +190,15 @@
 										<label class="control-label" for="input_general_card_currency_value"><span data-toggle="tooltip" title="<?php echo $help_card_currency_value; ?>"><?php echo $entry_card_currency_value; ?></span></label>
 										<input type="text" name="paypal_setting[general][card_currency_value]" value="<?php echo $setting['general']['card_currency_value']; ?>" placeholder="<?php echo $entry_card_currency_value; ?>" id="input_general_card_currency_value" class="form-control" />										
 									</div>
+								</div>
+								<div class="col col-md-12">
 									<div class="form-group">
 										<label class="control-label" for="input_cron_url"><span data-toggle="tooltip" title="<?php echo $help_cron_url; ?>"><?php echo $entry_cron_url; ?></span></label>
 										<input type="hidden" name="paypal_setting[general][cron_token]" value="<?php echo $setting['general']['cron_token']; ?>" />
 										<div class="input-group">
 											<input type="text" value="<?php echo $cron_url; ?>" readonly="readonly" id="input_cron_url" class="form-control" />
 											<span class="input-group-btn">
-												<button type="button" data-toggle="tooltip" title="<?php echo $button_copy_url; ?>" class="btn btn-default copy-cron-url" field_id="input_cron_url"><i class="fa fa-clipboard"></i></button>
+												<button type="button" data-toggle="tooltip" title="{{ button_copy_url }}" class="btn btn-default copy-cron-url" field_id="input_cron_url"><i class="fa fa-clipboard"></i></button>
 											</span>
 										</div>
 									</div>

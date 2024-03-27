@@ -8,17 +8,17 @@
 			<div class="modal-body">
 				<div id="paypal_form">
 					<?php if ($button_status) { ?>
-					<div id="paypal_button" class="paypal-button buttons clearfix">
+					<div id="paypal_button" class="paypal-button clearfix">
 						<div id="paypal_button_container" class="paypal-button-container paypal-spinner"></div>
 					</div>
 					<?php } ?>
 					<?php if ($googlepay_button_status) { ?>
-					<div id="googlepay_button" class="googlepay-button buttons clearfix">
+					<div id="googlepay_button" class="googlepay-button clearfix">
 						<div id="googlepay_button_container" class="googlepay-button-container paypal-spinner"></div>
 					</div>
 					<?php } ?>
 					<?php if ($applepay_button_status) { ?>
-					<div id="applepay_button" class="applepay-button buttons clearfix">
+					<div id="applepay_button" class="applepay-button clearfix">
 						<div id="applepay_button_container" class="applepay-button-container paypal-spinner"></div>
 					</div>
 					<?php } ?>
@@ -44,7 +44,7 @@
 									</div>
 								</div>
 								<div class="card-button">
-									<?php if ($logged) { ?>
+									<?php if ($vault_status && $logged) { ?>
 									<div class="checkbox">
 										<label>
 											<input type="checkbox" name="paypal_card_save" id="paypal_card_save" value="1" checked /> <?php echo $entry_card_save; ?>

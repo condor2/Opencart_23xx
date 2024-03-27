@@ -1,7 +1,7 @@
 <?php if ($checkout_mode == 'multi_button') { ?>
 <div id="paypal_form">
 	<?php if ($applepay_button_status) { ?>
-	<div id="applepay_button" class="applepay-button buttons clearfix">
+	<div id="applepay_button" class="applepay-button clearfix">
 		<div id="applepay_button_container" class="applepay-button-container paypal-spinner"></div>
 	</div>
 	<?php } ?>

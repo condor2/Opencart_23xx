@@ -256,23 +256,8 @@
 															<?php } ?>
 														</select>
 													</div>
-													<?php if ($button['page_code'] != 'checkout') { ?>
-													<div class="form-group">
-														<label class="control-label" for="input_button_<?php echo $button['page_code']; ?>_tagline"><?php echo $entry_button_tagline; ?></label>
-														<select name="paypal_setting[button][<?php echo $button['page_code']; ?>][tagline]" id="input_button_<?php echo $button['page_code']; ?>_tagline" class="form-control control-paypal-button">
-															<?php foreach ($setting['button_tagline'] as $button_tagline) { ?>
-															<?php if ($button_tagline['code'] == $button['tagline']) { ?>
-															<option value="<?php echo $button_tagline['code']; ?>" selected="selected"><?php echo ${$button_tagline['name']}; ?></option>
-															<?php } else { ?>
-															<option value="<?php echo $button_tagline['code']; ?>"><?php echo ${$button_tagline['name']}; ?></option>
-															<?php } ?>
-															<?php } ?>
-														</select>
-													</div>
-													<?php } ?>
 												</div>
 											</div>
-											<?php if ($button['page_code'] == 'checkout') { ?>
 											<hr class="hr" />
 											<button type="button" href="#all_settings_<?php echo $button['page_code']; ?>" class="btn btn-default button-all-settings collapsed" data-toggle="collapse" role="button"><?php echo $button_all_settings; ?><i class="icon icon-all-settings"></i></button>	
 											<div id="all_settings_<?php echo $button['page_code']; ?>" class="all-settings collapse">
@@ -293,7 +278,6 @@
 													<?php } ?>
 												</div>
 											</div>
-											<?php } ?>
 										</div>
 									</div>
 								</div>

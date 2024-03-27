@@ -1,7 +1,7 @@
 <?php if ($checkout_mode == 'multi_button') { ?>
 <div id="paypal_form">
 	<?php if ($googlepay_button_status) { ?>
-	<div id="googlepay_button" class="googlepay-button buttons clearfix">
+	<div id="googlepay_button" class="googlepay-button clearfix">
 		<div id="googlepay_button_container" class="googlepay-button-container paypal-spinner"></div>
 	</div>
 	<?php } ?>

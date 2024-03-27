@@ -196,13 +196,22 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_welcome'] = $this->language->get('text_welcome');
+		$data['text_automatic'] = $this->language->get('text_automatic');
+		$data['text_manual'] = $this->language->get('text_manual');
+		$data['text_sandbox'] = $this->language->get('text_sandbox');
 		$data['text_production'] = $this->language->get('text_production');
 		$data['text_sandbox'] = $this->language->get('text_sandbox');
+		$data['text_loading'] = $this->language->get('text_loading');
 
+		$data['entry_authorization_type'] = $this->language->get('entry_authorization_type');
 		$data['entry_environment'] = $this->language->get('entry_environment');
+		$data['entry_merchant_id'] = $this->language->get('entry_merchant_id');
+		$data['entry_client_id'] = $this->language->get('entry_client_id');
+		$data['entry_client_secret'] = $this->language->get('entry_client_secret');
 
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['button_connect'] = $this->language->get('button_connect');
+		$data['button_view'] = $this->language->get('button_view');
 
 		$data['breadcrumbs'] = [];
 
@@ -224,6 +233,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true);
 		$data['partner_url'] = str_replace('&amp;', '%26', $this->url->link('extension/payment/paypal', 'token=' . $this->session->data['token'], true));
 		$data['callback_url'] = str_replace('&amp;', '&', $this->url->link('extension/payment/paypal/callback', 'token=' . $this->session->data['token'], true));
+		$data['connect_url'] = str_replace('&amp;', '&', $this->url->link('extension/payment/paypal/connect', 'token=' . $this->session->data['token'], true));
 		$data['agree_url'] =  str_replace('&amp;', '&', $this->url->link('extension/payment/paypal/agree', 'token=' . $this->session->data['token'], true));
 
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -239,11 +249,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['setting'] = $_config->get('paypal_setting');
 
-		if (isset($this->session->data['environment'])) {
-			$data['environment'] = $this->session->data['environment'];
-		} else {
-			$data['environment'] = 'production';
-		}
+		$data['authorization_type'] = 'automatic';
+		$data['environment'] = 'production';
 
 		$data['seller_nonce'] = $this->token(50);
 
@@ -519,9 +526,11 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['entry_connect'] = $this->language->get('entry_connect');
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_vault_status'] = $this->language->get('entry_vault_status');
 		$data['entry_debug'] = $this->language->get('entry_debug');
 		$data['entry_sale_analytics_range'] = $this->language->get('entry_sale_analytics_range');
 		$data['entry_checkout_mode'] = $this->language->get('entry_checkout_mode');
+		$data['entry_checkout_route'] = $this->language->get('entry_checkout_route');
 		$data['entry_transaction_method'] = $this->language->get('entry_transaction_method');
 		$data['entry_total'] = $this->language->get('entry_total');
 		$data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
@@ -533,7 +542,9 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['entry_card_currency_value'] = $this->language->get('entry_card_currency_value');
 		$data['entry_cron_url'] = $this->language->get('entry_cron_url');
 
+		$data['help_vault_status'] = $this->language->get('help_vault_status');
 		$data['help_checkout_mode'] = $this->language->get('help_checkout_mode');
+		$data['help_checkout_route'] = $this->language->get('help_checkout_route');
 		$data['help_total'] = $this->language->get('help_total');
 		$data['help_country_code'] = $this->language->get('help_country_code');
 		$data['help_currency_code'] = $this->language->get('help_currency_code');
@@ -609,7 +620,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['webhook_id'] = $this->config->get('paypal_webhook_id');
 		$data['environment'] = $this->config->get('paypal_environment');
 
-		$data['text_connect'] = sprintf($this->language->get('text_connect'), $data['client_id'], $data['secret'], $data['merchant_id'], $data['webhook_id'], $data['environment']);
+		$data['text_connect'] = sprintf($this->language->get('text_connect'), $data['merchant_id'], $data['client_id'], $data['secret'], $data['webhook_id'], $data['environment']);
 
 		$data['total'] = $this->config->get('paypal_total');
 		$data['geo_zone_id'] = $this->config->get('paypal_geo_zone_id');
@@ -1622,8 +1633,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$this->document->addScript('view/javascript/paypal/paypal.js');
 		$this->document->addScript('view/javascript/paypal/bootstrap-switch.js');
-		//$this->document->addScript('https://www.paypalobjects.com/merchant-library/merchant-configurator.js');
-		$this->document->addScript('https://www.paypalobjects.com/merchant-library/preview/merchant-configurator.js');
+		$this->document->addScript('https://www.paypalobjects.com/merchant-library/merchant-configurator.js');
 
 		$this->document->setTitle($this->language->get('heading_title_main'));
 
@@ -2254,6 +2264,150 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
+	public function connect() {
+		$this->load->language('extension/payment/paypal');
+
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$server = HTTPS_SERVER;
+			$catalog = HTTPS_CATALOG;
+		} else {
+			$server = HTTP_SERVER;
+			$catalog = HTTP_CATALOG;
+		}
+
+		$_config = new Config();
+		$_config->load('paypal');
+
+		$config_setting = $_config->get('paypal_setting');
+
+		if (!empty($this->request->post['environment']) && !empty($this->request->post['client_id']) && !empty($this->request->post['client_secret']) && !empty($this->request->post['merchant_id'])) {
+			$this->load->model('extension/payment/paypal');
+
+			$environment = $this->request->post['environment'];
+			$client_id = $this->request->post['client_id'];
+			$secret = $this->request->post['client_secret'];
+			$merchant_id = $this->request->post['merchant_id'];
+
+			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
+
+			$paypal_info = [
+				'partner_id'             => $config_setting['partner'][$environment]['partner_id'],
+				'client_id'              => $client_id,
+				'secret'                 => $secret,
+				'environment'            => $environment,
+				'partner_attribution_id' => $config_setting['partner'][$environment]['partner_attribution_id']
+			];
+
+			$paypal = new PayPal($paypal_info);
+
+			$token_info = [
+				'grant_type' => 'client_credentials'
+			];
+
+			$result = $paypal->setAccessToken($token_info);
+
+			if ($result) {
+				$callback_token = sha1(uniqid(mt_rand(), 1));
+				$webhook_token = sha1(uniqid(mt_rand(), 1));
+				$cron_token = sha1(uniqid(mt_rand(), 1));
+
+				$webhook_info = [
+					'url'         => $catalog . 'index.php?route=extension/payment/paypal&webhook_token=' . $webhook_token,
+					'event_types' => [
+						['name' => 'PAYMENT.AUTHORIZATION.CREATED'],
+						['name' => 'PAYMENT.AUTHORIZATION.VOIDED'],
+						['name' => 'PAYMENT.CAPTURE.COMPLETED'],
+						['name' => 'PAYMENT.CAPTURE.DENIED'],
+						['name' => 'PAYMENT.CAPTURE.PENDING'],
+						['name' => 'PAYMENT.CAPTURE.REFUNDED'],
+						['name' => 'PAYMENT.CAPTURE.REVERSED'],
+						['name' => 'CHECKOUT.ORDER.COMPLETED'],
+						['name' => 'VAULT.PAYMENT-TOKEN.CREATED']
+					]
+				];
+
+				$result = $paypal->createWebhook($webhook_info);
+
+				$webhook_id = '';
+
+				if (isset($result['id'])) {
+					$webhook_id = $result['id'];
+				}
+
+				if ($paypal->hasErrors()) {
+					$error_messages = [];
+
+					$errors = $paypal->getErrors();
+
+					foreach ($errors as $error) {
+						if (isset($error['name']) && ($error['name'] == 'CURLE_OPERATION_TIMEOUTED')) {
+							$error['message'] = $this->language->get('error_timeout');
+						}
+
+						if (isset($error['details'][0]['description'])) {
+							$error_messages[] = $error['details'][0]['description'];
+						} elseif (isset($error['message'])) {
+							$error_messages[] = $error['message'];
+						}
+
+						$this->model_extension_payment_paypal->log($error, $error['message']);
+					}
+
+					$this->error['warning'] = implode(' ', $error_messages);
+				}
+
+				if (!$this->error) {
+					$this->load->model('setting/setting');
+
+					$setting = $this->model_setting_setting->getSetting('paypal');
+
+					$setting['paypal_environment'] = $environment;
+					$setting['paypal_client_id'] = $client_id;
+					$setting['paypal_secret'] = $secret;
+					$setting['paypal_merchant_id'] = $merchant_id;
+					$setting['paypal_webhook_id'] = $webhook_id;
+					$setting['paypal_status'] = 1;
+					$setting['paypal_total'] = 0;
+					$setting['paypal_geo_zone_id'] = 0;
+					$setting['paypal_sort_order'] = 0;
+					$setting['paypal_setting']['general']['callback_token'] = $callback_token;
+					$setting['paypal_setting']['general']['webhook_token'] = $webhook_token;
+					$setting['paypal_setting']['general']['cron_token'] = $cron_token;
+
+					$this->load->model('localisation/country');
+
+					$country = $this->model_localisation_country->getCountry($this->config->get('config_country_id'));
+
+					$setting['paypal_setting']['general']['country_code'] = $country['iso_code_2'];
+
+					$currency_code = $this->config->get('config_currency');
+					$currency_value = $this->currency->getValue($this->config->get('config_currency'));
+
+					if (!empty($config_setting['currency'][$currency_code]['status'])) {
+						$setting['paypal_setting']['general']['currency_code'] = $currency_code;
+						$setting['paypal_setting']['general']['currency_value'] = $currency_value;
+					}
+
+					if (!empty($config_setting['currency'][$currency_code]['card_status'])) {
+						$setting['paypal_setting']['general']['card_currency_code'] = $currency_code;
+						$setting['paypal_setting']['general']['card_currency_value'] = $currency_value;
+					}
+
+					$this->model_setting_setting->editSetting('paypal', $setting);
+				}
+			} else {
+				$this->error['warning'] = $this->language->get('error_connect');
+			}
+		} else {
+			$this->error['warning'] = $this->language->get('error_connect');
+		}
+
+		$data['error'] = $this->error;
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($data));
+	}
+
 	public function disconnect() {
 		$this->load->model('setting/setting');
 
@@ -2635,7 +2789,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = (int)$this->request->post['order_id'];
+			$order_id = $this->request->post['order_id'];
 			$transaction_id = $this->request->post['transaction_id'];
 
 			$_config = new Config();
@@ -2722,7 +2876,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = (int)$this->request->post['order_id'];
+			$order_id = $this->request->post['order_id'];
 			$transaction_id = $this->request->post['transaction_id'];
 
 			$_config = new Config();
@@ -2785,8 +2939,6 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$transaction_id = $result['id'];
 				$transaction_status = 'created';
 
-				$this->model_extension_payment_paypal->deletePayPalOrder($order_id);
-
 				$paypal_order_data = [
 					'order_id'           => $order_id,
 					'transaction_id'     => $transaction_id,
@@ -2811,7 +2963,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = (int)$this->request->post['order_id'];
+			$order_id = $this->request->post['order_id'];
 			$transaction_id = $this->request->post['transaction_id'];
 
 			$_config = new Config();
@@ -2873,8 +3025,6 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			if (!$this->error) {
 				$transaction_status = 'voided';
 
-				$this->model_extension_payment_paypal->deletePayPalOrder($order_id);
-
 				$paypal_order_data = [
 					'order_id'           => $order_id,
 					'transaction_status' => $transaction_status
@@ -2898,7 +3048,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = (int)$this->request->post['order_id'];
+			$order_id = $this->request->post['order_id'];
 			$transaction_id = $this->request->post['transaction_id'];
 
 			$_config = new Config();
@@ -2959,8 +3109,6 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			if (isset($result['id']) && isset($result['status']) && !$this->error) {
 				$transaction_status = 'refunded';
-
-				$this->model_extension_payment_paypal->deletePayPalOrder($order_id);
 
 				$paypal_order_data = [
 					'order_id'           => $order_id,

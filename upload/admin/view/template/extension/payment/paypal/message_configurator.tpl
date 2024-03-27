@@ -108,7 +108,7 @@ function initMerchantConfigurators() {
 		config: {
 			'checkout': {
 				'placement': 'checkout',
-				'status': ($('.payment-paypal #input_message_checkout_status').val() ? 'enabled' : 'disabled'),
+				'status': (($('.payment-paypal #input_message_checkout_status').val() == 1) ? 'enabled' : 'disabled'),
 				'layout': $('.payment-paypal #input_message_checkout_layout').val(),
 				'logo-type': $('.payment-paypal #input_message_checkout_logo_type').val(),
 				'logo-position': $('.payment-paypal #input_message_checkout_logo_position').val(),
@@ -117,7 +117,7 @@ function initMerchantConfigurators() {
 			},
 			'cart': {
 				'placement': 'cart',
-				'status': ($('.payment-paypal #input_message_cart_status').val() ? 'enabled' : 'disabled'),
+				'status': (($('.payment-paypal #input_message_cart_status').val() == 1) ? 'enabled' : 'disabled'),
 				'layout': $('.payment-paypal #input_message_cart_layout').val(),
 				'logo-type': $('.payment-paypal #input_message_cart_logo_type').val(),
 				'logo-position': $('.payment-paypal #input_message_cart_logo_position').val(),
@@ -126,7 +126,7 @@ function initMerchantConfigurators() {
 			},
 			'product': {
 				'placement': 'product',
-				'status': ($('.payment-paypal #input_message_product_status').val() ? 'enabled' : 'disabled'),
+				'status': (($('.payment-paypal #input_message_product_status').val() == 1) ? 'enabled' : 'disabled'),
 				'layout': $('.payment-paypal #input_message_product_layout').val(),
 				'logo-type': $('.payment-paypal #input_message_product_logo_type').val(),
 				'logo-position': $('.payment-paypal #input_message_product_logo_position').val(),
@@ -135,7 +135,7 @@ function initMerchantConfigurators() {
 			},
 			'homepage': {
 				'placement': 'homepage',
-				'status': ($('.payment-paypal #input_message_home_status').val() ? 'enabled' : 'disabled'),
+				'status': (($('.payment-paypal #input_message_home_status').val() == 1) ? 'enabled' : 'disabled'),
 				'layout': $('.payment-paypal #input_message_home_layout').val(),
 				'color': $('.payment-paypal #input_message_home_flex_color').val(),
 				'ratio': $('.payment-paypal #input_message_home_flex_ratio').val()

@@ -853,7 +853,7 @@
 .payment-paypal .panel-auth .section-connect .welcome {
 	font-size: 18px;
 	color: #1D1D1D;
-	margin-bottom: 37px;
+	margin-bottom: 20px;
 }
 .payment-paypal .panel-auth .section-connect .checkout-express {
 	font-size: 13px;
@@ -864,7 +864,7 @@
 	display: inline-block;
 	vertical-align: top;
 	font-family: 'Open Sans', sans-serif;
-	margin-bottom: 37px;
+	margin: 20px 0px 37px 0px;
 }
 .payment-paypal .panel-auth .section-connect .button-connect-ppcp::before {
 	display: none;
@@ -881,6 +881,10 @@
 }
 .payment-paypal .panel-auth .section-connect .button-connect-express-checkout::before {
 	display: none;
+}
+.payment-paypal .panel-auth .section-connect .button-connect {
+	display: inline-block;
+	margin: 10px 0px 37px 0px;
 }
 .payment-paypal .panel-auth .section-connect .control-label {
 	font-size: 13px;

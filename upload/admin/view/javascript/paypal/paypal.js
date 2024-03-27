@@ -103,12 +103,12 @@ var PayPalAPI = (function () {
 					env: paypal_data['environment'],
 					locale: paypal_data['locale'],
 					style: {
-						layout: ((paypal_data['page_code'] != 'checkout') ? 'horizontal' : 'vertical'),
+						layout: 'vertical',
 						size: paypal_data['button_size'],
 						color: paypal_data['button_color'],
 						shape: paypal_data['button_shape'],
 						label: paypal_data['button_label'],
-						tagline: ((paypal_data['page_code'] != 'checkout') ? paypal_data['button_tagline'] : 'false')
+						tagline: 'false'
 					}
 				};
 				

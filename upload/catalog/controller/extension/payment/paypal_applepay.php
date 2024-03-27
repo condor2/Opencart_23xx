@@ -26,8 +26,8 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 			$data['checkout_mode'] = $setting['general']['checkout_mode'];
 			$data['transaction_method'] = $setting['general']['transaction_method'];
 
-			if ($setting['applepay_button']['status']) {
-				$data['applepay_button_status'] = $setting['applepay_button']['status'];
+			if ($setting['applepay_button']['checkout']['status']) {
+				$data['applepay_button_status'] = $setting['applepay_button']['checkout']['status'];
 			}
 
 			$data['text_loading'] = $this->language->get('text_loading');
@@ -106,8 +106,8 @@ class ControllerExtensionPaymentPayPalGooglePay extends Controller {
 		$data['partner_attribution_id'] = $setting['partner'][$data['environment']]['partner_attribution_id'];
 		$data['transaction_method'] = $setting['general']['transaction_method'];
 
-		if ($setting['applepay_button']['status']) {
-			$data['applepay_button_status'] = $setting['applepay_button']['status'];
+		if ($setting['applepay_button']['checkout']['status']) {
+			$data['applepay_button_status'] = $setting['applepay_button']['checkout']['status'];
 		}
 
 		$data['text_paypal_paylater_title'] = $this->language->get('text_paypal_paylater_title');
