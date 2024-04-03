@@ -39,6 +39,7 @@ $(document).ready(function() {
 					['float', ['floatLeft', 'floatRight', 'floatNone']],
 					['remove', ['removeMedia']]
 				],
+				link: [['link', ['linkDialogShow', 'unlink']]],
 				table: [
 					['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
 					['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
@@ -86,6 +87,14 @@ $(document).ready(function() {
 					return button.render();
 				}
   			}
+		});
+	});
+
+	$(document).on('submit', 'form', function() {
+		$('[data-toggle=\'summernote\']').each(function() {
+			if ($(this).summernote('codeview.isActivated')) {
+				$(this).summernote('codeview.deactivate'); 
+			}
 		});
 	});
 });
