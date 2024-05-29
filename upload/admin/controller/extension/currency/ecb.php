@@ -11,7 +11,9 @@ class ControllerExtensionCurrencyEcb extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('ecb', $this->request->post);
+
 			$this->session->data['success'] = $this->language->get('text_success');
+
 			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=currency', true));
 		}
 
@@ -97,11 +99,14 @@ class ControllerExtensionCurrencyEcb extends Controller {
 		} else {
 			if (!empty($this->request->post['ecb_status'])) {
 				$this->load->model('localisation/currency');
+
 				$euro_currency = $this->model_localisation_currency->getCurrencyByCode('EUR');
+
 				if (empty($euro_currency)) {
 					$this->error['warning'] = $this->language->get('error_euro');
 				}
 			}
+
 			if (!empty($this->request->post['ecb_ip'])) {
 				if (!filter_var($this->request->post['ecb_ip'], FILTER_VALIDATE_IP)) {
 					$this->error['ip'] = $this->language->get('error_ip');
@@ -113,66 +118,8 @@ class ControllerExtensionCurrencyEcb extends Controller {
 	}
 
 	public function currency() {
-		if ($this->config->get('ecb_status')) {
-			if ($this->config->get('config_currency_engine') == 'ecb') {
-				$curl = curl_init();
-
-				curl_setopt($curl, CURLOPT_URL, 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml');
-				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($curl, CURLOPT_HEADER, false);
-				curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
-				curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 30);
-				curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-
-				$response = curl_exec($curl);
-
-				curl_close($curl);
-
-				if ($response) {
-					$dom = new \DOMDocument('1.0', 'UTF-8');
-					$dom->loadXml($response);
-
-					$cube = $dom->getElementsByTagName('Cube')->item(0);
-
-					$currencies = [];
-
-					$currencies['EUR'] = 1.0000;
-
-					foreach ($cube->getElementsByTagName('Cube') as $currency) {
-						if ($currency->getAttribute('currency')) {
-							$currencies[$currency->getAttribute('currency')] = $currency->getAttribute('rate');
-						}
-					}
-
-					if (count($currencies) > 1) {
-						$this->load->model('localisation/currency');
-						$this->load->model('extension/currency/ecb');
-
-						$default = $this->config->get('config_currency');
-
-						$results = $this->model_localisation_currency->getCurrencies();
-
-						foreach ($results as $result) {
-							if (isset($currencies[$result['code']])) {
-								$from = $currencies['EUR'];
-
-								$to = $currencies[$result['code']];
-
-								$this->model_extension_currency_ecb->editValueByCode($result['code'], 1 / ($currencies[$default] * ($from / $to)));
-							}
-						}
-					}
-
-					$default = $this->config->get('config_currency');
-
-					$this->model_extension_currency_ecb->editValueByCode($default, '1.00000');
-
-					$this->cache->delete('currency');
-				}
-
-				return true;
-			}
-		}
+		$this->load->model('extension/currency/ecb');
+		$this->model_extension_currency_ecb->refresh();
 
 		return null;
 	}

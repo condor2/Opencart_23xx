@@ -3,19 +3,19 @@ class ModelLocalisationCurrency extends Model {
 	public function addCurrency($data) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "currency SET title = '" . $this->db->escape((string)$data['title']) . "', code = '" . $this->db->escape((string)$data['code']) . "', symbol_left = '" . $this->db->escape((string)$data['symbol_left']) . "', symbol_right = '" . $this->db->escape((string)$data['symbol_right']) . "', decimal_place = '" . (int)$data['decimal_place'] . "', value = '" . (float)$data['value'] . "', status = '" . (bool)($data['status'] ?? 0) . "', date_modified = NOW()");
 
-		$this->cache->delete('currency');
+		$currency_id = $this->db->getLastId();
 
-		return $this->db->getLastId();
+		if ($this->config->get('config_currency_auto')) {
+			$this->refresh();
+		}
+
+		$this->cache->delete('currency');
+		
+		return $currency_id;
 	}
 
 	public function editCurrency($currency_id, $data) {
 		$this->db->query("UPDATE " . DB_PREFIX . "currency SET title = '" . $this->db->escape((string)$data['title']) . "', code = '" . $this->db->escape((string)$data['code']) . "', symbol_left = '" . $this->db->escape((string)$data['symbol_left']) . "', symbol_right = '" . $this->db->escape((string)$data['symbol_right']) . "', decimal_place = '" . (int)$data['decimal_place'] . "', value = '" . (float)$data['value'] . "', status = '" . (bool)($data['status'] ?? 0) . "', date_modified = NOW() WHERE currency_id = '" . (int)$currency_id . "'");
-
-		$this->cache->delete('currency');
-	}
-
-	public function editValueByCode($code, $value) {
-		$this->db->query("UPDATE " . DB_PREFIX . "currency SET value = '" . (float)$value . "', date_modified = NOW() WHERE code = '" . $this->db->escape($code) . "'");
 
 		$this->cache->delete('currency');
 	}
@@ -99,6 +99,16 @@ class ModelLocalisationCurrency extends Model {
 		}
 
 		return $currency_data;
+	}
+
+	public function refresh() {
+		$config_currency_engine = $this->config->get('config_currency_engine');
+
+		if ($config_currency_engine) {
+			$this->load->model('extension/currency/'.$config_currency_engine);
+
+			$this->{'model_extension_currency_' . $config_currency_engine}->refresh();
+		}
 	}
 
 	public function getTotalCurrencies() {
