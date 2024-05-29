@@ -273,11 +273,6 @@ $_['paypal_setting'] = [
 			'name' => 'text_pending_status',
 			'id'   => 1
 		],
-		'pending' => [
-			'code' => 'pending',
-			'name' => 'text_pending_status',
-			'id'   => 1
-		],
 		'partially_captured' => [
 			'code' => 'partially_captured',
 			'name' => 'text_partially_captured_status',
