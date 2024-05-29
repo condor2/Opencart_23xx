@@ -2990,7 +2990,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 	}
 
 	public function capturePayment() {
-		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id'])) {
+		if ($this->config->get('paypal_status') && !empty($this->request->post['order_id']) && !empty($this->request->post['transaction_id'])) {
 			$this->load->language('extension/payment/paypal');
 
 			$this->load->model('extension/payment/paypal');
@@ -3601,7 +3601,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = $this->request->post['order_id'];
+			$order_id = (int)$this->request->post['order_id'];
 			$country_code = $this->request->post['country_code'];
 			$tracking_number = $this->request->post['tracking_number'];
 			$carrier_name = $this->request->post['carrier_name'];
@@ -3736,7 +3736,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$this->load->model('extension/payment/paypal');
 
-			$order_id = $this->request->post['order_id'];
+			$order_id = (int)$this->request->post['order_id'];
 			$tracking_number = $this->request->post['tracking_number'];
 
 			$paypal_order_info = $this->model_extension_payment_paypal->getPayPalOrder($order_id);
