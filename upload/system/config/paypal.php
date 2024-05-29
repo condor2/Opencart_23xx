@@ -1,6 +1,6 @@
 <?php
 $_['paypal_setting'] = [
-	'version' => '3.0.2',
+	'version' => '3.1.1',
 	'partner' => [
 		'production' => [
 			'partner_id'             => 'TY2Q25KP2PX9L',
@@ -25,6 +25,7 @@ $_['paypal_setting'] = [
 		'currency_value'       => '1',
 		'card_currency_code'   => 'USD',
 		'card_currency_value'  => '1',
+		'order_history_token'  => '',
 		'callback_token'       => '',
 		'webhook_token'        => '',
 		'cron_token'           => ''
@@ -199,7 +200,7 @@ $_['paypal_setting'] = [
 		'checkout' => [
 			'page_code'     => 'checkout',
 			'page_name'     => 'text_checkout',
-			'status'        => false,
+			'status'        => true,
 			'layout'        => 'text',
 			'logo_position' => 'left',
 			'logo_type'     => 'primary',
@@ -211,7 +212,7 @@ $_['paypal_setting'] = [
 		'cart' => [
 			'page_code'     => 'cart',
 			'page_name'     => 'text_cart',
-			'status'        => false,
+			'status'        => true,
 			'insert_tag'    => '#content form',
 			'insert_type'   => 'after',
 			'layout'        => 'text',
@@ -225,7 +226,7 @@ $_['paypal_setting'] = [
 		'product' => [
 			'page_code'     => 'product',
 			'page_name'     => 'text_product',
-			'status'        => false,
+			'status'        => true,
 			'insert_tag'    => '#content #product',
 			'insert_type'   => 'before',
 			'layout'        => 'text',
@@ -239,9 +240,9 @@ $_['paypal_setting'] = [
 		'home' => [
 			'page_code'     => 'home',
 			'page_name'     => 'text_home',
-			'status'        => false,
-			'insert_tag'    => '.common-home #menu',
-			'insert_type'   => 'after',
+			'status'        => true,
+			'insert_tag'    => '#common-home',
+			'insert_type'   => 'prepend',
 			'layout'        => 'flex',
 			'logo_type'     => 'primary',
 			'logo_position' => 'left',
@@ -272,6 +273,21 @@ $_['paypal_setting'] = [
 			'name' => 'text_pending_status',
 			'id'   => 1
 		],
+		'pending' => [
+			'code' => 'pending',
+			'name' => 'text_pending_status',
+			'id'   => 1
+		],
+		'partially_captured' => [
+			'code' => 'partially_captured',
+			'name' => 'text_partially_captured_status',
+			'id'   => 1
+		],
+		'partially_refunded' => [
+			'code' => 'partially_refunded',
+			'name' => 'text_partially_refunded_status',
+			'id'   => 11
+		],
 		'refunded' => [
 			'code' => 'refunded',
 			'name' => 'text_refunded_status',
@@ -286,6 +302,11 @@ $_['paypal_setting'] = [
 			'code' => 'voided',
 			'name' => 'text_voided_status',
 			'id'   => 16
+		],
+		'shipped' => [
+			'code' => 'shipped',
+			'name' => 'text_shipped_status',
+			'id'   => 3
 		]
 	],
 	'contact' => [

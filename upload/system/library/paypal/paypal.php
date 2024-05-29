@@ -309,8 +309,7 @@ class PayPal {
 		}
 	}
 
-	//IN:  order id
-	//OUT: order info, if no return - check errors
+	//IN:  order id, order info
 	public function updateOrder($order_id, $order_info) {
 		$command = '/v2/checkout/orders/' . $order_id;
 
@@ -362,10 +361,12 @@ class PayPal {
 	}
 
 	//IN:  transaction id
-	public function setPaymentCapture($transaction_id) {
+	public function setPaymentCapture($transaction_id, $transaction_info) {
 		$command = '/v2/payments/authorizations/' . $transaction_id . '/capture';
 
-		$result = $this->execute('POST', $command);
+		$params = $transaction_info;
+
+		$result = $this->execute('POST', $command, $params, true);
 
 		if (!empty($result['id'])) {
 			return $result;
@@ -375,10 +376,12 @@ class PayPal {
 	}
 
 	//IN:  transaction id
-	public function setPaymentReauthorize($transaction_id) {
+	public function setPaymentReauthorize($transaction_id, $transaction_info) {
 		$command = '/v2/payments/authorizations/' . $transaction_id . '/reauthorize';
 
-		$result = $this->execute('POST', $command);
+		$params = $transaction_info;
+
+		$result = $this->execute('POST', $command, $params, true);
 
 		if (!empty($result['id'])) {
 			return $result;
@@ -401,16 +404,87 @@ class PayPal {
 	}
 
 	//IN:  transaction id
-	public function setPaymentRefund($transaction_id) {
+	public function setPaymentRefund($transaction_id, $transaction_info) {
 		$command = '/v2/payments/captures/' . $transaction_id . '/refund';
 
-		$result = $this->execute('POST', $command);
+		$params = $transaction_info;
+
+		$result = $this->execute('POST', $command, $params, true);
 
 		if (!empty($result['id'])) {
 			return $result;
 		} else {
 			return false;
 		}
+	}
+
+	//IN:  transaction id
+	//OUT: transaction info, if no return - check errors
+	public function getPaymentAuthorize($transaction_id) {
+		$command = '/v2/payments/authorizations/' . $transaction_id;
+
+		$result = $this->execute('GET', $command);
+
+		if (!empty($result['id'])) {
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
+	//IN:  transaction id
+	//OUT: transaction info, if no return - check errors
+	public function getPaymentCapture($transaction_id) {
+		$command = '/v2/payments/captures/' . $transaction_id;
+
+		$result = $this->execute('GET', $command);
+
+		if (!empty($result['id'])) {
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
+	//IN:  transaction id
+	//OUT: transaction info, if no return - check errors
+	public function getPaymentRefund($transaction_id) {
+		$command = '/v2/payments/refunds/' . $transaction_id;
+
+		$result = $this->execute('GET', $command);
+
+		if (!empty($result['id'])) {
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
+	//IN:  order id, tracker info
+	public function createOrderTracker($order_id, $tracker_info) {
+		$command = '/v2/checkout/orders/' . $order_id . '/track';
+
+		$params = $tracker_info;
+
+		$result = $this->execute('POST', $command, $params, true);
+
+		if (!empty($result['id'])) {
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
+	//IN:  order id, tracker id
+	//OUT: tracker info, if no return - check errors
+	public function updateOrderTracker($order_id, $tracker_id, $tracker_info) {
+		$command = '/v2/checkout/orders/' . $order_id . '/trackers/' . $tracker_id;
+
+		$params = $tracker_info;
+
+		$result = $this->execute('PATCH', $command, $params, true);
+
+		return true;
 	}
 
 	//OUT: number of errors

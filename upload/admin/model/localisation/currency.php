@@ -10,7 +10,7 @@ class ModelLocalisationCurrency extends Model {
 		}
 
 		$this->cache->delete('currency');
-		
+
 		return $currency_id;
 	}
 
@@ -105,7 +105,7 @@ class ModelLocalisationCurrency extends Model {
 		$config_currency_engine = $this->config->get('config_currency_engine');
 
 		if ($config_currency_engine) {
-			$this->load->model('extension/currency/'.$config_currency_engine);
+			$this->load->model('extension/currency/' . $config_currency_engine);
 
 			$this->{'model_extension_currency_' . $config_currency_engine}->refresh();
 		}

@@ -115,8 +115,8 @@
 						<?php foreach ($shipping_method['quote'] as $quote) { ?>
 						<div class="radio">
 							<label>
-								<?php if (($quote['code'] == $code) || !$code) { ?>
-								<?php $code = $quote['code']; ?>
+								<?php if (($quote['code'] == $shipping_method_code) || !$shipping_method_code) { ?>
+								<?php $shipping_method_code = $quote['code']; ?>
 								<input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" checked="checked" />
 								<?php } else { ?>
 								<input type="radio" name="shipping_method" value="<?php echo $quote['code']; ?>" id="<?php echo $quote['code']; ?>" />
@@ -140,7 +140,7 @@
 				</div>
 				<div class="panel-body">
 					<?php foreach ($payment_methods as $payment_method) { ?>
-					<?php if ($payment_method['code'] == 'paypal') { ?>
+					<?php if ($payment_method['code'] == $payment_method_code) { ?>
 					<div class="radio">
 						<label>
 							<input type="radio" name="payment_method" value="<?php echo $payment_method['code']; ?>" checked="checked" />
@@ -209,7 +209,7 @@
 				</div>
 			</div>
 			<div class="buttons">
-				<div class="pull-right"><a href="<?php echo $action_confirm; ?>" class="btn btn-primary" id="paypal_confirm"><?php echo $button_confirm; ?></a></div>
+				<div class="pull-right"><a href="<?php echo $action_confirm; ?>" class="btn btn-primary" id="paypal_confirm" data-loading-text="<?php echo $text_loading; ?>"><?php echo $button_confirm; ?></a></div>
 			</div>
 			<?php echo $content_bottom; ?>
 		</div>

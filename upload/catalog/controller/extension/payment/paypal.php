@@ -10,7 +10,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			ini_set('serialize_precision', 14);
 		}
 
-		if (empty($this->config->get('paypal_version')) || (!empty($this->config->get('paypal_version')) && ($this->config->get('paypal_version') < '3.0.0'))) {
+		if (empty($this->config->get('paypal_version')) || (!empty($this->config->get('paypal_version')) && ($this->config->get('paypal_version') < '3.1.0'))) {
 			$this->update();
 		}
 	}
@@ -23,7 +23,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		if ($this->config->get('paypal_status') && $this->config->get('paypal_client_id') && $this->config->get('paypal_secret') && !$this->callback() && !$this->webhook() && !$this->cron() && $agree_status) {
 			$this->load->language('extension/payment/paypal');
 
-			$_config = new \Config();
+			$_config = new Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -42,8 +42,13 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$data['button_status'] = $setting['button']['checkout']['status'];
 			$data['googlepay_button_status'] = $setting['googlepay_button']['checkout']['status'];
-			$data['applepay_button_status'] = $setting['applepay_button']['checkout']['status'];
 			$data['card_status'] = $setting['card']['status'];
+
+			if ($setting['applepay_button']['checkout']['status'] && $this->isApple()) {
+				$data['applepay_button_status'] = $setting['applepay_button']['checkout']['status'];
+			} else {
+				$data['applepay_button_status'] = false;
+			}
 
 			$data['logged'] = $this->customer->isLogged();
 
@@ -112,7 +117,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 	public function modal() {
 		$this->load->language('extension/payment/paypal');
 
-		$_config = new \Config();
+		$_config = new Config();
 		$_config->load('paypal');
 
 		$config_setting = $_config->get('paypal_setting');
@@ -130,10 +135,16 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 		$data['button_status'] = $setting['button']['checkout']['status'];
 		$data['googlepay_button_status'] = $setting['googlepay_button']['checkout']['status'];
-		$data['applepay_button_status'] = $setting['applepay_button']['checkout']['status'];
 		$data['card_status'] = $setting['card']['status'];
 
+		if ($setting['applepay_button']['checkout']['status'] && $this->isApple()) {
+			$data['applepay_button_status'] = $setting['applepay_button']['checkout']['status'];
+		} else {
+			$data['applepay_button_status'] = false;
+		}
+
 		$data['text_paypal_title'] = $this->language->get('text_paypal_title');
+		$data['text_loading'] = $this->language->get('text_loading');
 
 		$data['entry_card_number'] = $this->language->get('entry_card_number');
 		$data['entry_expiration_date'] = $this->language->get('entry_expiration_date');
@@ -203,7 +214,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$this->load->model('localisation/country');
 			$this->load->model('checkout/order');
 
-			$_config = new \Config();
+			$_config = new Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -383,7 +394,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 				}
 
-				if ($setting['applepay_button']['product']['status']) {
+				if ($setting['applepay_button']['product']['status'] && $this->isApple()) {
 					$data['components'][] = 'applepay';
 					$data['applepay_button_status'] = $setting['applepay_button']['product']['status'];
 					$data['applepay_button_insert_tag'] = html_entity_decode($setting['applepay_button']['product']['insert_tag']);
@@ -475,7 +486,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$data['googlepay_amount'] = number_format($item_total * $data['currency_value'], $data['decimal_place'], '.', '');
 				}
 
-				if ($setting['applepay_button']['cart']['status']) {
+				if ($setting['applepay_button']['cart']['status'] && $this->isApple()) {
 					$data['components'][] = 'applepay';
 					$data['applepay_button_status'] = $setting['applepay_button']['cart']['status'];
 					$data['applepay_button_insert_tag'] = html_entity_decode($setting['applepay_button']['cart']['insert_tag']);
@@ -600,7 +611,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 				}
 
-				if ($setting['applepay_button']['checkout']['status']) {
+				if ($setting['applepay_button']['checkout']['status'] && $this->isApple()) {
 					$data['components'][] = 'applepay';
 					$data['applepay_button_status'] = $setting['applepay_button']['checkout']['status'];
 					$data['applepay_button_align'] = $setting['applepay_button']['checkout']['align'];
@@ -872,7 +883,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			}
 
 			if (!$errors) {
-				$_config = new \Config();
+				$_config = new Config();
 				$_config->load('paypal');
 
 				$config_setting = $_config->get('paypal_setting');
@@ -926,19 +937,24 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$item_total = 0;
 				$tax_total = 0;
 
+				$this->load->model('tool/image');
+
 				foreach ($this->cart->getProducts() as $product) {
 					$product_price = number_format($product['price'] * $currency_value, $decimal_place, '.', '');
 
-					$item_info[] = [
-						'name'        => $product['name'],
-						'sku'         => $product['model'],
-						'url'         => $this->url->link('product/product', 'product_id=' . $product['product_id'], true),
-						'quantity'    => $product['quantity'],
-						'unit_amount' => [
-							'currency_code' => $currency_code,
-							'value'         => $product_price
-						]
+					$product_info = [];
+
+					$product_info['name'] = $product['name'];
+					$product_info['quantity'] = $product['quantity'];
+					$product_info['sku'] = $product['model'];
+					$product_info['url'] = $this->url->link('product/product', 'product_id=' . $product['product_id'], true);
+
+					$product_info['unit_amount'] = [
+						'currency_code' => $currency_code,
+						'value'         => $product_price
 					];
+
+					$item_info[] = $product_info;
 
 					$item_total += $product_price * $product['quantity'];
 
@@ -953,14 +969,17 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 				if (!empty($this->session->data['vouchers'])) {
 					foreach ($this->session->data['vouchers'] as $voucher) {
-						$item_info[] = [
-							'name'        => $voucher['description'],
-							'quantity'    => 1,
-							'unit_amount' => [
-								'currency_code' => $currency_code,
-								'value'         => $voucher['amount']
-							]
+						$voucher_info = [];
+
+						$voucher_info['name'] = $voucher['description'];
+						$voucher_info['quantity'] = 1;
+
+						$voucher_info['unit_amount'] = [
+							'currency_code' => $currency_code,
+							'value'         => $voucher['amount']
 						];
+
+						$item_info[] = $voucher_info;
 
 						$item_total += $voucher['amount'];
 					}
@@ -970,7 +989,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$tax_total = number_format($tax_total * $currency_value, $decimal_place, '.', '');
 				$order_total = number_format($item_total + $tax_total, $decimal_place, '.', '');
 
-				if ($page_code == 'checkout' && isset($order_info)) {
+				if ($page_code == 'checkout') {
 					$discount_total = 0;
 					$handling_total = 0;
 					$shipping_total = 0;
@@ -1006,7 +1025,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					'value'         => $tax_total
 				];
 
-				if ($page_code == 'checkout' && isset($shipping_total) && isset($handling_total) && isset($discount_total) && isset($order_info) && isset($shipping_info)) {
+				if ($page_code == 'checkout') {
 					$amount_info['breakdown']['shipping'] = [
 						'currency_code' => $currency_code,
 						'value'         => $shipping_total
@@ -1030,11 +1049,11 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$paypal_order_info['purchase_units'][0]['items'] = $item_info;
 				$paypal_order_info['purchase_units'][0]['amount'] = $amount_info;
 
-				if ($page_code == 'checkout' && isset($order_info)) {
+				if ($page_code == 'checkout') {
 					$paypal_order_info['purchase_units'][0]['description'] = 'Your order ' . $order_info['order_id'];
 					$paypal_order_info['purchase_units'][0]['invoice_id'] = $order_info['order_id'] . '_' . date('Ymd_His');
 
-					if ($this->cart->hasShipping() && isset($shipping_info)) {
+					if ($this->cart->hasShipping()) {
 						$paypal_order_info['purchase_units'][0]['shipping'] = $shipping_info;
 					}
 				}
@@ -1204,7 +1223,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				}
 			}
 
-			$_config = new \Config();
+			$_config = new Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -1293,7 +1312,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						$this->session->data['guest']['firstname'] = ($paypal_order_info['payer']['name']['given_name'] ?? '');
 						$this->session->data['guest']['lastname'] = ($paypal_order_info['payer']['name']['surname'] ?? '');
 						$this->session->data['guest']['email'] = ($paypal_order_info['payer']['email_address'] ?? '');
-						$this->session->data['guest']['telephone'] = '';
+						$this->session->data['guest']['telephone'] = ($paypal_order_info['payer']['phone']['phone_number']['national_number'] ?? '');
 						$this->session->data['guest']['custom_field'] = [];
 					}
 
@@ -1370,385 +1389,514 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						}
 					}
 
+					if (($payment_type == 'googlepay_button') && !empty($this->request->post['payment_data'])) {
+						$payment_data = json_decode(htmlspecialchars_decode($this->request->post['payment_data']), true);
+
+						if (isset($payment_data['paymentMethodData']['info']['billingAddress']['name'])) {
+							$payment_name = explode(' ', $payment_data['paymentMethodData']['info']['billingAddress']['name']);
+							$payment_firstname = $payment_name[0];
+							unset($payment_name[0]);
+							$payment_lastname = implode(' ', $payment_name);
+						}
+
+						$this->session->data['guest']['firstname'] = ($payment_firstname ?? '');
+						$this->session->data['guest']['lastname'] = ($payment_lastname ?? '');
+						$this->session->data['guest']['email'] = ($payment_data['email'] ?? '');
+						$this->session->data['guest']['telephone'] = ($payment_data['paymentMethodData']['info']['billingAddress']['phoneNumber'] ?? '');
+
+						$this->session->data['payment_address']['firstname'] = ($shipping_firstname ?? '');
+						$this->session->data['payment_address']['lastname'] = ($shipping_lastname ?? '');
+						$this->session->data['payment_address']['address_1'] = ($payment_data['paymentMethodData']['info']['billingAddress']['address1'] ?? '');
+						$this->session->data['payment_address']['city'] = ($payment_data['paymentMethodData']['info']['billingAddress']['locality'] ?? '');
+						$this->session->data['payment_address']['postcode'] = ($payment_data['paymentMethodData']['info']['billingAddress']['postalCode'] ?? '');
+
+						if (isset($payment_data['paymentMethodData']['info']['billingAddress']['countryCode'])) {
+							$country_info = $this->model_extension_payment_paypal->getCountryByCode($payment_data['paymentMethodData']['info']['billingAddress']['countryCode']);
+
+							if ($country_info) {
+								$this->session->data['payment_address']['country'] = $country_info['name'];
+								$this->session->data['payment_address']['country_id'] = $country_info['country_id'];
+							}
+						}
+
+						if ($this->cart->hasShipping()) {
+							if (isset($payment_data['shippingAddress']['name'])) {
+								$shipping_name = explode(' ', $payment_data['shippingAddress']['name']);
+								$shipping_firstname = $shipping_name[0];
+								unset($shipping_name[0]);
+								$shipping_lastname = implode(' ', $shipping_name);
+							}
+
+							$this->session->data['shipping_address']['firstname'] = ($shipping_firstname ?? '');
+							$this->session->data['shipping_address']['lastname'] = ($shipping_lastname ?? '');
+							$this->session->data['shipping_address']['address_1'] = ($payment_data['shippingAddress']['address1'] ?? '');
+							$this->session->data['shipping_address']['city'] = ($payment_data['shippingAddress']['locality'] ?? '');
+							$this->session->data['shipping_address']['postcode'] = ($payment_data['shippingAddress']['postalCode'] ?? '');
+
+							if (isset($payment_data['shippingAddress']['countryCode'])) {
+								$country_info = $this->model_extension_payment_paypal->getCountryByCode($payment_data['shippingAddress']['countryCode']);
+
+								if ($country_info) {
+									$this->session->data['shipping_address']['country'] = $country_info['name'];
+									$this->session->data['shipping_address']['country_id'] = $country_info['country_id'];
+								}
+							}
+						}
+					}
+
+					if (($payment_type == 'applepay_button') && !empty($this->request->post['payment_data'])) {
+						$payment_data = json_decode(htmlspecialchars_decode($this->request->post['payment_data']), true);
+
+						$this->session->data['guest']['firstname'] = ($payment_data['billingContact']['givenName'] ?? '');
+						$this->session->data['guest']['lastname'] = ($payment_data['billingContact']['familyName'] ?? '');
+						$this->session->data['guest']['email'] = ($payment_data['shippingContact']['emailAddress'] ?? '');
+						$this->session->data['guest']['telephone'] = ($payment_data['shippingContact']['phoneNumber'] ?? '');
+
+						$this->session->data['payment_address']['firstname'] = ($payment_data['billingContact']['givenName'] ?? '');
+						$this->session->data['payment_address']['lastname'] = ($payment_data['billingContact']['familyName'] ?? '');
+						$this->session->data['payment_address']['address_1'] = ($payment_data['billingContact']['addressLines'] ?? '');
+						$this->session->data['payment_address']['city'] = ($payment_data['billingContact']['locality'] ?? '');
+						$this->session->data['payment_address']['postcode'] = ($payment_data['billingContact']['postalCode'] ?? '');
+
+						if (isset($payment_data['billingContact']['countryCode'])) {
+							$country_info = $this->model_extension_payment_paypal->getCountryByCode($payment_data['billingContact']['countryCode']);
+
+							if ($country_info) {
+								$this->session->data['payment_address']['country'] = $country_info['name'];
+								$this->session->data['payment_address']['country_id'] = $country_info['country_id'];
+							}
+						}
+
+						if ($this->cart->hasShipping()) {
+							$this->session->data['shipping_address']['firstname'] = ($payment_data['shippingContact']['givenName'] ?? '');
+							$this->session->data['shipping_address']['lastname'] = ($payment_data['shippingContact']['familyName'] ?? '');
+							$this->session->data['shipping_address']['address_1'] = ($payment_data['shippingContact']['addressLines'] ?? '');
+							$this->session->data['shipping_address']['city'] = ($payment_data['shippingContact']['locality'] ?? '');
+							$this->session->data['shipping_address']['postcode'] = ($payment_data['shippingContact']['postalCode'] ?? '');
+
+							if (isset($payment_data['shippingContact']['countryCode'])) {
+								$country_info = $this->model_extension_payment_paypal->getCountryByCode($payment_data['shippingContact']['countryCode']);
+
+								if ($country_info) {
+									$this->session->data['shipping_address']['country'] = $country_info['name'];
+									$this->session->data['shipping_address']['country_id'] = $country_info['country_id'];
+								}
+							}
+						}
+					}
+
+					if ($payment_type == 'button') {
+						$this->session->data['payment_method'] = [
+							'code'       => 'paypal',
+							'title'      => $this->language->get('text_paypal_title'),
+							'terms'      => '',
+							'sort_order' => $this->config->get('paypal_sort_order')
+						];
+					}
+
+					if ($payment_type == 'googlepay_button') {
+						$this->session->data['payment_method'] = [
+							'code'       => 'paypal_googlepay',
+							'title'      => $this->language->get('text_paypal_googlepay_title'),
+							'terms'      => '',
+							'sort_order' => $this->config->get('paypal_sort_order')
+						];
+					}
+
+					if ($payment_type == 'applepay_button') {
+						$this->session->data['payment_method'] = [
+							'code'       => 'paypal_applepay',
+							'title'      => $this->language->get('text_paypal_applepay_title'),
+							'terms'      => '',
+							'sort_order' => $this->config->get('paypal_sort_order')
+						];
+					}
+
 					$data['url'] = $this->url->link('extension/payment/paypal/confirmOrder', '', true);
 				}
 			} else {
-				if (!empty($this->request->post['paypal_order_id'])) {
-					$paypal_order_id = $this->request->post['paypal_order_id'];
-				}
+				$paypal_order_info = $this->model_extension_payment_paypal->getPayPalOrder($this->session->data['order_id']);
 
-				if (($payment_type == 'card') && !empty($paypal_order_id)) {
-					$paypal_order_info = $paypal->getOrder($paypal_order_id);
-
-					if ($paypal->hasErrors()) {
-						$error_messages = [];
-
-						$errors = $paypal->getErrors();
-
-						foreach ($errors as $error) {
-							if (isset($error['name']) && ($error['name'] == 'CURLE_OPERATION_TIMEOUTED')) {
-								$error['message'] = $this->language->get('error_timeout');
-							}
-
-							if (isset($error['details'][0]['description'])) {
-								$error_messages[] = $error['details'][0]['description'];
-							} elseif (isset($error['message'])) {
-								$error_messages[] = $error['message'];
-							}
-
-							$this->model_extension_payment_paypal->log($error, $error['message']);
-						}
-
-						$this->error['warning'] = implode(' ', $error_messages);
+				if (!$paypal_order_info) {
+					if (!empty($this->request->post['paypal_order_id'])) {
+						$paypal_order_id = $this->request->post['paypal_order_id'];
 					}
 
-					if (isset($paypal_order_info['payment_source']['card']) && !$this->error) {
-						$this->model_extension_payment_paypal->log($paypal_order_info['payment_source']['card'], 'Card');
+					if (($payment_type == 'card') && !empty($paypal_order_id)) {
+						$paypal_order_info = $paypal->getOrder($paypal_order_id);
 
-						$liability_shift = ($paypal_order_info['payment_source']['card']['authentication_result']['liability_shift'] ?? '');
-						$enrollment_status = ($paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['enrollment_status'] ?? '');
-						$authentication_status = ($paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['authentication_status'] ?? '');
+						if ($paypal->hasErrors()) {
+							$error_messages = [];
 
-						if ($enrollment_status == 'Y') {
-							if (($authentication_status == 'N') && !$setting['card']['secure_scenario']['failed_authentication']) {
-								$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['failed_authentication']['error']);
+							$errors = $paypal->getErrors();
+
+							foreach ($errors as $error) {
+								if (isset($error['name']) && ($error['name'] == 'CURLE_OPERATION_TIMEOUTED')) {
+									$error['message'] = $this->language->get('error_timeout');
+								}
+
+								if (isset($error['details'][0]['description'])) {
+									$error_messages[] = $error['details'][0]['description'];
+								} elseif (isset($error['message'])) {
+									$error_messages[] = $error['message'];
+								}
+
+								$this->model_extension_payment_paypal->log($error, $error['message']);
 							}
 
-							if (($authentication_status == 'R') && !$setting['card']['secure_scenario']['rejected_authentication']) {
-								$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['rejected_authentication']['error']);
+							$this->error['warning'] = implode(' ', $error_messages);
+						}
+
+						if (isset($paypal_order_info['payment_source']['card']) && !$this->error) {
+							$this->model_extension_payment_paypal->log($paypal_order_info['payment_source']['card'], 'Card');
+
+							$liability_shift = ($paypal_order_info['payment_source']['card']['authentication_result']['liability_shift'] ?? '');
+							$enrollment_status = ($paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['enrollment_status'] ?? '');
+							$authentication_status = ($paypal_order_info['payment_source']['card']['authentication_result']['three_d_secure']['authentication_status'] ?? '');
+
+							if ($enrollment_status == 'Y') {
+								if (($authentication_status == 'N') && !$setting['card']['secure_scenario']['failed_authentication']) {
+									$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['failed_authentication']['error']);
+								}
+
+								if (($authentication_status == 'R') && !$setting['card']['secure_scenario']['rejected_authentication']) {
+									$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['rejected_authentication']['error']);
+								}
+
+								if (($authentication_status == 'A') && !$setting['card']['secure_scenario']['attempted_authentication']) {
+									$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['attempted_authentication']['error']);
+								}
+
+								if (($authentication_status == 'U') && !$setting['card']['secure_scenario']['unable_authentication']) {
+									$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['unable_authentication']['error']);
+								}
+
+								if (($authentication_status == 'C') && !$setting['card']['secure_scenario']['challenge_authentication']) {
+									$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['challenge_authentication']['error']);
+								}
 							}
 
-							if (($authentication_status == 'A') && !$setting['card']['secure_scenario']['attempted_authentication']) {
-								$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['attempted_authentication']['error']);
+							if (($enrollment_status == 'N') && !$setting['card']['secure_scenario']['card_ineligible']) {
+								$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['card_ineligible']['error']);
 							}
 
-							if (($authentication_status == 'U') && !$setting['card']['secure_scenario']['unable_authentication']) {
-								$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['unable_authentication']['error']);
+							if (($enrollment_status == 'U') && !$setting['card']['secure_scenario']['system_unavailable']) {
+								$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['system_unavailable']['error']);
 							}
 
-							if (($authentication_status == 'C') && !$setting['card']['secure_scenario']['challenge_authentication']) {
-								$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['challenge_authentication']['error']);
+							if (($enrollment_status == 'B') && !$setting['card']['secure_scenario']['system_bypassed']) {
+								$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['system_bypassed']['error']);
 							}
 						}
 
-						if (($enrollment_status == 'N') && !$setting['card']['secure_scenario']['card_ineligible']) {
-							$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['card_ineligible']['error']);
-						}
-
-						if (($enrollment_status == 'U') && !$setting['card']['secure_scenario']['system_unavailable']) {
-							$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['system_unavailable']['error']);
-						}
-
-						if (($enrollment_status == 'B') && !$setting['card']['secure_scenario']['system_bypassed']) {
-							$this->error['warning'] = $this->language->get($setting['card_secure_scenario']['system_bypassed']['error']);
+						if (!empty($this->error['warning'])) {
+							$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
 						}
 					}
 
-					if (!empty($this->error['warning'])) {
-						$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
-					}
-				}
-
-				if (!empty($paypal_order_id) && !$this->error) {
-					if ($transaction_method == 'authorize') {
-						$result = $paypal->setOrderAuthorize($paypal_order_id);
-					} else {
-						$result = $paypal->setOrderCapture($paypal_order_id);
-					}
-
-					if ($paypal->hasErrors()) {
-						$error_messages = [];
-
-						$errors = $paypal->getErrors();
-
-						foreach ($errors as $error) {
-							if (isset($error['details'][0]['issue']) && ($error['details'][0]['issue'] == 'INSTRUMENT_DECLINED')) {
-								$data['restart'] = true;
-							}
-
-							if (isset($error['name']) && ($error['name'] == 'CURLE_OPERATION_TIMEOUTED')) {
-								$error['message'] = $this->language->get('error_timeout');
-							}
-
-							if (isset($error['details'][0]['description'])) {
-								$error_messages[] = $error['details'][0]['description'];
-							} elseif (isset($error['message'])) {
-								$error_messages[] = $error['message'];
-							}
-
-							$this->model_extension_payment_paypal->log($error, $error['message']);
-						}
-
-						$this->error['warning'] = implode(' ', $error_messages);
-					}
-
-					if (!empty($this->error['warning'])) {
-						$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
-					}
-
-					if (!$this->error) {
-						$this->load->model('checkout/order');
-
-						$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
-
+					if (!empty($paypal_order_id) && !$this->error) {
 						if ($transaction_method == 'authorize') {
-							$this->model_extension_payment_paypal->log($result, 'Authorize Order');
-
-							if (isset($result['purchase_units'][0]['payments']['authorizations'][0]['status']) && isset($result['purchase_units'][0]['payments']['authorizations'][0]['seller_protection']['status'])) {
-								$authorization_id = $result['purchase_units'][0]['payments']['authorizations'][0]['id'];
-								$authorization_status = $result['purchase_units'][0]['payments']['authorizations'][0]['status'];
-								$seller_protection_status = $result['purchase_units'][0]['payments']['authorizations'][0]['seller_protection']['status'];
-								$order_status_id = 0;
-								$transaction_status = '';
-								$payment_method = '';
-								$vault_id = '';
-								$vault_customer_id = '';
-								$card_type = (!empty($this->request->post['card_type']) ? $this->request->post['card_type'] : '');
-								$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
-								$card_last_digits = '';
-								$card_expiry = '';
-								$paypal_order_data = [];
-
-								if (!$this->cart->hasShipping()) {
-									$seller_protection_status = 'NOT_ELIGIBLE';
-								}
-
-								foreach ($result['payment_source'] as $payment_source_key => $payment_source) {
-									$payment_method = $payment_source_key;
-									$vault_id = ($payment_source['attributes']['vault']['id'] ?? '');
-									$vault_customer_id = ($payment_source['attributes']['vault']['customer']['id'] ?? '');
-									$card_last_digits = ($payment_source['last_digits'] ?? '');
-									$card_expiry = ($payment_source['expiry'] ?? '');
-
-									break;
-								}
-
-								if ($authorization_status == 'CREATED') {
-									$order_status_id = $setting['order_status']['pending']['id'];
-									$transaction_status = 'created';
-								}
-
-								if ($authorization_status == 'CAPTURED') {
-									$this->error['warning'] = sprintf($this->language->get('error_authorization_captured'), $this->url->link('information/contact', '', true));
-								}
-
-								if ($authorization_status == 'DENIED') {
-									$order_status_id = $setting['order_status']['denied']['id'];
-									$transaction_status = 'denied';
-
-									$this->error['warning'] = $this->language->get('error_authorization_denied');
-								}
-
-								if ($authorization_status == 'EXPIRED') {
-									$this->error['warning'] = sprintf($this->language->get('error_authorization_expired'), $this->url->link('information/contact', '', true));
-								}
-
-								if ($authorization_status == 'PENDING') {
-									$order_status_id = $setting['order_status']['pending']['id'];
-									$transaction_status = 'pending';
-								}
-
-								if (($authorization_status == 'CREATED') || ($authorization_status == 'DENIED') || ($authorization_status == 'PENDING')) {
-									$message = sprintf($this->language->get('text_order_message'), $seller_protection_status);
-
-									$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $order_status_id, $message);
-								}
-
-								if (($authorization_status == 'CREATED') || ($authorization_status == 'DENIED') || ($authorization_status == 'PENDING')) {
-									if ($payment_method == 'paypal') {
-										$paypal_customer_token = [];
-
-										if ($setting['general']['vault_status'] && $this->customer->isLogged()) {
-											$paypal_customer_token = $this->model_extension_payment_paypal->getPayPalCustomerMainToken($this->customer->getId(), $payment_method);
-										}
-
-										if (!empty($paypal_customer_token['vault_id'])) {
-											$vault_id = $paypal_customer_token['vault_id'];
-											$vault_customer_id = $paypal_customer_token['vault_customer_id'];
-										}
-									}
-
-									$this->model_extension_payment_paypal->deletePayPalOrder($this->session->data['order_id']);
-
-									$paypal_order_data = [
-										'order_id'           => $this->session->data['order_id'],
-										'paypal_order_id'    => $paypal_order_id,
-										'transaction_id'     => $authorization_id,
-										'transaction_status' => $transaction_status,
-										'payment_method'     => $payment_method,
-										'vault_id'           => $vault_id,
-										'vault_customer_id'  => $vault_customer_id,
-										'card_type'          => $card_type,
-										'card_nice_type'     => $card_nice_type,
-										'card_last_digits'   => $card_last_digits,
-										'card_expiry'        => $card_expiry,
-										'environment'        => $environment
-									];
-
-									$this->model_extension_payment_paypal->addPayPalOrder($paypal_order_data);
-
-									if ($vault_id && $this->customer->isLogged()) {
-										$customer_id = $this->customer->getId();
-
-										$paypal_customer_token_info = $this->model_extension_payment_paypal->getPayPalCustomerToken($customer_id, $payment_method, $vault_id);
-
-										if (!$paypal_customer_token_info) {
-											$paypal_customer_token_data = [
-												'customer_id'       => $customer_id,
-												'payment_method'    => $payment_method,
-												'vault_id'          => $vault_id,
-												'vault_customer_id' => $vault_customer_id,
-												'card_type'         => $card_type,
-												'card_nice_type'    => $card_nice_type,
-												'card_last_digits'  => $card_last_digits,
-												'card_expiry'       => $card_expiry
-											];
-
-											$this->model_extension_payment_paypal->addPayPalCustomerToken($paypal_customer_token_data);
-										}
-
-										$this->model_extension_payment_paypal->setPayPalCustomerMainToken($customer_id, $payment_method, $vault_id);
-									}
-								}
-
-								if (($authorization_status == 'CREATED') || ($authorization_status == 'PENDING')) {
-									$recurring_products = $this->cart->getRecurringProducts();
-
-									foreach ($recurring_products as $recurring_product) {
-										$this->model_extension_payment_paypal->recurringPayment($recurring_product, $order_info, $paypal_order_data);
-									}
-								}
-
-								if (($authorization_status == 'CREATED') || ($authorization_status == 'PARTIALLY_CAPTURED') || ($authorization_status == 'PARTIALLY_CREATED') || ($authorization_status == 'VOIDED') || ($authorization_status == 'PENDING')) {
-									$data['url'] = $this->url->link('checkout/success', '', true);
-								}
-							}
+							$result = $paypal->setOrderAuthorize($paypal_order_id);
 						} else {
-							$this->model_extension_payment_paypal->log($result, 'Capture Order');
+							$result = $paypal->setOrderCapture($paypal_order_id);
+						}
 
-							if (isset($result['purchase_units'][0]['payments']['captures'][0]['status']) && isset($result['purchase_units'][0]['payments']['captures'][0]['seller_protection']['status'])) {
-								$capture_id = $result['purchase_units'][0]['payments']['captures'][0]['id'];
-								$capture_status = $result['purchase_units'][0]['payments']['captures'][0]['status'];
-								$seller_protection_status = $result['purchase_units'][0]['payments']['captures'][0]['seller_protection']['status'];
-								$order_status_id = 0;
-								$transaction_status = '';
-								$payment_method = '';
-								$vault_id = '';
-								$vault_customer_id = '';
-								$card_type = (!empty($this->request->post['card_type']) ? $this->request->post['card_type'] : '');
-								$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
-								$card_last_digits = '';
-								$card_expiry = '';
-								$paypal_order_data = [];
+						if ($paypal->hasErrors()) {
+							$error_messages = [];
 
-								if (!$this->cart->hasShipping()) {
-									$seller_protection_status = 'NOT_ELIGIBLE';
+							$errors = $paypal->getErrors();
+
+							foreach ($errors as $error) {
+								if (isset($error['details'][0]['issue']) && ($error['details'][0]['issue'] == 'INSTRUMENT_DECLINED')) {
+									$data['restart'] = true;
 								}
 
-								foreach ($result['payment_source'] as $payment_source_key => $payment_source) {
-									$payment_method = $payment_source_key;
-									$vault_id = ($payment_source['attributes']['vault']['id'] ?? '');
-									$vault_customer_id = ($payment_source['attributes']['vault']['customer']['id'] ?? '');
-									$card_last_digits = ($payment_source['last_digits'] ?? '');
-									$card_expiry = ($payment_source['expiry'] ?? '');
-
-									break;
+								if (isset($error['name']) && ($error['name'] == 'CURLE_OPERATION_TIMEOUTED')) {
+									$error['message'] = $this->language->get('error_timeout');
 								}
 
-								if ($capture_status == 'COMPLETED') {
-									$order_status_id = $setting['order_status']['completed']['id'];
-									$transaction_status = 'completed';
+								if (isset($error['details'][0]['description'])) {
+									$error_messages[] = $error['details'][0]['description'];
+								} elseif (isset($error['message'])) {
+									$error_messages[] = $error['message'];
 								}
 
-								if ($capture_status == 'DECLINED') {
-									$order_status_id = $setting['order_status']['denied']['id'];
-									$transaction_status = 'denied';
+								$this->model_extension_payment_paypal->log($error, $error['message']);
+							}
 
-									$this->error['warning'] = $this->language->get('error_capture_declined');
-								}
+							$this->error['warning'] = implode(' ', $error_messages);
+						}
 
-								if ($capture_status == 'FAILED') {
-									$this->error['warning'] = sprintf($this->language->get('error_capture_failed'), $this->url->link('information/contact', '', true));
-								}
+						if (!empty($this->error['warning'])) {
+							$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
+						}
 
-								if ($capture_status == 'PENDING') {
-									$order_status_id = $setting['order_status']['pending']['id'];
-									$transaction_status = 'pending';
-								}
+						if (!$this->error) {
+							$this->load->model('checkout/order');
 
-								if (($capture_status == 'COMPLETED') || ($capture_status == 'DECLINED') || ($capture_status == 'PENDING')) {
-									$message = sprintf($this->language->get('text_order_message'), $seller_protection_status);
+							$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
-									$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $order_status_id, $message);
-								}
+							if ($transaction_method == 'authorize') {
+								$this->model_extension_payment_paypal->log($result, 'Authorize Order');
 
-								if (($capture_status == 'COMPLETED') || ($capture_status == 'DECLINED') || ($capture_status == 'PENDING')) {
-									if ($payment_method == 'paypal') {
-										$paypal_customer_token = [];
+								if (isset($result['purchase_units'][0]['payments']['authorizations'][0]['status']) && isset($result['purchase_units'][0]['payments']['authorizations'][0]['seller_protection']['status'])) {
+									$authorization_id = $result['purchase_units'][0]['payments']['authorizations'][0]['id'];
+									$authorization_status = $result['purchase_units'][0]['payments']['authorizations'][0]['status'];
+									$seller_protection_status = $result['purchase_units'][0]['payments']['authorizations'][0]['seller_protection']['status'];
+									$order_status_id = 0;
+									$transaction_status = '';
+									$payment_method = '';
+									$vault_id = '';
+									$vault_customer_id = '';
+									$card_type = (!empty($this->request->post['card_type']) ? $this->request->post['card_type'] : '');
+									$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
+									$card_last_digits = '';
+									$card_expiry = '';
 
-										if ($setting['general']['vault_status'] && $this->customer->isLogged()) {
-											$paypal_customer_token = $this->model_extension_payment_paypal->getPayPalCustomerMainToken($this->customer->getId(), $payment_method);
+									if (!$this->cart->hasShipping()) {
+										$seller_protection_status = 'NOT_ELIGIBLE';
+									}
+
+									foreach ($result['payment_source'] as $payment_source_key => $payment_source) {
+										$payment_method = $payment_source_key;
+										$vault_id = ($payment_source['attributes']['vault']['id'] ?? '');
+										$vault_customer_id = ($payment_source['attributes']['vault']['customer']['id'] ?? '');
+										$card_last_digits = ($payment_source['last_digits'] ?? '');
+										$card_expiry = ($payment_source['expiry'] ?? '');
+
+										break;
+									}
+
+									if ($authorization_status == 'CREATED') {
+										$order_status_id = $setting['order_status']['pending']['id'];
+										$transaction_status = 'created';
+									}
+
+									if ($authorization_status == 'CAPTURED') {
+										$this->error['warning'] = sprintf($this->language->get('error_authorization_captured'), $this->url->link('information/contact', '', true));
+									}
+
+									if ($authorization_status == 'DENIED') {
+										$order_status_id = $setting['order_status']['denied']['id'];
+										$transaction_status = 'denied';
+
+										$this->error['warning'] = $this->language->get('error_authorization_denied');
+									}
+
+									if ($authorization_status == 'EXPIRED') {
+										$this->error['warning'] = sprintf($this->language->get('error_authorization_expired'), $this->url->link('information/contact', '', true));
+									}
+
+									if ($authorization_status == 'PENDING') {
+										$order_status_id = $setting['order_status']['pending']['id'];
+										$transaction_status = 'pending';
+									}
+
+									if (($authorization_status == 'CREATED') || ($authorization_status == 'DENIED') || ($authorization_status == 'PENDING')) {
+										$message = sprintf($this->language->get('text_order_message'), $seller_protection_status);
+
+										$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $order_status_id, $message);
+									}
+
+									if (($authorization_status == 'CREATED') || ($authorization_status == 'DENIED') || ($authorization_status == 'PENDING')) {
+										if ($payment_method == 'paypal') {
+											$paypal_customer_token = [];
+
+											if ($setting['general']['vault_status'] && $this->customer->isLogged()) {
+												$paypal_customer_token = $this->model_extension_payment_paypal->getPayPalCustomerMainToken($this->customer->getId(), $payment_method);
+											}
+
+											if (!empty($paypal_customer_token['vault_id'])) {
+												$vault_id = $paypal_customer_token['vault_id'];
+												$vault_customer_id = $paypal_customer_token['vault_customer_id'];
+											}
 										}
 
-										if (!empty($paypal_customer_token['vault_id'])) {
-											$vault_id = $paypal_customer_token['vault_id'];
-											$vault_customer_id = $paypal_customer_token['vault_customer_id'];
+										$this->model_extension_payment_paypal->deletePayPalOrder($this->session->data['order_id']);
+
+										$paypal_order_data = [
+											'order_id'           => $this->session->data['order_id'],
+											'paypal_order_id'    => $paypal_order_id,
+											'transaction_id'     => $authorization_id,
+											'transaction_status' => $transaction_status,
+											'payment_method'     => $payment_method,
+											'vault_id'           => $vault_id,
+											'vault_customer_id'  => $vault_customer_id,
+											'card_type'          => $card_type,
+											'card_nice_type'     => $card_nice_type,
+											'card_last_digits'   => $card_last_digits,
+											'card_expiry'        => $card_expiry,
+											'total'              => $order_info['total'],
+											'currency_code'      => $order_info['currency_code'],
+											'environment'        => $environment
+										];
+
+										$this->model_extension_payment_paypal->addPayPalOrder($paypal_order_data);
+
+										if ($vault_id && $this->customer->isLogged()) {
+											$customer_id = $this->customer->getId();
+
+											$paypal_customer_token_info = $this->model_extension_payment_paypal->getPayPalCustomerToken($customer_id, $payment_method, $vault_id);
+
+											if (!$paypal_customer_token_info) {
+												$paypal_customer_token_data = [
+													'customer_id'       => $customer_id,
+													'payment_method'    => $payment_method,
+													'vault_id'          => $vault_id,
+													'vault_customer_id' => $vault_customer_id,
+													'card_type'         => $card_type,
+													'card_nice_type'    => $card_nice_type,
+													'card_last_digits'  => $card_last_digits,
+													'card_expiry'       => $card_expiry
+												];
+
+												$this->model_extension_payment_paypal->addPayPalCustomerToken($paypal_customer_token_data);
+											}
+
+											$this->model_extension_payment_paypal->setPayPalCustomerMainToken($customer_id, $payment_method, $vault_id);
 										}
 									}
 
-									$this->model_extension_payment_paypal->deletePayPalOrder($this->session->data['order_id']);
+									if (($authorization_status == 'CREATED') || ($authorization_status == 'PENDING')) {
+										$recurring_products = $this->cart->getRecurringProducts();
 
-									$paypal_order_data = [
-										'order_id'           => $this->session->data['order_id'],
-										'paypal_order_id'    => $paypal_order_id,
-										'transaction_id'     => $capture_id,
-										'transaction_status' => $transaction_status,
-										'payment_method'     => $payment_method,
-										'vault_id'           => $vault_id,
-										'vault_customer_id'  => $vault_customer_id,
-										'card_type'          => $card_type,
-										'card_nice_type'     => $card_nice_type,
-										'card_last_digits'   => $card_last_digits,
-										'card_expiry'        => $card_expiry,
-										'environment'        => $environment
-									];
+										foreach ($recurring_products as $recurring_product) {
+											$this->model_extension_payment_paypal->recurringPayment($recurring_product, $order_info, $paypal_order_data);
+										}
+									}
 
-									$this->model_extension_payment_paypal->addPayPalOrder($paypal_order_data);
+									if (($authorization_status == 'CREATED') || ($authorization_status == 'PARTIALLY_CAPTURED') || ($authorization_status == 'PARTIALLY_CREATED') || ($authorization_status == 'VOIDED') || ($authorization_status == 'PENDING')) {
+										$data['url'] = $this->url->link('checkout/success', '', true);
+									}
+								}
+							} else {
+								$this->model_extension_payment_paypal->log($result, 'Capture Order');
 
-									if ($vault_id && $this->customer->isLogged()) {
-										$customer_id = $this->customer->getId();
+								if (isset($result['purchase_units'][0]['payments']['captures'][0]['status']) && isset($result['purchase_units'][0]['payments']['captures'][0]['seller_protection']['status'])) {
+									$capture_id = $result['purchase_units'][0]['payments']['captures'][0]['id'];
+									$capture_status = $result['purchase_units'][0]['payments']['captures'][0]['status'];
+									$seller_protection_status = $result['purchase_units'][0]['payments']['captures'][0]['seller_protection']['status'];
+									$order_status_id = 0;
+									$transaction_status = '';
+									$payment_method = '';
+									$vault_id = '';
+									$vault_customer_id = '';
+									$card_type = (!empty($this->request->post['card_type']) ? $this->request->post['card_type'] : '');
+									$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
+									$card_last_digits = '';
+									$card_expiry = '';
 
-										$paypal_customer_token_info = $this->model_extension_payment_paypal->getPayPalCustomerToken($customer_id, $payment_method, $vault_id);
+									if (!$this->cart->hasShipping()) {
+										$seller_protection_status = 'NOT_ELIGIBLE';
+									}
 
-										if (!$paypal_customer_token_info) {
-											$paypal_customer_token_data = [
-												'customer_id'       => $customer_id,
-												'payment_method'    => $payment_method,
-												'vault_id'          => $vault_id,
-												'vault_customer_id' => $vault_customer_id,
-												'card_type'         => $card_type,
-												'card_nice_type'    => $card_nice_type,
-												'card_last_digits'  => $card_last_digits,
-												'card_expiry'       => $card_expiry
-											];
+									foreach ($result['payment_source'] as $payment_source_key => $payment_source) {
+										$payment_method = $payment_source_key;
+										$vault_id = ($payment_source['attributes']['vault']['id'] ?? '');
+										$vault_customer_id = ($payment_source['attributes']['vault']['customer']['id'] ?? '');
+										$card_last_digits = ($payment_source['last_digits'] ?? '');
+										$card_expiry = ($payment_source['expiry'] ?? '');
 
-											$this->model_extension_payment_paypal->addPayPalCustomerToken($paypal_customer_token_data);
+										break;
+									}
+
+									if ($capture_status == 'COMPLETED') {
+										$order_status_id = $setting['order_status']['completed']['id'];
+										$transaction_status = 'completed';
+									}
+
+									if ($capture_status == 'DECLINED') {
+										$order_status_id = $setting['order_status']['denied']['id'];
+										$transaction_status = 'denied';
+
+										$this->error['warning'] = $this->language->get('error_capture_declined');
+									}
+
+									if ($capture_status == 'FAILED') {
+										$this->error['warning'] = sprintf($this->language->get('error_capture_failed'), $this->url->link('information/contact', '', true));
+									}
+
+									if ($capture_status == 'PENDING') {
+										$order_status_id = $setting['order_status']['pending']['id'];
+										$transaction_status = 'pending';
+									}
+
+									if (($capture_status == 'COMPLETED') || ($capture_status == 'DECLINED') || ($capture_status == 'PENDING')) {
+										$message = sprintf($this->language->get('text_order_message'), $seller_protection_status);
+
+										$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $order_status_id, $message);
+									}
+
+									if (($capture_status == 'COMPLETED') || ($capture_status == 'DECLINED') || ($capture_status == 'PENDING')) {
+										if ($payment_method == 'paypal') {
+											$paypal_customer_token = [];
+
+											if ($setting['general']['vault_status'] && $this->customer->isLogged()) {
+												$paypal_customer_token = $this->model_extension_payment_paypal->getPayPalCustomerMainToken($this->customer->getId(), $payment_method);
+											}
+
+											if (!empty($paypal_customer_token['vault_id'])) {
+												$vault_id = $paypal_customer_token['vault_id'];
+												$vault_customer_id = $paypal_customer_token['vault_customer_id'];
+											}
 										}
 
-										$this->model_extension_payment_paypal->setPayPalCustomerMainToken($customer_id, $payment_method, $vault_id);
+										$this->model_extension_payment_paypal->deletePayPalOrder($this->session->data['order_id']);
+
+										$paypal_order_data = [
+											'order_id'           => $this->session->data['order_id'],
+											'paypal_order_id'    => $paypal_order_id,
+											'transaction_id'     => $capture_id,
+											'transaction_status' => $transaction_status,
+											'payment_method'     => $payment_method,
+											'vault_id'           => $vault_id,
+											'vault_customer_id'  => $vault_customer_id,
+											'card_type'          => $card_type,
+											'card_nice_type'     => $card_nice_type,
+											'card_last_digits'   => $card_last_digits,
+											'card_expiry'        => $card_expiry,
+											'total'              => $order_info['total'],
+											'currency_code'      => $order_info['currency_code'],
+											'environment'        => $environment
+										];
+
+										$this->model_extension_payment_paypal->addPayPalOrder($paypal_order_data);
+
+										if ($vault_id && $this->customer->isLogged()) {
+											$customer_id = $this->customer->getId();
+
+											$paypal_customer_token_info = $this->model_extension_payment_paypal->getPayPalCustomerToken($customer_id, $payment_method, $vault_id);
+
+											if (!$paypal_customer_token_info) {
+												$paypal_customer_token_data = [
+													'customer_id'       => $customer_id,
+													'payment_method'    => $payment_method,
+													'vault_id'          => $vault_id,
+													'vault_customer_id' => $vault_customer_id,
+													'card_type'         => $card_type,
+													'card_nice_type'    => $card_nice_type,
+													'card_last_digits'  => $card_last_digits,
+													'card_expiry'       => $card_expiry
+												];
+
+												$this->model_extension_payment_paypal->addPayPalCustomerToken($paypal_customer_token_data);
+											}
+
+											$this->model_extension_payment_paypal->setPayPalCustomerMainToken($customer_id, $payment_method, $vault_id);
+										}
 									}
-								}
 
-								if (($capture_status == 'COMPLETED') || ($capture_status == 'PENDING')) {
-									$recurring_products = $this->cart->getRecurringProducts();
+									if (($capture_status == 'COMPLETED') || ($capture_status == 'PENDING')) {
+										$recurring_products = $this->cart->getRecurringProducts();
 
-									foreach ($recurring_products as $recurring_product) {
-										$this->model_extension_payment_paypal->recurringPayment($recurring_product, $order_info, $paypal_order_data);
+										foreach ($recurring_products as $recurring_product) {
+											$this->model_extension_payment_paypal->recurringPayment($recurring_product, $order_info, $paypal_order_data);
+										}
 									}
-								}
 
-								if (($capture_status == 'COMPLETED') || ($capture_status == 'PARTIALLY_REFUNDED') || ($capture_status == 'REFUNDED') || ($capture_status == 'PENDING')) {
-									$data['url'] = $this->url->link('checkout/success', '', true);
+									if (($capture_status == 'COMPLETED') || ($capture_status == 'PARTIALLY_REFUNDED') || ($capture_status == 'REFUNDED') || ($capture_status == 'PENDING')) {
+										$data['url'] = $this->url->link('checkout/success', '', true);
+									}
 								}
 							}
 						}
@@ -1806,6 +1954,14 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
 		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 
+		$theme = $this->config->get('theme_' . $this->config->get('config_theme') . '_directory');
+
+		if (file_exists(DIR_TEMPLATE . $theme . '/stylesheet/paypal/paypal.css')) {
+			$this->document->addStyle('catalog/view/theme/' . $theme . '/stylesheet/paypal/paypal.css');
+		} else {
+			$this->document->addStyle('catalog/view/theme/default/stylesheet/paypal/paypal.css');
+		}
+
 		$data['heading_title'] = $this->language->get('text_paypal');
 
 		$data['text_checkout_payment_address'] = $this->language->get('text_checkout_payment_address');
@@ -1818,6 +1974,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$data['text_recurring_item'] = $this->language->get('text_recurring_item');
 		$data['text_select'] = $this->language->get('text_select');
 		$data['text_none'] = $this->language->get('text_none');
+		$data['text_loading'] = $this->language->get('text_loading');
 
 		$data['column_image'] = $this->language->get('column_image');
 		$data['column_name'] = $this->language->get('column_name');
@@ -2035,7 +2192,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$this->session->data['shipping_method'] = $quote_data[$key1]['quote'][$key2];
 						}
 
-						$data['code'] = $this->session->data['shipping_method']['code'];
+						$data['shipping_method_code'] = $this->session->data['shipping_method']['code'];
 						$data['action_shipping'] = $this->url->link('extension/payment/paypal/confirmShipping', '', true);
 					} else {
 						unset($this->session->data['shipping_methods']);
@@ -2135,7 +2292,13 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$this->response->redirect($this->url->link('checkout/checkout', '', true));
 		}
 
-		$this->session->data['payment_method'] = $method_data['paypal'];
+		if (isset($this->session->data['payment_method']['code'])) {
+			$data['payment_method_code'] = $this->session->data['payment_method']['code'];
+		} else {
+			$this->session->data['payment_method'] = $method_data['paypal'];
+
+			$data['payment_method_code'] = $this->session->data['payment_method']['code'];
+		}
 
 		// Custom Fields
 		$this->load->model('account/custom_field');
@@ -2327,9 +2490,14 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$order_data['customer_group_id'] = $this->session->data['guest']['customer_group_id'];
 			$order_data['firstname'] = $this->session->data['guest']['firstname'];
 			$order_data['lastname'] = $this->session->data['guest']['lastname'];
-			$order_data['email'] = $this->session->data['guest']['email'];
 			$order_data['telephone'] = $this->session->data['guest']['telephone'];
 			$order_data['custom_field'] = $this->session->data['guest']['custom_field'];
+
+			if ($this->session->data['guest']['email']) {
+				$order_data['email'] = $this->session->data['guest']['email'];
+			} else {
+				$order_data['email'] = $this->config->get('config_email');
+			}
 
 			$order_data['payment_firstname'] = $this->session->data['payment_address']['firstname'];
 			$order_data['payment_lastname'] = $this->session->data['payment_address']['lastname'];
@@ -2522,7 +2690,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$order_data['order_id'] = $this->session->data['order_id'];
 
-			$_config = new \Config();
+			$_config = new Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -2567,6 +2735,42 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 			$paypal_order_id = $this->session->data['paypal_order_id'];
 
+			$paypal_order_info = $paypal->getOrder($paypal_order_id);
+
+			if ($paypal->hasErrors()) {
+				$error_messages = [];
+
+				$errors = $paypal->getErrors();
+
+				foreach ($errors as $error) {
+					if (isset($error['name']) && ($error['name'] == 'CURLE_OPERATION_TIMEOUTED')) {
+						$error['message'] = $this->language->get('error_timeout');
+					}
+
+					if (isset($error['details'][0]['description'])) {
+						$error_messages[] = $error['details'][0]['description'];
+					} elseif (isset($error['message'])) {
+						$error_messages[] = $error['message'];
+					}
+
+					$this->model_extension_payment_paypal->log($error, $error['message']);
+				}
+
+				$this->error['warning'] = implode(' ', $error_messages);
+			}
+
+			if (!empty($this->error['warning'])) {
+				$this->error['warning'] .= ' ' . sprintf($this->language->get('error_payment'), $this->url->link('information/contact', '', true));
+			}
+
+			$shipping_info_name = [];
+			$shipping_info_address = [];
+
+			if ($paypal_order_info && !$this->error) {
+				$shipping_info_name = ($paypal_order_info['purchase_units'][0]['shipping']['name'] ?? []);
+				$shipping_info_address = ($paypal_order_info['purchase_units'][0]['shipping']['address'] ?? []);
+			}
+
 			$paypal_order_info = [];
 
 			$paypal_order_info[] = [
@@ -2602,17 +2806,33 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					}
 				}
 
-				$paypal_order_info[] = [
-					'op'    => 'replace',
-					'path'  => '/purchase_units/@reference_id==\'default\'/shipping/name',
-					'value' => $shipping_info['name']
-				];
+				if ($shipping_info_name) {
+					$paypal_order_info[] = [
+						'op'    => 'replace',
+						'path'  => '/purchase_units/@reference_id==\'default\'/shipping/name',
+						'value' => $shipping_info['name']
+					];
+				} else {
+					$paypal_order_info[] = [
+						'op'    => 'add',
+						'path'  => '/purchase_units/@reference_id==\'default\'/shipping/name',
+						'value' => $shipping_info['name']
+					];
+				}
 
-				$paypal_order_info[] = [
-					'op'    => 'replace',
-					'path'  => '/purchase_units/@reference_id==\'default\'/shipping/address',
-					'value' => $shipping_info['address']
-				];
+				if ($shipping_info_address) {
+					$paypal_order_info[] = [
+						'op'    => 'replace',
+						'path'  => '/purchase_units/@reference_id==\'default\'/shipping/address',
+						'value' => $shipping_info['address']
+					];
+				} else {
+					$paypal_order_info[] = [
+						'op'    => 'add',
+						'path'  => '/purchase_units/@reference_id==\'default\'/shipping/address',
+						'value' => $shipping_info['address']
+					];
+				}
 			}
 
 			$item_total = 0;
@@ -2778,7 +2998,6 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$card_nice_type = '';
 							$card_last_digits = '';
 							$card_expiry = '';
-							$paypal_order_data = [];
 
 							if (!$this->cart->hasShipping()) {
 								$seller_protection_status = 'NOT_ELIGIBLE';
@@ -2853,6 +3072,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									'card_nice_type'     => $card_nice_type,
 									'card_last_digits'   => $card_last_digits,
 									'card_expiry'        => $card_expiry,
+									'total'              => $order_data['total'],
+									'currency_code'      => $order_data['currency_code'],
 									'environment'        => $environment
 								];
 
@@ -2910,7 +3131,6 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$card_nice_type = '';
 							$card_last_digits = '';
 							$card_expiry = '';
-							$paypal_order_data = [];
 
 							if (!$this->cart->hasShipping()) {
 								$seller_protection_status = 'NOT_ELIGIBLE';
@@ -2981,6 +3201,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									'card_nice_type'     => $card_nice_type,
 									'card_last_digits'   => $card_last_digits,
 									'card_expiry'        => $card_expiry,
+									'total'              => $order_data['total'],
+									'currency_code'      => $order_data['currency_code'],
 									'environment'        => $environment
 								];
 
@@ -3255,7 +3477,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			if (!empty($card_customer_tokens[$card_token_index]['vault_id'])) {
 				$vault_id = $card_customer_tokens[$card_token_index]['vault_id'];
 
-				$_config = new \Config();
+				$_config = new Config();
 				$_config->load('paypal');
 
 				$config_setting = $_config->get('paypal_setting');
@@ -3333,13 +3555,41 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 
+	public function addOrderHistory() {
+		if (!empty($this->request->get['order_history_token']) && !empty($this->request->post['order_id']) && !empty($this->request->post['order_status_id'])) {
+			$this->load->language('extension/payment/paypal');
+
+			$this->load->model('extension/payment/paypal');
+
+			$_config = new Config();
+			$_config->load('paypal');
+
+			$config_setting = $_config->get('paypal_setting');
+
+			$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('paypal_setting'));
+
+			if (hash_equals($setting['general']['order_history_token'], $this->request->get['order_history_token'])) {
+				$this->load->model('checkout/order');
+
+				$this->model_checkout_order->addOrderHistory($this->request->post['order_id'], $this->request->post['order_status_id'], '', true);
+
+				$data['success'] = $this->language->get('success_order');
+			}
+		}
+
+		$data['error'] = $this->error;
+
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($data));
+	}
+
 	public function callback() {
 		$this->load->language('extension/payment/paypal');
 
 		$this->load->model('extension/payment/paypal');
 
 		if (!empty($this->request->get['callback_token'])) {
-			$_config = new \Config();
+			$_config = new Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -3509,7 +3759,6 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									$order_status_id = 0;
 									$transaction_status = '';
 									$payment_method = 'card';
-									$paypal_order_data = [];
 
 									if (!$this->cart->hasShipping()) {
 										$seller_protection_status = 'NOT_ELIGIBLE';
@@ -3561,6 +3810,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 											'card_nice_type'     => $card_nice_type,
 											'card_last_digits'   => $card_last_digits,
 											'card_expiry'        => $card_expiry,
+											'total'              => $order_info['total'],
+											'currency_code'      => $order_info['currency_code'],
 											'environment'        => $environment
 										];
 
@@ -3613,7 +3864,6 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									$order_status_id = 0;
 									$transaction_status = '';
 									$payment_method = 'card';
-									$paypal_order_data = [];
 
 									if (!$this->cart->hasShipping()) {
 										$seller_protection_status = 'NOT_ELIGIBLE';
@@ -3661,6 +3911,8 @@ class ControllerExtensionPaymentPayPal extends Controller {
 											'card_nice_type'     => $card_nice_type,
 											'card_last_digits'   => $card_last_digits,
 											'card_expiry'        => $card_expiry,
+											'total'              => $order_info['total'],
+											'currency_code'      => $order_info['currency_code'],
 											'environment'        => $environment
 										];
 
@@ -3755,7 +4007,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 	public function webhook() {
 		if (!empty($this->request->get['webhook_token'])) {
-			$_config = new \Config();
+			$_config = new Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -3826,9 +4078,12 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 					$order_info = $this->model_checkout_order->getOrder($order_id);
 
-					if ($order_info) {
+					$paypal_order_info = $this->model_extension_payment_paypal->getPayPalOrder($order_id);
+
+					if ($order_info && $paypal_order_info) {
 						$order_status_id = 0;
-						$transaction_status = '';
+						$transaction_id = $paypal_order_info['transaction_id'];
+						$transaction_status = $paypal_order_info['transaction_status'];
 
 						if ($webhook_event['event_type'] == 'PAYMENT.AUTHORIZATION.CREATED') {
 							$order_status_id = $setting['order_status']['pending']['id'];
@@ -3841,8 +4096,13 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						}
 
 						if ($webhook_event['event_type'] == 'PAYMENT.CAPTURE.COMPLETED') {
-							$order_status_id = $setting['order_status']['completed']['id'];
-							$transaction_status = 'completed';
+							if (!empty($webhook_event['resource']['final_capture'])) {
+								$order_status_id = $setting['order_status']['completed']['id'];
+								$transaction_status = 'completed';
+							} else {
+								$order_status_id = $setting['order_status']['partially_captured']['id'];
+								$transaction_status = 'partially_captured';
+							}
 						}
 
 						if ($webhook_event['event_type'] == 'PAYMENT.CAPTURE.DENIED') {
@@ -3856,8 +4116,15 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						}
 
 						if ($webhook_event['event_type'] == 'PAYMENT.CAPTURE.REFUNDED') {
-							$order_status_id = $setting['order_status']['refunded']['id'];
-							$transaction_status = 'refunded';
+							$result = $paypal->getPaymentCapture($transaction_id);
+
+							if (!empty($result['status'] == 'REFUNDED')) {
+								$order_status_id = $setting['order_status']['refunded']['id'];
+								$transaction_status = 'refunded';
+							} elseif (!empty($result['status'] == 'PARTIALLY_REFUNDED')) {
+								$order_status_id = $setting['order_status']['partially_refunded']['id'];
+								$transaction_status = 'partially_refunded';
+							}
 						}
 
 						if ($webhook_event['event_type'] == 'PAYMENT.CAPTURE.REVERSED') {
@@ -3878,12 +4145,12 @@ class ControllerExtensionPaymentPayPal extends Controller {
 						if (isset($webhook_event['resource']['id']) && $transaction_status) {
 							$transaction_id = $webhook_event['resource']['id'];
 
-							$paypal_order_data = [
-								'order_id'           => $order_id,
-								'transaction_status' => $transaction_status
-							];
+							$paypal_order_data = [];
 
-							if (($transaction_status != 'refunded') && ($transaction_status != 'reversed')) {
+							$paypal_order_data['order_id'] = $order_id;
+							$paypal_order_data['transaction_status'] = $transaction_status;
+
+							if (($transaction_status == 'created') && ($transaction_status == 'completed')) {
 								$paypal_order_data['transaction_id'] = $transaction_id;
 							}
 
@@ -3956,7 +4223,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 	public function cron() {
 		if (!empty($this->request->get['cron_token'])) {
-			$_config = new \Config();
+			$_config = new Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -3987,7 +4254,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		$agree_status = $this->model_extension_payment_paypal->getAgreeStatus();
 
 		if ($this->config->get('paypal_status') && $this->config->get('paypal_client_id') && $this->config->get('paypal_secret') && $agree_status) {
-			$_config = new \Config();
+			$_config = new Config();
 			$_config->load('paypal');
 
 			$config_setting = $_config->get('paypal_setting');
@@ -4031,7 +4298,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 					$this->document->addScript('https://pay.google.com/gp/p/js/pay.js');
 				}
 
-				if (!empty($setting['applepay_button'][$params['page_code']]['status'])) {
+				if (!empty($setting['applepay_button'][$params['page_code']]['status']) && $this->isApple()) {
 					$this->document->addScript('https://applepay.cdn-apple.com/jsapi/v1/apple-pay-sdk.js');
 				}
 
@@ -4055,7 +4322,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$type = $data[0];
 
 			if ($type == 'payment') {
-				$_config = new \Config();
+				$_config = new Config();
 				$_config->load('paypal');
 
 				$config_setting = $_config->get('paypal_setting');
@@ -4319,7 +4586,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 		if (!empty($this->request->server['HTTP_USER_AGENT'])) {
 			$user_agent = strtolower($this->request->server['HTTP_USER_AGENT']);
 
-			$apple_agents = ['ipod', 'iphone', 'ipad'];
+			$apple_agents = ['ipod', 'iphone', 'ipad', 'apple'];
 
 			foreach ($apple_agents as $apple_agent) {
 				if (stripos($user_agent, $apple_agent)) {

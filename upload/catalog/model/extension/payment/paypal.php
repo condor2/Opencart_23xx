@@ -187,8 +187,24 @@ class ModelExtensionPaymentPayPal extends Model {
 			$implode[] = "`card_expiry` = '" . $this->db->escape($data['card_expiry']) . "'";
 		}
 
+		if (!empty($data['total'])) {
+			$implode[] = "`total` = '" . (float)$data['total'] . "'";
+		}
+
+		if (!empty($data['currency_code'])) {
+			$implode[] = "`currency_code` = '" . $this->db->escape($data['currency_code']) . "'";
+		}
+
 		if (!empty($data['environment'])) {
 			$implode[] = "`environment` = '" . $this->db->escape($data['environment']) . "'";
+		}
+
+		if (isset($data['tracking_number'])) {
+			$implode[] = "`tracking_number` = '" . $this->db->escape($data['tracking_number']) . "'";
+		}
+
+		if (isset($data['carrier_name'])) {
+			$implode[] = "`carrier_name` = '" . $this->db->escape($data['carrier_name']) . "'";
 		}
 
 		if ($implode) {
@@ -227,8 +243,40 @@ class ModelExtensionPaymentPayPal extends Model {
 			$implode[] = "`vault_customer_id` = '" . $this->db->escape($data['vault_customer_id']) . "'";
 		}
 
+		if (!empty($data['card_type'])) {
+			$implode[] = "`card_type` = '" . $this->db->escape($data['card_type']) . "'";
+		}
+
+		if (!empty($data['card_nice_type'])) {
+			$implode[] = "`card_nice_type` = '" . $this->db->escape($data['card_nice_type']) . "'";
+		}
+
+		if (!empty($data['card_last_digits'])) {
+			$implode[] = "`card_last_digits` = '" . $this->db->escape($data['card_last_digits']) . "'";
+		}
+
+		if (!empty($data['card_expiry'])) {
+			$implode[] = "`card_expiry` = '" . $this->db->escape($data['card_expiry']) . "'";
+		}
+
+		if (!empty($data['total'])) {
+			$implode[] = "`total` = '" . (float)$data['total'] . "'";
+		}
+
+		if (!empty($data['currency_code'])) {
+			$implode[] = "`currency_code` = '" . $this->db->escape($data['currency_code']) . "'";
+		}
+
 		if (!empty($data['environment'])) {
 			$implode[] = "`environment` = '" . $this->db->escape($data['environment']) . "'";
+		}
+
+		if (isset($data['tracking_number'])) {
+			$implode[] = "`tracking_number` = '" . $this->db->escape($data['tracking_number']) . "'";
+		}
+
+		if (isset($data['carrier_name'])) {
+			$implode[] = "`carrier_name` = '" . $this->db->escape($data['carrier_name']) . "'";
 		}
 
 		if ($implode) {
@@ -732,13 +780,20 @@ class ModelExtensionPaymentPayPal extends Model {
 	}
 
 	public function update() {
-		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "paypal_checkout_integration_customer_token`");
-		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order`");
-		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order_recurring`");
+		if ($this->config->get('paypal_version') < '3.0.0') {
+			$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "paypal_checkout_integration_customer_token`");
+			$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order`");
+			$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order_recurring`");
 
-		$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "paypal_checkout_integration_customer_token` (`customer_id` INT(11) NOT NULL, `payment_method` VARCHAR(20) NOT NULL, `vault_id` VARCHAR(50) NOT NULL, `vault_customer_id` VARCHAR(50) NOT NULL, `card_type` VARCHAR(40) NOT NULL, `card_nice_type` VARCHAR(40) NOT NULL, `card_last_digits` VARCHAR(4) NOT NULL, `card_expiry` VARCHAR(20) NOT NULL, `main_token_status` TINYINT(1) NOT NULL, PRIMARY KEY (`customer_id`, `payment_method`, `vault_id`), KEY `vault_customer_id` (`vault_customer_id`), KEY `main_token_status` (`main_token_status`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order` (`order_id` INT(11) NOT NULL, `paypal_order_id` VARCHAR(20) NOT NULL, `transaction_id` VARCHAR(20) NOT NULL, `transaction_status` VARCHAR(20) NOT NULL, `payment_method` VARCHAR(20) NOT NULL, `vault_id` VARCHAR(50) NOT NULL, `vault_customer_id` VARCHAR(50) NOT NULL, `card_type` VARCHAR(40) NOT NULL, `card_nice_type` VARCHAR(40) NOT NULL, `card_last_digits` VARCHAR(4) NOT NULL, `card_expiry` VARCHAR(20) NOT NULL, `environment` VARCHAR(20) NOT NULL, PRIMARY KEY (`order_id`), KEY `paypal_order_id` (`paypal_order_id`), KEY `transaction_id` (`transaction_id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
-		$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order_recurring` (`paypal_order_recurring_id` INT(11) NOT NULL AUTO_INCREMENT, `order_id` INT(11) NOT NULL, `order_recurring_id` INT(11) NOT NULL, `date_added` DATETIME NOT NULL, `date_modified` DATETIME NOT NULL, `next_payment` DATETIME NOT NULL, `trial_end` DATETIME DEFAULT NULL, `subscription_end` DATETIME DEFAULT NULL, `currency_code` CHAR(3) NOT NULL, `total` DECIMAL(10, 2) NOT NULL, PRIMARY KEY (`paypal_order_recurring_id`), KEY (`order_id`), KEY (`order_recurring_id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
+			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "paypal_checkout_integration_customer_token` (`customer_id` INT(11) NOT NULL, `payment_method` VARCHAR(20) NOT NULL, `vault_id` VARCHAR(50) NOT NULL, `vault_customer_id` VARCHAR(50) NOT NULL, `card_type` VARCHAR(40) NOT NULL, `card_nice_type` VARCHAR(40) NOT NULL, `card_last_digits` VARCHAR(4) NOT NULL, `card_expiry` VARCHAR(20) NOT NULL, `main_token_status` TINYINT(1) NOT NULL, PRIMARY KEY (`customer_id`, `payment_method`, `vault_id`), KEY `vault_customer_id` (`vault_customer_id`), KEY `main_token_status` (`main_token_status`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
+			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order` (`order_id` INT(11) NOT NULL, `paypal_order_id` VARCHAR(20) NOT NULL, `transaction_id` VARCHAR(20) NOT NULL, `transaction_status` VARCHAR(20) NOT NULL, `payment_method` VARCHAR(20) NOT NULL, `vault_id` VARCHAR(50) NOT NULL, `vault_customer_id` VARCHAR(50) NOT NULL, `card_type` VARCHAR(40) NOT NULL, `card_nice_type` VARCHAR(40) NOT NULL, `card_last_digits` VARCHAR(4) NOT NULL, `card_expiry` VARCHAR(20) NOT NULL, `total` DECIMAL(15,2) NOT NULL, `currency_code` VARCHAR(3) NOT NULL, `environment` VARCHAR(20) NOT NULL, `tracking_number` VARCHAR(64) NOT NULL, `carrier_name` VARCHAR(64) NOT NULL, PRIMARY KEY (`order_id`), KEY `paypal_order_id` (`paypal_order_id`), KEY `transaction_id` (`transaction_id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
+			$this->db->query("CREATE TABLE IF NOT EXISTS `" . DB_PREFIX . "paypal_checkout_integration_order_recurring` (`paypal_order_recurring_id` INT(11) NOT NULL AUTO_INCREMENT, `order_id` INT(11) NOT NULL, `order_recurring_id` INT(11) NOT NULL, `date_added` DATETIME NOT NULL, `date_modified` DATETIME NOT NULL, `next_payment` DATETIME NOT NULL, `trial_end` DATETIME DEFAULT NULL, `subscription_end` DATETIME DEFAULT NULL, `currency_code` CHAR(3) NOT NULL, `total` DECIMAL(10, 2) NOT NULL, PRIMARY KEY (`paypal_order_recurring_id`), KEY (`order_id`), KEY (`order_recurring_id`)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
+		} elseif ($this->config->get('paypal_version') < '3.1.0') {
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "paypal_checkout_integration_order` ADD COLUMN `total` DECIMAL(15,2) NOT NULL AFTER `card_expiry`");
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "paypal_checkout_integration_order` ADD COLUMN `currency_code` VARCHAR(3) NOT NULL AFTER `total`");
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "paypal_checkout_integration_order` ADD COLUMN `tracking_number` VARCHAR(64) NOT NULL AFTER `environment`");
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "paypal_checkout_integration_order` ADD COLUMN `carrier_name` VARCHAR(64) NOT NULL AFTER `tracking_number`");
+		}
 
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "event` WHERE `code` = 'paypal_order_info'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "event` WHERE `code` = 'paypal_header'");
@@ -751,6 +806,20 @@ class ModelExtensionPaymentPayPal extends Model {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "event` SET `code` = 'paypal_extension_get_extensions', `trigger` = 'catalog/model/extension/extension/getExtensions/after', `action` = 'extension/payment/paypal/extension_get_extensions_after', `status` = '1'");
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "event` SET `code` = 'paypal_order_delete_order', `trigger` = 'catalog/model/checkout/order/deleteOrder/before', `action` = 'extension/payment/paypal/order_delete_order_before', `status` = '1'");
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "event` SET `code` = 'paypal_customer_delete_customer', `trigger` = 'admin/model/customer/customer/deleteCustomer/before', `action` = 'extension/payment/paypal/customer_delete_customer_before', `status` = '1'");
+
+		if ($this->config->get('paypal_version') < '3.1.0') {
+			$setting = [];
+
+			$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "setting` WHERE store_id = '0' AND `key` = 'paypal_setting'");
+
+			if ($query->row) {
+				$setting[$query->row['key']] = json_decode($query->row['value'], true);
+			}
+
+			$setting['paypal_setting']['general']['order_history_token'] = sha1(uniqid(mt_rand(), 1));
+
+			$this->db->query("UPDATE " . DB_PREFIX . "setting SET `value` = '" . $this->db->escape(json_encode($setting)) . "', serialized = '1' WHERE `key` = '" . $this->db->escape('paypal_setting') . "' AND store_id = '0'");
+		}
 
 		$_config = new Config();
 		$_config->load('paypal');

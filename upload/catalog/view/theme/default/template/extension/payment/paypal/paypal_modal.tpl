@@ -51,7 +51,7 @@
 										</label>
 									</div>
 									<?php } ?>
-									<button type="button" id="paypal_card_button" class="btn paypal-card-button"><?php echo $button_pay; ?></button>
+									<button type="button" id="paypal_card_button" class="btn paypal-card-button" data-loading-text="<?php echo $text_loading; ?>"><?php echo $button_pay; ?></button>
 								</div>
 							</div>
 							<div id="payments-sdk__contingency-lightbox"></div>

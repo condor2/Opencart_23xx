@@ -63,6 +63,9 @@ $_['button_confirm']  						= 'Confirm';
 $_['button_shipping'] 						= 'Update shipping';
 $_['button_pay']							= 'Pay with Card';
 
+// Success
+$_['success_order']		 					= 'Success: You have modified orders!';
+
 // Error
 $_['error_warning']							= 'Please check the form carefully for errors.';
 $_['error_stock']              				= 'Products marked with *** are not available in the desired quantity or not in stock!';

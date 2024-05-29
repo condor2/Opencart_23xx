@@ -44,7 +44,7 @@
 						</label>
 					</div>
 					<?php } ?>
-					<button type="button" id="paypal_card_button" class="btn paypal-card-button"><?php echo $button_pay; ?></button>
+					<button type="button" id="paypal_card_button" class="btn paypal-card-button" data-loading-text="<?php echo $text_loading; ?>"><?php echo $button_pay; ?></button>
 				</div>
 			</div>
 			<div id="payments-sdk__contingency-lightbox"></div>
@@ -68,14 +68,14 @@ if (typeof PayPalAPI !== 'undefined') {
 <script type="text/javascript">
 
 $(document).on('click', '.paypal-button-confirm', function(event) {
-	$('.paypal-button-confirm').button('loading');
+	$('.paypal-button-confirm').prop('disabled', true).button('loading');
 	
 	$('#paypal_modal').remove();
 	
 	$('body').append('<div id="paypal_modal" class="modal fade"></div>');
 	
 	$('#paypal_modal').load('index.php?route=extension/payment/paypal/modal #paypal_modal >', function() {		
-		$('.paypal-button-confirm').button('reset');
+		$('.paypal-button-confirm').prop('disabled', false).button('reset');
 		
 		$('#paypal_modal').modal('show');
 		
