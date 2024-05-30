@@ -3000,6 +3000,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$card_nice_type = '';
 							$card_last_digits = '';
 							$card_expiry = '';
+							$paypal_order_data = [];
 
 							if (!$this->cart->hasShipping()) {
 								$seller_protection_status = 'NOT_ELIGIBLE';
@@ -3144,6 +3145,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 								$vault_customer_id = ($payment_source['attributes']['vault']['customer']['id'] ?? '');
 								$card_last_digits = ($payment_source['last_digits'] ?? '');
 								$card_expiry = ($payment_source['expiry'] ?? '');
+								$paypal_order_data = [];
 
 								break;
 							}
