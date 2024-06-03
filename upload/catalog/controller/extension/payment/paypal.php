@@ -3134,6 +3134,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$card_nice_type = '';
 							$card_last_digits = '';
 							$card_expiry = '';
+							$paypal_order_data = [];
 
 							if (!$this->cart->hasShipping()) {
 								$seller_protection_status = 'NOT_ELIGIBLE';
