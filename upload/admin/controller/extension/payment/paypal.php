@@ -2722,14 +2722,14 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 	public function order_info_before($route, &$data) {
 		if ($this->config->get('paypal_status') && !empty($this->request->get['order_id'])) {
-			$this->load->language('extension/payment/paypal');
+			$this->load->language('extension/payment/paypal','extension_payment_paypal');
 
 			$content = $this->getPaymentDetails((int)$this->request->get['order_id']);
 
 			if ($content) {
 				$data['tabs'][] = [
 					'code'    => 'paypal',
-					'title'   => $this->language->get('heading_title_main'),
+					'title'   => $this->language->get('extension_payment_paypal')->get('heading_title_main'),
 					'content' => $content
 				];
 			}
