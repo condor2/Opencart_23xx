@@ -1,7 +1,7 @@
 <?php
 /*
  * This document has been generated with
- * https://mlocati.github.io/php-cs-fixer-configurator/#version:3.58.0|configurator
+ * https://mlocati.github.io/php-cs-fixer-configurator/#version:3.58.1|configurator
  * you can change this configuration by importing this file.
  */
 $config = new PhpCsFixer\Config();
@@ -17,8 +17,8 @@ return $config
         '@PHP74Migration:risky' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
-        'array_push' => true,
-        'array_syntax' => true,
+        'array_push' => false,
+        'array_syntax' => false,
         'assign_null_coalescing_to_coalesce_equal' => true,
         'attribute_empty_parentheses' => true,
         'backtick_to_shell_exec' => true,
