@@ -36,12 +36,8 @@ class Model {
 	 *
 	 * @return object
 	 */
-	public function __get(string $key): object {
-		if ($this->registry->has($key)) {
-			return $this->registry->get($key);
-		} else {
-			throw new \Exception('Error: Could not call registry key ' . $key . '!');
-		}
+	public function __get($key) {
+		return $this->registry->get($key);
 	}
 
 	/**
