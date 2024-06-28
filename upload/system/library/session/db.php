@@ -1,56 +1,90 @@
 <?php
-namespace Session;
+/**
+ * @package		OpenCart
+ * @author		Daniel Kerr
+ * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
+ * @license		https://opensource.org/licenses/GPL-3.0
+ * @link		https://www.opencart.com
+*/
 
-final class DB {
-	public $data = [];
-	public $expire = [];
-	public $db;
+/**
+* Session class
+*/
+class Session {
+	protected $adaptor;
+	protected $session_id;
+	public $data = array();
 
-	public function __construct($registry) {
-		$this->db = $registry->get('db');
-
-		register_shutdown_function('session_write_close');
-
-		$this->expire = ini_get('session.gc_maxlifetime');
-	}
-
-	public function open() {
-		if ($this->db) {
-			return true;
+	/**
+	 * Constructor
+	 *
+	 * @param	string	$adaptor
+	 * @param	object	$registry
+ 	*/
+	public function __construct($adaptor, $registry = '') {
+		$class = 'Session\\' . $adaptor;
+		
+		if (class_exists($class)) {
+			if ($registry) {
+				$this->adaptor = new $class($registry);
+			} else {
+				$this->adaptor = new $class();
+			}	
+			
+			register_shutdown_function(array($this, 'close'));
 		} else {
-			return false;
-		}
+			trigger_error('Error: Could not load cache adaptor ' . $adaptor . ' session!');
+			exit();
+		}	
+	}
+	
+	/**
+	 * 
+	 *
+	 * @return	string
+ 	*/	
+	public function getId() {
+		return $this->session_id;
 	}
 
+	/**
+	 *
+	 *
+	 * @param	string	$session_id
+	 *
+	 * @return	string
+ 	*/	
+	public function start($session_id = '') {
+		if (!$session_id) {
+			if (function_exists('random_bytes')) {
+				$session_id = substr(bin2hex(random_bytes(26)), 0, 26);
+			} else {
+				$session_id = substr(bin2hex(openssl_random_pseudo_bytes(26)), 0, 26);
+			}
+		}
+
+		if (preg_match('/^[a-zA-Z0-9,\-]{22,52}$/', $session_id)) {
+			$this->session_id = $session_id;
+		} else {
+			exit('Error: Invalid session ID!');
+		}
+		
+		$this->data = $this->adaptor->read($session_id);
+		
+		return $session_id;
+	}
+	
+	/**
+	 * 
+ 	*/
 	public function close() {
-		return true;
+		$this->adaptor->write($this->session_id, $this->data);
 	}
-
-	public function read($session_id) {
-		$query = $this->db->query("SELECT `data` FROM `" . DB_PREFIX . "session` WHERE session_id = '" . $this->db->escape($session_id) . "' AND expire > " . (int)time());
-
-		if ($query->num_rows) {
-			return $query->row['data'];
-		} else {
-			return [];
-		}
-	}
-
-	public function write($session_id, $data) {
-		$this->db->query("REPLACE INTO SET `data` = '" . $this->db->escape($data) . "', expire = '" . $this->db->escape(date('Y-m-d H:i:s', time() + $this->expire)) . "' FROM `" . DB_PREFIX . "session` WHERE session_id = '" . $this->db->escape($session_id) . "' AND expire > " . (int)time());
-
-		return true;
-	}
-
-	public function destroy($session_id) {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "session` WHERE session_id = '" . $this->db->escape($session_id) . "'");
-
-		return true;
-	}
-
-	public function gc($expire) {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "session` WHERE expire < " . ((int)time() + $expire));
-
-		return true;
+	
+	/**
+	 * 
+ 	*/	
+	public function destroy() {
+		$this->adaptor->destroy($this->session_id);
 	}
 }
