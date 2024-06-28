@@ -3129,6 +3129,20 @@ CREATE TABLE `oc_review` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `oc_session`
+--
+
+DROP TABLE IF EXISTS `oc_session`;
+CREATE TABLE `oc_session` (
+  `session_id` varchar(32) NOT NULL,
+  `data` text NOT NULL,
+  `expire` datetime NOT NULL,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `oc_setting`
 --
 
