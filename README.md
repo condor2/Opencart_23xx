@@ -154,7 +154,11 @@ INSERT INTO `" . DB_PREFIX . "category`
 
 # How to enable DB session.
 
-<b>1.</b>Go to <b>system</b>-><b>config</b> and edit <b>catalog.php</b>. After this line: <b>$_['session_autostart'] = false;</b> add these lines:
+<b>1.</b>Go to <b>system</b>-><b>config</b> and edit <b>catalog.php</b>. After this line:
+````
+$_['session_autostart'] = false;
+````
+<b>add these lines:</b>
 ````
 $_['session_engine']    = 'db';
 $_['session_name']      = 'OCSESSID';
