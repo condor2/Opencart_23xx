@@ -1,90 +1,59 @@
 <?php
-/**
- * @package		OpenCart
- * @author		Daniel Kerr
- * @copyright	Copyright (c) 2005 - 2024, OpenCart, Ltd. (https://www.opencart.com/)
- * @license		https://opensource.org/licenses/GPL-3.0
- * @link		https://www.opencart.com
-*/
+namespace Session;
 
-/**
-* Session class
-*/
-class Session {
-	protected $adaptor;
-	protected $session_id;
-	public $data = array();
+final class DB {
+	public $maxlifetime;
+	public $db;
 
-	/**
-	 * Constructor
-	 *
-	 * @param	string	$adaptor
-	 * @param	object	$registry
- 	*/
-	public function __construct($adaptor, $registry = '') {
-		$class = 'Session\\' . $adaptor;
-		
-		if (class_exists($class)) {
-			if ($registry) {
-				$this->adaptor = new $class($registry);
-			} else {
-				$this->adaptor = new $class();
-			}	
-			
-			register_shutdown_function(array($this, 'close'));
+	public function __construct($registry) {
+		$this->db = $registry->get('db');
+
+		$this->maxlifetime = ini_get('session.gc_maxlifetime') !== null ? (int)ini_get('session.gc_maxlifetime') : 1440;
+
+		$this->gc();
+	}
+
+	public function read($session_id) {
+		$query = $this->db->query("SELECT `data` FROM `" . DB_PREFIX . "session` WHERE `session_id` = '" . $this->db->escape($session_id) . "' AND `expire` > '" . $this->db->escape(gmdate('Y-m-d H:i:s', time())) . "'");
+
+		if ($query->num_rows) {
+			return json_decode($query->row['data'], true);
 		} else {
-			trigger_error('Error: Could not load cache adaptor ' . $adaptor . ' session!');
-			exit();
-		}	
-	}
-	
-	/**
-	 * 
-	 *
-	 * @return	string
- 	*/	
-	public function getId() {
-		return $this->session_id;
+			return array();
+		}
 	}
 
-	/**
-	 *
-	 *
-	 * @param	string	$session_id
-	 *
-	 * @return	string
- 	*/	
-	public function start($session_id = '') {
-		if (!$session_id) {
-			if (function_exists('random_bytes')) {
-				$session_id = substr(bin2hex(random_bytes(26)), 0, 26);
-			} else {
-				$session_id = substr(bin2hex(openssl_random_pseudo_bytes(26)), 0, 26);
-			}
+	public function write($session_id, $data) {
+		if ($session_id) {
+			$this->db->query("REPLACE INTO `" . DB_PREFIX . "session` SET `session_id` = '" . $this->db->escape($session_id) . "', `data` = '" . $this->db->escape(json_encode($data)) . "', `expire` = '" . $this->db->escape(gmdate('Y-m-d H:i:s', time() + (int)$this->maxlifetime)) . "'");
 		}
 
-		if (preg_match('/^[a-zA-Z0-9,\-]{22,52}$/', $session_id)) {
-			$this->session_id = $session_id;
+		return true;
+	}
+
+	public function destroy($session_id) {
+		$this->db->query("DELETE FROM `" . DB_PREFIX . "session` WHERE `session_id` = '" . $this->db->escape($session_id) . "'");
+
+		return true;
+	}
+
+	public function gc() {
+		if (ini_get('session.gc_divisor') && $gc_divisor = (int)ini_get('session.gc_divisor')) {
+			$gc_divisor = $gc_divisor === 0 ? 100 : $gc_divisor;
 		} else {
-			exit('Error: Invalid session ID!');
+			$gc_divisor = 100;
 		}
-		
-		$this->data = $this->adaptor->read($session_id);
-		
-		return $session_id;
-	}
-	
-	/**
-	 * 
- 	*/
-	public function close() {
-		$this->adaptor->write($this->session_id, $this->data);
-	}
-	
-	/**
-	 * 
- 	*/	
-	public function destroy() {
-		$this->adaptor->destroy($this->session_id);
+
+		if (ini_get('session.gc_probability')) {
+			$gc_probability = (int)ini_get('session.gc_probability');
+		} else {
+			$gc_probability = 1;
+		}
+
+		if (mt_rand() / mt_getrandmax() < $gc_probability / $gc_divisor) {
+			$this->db->query("DELETE FROM `" . DB_PREFIX . "session` WHERE `expire` < '" . $this->db->escape(gmdate('Y-m-d H:i:s', time())) . "'");
+
+			return true;
+		}
 	}
 }
