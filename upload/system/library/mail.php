@@ -125,7 +125,7 @@ class Mail extends \stdClass {
 			if ($this->text) {
 				$message .= chunk_split(base64_encode($this->text)) . $eol;
 			} else {
-				$message .= chunk_split(base64_encode('This is a HTML email and your email client software does not support HTML email!')) . $eol;
+				$message .= chunk_split(base64_encode($this->html)) . $eol;
 			}
 
 			$message .= '--' . $boundary . '_alt' . $eol;
