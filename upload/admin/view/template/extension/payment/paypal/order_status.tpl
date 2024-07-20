@@ -42,7 +42,7 @@
 					<div class="section-content">
 						<div class="row">
 							<?php foreach (array_chunk($setting['order_status'], ceil(count($setting['order_status']) / 2)) as $column_paypal_order_status) { ?>
-							<div class="col col-md-6">
+							<div class="col col-md-4">
 								<?php foreach ($column_paypal_order_status as $paypal_order_status) { ?>
 								<div class="form-group">
 									<label class="control-label" for="input_order_status_<?php echo $paypal_order_status['code']; ?>"><?php echo ${$paypal_order_status['name']}; ?></label>
@@ -59,6 +59,21 @@
 								<?php } ?>
 							</div>
 							<?php } ?>
+							<div class="col col-md-4">
+								<div class="form-group">
+									<label class="control-label" for="input_final_order_status"><span data-toggle="tooltip" title="<?php echo $help_final_order_status; ?>"><?php echo $entry_final_order_status; ?></span></label>
+									<div class="well well-sm">
+										<?php foreach ($order_statuses as $order_status) { ?>
+										<div class="checkbox">
+											<label class="control-label">
+												<input type="checkbox" name="paypal_setting[final_order_status][]" value="<?php echo $order_status['order_status_id']; ?>" class="form-check-input form-check-input-mini" <?php if (in_array($order_status['order_status_id'], $setting['final_order_status'])) { ?> checked="checked" <?php } ?> />
+												<?php echo $order_status['name']; ?>
+											</label>
+										</div>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</form>

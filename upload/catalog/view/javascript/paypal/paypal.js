@@ -30,7 +30,24 @@ var PayPalAPI = (function () {
 		return params;
 	};
 	
-	var updatePayPalData = function() {
+	var requestPayPalData = async function(url, data) {
+		return new Promise((resolve, reject) => {
+			$.ajax({
+				method: 'post',
+				url: url,
+				data: data,
+				dataType: 'json',
+				success: function(data) {				
+					resolve(data);
+				},
+				error: function(xhr, ajaxOptions, thrownError) {
+					console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+				}
+			});
+		});
+	};
+	
+	var updatePayPalData = async function() {
 		var params = [];
 		var script_file = document.getElementsByTagName('script');
 		
@@ -44,25 +61,19 @@ var PayPalAPI = (function () {
 		
 		paypal_data = params;
 		
+		if (window.ApplePaySession && window.ApplePaySession?.supportsVersion(4) && ApplePaySession.canMakePayments()) {
+			paypal_data['applepay'] = true;
+		}
+		
 		if (paypal_data['page_code'] == 'product') {
 			paypal_data['product'] = $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea').serialize();
 		}
 		
-		$.ajax({
-			method: 'post',
-			url: 'index.php?route=extension/payment/paypal/getData',
-			data: paypal_data,
-			dataType: 'json',
-			async: false,
-			success: function(json) {						
-				paypal_data = json;
+		var json = await requestPayPalData('index.php?route=extension/payment/paypal/getData', paypal_data);
+			
+		paypal_data = json;
 				
-				showPayPalAlert(json);
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
-		});
+		showPayPalAlert(json);
 	};
 	
 	var readyPayPalSDK = function() {
@@ -125,8 +136,7 @@ var PayPalAPI = (function () {
 		src_data['merchant-id'] = paypal_data['merchant_id'];
 		src_data['currency'] = paypal_data['currency_code'];
 		src_data['intent'] = paypal_data['transaction_method'];
-		src_data['locale'] = paypal_data['locale'];
-
+				
 		if (paypal_data['button_enable_funding'] && paypal_data['button_enable_funding'].length) {
 			src_data['enable-funding'] = paypal_data['button_enable_funding'].join(',');
 		}
@@ -198,7 +208,7 @@ var PayPalAPI = (function () {
 						label: paypal_data['button_label'],
 						tagline: 'false'
 					},
-					createOrder: function() {
+					createOrder: async function() {
 						paypal_order_id = false;
 						product_data = false;
 						
@@ -206,42 +216,22 @@ var PayPalAPI = (function () {
 							product_data = $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea').serialize();
 						}
 				
-						$.ajax({
-							method: 'post',
-							url: 'index.php?route=extension/payment/paypal/createOrder',
-							data: {'page_code': paypal_data['page_code'], 'payment_type': 'button', 'product': product_data},
-							dataType: 'json',
-							async: false,
-							success: function(json) {				
-								showPayPalAlert(json);
-								
-								paypal_order_id = json['paypal_order_id'];
-							},
-							error: function(xhr, ajaxOptions, thrownError) {
-								console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-							}
-						});
-											
+						var json = await requestPayPalData('index.php?route=extension/payment/paypal/createOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'button', 'product': product_data});
+							
+						showPayPalAlert(json);
+							
+						paypal_order_id = json['paypal_order_id'];
+										
 						return paypal_order_id;	
 					},
-					onApprove: function(data) {	
-						$.ajax({
-							method: 'post',
-							url: 'index.php?route=extension/payment/paypal/approveOrder',
-							data: {'page_code': paypal_data['page_code'], 'payment_type': 'button', 'paypal_order_id': data.orderID},
-							dataType: 'json',
-							async: false,
-							success: function(json) {					
-								showPayPalAlert(json);
+					onApprove: async function(data) {	
+						var json = await requestPayPalData('index.php?route=extension/payment/paypal/approveOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'button', 'paypal_order_id': data.orderID});
+						
+						showPayPalAlert(json);
 							
-								if (json['url']) {
-									location = json['url'];
-								}
-							},
-							error: function(xhr, ajaxOptions, thrownError) {
-								console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-							}
-						});
+						if (json['url']) {
+							location = json['url'];
+						}
 					}
 				};
 				
@@ -300,71 +290,50 @@ var PayPalAPI = (function () {
 				$('#paypal_card_tokens_container').append(html);
 			});
 								
-			$('#paypal_card_tokens_container').delegate('.card-token-button', 'click', function(event) {
+			$('#paypal_card_tokens_container').delegate('.card-token-button', 'click', async function(event) {
 				event.preventDefault();
 	
 				if (!$('#paypal_card_tokens_container').hasClass('disabled')) {
 					var paypal_card_token = $(this).parents('.paypal-card-token');
 					var card_token_index = $(this).attr('index');
 											
-					paypal_order_id = false;
-									
-					$.ajax({
-						method: 'post',
-						url: 'index.php?route=extension/payment/paypal/createOrder',
-						data: {'page_code': paypal_data['page_code'], 'payment_type': 'card', 'index': card_token_index},
-						dataType: 'json',
-						beforeSend: function() {
-							paypal_card_token.addClass('paypal-spinner');
-							$('#paypal_card_tokens_container').addClass('disabled');
-						},
-						success: function(json) {							
-							showPayPalAlert(json);
+					paypal_card_token.addClass('paypal-spinner');
+					$('#paypal_card_tokens_container').addClass('disabled');
+					
+					var json = await requestPayPalData('index.php?route=extension/payment/paypal/createOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'card', 'index': card_token_index});
 						
-							if (json['url']) {
-								location = json['url'];
-							} else {
-								paypal_card_token.removeClass('paypal-spinner');
-								$('#paypal_card_tokens_container').removeClass('disabled');
-							}
-						},
-						error: function(xhr, ajaxOptions, thrownError) {
-							console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-						}
-					});
+					showPayPalAlert(json);
+						
+					if (json['url']) {
+						location = json['url'];
+					} else {
+						paypal_card_token.removeClass('paypal-spinner');
+						$('#paypal_card_tokens_container').removeClass('disabled');
+					}
 				}
 			});
 			
-			$('#paypal_card_tokens_container').delegate('.card-token-delete-button', 'click', function(event) {
+			$('#paypal_card_tokens_container').delegate('.card-token-delete-button', 'click', async function(event) {
 				event.preventDefault();
 						
 				if (!$('#paypal_card_tokens_container').hasClass('disabled')) {
 					var paypal_card_token = $(this).parents('.paypal-card-token');
 					var card_token_index = $(this).attr('index');
 								
-					$.ajax({
-						method: 'post',
-						url: 'index.php?route=extension/payment/paypal/deleteCustomerToken',
-						data: {'index': card_token_index},
-						dataType: 'json',
-						beforeSend: function() {
-							paypal_card_token.addClass('paypal-spinner');
-							$('#paypal_card_tokens_container').addClass('disabled');
-						},
-						success: function(json) {							
-							showPayPalAlert(json);
+					paypal_card_token.addClass('paypal-spinner');
+					$('#paypal_card_tokens_container').addClass('disabled');
+							
+					var json = await requestPayPalData('index.php?route=extension/payment/paypal/deleteCustomerToken', {'index': card_token_index});
+						
+					showPayPalAlert(json);
 									
-							if (json['success']) {
-								paypal_card_token.remove();
-							} else {
-								paypal_card_token.removeClass('paypal-spinner');
-								$('#paypal_card_tokens_container').removeClass('disabled');
-							}
-						},
-						error: function(xhr, ajaxOptions, thrownError) {
-							console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-						}
-					});
+					if (json['success']) {
+						paypal_card_token.remove();
+					} else {
+						paypal_card_token.removeClass('paypal-spinner');
+					}
+					
+					$('#paypal_card_tokens_container').removeClass('disabled');
 				}
 			});	
 		}
@@ -390,54 +359,34 @@ var PayPalAPI = (function () {
 							'padding': '0.75rem 0.75rem',
 						}
 					},
-					createOrder: function() {
+					createOrder: async function() {
 						paypal_order_id = false;
 						
 						var card_save = ($('#paypal_card_form #paypal_card_save:checked').length ? $('#paypal_card_form #paypal_card_save:checked').val() : 0);
 					
-						$.ajax({
-							method: 'post',
-							url: 'index.php?route=extension/payment/paypal/createOrder',
-							data: {'page_code': paypal_data['page_code'], 'payment_type': 'card', 'card_save': card_save},
-							dataType: 'json',
-							async: false,
-							success: function(json) {							
-								showPayPalAlert(json);
+						var json = await requestPayPalData('index.php?route=extension/payment/paypal/createOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'card', 'card_save': card_save});
+						
+						showPayPalAlert(json);
 									
-								paypal_order_id = json['paypal_order_id'];
-							},
-							error: function(xhr, ajaxOptions, thrownError) {
-								console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-							}
-						});
-					
+						paypal_order_id = json['paypal_order_id'];
+											
 						return paypal_order_id;
 					},
-					onApprove: function(data) {				
+					onApprove: async function(data) {				
 						var card_save = ($('#paypal_card_form #paypal_card_save:checked').length ? $('#paypal_card_form #paypal_card_save:checked').val() : 0);
 						var card_type = $('#paypal_card_form').attr('card_type');
 						var card_nice_type = $('#paypal_card_form').attr('card_nice_type');
 								
-						$.ajax({
-							method: 'post',
-							url: 'index.php?route=extension/payment/paypal/approveOrder',
-							data: {'page_code': paypal_data['page_code'], 'payment_type': 'card', 'card_save': card_save, 'card_type': card_type, 'card_nice_type': card_nice_type, 'paypal_order_id': data.orderID},
-							dataType: 'json',
-							async: false,
-							success: function(json) {				
-								showPayPalAlert(json);
+						var json = await requestPayPalData('index.php?route=extension/payment/paypal/approveOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'card', 'card_save': card_save, 'card_type': card_type, 'card_nice_type': card_nice_type, 'paypal_order_id': data.orderID});
+						
+						showPayPalAlert(json);
 								
-								if (json['url']) {
-									location = json['url'];
-								} else {
-									$('#paypal_card_container').removeClass('paypal-spinner');
-									$('#paypal_card_button').prop('disabled', false).button('reset');
-								}
-							},
-							error: function(xhr, ajaxOptions, thrownError) {
-								console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-							}
-						});
+						if (json['url']) {
+							location = json['url'];
+						} else {
+							$('#paypal_card_container').removeClass('paypal-spinner');
+							$('#paypal_card_button').prop('disabled', false).button('reset');
+						}
 					},
 					inputEvents: {
 						onChange: function(data) {
@@ -551,8 +500,8 @@ var PayPalAPI = (function () {
 			
 			if (paypal_data['page_code'] == 'product') {
 				$('[name^="option"], [name="quantity"]').on('change', function(event) {
-					setTimeout(function() {
-						updatePayPalData();
+					setTimeout(async function() {
+						await updatePayPalData();
 		
 						if (paypal_message) {
 							paypal_message.setAttribute('data-pp-amount', paypal_data['message_amount']);
@@ -583,21 +532,11 @@ var PayPalAPI = (function () {
 								product_data = $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea').serialize();
 							}
 							
-							$.ajax({
-								method: 'post',
-								url: 'index.php?route=extension/payment/paypal/createOrder',
-								data: {'page_code': paypal_data['page_code'], 'payment_type': 'googlepay_button', 'product': product_data},
-								dataType: 'json',
-								async: false,
-								success: function(json) {				
-									showPayPalAlert(json);
+							var json = await requestPayPalData('index.php?route=extension/payment/paypal/createOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'googlepay_button', 'product': product_data});
+							
+							showPayPalAlert(json);
 								
-									paypal_order_id = json['paypal_order_id'];
-								},
-								error: function(xhr, ajaxOptions, thrownError) {
-									console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-								}
-							});
+							paypal_order_id = json['paypal_order_id'];
 							
 							paymentData.paymentMethodData.info.billingAddress.phoneNumber = paymentData.paymentMethodData.info.billingAddress.phoneNumber.replace('+', '');
 							
@@ -610,46 +549,26 @@ var PayPalAPI = (function () {
 								console.log('Confirm Payment Completed Payer Action Required');
 								
 								PayPalSDK.Googlepay().initiatePayerAction({orderId: paypal_order_id}).then(async () => {
-									$.ajax({
-										method: 'post',
-										url: 'index.php?route=extension/payment/paypal/approveOrder',
-										data: {'page_code': paypal_data['page_code'], 'payment_type': 'googlepay_button', 'paypal_order_id': paypal_order_id, 'payment_data': JSON.stringify(paymentData)},
-										dataType: 'json',
-										async: false,
-										success: function(json) {					
-											showPayPalAlert(json);
+									var json = await requestPayPalData('index.php?route=extension/payment/paypal/approveOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'googlepay_button', 'paypal_order_id': paypal_order_id, 'payment_data': JSON.stringify(paymentData)});
+									
+									showPayPalAlert(json);
 													
-											if (json['url']) {
-												location = json['url'];
-											}
-										},
-										error: function(xhr, ajaxOptions, thrownError) {
-											console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-										}
-									});	
+									if (json['url']) {
+										location = json['url'];
+									}
 								});
 								
 								resolve({transactionState: 'SUCCESS'});	
 							} else if (confirmOrderResponse.status === 'APPROVED') {
 								console.log('Confirm Payment Approved');
 								
-								$.ajax({
-									method: 'post',
-									url: 'index.php?route=extension/payment/paypal/approveOrder',
-									data: {'page_code': paypal_data['page_code'], 'payment_type': 'googlepay_button', 'paypal_order_id': paypal_order_id, 'payment_data': JSON.stringify(paymentData)},
-									dataType: 'json',
-									async: false,
-									success: function(json) {					
-										showPayPalAlert(json);
+								var json = await requestPayPalData('index.php?route=extension/payment/paypal/approveOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'googlepay_button', 'paypal_order_id': paypal_order_id, 'payment_data': JSON.stringify(paymentData)});
+								
+								showPayPalAlert(json);
 													
-										if (json['url']) {
-											location = json['url'];
-										}
-									},
-									error: function(xhr, ajaxOptions, thrownError) {
-										console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-									}
-								});	
+								if (json['url']) {
+									location = json['url'];
+								}
 								
 								resolve({transactionState: 'SUCCESS'});	
 							} else {
@@ -870,21 +789,11 @@ var PayPalAPI = (function () {
 						product_data = $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea').serialize();
 					}
 						
-					$.ajax({
-						method: 'post',
-						url: 'index.php?route=extension/payment/paypal/createOrder',
-						data: {'page_code': paypal_data['page_code'], 'payment_type': 'applepay_button', 'product': product_data},
-						dataType: 'json',
-						async: false,
-						success: function(json) {				
-							showPayPalAlert(json);
+					var json = await requestPayPalData('index.php?route=extension/payment/paypal/createOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'applepay_button', 'product': product_data});
+						
+					showPayPalAlert(json);
 								
-							paypal_order_id = json['paypal_order_id'];
-						},
-						error: function(xhr, ajaxOptions, thrownError) {
-							console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-						}
-					});
+					paypal_order_id = json['paypal_order_id'];
 					
 					event.payment.shippingContact.phoneNumber = event.payment.shippingContact.phoneNumber.replace('+', '');
 																	
@@ -895,23 +804,13 @@ var PayPalAPI = (function () {
 						shippingContact: event.payment.shippingContact 
 					});
 				
-					$.ajax({
-						method: 'post',
-						url: 'index.php?route=extension/payment/paypal/approveOrder',
-						data: {'page_code': paypal_data['page_code'], 'payment_type': 'applepay_button', 'paypal_order_id': paypal_order_id, 'payment_data': JSON.stringify(event.payment)},
-						dataType: 'json',
-						async: false,
-						success: function(json) {					
-							showPayPalAlert(json);
+					var json = await requestPayPalData('index.php?route=extension/payment/paypal/approveOrder', {'page_code': paypal_data['page_code'], 'payment_type': 'applepay_button', 'paypal_order_id': paypal_order_id, 'payment_data': JSON.stringify(event.payment)});
+				
+					showPayPalAlert(json);
 													
-							if (json['url']) {
-								location = json['url'];
-							}
-						},
-						error: function(xhr, ajaxOptions, thrownError) {
-							console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-						}
-					});
+					if (json['url']) {
+						location = json['url'];
+					}
 						
 					session.completePayment({
 						status: window.ApplePaySession.STATUS_SUCCESS
@@ -936,8 +835,8 @@ var PayPalAPI = (function () {
 		$('#applepay_button_container').removeClass('paypal-spinner');
 	};
 	
-	var init = function(callback = '') {
-		updatePayPalData();
+	var init = async function(callback = '') {
+		await updatePayPalData();
 		
 		paypal_callback = callback;
 			

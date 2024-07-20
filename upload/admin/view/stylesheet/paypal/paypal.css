@@ -228,12 +228,17 @@
 	background-size: contain;
 	background-position: center;
 	border: 1px solid #919697;
+	border-radius: 3px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 	-webkit-print-color-adjust: exact;
 	color-adjust: exact;
 	cursor: pointer;
+}
+.payment-paypal .panel-default .form-check-input-mini {
+	width: 16px;
+	height: 16px;
 }
 .payment-paypal .panel-default .form-check-input[type=radio] {
 	border-radius: 50%;
@@ -255,6 +260,10 @@
 	display: inline-block;
 	margin: 0px 0px;
 	vertical-align: middle;
+}
+.payment-paypal .panel-default .well {
+	border: 1px solid #919697;
+	border-radius: 3px;
 }
 .payment-paypal .panel-default .hr {
 	display: inline-block;
