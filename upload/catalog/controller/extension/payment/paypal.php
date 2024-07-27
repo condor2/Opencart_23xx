@@ -1653,6 +1653,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 								$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
 								$card_last_digits = '';
 								$card_expiry = '';
+								$paypal_order_data = array();
 								
 								if (!$this->cart->hasShipping()) {
 									$seller_protection_status = 'NOT_ELIGIBLE';
@@ -1785,6 +1786,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 								$card_nice_type = (!empty($this->request->post['card_nice_type']) ? $this->request->post['card_nice_type'] : '');
 								$card_last_digits = '';
 								$card_expiry = '';
+								$paypal_order_data = array();
 								
 								if (!$this->cart->hasShipping()) {
 									$seller_protection_status = 'NOT_ELIGIBLE';
@@ -2633,7 +2635,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 
 				if ($affiliate_info) {
 					$order_data['affiliate_id'] = $affiliate_info['affiliate_id'];
-					$order_data['commission'] = ($subtotal / 100) * $affiliate_info['commission'];
+					$order_data['commission'] = ($sub_total / 100) * $affiliate_info['commission'];
 				} else {
 					$order_data['affiliate_id'] = 0;
 					$order_data['commission'] = 0;
@@ -2996,6 +2998,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$card_nice_type = '';
 							$card_last_digits = '';
 							$card_expiry = '';
+							$paypal_order_data = array();
 								
 							if (!$this->cart->hasShipping()) {
 								$seller_protection_status = 'NOT_ELIGIBLE';
@@ -3128,6 +3131,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 							$card_nice_type = '';
 							$card_last_digits = '';
 							$card_expiry = '';
+							$paypal_order_data = array();
 								
 							if (!$this->cart->hasShipping()) {
 								$seller_protection_status = 'NOT_ELIGIBLE';
@@ -3771,7 +3775,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									$order_status_id = 0;
 									$transaction_status = '';
 									$payment_method = 'card';
-									$paypal_order_data = [];
+									$paypal_order_data = array();
 								
 									if (!$this->cart->hasShipping()) {
 										$seller_protection_status = 'NOT_ELIGIBLE';
@@ -3876,7 +3880,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 									$order_status_id = 0;
 									$transaction_status = '';
 									$payment_method = 'card';
-									$paypal_order_data = [];
+									$paypal_order_data = array();
 																	
 									if (!$this->cart->hasShipping()) {
 										$seller_protection_status = 'NOT_ELIGIBLE';
