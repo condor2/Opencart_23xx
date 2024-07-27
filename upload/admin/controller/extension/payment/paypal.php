@@ -3021,6 +3021,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$transaction_id = $paypal_order_info['transaction_id'];
 				$currency_code = $paypal_order_info['currency_code'];
 				$order_status_id = 0;
+				$transaction_status = '';
 				
 				$_config = new Config();
 				$_config->load('paypal');
