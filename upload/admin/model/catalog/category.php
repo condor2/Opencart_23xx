@@ -223,11 +223,16 @@ class ModelCatalogCategory extends Model {
 		if (!empty($data['filter_name'])) {
 			$implode = [];
 
+			// Decode HTML entities and replace non-breaking spaces with regular spaces
+			$filterName = str_replace("\xC2\xA0", ' ', html_entity_decode($data['filter_name'], ENT_QUOTES, 'UTF-8'));
+
 			// split category path, clear > symbols and extra spaces
-			$words = explode(' ', trim(preg_replace('/\s+/', ' ', str_ireplace([' &gt; ', ' > '], ' ', $data['filter_name']))));
+			$cleanedFilterName = trim(preg_replace('/\s+/', ' ', str_ireplace([' &gt; ', ' > '], ' ', $filterName)));
+			$words = explode(' ', $cleanedFilterName);
 
 			foreach ($words as $word) {
-				$implode[] = "LCASE(`name`) LIKE '" . $this->db->escape('%' . utf8_strtolower($word) . '%') . "'";
+				$escapedWord = $this->db->escape('%' . utf8_strtolower($word) . '%');
+				$implode[] = "LCASE(`name`) LIKE '" . $escapedWord . "'";
 			}
 
 			if ($implode) {
