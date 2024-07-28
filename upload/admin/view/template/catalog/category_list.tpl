@@ -29,6 +29,38 @@
         <h3 class="panel-title"><i class="fa fa-list"></i> <?php echo $text_list; ?></h3>
       </div>
       <div class="panel-body">
+        <div class="well">
+          <div class="row">
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="control-label" for="input-name"><?php echo $entry_name; ?></label>
+                <input type="text" name="filter_name" value="<?php echo $filter_name; ?>" placeholder="<?php echo $entry_name; ?>" id="input-name" class="form-control" />
+              </div>
+            </div>
+
+
+            <div class="col-sm-6">
+              <div class="form-group">
+                <label class="control-label" for="input-status"><?php echo $entry_status; ?></label>
+                <select name="filter_status" id="input-status" class="form-control">
+                  <option value=""></option>
+                  <?php if ($filter_status == '1') { ?>
+                  <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                  <?php } else { ?>
+                  <option value="1"><?php echo $text_enabled; ?></option>
+                  <?php } ?>
+                  <?php if ($filter_status == '0') { ?>
+                  <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                  <?php } else { ?>
+                  <option value="0"><?php echo $text_disabled; ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+              <button type="button" id="button-filter" class="btn btn-primary pull-right"><i class="fa fa-filter"></i> <?php echo $button_filter; ?></button>
+            </div>
+          </div>
+        </div>
         <form action="<?php echo $delete; ?>" method="post" enctype="multipart/form-data" id="form-category">
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -78,5 +110,45 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript"><!--
+$('#button-filter').on('click', function() {
+	var url = '';
+
+	var filter_name = $('input[name=\'filter_name\']').val();
+
+	if (filter_name) {
+		url += '&filter_name=' + encodeURIComponent(filter_name);
+	}
+
+	var filter_status = $('select[name=\'filter_status\']').val();
+
+	if (filter_status !== '') {
+		url += '&filter_status=' + encodeURIComponent(filter_status);
+	}
+
+	location = 'index.php?route=catalog/category&token=<?php echo $token; ?>' + url;
+});
+//--></script>
+  <script type="text/javascript"><!--
+$('input[name=\'filter_name\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=catalog/category/autocomplete&token=<?php echo $token; ?>&filter_name=' +  encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['name'],
+						value: item['category_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'filter_name\']').val(item['label']);
+	}
+});
+//--></script>
 </div>
 <?php echo $footer; ?>

@@ -13,6 +13,7 @@ $_['text_default']           = 'Default';
 $_['column_name']            = 'Category Name';
 $_['column_sort_order']      = 'Sort Order';
 $_['column_action']          = 'Action';
+$_['column_status']          = 'Status';
 
 // Entry
 $_['entry_name']             = 'Category Name';
