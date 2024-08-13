@@ -1,8 +1,8 @@
 <?php
 class ControllerToolLog extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('tool/log');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -33,7 +33,7 @@ class ControllerToolLog extends Controller {
 			$data['success'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -88,7 +88,7 @@ class ControllerToolLog extends Controller {
 		$this->response->setOutput($this->load->view('tool/log', $data));
 	}
 
-	public function download(): void {
+	public function download() {
 		$this->load->language('tool/log');
 
 		$file = DIR_LOGS . $this->config->get('config_error_filename');
@@ -109,7 +109,7 @@ class ControllerToolLog extends Controller {
 		}
 	}
 
-	public function clear(): void {
+	public function clear() {
 		$this->load->language('tool/log');
 
 		if (!$this->user->hasPermission('modify', 'tool/log')) {

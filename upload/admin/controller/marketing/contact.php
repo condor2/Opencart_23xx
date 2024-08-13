@@ -1,8 +1,8 @@
 <?php
 class ControllerMarketingContact extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');
 
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
@@ -54,7 +54,7 @@ class ControllerMarketingContact extends Controller {
 
 		$data['lang'] = $this->language->get('summernote');
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -83,10 +83,10 @@ class ControllerMarketingContact extends Controller {
 		$this->response->setOutput($this->load->view('marketing/contact', $data));
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->language('marketing/contact');
 
-		$json = [];
+		$json = array();
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			if (!$this->user->hasPermission('modify', 'marketing/contact')) {
@@ -128,7 +128,7 @@ class ControllerMarketingContact extends Controller {
 
 				$email_total = 0;
 
-				$emails = [];
+				$emails = array();
 
 				switch ($this->request->post['to']) {
 					case 'newsletter':

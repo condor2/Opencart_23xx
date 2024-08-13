@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionFraudFraudLabsPro extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/fraud/fraudlabspro');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -57,7 +57,7 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 			$data['error_key'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -137,7 +137,7 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 		$this->response->setOutput($this->load->view('extension/fraud/fraudlabspro', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/fraud/fraudlabspro');
 
 		$this->model_extension_fraud_fraudlabspro->install();

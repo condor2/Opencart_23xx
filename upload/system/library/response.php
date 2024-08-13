@@ -22,7 +22,7 @@ class Response {
 	 *
 	 * @param string $header
 	 */
-	public function addHeader($header): void {
+	public function addHeader($header) {
 		$this->headers[] = $header;
 	}
 
@@ -34,7 +34,7 @@ class Response {
 	 *
 	 * @return void
 	 */
-	public function redirect($url, $status = 302): void {
+	public function redirect($url, $status = 302) {
 		header('Location: ' . str_replace(['&amp;', "\n", "\r"], ['&', '', ''], $url), true, $status);
 		exit();
 	}
@@ -46,7 +46,7 @@ class Response {
 	 *
 	 * @return void
 	 */
-	public function setCompression($level): void {
+	public function setCompression($level) {
 		$this->level = $level;
 	}
 
@@ -55,7 +55,7 @@ class Response {
 	 *
 	 * @return string
 	 */
-	public function getOutput(): string {
+	public function getOutput() {
 		return $this->output;
 	}
 
@@ -66,7 +66,7 @@ class Response {
 	 *
 	 * @return void
 	 */
-	public function setOutput($output): void {
+	public function setOutput($output) {
 		$this->output = $output;
 	}
 
@@ -78,7 +78,7 @@ class Response {
 	 *
 	 * @return string
 	 */
-	private function compress(string $data, int $level = 0): string {
+	private function compress($data, $level = 0) {
 		if (isset($_SERVER['HTTP_ACCEPT_ENCODING']) && (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false)) {
 			$encoding = 'gzip';
 		}
@@ -115,7 +115,7 @@ class Response {
 	 *
 	 * @return void
 	 */
-	public function output(): void {
+	public function output() {
 		if ($this->output) {
 			$output = $this->level ? $this->compress($this->output, $this->level) : $this->output;
 

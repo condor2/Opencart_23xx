@@ -1,8 +1,8 @@
 <?php
 class ControllerMarketingAffiliate extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('marketing/affiliate');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('marketing/affiliate');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -64,7 +64,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('marketing/affiliate');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -116,7 +116,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('marketing/affiliate');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -170,7 +170,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->getList();
 	}
 
-	public function approve(): void {
+	public function approve() {
 		$this->load->language('marketing/affiliate');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -222,7 +222,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->getList();
 	}
 
-	public function unlock(): void {
+	public function unlock() {
 		$this->load->language('marketing/affiliate');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -274,7 +274,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -357,7 +357,7 @@ class ControllerMarketingAffiliate extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -373,7 +373,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$data['add'] = $this->url->link('marketing/affiliate/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('marketing/affiliate/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['affiliates'] = [];
+		$data['affiliates'] = array();
 
 		$filter_data = [
 			'filter_name'       => $filter_name,
@@ -469,7 +469,7 @@ class ControllerMarketingAffiliate extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -565,7 +565,7 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->response->setOutput($this->load->view('marketing/affiliate_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['affiliate_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -758,7 +758,7 @@ class ControllerMarketingAffiliate extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -1145,7 +1145,7 @@ class ControllerMarketingAffiliate extends Controller {
 		return !$this->error;
 	}
 
-	public function transaction(): void {
+	public function transaction() {
 		$this->load->language('marketing/affiliate');
 
 		$this->load->model('marketing/affiliate');
@@ -1163,7 +1163,7 @@ class ControllerMarketingAffiliate extends Controller {
 			$page = 1;
 		}
 
-		$data['transactions'] = [];
+		$data['transactions'] = array();
 
 		$results = $this->model_marketing_affiliate->getTransactions($this->request->get['affiliate_id'], ($page - 1) * 10, 10);
 
@@ -1192,10 +1192,10 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->response->setOutput($this->load->view('marketing/affiliate_transaction', $data));
 	}
 
-	public function addTransaction(): void {
+	public function addTransaction() {
 		$this->load->language('marketing/affiliate');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'marketing/affiliate')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -1211,8 +1211,8 @@ class ControllerMarketingAffiliate extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function autocomplete(): void {
-		$affiliate_data = [];
+	public function autocomplete() {
+		$affiliate_data = array();
 
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_email'])) {
 			if (isset($this->request->get['filter_name'])) {

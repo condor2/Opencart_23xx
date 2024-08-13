@@ -1,6 +1,6 @@
 <?php
 class ControllerErrorNotFound extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('error/not_found');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -9,7 +9,7 @@ class ControllerErrorNotFound extends Controller {
 
 		$data['text_not_found'] = $this->language->get('text_not_found');
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

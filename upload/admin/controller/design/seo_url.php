@@ -1,8 +1,8 @@
 <?php
 class ControllerDesignSeoUrl extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('design/seo_url');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerDesignSeoUrl extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('design/seo_url');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -52,7 +52,7 @@ class ControllerDesignSeoUrl extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('design/seo_url');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -92,7 +92,7 @@ class ControllerDesignSeoUrl extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('design/seo_url');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -134,7 +134,7 @@ class ControllerDesignSeoUrl extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_query'])) {
 			$filter_query = $this->request->get['filter_query'];
 		} else {
@@ -187,7 +187,7 @@ class ControllerDesignSeoUrl extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -202,7 +202,7 @@ class ControllerDesignSeoUrl extends Controller {
 		$data['add'] = $this->url->link('design/seo_url/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('design/seo_url/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['seo_urls'] = [];
+		$data['seo_urls'] = array();
 
 		$filter_data = [
 			'filter_query'   => $filter_query,
@@ -263,7 +263,7 @@ class ControllerDesignSeoUrl extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -330,7 +330,7 @@ class ControllerDesignSeoUrl extends Controller {
 		$this->response->setOutput($this->load->view('design/seo_url_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['url_alias_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -373,7 +373,7 @@ class ControllerDesignSeoUrl extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleBestSeller extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/bestseller');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -62,7 +62,7 @@ class ControllerExtensionModuleBestSeller extends Controller {
 			$data['error_height'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

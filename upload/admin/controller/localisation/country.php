@@ -1,8 +1,8 @@
 <?php
 class ControllerLocalisationCountry extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('localisation/country');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerLocalisationCountry extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('localisation/country');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -56,7 +56,7 @@ class ControllerLocalisationCountry extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('localisation/country');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -100,7 +100,7 @@ class ControllerLocalisationCountry extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('localisation/country');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -146,7 +146,7 @@ class ControllerLocalisationCountry extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = (string)$this->request->get['filter_name'];
 		} else {
@@ -209,7 +209,7 @@ class ControllerLocalisationCountry extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -224,7 +224,7 @@ class ControllerLocalisationCountry extends Controller {
 		$data['add'] = $this->url->link('localisation/country/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('localisation/country/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['countries'] = [];
+		$data['countries'] = array();
 
 		$filter_data = [
 			'filter_name'       => $filter_name,
@@ -289,7 +289,7 @@ class ControllerLocalisationCountry extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -366,7 +366,7 @@ class ControllerLocalisationCountry extends Controller {
 		$this->response->setOutput($this->load->view('localisation/country_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['country_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -425,7 +425,7 @@ class ControllerLocalisationCountry extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -566,8 +566,8 @@ class ControllerLocalisationCountry extends Controller {
 		return !$this->error;
 	}
 
-	public function country(): void {
-		$json = [];
+	public function country() {
+		$json = array();
 
 		$this->load->model('localisation/country');
 

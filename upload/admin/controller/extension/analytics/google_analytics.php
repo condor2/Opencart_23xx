@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionAnalyticsGoogleAnalytics extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/analytics/google_analytics');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -42,7 +42,7 @@ class ControllerExtensionAnalyticsGoogleAnalytics extends Controller {
 			$data['error_code'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

@@ -8,12 +8,12 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 	/**
 	 * @var array<string, string>
 	 */
-	private $error = [];
+	private $error = array();
 
 	/**
 	 * @return void
 	 */
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/payment/laybuy');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -34,7 +34,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -174,11 +174,11 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		} elseif ($this->config->get('laybuy_category')) {
 			$data['laybuy_category'] = $this->config->get('laybuy_category');
 		} else {
-			$data['laybuy_category'] = [];
+			$data['laybuy_category'] = array();
 		}
 
 		// Categories
-		$data['categories'] = [];
+		$data['categories'] = array();
 
 		// Categories
 		$this->load->model('catalog/category');
@@ -205,10 +205,10 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		} elseif ($this->config->get('laybuy_customer_group')) {
 			$data['laybuy_customer_group'] = $this->config->get('laybuy_customer_group');
 		} else {
-			$data['laybuy_customer_group'] = [];
+			$data['laybuy_customer_group'] = array();
 		}
 
-		$data['customer_groups'] = [];
+		$data['customer_groups'] = array();
 
 		// Customer Groups
 		$this->load->model('customer/customer_group');
@@ -391,7 +391,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			$page = 1;
 		}
 
-		$data['reports'] = [];
+		$data['reports'] = array();
 
 		$filter_data = [
 			'filter_order_id'   => $filter_order_id,
@@ -440,7 +440,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -575,7 +575,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 	 *
 	 * @return void
 	 */
-	public function fetch(): void {
+	public function fetch() {
 		// Laybuy
 		$this->load->model('extension/payment/laybuy');
 
@@ -641,7 +641,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 						$next_payment_status = $this->language->get('text_status_1');
 
 						foreach ($report as $month => $payment) {
-							$report_content = [];
+							$report_content = array();
 
 							$payment['paymentDate'] = date('Y-m-d h:i:s', strtotime(str_replace('/', '-', $payment['paymentDate'])));
 							$date = date($this->language->get('date_format_short'), strtotime($payment['paymentDate']));
@@ -739,7 +739,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 	 *
 	 * @return void
 	 */
-	public function install(): void {
+	public function install() {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/laybuy');
 
@@ -752,7 +752,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 	 *
 	 * @return void
 	 */
-	public function uninstall(): void {
+	public function uninstall() {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/laybuy');
 
@@ -783,7 +783,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			$this->document->setTitle($this->language->get('heading_transaction_title'));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -904,7 +904,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 				'report'             => json_decode($transaction_info['report'], true)
 			];
 		} else {
-			$data['transaction'] = [];
+			$data['transaction'] = array();
 
 			$data['text_not_found'] = $this->language->get('text_not_found');
 		}
@@ -938,7 +938,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/laybuy_transaction', $data));
 	}
 
-	public function cancel(): void {
+	public function cancel() {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Canceling transaction');
@@ -952,7 +952,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		if ($this->user->hasPermission('modify', 'extension/payment/laybuy')) {
 			$this->load->language('extension/payment/laybuy');
 
-			$json = [];
+			$json = array();
 
 			$id = (int)$this->request->get['id'];
 
@@ -1038,7 +1038,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function revise(): void {
+	public function revise() {
 		$this->load->model('extension/payment/laybuy');
 
 		$this->model_extension_payment_laybuy->log('Revising transaction');
@@ -1053,7 +1053,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 			if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 				$this->load->language('extension/payment/laybuy');
 
-				$json = [];
+				$json = array();
 
 				$payment_type = $this->request->post['payment_type'];
 				$amount = $this->request->post['amount'];
@@ -1123,7 +1123,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 						$pplan = '0';
 					}
 
-					$data = [];
+					$data = array();
 
 					$data['mid']       = $this->config->get('laybuys_membership_id');
 					$data['eml']       = $revised_transaction['email'];
@@ -1197,8 +1197,8 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		}
 	}
 
-	public function autocomplete(): void {
-		$json = [];
+	public function autocomplete() {
+		$json = array();
 
 		if (isset($this->request->get['filter_customer_group'])) {
 			$this->load->model('customer/customer_group');

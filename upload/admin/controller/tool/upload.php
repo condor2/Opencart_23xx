@@ -1,8 +1,8 @@
 <?php
 class ControllerToolUpload extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('tool/upload');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerToolUpload extends Controller {
 		$this->getList();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('tool/upload');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -61,7 +61,7 @@ class ControllerToolUpload extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -114,7 +114,7 @@ class ControllerToolUpload extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -128,7 +128,7 @@ class ControllerToolUpload extends Controller {
 
 		$data['delete'] = $this->url->link('tool/upload/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['uploads'] = [];
+		$data['uploads'] = array();
 
 		$filter_data = [
 			'filter_name'       => $filter_name,
@@ -190,7 +190,7 @@ class ControllerToolUpload extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -266,7 +266,7 @@ class ControllerToolUpload extends Controller {
 		return !$this->error;
 	}
 
-	public function download(): void {
+	public function download() {
 		$this->load->model('tool/upload');
 
 		if (isset($this->request->get['code'])) {
@@ -309,7 +309,7 @@ class ControllerToolUpload extends Controller {
 
 			$data['text_not_found'] = $this->language->get('text_not_found');
 
-			$data['breadcrumbs'] = [];
+			$data['breadcrumbs'] = array();
 
 			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_home'),
@@ -329,10 +329,10 @@ class ControllerToolUpload extends Controller {
 		}
 	}
 
-	public function upload(): void {
+	public function upload() {
 		$this->load->language('sale/order');
 
-		$json = [];
+		$json = array();
 
 		// Check user has permission
 		if (!$this->user->hasPermission('modify', 'tool/upload')) {
@@ -349,7 +349,7 @@ class ControllerToolUpload extends Controller {
 				}
 
 				// Allowed file extension types
-				$allowed = [];
+				$allowed = array();
 
 				$extension_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_ext_allowed'));
 
@@ -364,7 +364,7 @@ class ControllerToolUpload extends Controller {
 				}
 
 				// Allowed file mime types
-				$allowed = [];
+				$allowed = array();
 
 				$mime_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_mime_allowed'));
 

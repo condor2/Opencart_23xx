@@ -1,8 +1,8 @@
 <?php
 class ControllerLocalisationGeoZone extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('localisation/geo_zone');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('localisation/geo_zone');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('localisation/geo_zone');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('localisation/geo_zone');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -143,7 +143,7 @@ class ControllerLocalisationGeoZone extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$data['add'] = $this->url->link('localisation/geo_zone/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('localisation/geo_zone/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['geo_zones'] = [];
+		$data['geo_zones'] = array();
 
 		$filter_data = [
 			'sort'  => $sort,
@@ -211,7 +211,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -259,7 +259,7 @@ class ControllerLocalisationGeoZone extends Controller {
 		$this->response->setOutput($this->load->view('localisation/geo_zone_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['geo_zone_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -308,7 +308,7 @@ class ControllerLocalisationGeoZone extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -359,10 +359,10 @@ class ControllerLocalisationGeoZone extends Controller {
 		} elseif (isset($this->request->get['geo_zone_id'])) {
 			$data['zone_to_geo_zones'] = $this->model_localisation_geo_zone->getZoneToGeoZones($this->request->get['geo_zone_id']);
 		} else {
-			$data['zone_to_geo_zones'] = [];
+			$data['zone_to_geo_zones'] = array();
 		}
 
-		$geo_zone_ids = [];
+		$geo_zone_ids = array();
 
 		foreach ($data['zone_to_geo_zones'] as $zone_to_geo_zone) {
 			if (isset($zone_to_geo_zone['geo_zone_id']) && !in_array($zone_to_geo_zone['geo_zone_id'], $geo_zone_ids)) {

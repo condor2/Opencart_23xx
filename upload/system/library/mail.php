@@ -23,39 +23,39 @@ class Mail extends \stdClass {
 		}
 	}
 
-	public function setTo($to): void {
+	public function setTo($to) {
 		$this->to = $to;
 	}
 
-	public function setFrom($from): void {
+	public function setFrom($from) {
 		$this->from = $from;
 	}
 
-	public function setSender($sender): void {
+	public function setSender($sender) {
 		$this->sender = $sender;
 	}
 
-	public function setReplyTo($reply_to): void {
+	public function setReplyTo($reply_to) {
 		$this->reply_to = $reply_to;
 	}
 
-	public function setSubject($subject): void {
+	public function setSubject($subject) {
 		$this->subject = $subject;
 	}
 
-	public function setText($text): void {
+	public function setText($text) {
 		$this->text = $text;
 	}
 
-	public function setHtml($html): void {
+	public function setHtml($html) {
 		$this->html = $html;
 	}
 
-	public function addAttachment($filename): void {
+	public function addAttachment($filename) {
 		$this->attachments[] = $filename;
 	}
 
-	public function send(): void {
+	public function send() {
 		if (!$this->to) {
 			throw new \Exception('Error: E-Mail to required!');
 		}

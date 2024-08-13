@@ -48,7 +48,7 @@ class Model {
 	 *
 	 * @return void
 	 */
-	public function __set(string $key, object $value): void {
+	public function __set($key, $value) {
 		$this->registry->set($key, $value);
 	}
 }

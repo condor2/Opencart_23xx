@@ -1,8 +1,8 @@
 <?php
 class ControllerLocalisationWeightClass extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('localisation/weight_class');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerLocalisationWeightClass extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('localisation/weight_class');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerLocalisationWeightClass extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('localisation/weight_class');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerLocalisationWeightClass extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('localisation/weight_class');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerLocalisationWeightClass extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -143,7 +143,7 @@ class ControllerLocalisationWeightClass extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerLocalisationWeightClass extends Controller {
 		$data['add'] = $this->url->link('localisation/weight_class/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('localisation/weight_class/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['weight_classes'] = [];
+		$data['weight_classes'] = array();
 
 		$filter_data = [
 			'sort'  => $sort,
@@ -213,7 +213,7 @@ class ControllerLocalisationWeightClass extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -262,7 +262,7 @@ class ControllerLocalisationWeightClass extends Controller {
 		$this->response->setOutput($this->load->view('localisation/weight_class_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['weight_class_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -285,13 +285,13 @@ class ControllerLocalisationWeightClass extends Controller {
 		if (isset($this->error['title'])) {
 			$data['error_title'] = $this->error['title'];
 		} else {
-			$data['error_title'] = [];
+			$data['error_title'] = array();
 		}
 
 		if (isset($this->error['unit'])) {
 			$data['error_unit'] = $this->error['unit'];
 		} else {
-			$data['error_unit'] = [];
+			$data['error_unit'] = array();
 		}
 
 		$url = '';
@@ -308,7 +308,7 @@ class ControllerLocalisationWeightClass extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -341,7 +341,7 @@ class ControllerLocalisationWeightClass extends Controller {
 		} elseif (isset($this->request->get['weight_class_id'])) {
 			$data['weight_class_description'] = $this->model_localisation_weight_class->getWeightClassDescriptions($this->request->get['weight_class_id']);
 		} else {
-			$data['weight_class_description'] = [];
+			$data['weight_class_description'] = array();
 		}
 
 		if (isset($this->request->post['value'])) {

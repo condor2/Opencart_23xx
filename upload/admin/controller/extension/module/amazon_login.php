@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleAmazonLogin extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/amazon_login');
 
 		$this->load->model('setting/setting');
@@ -56,7 +56,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -124,12 +124,12 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		return !$this->error;
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/event');
 		$this->model_extension_event->addEvent('amazon_login', 'catalog/controller/account/logout/after', 'extension/module/amazon_login/logout');
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/event');
 		$this->model_extension_event->deleteEvent('amazon_login');
 	}

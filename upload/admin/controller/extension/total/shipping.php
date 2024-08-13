@@ -5,12 +5,12 @@
  * @package Admin\Controller\Extension\Total
  */
 class ControllerExtensionTotalShipping extends Controller {
-	private array $error = [];
+	private array $error = array();
 
 	/**
 	 * @return void
 	 */
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/total/shipping');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerExtensionTotalShipping extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

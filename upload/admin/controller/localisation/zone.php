@@ -1,8 +1,8 @@
 <?php
 class ControllerLocalisationZone extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('localisation/zone');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerLocalisationZone extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('localisation/zone');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -56,7 +56,7 @@ class ControllerLocalisationZone extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('localisation/zone');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -100,7 +100,7 @@ class ControllerLocalisationZone extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('localisation/zone');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -146,7 +146,7 @@ class ControllerLocalisationZone extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = (string)$this->request->get['filter_name'];
 		} else {
@@ -209,7 +209,7 @@ class ControllerLocalisationZone extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -224,7 +224,7 @@ class ControllerLocalisationZone extends Controller {
 		$data['add'] = $this->url->link('localisation/zone/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('localisation/zone/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['zones'] = [];
+		$data['zones'] = array();
 
 		$filter_data = [
 			'filter_name'    => $filter_name,
@@ -289,7 +289,7 @@ class ControllerLocalisationZone extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -366,7 +366,7 @@ class ControllerLocalisationZone extends Controller {
 		$this->response->setOutput($this->load->view('localisation/zone_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['zone_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -420,7 +420,7 @@ class ControllerLocalisationZone extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

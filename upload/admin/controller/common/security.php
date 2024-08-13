@@ -28,7 +28,7 @@ class ControllerCommonSecurity extends Controller {
 
 		$path = '';
 
-		$data['paths'] = [];
+		$data['paths'] = array();
 
 		$parts = explode('/', str_replace('\\', '/', rtrim(DIR_SYSTEM, '/')));
 
@@ -45,10 +45,10 @@ class ControllerCommonSecurity extends Controller {
 		return $this->load->view('common/security', $data);
 	}
 
-	public function move(): void {
+	public function move() {
 		$this->load->language('common/security');
 
-		$json = [];
+		$json = array();
 
 		if ($this->request->post['path']) {
 			$path = $this->request->post['path'];
@@ -86,7 +86,7 @@ class ControllerCommonSecurity extends Controller {
 			}
 
 			if (!$json) {
-				$files = [];
+				$files = array();
 
 				// Make path into an array
 				$source = [DIR_SYSTEM . 'storage/'];

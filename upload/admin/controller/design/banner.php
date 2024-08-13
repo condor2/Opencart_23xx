@@ -1,8 +1,8 @@
 <?php
 class ControllerDesignBanner extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('design/banner');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerDesignBanner extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('design/banner');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerDesignBanner extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('design/banner');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerDesignBanner extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('design/banner');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerDesignBanner extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -143,7 +143,7 @@ class ControllerDesignBanner extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerDesignBanner extends Controller {
 		$data['add'] = $this->url->link('design/banner/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('design/banner/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['banners'] = [];
+		$data['banners'] = array();
 
 		$filter_data = [
 			'sort'  => $sort,
@@ -211,7 +211,7 @@ class ControllerDesignBanner extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -259,7 +259,7 @@ class ControllerDesignBanner extends Controller {
 		$this->response->setOutput($this->load->view('design/banner_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['banner_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -294,7 +294,7 @@ class ControllerDesignBanner extends Controller {
 		if (isset($this->error['banner_image'])) {
 			$data['error_banner_image'] = $this->error['banner_image'];
 		} else {
-			$data['error_banner_image'] = [];
+			$data['error_banner_image'] = array();
 		}
 
 		$url = '';
@@ -311,7 +311,7 @@ class ControllerDesignBanner extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -364,10 +364,10 @@ class ControllerDesignBanner extends Controller {
 		} elseif (isset($this->request->get['banner_id'])) {
 			$banner_images = $this->model_design_banner->getBannerImages($this->request->get['banner_id']);
 		} else {
-			$banner_images = [];
+			$banner_images = array();
 		}
 
-		$data['banner_images'] = [];
+		$data['banner_images'] = array();
 
 		foreach ($banner_images as $key => $value) {
 			foreach ($value as $banner_image) {

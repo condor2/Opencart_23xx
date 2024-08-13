@@ -1,17 +1,17 @@
 <?php
 namespace Cart;
 class Affiliate {
-	private object $db;
-	private object $config;
-	private object $request;
-	private object $session;
-	private int $affiliate_id = 0;
-	private string $firstname = '';
-	private string $lastname = '';
-	private string $email = '';
-	private string $telephone = '';
-	private string $fax = '';
-	private string $code = '';
+	private $db;
+	private $config;
+	private $request;
+	private $session;
+	private $affiliate_id;
+	private $firstname;
+	private $lastname;
+	private $email;
+	private $telephone;
+	private $fax;
+	private $code;
 
 	public function __construct(object $registry) {
 		$this->db = $registry->get('db');
@@ -72,10 +72,10 @@ class Affiliate {
 		}
 	}
 
-	public function logout(): void {
+	public function logout() {
 		unset($this->session->data['affiliate_id']);
 
-		$this->affiliate_id = 0;
+		$this->affiliate_id = '';
 		$this->firstname = '';
 		$this->lastname = '';
 		$this->email = '';
@@ -83,35 +83,35 @@ class Affiliate {
 		$this->fax = '';
 	}
 
-	public function isLogged(): bool {
+	public function isLogged() {
 		return $this->affiliate_id;
 	}
 
-	public function getId(): int {
+	public function getId() {
 		return $this->affiliate_id;
 	}
 
-	public function getFirstName(): string {
+	public function getFirstName() {
 		return $this->firstname;
 	}
 
-	public function getLastName(): string {
+	public function getLastName() {
 		return $this->lastname;
 	}
 
-	public function getEmail(): string {
+	public function getEmail() {
 		return $this->email;
 	}
 
-	public function getTelephone(): string {
+	public function getTelephone() {
 		return $this->telephone;
 	}
 
-	public function getFax(): string {
+	public function getFax() {
 		return $this->fax;
 	}
 
-	public function getCode(): string {
+	public function getCode() {
 		return $this->code;
 	}
 }

@@ -8,25 +8,25 @@ class Language {
 		$this->directory = $directory;
 	}
 
-	public function get(string $key) {
+	public function get($key) {
 		return $this->data[$key] ?? $key;
 	}
 
-	public function set(string $key, string $value): void {
+	public function set($key, $value) {
 		$this->data[$key] = $value;
 	}
 
 	// Please dont use the below function i'm thinking getting rid of it.
-	public function all(): array {
+	public function all() {
 		return $this->data;
 	}
 
 	// Please dont use the below function i'm thinking getting rid of it.
-	public function merge(&$data): void {
+	public function merge(&$data) {
 		array_merge($this->data, $data);
 	}
 
-	public function load(string $filename, &$data = []) {
+	public function load($filename, &$data = []) {
 		$_ = [];
 
 		$file = DIR_LANGUAGE . 'english/' . $filename . '.php';

@@ -1,6 +1,6 @@
 <?php
 class ControllerReportAffiliateActivity extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/affiliate_activity');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -57,7 +57,7 @@ class ControllerReportAffiliateActivity extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
@@ -71,7 +71,7 @@ class ControllerReportAffiliateActivity extends Controller {
 
 		$this->load->model('report/affiliate');
 
-		$data['activities'] = [];
+		$data['activities'] = array();
 
 		$filter_data = [
 			'filter_affiliate'  => $filter_affiliate,

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleEbayListing extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/ebay_listing');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -63,7 +63,7 @@ class ControllerExtensionModuleEbayListing extends Controller {
 			$data['error_height'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -140,7 +140,7 @@ class ControllerExtensionModuleEbayListing extends Controller {
 			$data['ebay_listing_site'] = $this->config->get('ebay_listing_site');
 		}
 
-		$data['sites'] = [];
+		$data['sites'] = array();
 
 		$data['sites'][] = [
 			'text'  => 'USA',

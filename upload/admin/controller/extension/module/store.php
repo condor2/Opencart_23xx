@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleStore extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -37,7 +37,7 @@ class ControllerExtensionModuleStore extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

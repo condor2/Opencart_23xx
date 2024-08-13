@@ -1,8 +1,8 @@
 <?php
 class ControllerCatalogCategory extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('catalog/category');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('catalog/category');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -52,7 +52,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('catalog/category');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -92,7 +92,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('catalog/category');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -134,7 +134,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->getList();
 	}
 
-	public function repair(): void {
+	public function repair() {
 		$this->load->language('catalog/category');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -174,7 +174,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -227,45 +227,45 @@ class ControllerCatalogCategory extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/category', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		$data['add'] = $this->url->link('catalog/category/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'] . $url, true);
 		$data['repair'] = $this->url->link('catalog/category/repair', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['categories'] = [];
+		$data['categories'] = array();
 
-		$filter_data = [
+		$filter_data = array(
 			'filter_name'   => $filter_name,
 			'filter_status' => $filter_status,
 			'sort'          => $sort,
 			'order'         => $order,
 			'start'         => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit'         => $this->config->get('config_limit_admin')
-		];
+		);
 
 		$category_total = $this->model_catalog_category->getTotalCategories($filter_data);
 
 		$results = $this->model_catalog_category->getCategories($filter_data);
 
 		foreach ($results as $result) {
-			$data['categories'][] = [
+			$data['categories'][] = array(
 				'category_id' => $result['category_id'],
 				'name'        => $result['name'],
 				'sort_order'  => $result['sort_order'],
 				'edit'        => $this->url->link('catalog/category/edit', 'token=' . $this->session->data['token'] . '&category_id=' . $result['category_id'] . $url, true),
 				'delete'      => $this->url->link('catalog/category/delete', 'token=' . $this->session->data['token'] . '&category_id=' . $result['category_id'] . $url, true)
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -309,7 +309,7 @@ class ControllerCatalogCategory extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -368,7 +368,7 @@ class ControllerCatalogCategory extends Controller {
 		$this->response->setOutput($this->load->view('catalog/category_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');
 
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
@@ -430,13 +430,13 @@ class ControllerCatalogCategory extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = [];
+			$data['error_name'] = array();
 		}
 
 		if (isset($this->error['meta_title'])) {
 			$data['error_meta_title'] = $this->error['meta_title'];
 		} else {
-			$data['error_meta_title'] = [];
+			$data['error_meta_title'] = array();
 		}
 
 		if (isset($this->error['keyword'])) {
@@ -465,17 +465,17 @@ class ControllerCatalogCategory extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/category', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		if (!isset($this->request->get['category_id'])) {
 			$data['action'] = $this->url->link('catalog/category/add', 'token=' . $this->session->data['token'] . $url, true);
@@ -502,7 +502,7 @@ class ControllerCatalogCategory extends Controller {
 		} elseif (!empty($category_info)) {
 			$data['category_description'] = $this->model_catalog_category->getCategoryDescriptions($this->request->get['category_id']);
 		} else {
-			$data['category_description'] = [];
+			$data['category_description'] = array();
 		}
 
 		if (isset($this->request->post['path'])) {
@@ -528,19 +528,19 @@ class ControllerCatalogCategory extends Controller {
 		} elseif (!empty($category_info)) {
 			$filters = $this->model_catalog_category->getCategoryFilters($this->request->get['category_id']);
 		} else {
-			$filters = [];
+			$filters = array();
 		}
 
-		$data['category_filters'] = [];
+		$data['category_filters'] = array();
 
 		foreach ($filters as $filter_id) {
 			$filter_info = $this->model_catalog_filter->getFilter($filter_id);
 
 			if ($filter_info) {
-				$data['category_filters'][] = [
+				$data['category_filters'][] = array(
 					'filter_id' => $filter_info['filter_id'],
 					'name'      => $filter_info['group'] . ' &gt; ' . $filter_info['name']
-				];
+				);
 			}
 		}
 
@@ -619,7 +619,7 @@ class ControllerCatalogCategory extends Controller {
 		} elseif (!empty($category_info)) {
 			$data['category_layout'] = $this->model_catalog_category->getCategoryLayouts($this->request->get['category_id']);
 		} else {
-			$data['category_layout'] = [];
+			$data['category_layout'] = array();
 		}
 
 		$this->load->model('design/layout');
@@ -697,31 +697,31 @@ class ControllerCatalogCategory extends Controller {
 		return !$this->error;
 	}
 
-	public function autocomplete(): void {
-		$json = [];
+	public function autocomplete() {
+		$json = array();
 
 		if (isset($this->request->get['filter_name'])) {
 			$this->load->model('catalog/category');
 
-			$filter_data = [
+			$filter_data = array(
 				'filter_name' => $this->request->get['filter_name'],
 				'sort'        => 'name',
 				'order'       => 'ASC',
 				'start'       => 0,
 				'limit'       => 5
-			];
+			);
 
 			$results = $this->model_catalog_category->getCategories($filter_data);
 
 			foreach ($results as $result) {
-				$json[] = [
+				$json[] = array(
 					'category_id' => $result['category_id'],
 					'name'        => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
-				];
+				);
 			}
 		}
 
-		$sort_order = [];
+		$sort_order = array();
 
 		foreach ($json as $key => $value) {
 			$sort_order[$key] = $value['name'];

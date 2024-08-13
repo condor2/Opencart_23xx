@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionShippingUPS extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/shipping/ups');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -151,7 +151,7 @@ class ControllerExtensionShippingUPS extends Controller {
 			$data['error_dimension'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -196,7 +196,7 @@ class ControllerExtensionShippingUPS extends Controller {
 			$data['ups_pickup'] = $this->config->get('ups_pickup');
 		}
 
-		$data['pickups'] = [];
+		$data['pickups'] = array();
 
 		$data['pickups'][] = [
 			'value' => '01',
@@ -239,7 +239,7 @@ class ControllerExtensionShippingUPS extends Controller {
 			$data['ups_packaging'] = $this->config->get('ups_packaging');
 		}
 
-		$data['packages'] = [];
+		$data['packages'] = array();
 
 		$data['packages'][] = [
 			'value' => '02',
@@ -303,7 +303,7 @@ class ControllerExtensionShippingUPS extends Controller {
 			$data['ups_origin'] = $this->config->get('ups_origin');
 		}
 
-		$data['origins'] = [];
+		$data['origins'] = array();
 
 		$data['origins'][] = [
 			'value' => 'US',
@@ -371,7 +371,7 @@ class ControllerExtensionShippingUPS extends Controller {
 			$data['ups_quote_type'] = $this->config->get('ups_quote_type');
 		}
 
-		$data['quote_types'] = [];
+		$data['quote_types'] = array();
 
 		$data['quote_types'][] = [
 			'value' => 'residential',

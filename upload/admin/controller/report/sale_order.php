@@ -1,6 +1,6 @@
 <?php
 class ControllerReportSaleOrder extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/sale_order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -57,7 +57,7 @@ class ControllerReportSaleOrder extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -71,7 +71,7 @@ class ControllerReportSaleOrder extends Controller {
 
 		$this->load->model('report/sale');
 
-		$data['orders'] = [];
+		$data['orders'] = array();
 
 		$filter_data = [
 			'filter_date_start'      => $filter_date_start,
@@ -124,7 +124,7 @@ class ControllerReportSaleOrder extends Controller {
 
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
-		$data['groups'] = [];
+		$data['groups'] = array();
 
 		$data['groups'][] = [
 			'text'  => $this->language->get('text_year'),

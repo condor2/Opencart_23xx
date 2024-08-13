@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionPaymentAuthorizeNetSim extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/payment/authorizenet_sim');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -64,7 +64,7 @@ class ControllerExtensionPaymentAuthorizeNetSim extends Controller {
 			$data['error_key'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

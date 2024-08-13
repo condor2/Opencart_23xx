@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonReset extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index(): ?object {
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
@@ -46,7 +46,7 @@ class ControllerCommonReset extends Controller {
 			$data['button_save'] = $this->language->get('button_save');
 			$data['button_cancel'] = $this->language->get('button_cancel');
 
-			$data['breadcrumbs'] = [];
+			$data['breadcrumbs'] = array();
 
 			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_home'),

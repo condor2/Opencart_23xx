@@ -20,7 +20,7 @@ class Template {
 	 *
 	 * @param string $adaptor
 	 */
-	public function __construct(string $adaptor) {
+	public function __construct($adaptor) {
 		$class = 'Template\\' . $adaptor;
 
 		if (class_exists($class)) {
@@ -34,7 +34,7 @@ class Template {
 	 * @param string $key
 	 * @param mixed  $value
 	 */
-	public function set(string $key, $value): void {
+	public function set($key, $value) {
 		$this->adaptor->set($key, $value);
 	}
 
@@ -44,7 +44,7 @@ class Template {
 	 *
 	 * @return string
 	 */
-	public function render(string $template): string {
+	public function render($template) {
 		return $this->adaptor->render($template);
 	}
 }

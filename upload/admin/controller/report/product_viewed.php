@@ -1,6 +1,6 @@
 <?php
 class ControllerReportProductViewed extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/product_viewed');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -17,7 +17,7 @@ class ControllerReportProductViewed extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -36,7 +36,7 @@ class ControllerReportProductViewed extends Controller {
 			'limit' => $this->config->get('config_limit_admin')
 		];
 
-		$data['products'] = [];
+		$data['products'] = array();
 
 		$product_viewed_total = $this->model_report_product->getTotalProductViews();
 

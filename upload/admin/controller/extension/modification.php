@@ -5,9 +5,9 @@
  * https://github.com/opencart/opencart/wiki/Modification-System
  */
 class ControllerExtensionModification extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/modification');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -67,10 +67,10 @@ class ControllerExtensionModification extends Controller {
 			$this->model_setting_setting->editSettingValue('config', 'config_maintenance', true);
 
 			// Log
-			$log = [];
+			$log = array();
 
 			// Clear all modification files
-			$files = [];
+			$files = array();
 
 			// Make path into an array
 			$path = [DIR_MODIFICATION . '*'];
@@ -108,7 +108,7 @@ class ControllerExtensionModification extends Controller {
 			}
 
 			// Begin
-			$xml = [];
+			$xml = array();
 
 			// Load the default modification XML
 			$xml[] = file_get_contents(DIR_SYSTEM . 'modification.xml');
@@ -131,7 +131,7 @@ class ControllerExtensionModification extends Controller {
 				}
 			}
 
-			$modification = [];
+			$modification = array();
 
 			foreach ($xml as $xml) {
 				if (empty($xml)) {
@@ -146,7 +146,7 @@ class ControllerExtensionModification extends Controller {
 				$log[] = 'MOD: ' . $dom->getElementsByTagName('name')->item(0)->textContent;
 
 				// Wipe the past modification store in the backup array
-				$recovery = [];
+				$recovery = array();
 
 				// Set the a recovery of the modification code in case we need to use it if an abort attribute is used.
 				if ($modification) {
@@ -264,7 +264,7 @@ class ControllerExtensionModification extends Controller {
 											if ($index !== '') {
 												$indexes = explode(',', $index);
 											} else {
-												$indexes = [];
+												$indexes = array();
 											}
 
 											// Get all the matches
@@ -341,7 +341,7 @@ class ControllerExtensionModification extends Controller {
 											}
 
 											// Log
-											$match = [];
+											$match = array();
 
 											preg_match_all($search, $modification[$key], $match, PREG_OFFSET_CAPTURE);
 
@@ -458,7 +458,7 @@ class ControllerExtensionModification extends Controller {
 		$this->load->model('extension/modification');
 
 		if ($this->validate()) {
-			$files = [];
+			$files = array();
 
 			// Make path into an array
 			$path = [DIR_MODIFICATION . '*'];
@@ -648,7 +648,7 @@ class ControllerExtensionModification extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -664,7 +664,7 @@ class ControllerExtensionModification extends Controller {
 		$data['clear'] = $this->url->link('extension/modification/clear', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('extension/modification/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['modifications'] = [];
+		$data['modifications'] = array();
 
 		$filter_data = [
 			'sort'  => $sort,
@@ -735,7 +735,7 @@ class ControllerExtensionModification extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';

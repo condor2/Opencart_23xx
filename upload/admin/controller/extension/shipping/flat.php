@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionShippingFlat extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/shipping/flat');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -40,7 +40,7 @@ class ControllerExtensionShippingFlat extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

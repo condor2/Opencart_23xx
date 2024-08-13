@@ -1,6 +1,6 @@
 <?php
 class ControllerReportProductPurchased extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/product_purchased');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -57,7 +57,7 @@ class ControllerReportProductPurchased extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -71,7 +71,7 @@ class ControllerReportProductPurchased extends Controller {
 
 		$this->load->model('report/product');
 
-		$data['products'] = [];
+		$data['products'] = array();
 
 		$filter_data = [
 			'filter_date_start'      => $filter_date_start,

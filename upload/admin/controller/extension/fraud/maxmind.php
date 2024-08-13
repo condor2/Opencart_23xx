@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionFraudMaxMind extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/fraud/maxmind');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -49,7 +49,7 @@ class ControllerExtensionFraudMaxMind extends Controller {
 			$data['error_key'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -105,13 +105,13 @@ class ControllerExtensionFraudMaxMind extends Controller {
 		$this->response->setOutput($this->load->view('extension/fraud/maxmind', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/fraud/maxmind');
 
 		$this->model_extension_fraud_maxmind->install();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/fraud/maxmind');
 
 		$this->model_extension_fraud_maxmind->uninstall();

@@ -1,8 +1,8 @@
 <?php
 class ControllerCatalogProduct extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -64,7 +64,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -116,7 +116,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -170,7 +170,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getList();
 	}
 
-	public function copy(): void {
+	public function copy() {
 		$this->load->language('catalog/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -224,7 +224,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_name'])) {
 			$filter_name = $this->request->get['filter_name'];
 		} else {
@@ -317,7 +317,7 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -333,7 +333,7 @@ class ControllerCatalogProduct extends Controller {
 		$data['copy'] = $this->url->link('catalog/product/copy', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('catalog/product/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['products'] = [];
+		$data['products'] = array();
 
 		$filter_data = [
 			'filter_name'     => $filter_name,
@@ -434,7 +434,7 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -541,7 +541,7 @@ class ControllerCatalogProduct extends Controller {
 		$this->response->setOutput($this->load->view('catalog/product_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');
 
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
@@ -678,13 +678,13 @@ class ControllerCatalogProduct extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = [];
+			$data['error_name'] = array();
 		}
 
 		if (isset($this->error['meta_title'])) {
 			$data['error_meta_title'] = $this->error['meta_title'];
 		} else {
-			$data['error_meta_title'] = [];
+			$data['error_meta_title'] = array();
 		}
 
 		if (isset($this->error['model'])) {
@@ -733,7 +733,7 @@ class ControllerCatalogProduct extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -770,7 +770,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['product_description'] = $this->model_catalog_product->getProductDescriptions($this->request->get['product_id']);
 		} else {
-			$data['product_description'] = [];
+			$data['product_description'] = array();
 		}
 
 		if (isset($this->request->post['model'])) {
@@ -884,7 +884,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['product_recurrings'] = $this->model_catalog_product->getRecurrings($product_info['product_id']);
 		} else {
-			$data['product_recurrings'] = [];
+			$data['product_recurrings'] = array();
 		}
 
 		// Tax Classes
@@ -1052,10 +1052,10 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$categories = $this->model_catalog_product->getProductCategories($this->request->get['product_id']);
 		} else {
-			$categories = [];
+			$categories = array();
 		}
 
-		$data['product_categories'] = [];
+		$data['product_categories'] = array();
 
 		foreach ($categories as $category_id) {
 			$category_info = $this->model_catalog_category->getCategory($category_id);
@@ -1076,10 +1076,10 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$filters = $this->model_catalog_product->getProductFilters($this->request->get['product_id']);
 		} else {
-			$filters = [];
+			$filters = array();
 		}
 
-		$data['product_filters'] = [];
+		$data['product_filters'] = array();
 
 		foreach ($filters as $filter_id) {
 			$filter_info = $this->model_catalog_filter->getFilter($filter_id);
@@ -1100,10 +1100,10 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$product_attributes = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
 		} else {
-			$product_attributes = [];
+			$product_attributes = array();
 		}
 
-		$data['product_attributes'] = [];
+		$data['product_attributes'] = array();
 
 		foreach ($product_attributes as $product_attribute) {
 			$attribute_info = $this->model_catalog_attribute->getAttribute($product_attribute['attribute_id']);
@@ -1125,13 +1125,13 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$product_options = $this->model_catalog_product->getProductOptions($this->request->get['product_id']);
 		} else {
-			$product_options = [];
+			$product_options = array();
 		}
 
-		$data['product_options'] = [];
+		$data['product_options'] = array();
 
 		foreach ($product_options as $product_option) {
-			$product_option_value_data = [];
+			$product_option_value_data = array();
 
 			if (isset($product_option['product_option_value'])) {
 				foreach ($product_option['product_option_value'] as $product_option_value) {
@@ -1161,7 +1161,7 @@ class ControllerCatalogProduct extends Controller {
 			];
 		}
 
-		$data['option_values'] = [];
+		$data['option_values'] = array();
 
 		foreach ($data['product_options'] as $product_option) {
 			if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
@@ -1182,10 +1182,10 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$product_discounts = $this->model_catalog_product->getProductDiscounts($this->request->get['product_id']);
 		} else {
-			$product_discounts = [];
+			$product_discounts = array();
 		}
 
-		$data['product_discounts'] = [];
+		$data['product_discounts'] = array();
 
 		foreach ($product_discounts as $product_discount) {
 			$data['product_discounts'][] = [
@@ -1204,10 +1204,10 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$product_specials = $this->model_catalog_product->getProductSpecials($this->request->get['product_id']);
 		} else {
-			$product_specials = [];
+			$product_specials = array();
 		}
 
-		$data['product_specials'] = [];
+		$data['product_specials'] = array();
 
 		foreach ($product_specials as $product_special) {
 			$data['product_specials'][] = [
@@ -1244,10 +1244,10 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$product_images = $this->model_catalog_product->getProductImages($this->request->get['product_id']);
 		} else {
-			$product_images = [];
+			$product_images = array();
 		}
 
-		$data['product_images'] = [];
+		$data['product_images'] = array();
 
 		foreach ($product_images as $product_image) {
 			if (is_file(DIR_IMAGE . html_entity_decode($product_image['image'], ENT_QUOTES, 'UTF-8'))) {
@@ -1273,10 +1273,10 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$product_downloads = $this->model_catalog_product->getProductDownloads($this->request->get['product_id']);
 		} else {
-			$product_downloads = [];
+			$product_downloads = array();
 		}
 
-		$data['product_downloads'] = [];
+		$data['product_downloads'] = array();
 
 		foreach ($product_downloads as $download_id) {
 			$download_info = $this->model_catalog_download->getDownload($download_id);
@@ -1295,10 +1295,10 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$products = $this->model_catalog_product->getProductRelated($this->request->get['product_id']);
 		} else {
-			$products = [];
+			$products = array();
 		}
 
-		$data['product_relateds'] = [];
+		$data['product_relateds'] = array();
 
 		foreach ($products as $product_id) {
 			$related_info = $this->model_catalog_product->getProduct($product_id);
@@ -1326,7 +1326,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['product_reward'] = $this->model_catalog_product->getProductRewards($this->request->get['product_id']);
 		} else {
-			$data['product_reward'] = [];
+			$data['product_reward'] = array();
 		}
 
 		// Layouts
@@ -1335,7 +1335,7 @@ class ControllerCatalogProduct extends Controller {
 		} elseif (!empty($product_info)) {
 			$data['product_layout'] = $this->model_catalog_product->getProductLayouts($this->request->get['product_id']);
 		} else {
-			$data['product_layout'] = [];
+			$data['product_layout'] = array();
 		}
 
 		$this->load->model('design/layout');
@@ -1405,8 +1405,8 @@ class ControllerCatalogProduct extends Controller {
 		return !$this->error;
 	}
 
-	public function autocomplete(): void {
-		$json = [];
+	public function autocomplete() {
+		$json = array();
 
 		if (isset($this->request->get['filter_name']) || isset($this->request->get['filter_model'])) {
 			$this->load->model('catalog/product');
@@ -1440,7 +1440,7 @@ class ControllerCatalogProduct extends Controller {
 			$results = $this->model_catalog_product->getProducts($filter_data);
 
 			foreach ($results as $result) {
-				$option_data = [];
+				$option_data = array();
 
 				$product_options = $this->model_catalog_product->getProductOptions($result['product_id']);
 
@@ -1448,7 +1448,7 @@ class ControllerCatalogProduct extends Controller {
 					$option_info = $this->model_catalog_option->getOption($product_option['option_id']);
 
 					if ($option_info) {
-						$product_option_value_data = [];
+						$product_option_value_data = array();
 
 						foreach ($product_option['product_option_value'] as $product_option_value) {
 							$option_value_info = $this->model_catalog_option->getOptionValue($product_option_value['option_value_id']);

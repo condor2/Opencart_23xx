@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionPaymentEway extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/payment/eway');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -90,7 +90,7 @@ class ControllerExtensionPaymentEway extends Controller {
 			$data['error_payment_type'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -207,12 +207,12 @@ class ControllerExtensionPaymentEway extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/eway', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/payment/eway');
 		$this->model_extension_payment_eway->install();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/payment/eway');
 		$this->model_extension_payment_eway->uninstall();
 	}
@@ -283,7 +283,7 @@ class ControllerExtensionPaymentEway extends Controller {
 		}
 	}
 
-	public function refund(): void {
+	public function refund() {
 		$this->load->language('extension/payment/eway');
 
 		$order_id = $this->request->post['order_id'];
@@ -319,7 +319,7 @@ class ControllerExtensionPaymentEway extends Controller {
 					$this->model_extension_payment_eway->updateRefundStatus($eway_order['eway_order_id'], $refund_status);
 				}
 
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['transactionid'] = $result->TransactionID;
 				$json['data']['created'] = date("Y-m-d H:i:s");
 				$json['data']['amount'] = number_format($refund_amount, 2, '.', '');
@@ -338,7 +338,7 @@ class ControllerExtensionPaymentEway extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function capture(): void {
+	public function capture() {
 		$this->load->language('extension/payment/eway');
 
 		$order_id = $this->request->post['order_id'];
@@ -376,7 +376,7 @@ class ControllerExtensionPaymentEway extends Controller {
 				$this->model_extension_payment_eway->updateCaptureStatus($eway_order['eway_order_id'], 1);
 				$this->model_extension_payment_eway->updateTransactionId($eway_order['eway_order_id'], $result->TransactionID);
 
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['transactionid'] = $result->TransactionID;
 				$json['data']['created'] = date("Y-m-d H:i:s");
 				$json['data']['amount'] = number_format($capture_amount, 2, '.', '');

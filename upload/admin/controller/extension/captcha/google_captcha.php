@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionCaptchaGoogleCaptcha extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/captcha/google_captcha');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -49,7 +49,7 @@ class ControllerExtensionCaptchaGoogleCaptcha extends Controller {
 			$data['error_secret'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

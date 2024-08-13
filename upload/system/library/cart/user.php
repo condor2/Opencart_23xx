@@ -1,16 +1,16 @@
 <?php
 namespace Cart;
 class User {
+	private $user_id;
+	private $user_group_id;
+	private $username;
+	private $permission = array();
+	private $firstname;
+	private $lastname;
 	private $db;
 	private $request;
 	private $session;
-	private $user_id = 0;
-	private $username = '';
-	private $firstname  = '';
-	private $lastname = '';
-	private $email  = '';
-	private $user_group_id = 0;
-	private $permission = [];
+	private $email;
 
 	/**
 	 * Constructor
@@ -106,15 +106,15 @@ class User {
 	 *
 	 * @return void
 	 */
-	public function logout(): void {
+	public function logout() {
 		unset($this->session->data['user_id']);
 
-		$this->user_id = 0;
+		$this->user_id = '';
 		$this->username = '';
 		$this->firstname = '';
 		$this->lastname = '';
 		$this->email = '';
-		$this->user_group_id = 0;
+		$this->user_group_id = '';
 	}
 
 	/**
@@ -139,7 +139,7 @@ class User {
 	 * @return bool
 	 */
 	public function isLogged() {
-		return $this->user_id ? true : false;
+		return $this->user_id;
 	}
 
 	/**

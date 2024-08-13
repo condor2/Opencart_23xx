@@ -127,7 +127,7 @@ class Image {
 	 * @param int    $height
 	 * @param string $default
 	 */
-	public function resize(int $width = 0, int $height = 0, string $default = ''): void {
+	public function resize(int $width = 0, int $height = 0, $default = '') {
 		if (!$this->width || !$this->height) {
 			return;
 		}
@@ -254,7 +254,7 @@ class Image {
 	 * @param int $bottom_x
 	 * @param int $bottom_y
 	 */
-	public function crop(int $top_x, $top_y, int $bottom_x, int $bottom_y): void {
+	public function crop(int $top_x, $top_y, int $bottom_x, int $bottom_y) {
 		$image_old = $this->image;
 		$this->image = imagecreatetruecolor($bottom_x - $top_x, $bottom_y - $top_y);
 
@@ -269,7 +269,7 @@ class Image {
 	 * @param int    $degree
 	 * @param string $color
 	 */
-	public function rotate(int $degree, $color = 'FFFFFF'): void {
+	public function rotate(int $degree, $color = 'FFFFFF') {
 		$rgb = $this->html2rgb($color);
 
 		$this->image = imagerotate($this->image, $degree, imagecolorallocate($this->image, $rgb[0], $rgb[1], $rgb[2]));
@@ -283,7 +283,7 @@ class Image {
 	 *
 	 * @return void
 	 */
-	private function filter(): void {
+	private function filter() {
 		$args = func_get_args();
 
 		imagefilter(...$args);
@@ -296,7 +296,7 @@ class Image {
 	 * @param int    $size
 	 * @param string $color
 	 */
-	private function text($text, int $x = 0, int $y = 0, int $size = 5, $color = '000000'): void {
+	private function text($text, int $x = 0, int $y = 0, int $size = 5, $color = '000000') {
 		$rgb = $this->html2rgb($color);
 
 		imagestring($this->image, $size, $x, $y, $text, imagecolorallocate($this->image, $rgb[0], $rgb[1], $rgb[2]));
@@ -308,7 +308,7 @@ class Image {
 	 * @param int    $y
 	 * @param int    $opacity
 	 */
-	private function merge($merge, int $x = 0, int $y = 0, int $opacity = 100): void {
+	private function merge($merge, int $x = 0, int $y = 0, int $opacity = 100) {
 		imagecopymerge($this->image, $merge->getImage(), $x, $y, 0, 0, $merge->getWidth(), $merge->getHeight(), $opacity);
 	}
 

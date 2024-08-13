@@ -28,7 +28,7 @@ class Config {
 	 * @param string $key
 	 * @param string $value
 	 */
-	public function set($key, $value): void {
+	public function set($key, $value) {
 		$this->data[$key] = $value;
 	}
 
@@ -37,14 +37,14 @@ class Config {
 	 *
 	 * @return bool
 	 */
-	public function has(string $key): bool {
+	public function has($key) {
 		return isset($this->data[$key]);
 	}
 
 	/**
 	 * @param string $filename
 	 */
-	public function load(string $filename): void {
+	public function load($filename) {
 		$file = DIR_CONFIG . $filename . '.php';
 
 		if (file_exists($file)) {

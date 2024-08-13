@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionPaymentAmazonLoginPay extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 
 		$this->load->language('extension/payment/amazon_login_pay');
 
@@ -135,7 +135,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			$data['error_curreny'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -376,7 +376,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/amazon_login_pay', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/payment/amazon_login_pay');
 		$this->load->model('extension/event');
 		$this->model_extension_payment_amazon_login_pay->install();
@@ -384,7 +384,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$this->model_extension_event->addEvent('amazon_history_capture', 'catalog/model/checkout/order/addOrderHistory/after', 'extension/payment/amazon_login_pay/capture');
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/payment/amazon_login_pay');
 		$this->load->model('extension/event');
 		$this->model_extension_payment_amazon_login_pay->uninstall();
@@ -447,9 +447,9 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		}
 	}
 
-	public function cancel(): void {
+	public function cancel() {
 		$this->load->language('extension/payment/amazon_login_pay');
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['order_id']) && $this->request->post['order_id'] != '') {
 			$this->load->model('extension/payment/amazon_login_pay');
@@ -464,7 +464,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 				$this->model_extension_payment_amazon_login_pay->addTransaction($amazon_login_pay_order['amazon_login_pay_order_id'], 'cancel', $cancel_response['status'], 0.00);
 				$this->model_extension_payment_amazon_login_pay->updateCancelStatus($amazon_login_pay_order['amazon_login_pay_order_id'], 1);
 				$json['msg'] = $this->language->get('text_cancel_ok');
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['date_added'] = date("Y-m-d H:i:s");
 				$json['data']['type'] = 'cancel';
 				$json['data']['status'] = $cancel_response['status'];
@@ -482,9 +482,9 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function capture(): void {
+	public function capture() {
 		$this->load->language('extension/payment/amazon_login_pay');
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['order_id']) && $this->request->post['order_id'] != '' && isset($this->request->post['amount']) && $this->request->post['amount'] > 0) {
 			$this->load->model('extension/payment/amazon_login_pay');
@@ -509,7 +509,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 					$json['msg'] = $this->language->get('text_capture_ok');
 				}
 
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['date_added'] = date("Y-m-d H:i:s");
 				$json['data']['type'] = 'capture';
 				$json['data']['status'] = $capture_response['status'];
@@ -531,9 +531,9 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function refund(): void {
+	public function refund() {
 		$this->load->language('extension/payment/amazon_login_pay');
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['order_id']) && !empty($this->request->post['order_id'])) {
 			$this->load->model('extension/payment/amazon_login_pay');
@@ -564,7 +564,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 						$json['msg'][] = $this->language->get('text_refund_ok') . '<br />';
 					}
 
-					$data = [];
+					$data = array();
 					$data['date_added'] = date("Y-m-d H:i:s");
 					$data['type'] = 'refund';
 					$data['status'] = $response['status'];

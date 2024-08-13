@@ -1,8 +1,8 @@
 <?php
 class ControllerSaleRecurring extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('sale/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerSaleRecurring extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_order_recurring_id'])) {
 			$filter_order_recurring_id = (int)$this->request->get['filter_order_recurring_id'];
 		} else {
@@ -105,7 +105,7 @@ class ControllerSaleRecurring extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -117,7 +117,7 @@ class ControllerSaleRecurring extends Controller {
 			'href' => $this->url->link('sale/recurring', 'token=' . $this->session->data['token'] . $url, true)
 		];
 
-		$data['recurrings'] = [];
+		$data['recurrings'] = array();
 
 		$filter_data = [
 			'filter_order_recurring_id' => $filter_order_recurring_id,
@@ -294,7 +294,7 @@ class ControllerSaleRecurring extends Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
-		$data['recurring_statuses'] = [];
+		$data['recurring_statuses'] = array();
 
 		$data['recurring_statuses'][0] = [
 			'text'  => '',
@@ -398,7 +398,7 @@ class ControllerSaleRecurring extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$data['breadcrumbs'] = [];
+			$data['breadcrumbs'] = array();
 
 			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_home'),
@@ -458,7 +458,7 @@ class ControllerSaleRecurring extends Controller {
 			$data['quantity'] = $order_recurring_info['product_quantity'];
 
 			// Transactions
-			$data['transactions'] = [];
+			$data['transactions'] = array();
 
 			$transactions = $this->model_sale_recurring->getRecurringTransactions($order_recurring_info['order_recurring_id']);
 

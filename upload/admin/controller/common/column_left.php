@@ -17,7 +17,7 @@ class ControllerCommonColumnLeft extends Controller {
 			];
 
 			// Catalog
-			$catalog = [];
+			$catalog = array();
 
 			if ($this->user->hasPermission('access', 'catalog/category')) {
 				$catalog[] = [
@@ -52,7 +52,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Attributes
-			$attribute = [];
+			$attribute = array();
 
 			if ($this->user->hasPermission('access', 'catalog/attribute')) {
 				$attribute[] = [
@@ -129,7 +129,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Extension
-			$extension = [];
+			$extension = array();
 
 			if ($this->user->hasPermission('access', 'extension/installer')) {
 				$extension[] = [
@@ -174,7 +174,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Design
-			$design = [];
+			$design = array();
 
 			if ($this->user->hasPermission('access', 'design/layout')) {
 				$design[] = [
@@ -211,7 +211,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Sales
-			$sale = [];
+			$sale = array();
 
 			if ($this->user->hasPermission('access', 'sale/order')) {
 				$sale[] = [
@@ -238,7 +238,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Voucher
-			$voucher = [];
+			$voucher = array();
 
 			if ($this->user->hasPermission('access', 'sale/voucher')) {
 				$voucher[] = [
@@ -275,7 +275,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Customer
-			$customer = [];
+			$customer = array();
 
 			if ($this->user->hasPermission('access', 'customer/customer')) {
 				$customer[] = [
@@ -312,7 +312,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Marketing
-			$marketing = [];
+			$marketing = array();
 
 			if ($this->user->hasPermission('access', 'marketing/marketing')) {
 				$marketing[] = [
@@ -357,7 +357,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// System
-			$system = [];
+			$system = array();
 
 			if ($this->user->hasPermission('access', 'setting/setting')) {
 				$system[] = [
@@ -368,7 +368,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Users
-			$user = [];
+			$user = array();
 
 			if ($this->user->hasPermission('access', 'user/user')) {
 				$user[] = [
@@ -403,7 +403,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Localisation
-			$localisation = [];
+			$localisation = array();
 
 			if ($this->user->hasPermission('access', 'localisation/location')) {
 				$localisation[] = [
@@ -446,7 +446,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Returns
-			$return = [];
+			$return = array();
 
 			if ($this->user->hasPermission('access', 'localisation/return_status')) {
 				$return[] = [
@@ -505,7 +505,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Tax
-			$tax = [];
+			$tax = array();
 
 			if ($this->user->hasPermission('access', 'localisation/tax_class')) {
 				$tax[] = [
@@ -556,7 +556,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Tools
-			$tool = [];
+			$tool = array();
 
 			if ($this->user->hasPermission('access', 'tool/upload')) {
 				$tool[] = [
@@ -601,10 +601,10 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Report
-			$report = [];
+			$report = array();
 
 			// Report Sales
-			$report_sale = [];
+			$report_sale = array();
 
 			if ($this->user->hasPermission('access', 'report/sale_order')) {
 				$report_sale[] = [
@@ -655,7 +655,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Report Products
-			$report_product = [];
+			$report_product = array();
 
 			if ($this->user->hasPermission('access', 'report/product_viewed')) {
 				$report_product[] = [
@@ -682,7 +682,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Report Customers
-			$report_customer = [];
+			$report_customer = array();
 
 			if ($this->user->hasPermission('access', 'report/customer_online')) {
 				$report_customer[] = [
@@ -741,7 +741,7 @@ class ControllerCommonColumnLeft extends Controller {
 			}
 
 			// Report Marketing
-			$report_marketing = [];
+			$report_marketing = array();
 
 			if ($this->user->hasPermission('access', 'report/marketing')) {
 				$report_marketing[] = [
@@ -812,7 +812,7 @@ class ControllerCommonColumnLeft extends Controller {
 
 			$this->load->model('localisation/order_status');
 
-			$order_status_data = [];
+			$order_status_data = array();
 
 			$results = $this->model_localisation_order_status->getOrderStatuses();
 

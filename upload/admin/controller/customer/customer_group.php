@@ -1,8 +1,8 @@
 <?php
 class ControllerCustomerCustomerGroup extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('customer/customer_group');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('customer/customer_group');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('customer/customer_group');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('customer/customer_group');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -143,7 +143,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$data['add'] = $this->url->link('customer/customer_group/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('customer/customer_group/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['customer_groups'] = [];
+		$data['customer_groups'] = array();
 
 		$filter_data = [
 			'sort'  => $sort,
@@ -211,7 +211,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -259,7 +259,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		$this->response->setOutput($this->load->view('customer/customer_group_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['customer_group_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -285,7 +285,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = [];
+			$data['error_name'] = array();
 		}
 
 		$url = '';
@@ -302,7 +302,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -335,7 +335,7 @@ class ControllerCustomerCustomerGroup extends Controller {
 		} elseif (isset($this->request->get['customer_group_id'])) {
 			$data['customer_group_description'] = $this->model_customer_customer_group->getCustomerGroupDescriptions($this->request->get['customer_group_id']);
 		} else {
-			$data['customer_group_description'] = [];
+			$data['customer_group_description'] = array();
 		}
 
 		if (isset($this->request->post['approval'])) {

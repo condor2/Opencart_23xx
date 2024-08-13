@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionPaymentG2APay extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/payment/g2apay');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -125,7 +125,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 			$data['g2apay_partially_refunded_status_id'] = (int)$this->config->get('g2apay_partially_refunded_status_id');
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -278,9 +278,9 @@ class ControllerExtensionPaymentG2APay extends Controller {
 		}
 	}
 
-	public function refund(): void {
+	public function refund() {
 		$this->load->language('extension/payment/g2apay');
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['order_id']) && !empty($this->request->post['order_id'])) {
 			$this->load->model('extension/payment/g2apay');
@@ -306,7 +306,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 					$json['msg'] = $this->language->get('text_refund_ok');
 				}
 
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['date_added'] = date("Y-m-d H:i:s");
 				$json['data']['amount'] = $this->currency->format(($this->request->post['amount'] * -1), $g2apay_order['currency_code'], false);
 				$json['data']['total_released'] = (float)$total_released;
@@ -326,12 +326,12 @@ class ControllerExtensionPaymentG2APay extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/payment/g2apay');
 		$this->model_extension_payment_g2apay->install();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/payment/g2apay');
 		$this->model_extension_payment_g2apay->uninstall();
 	}

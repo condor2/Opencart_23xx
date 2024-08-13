@@ -1,6 +1,6 @@
 <?php
 class ControllerReportSaleReturn extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/sale_return');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -57,7 +57,7 @@ class ControllerReportSaleReturn extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -71,7 +71,7 @@ class ControllerReportSaleReturn extends Controller {
 
 		$this->load->model('report/return');
 
-		$data['returns'] = [];
+		$data['returns'] = array();
 
 		$filter_data = [
 			'filter_date_start'       => $filter_date_start,
@@ -119,7 +119,7 @@ class ControllerReportSaleReturn extends Controller {
 
 		$data['return_statuses'] = $this->model_localisation_return_status->getReturnStatuses();
 
-		$data['groups'] = [];
+		$data['groups'] = array();
 
 		$data['groups'][] = [
 			'text'  => $this->language->get('text_year'),

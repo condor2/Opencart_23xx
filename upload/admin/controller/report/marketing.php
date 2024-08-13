@@ -1,6 +1,6 @@
 <?php
 class ControllerReportMarketing extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/marketing');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -47,7 +47,7 @@ class ControllerReportMarketing extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -61,7 +61,7 @@ class ControllerReportMarketing extends Controller {
 
 		$this->load->model('report/marketing');
 
-		$data['marketings'] = [];
+		$data['marketings'] = array();
 
 		$filter_data = [
 			'filter_date_start'      => $filter_date_start,
@@ -76,7 +76,7 @@ class ControllerReportMarketing extends Controller {
 		$results = $this->model_report_marketing->getMarketing($filter_data);
 
 		foreach ($results as $result) {
-			$action = [];
+			$action = array();
 
 			$action[] = [
 				'text' => $this->language->get('text_edit'),

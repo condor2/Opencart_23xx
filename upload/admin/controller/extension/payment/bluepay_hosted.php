@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionPaymentBluePayHosted extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/payment/bluepay_hosted');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -78,7 +78,7 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 			$data['error_secret_key'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -194,13 +194,13 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/bluepay_hosted', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/payment/bluepay_hosted');
 
 		$this->model_extension_payment_bluepay_hosted->install();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/payment/bluepay_hosted');
 
 		$this->model_extension_payment_bluepay_hosted->uninstall();
@@ -254,9 +254,9 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 		}
 	}
 
-	public function void(): void {
+	public function void() {
 		$this->load->language('extension/payment/bluepay_hosted');
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['order_id']) && $this->request->post['order_id'] != '') {
 			$this->load->model('extension/payment/bluepay_hosted');
@@ -272,7 +272,7 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 				$this->model_extension_payment_bluepay_hosted->updateVoidStatus($bluepay_hosted_order['bluepay_hosted_order_id'], 1);
 
 				$json['msg'] = $this->language->get('text_void_ok');
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['date_added'] = date("Y-m-d H:i:s");
 				$json['data']['total'] = $bluepay_hosted_order['total'];
 				$json['error'] = false;
@@ -289,9 +289,9 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function release(): void {
+	public function release() {
 		$this->load->language('extension/payment/bluepay_hosted');
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['order_id']) && $this->request->post['order_id'] != '' && isset($this->request->post['amount']) && $this->request->post['amount'] > 0) {
 			$this->load->model('extension/payment/bluepay_hosted');
@@ -318,7 +318,7 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 					$json['msg'] = $this->language->get('text_release_ok');
 				}
 
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['date_added'] = date("Y-m-d H:i:s");
 				$json['data']['amount'] = $this->request->post['amount'];
 				$json['data']['release_status'] = $release_status;
@@ -337,9 +337,9 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function rebate(): void {
+	public function rebate() {
 		$this->load->language('extension/payment/bluepay_hosted');
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['order_id']) && !empty($this->request->post['order_id'])) {
 			$this->load->model('extension/payment/bluepay_hosted');
@@ -365,7 +365,7 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 					$json['msg'] = $this->language->get('text_rebate_ok');
 				}
 
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['date_added'] = date("Y-m-d H:i:s");
 				$json['data']['amount'] = $this->request->post['amount'] * -1;
 				$json['data']['total_released'] = (float)$total_released;

@@ -5,12 +5,12 @@
  * @package Admin\Controller\Extension\Module
  */
 class ControllerExtensionModulePPLogin extends Controller {
-	private $error = [];
+	private $error = array();
 
 	/**
 	 * @return void
 	 */
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/pp_login');
 
 		$this->load->model('setting/setting');
@@ -76,7 +76,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 			$data['error_secret'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -151,7 +151,7 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['languages'] = $this->model_localisation_language->getLanguages();
 
-		$data['locales'] = [];
+		$data['locales'] = array();
 
 		$data['locales'][] = [
 			'value' => 'en-gb',

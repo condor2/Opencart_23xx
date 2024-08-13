@@ -30,7 +30,7 @@ class Front {
 	/**
 	 * @param object $pre_action
 	 */
-	public function addPreAction(Action $pre_action): void {
+	public function addPreAction(Action $pre_action) {
 		$this->pre_action[] = $pre_action;
 	}
 
@@ -38,7 +38,7 @@ class Front {
 	 * @param object $action
 	 * @param object $error
 	 */
-	public function dispatch(Action $action, Action $error): void {
+	public function dispatch(Action $action, Action $error) {
 		$this->error = $error;
 
 		foreach ($this->pre_action as $pre_action) {

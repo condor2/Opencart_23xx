@@ -1,13 +1,13 @@
 <?php
 class ControllerExtensionExtension extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/extension');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -35,7 +35,7 @@ class ControllerExtensionExtension extends Controller {
 			$data['type'] = '';
 		}
 
-		$data['categories'] = [];
+		$data['categories'] = array();
 
 		$files = glob(DIR_APPLICATION . 'controller/extension/extension/*.php', GLOB_BRACE);
 

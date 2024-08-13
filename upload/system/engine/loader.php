@@ -34,7 +34,7 @@ final class Loader {
 		return $output;
 	}
 
-	public function model($route): void {
+	public function model($route) {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 
@@ -97,7 +97,7 @@ final class Loader {
 		return $output;
 	}
 
-	public function library($route): void {
+	public function library($route) {
 		// Sanitize the call
 		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 
@@ -113,7 +113,7 @@ final class Loader {
 		}
 	}
 
-	public function helper($route): void {
+	public function helper($route) {
 		$file = DIR_SYSTEM . 'helper/' . preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route) . '.php';
 
 		if (is_file($file)) {
@@ -123,7 +123,7 @@ final class Loader {
 		}
 	}
 
-	public function config($route): void {
+	public function config($route) {
 		$this->registry->get('event')->trigger('config/' . $route . '/before', [&$route]);
 
 		$this->registry->get('config')->load($route);

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionDashboardOrder extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/dashboard/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -36,7 +36,7 @@ class ControllerExtensionDashboardOrder extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -63,7 +63,7 @@ class ControllerExtensionDashboardOrder extends Controller {
 			$data['dashboard_order_width'] = $this->config->get('dashboard_order_width');
 		}
 
-		$data['columns'] = [];
+		$data['columns'] = array();
 
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;

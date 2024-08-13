@@ -1,8 +1,8 @@
 <?php
 class ControllerUserUser extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('user/user');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -143,7 +143,7 @@ class ControllerUserUser extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerUserUser extends Controller {
 		$data['add'] = $this->url->link('user/user/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('user/user/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['users'] = [];
+		$data['users'] = array();
 
 		$filter_data = [
 			'sort'  => $sort,
@@ -213,7 +213,7 @@ class ControllerUserUser extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -338,7 +338,7 @@ class ControllerUserUser extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

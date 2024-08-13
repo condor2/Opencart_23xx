@@ -1,6 +1,6 @@
 <?php
 class ControllerReportCustomerReward extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/customer_reward');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -47,7 +47,7 @@ class ControllerReportCustomerReward extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -61,7 +61,7 @@ class ControllerReportCustomerReward extends Controller {
 
 		$this->load->model('report/customer');
 
-		$data['customers'] = [];
+		$data['customers'] = array();
 
 		$filter_data = [
 			'filter_date_start' => $filter_date_start,

@@ -1,13 +1,15 @@
 <?php
 class ControllerCommonDashboard extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('common/dashboard');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
+		$data['token'] = $this->session->data['token'];
+
 		$data['heading_title'] = $this->language->get('heading_title');
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -19,8 +21,6 @@ class ControllerCommonDashboard extends Controller {
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
 		];
 
-		$data['token'] = $this->session->data['token'];
-
 		// Check install directory exists
 		if (is_dir(dirname(DIR_APPLICATION) . '/install')) {
 			$data['error_install'] = $this->language->get('error_install');
@@ -29,7 +29,7 @@ class ControllerCommonDashboard extends Controller {
 		}
 
 		// Dashboard Extensions
-		$dashboards = [];
+		$dashboards = array();
 
 		$this->load->model('extension/extension');
 
@@ -52,7 +52,7 @@ class ControllerCommonDashboard extends Controller {
 			}
 		}
 
-		$sort_order = [];
+		$sort_order = array();
 
 		foreach ($dashboards as $key => $value) {
 			$sort_order[$key] = $value['sort_order'];
@@ -62,8 +62,8 @@ class ControllerCommonDashboard extends Controller {
 
 		// Split the array so the columns width is not more than 12 on each row.
 		$width = 0;
-		$column = [];
-		$data['rows'] = [];
+		$column = array();
+		$data['rows'] = array();
 
 		foreach ($dashboards as $dashboard) {
 			$column[] = $dashboard;
@@ -74,7 +74,7 @@ class ControllerCommonDashboard extends Controller {
 				$data['rows'][] = $column;
 
 				$width = 0;
-				$column = [];
+				$column = array();
 			}
 		}
 

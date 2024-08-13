@@ -133,7 +133,7 @@ class ControllerCommonHeader extends Controller {
 			$data['alerts'] = $customer_total + $product_total + $review_total + $return_total + $affiliate_total;
 
 			// Online Stores
-			$data['stores'] = [];
+			$data['stores'] = array();
 
 			$data['stores'][] = [
 				'name' => $this->config->get('config_name'),

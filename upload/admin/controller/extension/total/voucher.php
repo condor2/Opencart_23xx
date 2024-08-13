@@ -5,12 +5,12 @@
  * @package Admin\Controller\Extension\Total
  */
 class ControllerExtensionTotalVoucher extends Controller {
-	private array $error = [];
+	private array $error = array();
 
 	/**
 	 * @return void
 	 */
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/total/voucher');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -43,7 +43,7 @@ class ControllerExtensionTotalVoucher extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -91,14 +91,14 @@ class ControllerExtensionTotalVoucher extends Controller {
 		return !$this->error;
 	}
 
-	public function install(): void {
+	public function install() {
 		// Register the event triggers
 		$this->load->model('extension/event');
 
 		$this->model_extension_event->addEvent('voucher', 'catalog/model/checkout/order/addOrderHistory/after', 'extension/total/voucher/send');
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		// Delete the event triggers
 		$this->load->model('extension/event');
 

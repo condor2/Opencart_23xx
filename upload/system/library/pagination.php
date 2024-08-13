@@ -28,7 +28,7 @@ class Pagination {
 	 *
 	 * @return string
 	 */
-	public function render(): string {
+	public function render() {
 		$total = $this->total;
 
 		if ($this->page < 1) {

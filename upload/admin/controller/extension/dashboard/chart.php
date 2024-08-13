@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionDashboardChart extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/dashboard/chart');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -36,7 +36,7 @@ class ControllerExtensionDashboardChart extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -63,7 +63,7 @@ class ControllerExtensionDashboardChart extends Controller {
 			$data['dashboard_chart_width'] = $this->config->get('dashboardchart_width');
 		}
 
-		$data['columns'] = [];
+		$data['columns'] = array();
 
 		for ($i = 3; $i <= 12; $i++) {
 			$data['columns'][] = $i;
@@ -115,19 +115,19 @@ class ControllerExtensionDashboardChart extends Controller {
 	public function chart() {
 		$this->load->language('extension/dashboard/chart');
 
-		$json = [];
+		$json = array();
 
 		$this->load->model('report/sale');
 		$this->load->model('report/customer');
 
-		$json['order'] = [];
-		$json['customer'] = [];
-		$json['xaxis'] = [];
+		$json['order'] = array();
+		$json['customer'] = array();
+		$json['xaxis'] = array();
 
 		$json['order']['label'] = $this->language->get('text_order');
 		$json['customer']['label'] = $this->language->get('text_customer');
-		$json['order']['data'] = [];
-		$json['customer']['data'] = [];
+		$json['order']['data'] = array();
+		$json['customer']['data'] = array();
 
 		if (isset($this->request->get['range'])) {
 			$range = $this->request->get['range'];

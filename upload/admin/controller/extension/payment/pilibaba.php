@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionPaymentPilibaba extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->model('setting/setting');
 
 		$this->load->model('extension/payment/pilibaba');
@@ -25,7 +25,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -181,7 +181,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		if ($data['pilibaba_merchant_number'] && $data['pilibaba_secret_key']) {
 			$data['show_register'] = false;
 
-			$data['currencies'] = $data['warehouses'] = $data['countries'] = [];
+			$data['currencies'] = $data['warehouses'] = $data['countries'] = array();
 		} else {
 			$data['show_register'] = true;
 
@@ -219,7 +219,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/pilibaba', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/pilibaba');
 
@@ -227,7 +227,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		}
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		if ($this->user->hasPermission('modify', 'extension/extension')) {
 			$this->load->model('extension/payment/pilibaba');
 
@@ -235,10 +235,10 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		}
 	}
 
-	public function register(): void {
+	public function register() {
 		$this->load->language('extension/payment/pilibaba');
 
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['email_address']) && isset($this->request->post['password']) && isset($this->request->post['currency']) && isset($this->request->post['warehouse']) && isset($this->request->post['country']) && isset($this->request->post['environment'])) {
 			if (utf8_strlen($this->request->post['email_address']) < 1) {
@@ -335,10 +335,10 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		}
 	}
 
-	public function tracking(): void {
+	public function tracking() {
 		$this->load->language('extension/payment/pilibaba');
 
-		$json = [];
+		$json = array();
 
 		if ($this->config->get('pilibaba_status')) {
 			if (isset($this->request->post['order_id']) && isset($this->request->post['tracking'])) {
@@ -362,7 +362,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function barcode(): void {
+	public function barcode() {
 		if ($this->config->get('pilibaba_status')) {
 			if (isset($this->request->get['order_id'])) {
 				if ($this->config->get('pilibaba_environment') == 'live') {

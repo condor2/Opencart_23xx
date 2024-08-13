@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionExtensionPayment extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/extension/payment');
 
 		$this->load->model('extension/extension');
@@ -10,7 +10,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 		$this->getList();
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->language('extension/extension/payment');
 
 		$this->load->model('extension/extension');
@@ -36,7 +36,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 		$this->getList();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->language('extension/extension/payment');
 
 		$this->load->model('extension/extension');
@@ -60,7 +60,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
@@ -100,7 +100,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 			}
 		}
 
-		$data['extensions'] = [];
+		$data['extensions'] = array();
 
 		// Compatibility code for old extension folders
 		$files = glob(DIR_APPLICATION . 'controller/extension/payment/*.php');

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionFraudIp extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/fraud/ip');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -48,7 +48,7 @@ class ControllerExtensionFraudIp extends Controller {
 			$data['error_warning'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -92,7 +92,7 @@ class ControllerExtensionFraudIp extends Controller {
 		$this->response->setOutput($this->load->view('extension/fraud/ip', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/fraud/ip');
 
 		$this->model_extension_fraud_ip->install();
@@ -112,7 +112,7 @@ class ControllerExtensionFraudIp extends Controller {
 		return !$this->error;
 	}
 
-	public function ip(): void {
+	public function ip() {
 		$this->load->language('extension/fraud/ip');
 
 		$this->load->model('extension/fraud/ip');
@@ -136,7 +136,7 @@ class ControllerExtensionFraudIp extends Controller {
 
 		$limit = 10;
 
-		$data['ips'] = [];
+		$data['ips'] = array();
 
 		$results = $this->model_extension_fraud_ip->getIps(($page - 1) * $limit, $limit);
 
@@ -164,10 +164,10 @@ class ControllerExtensionFraudIp extends Controller {
 		$this->response->setOutput($this->load->view('extension/fraud/ip_ip', $data));
 	}
 
-	public function addIp(): void {
+	public function addIp() {
 		$this->load->language('extension/fraud/ip');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'extension/fraud/ip')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -185,10 +185,10 @@ class ControllerExtensionFraudIp extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function removeIp(): void {
+	public function removeIp() {
 		$this->load->language('extension/fraud/ip');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'extension/fraud/ip')) {
 			$json['error'] = $this->language->get('error_permission');

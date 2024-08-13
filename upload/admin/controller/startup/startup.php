@@ -1,6 +1,6 @@
 <?php
 class ControllerStartupStartup extends Controller {
-	public function index(): void {
+	public function index() {
 		// Settings
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
 

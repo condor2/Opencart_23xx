@@ -1,6 +1,6 @@
 <?php
 class ControllerReportSaleCoupon extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/sale_coupon');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -37,7 +37,7 @@ class ControllerReportSaleCoupon extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -51,7 +51,7 @@ class ControllerReportSaleCoupon extends Controller {
 
 		$this->load->model('report/coupon');
 
-		$data['coupons'] = [];
+		$data['coupons'] = array();
 
 		$filter_data = [
 			'filter_date_start' => $filter_date_start,

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleHTML extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->document->addStyle('view/javascript/summernote/summernote.min.css');
 
 		$this->document->addScript('view/javascript/summernote/summernote.min.js');
@@ -62,7 +62,7 @@ class ControllerExtensionModuleHTML extends Controller {
 			$data['error_name'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -111,7 +111,7 @@ class ControllerExtensionModuleHTML extends Controller {
 		} elseif (!empty($module_info)) {
 			$data['module_description'] = $module_info['module_description'];
 		} else {
-			$data['module_description'] = [];
+			$data['module_description'] = array();
 		}
 
 		$this->load->model('localisation/language');

@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionPaymentFirstdata extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/payment/firstdata');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 			$data['error_demo_url'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -244,12 +244,12 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/firstdata', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/payment/firstdata');
 		$this->model_extension_payment_firstdata->install();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/payment/firstdata');
 		$this->model_extension_payment_firstdata->uninstall();
 	}
@@ -347,7 +347,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		}
 	}
 
-	public function void(): void {
+	public function void() {
 		$this->load->language('extension/payment/firstdata');
 
 		if ($this->request->post['status'] == 'FAILED') {
@@ -365,7 +365,7 @@ class ControllerExtensionPaymentFirstdata extends Controller {
 		$this->response->redirect($this->url->link('sale/order/info', 'order_id=' . $this->request->post['order_id'] . '&token=' . $this->session->data['token'], true));
 	}
 
-	public function capture(): void {
+	public function capture() {
 		$this->load->language('extension/payment/firstdata');
 
 		if ($this->request->post['status'] == 'FAILED') {

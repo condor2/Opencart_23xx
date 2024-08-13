@@ -1,8 +1,8 @@
 <?php
 class ControllerCatalogFilter extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('catalog/filter');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -143,41 +143,41 @@ class ControllerCatalogFilter extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		$data['add'] = $this->url->link('catalog/filter/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('catalog/filter/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['filters'] = [];
+		$data['filters'] = array();
 
-		$filter_data = [
+		$filter_data = array(
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
-		];
+		);
 
 		$filter_total = $this->model_catalog_filter->getTotalFilterGroups();
 
 		$results = $this->model_catalog_filter->getFilterGroups($filter_data);
 
 		foreach ($results as $result) {
-			$data['filters'][] = [
+			$data['filters'][] = array(
 				'filter_group_id' => $result['filter_group_id'],
 				'name'            => $result['name'],
 				'sort_order'      => $result['sort_order'],
 				'edit'            => $this->url->link('catalog/filter/edit', 'token=' . $this->session->data['token'] . '&filter_group_id=' . $result['filter_group_id'] . $url, true)
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -211,7 +211,7 @@ class ControllerCatalogFilter extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -259,7 +259,7 @@ class ControllerCatalogFilter extends Controller {
 		$this->response->setOutput($this->load->view('catalog/filter_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['filter_group_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -284,13 +284,13 @@ class ControllerCatalogFilter extends Controller {
 		if (isset($this->error['group'])) {
 			$data['error_group'] = $this->error['group'];
 		} else {
-			$data['error_group'] = [];
+			$data['error_group'] = array();
 		}
 
 		if (isset($this->error['filter'])) {
 			$data['error_filter'] = $this->error['filter'];
 		} else {
-			$data['error_filter'] = [];
+			$data['error_filter'] = array();
 		}
 
 		$url = '';
@@ -307,17 +307,17 @@ class ControllerCatalogFilter extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/filter', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		if (!isset($this->request->get['filter_group_id'])) {
 			$data['action'] = $this->url->link('catalog/filter/add', 'token=' . $this->session->data['token'] . $url, true);
@@ -342,7 +342,7 @@ class ControllerCatalogFilter extends Controller {
 		} elseif (!empty($filter_group_info)) {
 			$data['filter_group_description'] = $this->model_catalog_filter->getFilterGroupDescriptions($this->request->get['filter_group_id']);
 		} else {
-			$data['filter_group_description'] = [];
+			$data['filter_group_description'] = array();
 		}
 
 		if (isset($this->request->post['sort_order'])) {
@@ -358,7 +358,7 @@ class ControllerCatalogFilter extends Controller {
 		} elseif (!empty($filter_group_info)) {
 			$data['filters'] = $this->model_catalog_filter->getFilterDescriptions($this->request->get['filter_group_id']);
 		} else {
-			$data['filters'] = [];
+			$data['filters'] = array();
 		}
 
 		$data['header'] = $this->load->controller('common/header');
@@ -406,29 +406,29 @@ class ControllerCatalogFilter extends Controller {
 		return !$this->error;
 	}
 
-	public function autocomplete(): void {
-		$json = [];
+	public function autocomplete() {
+		$json = array();
 
 		if (isset($this->request->get['filter_name'])) {
 			$this->load->model('catalog/filter');
 
-			$filter_data = [
+			$filter_data = array(
 				'filter_name' => $this->request->get['filter_name'],
 				'start'       => 0,
 				'limit'       => 5
-			];
+			);
 
 			$filters = $this->model_catalog_filter->getFilters($filter_data);
 
 			foreach ($filters as $filter) {
-				$json[] = [
+				$json[] = array(
 					'filter_id' => $filter['filter_id'],
 					'name'      => strip_tags(html_entity_decode($filter['group'] . ' &gt; ' . $filter['name'], ENT_QUOTES, 'UTF-8'))
-				];
+				);
 			}
 		}
 
-		$sort_order = [];
+		$sort_order = array();
 
 		foreach ($json as $key => $value) {
 			$sort_order[$key] = $value['name'];

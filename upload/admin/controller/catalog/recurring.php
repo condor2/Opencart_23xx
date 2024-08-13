@@ -1,8 +1,8 @@
 <?php
 class ControllerCatalogRecurring extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -44,7 +44,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -110,7 +110,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	public function copy(): void {
+	public function copy() {
 		$this->load->language('catalog/recurring');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -144,7 +144,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -177,7 +177,7 @@ class ControllerCatalogRecurring extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -193,7 +193,7 @@ class ControllerCatalogRecurring extends Controller {
 		$data['copy'] = $this->url->link('catalog/recurring/copy', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('catalog/recurring/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['recurrings'] = [];
+		$data['recurrings'] = array();
 
 		$filter_data = [
 			'sort'  => $sort,
@@ -247,7 +247,7 @@ class ControllerCatalogRecurring extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -295,7 +295,7 @@ class ControllerCatalogRecurring extends Controller {
 		$this->response->setOutput($this->load->view('catalog/recurring_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['recurring_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -330,7 +330,7 @@ class ControllerCatalogRecurring extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = [];
+			$data['error_name'] = array();
 		}
 
 		$url = '';
@@ -347,7 +347,7 @@ class ControllerCatalogRecurring extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -382,7 +382,7 @@ class ControllerCatalogRecurring extends Controller {
 		} elseif (!empty($recurring_info)) {
 			$data['recurring_description'] = $this->model_catalog_recurring->getRecurringDescription($recurring_info['recurring_id']);
 		} else {
-			$data['recurring_description'] = [];
+			$data['recurring_description'] = array();
 		}
 
 		if (isset($this->request->post['price'])) {
@@ -393,7 +393,7 @@ class ControllerCatalogRecurring extends Controller {
 			$data['price'] = 0;
 		}
 
-		$data['frequencies'] = [];
+		$data['frequencies'] = array();
 
 		$data['frequencies'][] = [
 			'text'  => $this->language->get('text_day'),

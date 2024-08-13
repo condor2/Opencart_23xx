@@ -12,7 +12,7 @@ class ControllerStartupStartup extends Controller {
 		return false;
 	}
 
-	public function index(): void {
+	public function index() {
 		// Store
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "store` WHERE REPLACE(`url`, 'www.', '') = '" . $this->db->escape(($this->request->server['HTTPS'] ? 'https://' : 'http://') . str_replace('www.', '', $this->request->server['HTTP_HOST']) . rtrim(dirname($this->request->server['PHP_SELF']), '/.\\') . '/') . "'");
 
@@ -125,13 +125,16 @@ class ControllerStartupStartup extends Controller {
 		$this->registry->set('customer', $customer);
 
 		// Customer Group
-		if ($this->customer->isLogged()) {
-			$this->config->set('config_customer_group_id', $this->customer->getGroupId());
-		} elseif (isset($this->session->data['customer']) && isset($this->session->data['customer']['customer_group_id'])) {
+		if (isset($this->session->data['customer']) && isset($this->session->data['customer']['customer_group_id'])) {
 			// For API calls
 			$this->config->set('config_customer_group_id', $this->session->data['customer']['customer_group_id']);
+		} elseif ($this->customer->isLogged()) {
+			// Logged in customers
+			$this->config->set('config_customer_group_id', $this->customer->getGroupId());
 		} elseif (isset($this->session->data['guest']) && isset($this->session->data['guest']['customer_group_id'])) {
 			$this->config->set('config_customer_group_id', $this->session->data['guest']['customer_group_id']);
+		} else {
+			$this->config->set('config_customer_group_id', $this->config->get('config_customer_group_id'));
 		}
 
 		// Tracking Code
@@ -176,6 +179,7 @@ class ControllerStartupStartup extends Controller {
 		// Tax
 		$this->registry->set('tax', new Cart\Tax($this->registry));
 
+		// PHP v7.4+ validation compatibility.
 		if (isset($this->session->data['shipping_address']['country_id']) && isset($this->session->data['shipping_address']['zone_id'])) {
 			$this->tax->setShippingAddress($this->session->data['shipping_address']['country_id'], $this->session->data['shipping_address']['zone_id']);
 		} elseif ($this->config->get('config_tax_default') == 'shipping') {

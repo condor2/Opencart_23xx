@@ -1,21 +1,21 @@
 <?php
 namespace Cart;
 class Customer {
-	private object $db;
-	private object $config;
-	private object $request;
-	private object $session;
-	private int $customer_id = 0;
-	private string $firstname = '';
-	private string $lastname = '';
-	private int $customer_group_id = 0;
-	private string $email = '';
-	private string $telephone = '';
-	private string $fax = '';
-	private bool $newsletter = false;
-	private int $address_id = 0;
+	private $config;
+	private $db;
+	private $request;
+	private $session;
+	private $customer_id;
+	private $firstname;
+	private $lastname;
+	private $customer_group_id;
+	private $email;
+	private $telephone;
+	private $fax;
+	private $newsletter;
+	private $address_id;
 
-	public function __construct(object $registry) {
+	public function __construct($registry) {
 		$this->config = $registry->get('config');
 		$this->db = $registry->get('db');
 		$this->request = $registry->get('request');
@@ -48,7 +48,7 @@ class Customer {
 		}
 	}
 
-	public function login(string $email, string $password, bool $override = false): bool {
+	public function login($email, $password, $override = false) {
 		$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "' AND status = '1' AND approved = '1'");
 
 		if ($customer_query->row) {
@@ -88,69 +88,69 @@ class Customer {
 		}
 	}
 
-	public function logout(): void {
+	public function logout() {
 		unset($this->session->data['customer_id']);
 
-		$this->customer_id = 0;
+		$this->customer_id = '';
 		$this->firstname = '';
 		$this->lastname = '';
-		$this->customer_group_id = 0;
+		$this->customer_group_id = '';
 		$this->email = '';
 		$this->telephone = '';
 		$this->fax = '';
-		$this->newsletter = false;
-		$this->address_id = 0;
+		$this->newsletter = '';
+		$this->address_id = '';
 	}
 
-	public function isLogged(): bool {
+	public function isLogged() {
 		return $this->customer_id;
 	}
 
-	public function getId(): int {
+	public function getId() {
 		return $this->customer_id;
 	}
 
-	public function getFirstName(): string {
+	public function getFirstName() {
 		return $this->firstname;
 	}
 
-	public function getLastName(): string {
+	public function getLastName() {
 		return $this->lastname;
 	}
 
-	public function getGroupId(): int {
+	public function getGroupId() {
 		return $this->customer_group_id;
 	}
 
-	public function getEmail(): string {
+	public function getEmail() {
 		return $this->email;
 	}
 
-	public function getTelephone(): string {
+	public function getTelephone() {
 		return $this->telephone;
 	}
 
-	public function getFax(): string {
+	public function getFax() {
 		return $this->fax;
 	}
 
-	public function getNewsletter(): bool {
+	public function getNewsletter() {
 		return $this->newsletter;
 	}
 
-	public function getAddressId(): int {
+	public function getAddressId() {
 		return $this->address_id;
 	}
 
-	public function getBalance(): float {
+	public function getBalance() {
 		$query = $this->db->query("SELECT SUM(amount) AS total FROM " . DB_PREFIX . "customer_transaction WHERE customer_id = '" . (int)$this->customer_id . "'");
 
-		return (float)$query->row['total'];
+		return $query->row['total'];
 	}
 
-	public function getRewardPoints(): int {
+	public function getRewardPoints() {
 		$query = $this->db->query("SELECT SUM(points) AS total FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$this->customer_id . "'");
 
-		return (float)$query->row['total'];
+		return $query->row['total'];
 	}
 }

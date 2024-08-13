@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleLaybuyLayout extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->model('setting/setting');
 
 		$this->language->load('extension/module/laybuy_layout');
@@ -17,7 +17,7 @@ class ControllerExtensionModuleLaybuyLayout extends Controller {
 			$this->response->redirect($this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=module', true));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),

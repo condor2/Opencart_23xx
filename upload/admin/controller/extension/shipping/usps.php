@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionShippingUsps extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/shipping/usps');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -120,7 +120,7 @@ class ControllerExtensionShippingUsps extends Controller {
 			$data['error_dimension'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -387,7 +387,7 @@ class ControllerExtensionShippingUsps extends Controller {
 			$data['usps_size'] = $this->config->get('usps_size');
 		}
 
-		$data['sizes'] = [];
+		$data['sizes'] = array();
 
 		$data['sizes'][] = [
 			'text'  => $this->language->get('text_regular'),
@@ -405,7 +405,7 @@ class ControllerExtensionShippingUsps extends Controller {
 			$data['usps_container'] = $this->config->get('usps_container');
 		}
 
-		$data['containers'] = [];
+		$data['containers'] = array();
 
 		$data['containers'][] = [
 			'text'  => $this->language->get('text_rectangular'),

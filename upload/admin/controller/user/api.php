@@ -1,8 +1,8 @@
 <?php
 class ControllerUserApi extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('user/api');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -143,7 +143,7 @@ class ControllerUserApi extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -158,7 +158,7 @@ class ControllerUserApi extends Controller {
 		$data['add'] = $this->url->link('user/api/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('user/api/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['apis'] = [];
+		$data['apis'] = array();
 
 		$filter_data = [
 			'sort'  => $sort,
@@ -215,7 +215,7 @@ class ControllerUserApi extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -330,7 +330,7 @@ class ControllerUserApi extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -384,11 +384,11 @@ class ControllerUserApi extends Controller {
 		} elseif (!empty($api_info)) {
 			$data['api_ips'] = $this->model_user_api->getApiIps($this->request->get['api_id']);
 		} else {
-			$data['api_ips'] = [];
+			$data['api_ips'] = array();
 		}
 
 		// Session
-		$data['api_sessions'] = [];
+		$data['api_sessions'] = array();
 
 		if (!empty($api_info)) {
 			$results = $this->model_user_api->getApiSessions($this->request->get['api_id']);
@@ -442,7 +442,7 @@ class ControllerUserApi extends Controller {
 	public function addIp() {
 		$this->load->language('user/api');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'user/api')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -461,7 +461,7 @@ class ControllerUserApi extends Controller {
 	public function deleteSession() {
 		$this->load->language('user/api');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'user/api')) {
 			$json['error'] = $this->language->get('error_permission');

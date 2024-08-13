@@ -1,6 +1,6 @@
 <?php
 class ControllerReportCustomerOnline extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/customer_online');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -37,7 +37,7 @@ class ControllerReportCustomerOnline extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
@@ -52,7 +52,7 @@ class ControllerReportCustomerOnline extends Controller {
 		$this->load->model('report/customer');
 		$this->load->model('customer/customer');
 
-		$data['customers'] = [];
+		$data['customers'] = array();
 
 		$filter_data = [
 			'filter_ip'       => $filter_ip,

@@ -37,7 +37,7 @@ class Url {
 	 *
 	 * @return void
 	 */
-	public function addRewrite($rewrite): void {
+	public function addRewrite($rewrite) {
 		$this->rewrite[] = $rewrite;
 	}
 
@@ -52,7 +52,7 @@ class Url {
 	 *
 	 * @return string
 	 */
-	public function link(string $route, $args = '', bool $secure = false): string {
+	public function link($route, $args = '', $secure = false) {
 		if ($this->ssl && $secure) {
 			$url = $this->ssl . 'index.php?route=' . $route;
 		} else {

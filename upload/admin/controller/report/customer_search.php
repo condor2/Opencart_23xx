@@ -1,6 +1,6 @@
 <?php
 class ControllerReportCustomerSearch extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('report/customer_search');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -67,7 +67,7 @@ class ControllerReportCustomerSearch extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true),
@@ -82,7 +82,7 @@ class ControllerReportCustomerSearch extends Controller {
 		$this->load->model('report/customer');
 		$this->load->model('catalog/category');
 
-		$data['searches'] = [];
+		$data['searches'] = array();
 
 		$filter_data = [
 			'filter_date_start' => $filter_date_start,

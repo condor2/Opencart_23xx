@@ -1,8 +1,8 @@
 <?php
 class ControllerSettingStore extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('setting/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -14,7 +14,7 @@ class ControllerSettingStore extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('setting/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -36,7 +36,7 @@ class ControllerSettingStore extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('setting/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -58,7 +58,7 @@ class ControllerSettingStore extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('setting/store');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -82,7 +82,7 @@ class ControllerSettingStore extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
 		} else {
@@ -95,7 +95,7 @@ class ControllerSettingStore extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -110,7 +110,7 @@ class ControllerSettingStore extends Controller {
 		$data['add'] = $this->url->link('setting/store/add', 'token=' . $this->session->data['token'], true);
 		$data['delete'] = $this->url->link('setting/store/delete', 'token=' . $this->session->data['token'], true);
 
-		$data['stores'] = [];
+		$data['stores'] = array();
 
 		$store_total = 0;
 
@@ -173,7 +173,7 @@ class ControllerSettingStore extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$pagination = new Pagination();
@@ -193,7 +193,7 @@ class ControllerSettingStore extends Controller {
 		$this->response->setOutput($this->load->view('setting/store_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['store_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -333,7 +333,7 @@ class ControllerSettingStore extends Controller {
 			$data['error_customer_group_display'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -429,7 +429,7 @@ class ControllerSettingStore extends Controller {
 			$data['config_theme'] = '';
 		}
 
-		$data['themes'] = [];
+		$data['themes'] = array();
 
 		$this->load->model('extension/extension');
 
@@ -555,7 +555,7 @@ class ControllerSettingStore extends Controller {
 		} elseif (isset($store_info['config_location'])) {
 			$data['config_location'] = $this->config->get('config_location');
 		} else {
-			$data['config_location'] = [];
+			$data['config_location'] = array();
 		}
 
 		if (isset($this->request->post['config_country_id'])) {
@@ -643,7 +643,7 @@ class ControllerSettingStore extends Controller {
 		} elseif (isset($store_info['config_customer_group_display'])) {
 			$data['config_customer_group_display'] = $store_info['config_customer_group_display'];
 		} else {
-			$data['config_customer_group_display'] = [];
+			$data['config_customer_group_display'] = array();
 		}
 
 		if (isset($this->request->post['config_customer_price'])) {

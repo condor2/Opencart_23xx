@@ -1,8 +1,8 @@
 <?php
 class ControllerSaleOrder extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -22,7 +22,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -32,7 +32,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('sale/order');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -86,7 +86,7 @@ class ControllerSaleOrder extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_order_id'])) {
 			$filter_order_id = (int)$this->request->get['filter_order_id'];
 		} else {
@@ -199,7 +199,7 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -216,7 +216,7 @@ class ControllerSaleOrder extends Controller {
 		$data['add'] = $this->url->link('sale/order/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = str_replace('&amp;', '&', $this->url->link('sale/order/delete', 'token=' . $this->session->data['token'] . $url, true));
 
-		$data['orders'] = [];
+		$data['orders'] = array();
 
 		$filter_data = [
 			'filter_order_id'        => $filter_order_id,
@@ -305,7 +305,7 @@ class ControllerSaleOrder extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -424,7 +424,7 @@ class ControllerSaleOrder extends Controller {
 		$data['sort'] = $sort;
 		$data['order'] = $order;
 
-		$data['stores'] = [];
+		$data['stores'] = array();
 
 		$data['stores'][] = [
 			'store_id' => 0,
@@ -453,7 +453,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_list', $data));
 	}
 
-	public function getForm(): void {
+	public function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['order_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -579,7 +579,7 @@ class ControllerSaleOrder extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -643,7 +643,7 @@ class ControllerSaleOrder extends Controller {
 			$data['shipping_code'] = $order_info['shipping_code'];
 
 			// Products
-			$data['order_products'] = [];
+			$data['order_products'] = array();
 
 			$products = $this->model_sale_order->getOrderProducts($this->request->get['order_id']);
 
@@ -667,7 +667,7 @@ class ControllerSaleOrder extends Controller {
 			$data['voucher'] = '';
 			$data['reward'] = '';
 
-			$data['order_totals'] = [];
+			$data['order_totals'] = array();
 
 			$order_totals = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
 
@@ -700,9 +700,9 @@ class ControllerSaleOrder extends Controller {
 			$data['email'] = '';
 			$data['telephone'] = '';
 			$data['fax'] = '';
-			$data['customer_custom_field'] = [];
+			$data['customer_custom_field'] = array();
 
-			$data['addresses'] = [];
+			$data['addresses'] = array();
 
 			$data['payment_firstname'] = '';
 			$data['payment_lastname'] = '';
@@ -713,7 +713,7 @@ class ControllerSaleOrder extends Controller {
 			$data['payment_postcode'] = '';
 			$data['payment_country_id'] = '';
 			$data['payment_zone_id'] = '';
-			$data['payment_custom_field'] = [];
+			$data['payment_custom_field'] = array();
 			$data['payment_method'] = '';
 			$data['payment_code'] = '';
 
@@ -726,13 +726,13 @@ class ControllerSaleOrder extends Controller {
 			$data['shipping_postcode'] = '';
 			$data['shipping_country_id'] = '';
 			$data['shipping_zone_id'] = '';
-			$data['shipping_custom_field'] = [];
+			$data['shipping_custom_field'] = array();
 			$data['shipping_method'] = '';
 			$data['shipping_code'] = '';
 
-			$data['order_products'] = [];
-			$data['order_vouchers'] = [];
-			$data['order_totals'] = [];
+			$data['order_products'] = array();
+			$data['order_vouchers'] = array();
+			$data['order_totals'] = array();
 
 			$data['order_status_id'] = $this->config->get('config_order_status_id');
 			$data['comment'] = '';
@@ -748,7 +748,7 @@ class ControllerSaleOrder extends Controller {
 		// Stores
 		$this->load->model('setting/store');
 
-		$data['stores'] = [];
+		$data['stores'] = array();
 
 		$data['stores'][] = [
 			'store_id' => 0,
@@ -772,7 +772,7 @@ class ControllerSaleOrder extends Controller {
 		// Custom Fields
 		$this->load->model('customer/custom_field');
 
-		$data['custom_fields'] = [];
+		$data['custom_fields'] = array();
 
 		$filter_data = [
 			'sort'  => 'cf.sort_order',
@@ -960,7 +960,7 @@ class ControllerSaleOrder extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$data['breadcrumbs'] = [];
+			$data['breadcrumbs'] = array();
 
 			$data['breadcrumbs'][] = [
 				'text' => $this->language->get('text_home'),
@@ -1096,12 +1096,12 @@ class ControllerSaleOrder extends Controller {
 			// Uploaded files
 			$this->load->model('tool/upload');
 
-			$data['products'] = [];
+			$data['products'] = array();
 
 			$products = $this->model_sale_order->getOrderProducts($this->request->get['order_id']);
 
 			foreach ($products as $product) {
-				$option_data = [];
+				$option_data = array();
 
 				$options = $this->model_sale_order->getOrderOptions($this->request->get['order_id'], $product['order_product_id']);
 
@@ -1139,7 +1139,7 @@ class ControllerSaleOrder extends Controller {
 				];
 			}
 
-			$data['vouchers'] = [];
+			$data['vouchers'] = array();
 
 			$vouchers = $this->model_sale_order->getOrderVouchers($this->request->get['order_id']);
 
@@ -1151,7 +1151,7 @@ class ControllerSaleOrder extends Controller {
 				];
 			}
 
-			$data['totals'] = [];
+			$data['totals'] = array();
 
 			$totals = $this->model_sale_order->getOrderTotals($this->request->get['order_id']);
 
@@ -1204,7 +1204,7 @@ class ControllerSaleOrder extends Controller {
 			// Custom Fields
 			$this->load->model('customer/custom_field');
 
-			$data['account_custom_fields'] = [];
+			$data['account_custom_fields'] = array();
 
 			$filter_data = [
 				'sort'  => 'cf.sort_order',
@@ -1260,7 +1260,7 @@ class ControllerSaleOrder extends Controller {
 			}
 
 			// Custom fields
-			$data['payment_custom_fields'] = [];
+			$data['payment_custom_fields'] = array();
 
 			foreach ($custom_fields as $custom_field) {
 				if ($custom_field['location'] == 'address' && isset($order_info['payment_custom_field'][$custom_field['custom_field_id']])) {
@@ -1313,7 +1313,7 @@ class ControllerSaleOrder extends Controller {
 			}
 
 			// Shipping
-			$data['shipping_custom_fields'] = [];
+			$data['shipping_custom_fields'] = array();
 
 			foreach ($custom_fields as $custom_field) {
 				if ($custom_field['location'] == 'address' && isset($order_info['shipping_custom_field'][$custom_field['custom_field_id']])) {
@@ -1371,7 +1371,7 @@ class ControllerSaleOrder extends Controller {
 			$data['accept_language'] = $order_info['accept_language'];
 
 			// Additional Tabs
-			$data['tabs'] = [];
+			$data['tabs'] = array();
 
 			if ($this->user->hasPermission('access', 'extension/payment/' . $order_info['payment_code'])) {
 				if (is_file(DIR_CATALOG . 'controller/extension/payment/' . $order_info['payment_code'] . '.php')) {
@@ -1450,10 +1450,10 @@ class ControllerSaleOrder extends Controller {
 		return !$this->error;
 	}
 
-	public function createInvoiceNo(): void {
+	public function createInvoiceNo() {
 		$this->load->language('sale/order');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -1479,10 +1479,10 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function addReward(): void {
+	public function addReward() {
 		$this->load->language('sale/order');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -1514,10 +1514,10 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function removeReward(): void {
+	public function removeReward() {
 		$this->load->language('sale/order');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -1545,10 +1545,10 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function addCommission(): void {
+	public function addCommission() {
 		$this->load->language('sale/order');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -1580,10 +1580,10 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function removeCommission(): void {
+	public function removeCommission() {
 		$this->load->language('sale/order');
 
-		$json = [];
+		$json = array();
 
 		if (!$this->user->hasPermission('modify', 'sale/order')) {
 			$json['error'] = $this->language->get('error_permission');
@@ -1611,7 +1611,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function history(): void {
+	public function history() {
 		$this->load->language('sale/order');
 
 		$data['text_no_results'] = $this->language->get('text_no_results');
@@ -1629,7 +1629,7 @@ class ControllerSaleOrder extends Controller {
 
 		$limit = 10;
 
-		$data['histories'] = [];
+		$data['histories'] = array();
 
 		$this->load->model('sale/order');
 
@@ -1659,7 +1659,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_history', $data));
 	}
 
-	public function invoice(): void {
+	public function invoice() {
 		$this->load->language('sale/order');
 
 		$data['title'] = $this->language->get('text_invoice');
@@ -1694,9 +1694,9 @@ class ControllerSaleOrder extends Controller {
 
 		$this->load->model('setting/setting');
 
-		$data['orders'] = [];
+		$data['orders'] = array();
 
-		$orders = [];
+		$orders = array();
 
 		if (isset($this->request->post['selected'])) {
 			$orders = $this->request->post['selected'];
@@ -1798,12 +1798,12 @@ class ControllerSaleOrder extends Controller {
 
 				$this->load->model('tool/upload');
 
-				$product_data = [];
+				$product_data = array();
 
 				$products = $this->model_sale_order->getOrderProducts($order_id);
 
 				foreach ($products as $product) {
-					$option_data = [];
+					$option_data = array();
 
 					$options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
 
@@ -1836,7 +1836,7 @@ class ControllerSaleOrder extends Controller {
 					];
 				}
 
-				$voucher_data = [];
+				$voucher_data = array();
 
 				$vouchers = $this->model_sale_order->getOrderVouchers($order_id);
 
@@ -1847,7 +1847,7 @@ class ControllerSaleOrder extends Controller {
 					];
 				}
 
-				$total_data = [];
+				$total_data = array();
 
 				$totals = $this->model_sale_order->getOrderTotals($order_id);
 
@@ -1885,7 +1885,7 @@ class ControllerSaleOrder extends Controller {
 		$this->response->setOutput($this->load->view('sale/order_invoice', $data));
 	}
 
-	public function shipping(): void {
+	public function shipping() {
 		$this->load->language('sale/order');
 
 		$data['title'] = $this->language->get('text_shipping');
@@ -1929,9 +1929,9 @@ class ControllerSaleOrder extends Controller {
 
 		$this->load->model('setting/setting');
 
-		$data['orders'] = [];
+		$data['orders'] = array();
 
-		$orders = [];
+		$orders = array();
 
 		if (isset($this->request->post['selected'])) {
 			$orders = $this->request->post['selected'];
@@ -2000,7 +2000,7 @@ class ControllerSaleOrder extends Controller {
 
 				$this->load->model('tool/upload');
 
-				$product_data = [];
+				$product_data = array();
 
 				$products = $this->model_sale_order->getOrderProducts($order_id);
 
@@ -2010,7 +2010,7 @@ class ControllerSaleOrder extends Controller {
 					$product_info = $this->model_catalog_product->getProduct($product['product_id']);
 
 					if ($product_info) {
-						$option_data = [];
+						$option_data = array();
 
 						$options = $this->model_sale_order->getOrderOptions($order_id, $product['order_product_id']);
 

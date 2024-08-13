@@ -1,8 +1,8 @@
 <?php
 class ControllerSaleReturn extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('sale/return');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -12,7 +12,7 @@ class ControllerSaleReturn extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('sale/return');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -76,7 +76,7 @@ class ControllerSaleReturn extends Controller {
 		$this->getForm();
 	}
 
-	public function edit(): void {
+	public function edit() {
 		$this->load->language('sale/return');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -140,7 +140,7 @@ class ControllerSaleReturn extends Controller {
 		$this->getForm();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('sale/return');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -206,7 +206,7 @@ class ControllerSaleReturn extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		if (isset($this->request->get['filter_return_id'])) {
 			$filter_return_id = (int)$this->request->get['filter_return_id'];
 		} else {
@@ -319,7 +319,7 @@ class ControllerSaleReturn extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -334,7 +334,7 @@ class ControllerSaleReturn extends Controller {
 		$data['add'] = $this->url->link('sale/return/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('sale/return/delete', 'token=' . $this->session->data['token'] . $url, true);
 
-		$data['returns'] = [];
+		$data['returns'] = array();
 
 		$filter_data = [
 			'filter_return_id'        => $filter_return_id,
@@ -423,7 +423,7 @@ class ControllerSaleReturn extends Controller {
 		if (isset($this->request->post['selected'])) {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
-			$data['selected'] = [];
+			$data['selected'] = array();
 		}
 
 		$url = '';
@@ -554,7 +554,7 @@ class ControllerSaleReturn extends Controller {
 		$this->response->setOutput($this->load->view('sale/return_list', $data));
 	}
 
-	protected function getForm(): void {
+	protected function getForm() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_form'] = !isset($this->request->get['return_id']) ? $this->language->get('text_add') : $this->language->get('text_edit');
@@ -694,7 +694,7 @@ class ControllerSaleReturn extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -925,7 +925,7 @@ class ControllerSaleReturn extends Controller {
 		return !$this->error;
 	}
 
-	public function history(): void {
+	public function history() {
 		$this->load->language('sale/return');
 
 		$data['error'] = '';
@@ -960,7 +960,7 @@ class ControllerSaleReturn extends Controller {
 
 		$limit = 10;
 
-		$data['histories'] = [];
+		$data['histories'] = array();
 
 		$results = $this->model_sale_return->getReturnHistories($this->request->get['return_id'], ($page - 1) * $limit, $limit);
 

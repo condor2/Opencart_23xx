@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionPaymentWorldpay extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/payment/worldpay');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -75,7 +75,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 			$data['error_client_key'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -245,12 +245,12 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/worldpay', $data));
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->model('extension/payment/worldpay');
 		$this->model_extension_payment_worldpay->install();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->model('extension/payment/worldpay');
 		$this->model_extension_payment_worldpay->uninstall();
 	}
@@ -305,9 +305,9 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 		}
 	}
 
-	public function refund(): void {
+	public function refund() {
 		$this->load->language('extension/payment/worldpay');
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['order_id']) && !empty($this->request->post['order_id'])) {
 			$this->load->model('extension/payment/worldpay');
@@ -327,7 +327,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 				$this->model_extension_payment_worldpay->updateRefundStatus($worldpay_order['worldpay_order_id'], 1);
 
 				$json['msg'] = $this->language->get('text_refund_ok_order');
-				$json['data'] = [];
+				$json['data'] = array();
 				$json['data']['created'] = date("Y-m-d H:i:s");
 				$json['data']['amount'] = $this->currency->format(($this->request->post['amount'] * -1), $worldpay_order['currency_code'], false);
 				$json['data']['total_released'] = $this->currency->format($total_released, $worldpay_order['currency_code'], false);

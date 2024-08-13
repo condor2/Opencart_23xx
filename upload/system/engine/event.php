@@ -12,7 +12,7 @@ class Event {
 		$this->registry = $registry;
 	}
 
-	public function register($trigger, \Action $action): void {
+	public function register($trigger, \Action $action) {
 		$this->data[$trigger][] = $action;
 	}
 
@@ -30,7 +30,7 @@ class Event {
 		}
 	}
 
-	public function unregister($trigger, $route = ''): void {
+	public function unregister($trigger, $route = '') {
 		if ($route) {
 			foreach ($this->data[$trigger] as $key => $action) {
 				if ($action->getId() == $route) {
@@ -42,7 +42,7 @@ class Event {
 		}
 	}
 
-	public function removeAction($trigger, $route): void {
+	public function removeAction($trigger, $route) {
 		foreach ($this->data[$trigger] as $key => $action) {
 			if ($action->getId() == $route) {
 				unset($this->data[$trigger][$key]);

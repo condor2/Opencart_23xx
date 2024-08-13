@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionModuleFeatured extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/module/featured');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -63,7 +63,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 			$data['error_height'] = '';
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = [
 			'text' => $this->language->get('text_home'),
@@ -111,14 +111,14 @@ class ControllerExtensionModuleFeatured extends Controller {
 
 		$this->load->model('catalog/product');
 
-		$data['products'] = [];
+		$data['products'] = array();
 
 		if (!empty($this->request->post['product'])) {
 			$products = $this->request->post['product'];
 		} elseif (!empty($module_info['product'])) {
 			$products = $module_info['product'];
 		} else {
-			$products = [];
+			$products = array();
 		}
 
 		foreach ($products as $product_id) {

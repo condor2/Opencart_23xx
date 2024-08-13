@@ -1,6 +1,6 @@
 <?php
 class ControllerStartupSass extends Controller {
-	public function index(): void {
+	public function index() {
 		$files = glob(DIR_APPLICATION . 'view/stylesheet/*.scss');
 
 		if ($files) {

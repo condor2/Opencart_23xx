@@ -1,8 +1,8 @@
 <?php
 class ControllerExtensionExtensionModule extends Controller {
-	private $error = [];
+	private $error = array();
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -12,7 +12,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function install(): void {
+	public function install() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -42,7 +42,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -70,7 +70,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -88,7 +88,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('extension/extension/module');
 
 		$this->load->model('extension/extension');
@@ -104,7 +104,7 @@ class ControllerExtensionExtensionModule extends Controller {
 		$this->getList();
 	}
 
-	protected function getList(): void {
+	protected function getList() {
 		$data['heading_title'] = $this->language->get('heading_title');
 
 		$data['text_layout'] = sprintf($this->language->get('text_layout'), $this->url->link('design/layout', 'token=' . $this->session->data['token'], true));
@@ -146,7 +146,7 @@ class ControllerExtensionExtensionModule extends Controller {
 			}
 		}
 
-		$data['extensions'] = [];
+		$data['extensions'] = array();
 
 		// Compatibility code for old extension folders
 		$files = glob(DIR_APPLICATION . 'controller/extension/module/*.php');
@@ -157,7 +157,7 @@ class ControllerExtensionExtensionModule extends Controller {
 
 				$this->load->language('extension/module/' . $extension);
 
-				$module_data = [];
+				$module_data = array();
 
 				$modules = $this->model_extension_module->getModulesByCode($extension);
 
@@ -181,7 +181,7 @@ class ControllerExtensionExtensionModule extends Controller {
 			}
 		}
 
-		$sort_order = [];
+		$sort_order = array();
 
 		foreach ($data['extensions'] as $key => $value) {
 			$sort_order[$key] = $value['name'];
