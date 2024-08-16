@@ -49,12 +49,12 @@ class ModelExtensionCurrencyEcb extends Model {
 
 						$to = $currencies[$result['code']];
 
-						$this->editValueByCode($result['code'], 1 / ($currencies[$default] * ($from / $to)));
+						$this->model_extension_currency_ecb->editValueByCode($result['code'], 1 / ($currencies[$default] * ($from / $to)));
 					}
 				}
 			}
 
-			$this->editValueByCode($default, '1.00000');
+			$this->model_extension_currency_ecb->editValueByCode($default, '1.00000');
 
 			$this->cache->delete('currency');
 		}
