@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPerpetualPayments extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/perpetual_payments');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
@@ -49,7 +49,7 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 		return $this->load->view('extension/payment/perpetual_payments', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		if (!isset($this->session->data['order_id'])) {
 			return;
 		}

@@ -161,7 +161,7 @@ class ControllerExtensionFraudFraudLabsPro extends Controller {
 		return !$this->error;
 	}
 
-	public function order(): string {
+	public function order() {
 		$this->load->language('extension/fraud/fraudlabspro');
 
 		$this->load->model('extension/fraud/fraudlabspro');

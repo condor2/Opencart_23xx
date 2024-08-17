@@ -294,7 +294,7 @@ class ControllerExtensionPaymentGlobalpay extends Controller {
 		$this->model_extension_payment_globalpay->install();
 	}
 
-	public function order(): string {
+	public function order() {
 		if ($this->config->get('globalpay_status')) {
 			$this->load->model('extension/payment/globalpay');
 

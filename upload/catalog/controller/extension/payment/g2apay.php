@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentG2APay extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/g2apay');
 
 		$data['button_confirm'] = $this->language->get('button_confirm');
@@ -10,7 +10,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 		return $this->load->view('extension/payment/g2apay', $data);
 	}
 
-	public function checkout(): void {
+	public function checkout() {
 		if (!isset($this->session->data['order_id'])) {
 			return;
 		}
@@ -133,7 +133,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 		}
 	}
 
-	public function success(): void {
+	public function success() {
 		$order_id = (int)$this->session->data['order_id'];
 
 		if (isset($this->request->post['transaction_id'])) {
@@ -161,7 +161,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 		$this->response->redirect($this->url->link('checkout/success'));
 	}
 
-	public function ipn(): void {
+	public function ipn() {
 		$this->load->model('extension/payment/g2apay');
 		$this->load->model('checkout/order');
 

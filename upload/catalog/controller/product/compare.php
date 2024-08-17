@@ -1,6 +1,6 @@
 <?php
 class ControllerProductCompare extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('product/compare');
 
 		$this->load->model('catalog/product');
@@ -156,7 +156,7 @@ class ControllerProductCompare extends Controller {
 		$this->response->setOutput($this->load->view('product/compare', $data));
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('product/compare');
 
 		$json = [];

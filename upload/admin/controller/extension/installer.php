@@ -7,15 +7,15 @@ class ControllerExtensionInstaller extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/installer', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -92,18 +92,18 @@ class ControllerExtensionInstaller extends Controller {
 				move_uploaded_file($this->request->files['file']['tmp_name'], $file);
 
 				if (file_exists($file)) {
-					$json['step'][] = [
+					$json['step'][] = array(
 						'text' => $this->language->get('text_xml'),
 						'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/xml', 'token=' . $this->session->data['token'], true)),
 						'path' => $path
-					];
+					);
 
 					// Clear temporary files
-					$json['step'][] = [
+					$json['step'][] = array(
 						'text' => $this->language->get('text_remove'),
 						'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/remove', 'token=' . $this->session->data['token'], true)),
 						'path' => $path
-					];
+					);
 				} else {
 					$json['error'] = $this->language->get('error_file');
 				}
@@ -126,18 +126,18 @@ class ControllerExtensionInstaller extends Controller {
 
 					if ($zip->open($file, $flag)) {
 						// Zip
-						$json['step'][] = [
+						$json['step'][] = array(
 							'text' => $this->language->get('text_unzip'),
 							'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/unzip', 'token=' . $this->session->data['token'], true)),
 							'path' => $path
-						];
+						);
 
 						// FTP
-						$json['step'][] = [
+						$json['step'][] = array(
 							'text' => $this->language->get('text_ftp'),
 							'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/no_ftp', 'token=' . $this->session->data['token'], true)),
 							'path' => $path
-						];
+						);
 
 						// Send make and array of actions to carry out
 						for ($i = 0; $i < $zip->numFiles; $i++) {
@@ -145,29 +145,29 @@ class ControllerExtensionInstaller extends Controller {
 
 							// SQL
 							if (substr($zip_name, 0, 11) == 'install.sql') {
-								$json['step'][] = [
+								$json['step'][] = array(
 									'text' => $this->language->get('text_sql'),
 									'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/sql', 'token=' . $this->session->data['token'], true)),
 									'path' => $path
-								];
+								);
 							}
 
 							// XML
 							if (substr($zip_name, 0, 11) == 'install.xml') {
-								$json['step'][] = [
+								$json['step'][] = array(
 									'text' => $this->language->get('text_xml'),
 									'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/xml', 'token=' . $this->session->data['token'], true)),
 									'path' => $path
-								];
+								);
 							}
 
 							// PHP
 							if (substr($zip_name, 0, 11) == 'install.php') {
-								$json['step'][] = [
+								$json['step'][] = array(
 									'text' => $this->language->get('text_php'),
 									'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/php', 'token=' . $this->session->data['token'], true)),
 									'path' => $path
-								];
+								);
 							}
 
 							// Compare admin files
@@ -200,11 +200,11 @@ class ControllerExtensionInstaller extends Controller {
 						}
 
 						// Clear temporary files
-						$json['step'][] = [
+						$json['step'][] = array(
 							'text' => $this->language->get('text_remove'),
 							'url'  => str_replace('&amp;', '&', $this->url->link('extension/installer/remove', 'token=' . $this->session->data['token'], true)),
 							'path' => $path
-						];
+						);
 
 						$zip->close();
 					} else {
@@ -445,7 +445,7 @@ class ControllerExtensionInstaller extends Controller {
 						$link = '';
 					}
 
-					$modification_data = [
+					$modification_data = array(
 						'name'    => $name,
 						'code'    => $code,
 						'author'  => $author,
@@ -453,7 +453,7 @@ class ControllerExtensionInstaller extends Controller {
 						'link'    => $link,
 						'xml'     => $xml,
 						'status'  => 1
-					];
+					);
 
 					if (!$json) {
 						$this->model_extension_modification->addModification($modification_data);

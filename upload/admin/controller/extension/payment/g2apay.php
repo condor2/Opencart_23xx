@@ -234,7 +234,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/g2apay', $data));
 	}
 
-	public function order(): string {
+	public function order() {
 
 		if ($this->config->get('g2apay_status')) {
 

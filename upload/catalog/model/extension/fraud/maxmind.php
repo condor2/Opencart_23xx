@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionFraudMaxMind extends Model {
-	public function check(array $order_info): int {
+	public function check(array $order_info) {
 		$risk_score = 0;
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "maxmind` WHERE order_id = '" . (int)$order_info['order_id'] . "'");

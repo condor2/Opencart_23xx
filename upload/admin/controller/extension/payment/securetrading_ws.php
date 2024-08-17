@@ -335,7 +335,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		exit();
 	}
 
-	public function showTransactions(): string {
+	public function showTransactions() {
 		$this->load->model('extension/payment/securetrading_ws');
 		$this->load->language('extension/payment/securetrading_ws');
 
@@ -402,7 +402,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		return $this->load->view('extension/payment/securetrading_ws_transactions', $data);
 	}
 
-	public function order(): string {
+	public function order() {
 		if ($this->config->get('securetrading_ws_status')) {
 			$this->load->model('extension/payment/securetrading_ws');
 

@@ -2,7 +2,7 @@
 class ControllerAffiliateForgotten extends Controller {
 	private $error = [];
 
-	public function index(): void {
+	public function index() {
 		if ($this->affiliate->isLogged()) {
 			$this->response->redirect($this->url->link('affiliate/account', '', true));
 		}

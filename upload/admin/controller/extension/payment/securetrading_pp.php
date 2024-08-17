@@ -307,7 +307,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 		$this->model_extension_payment_securetrading_pp->uninstall();
 	}
 
-	public function order(): string {
+	public function order() {
 
 		if ($this->config->get('securetrading_pp_status')) {
 			$this->load->model('extension/payment/securetrading_pp');

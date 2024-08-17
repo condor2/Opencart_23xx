@@ -9,15 +9,15 @@ class ControllerExtensionExtension extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -48,11 +48,11 @@ class ControllerExtensionExtension extends Controller {
 			if ($this->user->hasPermission('access', 'extension/extension/' . $extension)) {
 				$files = glob(DIR_APPLICATION . 'controller/{extension/' . $extension . ',' . $extension . '}/*.php', GLOB_BRACE);
 
-				$data['categories'][] = [
+				$data['categories'][] = array(
 					'code' => $extension,
 					'text' => $this->language->get('heading_title') . ' (' . count($files) . ')',
 					'href' => $this->url->link('extension/extension/' . $extension, 'token=' . $this->session->data['token'], true)
-				];
+				);
 			}
 		}
 

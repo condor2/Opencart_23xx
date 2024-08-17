@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentFreeCheckout extends Controller {
-	public function index(): string {
+	public function index() {
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
 		$data['text_loading'] = $this->language->get('text_loading');
@@ -10,7 +10,7 @@ class ControllerExtensionPaymentFreeCheckout extends Controller {
 		return $this->load->view('extension/payment/free_checkout', $data);
 	}
 
-	public function confirm(): void {
+	public function confirm() {
 		if ($this->session->data['payment_method']['code'] == 'free_checkout') {
 			$this->load->model('checkout/order');
 

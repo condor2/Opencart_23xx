@@ -2,7 +2,7 @@
 class ControllerProductProduct extends Controller {
 	private $error = [];
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('product/product');
 
 		$data['breadcrumbs'] = [];
@@ -564,7 +564,7 @@ class ControllerProductProduct extends Controller {
 		}
 	}
 
-	public function review(): void {
+	public function review() {
 		$this->load->language('product/product');
 
 		$this->load->model('catalog/review');
@@ -605,7 +605,7 @@ class ControllerProductProduct extends Controller {
 		$this->response->setOutput($this->load->view('product/review', $data));
 	}
 
-	public function write(): void {
+	public function write() {
 		$this->load->language('product/product');
 
 		$json = [];

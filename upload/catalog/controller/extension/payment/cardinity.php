@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentCardinity extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/cardinity');
 
 		$data['entry_holder'] = $this->language->get('entry_holder');
@@ -35,7 +35,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		return $this->load->view('extension/payment/cardinity', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/cardinity');
 
@@ -133,7 +133,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function threeDSecureForm(): void {
+	public function threeDSecureForm() {
 		$this->load->model('extension/payment/cardinity');
 
 		$this->load->language('extension/payment/cardinity');
@@ -167,7 +167,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/cardinity_3ds', $data));
 	}
 
-	public function threeDSecureCallback(): void {
+	public function threeDSecureCallback() {
 		$this->load->model('extension/payment/cardinity');
 
 		$this->load->language('extension/payment/cardinity');
@@ -212,7 +212,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		}
 	}
 
-	private function finalizeOrder(string $payment): void {
+	private function finalizeOrder(string $payment) {
 		$this->load->model('checkout/order');
 
 		$this->load->language('extension/payment/cardinity');
@@ -223,7 +223,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$this->model_extension_payment_cardinity->log($payment);
 	}
 
-	private function failedOrder($log = null, $alert = null): void {
+	private function failedOrder($log = null, $alert = null) {
 		$this->load->language('extension/payment/cardinity');
 
 		$this->model_extension_payment_cardinity->log($this->language->get('text_payment_failed'));

@@ -227,7 +227,7 @@ class ControllerExtensionPaymentEway extends Controller {
 		return $this->order();
 	}
 
-	public function order(): string {
+	public function order() {
 		if ($this->config->get('eway_status')) {
 			$this->load->model('extension/payment/eway');
 

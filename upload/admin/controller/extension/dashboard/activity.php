@@ -38,20 +38,20 @@ class ControllerExtensionDashboardActivity extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=dashboard', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/dashboard/activity', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
 		$data['action'] = $this->url->link('extension/dashboard/activity', 'token=' . $this->session->data['token'], true);
 
@@ -96,7 +96,7 @@ class ControllerExtensionDashboardActivity extends Controller {
 		return !$this->error;
 	}
 
-	public function dashboard(): string {
+	public function dashboard() {
 		$this->load->language('extension/dashboard/activity');
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -114,24 +114,24 @@ class ControllerExtensionDashboardActivity extends Controller {
 		foreach ($results as $result) {
 			$comment = vsprintf($this->language->get('text_' . $result['key']), json_decode($result['data'], true));
 
-			$find = [
+			$find = array(
 				'customer_id=',
 				'order_id=',
 				'affiliate_id=',
 				'return_id='
-			];
+			);
 
-			$replace = [
+			$replace = array(
 				$this->url->link('customer/customer/edit', 'token=' . $this->session->data['token'] . '&customer_id=', true),
 				$this->url->link('sale/order/info', 'token=' . $this->session->data['token'] . '&order_id=', true),
 				$this->url->link('marketing/affiliate/edit', 'token=' . $this->session->data['token'] . '&affiliate_id=', true),
 				$this->url->link('sale/return/edit', 'token=' . $this->session->data['token'] . '&return_id=', true)
-			];
+			);
 
-			$data['activities'][] = [
+			$data['activities'][] = array(
 				'comment'    => str_replace($find, $replace, $comment),
 				'date_added' => date($this->language->get('datetime_format'), strtotime($result['date_added']))
-			];
+			);
 		}
 
 		return $this->load->view('extension/dashboard/activity_info', $data);

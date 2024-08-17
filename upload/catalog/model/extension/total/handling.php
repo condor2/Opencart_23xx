@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionTotalHandling extends Model {
-	public function getTotal(array $total): void {
+	public function getTotal(array $total) {
 		if (($this->cart->getSubTotal() > $this->config->get('handling_total')) && ($this->cart->getSubTotal() > 0)) {
 			$this->load->language('extension/total/handling');
 

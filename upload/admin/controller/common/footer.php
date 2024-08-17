@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonFooter extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('common/footer');
 
 		$data['text_footer'] = $this->language->get('text_footer');

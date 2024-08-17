@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSecureTradingPp extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->model('checkout/order');
 		$this->load->model('localisation/country');
 		$this->load->model('localisation/zone');
@@ -81,7 +81,7 @@ class ControllerExtensionPaymentSecureTradingPp extends Controller {
 		}
 	}
 
-	public function ipn(): void {
+	public function ipn() {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/securetrading_pp');
 		$this->load->language('extension/payment/securetrading_pp');

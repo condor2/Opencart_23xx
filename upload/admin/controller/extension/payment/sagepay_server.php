@@ -194,7 +194,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		$this->model_extension_payment_sagepay_server->uninstall();
 	}
 
-	public function order(): string {
+	public function order() {
 
 		if ($this->config->get('sagepay_server_status')) {
 			$this->load->model('extension/payment/sagepay_server');

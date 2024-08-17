@@ -1,12 +1,12 @@
 <?php
 class ModelLocalisationZone extends Model {
-	public function getZone(int $zone_id): array {
+	public function getZone(int $zone_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "zone` WHERE `zone_id` = '" . (int)$zone_id . "' AND `status` = '1'");
 
 		return $query->row;
 	}
 
-	public function getZonesByCountryId(int $country_id): array {
+	public function getZonesByCountryId(int $country_id) {
 		$zone_data = $this->cache->get('zone.' . (int)$country_id);
 
 		if (!$zone_data) {

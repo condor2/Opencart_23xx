@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountWishList extends Controller {
-	public function index(): void {
+	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/wishlist', '', true);
 
@@ -128,7 +128,7 @@ class ControllerAccountWishList extends Controller {
 		$this->response->setOutput($this->load->view('account/wishlist', $data));
 	}
 
-	public function add(): void {
+	public function add() {
 		$this->load->language('account/wishlist');
 
 		$json = [];

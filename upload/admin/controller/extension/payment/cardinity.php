@@ -143,7 +143,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		$this->response->setOutput($this->load->view('extension/payment/cardinity', $data));
 	}
 
-	public function order(): string {
+	public function order() {
 		$this->load->language('extension/payment/cardinity');
 
 		$data['text_payment_info'] = $this->language->get('text_payment_info');

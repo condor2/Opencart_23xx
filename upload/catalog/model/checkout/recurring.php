@@ -1,6 +1,6 @@
 <?php
 class ModelCheckoutRecurring extends Model {
-	public function create(int $order_id, string $description, array $data): int {
+	public function create(int $order_id, string $description, array $data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "order_recurring` SET
 		`order_id` = '" . (int)$order_id . "',
 		`date_added` = NOW(),
@@ -25,7 +25,7 @@ class ModelCheckoutRecurring extends Model {
 		return $this->db->getLastId();
 	}
 
-	public function addReference(int $order_recurring_id, string $reference): void {
+	public function addReference(int $order_recurring_id, string $reference) {
 		$this->db->query("REPLACE INTO `" . DB_PREFIX . "order_recurring` SET `reference` = '" . $this->db->escape($reference) . "', `order_recurring_id` = '" . (int)$order_recurring_id . "', `date_added` = NOW()");
 	}
 

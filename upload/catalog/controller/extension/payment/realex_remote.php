@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentRealexRemote extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/realex_remote');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
@@ -61,7 +61,7 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 		return $this->load->view('extension/payment/realex_remote', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/realex_remote');
 
@@ -231,7 +231,7 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function acsReturn(): void {
+	public function acsReturn() {
 		if (isset($this->session->data['order_id'])) {
 			$this->load->model('checkout/order');
 			$this->load->model('extension/payment/realex_remote');

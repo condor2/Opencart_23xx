@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionFraudFraudLabsPro extends Model {
-	public function check(array $data): int {
+	public function check(array $data) {
 		// Do not perform fraud check if FraudLabs Pro is disabled or API key is not provided.
 		if (!$this->config->get('fraudlabspro_status') || !$this->config->get('fraudlabspro_key')) {
 			return 0;

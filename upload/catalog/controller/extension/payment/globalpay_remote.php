@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentGlobalpayRemote extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/globalpay_remote');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
@@ -61,7 +61,7 @@ class ControllerExtensionPaymentGlobalpayRemote extends Controller {
 		return $this->load->view('extension/payment/globalpay_remote', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/globalpay_remote');
 

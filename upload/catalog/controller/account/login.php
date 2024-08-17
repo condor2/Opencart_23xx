@@ -2,7 +2,7 @@
 class ControllerAccountLogin extends Controller {
 	private $error = [];
 
-	public function index(): void {
+	public function index() {
 		$this->load->model('account/customer');
 
 		// Login override for admin users

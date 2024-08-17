@@ -111,31 +111,31 @@ class ControllerExtensionEvent extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/event', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		$data['events'] = array();
 
-		$filter_data = [
+		$filter_data = array(
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
-		];
+		);
 
 		$event_total = $this->model_extension_event->getTotalEvents();
 
 		$results = $this->model_extension_event->getEvents($filter_data);
 
 		foreach ($results as $result) {
-			$data['events'][] = [
+			$data['events'][] = array(
 				'event_id'   => $result['event_id'],
 				'code'       => $result['code'],
 				'trigger'    => $result['trigger'],
@@ -145,7 +145,7 @@ class ControllerExtensionEvent extends Controller {
 				'enable'     => $this->url->link('extension/event/enable', 'token=' . $this->session->data['token'] . '&event_id=' . $result['event_id'], true),
 				'disable'    => $this->url->link('extension/event/disable', 'token=' . $this->session->data['token'] . '&event_id=' . $result['event_id'], true),
 				'enabled'    => $result['status']
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

@@ -206,7 +206,7 @@ class ControllerExtensionPaymentBluePayHosted extends Controller {
 		$this->model_extension_payment_bluepay_hosted->uninstall();
 	}
 
-	public function order(): string {
+	public function order() {
 		if ($this->config->get('bluepay_hosted_status')) {
 			$this->load->model('extension/payment/bluepay_hosted');
 

@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentCheque extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/cheque');
 
 		$data['text_instruction'] = $this->language->get('text_instruction');
@@ -19,7 +19,7 @@ class ControllerExtensionPaymentCheque extends Controller {
 		return $this->load->view('extension/payment/cheque', $data);
 	}
 
-	public function confirm(): void {
+	public function confirm() {
 		if ($this->session->data['payment_method']['code'] == 'cheque') {
 			$this->load->language('extension/payment/cheque');
 

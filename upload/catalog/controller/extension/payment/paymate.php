@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPaymate extends Controller {
-	public function index(): string {
+	public function index() {
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
 		if (!$this->config->get('paymate_test')) {
@@ -36,7 +36,7 @@ class ControllerExtensionPaymentPaymate extends Controller {
 		return $this->load->view('extension/payment/paymate', $data);
 	}
 
-	public function callback(): void {
+	public function callback() {
 		$this->load->language('extension/payment/paymate');
 
 		if (isset($this->request->post['ref'])) {

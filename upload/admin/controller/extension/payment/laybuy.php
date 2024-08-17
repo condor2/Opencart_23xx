@@ -1217,7 +1217,7 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function order(): string {
+	public function order() {
 		if ($this->config->get('laybuy_status')) {
 			$this->load->language('extension/payment/laybuy');
 

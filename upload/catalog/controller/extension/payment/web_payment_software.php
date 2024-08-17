@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentWebPaymentSoftware extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/web_payment_software');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
@@ -37,7 +37,7 @@ class ControllerExtensionPaymentWebPaymentSoftware extends Controller {
 		return $this->load->view('extension/payment/web_payment_software', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);

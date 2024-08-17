@@ -2,7 +2,7 @@
 class ControllerCommonReset extends Controller {
 	private $error = array();
 
-	public function index(): ?object {
+	public function index() {
 		if ($this->user->isLogged() && isset($this->request->get['token']) && ($this->request->get['token'] == $this->session->data['token'])) {
 			$this->response->redirect($this->url->link('common/dashboard', '', true));
 		}
@@ -48,15 +48,15 @@ class ControllerCommonReset extends Controller {
 
 			$data['breadcrumbs'] = array();
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),
 				'href' => $this->url->link('common/dashboard', '', true)
-			];
+			);
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('heading_title'),
 				'href' => $this->url->link('common/reset', '', true)
-			];
+			);
 
 			if (isset($this->error['password'])) {
 				$data['error_password'] = $this->error['password'];

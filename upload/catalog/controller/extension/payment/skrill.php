@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSkrill extends Controller {
-	public function index(): string {
+	public function index() {
 		if (!isset($this->session->data['order_id'])) {
 			return '';
 		}
@@ -51,7 +51,7 @@ class ControllerExtensionPaymentSkrill extends Controller {
 		return $this->load->view('extension/payment/skrill', $data);
 	}
 
-	public function callback(): void {
+	public function callback() {
 		if (isset($this->request->post['order_id'])) {
 			$order_id = (int)$this->request->post['order_id'];
 		} else {

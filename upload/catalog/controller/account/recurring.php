@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountRecurring extends Controller {
-	public function index(): void {
+	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/recurring', '', true);
 
@@ -99,7 +99,7 @@ class ControllerAccountRecurring extends Controller {
 		$this->response->setOutput($this->load->view('account/recurring_list', $data));
 	}
 
-	public function info(): void {
+	public function info() {
 		$this->load->language('account/recurring');
 
 		if (isset($this->request->get['order_recurring_id'])) {

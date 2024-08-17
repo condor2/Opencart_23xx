@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionTotalShipping extends Model {
-	public function getTotal(array $total): void {
+	public function getTotal(array $total) {
 		if ($this->cart->hasShipping() && isset($this->session->data['shipping_method'])) {
 			$total['totals'][] = [
 				'code'       => 'shipping',

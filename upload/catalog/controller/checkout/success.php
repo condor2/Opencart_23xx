@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutSuccess extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('checkout/success');
 
 		if (isset($this->session->data['order_id'])) {

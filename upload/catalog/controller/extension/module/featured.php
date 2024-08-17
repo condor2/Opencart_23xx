@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleFeatured extends Controller {
-	public function index(array $setting): string {
+	public function index(array $setting) {
 		$this->load->language('extension/module/featured');
 
 		$data['heading_title'] = $setting['name'];

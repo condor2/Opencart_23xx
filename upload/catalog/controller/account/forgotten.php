@@ -2,7 +2,7 @@
 class ControllerAccountForgotten extends Controller {
 	private $error = [];
 
-	public function index(): void {
+	public function index() {
 		if ($this->customer->isLogged()) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}

@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSecureTradingWs extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->model('checkout/order');
 		$this->load->language('extension/payment/securetrading_ws');
 
@@ -60,7 +60,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		}
 	}
 
-	public function process(): void {
+	public function process() {
 		$this->load->model('checkout/order');
 		$this->load->model('localisation/country');
 		$this->load->model('extension/payment/securetrading_ws');
@@ -218,7 +218,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		}
 	}
 
-	public function threedreturn(): void {
+	public function threedreturn() {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/securetrading_ws');
 		$this->load->language('extension/payment/securetrading_ws');

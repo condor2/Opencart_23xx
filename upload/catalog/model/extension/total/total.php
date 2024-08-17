@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionTotalTotal extends Model {
-	public function getTotal(array $total): void {
+	public function getTotal(array $total) {
 		$this->load->language('extension/total/total');
 
 		$total['totals'][] = [

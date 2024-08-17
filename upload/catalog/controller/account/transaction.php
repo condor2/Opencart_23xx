@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountTransaction extends Controller {
-	public function index(): void {
+	public function index() {
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/transaction', '', true);
 

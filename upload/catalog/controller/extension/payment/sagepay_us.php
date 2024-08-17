@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSagepayUS extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/sagepay_us');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
@@ -36,7 +36,7 @@ class ControllerExtensionPaymentSagepayUS extends Controller {
 		return $this->load->view('extension/payment/sagepay_us', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);

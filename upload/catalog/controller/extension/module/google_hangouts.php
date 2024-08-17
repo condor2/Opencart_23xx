@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleGoogleHangouts extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/module/google_hangouts');
 
 		$data['heading_title'] = $this->language->get('heading_title');

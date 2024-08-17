@@ -96,7 +96,7 @@ class ControllerExtensionDashboardSale extends Controller {
 		return !$this->error;
 	}
 
-	public function dashboard(): string {
+	public function dashboard() {
 		$this->load->language('extension/dashboard/sale');
 
 		$data['heading_title'] = $this->language->get('heading_title');

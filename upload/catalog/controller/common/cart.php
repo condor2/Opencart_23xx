@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonCart extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('common/cart');
 
 		// Totals
@@ -143,7 +143,7 @@ class ControllerCommonCart extends Controller {
 		return $this->load->view('common/cart', $data);
 	}
 
-	public function info(): void {
+	public function info() {
 		$this->response->setOutput($this->index());
 	}
 }

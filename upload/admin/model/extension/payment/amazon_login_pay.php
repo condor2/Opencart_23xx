@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionPaymentAmazonLoginPay extends Model {
-	public function install(): void {
+	public function install() {
 		$this->db->query("
 			CREATE TABLE `" . DB_PREFIX . "amazon_login_pay_order` (
 				`amazon_login_pay_order_id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -45,13 +45,13 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 			");
 	}
 
-	public function uninstall(): void {
+	public function uninstall() {
 		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "amazon_login_pay_order`;");
 		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "amazon_login_pay_order_total_tax`;");
 		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "amazon_login_pay_order_transaction`;");
 	}
 
-	public function getOrder(int $order_id): array {
+	public function getOrder(int $order_id) {
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "amazon_login_pay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
@@ -65,7 +65,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		}
 	}
 
-	public function cancel($amazon_login_pay_order): array {
+	public function cancel($amazon_login_pay_order) {
 		$total_captured = $this->getTotalCaptured($amazon_login_pay_order['amazon_login_pay_order_id']);
 
 		if (!empty($amazon_login_pay_order) && $total_captured == 0) {

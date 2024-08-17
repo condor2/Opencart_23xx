@@ -145,38 +145,38 @@ class ControllerDesignLayout extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('design/layout', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		$data['add'] = $this->url->link('design/layout/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['delete'] = $this->url->link('design/layout/delete', 'token=' . $this->session->data['token'] . $url, true);
 
 		$data['layouts'] = array();
 
-		$filter_data = [
+		$filter_data = array(
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
-		];
+		);
 
 		$layout_total = $this->model_design_layout->getTotalLayouts();
 
 		$results = $this->model_design_layout->getLayouts($filter_data);
 
 		foreach ($results as $result) {
-			$data['layouts'][] = [
+			$data['layouts'][] = array(
 				'layout_id' => $result['layout_id'],
 				'name'      => $result['name'],
 				'edit'      => $this->url->link('design/layout/edit', 'token=' . $this->session->data['token'] . '&layout_id=' . $result['layout_id'] . $url, true)
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -310,15 +310,15 @@ class ControllerDesignLayout extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('design/layout', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		if (!isset($this->request->get['layout_id'])) {
 			$data['action'] = $this->url->link('design/layout/add', 'token=' . $this->session->data['token'] . $url, true);
@@ -372,18 +372,18 @@ class ControllerDesignLayout extends Controller {
 			$modules = $this->model_extension_module->getModulesByCode($code);
 
 			foreach ($modules as $module) {
-				$module_data[] = [
+				$module_data[] = array(
 					'name' => strip_tags($module['name']),
 					'code' => $code . '.' . $module['module_id']
-				];
+				);
 			}
 
 			if ($this->config->has($code . '_status') || $module_data) {
-				$data['extensions'][] = [
+				$data['extensions'][] = array(
 					'name'   => strip_tags($this->language->get('heading_title')),
 					'code'   => $code,
 					'module' => $module_data
-				];
+				);
 			}
 		}
 
@@ -405,24 +405,24 @@ class ControllerDesignLayout extends Controller {
 			$this->load->language('extension/module/' . $part[0]);
 
 			if (!isset($part[1])) {
-				$data['layout_modules'][] = [
+				$data['layout_modules'][] = array(
 					'name'       => strip_tags($this->language->get('heading_title')),
 					'code'       => $layout_module['code'],
 					'edit'       => $this->url->link('extension/module/' . $part[0], 'token=' . $this->session->data['token'], true),
 					'position'   => $layout_module['position'],
 					'sort_order' => $layout_module['sort_order']
-				];
+				);
 			} else {
 				$module_info = $this->model_extension_module->getModule($part[1]);
 
 				if ($module_info) {
-					$data['layout_modules'][] = [
+					$data['layout_modules'][] = array(
 						'name'       => strip_tags($module_info['name']),
 						'code'       => $layout_module['code'],
 						'edit'       => $this->url->link('extension/module/' . $part[0], 'token=' . $this->session->data['token'] . '&module_id=' . $part[1], true),
 						'position'   => $layout_module['position'],
 						'sort_order' => $layout_module['sort_order']
-					];
+					);
 				}
 			}
 		}

@@ -2,7 +2,7 @@
 class ControllerAccountRegister extends Controller {
 	private $error = [];
 
-	public function index(): void {
+	public function index() {
 		if ($this->customer->isLogged()) {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
@@ -449,7 +449,7 @@ class ControllerAccountRegister extends Controller {
 		return !$this->error;
 	}
 
-	public function customfield(): void {
+	public function customfield() {
 		$json = [];
 
 		$this->load->model('account/custom_field');

@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentGlobalpay extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/globalpay');
 
 		$data['entry_cc_type'] = $this->language->get('entry_cc_type');
@@ -85,7 +85,7 @@ class ControllerExtensionPaymentGlobalpay extends Controller {
 		return $this->load->view('extension/payment/globalpay', $data);
 	}
 
-	public function notify(): void {
+	public function notify() {
 		$this->load->model('extension/payment/globalpay');
 
 		$this->model_extension_payment_globalpay->logger(print_r($this->request->post, 1));

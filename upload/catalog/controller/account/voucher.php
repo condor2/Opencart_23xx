@@ -2,7 +2,7 @@
 class ControllerAccountVoucher extends Controller {
 	private $error = [];
 
-	public function index(): void {
+	public function index() {
 		$this->load->language('account/voucher');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -171,7 +171,7 @@ class ControllerAccountVoucher extends Controller {
 		$this->response->setOutput($this->load->view('account/voucher', $data));
 	}
 
-	public function success(): void {
+	public function success() {
 		$this->load->language('account/voucher');
 
 		$this->document->setTitle($this->language->get('heading_title'));

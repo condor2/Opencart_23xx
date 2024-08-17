@@ -2,7 +2,7 @@
 class ControllerAffiliatePassword extends Controller {
 	private $error = [];
 
-	public function index(): void {
+	public function index() {
 		if (!$this->affiliate->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('affiliate/password', '', true);
 

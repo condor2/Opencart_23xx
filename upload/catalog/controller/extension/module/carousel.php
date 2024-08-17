@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleCarousel extends Controller {
-	public function index(array $setting): string {
+	public function index(array $setting) {
 		static $module = 0;
 
 		$this->load->model('design/banner');

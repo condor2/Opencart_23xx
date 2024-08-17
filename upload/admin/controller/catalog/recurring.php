@@ -179,15 +179,15 @@ class ControllerCatalogRecurring extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/recurring', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		$data['add'] = $this->url->link('catalog/recurring/add', 'token=' . $this->session->data['token'] . $url, true);
 		$data['copy'] = $this->url->link('catalog/recurring/copy', 'token=' . $this->session->data['token'] . $url, true);
@@ -195,24 +195,24 @@ class ControllerCatalogRecurring extends Controller {
 
 		$data['recurrings'] = array();
 
-		$filter_data = [
+		$filter_data = array(
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
-		];
+		);
 
 		$recurring_total = $this->model_catalog_recurring->getTotalRecurrings();
 
 		$results = $this->model_catalog_recurring->getRecurrings($filter_data);
 
 		foreach ($results as $result) {
-			$data['recurrings'][] = [
+			$data['recurrings'][] = array(
 				'recurring_id' => $result['recurring_id'],
 				'name'         => $result['name'],
 				'sort_order'   => $result['sort_order'],
 				'edit'         => $this->url->link('catalog/recurring/edit', 'token=' . $this->session->data['token'] . '&recurring_id=' . $result['recurring_id'] . $url, true)
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -349,15 +349,15 @@ class ControllerCatalogRecurring extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('catalog/recurring', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		if (!isset($this->request->get['recurring_id'])) {
 			$data['action'] = $this->url->link('catalog/recurring/add', 'token=' . $this->session->data['token'] . $url, true);
@@ -395,30 +395,30 @@ class ControllerCatalogRecurring extends Controller {
 
 		$data['frequencies'] = array();
 
-		$data['frequencies'][] = [
+		$data['frequencies'][] = array(
 			'text'  => $this->language->get('text_day'),
 			'value' => 'day'
-		];
+		);
 
-		$data['frequencies'][] = [
+		$data['frequencies'][] = array(
 			'text'  => $this->language->get('text_week'),
 			'value' => 'week'
-		];
+		);
 
-		$data['frequencies'][] = [
+		$data['frequencies'][] = array(
 			'text'  => $this->language->get('text_semi_month'),
 			'value' => 'semi_month'
-		];
+		);
 
-		$data['frequencies'][] = [
+		$data['frequencies'][] = array(
 			'text'  => $this->language->get('text_month'),
 			'value' => 'month'
-		];
+		);
 
-		$data['frequencies'][] = [
+		$data['frequencies'][] = array(
 			'text'  => $this->language->get('text_year'),
 			'value' => 'year'
-		];
+		);
 
 		if (isset($this->request->post['frequency'])) {
 			$data['frequency'] = $this->request->post['frequency'];

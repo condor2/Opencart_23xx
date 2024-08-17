@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentCardConnect extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/cardconnect');
 
 		$this->load->model('extension/payment/cardconnect');
@@ -55,7 +55,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		return $this->load->view('extension/payment/cardconnect', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->language('extension/payment/cardconnect');
 
 		$this->load->model('extension/payment/cardconnect');
@@ -255,7 +255,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('extension/payment/cardconnect');
 
 		$this->load->model('extension/payment/cardconnect');
@@ -302,7 +302,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function cron(): void {
+	public function cron() {
 		$this->load->model('extension/payment/cardconnect');
 
 		$this->model_extension_payment_cardconnect->log('Running cron');

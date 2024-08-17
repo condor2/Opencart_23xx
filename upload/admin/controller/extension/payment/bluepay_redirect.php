@@ -183,7 +183,7 @@ class ControllerExtensionPaymentBluepayredirect extends Controller {
 		$this->model_extension_payment_bluepay_redirect->uninstall();
 	}
 
-	public function order(): string {
+	public function order() {
 		if ($this->config->get('bluepay_redirect_status')) {
 			$this->load->model('extension/payment/bluepay_redirect');
 

@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleLatest extends Controller {
-	public function index(array $setting): string {
+	public function index(array $setting) {
 		$this->load->language('extension/module/latest');
 
 		$data['heading_title'] = $this->language->get('heading_title');

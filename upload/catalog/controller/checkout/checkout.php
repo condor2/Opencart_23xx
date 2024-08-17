@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutCheckout extends Controller {
-	public function index(): void {
+	public function index() {
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$this->response->redirect($this->url->link('checkout/cart'));
@@ -92,7 +92,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->response->setOutput($this->load->view('checkout/checkout', $data));
 	}
 
-	public function country(): void {
+	public function country() {
 		$json = [];
 
 		$this->load->model('localisation/country');
@@ -118,7 +118,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function customfield(): void {
+	public function customfield() {
 		$json = [];
 
 		$this->load->model('account/custom_field');

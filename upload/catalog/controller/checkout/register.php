@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutRegister extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('checkout/checkout');
 
 		$data['text_checkout_payment_address'] = $this->language->get('text_checkout_payment_address');
@@ -101,7 +101,7 @@ class ControllerCheckoutRegister extends Controller {
 		$this->response->setOutput($this->load->view('checkout/register', $data));
 	}
 
-	public function save(): void {
+	public function save() {
 		$this->load->language('checkout/checkout');
 
 		$json = [];

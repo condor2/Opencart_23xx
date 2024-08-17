@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSagepayDirect extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/sagepay_direct');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
@@ -123,7 +123,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 		return $this->load->view('extension/payment/sagepay_direct', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->language('extension/payment/sagepay_direct');
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/sagepay_direct');
@@ -366,7 +366,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function callback(): void {
+	public function callback() {
 		$this->load->model('extension/payment/sagepay_direct');
 		$this->load->language('extension/payment/sagepay_direct');
 		$this->load->model('checkout/order');
@@ -453,7 +453,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 		}
 	}
 
-	public function delete(): void {
+	public function delete() {
 
 		$this->load->language('account/sagepay_direct_cards');
 
@@ -492,7 +492,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function cron(): void {
+	public function cron() {
 		if (isset($this->request->get['token']) && hash_equals($this->config->get('sagepay_direct_cron_job_token'), $this->request->get['token'])) {
 			$this->load->model('extension/payment/sagepay_direct');
 

@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonLanguage extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('common/language');
 
 		$data['text_language'] = $this->language->get('text_language');
@@ -47,7 +47,7 @@ class ControllerCommonLanguage extends Controller {
 		return $this->load->view('common/language', $data);
 	}
 
-	public function language(): void {
+	public function language() {
 		if (isset($this->request->post['code'])) {
 			$this->session->data['language'] = $this->request->post['code'];
 		}

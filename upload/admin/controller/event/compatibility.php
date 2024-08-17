@@ -1,7 +1,7 @@
 <?php
 class ControllerEventCompatibility extends Controller {
-	public function controller(string &$route) {
-		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', $route);
+	public function controller(&$route) {
+		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 
 		// Compatibility code for old extension folders
 		$part = explode('/', $route);
@@ -11,8 +11,8 @@ class ControllerEventCompatibility extends Controller {
 		}
 	}
 
-	public function language(string &$route) {
-		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', $route);
+	public function language(&$route) {
+		$route = preg_replace('/[^a-zA-Z0-9_\/]/', '', (string)$route);
 
 		// Compatibility code for old extension folders
 		$part = explode('/', $route);
@@ -22,7 +22,7 @@ class ControllerEventCompatibility extends Controller {
 		}
 	}
 
-	public function view(string &$route, array &$data) {
+	public function view(&$route, &$data) {
 		$part = explode('/', $route);
 
 		if (isset($part[0]) && isset($data['back'])) {

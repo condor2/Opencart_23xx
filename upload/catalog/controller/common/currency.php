@@ -1,6 +1,6 @@
 <?php
 class ControllerCommonCurrency extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('common/currency');
 
 		$data['text_currency'] = $this->language->get('text_currency');
@@ -49,7 +49,7 @@ class ControllerCommonCurrency extends Controller {
 		return $this->load->view('common/currency', $data);
 	}
 
-	public function currency(): void {
+	public function currency() {
 		if (isset($this->request->post['code'])) {
 			$this->session->data['currency'] = $this->request->post['code'];
 

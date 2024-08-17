@@ -282,7 +282,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function order(): string {
+	public function order() {
 		if ($this->config->get('pilibaba_status')) {
 			$this->load->model('extension/payment/pilibaba');
 

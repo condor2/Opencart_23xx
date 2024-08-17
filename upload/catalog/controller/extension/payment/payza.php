@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentPayza extends Controller {
-	public function index(): string {
+	public function index() {
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
 		$this->load->model('checkout/order');
@@ -21,7 +21,7 @@ class ControllerExtensionPaymentPayza extends Controller {
 		return $this->load->view('extension/payment/payza', $data);
 	}
 
-	public function callback(): void {
+	public function callback() {
 		if (isset($this->request->post['ap_securitycode']) && ($this->request->post['ap_securitycode'] == $this->config->get('payza_security'))) {
 			$this->load->model('checkout/order');
 

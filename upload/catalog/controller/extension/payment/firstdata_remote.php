@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentFirstdataRemote extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/firstdata_remote');
 		$this->load->model('extension/payment/firstdata_remote');
 
@@ -58,7 +58,7 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		return $this->load->view('extension/payment/firstdata_remote', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/firstdata_remote');
 		$this->load->language('extension/payment/firstdata_remote');

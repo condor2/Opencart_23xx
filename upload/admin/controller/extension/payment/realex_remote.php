@@ -258,7 +258,7 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 		$this->model_extension_payment_realex_remote->install();
 	}
 
-	public function order(): string {
+	public function order() {
 		if ($this->config->get('realex_remote_status')) {
 			$this->load->model('extension/payment/realex_remote');
 

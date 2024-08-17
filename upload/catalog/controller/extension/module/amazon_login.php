@@ -10,7 +10,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 	/**
 	 * @return string
 	 */
-	public function index(): string {
+	public function index() {
 		$this->load->model('extension/payment/amazon_login_pay');
 
 		if ($this->config->get('amazon_login_pay_status') && $this->config->get('amazon_login_status') && !$this->customer->isLogged() && !empty($this->request->server['HTTPS'])) {
@@ -58,7 +58,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		}
 	}
 
-	public function login(): void {
+	public function login() {
 		$this->load->model('extension/payment/amazon_login_pay');
 		$this->load->model('account/customer');
 		$this->load->model('account/customer_group');
@@ -197,7 +197,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		}
 	}
 
-	public function logout(): void {
+	public function logout() {
 		unset($this->session->data['lpa']);
 		unset($this->session->data['access_token']);
 

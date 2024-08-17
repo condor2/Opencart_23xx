@@ -1,6 +1,6 @@
 <?php
 class ControllerApiShipping extends Controller {
-	public function address(): void {
+	public function address() {
 		$this->load->language('api/shipping');
 
 		// Delete old shipping address, shipping methods and method so not to cause any issues if there is an error
@@ -145,7 +145,7 @@ class ControllerApiShipping extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function methods(): void {
+	public function methods() {
 		$this->load->language('api/shipping');
 
 		// Delete past shipping methods and method just in case there is an error
@@ -215,7 +215,7 @@ class ControllerApiShipping extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function method(): void {
+	public function method() {
 		$this->load->language('api/shipping');
 
 		// Delete old shipping method so not to cause any issues if there is an error

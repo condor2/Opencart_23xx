@@ -1,6 +1,6 @@
 <?php
 class ControllerCheckoutLogin extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('checkout/checkout');
 
 		$data['text_checkout_account'] = $this->language->get('text_checkout_account');
@@ -34,7 +34,7 @@ class ControllerCheckoutLogin extends Controller {
 		$this->response->setOutput($this->load->view('checkout/login', $data));
 	}
 
-	public function save(): void {
+	public function save() {
 		$this->load->language('checkout/checkout');
 
 		$json = [];

@@ -51,7 +51,7 @@ class ControllerExtensionModification extends Controller {
 		$this->getList();
 	}
 
-	public function refresh(array $data = []) {
+	public function refresh($data = array()) {
 		$this->load->language('extension/modification');
 
 		$this->document->setTitle($this->language->get('heading_title'));
@@ -73,7 +73,7 @@ class ControllerExtensionModification extends Controller {
 			$files = array();
 
 			// Make path into an array
-			$path = [DIR_MODIFICATION . '*'];
+			$path = array(DIR_MODIFICATION . '*');
 
 			// While the path array is still populated keep looping through
 			while (count($path) != 0) {
@@ -100,7 +100,7 @@ class ControllerExtensionModification extends Controller {
 					if (is_file($file)) {
 						unlink($file);
 
-						// If directory use the remove directory function
+					// If directory use the remove directory function
 					} elseif (is_dir($file)) {
 						rmdir($file);
 					}
@@ -158,7 +158,7 @@ class ControllerExtensionModification extends Controller {
 				foreach ($files as $file) {
 					$operations = $file->getElementsByTagName('operation');
 
-					$files = explode('|', $file->getAttribute('path'));
+					$files = explode('|', str_replace("\\", '/', $file->getAttribute('path')));
 
 					foreach ($files as $file) {
 						$path = '';
@@ -298,11 +298,11 @@ class ControllerExtensionModification extends Controller {
 															$new_lines = explode("\n", $add);
 
 															if ($offset < 0) {
-																array_splice($lines, $line_id + $offset, abs($offset) + 1, [str_replace($search, $add, $line)]);
+																array_splice($lines, $line_id + $offset, abs($offset) + 1, array(str_replace($search, $add, $line)));
 
 																$line_id -= $offset;
 															} else {
-																array_splice($lines, $line_id, $offset + 1, [str_replace($search, $add, $line)]);
+																array_splice($lines, $line_id, $offset + 1, array(str_replace($search, $add, $line)));
 															}
 
 															break;
@@ -461,7 +461,7 @@ class ControllerExtensionModification extends Controller {
 			$files = array();
 
 			// Make path into an array
-			$path = [DIR_MODIFICATION . '*'];
+			$path = array(DIR_MODIFICATION . '*');
 
 			// While the path array is still populated keep looping through
 			while (count($path) != 0) {
@@ -650,15 +650,15 @@ class ControllerExtensionModification extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/modification', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
 		$data['refresh'] = $this->url->link('extension/modification/refresh', 'token=' . $this->session->data['token'] . $url, true);
 		$data['clear'] = $this->url->link('extension/modification/clear', 'token=' . $this->session->data['token'] . $url, true);
@@ -666,19 +666,19 @@ class ControllerExtensionModification extends Controller {
 
 		$data['modifications'] = array();
 
-		$filter_data = [
+		$filter_data = array(
 			'sort'  => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
-		];
+		);
 
 		$modification_total = $this->model_extension_modification->getTotalModifications();
 
 		$results = $this->model_extension_modification->getModifications($filter_data);
 
 		foreach ($results as $result) {
-			$data['modifications'][] = [
+			$data['modifications'][] = array(
 				'modification_id' => $result['modification_id'],
 				'name'            => $result['name'],
 				'author'          => $result['author'],
@@ -689,7 +689,7 @@ class ControllerExtensionModification extends Controller {
 				'enable'          => $this->url->link('extension/modification/enable', 'token=' . $this->session->data['token'] . '&modification_id=' . $result['modification_id'], true),
 				'disable'         => $this->url->link('extension/modification/disable', 'token=' . $this->session->data['token'] . '&modification_id=' . $result['modification_id'], true),
 				'enabled'         => $result['status']
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

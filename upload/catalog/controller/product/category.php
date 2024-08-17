@@ -1,6 +1,6 @@
 <?php
 class ControllerProductCategory extends Controller {
-	public function index(): void {
+	public function index() {
 		$this->load->language('product/category');
 
 		$this->load->model('catalog/category');

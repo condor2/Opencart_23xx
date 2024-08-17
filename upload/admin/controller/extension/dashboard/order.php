@@ -96,7 +96,7 @@ class ControllerExtensionDashboardOrder extends Controller {
 		return !$this->error;
 	}
 
-	public function dashboard(): string {
+	public function dashboard() {
 		$this->load->language('extension/dashboard/order');
 
 		$data['heading_title'] = $this->language->get('heading_title');

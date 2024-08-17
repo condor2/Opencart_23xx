@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentBluePayRedirect extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/bluepay_redirect');
 
 		$data['text_credit_card'] = $this->language->get('text_credit_card');

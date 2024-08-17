@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionPaymentSagepayServer extends Controller {
-	public function index(): string {
+	public function index() {
 		$this->load->language('extension/payment/sagepay_server');
 		$data['text_credit_card'] = $this->language->get('text_credit_card');
 		$data['text_card_name'] = $this->language->get('text_card_name');
@@ -38,7 +38,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		return $this->load->view('extension/payment/sagepay_server', $data);
 	}
 
-	public function send(): void {
+	public function send() {
 		$payment_data = [];
 
 		$url = '';
@@ -198,7 +198,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function callback(): void {
+	public function callback() {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/sagepay_server');
 
@@ -426,7 +426,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		echo "RedirectURL=" . $success_page . $end_ln;
 	}
 
-	public function success(): void {
+	public function success() {
 		$this->load->model('checkout/order');
 		$this->load->model('extension/payment/sagepay_server');
 		$this->load->model('checkout/recurring');
@@ -449,7 +449,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		}
 	}
 
-	public function failure(): void {
+	public function failure() {
 		$this->load->language('extension/payment/sagepay_server');
 
 		$this->session->data['error'] = $this->language->get('text_generic_error');
@@ -457,7 +457,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		$this->response->redirect($this->url->link('checkout/checkout', '', true));
 	}
 
-	public function delete(): void {
+	public function delete() {
 		$this->load->language('account/sagepay_server_cards');
 
 		$this->load->model('extension/payment/sagepay_server');
@@ -495,7 +495,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 
-	public function cron(): void {
+	public function cron() {
 		if (isset($this->request->get['token']) && hash_equals($this->config->get('sagepay_server_cron_job_token'), $this->request->get['token'])) {
 			$this->load->model('extension/payment/sagepay_server');
 
