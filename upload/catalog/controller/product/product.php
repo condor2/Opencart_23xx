@@ -111,7 +111,7 @@ class ControllerProductProduct extends Controller {
 			}
 
 			if (isset($this->request->get['tag'])) {
-				$url .= '&tag=' . $this->request->get['tag'];
+				$url .= '&tag=' . urlencode(html_entity_decode(trim($this->request->get['tag']), ENT_QUOTES, 'UTF-8'));
 			}
 
 			if (isset($this->request->get['description'])) {
@@ -178,7 +178,7 @@ class ControllerProductProduct extends Controller {
 			}
 
 			if (isset($this->request->get['tag'])) {
-				$url .= '&tag=' . $this->request->get['tag'];
+				$url .= '&tag=' . urlencode(html_entity_decode(trim($this->request->get['tag']), ENT_QUOTES, 'UTF-8'));
 			}
 
 			if (isset($this->request->get['description'])) {
@@ -468,7 +468,7 @@ class ControllerProductProduct extends Controller {
 				foreach ($tags as $tag) {
 					$data['tags'][] = [
 						'tag'  => trim($tag),
-						'href' => $this->url->link('product/search', 'tag=' . trim($tag))
+						'href' => $this->url->link('product/search', 'tag=' . rawurlencode(html_entity_decode(trim($tag), ENT_QUOTES, 'UTF-8')))
 					];
 				}
 			}
@@ -505,7 +505,7 @@ class ControllerProductProduct extends Controller {
 			}
 
 			if (isset($this->request->get['tag'])) {
-				$url .= '&tag=' . $this->request->get['tag'];
+				$url .= '&tag=' . urlencode(html_entity_decode(trim($this->request->get['tag']), ENT_QUOTES, 'UTF-8'));
 			}
 
 			if (isset($this->request->get['description'])) {
