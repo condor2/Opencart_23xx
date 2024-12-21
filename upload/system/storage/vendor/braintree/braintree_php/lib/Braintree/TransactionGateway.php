@@ -39,12 +39,13 @@ class TransactionGateway
     /**
      * @ignore
      * @access private
-     * @param array $attribs
+     * @param array $attribs (Note: $deviceSessionId and $fraudMerchantId params are deprecated. Use $deviceData instead)
      * @return Result\Successful|Result\Error
      */
     private function create($attribs)
     {
         Util::verifyKeys(self::createSignature(), $attribs);
+        $this->_checkForDeprecatedAttributes($attribs);
         return $this->_doCreate('/transactions', ['transaction' => $attribs]);
     }
 
@@ -59,37 +60,6 @@ class TransactionGateway
     {
         $result = $this->create($attribs);
         return Util::returnObjectOrThrowException(__CLASS__, $result);
-    }
-    /**
-     *
-     * @deprecated since version 2.3.0
-     * @access public
-     * @param array $attribs
-     * @return object
-     */
-    public function createFromTransparentRedirect($queryString)
-    {
-        trigger_error("DEPRECATED: Please use TransparentRedirectRequest::confirm", E_USER_NOTICE);
-        $params = TransparentRedirect::parseAndValidateQueryString(
-                $queryString
-        );
-        return $this->_doCreate(
-                '/transactions/all/confirm_transparent_redirect_request',
-                ['id' => $params['id']]
-        );
-    }
-    /**
-     *
-     * @deprecated since version 2.3.0
-     * @access public
-     * @param none
-     * @return string
-     */
-    public function createTransactionUrl()
-    {
-        trigger_error("DEPRECATED: Please use TransparentRedirectRequest::url", E_USER_NOTICE);
-        return $this->_config->baseUrl() . $this->_config->merchantPath() .
-                '/transactions/all/create_via_transparent_redirect_request';
     }
 
     public static function cloneSignature()
@@ -109,12 +79,11 @@ class TransactionGateway
             'channel',
             'customerId',
             'deviceData',
-            'deviceSessionId',
-            'fraudMerchantId',
             'merchantAccountId',
             'orderId',
             'paymentMethodNonce',
             'paymentMethodToken',
+            'productSku',
             'purchaseOrderNumber',
             'recurring',
             'serviceFeeAmount',
@@ -127,14 +96,20 @@ class TransactionGateway
             'taxAmount',
             'taxExempt',
             'threeDSecureToken',
+            'threeDSecureAuthenticationId',
             'transactionSource',
             'type',
             'venmoSdkPaymentMethodCode',
+            'scaExemption',
             'shippingAmount',
             'discountAmount',
             'shipsFromPostalCode',
+            'deviceSessionId', 'fraudMerchantId', // NEXT_MAJOR_VERSION remove deviceSessionId and fraudMerchantId
             ['riskData' =>
-                ['customerBrowser', 'customerIp', 'customer_browser', 'customer_ip']
+                [
+                    //NEXT_MAJOR_VERSION remove snake case parameters, PHP should only accept camel case
+                    'customerBrowser', 'customerIp', 'customer_browser', 'customer_ip',
+                    'customerDeviceId', 'customerLocationZip', 'customerTenure'],
             ],
             ['creditCard' =>
                 ['token', 'cardholderName', 'cvv', 'expirationDate', 'expirationMonth', 'expirationYear', 'number'],
@@ -148,21 +123,26 @@ class TransactionGateway
                 [
                     'firstName', 'lastName', 'company', 'countryName',
                     'countryCodeAlpha2', 'countryCodeAlpha3', 'countryCodeNumeric',
-                    'extendedAddress', 'locality', 'postalCode', 'region',
+                    'extendedAddress', 'locality', 'phoneNumber', 'postalCode', 'region',
                     'streetAddress'],
             ],
             ['shipping' =>
                 [
                     'firstName', 'lastName', 'company', 'countryName',
                     'countryCodeAlpha2', 'countryCodeAlpha3', 'countryCodeNumeric',
-                    'extendedAddress', 'locality', 'postalCode', 'region',
-                    'streetAddress'],
+                    'extendedAddress', 'locality', 'phoneNumber', 'postalCode', 'region',
+                    'shippingMethod', 'streetAddress'],
             ],
             ['threeDSecurePassThru' =>
                 [
                     'eciFlag',
                     'cavv',
-                    'xid'],
+                    'xid',
+                    'threeDSecureVersion',
+                    'authenticationResponse',
+                    'directoryResponse',
+                    'cavvAlgorithm',
+                    'dsTransactionId'],
             ],
             ['options' =>
                 [
@@ -184,10 +164,6 @@ class TransactionGateway
                     ['threeDSecure' =>
                         ['required']
                     ],
-                    # TODO: Snake case version included for backwards compatiblity. Remove in the next major version
-                    ['three_d_secure' =>
-                        ['required']
-                    ],
                     ['paypal' =>
                         [
                             'payeeId',
@@ -207,8 +183,6 @@ class TransactionGateway
                     ],
                     ['venmo' =>
                         [
-                            # TODO: Snake case version included for backwards compatiblity. Remove in the next major version
-                            'profile_id',
                             'profileId'
                         ]
                     ]
@@ -217,9 +191,6 @@ class TransactionGateway
             ['customFields' => ['_anyKey_']],
             ['descriptor' => ['name', 'phone', 'url']],
             ['paypalAccount' => ['payeeId', 'payeeEmail', 'payerId', 'paymentId']],
-            # TODO: Snake case version included for backwards compatiblity. Remove in the next major version
-            ['apple_pay_card' => ['number', 'cardholder_name', 'cryptogram', 'expiration_month', 'expiration_year', 'eci_indicator']], 
-
             ['applePayCard' => ['number', 'cardholderName', 'cryptogram', 'expirationMonth', 'expirationYear', 'eciIndicator']],
             ['industry' =>
                 ['industryType',
@@ -234,6 +205,7 @@ class TransactionGateway
                             'lodgingCheckOutDate',
                             'lodgingName',
                             'roomRate',
+                            'roomTax',
                             'passengerFirstName',
                             'passengerLastName',
                             'passengerMiddleInitial',
@@ -248,6 +220,10 @@ class TransactionGateway
                             'feeAmount',
                             'taxAmount',
                             'restrictedTicket',
+                            'noShow',
+                            'advancedDeposit',
+                            'fireSafe',
+                            'propertyPhone',
                             ['legs' =>
                                 [
                                     'conjunctionTicket',
@@ -268,6 +244,12 @@ class TransactionGateway
                                     'taxAmount',
                                     'endorsementOrRestrictions'
                                 ]
+                            ],
+                            ['additionalCharges' =>
+                                [
+                                    'kind',
+                                    'amount'
+                                ]
                             ]
                         ]
                     ]
@@ -276,13 +258,24 @@ class TransactionGateway
             ['lineItems' => ['quantity', 'name', 'description', 'kind', 'unitAmount', 'unitTaxAmount', 'totalAmount', 'discountAmount', 'taxAmount', 'unitOfMeasure', 'productCode', 'commodityCode', 'url']],
             ['externalVault' =>
                 ['status' , 'previousNetworkTransactionId'],
-            ]
+            ],
+            // NEXT_MAJOR_VERSION rename Android Pay to Google Pay
+            ['androidPayCard' => ['number', 'cryptogram', 'expirationMonth', 'expirationYear', 'eciIndicator', 'sourceCardType', 'sourceCardLastFour', 'googleTransactionId']],
+            ['installments' => ['count']]
         ];
     }
 
     public static function submitForSettlementSignature()
     {
-        return ['orderId', ['descriptor' => ['name', 'phone', 'url']]];
+        return ['orderId', ['descriptor' => ['name', 'phone', 'url']],
+            'purchaseOrderNumber',
+            'taxAmount',
+            'taxExempt',
+            'shippingAmount',
+            'discountAmount',
+            'shipsFromPostalCode',
+            ['lineItems' => ['quantity', 'name', 'description', 'kind', 'unitAmount', 'unitTaxAmount', 'totalAmount', 'discountAmount', 'taxAmount', 'unitOfMeasure', 'productCode', 'commodityCode', 'url']],
+        ];
     }
 
     public static function updateDetailsSignature()
@@ -339,11 +332,14 @@ class TransactionGateway
     }
     /**
      * new sale
-     * @param array $attribs
+     * @param array $attribs (Note: $recurring param is deprecated. Use $transactionSource instead)
      * @return Result\Successful|Result\Error
      */
     public function sale($attribs)
     {
+        if (array_key_exists('recurring', $attribs)) {
+            trigger_error('$recurring is deprecated, use $transactionSource instead', E_USER_DEPRECATED);
+        }
         return $this->create(array_merge(['type' => Transaction::SALE], $attribs));
     }
 
@@ -390,7 +386,7 @@ class TransactionGateway
 
             return new ResourceCollection($response, $pager);
         } else {
-            throw new Exception\DownForMaintenance();
+            throw new Exception\RequestTimeout();
         }
     }
 
@@ -410,7 +406,7 @@ class TransactionGateway
                 'transaction'
             );
         } else {
-            throw new Exception\DownForMaintenance();
+            throw new Exception\RequestTimeout();
         }
     }
 
@@ -549,11 +545,6 @@ class TransactionGateway
                    'expected transaction id to be set'
                    );
         }
-        if (!preg_match('/^[0-9a-z]+$/', $id)) {
-            throw new InvalidArgumentException(
-                    $id . ' is an invalid transaction id.'
-                    );
-        }
     }
 
     /**
@@ -584,5 +575,14 @@ class TransactionGateway
             );
         }
     }
+
+    private function _checkForDeprecatedAttributes($attributes)
+    {
+        if (isset($attributes['deviceSessionId'])) {
+            trigger_error('$deviceSessionId is deprecated, use $deviceData instead', E_USER_DEPRECATED);
+        }
+        if (isset($attributes['fraudMerchantId'])) {
+            trigger_error('$fraudMerchantId is deprecated, use $deviceData instead', E_USER_DEPRECATED);
+        }
+    }
 }
-class_alias('Braintree\TransactionGateway', 'Braintree_TransactionGateway');

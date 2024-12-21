@@ -64,6 +64,7 @@ class PaymentMethodGateway
     public function update($token, $attribs)
     {
         Util::verifyKeys(self::updateSignature(), $attribs);
+        $this->_checkForDeprecatedAttributes($attribs);
         return $this->_doUpdate('/payment_methods/any/' . $token, ['payment_method' => $attribs]);
     }
 
@@ -152,7 +153,11 @@ class PaymentMethodGateway
 
     public static function createSignature()
     {
-        $signature = array_merge(self::baseSignature(), ['customerId', 'paypalRefreshToken', 'paypalVaultWithoutUpgrade']);
+        $signature = array_merge(self::baseSignature(), [
+            'customerId',
+            'paypalRefreshToken',
+            CreditCardGateway::threeDSecurePassThruSignature()
+        ]);
         return $signature;
     }
 
@@ -164,11 +169,21 @@ class PaymentMethodGateway
                 'updateExisting'
             ]
         ]);
+        $threeDSPassThruSignature = [
+            'authenticationResponse',
+            'cavv',
+            'cavvAlgorithm',
+            'directoryResponse',
+            'dsTransactionId',
+            'eciFlag',
+            'threeDSecureVersion',
+            'xid'
+        ];
         $signature = array_merge(self::baseSignature(), [
-            'deviceSessionId',
             'venmoSdkPaymentMethodCode',
-            'fraudMerchantId',
-            ['billingAddress' => $billingAddressSignature]
+            'deviceSessionId', 'fraudMerchantId', // NEXT_MAJOR_VERSION remove deviceSessionId and fraudMerchantId
+            ['billingAddress' => $billingAddressSignature],
+            ['threeDSecurePassThru' => $threeDSPassThruSignature]
         ]);
         return $signature;
     }
@@ -317,5 +332,14 @@ class PaymentMethodGateway
                     );
         }
     }
+
+    private function _checkForDeprecatedAttributes($attributes)
+    {
+        if (isset($attributes['deviceSessionId'])) {
+            trigger_error('$deviceSessionId is deprecated, use $deviceData instead', E_USER_DEPRECATED);
+        }
+        if (isset($attributes['fraudMerchantId'])) {
+            trigger_error('$fraudMerchantId is deprecated, use $deviceData instead', E_USER_DEPRECATED);
+        }
+    }
 }
-class_alias('Braintree\PaymentMethodGateway', 'Braintree_PaymentMethodGateway');

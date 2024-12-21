@@ -26,22 +26,20 @@ class PaymentMethodParser
             return CreditCard::factory($response['creditCard']);
         } else if (isset($response['paypalAccount'])) {
             return PayPalAccount::factory($response['paypalAccount']);
-        } else if (isset($response['coinbaseAccount'])) {
-            return CoinbaseAccount::factory($response['coinbaseAccount']);
         } else if (isset($response['applePayCard'])) {
             return ApplePayCard::factory($response['applePayCard']);
         } else if (isset($response['androidPayCard'])) {
             return AndroidPayCard::factory($response['androidPayCard']);
         } else if (isset($response['amexExpressCheckoutCard'])) {
+        // NEXT_MAJOR_VERSION remove deprecated amexExpressCheckoutCard
             return AmexExpressCheckoutCard::factory($response['amexExpressCheckoutCard']);
-        } else if (isset($response['europeBankAccount'])) {
-            return EuropeBankAccount::factory($response['europeBankAccount']);
         } else if (isset($response['usBankAccount'])) {
             return UsBankAccount::factory($response['usBankAccount']);
         } else if (isset($response['venmoAccount'])) {
             return VenmoAccount::factory($response['venmoAccount']);
         } else if (isset($response['visaCheckoutCard'])) {
             return VisaCheckoutCard::factory($response['visaCheckoutCard']);
+        // NEXT_MAJOR_VERSION remove deprecated masterpassCard
         } else if (isset($response['masterpassCard'])) {
             return MasterpassCard::factory($response['masterpassCard']);
         } else if (isset($response['samsungPayCard'])) {
@@ -55,4 +53,3 @@ class PaymentMethodParser
         }
     }
 }
-class_alias('Braintree\PaymentMethodParser', 'Braintree_PaymentMethodParser');

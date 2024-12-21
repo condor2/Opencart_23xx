@@ -5,7 +5,6 @@ use InvalidArgumentException;
 
 /**
  * Braintree DisputeGateway module
- * PHP Version 5
  * Creates and manages Braintree Disputes
  *
  * @package   Braintree
@@ -132,6 +131,7 @@ class DisputeGateway
             }
 
             if (array_key_exists('tag', $request)) {
+                trigger_error('$tag is deprecated, use $category instead', E_USER_DEPRECATED);
                 $evidence['category'] = $request['tag'];
             }
 
@@ -243,7 +243,7 @@ class DisputeGateway
     /**
      * Search for Disputes, given a DisputeSearch query
      *
-     * @param DisputeSearch $query
+     * @param array $query
      */
     public function search($query)
     {
@@ -271,4 +271,3 @@ class DisputeGateway
         return new PaginatedResult($totalItems, $pageSize, $disputes);
     }
 }
-class_alias('Braintree\DisputeGateway', 'Braintree_DisputeGateway');

@@ -18,6 +18,7 @@ namespace Braintree;
  * @property-read string $cardType
  * @property-read string $cardholderName
  * @property-read string $commercial
+ * @property-read string $countryOfIssuance
  * @property-read \DateTime $createdAt
  * @property-read string $customerId
  * @property-read string $customerLocation
@@ -31,6 +32,7 @@ namespace Braintree;
  * @property-read boolean $healthcare
  * @property-read string $imageUrl
  * @property-read string $issuingBank
+ * @property-read string $isNetworkTokenized
  * @property-read string $last4
  * @property-read string $maskedNumber
  * @property-read string $payroll
@@ -223,11 +225,6 @@ class CreditCard extends Base
         return Configuration::gateway()->creditCard()->createNoValidate($attribs);
     }
 
-    public static function createFromTransparentRedirect($queryString)
-    {
-        return Configuration::gateway()->creditCard()->createFromTransparentRedirect($queryString);
-    }
-
     public static function createCreditCardUrl()
     {
         return Configuration::gateway()->creditCard()->createCreditCardUrl();
@@ -298,11 +295,6 @@ class CreditCard extends Base
         return Configuration::gateway()->creditCard()->updateCreditCardUrl();
     }
 
-    public static function updateFromTransparentRedirect($queryString)
-    {
-        return Configuration::gateway()->creditCard()->updateFromTransparentRedirect($queryString);
-    }
-
     public static function delete($token)
     {
         return Configuration::gateway()->creditCard()->delete($token);
@@ -329,4 +321,3 @@ class CreditCard extends Base
         ];
     }
 }
-class_alias('Braintree\CreditCard', 'Braintree_CreditCard');

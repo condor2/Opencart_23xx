@@ -33,7 +33,7 @@ class Configuration
      * Braintree API version to use
      * @access public
      */
-    const API_VERSION =  5;
+    const API_VERSION =  6;
     const GRAPHQL_API_VERSION = '2018-09-10';
 
     public function __construct($attribs = [])
@@ -52,8 +52,26 @@ class Configuration
             if ($kind == 'privateKey') {
                 $this->_privateKey = $value;
             }
+            if ($kind == 'proxyHost') {
+                $this->_proxyHost = $value;
+            }
+            if ($kind == 'proxyPort') {
+                $this->_proxyPort = $value;
+            }
+            if ($kind == 'proxyType') {
+                $this->_proxyType = $value;
+            }
+            if ($kind == 'proxyUser') {
+                $this->_proxyUser = $value;
+            }
+            if ($kind == 'proxyPassword') {
+                $this->_proxyPassword = $value;
+            }
             if ($kind == 'timeout') {
                 $this->_timeout = $value;
+            }
+            if ($kind == 'sslVersion') {
+                $this->_sslVersion = $value;
             }
             if ($kind == 'acceptGzipEncoding') {
                 $this->_acceptGzipEncoding = $value;
@@ -195,12 +213,15 @@ class Configuration
     }
 
     /**
+     * @deprecated Use isUsingInstanceProxy instead.
      * Specifies whether or not a proxy is properly configured
      *
      * @return bool true if a proxy is configured properly, false if not
      */
     public static function isUsingProxy()
     {
+        // NEXT_MAJOR_VERSION Remove this method and rename isUsingInstanceProxy to isUsingProxy
+        trigger_error('DEPRECATED: Use isUsingInstanceProxy instead.', E_USER_DEPRECATED);
         $proxyHost = self::$global->getProxyHost();
         $proxyPort = self::$global->getProxyPort();
         return !empty($proxyHost) && !empty($proxyPort);
@@ -223,6 +244,7 @@ class Configuration
     }
 
     /**
+     * @deprecated Use isAuthenticatedInstanceProxy instead.
      * Specified whether or not a username and password have been provided for
      * use with an authenticated proxy
      *
@@ -230,6 +252,8 @@ class Configuration
      */
     public static function isAuthenticatedProxy()
     {
+        // NEXT_MAJOR_VERSION Remove this method and rename isAuthenticatedInstanceProxy to isAuthenticatedProxy
+        trigger_error('DEPRECATED: Use isAuthenticatedInstanceProxy instead.', E_USER_DEPRECATED);
         $proxyUser = self::$global->getProxyUser();
         $proxyPwd = self::$global->getProxyPassword();
         return !empty($proxyUser) && !empty($proxyPwd);
@@ -416,7 +440,7 @@ class Configuration
         $this->_sslVersion = $value;
     }
 
-    private function getSslVersion()
+    public function getSslVersion()
     {
         return $this->_sslVersion;
     }
@@ -532,6 +556,20 @@ class Configuration
         return getenv("GRAPHQL_PORT") ?: 8080;
     }
 
+    public function isUsingInstanceProxy()
+    {
+        $proxyHost = $this->getProxyHost();
+        $proxyPort = $this->getProxyPort();
+        return !empty($proxyHost) && !empty($proxyPort);
+    }
+
+    public function isAuthenticatedInstanceProxy()
+    {
+        $proxyUser = $this->getProxyUser();
+        $proxyPwd = $this->getProxyPassword();
+        return !empty($proxyUser) && !empty($proxyPwd);
+    }
+
     /**
      * returns http protocol depending on environment
      *
@@ -602,28 +640,6 @@ class Configuration
         return $graphQLServerName;
     }
 
-    public function authUrl()
-    {
-        switch($this->_environment) {
-         case 'production':
-             $serverName = 'https://auth.venmo.com';
-             break;
-         case 'qa':
-             $serverName = 'https://auth.qa.venmo.com';
-             break;
-         case 'sandbox':
-             $serverName = 'https://auth.sandbox.venmo.com';
-             break;
-         case 'development':
-         case 'integration':
-         default:
-             $serverName = 'http://auth.venmo.dev:9292';
-             break;
-        }
-
-        return $serverName;
-    }
-
     /**
      * returns boolean indicating SSL is on or off for this session,
      * depending on environment
@@ -662,4 +678,3 @@ class Configuration
     }
 }
 Configuration::reset();
-class_alias('Braintree\Configuration', 'Braintree_Configuration');

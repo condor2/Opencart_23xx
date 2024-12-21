@@ -6,7 +6,6 @@ use InvalidArgumentException;
 
 /**
  * Braintree Utility methods
- * PHP version 5
  */
 
 class Util
@@ -61,6 +60,9 @@ class Util
         case 404:
             throw new Exception\NotFound();
             break;
+        case 408;
+            throw new Exception\RequestTimeout();
+            break;
         case 426:
             throw new Exception\UpgradeRequired();
             break;
@@ -70,8 +72,8 @@ class Util
         case 500:
             throw new Exception\ServerError();
             break;
-        case 503:
-            throw new Exception\DownForMaintenance();
+        case 504;
+            throw new Exception\GatewayTimeout();
             break;
         default:
             throw new Exception\Unexpected('Unexpected HTTP_RESPONSE #' . $statusCode);
@@ -114,7 +116,7 @@ class Util
             } else if ($errorClass == "INTERNAL") {
                 throw new Exception\ServerError();
             } else if ($errorClass == "SERVICE_AVAILABILITY") {
-                throw new Exception\DownForMaintenance();
+                throw new Exception\ServiceUnavailable();
             } else {
                 throw new Exception\Unexpected('Unexpected exception ' . $message);
             }
@@ -148,69 +150,37 @@ class Util
     {
         $classNamesToResponseKeys = [
             'Braintree\CreditCard' => 'creditCard',
-            'Braintree_CreditCard' => 'creditCard',
             'Braintree\CreditCardGateway' => 'creditCard',
-            'Braintree_CreditCardGateway' => 'creditCard',
             'Braintree\Customer' => 'customer',
-            'Braintree_Customer' => 'customer',
             'Braintree\CustomerGateway' => 'customer',
-            'Braintree_CustomerGateway' => 'customer',
             'Braintree\Subscription' => 'subscription',
-            'Braintree_Subscription' => 'subscription',
             'Braintree\SubscriptionGateway' => 'subscription',
-            'Braintree_SubscriptionGateway' => 'subscription',
             'Braintree\Transaction' => 'transaction',
-            'Braintree_Transaction' => 'transaction',
             'Braintree\TransactionGateway' => 'transaction',
-            'Braintree_TransactionGateway' => 'transaction',
             'Braintree\CreditCardVerification' => 'verification',
-            'Braintree_CreditCardVerification' => 'verification',
             'Braintree\CreditCardVerificationGateway' => 'verification',
-            'Braintree_CreditCardVerificationGateway' => 'verification',
             'Braintree\AddOn' => 'addOn',
-            'Braintree_AddOn' => 'addOn',
             'Braintree\AddOnGateway' => 'addOn',
-            'Braintree_AddOnGateway' => 'addOn',
             'Braintree\Discount' => 'discount',
-            'Braintree_Discount' => 'discount',
             'Braintree\DiscountGateway' => 'discount',
-            'Braintree_DiscountGateway' => 'discount',
             'Braintree\Dispute' => 'dispute',
-            'Braintree_Dispute' => 'dispute',
             'Braintree\Dispute\EvidenceDetails' => 'evidence',
-            'Braintree_Dispute_EvidenceDetails' => 'evidence',
             'Braintree\DocumentUpload' => 'documentUpload',
-            'Braintree_DocumentUpload' => 'doumentUpload',
             'Braintree\Plan' => 'plan',
-            'Braintree_Plan' => 'plan',
             'Braintree\PlanGateway' => 'plan',
-            'Braintree_PlanGateway' => 'plan',
             'Braintree\Address' => 'address',
-            'Braintree_Address' => 'address',
             'Braintree\AddressGateway' => 'address',
-            'Braintree_AddressGateway' => 'address',
             'Braintree\SettlementBatchSummary' => 'settlementBatchSummary',
-            'Braintree_SettlementBatchSummary' => 'settlementBatchSummary',
             'Braintree\SettlementBatchSummaryGateway' => 'settlementBatchSummary',
-            'Braintree_SettlementBatchSummaryGateway' => 'settlementBatchSummary',
             'Braintree\Merchant' => 'merchant',
-            'Braintree_Merchant' => 'merchant',
             'Braintree\MerchantGateway' => 'merchant',
-            'Braintree_MerchantGateway' => 'merchant',
             'Braintree\MerchantAccount' => 'merchantAccount',
-            'Braintree_MerchantAccount' => 'merchantAccount',
             'Braintree\MerchantAccountGateway' => 'merchantAccount',
-            'Braintree_MerchantAccountGateway' => 'merchantAccount',
             'Braintree\OAuthCredentials' => 'credentials',
-            'Braintree_OAuthCredentials' => 'credentials',
             'Braintree\OAuthResult' => 'result',
-            'Braintree_OAuthResult' => 'result',
             'Braintree\PayPalAccount' => 'paypalAccount',
-            'Braintree_PayPalAccount' => 'paypalAccount',
             'Braintree\PayPalAccountGateway' => 'paypalAccount',
-            'Braintree_PayPalAccountGateway' => 'paypalAccount',
             'Braintree\UsBankAccountVerification' => 'usBankAccountVerification',
-            'Braintree_UsBankAccountVerification' => 'usBankAccountVerification',
         ];
 
         return $classNamesToResponseKeys[$name];
@@ -462,4 +432,3 @@ class Util
         return $invalidKeys;
     }
 }
-class_alias('Braintree\Util', 'Braintree_Util');

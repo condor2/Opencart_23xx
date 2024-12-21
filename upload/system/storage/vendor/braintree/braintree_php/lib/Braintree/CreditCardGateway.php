@@ -32,6 +32,7 @@ class CreditCardGateway
     public function create($attribs)
     {
         Util::verifyKeys(self::createSignature(), $attribs);
+        $this->_checkForDeprecatedAttributes($attribs);
         return $this->_doCreate('/payment_methods', ['credit_card' => $attribs]);
     }
 
@@ -49,40 +50,6 @@ class CreditCardGateway
         $result = $this->create($attribs);
         return Util::returnObjectOrThrowException(__CLASS__, $result);
     }
-    /**
-     * create a customer from a TransparentRedirect operation
-     *
-     * @deprecated since version 2.3.0
-     * @access public
-     * @param array $attribs
-     * @return Result\Successful|Result\Error
-     */
-    public function createFromTransparentRedirect($queryString)
-    {
-        trigger_error("DEPRECATED: Please use TransparentRedirectRequest::confirm", E_USER_NOTICE);
-        $params = TransparentRedirect::parseAndValidateQueryString(
-            $queryString
-        );
-        return $this->_doCreate(
-            '/payment_methods/all/confirm_transparent_redirect_request',
-            ['id' => $params['id']]
-        );
-    }
-
-    /**
-     *
-     * @deprecated since version 2.3.0
-     * @access public
-     * @param none
-     * @return string
-     */
-    public function createCreditCardUrl()
-    {
-        trigger_error("DEPRECATED: Please use TransparentRedirectRequest::url", E_USER_NOTICE);
-        return $this->_config->baseUrl() . $this->_config->merchantPath().
-                '/payment_methods/all/create_via_transparent_redirect_request';
-    }
-
     /**
      * returns a ResourceCollection of expired credit cards
      * @return ResourceCollection
@@ -263,7 +230,7 @@ class CreditCardGateway
      * is the 2nd attribute. $token is not sent in object context.
      *
      * @access public
-     * @param array $attributes
+     * @param array $attributes (Note: $deviceSessionId and $fraudMerchantId params are deprecated. Use $deviceData instead)
      * @param string $token (optional)
      * @return Result\Successful|Result\Error
      */
@@ -271,6 +238,7 @@ class CreditCardGateway
     {
         Util::verifyKeys(self::updateSignature(), $attributes);
         $this->_validateId($token);
+        $this->_checkForDeprecatedAttributes($attributes);
         return $this->_doUpdate('put', '/payment_methods/credit_card/' . $token, ['creditCard' => $attributes]);
     }
 
@@ -292,39 +260,6 @@ class CreditCardGateway
         $result = $this->update($token, $attributes);
         return Util::returnObjectOrThrowException(__CLASS__, $result);
     }
-    /**
-     *
-     * @access public
-     * @param none
-     * @return string
-     */
-    public function updateCreditCardUrl()
-    {
-        trigger_error("DEPRECATED: Please use TransparentRedirectRequest::url", E_USER_NOTICE);
-        return $this->_config->baseUrl() . $this->_config->merchantPath() .
-                '/payment_methods/all/update_via_transparent_redirect_request';
-    }
-
-    /**
-     * update a customer from a TransparentRedirect operation
-     *
-     * @deprecated since version 2.3.0
-     * @access public
-     * @param array $attribs
-     * @return object
-     */
-    public function updateFromTransparentRedirect($queryString)
-    {
-        trigger_error("DEPRECATED: Please use TransparentRedirectRequest::confirm", E_USER_NOTICE);
-        $params = TransparentRedirect::parseAndValidateQueryString(
-            $queryString
-        );
-        return $this->_doUpdate(
-            'post',
-            '/payment_methods/all/confirm_transparent_redirect_request',
-            ['id' => $params['id']]
-        );
-    }
 
     public function delete($token)
     {
@@ -342,9 +277,10 @@ class CreditCardGateway
     private static function baseSignature($options)
     {
          return [
-             'billingAddressId', 'cardholderName', 'cvv', 'number', 'deviceSessionId',
+             'billingAddressId', 'cardholderName', 'cvv', 'number',
              'expirationDate', 'expirationMonth', 'expirationYear', 'token', 'venmoSdkPaymentMethodCode',
-             'deviceData', 'fraudMerchantId', 'paymentMethodNonce',
+             'deviceData', 'paymentMethodNonce',
+             'deviceSessionId', 'fraudMerchantId', // NEXT_MAJOR_VERSION remove deviceSessionId and fraudMerchantId
              ['options' => $options],
              [
                  'billingAddress' => self::billingAddressSignature()
@@ -376,7 +312,24 @@ class CreditCardGateway
         $options[] = "failOnDuplicatePaymentMethod";
         $signature = self::baseSignature($options);
         $signature[] = 'customerId';
+        $signature[] = self::threeDSecurePassThruSignature();
         return $signature;
+    }
+
+    public static function threeDSecurePassThruSignature()
+    {
+        return [
+            'threeDSecurePassThru' => [
+                'eciFlag',
+                'cavv',
+                'xid',
+                'threeDSecureVersion',
+                'authenticationResponse',
+                'directoryResponse',
+                'cavvAlgorithm',
+                'dsTransactionId',
+            ]
+        ];
     }
 
     public static function updateSignature()
@@ -384,6 +337,7 @@ class CreditCardGateway
         $options = self::baseOptions();
         $options[] = "failOnDuplicatePaymentMethod";
         $signature = self::baseSignature($options);
+        $signature[] = self::threeDSecurePassThruSignature();
 
         $updateExistingBillingSignature = [
             [
@@ -482,5 +436,14 @@ class CreditCardGateway
             );
         }
     }
+
+    private function _checkForDeprecatedAttributes($attributes)
+    {
+        if (isset($attributes['deviceSessionId'])) {
+            trigger_error('$deviceSessionId is deprecated, use $deviceData instead', E_USER_DEPRECATED);
+        }
+        if (isset($attributes['fraudMerchantId'])) {
+            trigger_error('$fraudMerchantId is deprecated, use $deviceData instead', E_USER_DEPRECATED);
+        }
+    }
 }
-class_alias('Braintree\CreditCardGateway', 'Braintree_CreditCardGateway');

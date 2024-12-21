@@ -7,6 +7,7 @@ use Braintree\Instance;
  *
  * @package    Braintree
  * @subpackage Transaction
+ * @deprecated
  */
 
 /**
@@ -15,6 +16,7 @@ use Braintree\Instance;
  *
  * @package    Braintree
  * @subpackage Transaction
+ * @deprecated
  *
  * @property-read string $cardType
  * @property-read string $bin
@@ -40,4 +42,3 @@ class AmexExpressCheckoutCardDetails extends Instance
         parent::__construct($attributes);
     }
 }
-class_alias('Braintree\Transaction\AmexExpressCheckoutCardDetails', 'Braintree_Transaction_AmexExpressCheckoutCardDetails');

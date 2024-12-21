@@ -2,11 +2,8 @@
 
 namespace GuzzleHttp\Subscriber\Oauth;
 
+use GuzzleHttp\Psr7\Query;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\MessageFormatter;
-use GuzzleHttp\Promise;
-use Psr\Http\Message\StreamInterface;
 
 /**
  * OAuth 1.0 signature plugin.
@@ -28,9 +25,10 @@ class Oauth1
     const REQUEST_METHOD_HEADER = 'header';
     const REQUEST_METHOD_QUERY  = 'query';
 
-    const SIGNATURE_METHOD_HMAC      = 'HMAC-SHA1';
-    const SIGNATURE_METHOD_RSA       = 'RSA-SHA1';
-    const SIGNATURE_METHOD_PLAINTEXT = 'PLAINTEXT';
+    const SIGNATURE_METHOD_HMAC       = 'HMAC-SHA1';
+    const SIGNATURE_METHOD_HMACSHA256 = 'HMAC-SHA256';
+    const SIGNATURE_METHOD_RSA        = 'RSA-SHA1';
+    const SIGNATURE_METHOD_PLAINTEXT  = 'PLAINTEXT';
 
     /** @var array Configuration settings */
     private $config;
@@ -107,8 +105,8 @@ class Oauth1
                 $request = $request->withHeader($header, $value);
                 break;
             case self::REQUEST_METHOD_QUERY:
-                $queryparams = \GuzzleHttp\Psr7\parse_query($request->getUri()->getQuery());
-                $preparedParams = \GuzzleHttp\Psr7\build_query($oauthparams + $queryparams);
+                $queryParams = Query::parse($request->getUri()->getQuery());
+                $preparedParams = Query::build($oauthparams + $queryParams);
                 $request = $request->withUri($request->getUri()->withQuery($preparedParams));
                 break;
             default:
@@ -138,14 +136,14 @@ class Oauth1
         unset($params['oauth_signature']);
 
         // Add POST fields if the request uses POST fields and no files
-        if ($request->getHeaderLine('Content-Type') == 'application/x-www-form-urlencoded') {
-            $body = \GuzzleHttp\Psr7\parse_query($request->getBody()->getContents());
+        if ($request->getHeaderLine('Content-Type') === 'application/x-www-form-urlencoded') {
+            $body = Query::parse($request->getBody()->getContents());
             $params += $body;
         }
 
         // Parse & add query string parameters as base string parameters
         $query = $request->getUri()->getQuery();
-        $params += \GuzzleHttp\Psr7\parse_query($query);
+        $params += Query::parse($query);
 
         $baseString = $this->createBaseString(
             $request,
@@ -155,7 +153,10 @@ class Oauth1
         // Implements double-dispatch to sign requests
         switch ($this->config['signature_method']) {
             case Oauth1::SIGNATURE_METHOD_HMAC:
-                $signature = $this->signUsingHmacSha1($baseString);
+                $signature = $this->signUsingHmac('sha1', $baseString);
+                break;
+            case Oauth1::SIGNATURE_METHOD_HMACSHA256:
+                $signature = $this->signUsingHmac('sha256', $baseString);
                 break;
             case Oauth1::SIGNATURE_METHOD_RSA:
                 $signature = $this->signUsingRsaSha1($baseString);
@@ -233,16 +234,19 @@ class Oauth1
     }
 
     /**
+     * @param string $algo Name of selected hashing algorithm (i.e. "md5", "sha256", "haval160,4", etc..)
      * @param string $baseString
      *
      * @return string
      */
-    private function signUsingHmacSha1($baseString)
+    private function signUsingHmac($algo, $baseString)
     {
-        $key = rawurlencode($this->config['consumer_secret'])
-            . '&' . rawurlencode($this->config['token_secret']);
+        $key = rawurlencode($this->config['consumer_secret']) . '&';
+        if (isset($this->config['token_secret'])) {
+            $key .= rawurlencode($this->config['token_secret']);
+        }
 
-        return hash_hmac('sha1', $baseString, $key, true);
+        return hash_hmac($algo, $baseString, $key, true);
     }
 
     /**
@@ -264,7 +268,7 @@ class Oauth1
 
         $signature = '';
         openssl_sign($baseString, $signature, $privateKey);
-        openssl_free_key($privateKey);
+        unset($privateKey);
 
         return $signature;
     }
@@ -326,7 +330,8 @@ class Oauth1
             'callback'  => 'oauth_callback',
             'token'     => 'oauth_token',
             'verifier'  => 'oauth_verifier',
-            'version'   => 'oauth_version'
+            'version'   => 'oauth_version',
+            'bodyhash'  => 'oauth_body_hash'
         ];
 
         foreach ($optionalParams as $optionName => $oauthName) {
