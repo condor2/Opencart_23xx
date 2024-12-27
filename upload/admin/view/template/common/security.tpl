@@ -124,11 +124,11 @@ $('#modal-security select[name=\'type\']').on('change', function () {
 	html += '<p><strong>' + $('#modal-security input[name=\'path\']').val() + $('#modal-security input[name=\'directory\']').val() + '/</strong></p></li>';
 	html += '<li><p><?php echo $text_config; ?></p>';
 	html += '<p><strong>define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');</strong></p>';
-	html += '<p>to</p>';
+	html += '<p><?php echo $text_to; ?></p>';
 	html += '<p><strong>define(\'DIR_STORAGE\', \'' + $('#modal-security input[name=\'path\']').val() + $('#modal-security input[name=\'directory\']').val() + '/\');</strong></p></li>';
 	html += '<li><p><?php echo $text_admin; ?></p>';
 	html += '<p><strong>define(\'DIR_STORAGE\', DIR_SYSTEM . \'storage/\');</strong></p>';
-	html += '<p>to</p>';
+	html += '<p><?php echo $text_to; ?></p>';
 	html += '<p><strong>define(\'DIR_STORAGE\', \'' + $('#modal-security input[name=\'path\']').val() + $('#modal-security input[name=\'directory\']').val() + '/\');</strong></p></li>';
     html += '</ol>';
 	
