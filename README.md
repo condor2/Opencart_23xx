@@ -23,7 +23,7 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 ## Updates
 - Bootstrap 3.4.1
 - jQuery 3.7.1
-- Summernote v0.8.20
+- Summernote v0.9.1
 
 ## Removed
 - OpenBay
