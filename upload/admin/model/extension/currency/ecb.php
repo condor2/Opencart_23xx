@@ -7,7 +7,7 @@ class ModelExtensionCurrencyEcb extends Model {
 	}
 
 	public function refresh() {
-		if ($this->config->get('currency_ecb_status')) {
+		if ($this->config->get('ecb_status')) {
 			if ($this->config->get('config_currency_engine') == 'ecb') {
 				$curl = curl_init();
 
