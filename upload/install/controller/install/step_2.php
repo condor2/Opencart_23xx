@@ -31,6 +31,7 @@ class ControllerInstallStep2 extends Controller {
 		$data['text_writable'] = $this->language->get('text_writable');
 		$data['text_unwritable'] = $this->language->get('text_unwritable');
 		$data['text_version'] = $this->language->get('text_version');
+		$data['text_open_basedir'] = $this->language->get('text_open_basedir');
 		$data['text_global'] = $this->language->get('text_global');
 		$data['text_magic'] = $this->language->get('text_magic');
 		$data['text_file_upload'] = $this->language->get('text_file_upload');
@@ -126,11 +127,30 @@ class ControllerInstallStep2 extends Controller {
 
 		$data['php_version'] = PHP_VERSION;
 
-		if (version_compare(PHP_VERSION, '7.4.0', '<')) {
-			$data['version'] = false;
+		$data['version'] = version_compare(PHP_VERSION, '7.4.0', '>=');
+
+		$open_basedir = str_replace('\\', '/', ini_get('open_basedir')) . '/';
+
+		$directory = rtrim(DIR_OPENCART, '/');
+
+		$required = substr($directory, 0, strrpos($directory, '/')) . '/';
+
+		if ($open_basedir) {
+			$data['open_basedir'] = false;
+
+			$directories = explode(',', $open_basedir, 1);
+
+			foreach ($directories as $directory) {
+				if (str_starts_with($directory, $required)) {
+					$data['open_basedir'] = true;
+				}
+			}
 		} else {
-			$data['version'] = true;
+			$data['open_basedir'] = true;
 		}
+
+		$data['open_basedir_current'] = $open_basedir;
+		$data['open_basedir_required'] = $required;
 
 		$data['register_globals'] = ini_get('register_globals');
 		$data['magic_quotes_gpc'] = ini_get('magic_quotes_gpc');
@@ -185,6 +205,26 @@ class ControllerInstallStep2 extends Controller {
 	private function validate() {
 		if (version_compare(PHP_VERSION, '7.4.0', '<')) {
 			$this->error['warning'] = $this->language->get('error_version');
+		}
+
+		$open_basedir = str_replace('\\', '/', ini_get('open_basedir'));
+
+		$directory = rtrim(DIR_OPENCART, '/');
+
+		$required = substr($directory, 0, strrpos($directory, '/')) . '/';
+
+		if ($open_basedir) {
+			$data['open_basedir'] = false;
+
+			$directories = explode(',', $open_basedir);
+
+			foreach ($directories as $directory) {
+				if (str_starts_with($directory, $required)) {
+					$data['open_basedir'] = true;
+				}
+			}
+
+			$this->error['warning'] = sprintf($this->language->get('error_open_basedir'), $required);
 		}
 
 		if (!ini_get('file_uploads')) {

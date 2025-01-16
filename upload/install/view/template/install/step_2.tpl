@@ -43,6 +43,20 @@
                   <?php } ?></td>
               </tr>
               <tr>
+                <td><?php echo $text_open_basedir; ?></td>
+                <td><?php if (!$open_basedir) { ?>
+                  <span class="text-success"><?php echo $open_basedir_current; ?></span>
+                  <?php } else { ?>
+                  <span class="text-danger"> <?php echo $open_basedir_current; ?></span>
+                  <?php } ?></td>
+                <td><?php echo $open_basedir_required; ?></td>
+                <td class="text-center"><?php if (!$open_basedir) { ?>
+                  <span class="text-success"><i class="fa fa-check-circle"></i></span>
+                  <?php } else { ?>
+                  <span class="text-danger"><i class="fa fa-minus-circle"></i></span>
+                  <?php } ?></td>
+              </tr>
+              <tr>
                 <td><?php echo $text_global; ?></td>
                 <td><?php if ($register_globals) { ?>
                   <?php echo $text_on; ?>
