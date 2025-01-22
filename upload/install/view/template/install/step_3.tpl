@@ -21,6 +21,7 @@
     <div class="col-sm-9">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" class="form-horizontal">
         <p><?php echo $text_db_connection; ?></p>
+
         <fieldset>
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-db-driver"><?php echo $entry_db_driver; ?></label>
@@ -63,47 +64,6 @@
               <input type="password" name="db_password" value="<?php echo $db_password; ?>" id="input-db-password" class="form-control" />
             </div>
           </div>
-          <div class="row">
-           <div class="col-md-12">
-            <div class="panel-group" id="db-advanced">
-             <div class="panel panel-default">
-              <div class="panel-heading">
-               <h4 class="panel-title">
-                <a data-toggle="collapse" href="#db-advanced-collapse">
-                 <?php echo $entry_db_advanced; ?>
-                 <span class="glyphicon glyphicon-menu-down pull-right"></span>
-                </a>			  
-               </h4>
-              </div>
-               <div id="db-advanced-collapse" class="panel-collapse collapse">
-                <div class="panel-body">
-                 <div class="alert alert-info alert-dismissible">
-                  <?php echo $entry_db_ssl_info; ?>
-                 </div>
-                <div class="row">
-                 <div class="col-md-12">
-                   <label for="input-db-ssl-key" class="form-label"><?php echo $entry_db_ssl_key; ?></label>
-                   <textarea name="db_ssl_key" id="input-db-ssl-key" class="form-control"><?php echo $db_ssl_key; ?></textarea>
-                 </div>
-                </div>
-                <div class="row">
-                 <div class="col-md-12">
-                   <label for="input-db-ssl-cert" class="form-label"><?php echo $entry_db_ssl_cert; ?></label>
-                   <textarea name="db_ssl_cert" id="input-db-ssl-cert" class="form-control"><?php echo $db_ssl_cert; ?></textarea>
-                 </div>
-                </div>
-                <div class="row">
-                 <div class="col-md-12">
-                   <label for="input-db-ssl-ca" class="form-label"><?php echo $entry_db_ssl_ca; ?></label>
-                   <textarea name="db_ssl_ca" id="input-db-ssl-ca" class="form-control"><?php echo $db_ssl_ca; ?></textarea>
-                 </div>
-                </div>
-                </div>
-               </div>
-             </div>
-            </div>
-           </div>
-          </div>
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-db-database"><?php echo $entry_db_database; ?></label>
             <div class="col-sm-10">
@@ -131,7 +91,50 @@
               <?php } ?>
             </div>
           </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-db-advanced"><?php echo $entry_db_advanced; ?></label>
+            <div class="col-sm-2">
+             <div class="checkbox">
+              <label>
+               <input type="hidden" name="advanced" value="0"/>
+               <input type="checkbox" name="advanced" value="1" data-toggle="collapse" data-target="#collapse-advanced">
+              </label>
+             </div>
+            </div>
+          </div>
         </fieldset>
+          <div class="row">
+           <div class="col-sm-12">
+            <div class="panel-group" id="db-advanced">
+             <div id="collapse-advanced" class="collapse">
+                <p><?php echo $text_db_advanced; ?></p>
+                 <div class="alert alert-info">
+                  <?php echo $entry_db_ssl_info; ?>
+                 </div>
+               <fieldset>
+                <div class="form-group">
+                 <div class="col-sm-12">
+                   <label class="control-label" for="input-db-ssl-key"><?php echo $entry_db_ssl_key; ?></label>
+                   <textarea class="form-control" name="db_ssl_key" id="input-db-ssl-key"><?php echo $db_ssl_key; ?></textarea>
+                 </div>
+                </div>
+                <div class="form-group">
+                 <div class="col-sm-12">
+                   <label class="control-label" for="input-db-ssl-cert"><?php echo $entry_db_ssl_cert; ?></label>
+                   <textarea class="form-control" name="db_ssl_cert" id="input-db-ssl-cert"><?php echo $db_ssl_cert; ?></textarea>
+                 </div>
+                </div>
+                <div class="form-group">
+                 <div class="col-sm-12">
+                   <label class="control-label" for="input-db-ssl-ca"><?php echo $entry_db_ssl_ca; ?></label>
+                   <textarea class="form-control" name="db_ssl_ca" id="input-db-ssl-ca"><?php echo $db_ssl_ca; ?></textarea>
+                 </div>
+                </div>
+               </fieldset>
+             </div>
+            </div>
+           </div>
+          </div>
         <p><?php echo $text_db_administration; ?></p>
         <fieldset>
           <div class="form-group required">
