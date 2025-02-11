@@ -106,24 +106,24 @@ class ModelUpgrade1008 extends Model {
 		}
 
 		// Remove Affiliate `salt` column
-		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate' AND COLUMN_NAME = 'salt'");
+		//$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "affiliate' AND COLUMN_NAME = 'salt'");
 
-		if ($query->num_rows) {
-			$this->db->query("ALTER TABLE `" . DB_PREFIX . "affiliate` DROP COLUMN `salt`");
-		}
+		//if ($query->num_rows) {
+			//$this->db->query("ALTER TABLE `" . DB_PREFIX . "affiliate` DROP COLUMN `salt`");
+		//}
 
 		// Remove Customer `salt` column
-		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "customer' AND COLUMN_NAME = 'salt'");
+		//$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "customer' AND COLUMN_NAME = 'salt'");
 
-		if ($query->num_rows) {
-			$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer` DROP COLUMN `salt`");
-		}
+		//if ($query->num_rows) {
+			//$this->db->query("ALTER TABLE `" . DB_PREFIX . "customer` DROP COLUMN `salt`");
+		//}
 
 		// Remove User `salt` column
-		$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "user' AND COLUMN_NAME = 'salt'");
+		//$query = $this->db->query("SELECT * FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = '" . DB_DATABASE . "' AND TABLE_NAME = '" . DB_PREFIX . "user' AND COLUMN_NAME = 'salt'");
 
-		if ($query->num_rows) {
-			$this->db->query("ALTER TABLE `" . DB_PREFIX . "user` DROP COLUMN `salt`");
-		}
+		//if ($query->num_rows) {
+			//$this->db->query("ALTER TABLE `" . DB_PREFIX . "user` DROP COLUMN `salt`");
+		//}
 	}
 }
