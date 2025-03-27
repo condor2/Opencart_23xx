@@ -34,6 +34,7 @@
 						<li class="nav-tab"><a href="<?php echo $href_googlepay_button; ?>" class="tab"><i class="tab-icon tab-icon-googlepay-button"></i><span class="tab-title"><?php echo $text_tab_googlepay_button; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_applepay_button; ?>" class="tab"><i class="tab-icon tab-icon-applepay-button"></i><span class="tab-title"><?php echo $text_tab_applepay_button; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_card; ?>" class="tab"><i class="tab-icon tab-icon-card"></i><span class="tab-title"><?php echo $text_tab_card; ?></span></a></li>
+						<li class="nav-tab"><a href="<?php echo $href_fastlane; ?>" class="tab"><i class="tab-icon tab-icon-fastlane"></i><span class="tab-title"><?php echo $text_tab_fastlane; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_message_configurator; ?>" class="tab"><i class="tab-icon tab-icon-message-configurator"></i><span class="tab-title"><?php echo $text_tab_message_configurator; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_message_setting; ?>" class="tab"><i class="tab-icon tab-icon-message-setting"></i><span class="tab-title"><?php echo $text_tab_message_setting; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_order_status; ?>" class="tab"><i class="tab-icon tab-icon-order-status"></i><span class="tab-title"><?php echo $text_tab_order_status; ?></span></a></li>
@@ -58,10 +59,14 @@
 										<div class="section-checkout">
 											<div class="section-title"><?php echo $text_checkout; ?></div>
 											<div class="section-panel">
-												<div class="section-panel-title"><?php echo $text_step_payment_method; ?><i class="icon icon-section-panel"></i></div>
+												<div class="section-panel-heading">
+													<div class="section-panel-title"><?php echo $text_step_payment_method; ?><i class="icon icon-section-panel"></i></div>
+												</div>
 											</div>
 											<div class="section-panel">
-												<div class="section-panel-title"><?php echo $text_step_confirm_order; ?><i class="icon icon-section-panel"></i></div>
+												<div class="section-panel-heading">
+													<div class="section-panel-title"><?php echo $text_step_confirm_order; ?><i class="icon icon-section-panel"></i></div>
+												</div>
 											</div>
 											<div class="table-totals">
 												<div class="row">
@@ -104,10 +109,14 @@
 												</div>
 											</div>	
 											<div class="section-panel">
-												<div class="section-panel-title"><?php echo $text_step_coupon; ?><i class="icon icon-section-panel"></i></div>
+												<div class="section-panel-heading">
+													<div class="section-panel-title"><?php echo $text_step_coupon; ?><i class="icon icon-section-panel"></i></div>
+												</div>
 											</div>
 											<div class="section-panel">
-												<div class="section-panel-title"><?php echo $text_step_shipping; ?><i class="icon icon-section-panel"></i></div>
+												<div class="section-panel-heading">
+													<div class="section-panel-title"><?php echo $text_step_shipping; ?><i class="icon icon-section-panel"></i></div>
+												</div>
 											</div>
 											<div class="table-totals">
 												<div class="row">

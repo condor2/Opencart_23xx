@@ -34,6 +34,7 @@
 						<li class="nav-tab"><a href="<?php echo $href_googlepay_button; ?>" class="tab"><i class="tab-icon tab-icon-googlepay-button"></i><span class="tab-title"><?php echo $text_tab_googlepay_button; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_applepay_button; ?>" class="tab"><i class="tab-icon tab-icon-applepay-button"></i><span class="tab-title"><?php echo $text_tab_applepay_button; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_card; ?>" class="tab"><i class="tab-icon tab-icon-card"></i><span class="tab-title"><?php echo $text_tab_card; ?></span></a></li>
+						<li class="nav-tab"><a href="<?php echo $href_fastlane; ?>" class="tab"><i class="tab-icon tab-icon-fastlane"></i><span class="tab-title"><?php echo $text_tab_fastlane; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_message_configurator; ?>" class="tab"><i class="tab-icon tab-icon-message-configurator"></i><span class="tab-title"><?php echo $text_tab_message_configurator; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_message_setting; ?>" class="tab"><i class="tab-icon tab-icon-message-setting"></i><span class="tab-title"><?php echo $text_tab_message_setting; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_order_status; ?>" class="tab"><i class="tab-icon tab-icon-order-status"></i><span class="tab-title"><?php echo $text_tab_order_status; ?></span></a></li>
@@ -91,7 +92,7 @@
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="input_general_checkout_route"><span data-toggle="tooltip" title="<?php echo $help_checkout_route; ?>"><?php echo $entry_checkout_route; ?></span></label>
-										<input type="text" name="paypal_setting[general][checkout_route]" value="<?php echo $setting['general']['checkout_route']; ?>" placeholder="<?php echo $entry_currency_value; ?>" id="input_general_checkout_route" class="form-control" />
+										<input type="text" name="paypal_setting[general][checkout_route]" value="<?php echo $setting['general']['checkout_route']; ?>" placeholder="<?php echo $entry_checkout_route; ?>" id="input_general_checkout_route" class="form-control" />
 									</div>
 									<div class="form-group">
 										<label class="control-label" for="input_general_transaction_method"><?php echo $entry_transaction_method; ?></label>

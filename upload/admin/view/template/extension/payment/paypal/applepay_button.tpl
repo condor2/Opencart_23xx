@@ -34,6 +34,7 @@
 						<li class="nav-tab"><a href="<?php echo $href_googlepay_button; ?>" class="tab"><i class="tab-icon tab-icon-googlepay-button"></i><span class="tab-title"><?php echo $text_tab_googlepay_button; ?></span></a></li>
 						<li class="nav-tab active"><a href="<?php echo $href_applepay_button; ?>" class="tab"><i class="tab-icon tab-icon-applepay-button"></i><span class="tab-title"><?php echo $text_tab_applepay_button; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_card; ?>" class="tab"><i class="tab-icon tab-icon-card"></i><span class="tab-title"><?php echo $text_tab_card; ?></span></a></li>
+						<li class="nav-tab"><a href="<?php echo $href_fastlane; ?>" class="tab"><i class="tab-icon tab-icon-fastlane"></i><span class="tab-title"><?php echo $text_tab_fastlane; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_message_configurator; ?>" class="tab"><i class="tab-icon tab-icon-message-configurator"></i><span class="tab-title"><?php echo $text_tab_message_configurator; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_message_setting; ?>" class="tab"><i class="tab-icon tab-icon-message-setting"></i><span class="tab-title"><?php echo $text_tab_message_setting; ?></span></a></li>
 						<li class="nav-tab"><a href="<?php echo $href_order_status; ?>" class="tab"><i class="tab-icon tab-icon-order-status"></i><span class="tab-title"><?php echo $text_tab_order_status; ?></span></a></li>
@@ -58,10 +59,14 @@
 										<div class="section-checkout">
 											<div class="section-title"><?php echo $text_checkout; ?></div>
 											<div class="section-panel">
-												<div class="section-panel-title"><?php echo $text_step_payment_method; ?><i class="icon icon-section-panel"></i></div>
+												<div class="section-panel-heading">
+													<div class="section-panel-title"><?php echo $text_step_payment_method; ?><i class="icon icon-section-panel"></i></div>
+												</div>
 											</div>
 											<div class="section-panel">
-												<div class="section-panel-title"><?php echo $text_step_confirm_order; ?><i class="icon icon-section-panel"></i></div>
+												<div class="section-panel-heading">
+													<div class="section-panel-title"><?php echo $text_step_confirm_order; ?><i class="icon icon-section-panel"></i></div>
+												</div>
 											</div>
 											<div class="table-totals">
 												<div class="row">
@@ -104,10 +109,14 @@
 												</div>
 											</div>	
 											<div class="section-panel">
-												<div class="section-panel-title"><?php echo $text_step_coupon; ?><i class="icon icon-section-panel"></i></div>
+												<div class="section-panel-heading">
+													<div class="section-panel-title"><?php echo $text_step_coupon; ?><i class="icon icon-section-panel"></i></div>
+												</div>
 											</div>
 											<div class="section-panel">
-												<div class="section-panel-title"><?php echo $text_step_shipping; ?><i class="icon icon-section-panel"></i></div>
+												<div class="section-panel-heading">
+													<div class="section-panel-title"><?php echo $text_step_shipping; ?><i class="icon icon-section-panel"></i></div>
+												</div>
 											</div>
 											<div class="table-totals">
 												<div class="row">
@@ -168,6 +177,25 @@
 													</div>
 												</div>
 											</div>
+											<?php if ($text_applepay_alert) { ?>
+											<div class="form-group">
+												<p class="alert alert-info"><?php echo $text_applepay_alert; ?></p>
+											</div>
+											<div class="form-group">
+												<p class="footnote step-1"><?php echo $text_applepay_step_1; ?></p>
+												<div class="row">
+													<div class="col col-md-6">
+														<a href="<?php echo $applepay_download_url; ?>" target="_blank" class="btn btn-primary btn-block button-download"><?php echo $button_download; ?></a>
+													</div>
+													<div class="col col-md-6">
+														<button type="button" class="btn btn-primary btn-block button-download-host"><?php echo $button_download_host; ?></button>
+													</div>
+												</div>
+											</div>
+											<div class="form-group">
+												<p class="footnote step-2"><?php echo $text_applepay_step_2; ?></p>
+											</div>
+											<?php } ?>
 											<?php if ($applepay_button['page_code'] != 'checkout') { ?>
 											<div class="row">
 												<div class="col col-md-6">

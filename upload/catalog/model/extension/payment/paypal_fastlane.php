@@ -1,5 +1,5 @@
 <?php
-class ModelExtensionPaymentPayPalPayLater extends Model {
+class ModelExtensionPaymentPayPalFastlane extends Model {
 	public function getMethod($address, $total) {
 		$method_data = array();
 
@@ -23,22 +23,9 @@ class ModelExtensionPaymentPayPalPayLater extends Model {
 			}
 
 			if ($status) {
-				$_config = new Config();
-				$_config->load('paypal');
-
-				$config_setting = $_config->get('paypal_setting');
-
-				$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('paypal_setting'));
-
-				if ($setting['message']['checkout']['status'] && ($this->session->data['currency'] == $setting['general']['currency_code'])) {
-					$message = $this->load->view('extension/payment/paypal/message');
-				} else {
-					$message = '';
-				}
-
 				$method_data = array(
-					'code'       => 'paypal_paylater',
-					'title'      => $this->language->get('text_paypal_paylater_title') . $message,
+					'code'       => 'paypal_fastlane',
+					'title'      => $this->language->get('text_paypal_fastlane_title'),
 					'terms'      => '',
 					'sort_order' => $this->config->get('paypal_sort_order')
 				);

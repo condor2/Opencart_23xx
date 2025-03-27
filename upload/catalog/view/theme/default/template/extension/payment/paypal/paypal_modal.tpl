@@ -28,7 +28,7 @@
 					</div>
 					<div id="paypal_card" class="paypal-card">
 						<div id="paypal_card_container" class="paypal-card-container paypal-spinner">
-							<div id="paypal_card_form" class="paypal-card-form well">
+							<div id="paypal_card_form" class="paypal-card-form">
 								<div class="card-info-holder-name clearfix">
 									<div id="card_holder_name" class="card-input-container"></div>
 								</div>

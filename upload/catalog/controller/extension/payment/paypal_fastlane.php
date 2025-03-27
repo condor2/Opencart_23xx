@@ -1,5 +1,5 @@
 <?php
-class ControllerExtensionPaymentPayPalPayLater extends Controller {
+class ControllerExtensionPaymentPayPalFastlane extends Controller {
 	private $error = array();
 
 	public function index() {
@@ -25,13 +25,11 @@ class ControllerExtensionPaymentPayPalPayLater extends Controller {
 			$data['partner_attribution_id'] = $setting['partner'][$data['environment']]['partner_attribution_id'];
 			$data['checkout_mode'] = $setting['general']['checkout_mode'];
 			$data['transaction_method'] = $setting['general']['transaction_method'];
-
-			if ($setting['button']['checkout']['status']) {
-				$data['button_status'] = $setting['button']['checkout']['status'];
-			}
+			$data['fastlane_status'] = $setting['fastlane']['status'];
 
 			$data['text_loading'] = $this->language->get('text_loading');
 
+			$data['button_pay'] = $this->language->get('button_pay');
 			$data['button_confirm'] = $this->language->get('button_confirm');
 
 			require_once DIR_SYSTEM . 'library/paypal/paypal.php';
@@ -80,7 +78,7 @@ class ControllerExtensionPaymentPayPalPayLater extends Controller {
 
 			$data['error'] = $this->error;
 
-			return $this->load->view('extension/payment/paypal/paypal_paylater', $data);
+			return $this->load->view('extension/payment/paypal/paypal_fastlane', $data);
 		}
 
 		return '';
@@ -103,12 +101,9 @@ class ControllerExtensionPaymentPayPalPayLater extends Controller {
 		$data['partner_id'] = $setting['partner'][$data['environment']]['partner_id'];
 		$data['partner_attribution_id'] = $setting['partner'][$data['environment']]['partner_attribution_id'];
 		$data['transaction_method'] = $setting['general']['transaction_method'];
+		$data['fastlane_status'] = $setting['fastlane']['status'];
 
-		if ($setting['button']['checkout']['status']) {
-			$data['button_status'] = $setting['button']['checkout']['status'];
-		}
-
-		$data['text_paypal_paylater_title'] = $this->language->get('text_paypal_paylater_title');
+		$data['text_paypal_fastlane_title'] = $this->language->get('text_paypal_fastlane_title');
 
 		require_once DIR_SYSTEM . 'library/paypal/paypal.php';
 
@@ -156,6 +151,6 @@ class ControllerExtensionPaymentPayPalPayLater extends Controller {
 
 		$data['error'] = $this->error;
 
-		$this->response->setOutput($this->load->view('extension/payment/paypal/paypal_paylater_modal', $data));
+		$this->response->setOutput($this->load->view('extension/payment/paypal/paypal_fastlane_modal', $data));
 	}
 }
