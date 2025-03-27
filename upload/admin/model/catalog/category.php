@@ -334,7 +334,7 @@ class ModelCatalogCategory extends Model {
 		return $category_layout_data;
 	}
 
-	public function getTotalCategories() {
+	public function getTotalCategories($data = []) {
 		if (!empty($data['filter_name'])) {
 			// category path name filter "Components > Monitors > test 1"
 			$data['start'] = 0;
