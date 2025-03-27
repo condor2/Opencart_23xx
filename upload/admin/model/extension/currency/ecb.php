@@ -6,7 +6,7 @@ class ModelExtensionCurrencyEcb extends Model {
 		$this->cache->delete('currency');
 	}
 
-	public function refresh() {
+	public function refresh($default = '') {
 		if ($this->config->get('ecb_status')) {
 			if ($this->config->get('config_currency_engine') == 'ecb') {
 				$curl = curl_init();
