@@ -174,7 +174,7 @@ return $config
         'void_return' => false,
         'whitespace_after_comma_in_array' => true,
         'yield_from_array_to_yields' => true,
-        'unnecessary_brace_in_string_interpolation' => true,
+        //'unnecessary_brace_in_string_interpolation' => true,
     ])
     ->setFinder(PhpCsFixer\Finder::create()
         ->in(__DIR__ . '/upload/')
