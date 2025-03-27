@@ -20,14 +20,17 @@ class ModelExtensionCurrencyEcb extends Model {
 
 				$response = curl_exec($curl);
 
+				$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
 				curl_close($curl);
 
-				if ($response) {
+				if ($status == 200) {
 					$dom = new \DOMDocument('1.0', 'UTF-8');
 					$dom->loadXml($response);
 
 					$cube = $dom->getElementsByTagName('Cube')->item(0);
 
+					// Compile all the rates into an array
 					$currencies = [];
 
 					$currencies['EUR'] = 1.0000;
@@ -38,10 +41,14 @@ class ModelExtensionCurrencyEcb extends Model {
 						}
 					}
 
+					if (isset($currencies[$default])) {
+						$value = $currencies[$default];
+					} else {
+						$value = $currencies['EUR'];
+					}
+
 					if (count($currencies) > 1) {
 						$this->load->model('localisation/currency');
-
-						$default = $this->config->get('config_currency');
 
 						$results = $this->model_localisation_currency->getCurrencies();
 
@@ -51,7 +58,7 @@ class ModelExtensionCurrencyEcb extends Model {
 
 								$to = $currencies[$result['code']];
 
-								$this->model_extension_currency_ecb->editValueByCode($result['code'], 1 / ($currencies[$default] * ($from / $to)));
+								$this->model_extension_currency_ecb->editValueByCode($result['code'], 1 / ($value * ($from / $to)));
 							}
 						}
 					}
