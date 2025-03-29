@@ -58,6 +58,7 @@ set_error_handler(function(string $code, string $message, string $file, string $
 });
 
 // Event
+/** @phpstan-ignore arguments.count */
 $event = new \Event($registry);
 $registry->set('event', $event);
 
@@ -97,7 +98,7 @@ if ($config->get('db_autostart')) {
 }
 
 // Session
-$session = new Session($config->get('session_engine'), $registry);
+$session = new Session($config->get('session_engine'));
 $registry->set('session', $session);
 
 if ($config->get('session_autostart')) {
