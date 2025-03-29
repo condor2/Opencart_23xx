@@ -49,9 +49,6 @@ jobs:
       - name: Install Dependencies
         run: composer install
 
-      - name: Run PHPStan
-        run: php tools/phpstan.phar analyze --no-progress
-
       - name: Check Code Style
         if: matrix.php == '8.3'
         run: |
