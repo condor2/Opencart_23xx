@@ -4,6 +4,7 @@ define('VERSION', '2.3.0.3');
 
 // Configuration
 if (is_file('config.php')) {
+	/** @phpstan-ignore requireOnce.fileNotFound */
 	require_once('config.php');
 }
 
