@@ -3,16 +3,22 @@
 namespace Tools\PHPStan;
 
 use Registry;
-use PHPStan\Broker\Broker;
 use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\PropertiesClassReflectionExtension;
 use PHPStan\Reflection\PropertyReflection;
+use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\Generic\GenericObjectType;
 use PHPStan\Type\NullType;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\TypeCombinator;
 
 class RegistryPropertyReflectionExtension implements PropertiesClassReflectionExtension {
+	private ReflectionProvider $reflectionProvider;
+
+	public function __construct(ReflectionProvider $reflectionProvider) {
+		$this->reflectionProvider = $reflectionProvider;
+	}
+
 	public function hasProperty(ClassReflection $classReflection, string $propertyName): bool {
 		if (!$classReflection->is(Registry::class)) {
 			return false;
@@ -25,10 +31,9 @@ class RegistryPropertyReflectionExtension implements PropertiesClassReflectionEx
 		preg_match('/^(model_.+)$/', $propertyName, $matches);
 		$className = $this->convertSnakeToStudly($matches[1]);
 
-		$broker = Broker::getInstance();
 
 		$type = new NullType();
-		if ($broker->hasClass($className)) {
+		if ($this->reflectionProvider->hasClass($className)) {
 			$found = new ObjectType($className);
 			$type = new GenericObjectType('\Proxy', [$found]);
 			$type = TypeCombinator::addNull($type);
