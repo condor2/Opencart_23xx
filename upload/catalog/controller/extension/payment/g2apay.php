@@ -139,7 +139,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 		if (isset($this->request->post['transaction_id'])) {
 			$g2apay_transaction_id = $this->request->post['transaction_id'];
 		} elseif (isset($this->request->get['transaction_id'])) {
-			$g2apay_transaction_id = $this->request->get['transaction_id'];
+			$g2apay_transaction_id = (int)$this->request->get['transaction_id'];
 		} else {
 			$g2apay_transaction_id = '';
 		}

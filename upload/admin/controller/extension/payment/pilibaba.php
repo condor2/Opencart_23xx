@@ -286,7 +286,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		if ($this->config->get('pilibaba_status')) {
 			$this->load->model('extension/payment/pilibaba');
 
-			$order_id = $this->request->get['order_id'];
+			$order_id = (int)$this->request->get['order_id'];
 
 			$pilibaba_order = $this->model_extension_payment_pilibaba->getOrder($this->request->get['order_id']);
 

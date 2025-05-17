@@ -107,7 +107,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 				$webhook_id = $result['id'];
 			}
 
-			$merchant_id = $this->request->get['merchantIdInPayPal'];
+			$merchant_id = (int)$this->request->get['merchantIdInPayPal'];
 
 			$result = $paypal->getSellerStatus($config_setting['partner'][$environment]['partner_id'], $merchant_id);
 
