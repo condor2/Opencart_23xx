@@ -127,7 +127,7 @@ class ControllerInstallStep2 extends Controller {
 
 		$data['php_version'] = PHP_VERSION;
 
-		$data['version'] = version_compare(PHP_VERSION, '7.4.0', '>=');
+		$data['version'] = version_compare(PHP_VERSION, '8.1.0', '>=');
 
 		$open_basedir = str_replace('\\', '/', ini_get('open_basedir')) . '/';
 
@@ -203,7 +203,7 @@ class ControllerInstallStep2 extends Controller {
 	}
 
 	private function validate() {
-		if (version_compare(PHP_VERSION, '7.4.0', '<')) {
+		if (version_compare(PHP_VERSION, '8.1.0', '<')) {
 			$this->error['warning'] = $this->language->get('error_version');
 		}
 

@@ -35,7 +35,7 @@
               <tr>
                 <td><?php echo $text_version; ?></td>
                 <td><?php echo $php_version; ?></td>
-                <td>7.4+</td>
+                <td>8.1+</td>
                 <td class="text-center"><?php if ($version) { ?>
                   <span class="text-success"><i class="fa fa-check-circle"></i></span>
                   <?php } else { ?>

@@ -12,10 +12,11 @@
     },
     "require-dev": {
         "monolog/monolog"           : "~1.0",
-        "phpspec/phpspec"           : "~6.2||7.*",
+        "phpspec/phpspec"           : "~6.2||7.*||dev-main",
         "phpunit/phpunit"           : "^8.5",
         "symfony/yaml"              : ">=4.4"
     },
+    "prefer-stable": true,
     "config": {
         "bin-dir": "bin"
     },

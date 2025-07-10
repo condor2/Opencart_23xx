@@ -205,7 +205,7 @@ class Create implements MethodInterface
     private function buildElement(
         string $typeValue,
         bool $isRequired = false,
-        array $length = null,
+        ?array $length = null,
         $args = null // TODO can it be null?
     ): object
     {
