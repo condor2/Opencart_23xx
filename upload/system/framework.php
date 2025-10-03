@@ -58,7 +58,6 @@ set_error_handler(function(string $code, string $message, string $file, string $
 });
 
 // Event
-/** @phpstan-ignore arguments.count */
 $event = new \Event($registry);
 $registry->set('event', $event);
 
