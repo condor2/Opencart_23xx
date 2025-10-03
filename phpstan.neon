@@ -15,4 +15,4 @@ parameters:
     ignoreErrors:
         - '#Constant [A-Z_]+ not found\.#'
         - '#might not be defined\.#'
-        - '#Class Session constructor invoked with 0 parameters#'
+        - '#Class Session constructor invoked with 0 parameters, 1-2 required\.#'
