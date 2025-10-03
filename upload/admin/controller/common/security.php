@@ -136,7 +136,7 @@ class ControllerCommonSecurity extends Controller {
 					$lines = file($file);
 
 					foreach ($lines as $line_id => $line) {
-						if (strpos($line, 'define(\'DIR_STORAGE') !== false) {
+						if (str_contains($line, 'define(\'DIR_STORAGE')) {
 							$output .= 'define(\'DIR_STORAGE\', \'' . $path . $directory . '/\');' . "\n";
 						} else {
 							$output .= $line;

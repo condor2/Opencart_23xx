@@ -268,7 +268,7 @@ class ModelExtensionPaymentOpayo extends Model {
 		$data = [];
 
 		foreach ($response_info as $i => $string) {
-			if (strpos($string, '=') === false) {
+			if (!str_contains($string, '=')) {
 				continue;
 			}
 			$parts = explode('=', $string, 2);

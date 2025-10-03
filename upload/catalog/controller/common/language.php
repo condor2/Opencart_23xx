@@ -52,7 +52,7 @@ class ControllerCommonLanguage extends Controller {
 			$this->session->data['language'] = $this->request->post['code'];
 		}
 
-		if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) === 0 || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) === 0)) {
+		if (isset($this->request->post['redirect']) && (str_starts_with($this->request->post['redirect'], $this->config->get('config_url')) || str_starts_with($this->request->post['redirect'], $this->config->get('config_ssl')))) {
 			$this->response->redirect($this->request->post['redirect']);
 		} else {
 			$this->response->redirect($this->url->link('common/home'));

@@ -218,7 +218,7 @@ class ControllerExtensionModification extends Controller {
 
 										if ($ignoreif) {
 											if ($ignoreif->getAttribute('regex') != 'true') {
-												if (strpos($modification[$key], $ignoreif->textContent) !== false) {
+												if (str_contains($modification[$key], $ignoreif->textContent)) {
 													continue;
 												}
 											} else {

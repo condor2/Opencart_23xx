@@ -3918,7 +3918,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$carriers += $config_carrier['GLOBAL'];
 
 			foreach ($carriers as $carrier_name => $carrier_code) {
-				if (strpos(strtolower($carrier_name), strtolower($filter_carrier_name)) !== false) {
+				if (str_contains(strtolower($carrier_name), strtolower($filter_carrier_name))) {
 					$data[] = array(
 						'name' => $carrier_name,
 						'code' => $carrier_code
