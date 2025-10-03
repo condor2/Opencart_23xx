@@ -1,7 +1,7 @@
 <?php
 /*
  * This document has been generated with
- * https://mlocati.github.io/php-cs-fixer-configurator/#version:3.73.1|configurator
+ * https://mlocati.github.io/php-cs-fixer-configurator/#version:3.65|configurator
  * you can change this configuration by importing this file.
  */
 $config = new PhpCsFixer\Config();
@@ -9,12 +9,12 @@ return $config
     ->setRiskyAllowed(true)
     ->setIndent("\t")
     ->setRules([
-        '@PER-CS2.0:risky' => true,
-        '@PER-CS2.0' => true,
+        '@PER-CS2x0:risky' => true,
+        '@PER-CS2x0' => true,
         '@DoctrineAnnotation' => true,
-        '@PHPUnit100Migration:risky' => true,
-        '@PHP74Migration' => true,
-        '@PHP74Migration:risky' => true,
+        '@PHPUnit10x0Migration:risky' => true,
+        '@PHP8x0Migration' => true,
+        '@PHP8x0Migration:risky' => true,
         'align_multiline_comment' => true,
         'array_indentation' => true,
         'array_push' => false,
@@ -168,7 +168,7 @@ return $config
         'string_line_ending' => true,
         'switch_continue_to_break' => true,
         'ternary_to_elvis_operator' => true,
-        'trailing_comma_in_multiline' => false,
+        'trailing_comma_in_multiline' => ['elements' => []],
         'trim_array_spaces' => true,
         'type_declaration_spaces' => true,
         'types_spaces' => true,
