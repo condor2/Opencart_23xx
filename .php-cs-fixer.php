@@ -14,7 +14,6 @@ return $config
         '@DoctrineAnnotation' => true,
         '@PHPUnit10x0Migration:risky' => true,
         '@PHP81Migration' => true,
-        '@PHP81Migration:risky' => true,
         '@PHP82Migration' => true,
         '@PHP82Migration:risky' => true,
         '@PHP83Migration' => true,
