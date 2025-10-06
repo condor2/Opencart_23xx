@@ -75,6 +75,8 @@ class ControllerSettingSetting extends Controller {
 		$data['entry_currency'] = $this->language->get('entry_currency');
 		$data['entry_currency_engine'] = $this->language->get('entry_currency_engine');
 		$data['entry_currency_auto'] = $this->language->get('entry_currency_auto');
+		$data['entry_symbol_left_space'] = $this->language->get('entry_symbol_left_space');
+		$data['entry_symbol_right_space'] = $this->language->get('entry_symbol_right_space');
 		$data['entry_length_class'] = $this->language->get('entry_length_class');
 		$data['entry_weight_class'] = $this->language->get('entry_weight_class');
 		$data['entry_limit_admin'] = $this->language->get('entry_limit_admin');
@@ -148,6 +150,8 @@ class ControllerSettingSetting extends Controller {
 		$data['help_location'] = $this->language->get('help_location');
 		$data['help_currency'] = $this->language->get('help_currency');
 		$data['help_currency_auto'] = $this->language->get('help_currency_auto');
+		$data['help_symbol_left_space'] = $this->language->get('help_symbol_left_space');
+		$data['help_symbol_right_space'] = $this->language->get('help_symbol_right_space');
 		$data['help_limit_admin'] = $this->language->get('help_limit_admin');
 		$data['help_product_count'] = $this->language->get('help_product_count');
 		$data['help_review'] = $this->language->get('help_review');
@@ -582,6 +586,18 @@ class ControllerSettingSetting extends Controller {
 					'value' => $extension_code
 				];
 			}
+		}
+
+		if (isset($this->request->post['config_symbol_left_space'])) {
+			$data['config_symbol_left_space'] = $this->request->post['config_symbol_left_space'];
+		} else {
+			$data['config_symbol_left_space'] = $this->config->get('config_symbol_left_space');
+		}
+
+		if (isset($this->request->post['config_symbol_right_space'])) {
+			$data['config_symbol_right_space'] = $this->request->post['config_symbol_right_space'];
+		} else {
+			$data['config_symbol_right_space'] = $this->config->get('config_symbol_right_space');
 		}
 
 		if (isset($this->request->post['config_length_class_id'])) {
