@@ -22,7 +22,7 @@ class ControllerExtensionCurrencyEcb extends Controller {
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
-		$data['text_support'] = $this->language->get('text_support');
+		$data['text_information'] = $this->language->get('text_information');
 
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_ip'] = $this->language->get('entry_ip');
@@ -69,8 +69,8 @@ class ControllerExtensionCurrencyEcb extends Controller {
 		$data['refresh'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true);
 
 		$data['text_edit'] = $this->language->get('text_edit');
-		$data['text_support'] = str_replace('%1', $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true), $data['text_support']);
-		$data['text_support'] = str_replace('%2', $this->url->link('setting/store', 'token=' . $this->session->data['token'], true), $data['text_support']);
+		$data['text_information'] = str_replace('%1', $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true), $data['text_information']);
+		$data['text_information'] = str_replace('%2', $this->url->link('setting/store', 'token=' . $this->session->data['token'], true), $data['text_information']);
 
 		$data['ecb_cron'] = 'curl -s &quot;' . HTTPS_CATALOG . 'index.php?route=extension/currency/ecb/refresh&quot;';
 

@@ -20,6 +20,7 @@ class ControllerExtensionCurrencyFixer extends Controller {
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_information'] = $this->language->get('text_information');
 
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_api'] = $this->language->get('entry_api');
@@ -73,8 +74,8 @@ class ControllerExtensionCurrencyFixer extends Controller {
 		$data['refresh'] = $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true);
 
 		$data['text_edit'] = $this->language->get('text_edit');
-		$data['text_edit'] = str_replace('%1', $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true), $data['text_edit']);
-		$data['text_edit'] = str_replace('%2', $this->url->link('setting/store', 'token=' . $this->session->data['token'], true), $data['text_edit']);
+		$data['text_information'] = str_replace('%1', $this->url->link('localisation/currency', 'token=' . $this->session->data['token'], true), $data['text_information']);
+		$data['text_information'] = str_replace('%2', $this->url->link('setting/store', 'token=' . $this->session->data['token'], true), $data['text_information']);
 
 		$data['fixer_cron'] = 'curl -s &quot;' . HTTPS_CATALOG . 'index.php?route=extension/currency/fixer/refresh&quot;';
 
@@ -119,10 +120,6 @@ class ControllerExtensionCurrencyFixer extends Controller {
 
 		return !$this->error;
 	}
-
-	public function install() {}
-
-	public function uninstall() {}
 
 	public function currency() {
 		$this->load->model('extension/currency/fixer');
