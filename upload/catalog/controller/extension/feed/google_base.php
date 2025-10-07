@@ -60,7 +60,6 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 						}
 
 						$currencies = [
-
 							'USD', // US Dollar
 							'EUR', // Euro
 							'GBP', // British Pound
