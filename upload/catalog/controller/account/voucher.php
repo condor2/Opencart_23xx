@@ -240,7 +240,7 @@ class ControllerAccountVoucher extends Controller {
 		}
 
 		// currently not checked and no text for it ..
-		if ( !$this->error && empty($this->request->post['message'])) {
+		if (!$this->error && empty($this->request->post['message'])) {
 			// because we have no further checks and text of/for this
 			$this->error = true;
 		}

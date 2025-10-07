@@ -453,6 +453,14 @@ class ControllerAccountRegister extends Controller {
 			$this->error['password'] = $this->language->get('error_password');
 		}
 
+		if (!empty($this->request->post['confirm']) && !empty($this->request->post['password'])) {
+			if ($this->request->post['confirm'] != $this->request->post['password']) {
+				$this->error['confirm'] = $this->language->get('error_confirm');
+			}
+		} else {
+			$this->error['confirm'] = $this->language->get('error_confirm');
+		}
+
 		// Captcha
 		if ($this->config->get($this->config->get('config_captcha') . '_status') && in_array('register', (array)$this->config->get('config_captcha_page'))) {
 			$captcha = $this->load->controller('extension/captcha/' . $this->config->get('config_captcha') . '/validate');
