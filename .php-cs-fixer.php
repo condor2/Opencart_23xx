@@ -13,7 +13,7 @@ return $config
         '@PER-CS2x0' => true,
         '@DoctrineAnnotation' => true,
         '@PHPUnit10x0Migration:risky' => true,
-        '@PHP81Migration' => true,
+        '@PHP8x1Migration' => true,
         'octal_notation' => false,
         'align_multiline_comment' => true,
         'array_indentation' => true,
