@@ -132,6 +132,7 @@ class ModelUpgrade1009 extends Model {
 		$this->db->query("UPDATE `" . DB_PREFIX . "country` SET `name`='North Macedonia' WHERE `name`='FYROM';");
 		$this->db->query("UPDATE `" . DB_PREFIX . "country` SET `name`='Eswatini' WHERE `name`='Swaziland';");
 
+		/** @var string $dir_opencart */
 		$dir_opencart = str_replace('\\', '/', realpath(DIR_OPENCART));
 		$dir_excluded = $dir_opencart . '/install';
 
