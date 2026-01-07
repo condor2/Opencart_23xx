@@ -1,5 +1,7 @@
 <?php
 class ModelUpgrade1009 extends Model {
+    private string $dir_opencart;
+
 	public function upgrade(): void {
 		$dir_opencart = str_replace('\\', '/', realpath(DIR_OPENCART));
 		$dir_storage = str_replace('\\', '/', realpath(DIR_STORAGE));
