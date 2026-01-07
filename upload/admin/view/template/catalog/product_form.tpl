@@ -1401,7 +1401,7 @@ function addRecurring() {
 	<?php foreach ($customer_groups as $customer_group) { ?>
 	html += '      <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>';
 	<?php } ?>
-	html += '    <select>';
+	html += '    </select>';
 	html += '  </td>';
 	html += '  <td class="text-right">';
 	html += '    <a onclick="$(\'#recurring-row' + recurring_row + '\').remove()" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></a>';
