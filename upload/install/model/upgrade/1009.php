@@ -1,10 +1,12 @@
 <?php
 class ModelUpgrade1009 extends Model {
 	public function upgrade(): void {
+		$dir_opencart = str_replace('\\', '/', realpath(DIR_OPENCART));
 		$dir_storage = str_replace('\\', '/', realpath(DIR_STORAGE));
 		$dir_current_storage = str_replace('\\', '/', realpath($this->getCurrentStorageDirectory()));
 		$dir_vendor = $dir_storage . '/vendor';
 		$dir_current_vendor = $dir_current_storage . '/vendor';
+		$dir_excluded = $dir_opencart . '/install';
 
 		// remove obsolete files and folders from vendor directory
 		$obsoletes = array(
@@ -131,9 +133,6 @@ class ModelUpgrade1009 extends Model {
 		$this->db->query("UPDATE `" . DB_PREFIX . "zone` SET `name`='Ra’s al Khaymah' WHERE `name`='R''as al Khaymah';");
 		$this->db->query("UPDATE `" . DB_PREFIX . "country` SET `name`='North Macedonia' WHERE `name`='FYROM';");
 		$this->db->query("UPDATE `" . DB_PREFIX . "country` SET `name`='Eswatini' WHERE `name`='Swaziland';");
-
-		$dir_opencart = str_replace('\\', '/', realpath(DIR_OPENCART)); // @phpstan-ignore-line
-		$dir_excluded = $dir_opencart . '/install';
 
 		// remove various obsolete extensions files
 		$this->removeByName($dir_opencart, 'divido');
