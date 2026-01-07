@@ -134,6 +134,14 @@ class ControllerAccountForgotten extends Controller {
 			if ($customer_info && !$customer_info['status']) {
 				$this->error['warning'] = $this->language->get('error_approved');
 			}
+
+
+
+			$customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
+
+			if ($customer_info && !$customer_info['status']) {
+				$this->error['warning'] = $this->language->get('error_approved');
+			}
 		}
 
 		return !$this->error;

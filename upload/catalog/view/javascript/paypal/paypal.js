@@ -4,18 +4,6 @@ var PayPalAPI = (function () {
 	var paypal_sdk = [];
 	var paypal_callback;
 	
-	// Utility function to escape HTML special characters
-	function escapeHtml(text) {
-		var map = {
-			'&': '&amp;',
-			'<': '&lt;',
-			'>': '&gt;',
-			'"': '&quot;',
-			"'": '&#039;'
-		};
-		return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
-	}
-	
 	var showPayPalAlert = function(data) {
 		$('.alert-paypal').remove();
 		
@@ -736,7 +724,7 @@ var PayPalAPI = (function () {
 				$('#fastlane_modal #fastlane_collapse_payment .panel-body').load('index.php?route=extension/payment/paypal/fastlanePayment', function() {
 					var panel_title = $('#fastlane_modal #fastlane_collapse_payment').parent().find('.panel-heading .panel-title');
 			
-					panel_title.html('<a href="#fastlane_collapse_payment" data-toggle="collapse" data-parent="#fastlane_accordion" class="accordion-toggle">' + escapeHtml(panel_title.attr('data-original-title')) + ' <i class="fa fa-caret-down"></i></a>');
+					panel_title.html('<a href="#fastlane_collapse_payment" data-toggle="collapse" data-parent="#fastlane_accordion" class="accordion-toggle">' + panel_title.attr('data-original-title') + ' <i class="fa fa-caret-down"></i></a>');
 
 					$('a[href=\'#fastlane_collapse_payment\']').trigger('click');
 					
