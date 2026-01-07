@@ -8,29 +8,27 @@ namespace Cache;
  * all bulk operations (listing / clear) are performed via APCUIterator,
  * which saves additional memory and keeps the operational logic at the APCu level.
  */
-class APCu
-{
+class APCu {
 	/**
 	 * @var int ttl in seconds
 	 */
 	private $expire;
-	
+
 	/**
 	 * @var bool whether the cache is available
 	 */
 	private $active = false;
-	
+
 	/**
 	 * @var string key prefix
 	 */
 	private $prefix;
 
 	/**
-	 * @param int $expire
+	 * @param int         $expire
 	 * @param string|null $prefix
 	 */
-	public function __construct($expire = 3600, $prefix = null)
-	{
+	public function __construct($expire = 3600, $prefix = null) {
 		$this->expire = (int)$expire;
 
 		if ($prefix !== null) {
@@ -57,11 +55,12 @@ class APCu
 	 * The prefix is left as the root for APCUIterator.
 	 *
 	 * @param string $key
+	 *
 	 * @return string
 	 */
-	private function key($key)
-	{
+	private function key($key) {
 		$clean = preg_replace('/[^A-Za-z0-9_\-\.]/', '_', (string)$key);
+
 		return $this->prefix . $clean;
 	}
 
@@ -72,10 +71,10 @@ class APCu
 	 * We use the $success flag to distinguish these cases.
 	 *
 	 * @param string $key
+	 *
 	 * @return false|mixed
 	 */
-	public function get($key)
-	{
+	public function get($key) {
 		if (!$this->active) {
 			return false;
 		}
@@ -99,29 +98,30 @@ class APCu
 	 * Values are stored as native PHP values (no serialization).
 	 *
 	 * @param string $key
-	 * @param mixed $value
+	 * @param mixed  $value
+	 *
 	 * @return bool
 	 */
-	public function set($key, $value)
-	{
+	public function set($key, $value) {
 		if (!$this->active) {
 			return false;
 		}
 
 		$k = $this->key($key);
+
 		// Store the PHP value directly in APCu.
-		return (bool) apcu_store($k, $value, $this->expire);
+		return (bool)apcu_store($k, $value, $this->expire);
 	}
 
 	/**
 	 * Deletes cache entries by prefix. Supports wildcard-style deletion,
 	 * similar to the file-based cache driver in OpenCart.
 	 *
-	 * @param string $key Key or prefix to delete.
-	 * @return bool True on success, false on failure.
+	 * @param string $key key or prefix to delete
+	 *
+	 * @return bool true on success, false on failure
 	 */
-	public function delete($key)
-	{
+	public function delete($key) {
 		if (!$this->active) {
 			return false;
 		}
@@ -167,7 +167,7 @@ class APCu
 				$info = @apcu_cache_info('user');
 				if ($info === false || !isset($info['cache_list'])) {
 					// Invalid response — fallback to deleting a single key below.
-					return (bool) @apcu_delete($fullPrefix);
+					return (bool)@apcu_delete($fullPrefix);
 				}
 
 				$keys = [];
@@ -205,7 +205,7 @@ class APCu
 
 		// 3) Last resort — delete the exact key only.
 		// This ensures single-key deletion still works when other methods are unavailable.
-		return (bool) @apcu_delete($fullPrefix);
+		return (bool)@apcu_delete($fullPrefix);
 	}
 
 	/**
@@ -217,8 +217,7 @@ class APCu
 	 *
 	 * @return bool
 	 */
-	public function clear()
-	{
+	public function clear() {
 		if (!$this->active) {
 			return false;
 		}
@@ -261,11 +260,11 @@ class APCu
 	/**
 	 * Return a list of keys by prefix (without values). Useful for debugging/diagnostics.
 	 *
-	 * @param string|null $patternSuffix A regex suffix (will be appended to the prefix), or null to return all.
+	 * @param string|null $patternSuffix a regex suffix (will be appended to the prefix), or null to return all
+	 *
 	 * @return array
 	 */
-	public function listKeys($patternSuffix = null)
-	{
+	public function listKeys($patternSuffix = null) {
 		if (!$this->active || !class_exists('\APCUIterator')) {
 			return [];
 		}
@@ -274,6 +273,7 @@ class APCu
 		$pattern = '/' . $m . '/';
 
 		$out = [];
+
 		try {
 			$it = new \APCUIterator($pattern, APC_ITER_KEY);
 			foreach ($it as $entry) {

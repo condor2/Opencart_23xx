@@ -349,7 +349,7 @@ class ModelUpgrade1009 extends Model {
 			return false;
 		}
 
-		return (substr($haystack, strlen($haystack)-strlen($needle), strlen($needle) ) == $needle);
+		return substr($haystack, strlen($haystack) - strlen($needle), strlen($needle)) == $needle;
 	}
 
 	private function startsWith(string $haystack, string $needle): bool {
@@ -358,7 +358,7 @@ class ModelUpgrade1009 extends Model {
 			return false;
 		}
 
-		return (substr($haystack, 0, strlen($needle) ) == $needle);
+		return substr($haystack, 0, strlen($needle)) == $needle;
 	}
 
 	private function upgradeCharacterSetAndCollation(): void {
