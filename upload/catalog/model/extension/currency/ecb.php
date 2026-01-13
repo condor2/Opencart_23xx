@@ -39,14 +39,10 @@ class ModelExtensionCurrencyEcb extends Model {
 				}
 			}
 
-			if (isset($currencies[$default])) {
-				$value = $currencies[$default];
-			} else {
-				$value = $currencies['EUR'];
-			}
-
-			if (count($currencies) > 1) {
+			if ($currencies) {
 				$this->load->model('localisation/currency');
+
+				$default = $this->config->get('config_currency');
 
 				$results = $this->model_localisation_currency->getCurrencies();
 
@@ -56,12 +52,12 @@ class ModelExtensionCurrencyEcb extends Model {
 
 						$to = $currencies[$result['code']];
 
-						$this->model_extension_currency_ecb->editValueByCode($result['code'], 1 / ($value * ($from / $to)));
+						$this->editValueByCode($result['code'], 1 / ($currencies[$default] * ($from / $to)));
 					}
 				}
 			}
 
-			$this->model_extension_currency_ecb->editValueByCode($default, '1.00000');
+			$this->editValueByCode($default, '1.00000');
 
 			$this->cache->delete('currency');
 		}
