@@ -6,7 +6,7 @@ class ModelExtensionCurrencyEcb extends Model {
 		$this->cache->delete('currency');
 	}
 
-	public function refresh($default = '') {
+	public function refresh() {
 		$curl = curl_init();
 
 		curl_setopt($curl, CURLOPT_URL, 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml');
