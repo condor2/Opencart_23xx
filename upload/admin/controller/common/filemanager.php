@@ -38,7 +38,7 @@ class ControllerCommonFileManager extends Controller {
 			}
 
 			// Get files
-			$files = glob($directory . '/' . $filter_name . '*.{ico,jpg,jpeg,png,gif,svg,svgz,webp,JPG,JPEG,PNG,GIF,SVG,SVGZ,WEBP}', GLOB_BRACE);
+			$files = safe_glob($directory . '/' . $filter_name . '*.{ico,jpg,jpeg,png,gif,svg,svgz,webp,JPG,JPEG,PNG,GIF,SVG,SVGZ,WEBP}', GLOB_BRACE);
 
 			if (!$files) {
 				$files = array();
