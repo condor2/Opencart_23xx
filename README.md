@@ -19,6 +19,7 @@ OpenCart is a free open source ecommerce platform for online merchants. OpenCart
 - <a href="https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=18892">No FTP on Ocmod Installer</a>
 - Admin SEO URL like in Opencart 3.0.x.x
 - <a href="https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=38358">Paypal Checkout Integration</a>
+- <a href="https://www.opencart.com/index.php?route=marketplace/extension/info&extension_id=48087">USPS OAuth (v3 REST) 1.0.5</a>
 
 ## Updates
 - Bootstrap 3.4.1
