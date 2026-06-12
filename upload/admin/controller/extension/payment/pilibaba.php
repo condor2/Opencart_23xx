@@ -371,7 +371,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 					$url = 'http://pre.pilibaba.com/pilipay/barCode';
 				}
 
-				echo '<img src="' . $url . '?orderNo=' . $this->request->get['order_id'] . '&merchantNo=' . $this->config->get('pilibaba_merchant_number') . '">';
+				echo '<img src="' . $url . '?orderNo=' . (int)$this->request->get['order_id'] . '&merchantNo=' . $this->config->get('pilibaba_merchant_number') . '">';
 			}
 		}
 	}
