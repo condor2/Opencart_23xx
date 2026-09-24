@@ -8,14 +8,14 @@ class ControllerApiShipping extends Controller {
 		unset($this->session->data['shipping_methods']);
 		unset($this->session->data['shipping_method']);
 
-		$json = [];
+		$json = array();
 
 		if ($this->cart->hasShipping()) {
 			if (!isset($this->session->data['api_id'])) {
 				$json['error']['warning'] = $this->language->get('error_permission');
 			} else {
 				// Add keys for missing post vars
-				$keys = [
+				$keys = array(
 					'firstname',
 					'lastname',
 					'company',
@@ -25,7 +25,7 @@ class ControllerApiShipping extends Controller {
 					'city',
 					'zone_id',
 					'country_id'
-				];
+				);
 
 				foreach ($keys as $key) {
 					if (!isset($this->request->post[$key])) {
@@ -107,7 +107,7 @@ class ControllerApiShipping extends Controller {
 						$zone_code = '';
 					}
 
-					$this->session->data['shipping_address'] = [
+					$this->session->data['shipping_address'] = array(
 						'firstname'      => $this->request->post['firstname'],
 						'lastname'       => $this->request->post['lastname'],
 						'company'        => $this->request->post['company'],
@@ -123,8 +123,8 @@ class ControllerApiShipping extends Controller {
 						'iso_code_2'     => $iso_code_2,
 						'iso_code_3'     => $iso_code_3,
 						'address_format' => $address_format,
-						'custom_field'   => $this->request->post['custom_field'] ?? []
-					];
+						'custom_field'   => $this->request->post['custom_field'] ?? array()
+					);
 
 					$json['success'] = $this->language->get('text_address');
 
@@ -152,7 +152,7 @@ class ControllerApiShipping extends Controller {
 		unset($this->session->data['shipping_methods']);
 		unset($this->session->data['shipping_method']);
 
-		$json = [];
+		$json = array();
 
 		if (!isset($this->session->data['api_id'])) {
 			$json['error'] = $this->language->get('error_permission');
@@ -163,7 +163,7 @@ class ControllerApiShipping extends Controller {
 
 			if (!$json) {
 				// Shipping Methods
-				$json['shipping_methods'] = [];
+				$json['shipping_methods'] = array();
 
 				$this->load->model('extension/extension');
 
@@ -176,17 +176,17 @@ class ControllerApiShipping extends Controller {
 						$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
 
 						if ($quote) {
-							$json['shipping_methods'][$result['code']] = [
+							$json['shipping_methods'][$result['code']] = array(
 								'title'      => $quote['title'],
 								'quote'      => $quote['quote'],
 								'sort_order' => $quote['sort_order'],
 								'error'      => $quote['error']
-							];
+							);
 						}
 					}
 				}
 
-				$sort_order = [];
+				$sort_order = array();
 
 				foreach ($json['shipping_methods'] as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];
@@ -201,7 +201,7 @@ class ControllerApiShipping extends Controller {
 				}
 			}
 		} else {
-			$json['shipping_methods'] = [];
+			$json['shipping_methods'] = array();
 		}
 
 		if (isset($this->request->server['HTTP_ORIGIN'])) {
@@ -221,7 +221,7 @@ class ControllerApiShipping extends Controller {
 		// Delete old shipping method so not to cause any issues if there is an error
 		unset($this->session->data['shipping_method']);
 
-		$json = [];
+		$json = array();
 
 		if (!isset($this->session->data['api_id'])) {
 			$json['error'] = $this->language->get('error_permission');

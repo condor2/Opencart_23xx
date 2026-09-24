@@ -17,13 +17,13 @@ class ModelUserUserGroup extends Model {
 	public function getUserGroup($user_group_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_group_id . "'");
 
-		return [
+		return array(
 			'name'       => $query->row['name'],
 			'permission' => json_decode($query->row['permission'], true)
-		];
+		);
 	}
 
-	public function getUserGroups($data = []) {
+	public function getUserGroups($data = array()) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "user_group";
 
 		$sql .= " ORDER BY `name`";
@@ -75,7 +75,7 @@ class ModelUserUserGroup extends Model {
 		if ($user_group_query->num_rows) {
 			$data = json_decode($user_group_query->row['permission'], true);
 
-			$data[$type] = array_diff($data[$type], [$route]);
+			$data[$type] = array_diff($data[$type], array($route));
 
 			$this->db->query("UPDATE " . DB_PREFIX . "user_group SET permission = '" . $this->db->escape(json_encode($data)) . "' WHERE user_group_id = '" . (int)$user_group_id . "'");
 		}

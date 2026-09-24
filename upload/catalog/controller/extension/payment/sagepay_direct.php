@@ -32,80 +32,80 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 			$data['success'] = '';
 		}
 
-		$data['cards'] = [];
+		$data['cards'] = array();
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'Visa',
 			'value' => 'VISA'
-		];
+		);
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'MasterCard',
 			'value' => 'MC'
-		];
+		);
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'Visa Delta/Debit',
 			'value' => 'DELTA'
-		];
+		);
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'Solo',
 			'value' => 'SOLO'
-		];
+		);
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'Maestro',
 			'value' => 'MAESTRO'
-		];
+		);
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'Visa Electron UK Debit',
 			'value' => 'UKE'
-		];
+		);
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'American Express',
 			'value' => 'AMEX'
-		];
+		);
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'Diners Club',
 			'value' => 'DC'
-		];
+		);
 
-		$data['cards'][] = [
+		$data['cards'][] = array(
 			'text'  => 'Japan Credit Bureau',
 			'value' => 'JCB'
-		];
+		);
 
-		$data['months'] = [];
+		$data['months'] = array();
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = [
+			$data['months'][] = array(
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			];
+			);
 		}
 
 		$today = getdate();
 
-		$data['year_valid'] = [];
+		$data['year_valid'] = array();
 
 		for ($i = $today['year'] - 10; $i < $today['year'] + 1; $i++) {
-			$data['year_valid'][] = [
+			$data['year_valid'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			];
+			);
 		}
 
-		$data['year_expire'] = [];
+		$data['year_expire'] = array();
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = [
+			$data['year_expire'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			];
+			);
 		}
 
 		if ($this->config->get('sagepay_direct_card') == '1') {
@@ -114,7 +114,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 			$data['sagepay_direct_card'] = false;
 		}
 
-		$data['existing_cards'] = [];
+		$data['existing_cards'] = array();
 		if ($this->customer->isLogged() && $data['sagepay_direct_card']) {
 			$this->load->model('extension/payment/sagepay_direct');
 			$data['existing_cards'] = $this->model_extension_payment_sagepay_direct->getCards($this->customer->getId());
@@ -129,7 +129,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 		$this->load->model('extension/payment/sagepay_direct');
 		$this->load->model('account/order');
 
-		$payment_data = [];
+		$payment_data = array();
 
 		$url = '';
 
@@ -260,7 +260,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 
 		$response_data = $this->model_extension_payment_sagepay_direct->sendCurl($url, $payment_data);
 
-		$json = [];
+		$json = array();
 
 		if ($response_data['Status'] == '3DAUTH') {
 			$json['ACSURL'] = $response_data['ACSURL'];
@@ -273,7 +273,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 
 			$card_id = '';
 			if (!empty($payment_data['CreateToken']) && $this->customer->isLogged()) {
-				$card_data = [];
+				$card_data = array();
 				$card_data['customer_id'] = $this->customer->getId();
 				$card_data['Token'] = '';
 				$card_data['Last4Digits'] = substr(str_replace(' ', '', $payment_data['CardNumber']), -4, 4);
@@ -327,7 +327,7 @@ class ControllerExtensionPaymentSagepayDirect extends Controller {
 			$card_id = '';
 
 			if (!empty($payment_data['CreateToken']) && !empty($response_data['Token']) && $this->customer->isLogged()) {
-				$card_data = [];
+				$card_data = array();
 				$card_data['customer_id'] = $this->customer->getId();
 				$card_data['Token'] = $response_data['Token'];
 				$card_data['Last4Digits'] = substr(str_replace(' ', '', $payment_data['CardNumber']), -4, 4);

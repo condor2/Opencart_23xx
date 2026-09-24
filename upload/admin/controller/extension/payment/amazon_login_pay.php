@@ -137,20 +137,20 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=payment', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/payment/amazon_login_pay', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
 		$data['action'] = $this->url->link('extension/payment/amazon_login_pay', 'token=' . $this->session->data['token'], true);
 
@@ -224,7 +224,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 			$data['amazon_login_pay_payment_region'] = $this->request->post['amazon_login_pay_payment_region'];
 		} elseif ($this->config->get('amazon_login_pay_payment_region')) {
 			$data['amazon_login_pay_payment_region'] = $this->config->get('amazon_login_pay_payment_region');
-		} elseif (in_array($this->config->get('config_currency'), ['EUR', 'GBP', 'USD'])) {
+		} elseif (in_array($this->config->get('config_currency'), array('EUR', 'GBP', 'USD'))) {
 			$data['amazon_login_pay_payment_region'] = $this->config->get('config_currency');
 		} else {
 			$data['amazon_login_pay_payment_region'] = 'USD';
@@ -335,7 +335,7 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
-		$data['declined_codes'] = [$this->language->get('text_amazon_invalid'), $this->language->get('text_amazon_rejected'), $this->language->get('text_amazon_timeout')];
+		$data['declined_codes'] = array($this->language->get('text_amazon_invalid'), $this->language->get('text_amazon_rejected'), $this->language->get('text_amazon_timeout'));
 
 		//SIMPLE PATH
 
@@ -348,26 +348,26 @@ class ControllerExtensionPaymentAmazonLoginPay extends Controller {
 		if ($data['amazon_login_pay_payment_region'] == 'USD') {
 			$data['registration_url'] = "https://sellercentral.amazon.com/hz/me/sp/redirect?ld=" . $ld;
 
-			$data['languages'] = [
+			$data['languages'] = array(
 				'en-US' => $this->language->get('text_us')
-			];
+			);
 		} else {
 			$data['registration_url'] = "https://sellercentral-europe.amazon.com/hz/me/sp/redirect?ld=" . $ld;
 
-			$data['languages'] = [
+			$data['languages'] = array(
 				'de-DE' => $this->language->get('text_de'),
 				'es-ES' => $this->language->get('text_es'),
 				'fr-FR' => $this->language->get('text_fr'),
 				'it-IT' => $this->language->get('text_it'),
 				'en-GB' => $this->language->get('text_uk')
-			];
+			);
 		}
 
-		$data['payment_regions'] = [
+		$data['payment_regions'] = array(
 			'EUR' => $this->language->get('text_eu_region'),
 			'GBP' => $this->language->get('text_uk_region'),
 			'USD' => $this->language->get('text_us_region')
-		];
+		);
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

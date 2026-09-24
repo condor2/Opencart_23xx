@@ -29,7 +29,7 @@ class ModelExtensionTotalCoupon extends Model {
 			}
 
 			// Products
-			$coupon_product_data = [];
+			$coupon_product_data = array();
 
 			$coupon_product_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "coupon_product` WHERE coupon_id = '" . (int)$coupon_query->row['coupon_id'] . "'");
 
@@ -38,7 +38,7 @@ class ModelExtensionTotalCoupon extends Model {
 			}
 
 			// Categories
-			$coupon_category_data = [];
+			$coupon_category_data = array();
 
 			$coupon_category_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "coupon_category` cc LEFT JOIN `" . DB_PREFIX . "category_path` cp ON (cc.category_id = cp.path_id) WHERE cc.coupon_id = '" . (int)$coupon_query->row['coupon_id'] . "'");
 
@@ -46,7 +46,7 @@ class ModelExtensionTotalCoupon extends Model {
 				$coupon_category_data[] = $category['category_id'];
 			}
 
-			$product_data = [];
+			$product_data = array();
 
 			if ($coupon_product_data || $coupon_category_data) {
 				foreach ($this->cart->getProducts() as $product) {
@@ -76,7 +76,7 @@ class ModelExtensionTotalCoupon extends Model {
 		}
 
 		if ($status && isset($product_data)) {
-			return [
+			return array(
 				'coupon_id'     => $coupon_query->row['coupon_id'],
 				'code'          => $coupon_query->row['code'],
 				'name'          => $coupon_query->row['name'],
@@ -91,9 +91,9 @@ class ModelExtensionTotalCoupon extends Model {
 				'uses_customer' => $coupon_query->row['uses_customer'],
 				'status'        => $coupon_query->row['status'],
 				'date_added'    => $coupon_query->row['date_added']
-			];
+			);
 		} else {
-			return [];
+			return array();
 		}
 	}
 
@@ -172,12 +172,12 @@ class ModelExtensionTotalCoupon extends Model {
 				}
 
 				if ($discount_total > 0) {
-					$total['totals'][] = [
+					$total['totals'][] = array(
 						'code'       => 'coupon',
 						'title'      => sprintf($this->language->get('text_coupon'), $this->session->data['coupon']),
 						'value'      => -$discount_total,
 						'sort_order' => $this->config->get('coupon_sort_order')
-					];
+					);
 
 					$total['total'] -= $discount_total;
 				}

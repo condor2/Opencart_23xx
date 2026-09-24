@@ -11,16 +11,16 @@ class ControllerCommonLanguage extends Controller {
 
 		$this->load->model('localisation/language');
 
-		$data['languages'] = [];
+		$data['languages'] = array();
 
 		$results = $this->model_localisation_language->getLanguages();
 
 		foreach ($results as $result) {
 			if ($result['status']) {
-				$data['languages'][] = [
+				$data['languages'][] = array(
 					'name' => $result['name'],
 					'code' => $result['code']
-				];
+				);
 			}
 		}
 

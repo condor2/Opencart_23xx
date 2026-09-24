@@ -62,7 +62,7 @@ class ControllerCheckoutShippingAddress extends Controller {
 		if (isset($this->session->data['shipping_address']['custom_field'])) {
 			$data['shipping_address_custom_field'] = $this->session->data['shipping_address']['custom_field'];
 		} else {
-			$data['shipping_address_custom_field'] = [];
+			$data['shipping_address_custom_field'] = array();
 		}
 
 		$this->response->setOutput($this->load->view('checkout/shipping_address', $data));
@@ -71,7 +71,7 @@ class ControllerCheckoutShippingAddress extends Controller {
 	public function save() {
 		$this->load->language('checkout/checkout');
 
-		$json = [];
+		$json = array();
 
 		// Validate if customer is logged in.
 		if (!$this->customer->isLogged()) {
@@ -186,10 +186,10 @@ class ControllerCheckoutShippingAddress extends Controller {
 					if ($this->config->get('config_customer_activity')) {
 						$this->load->model('account/activity');
 
-						$activity_data = [
+						$activity_data = array(
 							'customer_id' => $this->customer->getId(),
 							'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-						];
+						);
 
 						$this->model_account_activity->addActivity('address_add', $activity_data);
 					}

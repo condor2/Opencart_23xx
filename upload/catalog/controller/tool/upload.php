@@ -3,7 +3,7 @@ class ControllerToolUpload extends Controller {
 	public function index() {
 		$this->load->language('tool/upload');
 
-		$json = [];
+		$json = array();
 
 		if (!empty($this->request->files['file']['name']) && is_file($this->request->files['file']['tmp_name'])) {
 			// Sanitize the filename
@@ -15,7 +15,7 @@ class ControllerToolUpload extends Controller {
 			}
 
 			// Allowed file extension types
-			$allowed = [];
+			$allowed = array();
 
 			$extension_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_ext_allowed'));
 
@@ -30,7 +30,7 @@ class ControllerToolUpload extends Controller {
 			}
 
 			// Allowed file mime types
-			$allowed = [];
+			$allowed = array();
 
 			$mime_allowed = preg_replace('~\r?\n~', "\n", $this->config->get('config_file_mime_allowed'));
 

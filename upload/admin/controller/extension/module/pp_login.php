@@ -78,20 +78,20 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_extension'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=module', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/module/pp_login', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
 		$data['action'] = $this->url->link('extension/module/pp_login', 'token=' . $this->session->data['token'], true);
 
@@ -153,140 +153,140 @@ class ControllerExtensionModulePPLogin extends Controller {
 
 		$data['locales'] = array();
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'en-gb',
 			'text'  => 'English (Great Britain)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'zh-cn',
 			'text'  => 'Chinese (People\'s Republic of China)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'zh-hk',
 			'text'  => 'Chinese (Hong Kong)',
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'zh-tw',
 			'text'  => 'Chinese (Taiwan)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'zh-xc',
 			'text'  => 'Chinese (US)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'da-dk',
 			'text'  => 'Danish'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'nl-nl',
 			'text'  => 'Dutch'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'en-au',
 			'text'  => 'English (Australia)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'en-us',
 			'text'  => 'English (US)',
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'fr-fr',
 			'text'  => 'French'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'fr-ca',
 			'text'  => 'French (Canada)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'fr-xc',
 			'text'  => 'French (international)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'de-de',
 			'text'  => 'German'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'he-il',
 			'text'  => 'Hebrew (Israel)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'id-id',
 			'text'  => 'Indonesian'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'it-il',
 			'text'  => 'Italian'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'ja-jp',
 			'text'  => 'Japanese'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'no-no',
 			'text'  => 'Norwegian'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'pl-pl',
 			'text'  => 'Polish'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'pt-pt',
 			'text'  => 'Portuguese'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'pt-br',
 			'text'  => 'Portuguese (Brazil)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'ru-ru',
 			'text'  => 'Russian'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'es-es',
 			'text'  => 'Spanish'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'es-xc',
 			'text'  => 'Spanish (Mexico)'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'sv-se',
 			'text'  => 'Swedish'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'th-th',
 			'text'  => 'Thai'
-		];
+		);
 
-		$data['locales'][] = [
+		$data['locales'][] = array(
 			'value' => 'tr-tr',
 			'text'  => 'Turkish'
-		];
+		);
 
 		if (isset($this->request->post['pp_login_locale'])) {
 			$data['pp_login_locale'] = $this->request->post['pp_login_locale'];

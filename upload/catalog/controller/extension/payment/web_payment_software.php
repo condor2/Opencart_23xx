@@ -14,24 +14,24 @@ class ControllerExtensionPaymentWebPaymentSoftware extends Controller {
 		$data['button_confirm'] = $this->language->get('button_confirm');
 		$data['button_back'] = $this->language->get('button_back');
 
-		$data['months'] = [];
+		$data['months'] = array();
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = [
+			$data['months'][] = array(
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			];
+			);
 		}
 
 		$today = getdate();
 
-		$data['year_expire'] = [];
+		$data['year_expire'] = array();
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = [
+			$data['year_expire'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			];
+			);
 		}
 
 		return $this->load->view('extension/payment/web_payment_software', $data);
@@ -90,7 +90,7 @@ class ControllerExtensionPaymentWebPaymentSoftware extends Controller {
 		$xml = simplexml_load_string($response);
 
 		//create object to use as json
-		$json = [];
+		$json = array();
 
 		//If successful log transaction in opencart system
 		if ('00' === (string)$xml->response_code) {

@@ -13,24 +13,24 @@ class ControllerExtensionPaymentSagepayUS extends Controller {
 
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
-		$data['months'] = [];
+		$data['months'] = array();
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = [
+			$data['months'][] = array(
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			];
+			);
 		}
 
 		$today = getdate();
 
-		$data['year_expire'] = [];
+		$data['year_expire'] = array();
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = [
+			$data['year_expire'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			];
+			);
 		}
 
 		return $this->load->view('extension/payment/sagepay_us', $data);
@@ -69,7 +69,7 @@ class ControllerExtensionPaymentSagepayUS extends Controller {
 
 		curl_close($ch);
 
-		$json = [];
+		$json = array();
 
 		if ($response[1] == 'A') {
 			$message  = 'Approval Indicator: ' . $response[1] . "\n";

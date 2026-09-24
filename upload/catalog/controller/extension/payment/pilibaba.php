@@ -25,7 +25,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 		$data['signType']     = 'MD5';
 		$data['signMsg']      = strtoupper(md5($data['version'] . $data['merchantNo'] . $data['currencyType'] . $data['orderNo'] . $data['orderAmount'] . $data['orderTime'] . $data['pageUrl'] . $data['serverUrl'] . $data['redirectUrl'] . $data['notifyType'] . $data['shipper'] . $data['tax'] . $data['signType'] . $this->config->get('pilibaba_secret_key')));
 
-		$products = [];
+		$products = array();
 
 		foreach ($this->cart->getProducts() as $product) {
 			// kilograms
@@ -35,7 +35,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$weight = (int)($product['weight']);
 			}
 
-			$products[] = array_map('strval', [
+			$products[] = array_map('strval', array(
 				'name'       => $product['name'],
 				'pictureUrl' => $this->config->get('config_url') . 'image/' . $product['image'],
 				'price'      => (int)(round($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'), $this->session->data['currency']), 2) * 100),
@@ -43,7 +43,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				'productId'  => $product['product_id'],
 				'quantity'   => $product['quantity'],
 				'weight'     => $weight
-			]);
+			));
 		}
 
 		$data['products'] = $products;
@@ -81,22 +81,22 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 
 				$this->response->redirect($this->url->link('checkout/cart'));
 			} else {
-				$order_data = [];
+				$order_data = array();
 
-				$totals = [];
+				$totals = array();
 				$taxes = $this->cart->getTaxes();
 				$total = 0;
 
 				// Because __call can not keep var references so we put them into an array.
-				$total_data = [
+				$total_data = array(
 					'totals' => &$totals,
 					'taxes'  => &$taxes,
 					'total'  => &$total
-				];
+				);
 
 				$this->load->model('extension/extension');
 
-				$sort_order = [];
+				$sort_order = array();
 
 				$results = $this->model_extension_extension->getExtensions('total');
 
@@ -115,7 +115,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 					}
 				}
 
-				$sort_order = [];
+				$sort_order = array();
 
 				foreach ($totals as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];
@@ -158,7 +158,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$order_data['payment_country'] = '';
 				$order_data['payment_country_id'] = 0;
 				$order_data['payment_address_format'] = '';
-				$order_data['payment_custom_field'] = [];
+				$order_data['payment_custom_field'] = array();
 				$order_data['payment_method'] = $this->language->get('text_title');
 				$order_data['payment_code'] = 'pilibaba';
 
@@ -174,7 +174,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$order_data['shipping_country'] = '';
 				$order_data['shipping_country_id'] = 0;
 				$order_data['shipping_address_format'] = '';
-				$order_data['shipping_custom_field'] = [];
+				$order_data['shipping_custom_field'] = array();
 				$order_data['shipping_method'] = $this->language->get('text_description');
 				$order_data['shipping_code'] = 'pilibaba.pilibaba';
 
@@ -184,15 +184,15 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$this->session->data['guest']['email'] = '';
 				$this->session->data['guest']['telephone'] = '';
 				$this->session->data['guest']['fax'] = '';
-				$this->session->data['guest']['custom_field'] = [];
+				$this->session->data['guest']['custom_field'] = array();
 
-				$order_data['products'] = [];
+				$order_data['products'] = array();
 
 				foreach ($this->cart->getProducts() as $product) {
-					$option_data = [];
+					$option_data = array();
 
 					foreach ($product['option'] as $option) {
-						$option_data[] = [
+						$option_data[] = array(
 							'product_option_id'       => $option['product_option_id'],
 							'product_option_value_id' => $option['product_option_value_id'],
 							'option_id'               => $option['option_id'],
@@ -200,10 +200,10 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 							'name'                    => $option['name'],
 							'value'                   => $option['value'],
 							'type'                    => $option['type']
-						];
+						);
 					}
 
-					$order_data['products'][] = [
+					$order_data['products'][] = array(
 						'product_id' => $product['product_id'],
 						'name'       => $product['name'],
 						'model'      => $product['model'],
@@ -215,15 +215,15 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 						'total'      => $product['total'],
 						'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
 						'reward'     => $product['reward']
-					];
+					);
 				}
 
 				// Gift Voucher
-				$order_data['vouchers'] = [];
+				$order_data['vouchers'] = array();
 
 				if (!empty($this->session->data['vouchers'])) {
 					foreach ($this->session->data['vouchers'] as $voucher) {
-						$order_data['vouchers'][] = [
+						$order_data['vouchers'][] = array(
 							'description'      => $voucher['description'],
 							'code'             => token(10),
 							'to_name'          => $voucher['to_name'],
@@ -233,7 +233,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 							'voucher_theme_id' => $voucher['voucher_theme_id'],
 							'message'          => $voucher['message'],
 							'amount'           => $voucher['amount']
-						];
+						);
 					}
 				}
 
@@ -322,7 +322,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 				$data['signType']     = 'MD5';
 				$data['signMsg']      = strtoupper(md5($data['version'] . $data['merchantNo'] . $data['currencyType'] . $data['orderNo'] . $data['orderAmount'] . $data['orderTime'] . $data['pageUrl'] . $data['serverUrl'] . $data['redirectUrl'] . $data['notifyType'] . $data['shipper'] . $data['tax'] . $data['signType'] . $this->config->get('pilibaba_secret_key')));
 
-				$products = [];
+				$products = array();
 
 				foreach ($this->cart->getProducts() as $product) {
 					// kilograms
@@ -332,7 +332,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 						$weight = (int)($product['weight']);
 					}
 
-					$products[] = array_map('strval', [
+					$products[] = array_map('strval', array(
 						'name'       => $product['name'],
 						'pictureUrl' => $this->config->get('config_url') . 'image/' . $product['image'],
 						'price'      => (int)(round($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax'), $this->session->data['currency']), 2) * 100),
@@ -340,7 +340,7 @@ class ControllerExtensionPaymentPilibaba extends Controller {
 						'productId'  => $product['product_id'],
 						'quantity'   => $product['quantity'],
 						'weight'     => $weight
-					]);
+					));
 				}
 
 				$data['products'] = $products;

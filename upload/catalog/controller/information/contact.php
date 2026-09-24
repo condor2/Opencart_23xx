@@ -1,6 +1,6 @@
 <?php
 class ControllerInformationContact extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index() {
 		$this->load->language('information/contact');
@@ -28,17 +28,17 @@ class ControllerInformationContact extends Controller {
 			$this->response->redirect($this->url->link('information/contact/success'));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('information/contact')
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -96,7 +96,7 @@ class ControllerInformationContact extends Controller {
 		$data['open'] = nl2br($this->config->get('config_open'));
 		$data['comment'] = $this->config->get('config_comment');
 
-		$data['locations'] = [];
+		$data['locations'] = array();
 
 		$this->load->model('localisation/location');
 
@@ -110,7 +110,7 @@ class ControllerInformationContact extends Controller {
 					$image = false;
 				}
 
-				$data['locations'][] = [
+				$data['locations'][] = array(
 					'location_id' => $location_info['location_id'],
 					'name'        => $location_info['name'],
 					'address'     => nl2br($location_info['address']),
@@ -120,7 +120,7 @@ class ControllerInformationContact extends Controller {
 					'image'       => $image,
 					'open'        => nl2br($location_info['open']),
 					'comment'     => $location_info['comment']
-				];
+				);
 			}
 		}
 
@@ -201,17 +201,17 @@ class ControllerInformationContact extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('information/contact')
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

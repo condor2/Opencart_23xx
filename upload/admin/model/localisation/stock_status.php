@@ -40,7 +40,7 @@ class ModelLocalisationStockStatus extends Model {
 		return $query->row;
 	}
 
-	public function getStockStatuses($data = []) {
+	public function getStockStatuses($data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "stock_status WHERE language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
@@ -83,12 +83,12 @@ class ModelLocalisationStockStatus extends Model {
 	}
 
 	public function getStockStatusDescriptions($stock_status_id) {
-		$stock_status_data = [];
+		$stock_status_data = array();
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "stock_status WHERE stock_status_id = '" . (int)$stock_status_id . "'");
 
 		foreach ($query->rows as $result) {
-			$stock_status_data[$result['language_id']] = ['name' => $result['name']];
+			$stock_status_data[$result['language_id']] = array('name' => $result['name']);
 		}
 
 		return $stock_status_data;

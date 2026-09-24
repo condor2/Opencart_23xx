@@ -2,7 +2,7 @@
 class Language {
 	private $default = 'en-gb';
 	private $directory;
-	private $data = [];
+	private $data = array();
 
 	public function __construct($directory = '') {
 		$this->directory = $directory;
@@ -26,8 +26,8 @@ class Language {
 		array_merge($this->data, $data);
 	}
 
-	public function load($filename, &$data = []) {
-		$_ = [];
+	public function load($filename, &$data = array()) {
+		$_ = array();
 
 		$file = DIR_LANGUAGE . 'english/' . $filename . '.php';
 

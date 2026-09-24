@@ -4550,7 +4550,7 @@ class ControllerExtensionPaymentPayPal extends Controller {
 			$this->session->data['guest']['lastname'] = '';
 			$this->session->data['guest']['email'] = $this->request->post['email'];
 			$this->session->data['guest']['telephone'] = '';
-			$this->session->data['guest']['custom_field'] = [];
+			$this->session->data['guest']['custom_field'] = array();
 
 			$this->session->data['shipping_address']['firstname'] = '';
 			$this->session->data['shipping_address']['lastname'] = '';

@@ -80,14 +80,14 @@ class ModelCatalogInformation extends Model {
 		return $query->row;
 	}
 
-	public function getInformations(array $data = []) {
+	public function getInformations(array $data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM `" . DB_PREFIX . "information` i LEFT JOIN `" . DB_PREFIX . "information_description` id ON (i.`information_id` = id.`information_id`) WHERE id.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
-			$sort_data = [
+			$sort_data = array(
 				'id.`title`',
 				'i.`sort_order`'
-			];
+			);
 
 			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 				$sql .= " ORDER BY " . $data['sort'];
@@ -132,25 +132,25 @@ class ModelCatalogInformation extends Model {
 	}
 
 	public function getInformationDescriptions(int $information_id) {
-		$information_description_data = [];
+		$information_description_data = array();
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "information_description` WHERE `information_id` = '" . (int)$information_id . "'");
 
 		foreach ($query->rows as $result) {
-			$information_description_data[$result['language_id']] = [
+			$information_description_data[$result['language_id']] = array(
 				'title'            => $result['title'],
 				'description'      => $result['description'],
 				'meta_title'       => $result['meta_title'],
 				'meta_description' => $result['meta_description'],
 				'meta_keyword'     => $result['meta_keyword']
-			];
+			);
 		}
 
 		return $information_description_data;
 	}
 
 	public function getInformationStores(int $information_id) {
-		$information_store_data = [];
+		$information_store_data = array();
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "information_to_store` WHERE `information_id` = '" . (int)$information_id . "'");
 
@@ -162,7 +162,7 @@ class ModelCatalogInformation extends Model {
 	}
 
 	public function getInformationLayouts(int $information_id) {
-		$information_layout_data = [];
+		$information_layout_data = array();
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "information_to_layout` WHERE `information_id` = '" . (int)$information_id . "'");
 

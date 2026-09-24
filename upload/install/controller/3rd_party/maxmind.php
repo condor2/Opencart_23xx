@@ -1,6 +1,6 @@
 <?php
 class Controller3rdPartyMaxmind extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index(): void {
 		$this->language->load('3rd_party/maxmind');

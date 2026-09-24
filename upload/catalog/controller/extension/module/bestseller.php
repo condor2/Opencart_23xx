@@ -15,7 +15,7 @@ class ControllerExtensionModuleBestSeller extends Controller {
 
 		$this->load->model('tool/image');
 
-		$data['products'] = [];
+		$data['products'] = array();
 
 		$results = $this->model_catalog_product->getBestSellerProducts($setting['limit']);
 
@@ -51,7 +51,7 @@ class ControllerExtensionModuleBestSeller extends Controller {
 					$rating = false;
 				}
 
-				$data['products'][] = [
+				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
@@ -61,7 +61,7 @@ class ControllerExtensionModuleBestSeller extends Controller {
 					'tax'         => $tax,
 					'rating'      => $rating,
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
-				];
+				);
 			}
 
 			return $this->load->view('extension/module/bestseller', $data);

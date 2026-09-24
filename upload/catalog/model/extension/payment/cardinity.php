@@ -15,10 +15,10 @@ class ModelExtensionPaymentCardinity extends Model {
 	}
 
 	public function createPayment($key, $secret, $payment_data) {
-		$client = Client::create([
+		$client = Client::create(array(
 			'consumerKey'    => $key,
 			'consumerSecret' => $secret,
-		]);
+		));
 
 		$method = new Payment\Create($payment_data);
 
@@ -32,10 +32,10 @@ class ModelExtensionPaymentCardinity extends Model {
 	}
 
 	public function finalizePayment($key, $secret, $payment_id, $pares) {
-		$client = Client::create([
+		$client = Client::create(array(
 			'consumerKey'    => $key,
 			'consumerSecret' => $secret,
-		]);
+		));
 
 		$method = new Payment\Finalize($payment_id, $pares);
 
@@ -67,26 +67,26 @@ class ModelExtensionPaymentCardinity extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
-			$method_data = [
+			$method_data = array(
 				'code'       => 'cardinity',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('cardinity_sort_order')
-			];
+			);
 		}
 
 		return $method_data;
 	}
 
 	public function getSupportedCurrencies() {
-		return [
+		return array(
 			'USD',
 			'GBP',
 			'EUR'
-		];
+		);
 	}
 
 	public function log($data, $class_step = 6, $function_step = 6) {

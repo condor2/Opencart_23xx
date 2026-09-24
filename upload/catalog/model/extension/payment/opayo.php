@@ -15,15 +15,15 @@ class ModelExtensionPaymentOpayo extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
-			$method_data = [
+			$method_data = array(
 				'code'       => 'opayo',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('opayo_sort_order')
-			];
+			);
 		}
 
 		return $method_data;
@@ -32,17 +32,17 @@ class ModelExtensionPaymentOpayo extends Model {
 	public function getCards($customer_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "opayo_card` WHERE `customer_id` = '" . (int)$customer_id . "' ORDER BY `card_id`");
 
-		$card_data = [];
+		$card_data = array();
 
 		foreach ($query->rows as $row) {
-			$card_data[] = [
+			$card_data[] = array(
 				'card_id'     => $row['card_id'],
 				'customer_id' => $row['customer_id'],
 				'token'       => $row['token'],
 				'digits'      => '**** ' . $row['digits'],
 				'expiry'      => $row['expiry'],
 				'type'        => $row['type'],
-			];
+			);
 		}
 
 		return $card_data;
@@ -194,7 +194,7 @@ class ModelExtensionPaymentOpayo extends Model {
 		$this->load->model('checkout/order');
 
 		$recurrings = $this->getProfiles();
-		$cron_data = [];
+		$cron_data = array();
 		$i = 0;
 
 		foreach ($recurrings as $recurring) {
@@ -411,7 +411,7 @@ class ModelExtensionPaymentOpayo extends Model {
 	private function getProfiles() {
 		$query = $this->db->query("SELECT `or`.order_recurring_id FROM `" . DB_PREFIX . "order_recurring` `or` JOIN `" . DB_PREFIX . "order` `o` USING(`order_id`) WHERE o.payment_code = 'opayo'");
 
-		$order_recurring = [];
+		$order_recurring = array();
 
 		foreach ($query->rows as $recurring) {
 			$order_recurring[] = $this->getProfile($recurring['order_recurring_id']);
@@ -432,7 +432,7 @@ class ModelExtensionPaymentOpayo extends Model {
 	}
 
 	public function sendCurl($url, $payment_data, $i = null) {
-		$data = [];
+		$data = array();
 
 		$curl = curl_init($url);
 

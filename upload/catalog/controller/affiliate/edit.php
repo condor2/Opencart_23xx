@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateEdit extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index() {
 		if (!$this->affiliate->isLogged()) {
@@ -24,10 +24,10 @@ class ControllerAffiliateEdit extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('affiliate/activity');
 
-				$activity_data = [
+				$activity_data = array(
 					'affiliate_id' => $this->affiliate->getId(),
 					'name'         => $this->affiliate->getFirstName() . ' ' . $this->affiliate->getLastName()
-				];
+				);
 
 				$this->model_affiliate_activity->addActivity('edit', $activity_data);
 			}
@@ -35,22 +35,22 @@ class ControllerAffiliateEdit extends Controller {
 			$this->response->redirect($this->url->link('affiliate/account', '', true));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('affiliate/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_edit'),
 			'href' => $this->url->link('affiliate/edit', '', true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -309,7 +309,7 @@ class ControllerAffiliateEdit extends Controller {
 	}
 
 	public function country() {
-		$json = [];
+		$json = array();
 
 		$this->load->model('localisation/country');
 
@@ -318,7 +318,7 @@ class ControllerAffiliateEdit extends Controller {
 		if ($country_info) {
 			$this->load->model('localisation/zone');
 
-			$json = [
+			$json = array(
 				'country_id'        => $country_info['country_id'],
 				'name'              => $country_info['name'],
 				'iso_code_2'        => $country_info['iso_code_2'],
@@ -327,7 +327,7 @@ class ControllerAffiliateEdit extends Controller {
 				'postcode_required' => $country_info['postcode_required'],
 				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
 				'status'            => $country_info['status']
-			];
+			);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

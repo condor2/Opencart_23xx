@@ -78,7 +78,7 @@ class ModelExtensionPaymentOpayo extends Model {
 		$opayo_order = $this->getOrder($order_id);
 
 		if (!empty($opayo_order) && $opayo_order['release_status'] == 0) {
-			$void_data = [];
+			$void_data = array();
 
 			// Setting
 			$_config = new Config();
@@ -120,7 +120,7 @@ class ModelExtensionPaymentOpayo extends Model {
 		$total_released = $this->getTotalReleased($opayo_order['opayo_order_id']);
 
 		if (!empty($opayo_order) && $opayo_order['release_status'] == 0 && ($total_released + $amount <= $opayo_order['total'])) {
-			$release_data = [];
+			$release_data = array();
 
 			// Setting
 			$_config = new Config();
@@ -162,7 +162,7 @@ class ModelExtensionPaymentOpayo extends Model {
 		$opayo_order = $this->getOrder($order_id);
 
 		if (!empty($opayo_order) && $opayo_order['rebate_status'] != 1) {
-			$refund_data = [];
+			$refund_data = array();
 
 			// Setting
 			$_config = new Config();
@@ -265,7 +265,7 @@ class ModelExtensionPaymentOpayo extends Model {
 
 		$response_info = explode(chr(10), $response);
 
-		$data = [];
+		$data = array();
 
 		foreach ($response_info as $i => $string) {
 			if (!str_contains($string, '=')) {

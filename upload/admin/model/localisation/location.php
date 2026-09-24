@@ -20,13 +20,13 @@ class ModelLocalisationLocation extends Model {
 		return $query->row;
 	}
 
-	public function getLocations($data = []) {
+	public function getLocations($data = array()) {
 		$sql = "SELECT location_id, name, address FROM " . DB_PREFIX . "location";
 
-		$sort_data = [
+		$sort_data = array(
 			'name',
 			'address',
-		];
+		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];

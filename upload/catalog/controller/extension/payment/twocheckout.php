@@ -42,18 +42,18 @@ class ControllerExtensionPaymentTwoCheckout extends Controller {
 			$data['ship_country'] = $order_info['payment_country'];
 		}
 
-		$data['products'] = [];
+		$data['products'] = array();
 
 		$products = $this->cart->getProducts();
 
 		foreach ($products as $product) {
-			$data['products'][] = [
+			$data['products'][] = array(
 				'product_id'  => $product['product_id'],
 				'name'        => $product['name'],
 				'description' => $product['name'],
 				'quantity'    => $product['quantity'],
 				'price'       => $this->currency->format($product['price'], $order_info['currency_code'], $order_info['currency_value'], false)
-			];
+			);
 		}
 
 		if ($this->config->get('twocheckout_test')) {

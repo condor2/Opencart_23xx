@@ -11,22 +11,22 @@ class ControllerAccountReward extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_reward'),
 			'href' => $this->url->link('account/reward', '', true)
-		];
+		);
 
 		$this->load->model('account/reward');
 
@@ -49,27 +49,27 @@ class ControllerAccountReward extends Controller {
 
 		$limit = 10;
 
-		$data['rewards'] = [];
+		$data['rewards'] = array();
 
-		$filter_data = [
+		$filter_data = array(
 			'sort'  => 'date_added',
 			'order' => 'DESC',
 			'start' => ($page - 1) * $limit,
 			'limit' => $limit
-		];
+		);
 
 		$reward_total = $this->model_account_reward->getTotalRewards();
 
 		$results = $this->model_account_reward->getRewards($filter_data);
 
 		foreach ($results as $result) {
-			$data['rewards'][] = [
+			$data['rewards'][] = array(
 				'order_id'    => $result['order_id'],
 				'points'      => $result['points'],
 				'description' => $result['description'],
 				'date_added'  => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'href'        => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true)
-			];
+			);
 		}
 
 		$pagination = new Pagination();

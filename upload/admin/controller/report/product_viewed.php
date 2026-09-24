@@ -19,22 +19,22 @@ class ControllerReportProductViewed extends Controller {
 
 		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('report/product_viewed', 'token=' . $this->session->data['token'] . $url, true)
-		];
+		);
 
 		$this->load->model('report/product');
 
-		$filter_data = [
+		$filter_data = array(
 			'start' => ($page - 1) * $this->config->get('config_limit_admin'),
 			'limit' => $this->config->get('config_limit_admin')
-		];
+		);
 
 		$data['products'] = array();
 
@@ -51,12 +51,12 @@ class ControllerReportProductViewed extends Controller {
 				$percent = 0;
 			}
 
-			$data['products'][] = [
+			$data['products'][] = array(
 				'name'    => $result['name'],
 				'model'   => $result['model'],
 				'viewed'  => $result['viewed'],
 				'percent' => $percent . '%'
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

@@ -35,7 +35,7 @@ class ControllerUpgradeUpgrade extends Controller {
 	public function next(): void {
 		$this->load->language('upgrade/upgrade');
 
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->get['step'])) {
 			$step = $this->request->get['step'];

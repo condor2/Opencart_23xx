@@ -29,7 +29,7 @@ class ModelExtensionCurrencyEcb extends Model {
 			$cube = $dom->getElementsByTagName('Cube')->item(0);
 
 			// Compile all the rates into an array
-			$currencies = [];
+			$currencies = array();
 
 			$currencies['EUR'] = 1.0000;
 

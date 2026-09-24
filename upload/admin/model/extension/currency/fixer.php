@@ -28,12 +28,12 @@ class ModelExtensionCurrencyFixer extends Model {
 				if ($status == 200) {
 					$response_info = json_decode($response, true);
 				} else {
-					$response_info = [];
+					$response_info = array();
 				}
 
 				if (isset($response_info['rates'])) {
 					// Compile all the rates into an array
-					$currencies = [];
+					$currencies = array();
 
 					$currencies['EUR'] = 1.0000;
 

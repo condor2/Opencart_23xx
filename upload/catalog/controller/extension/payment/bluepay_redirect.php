@@ -28,24 +28,24 @@ class ControllerExtensionPaymentBluePayRedirect extends Controller {
 
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
-		$data['months'] = [];
+		$data['months'] = array();
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = [
+			$data['months'][] = array(
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			];
+			);
 		}
 
 		$today = getdate();
 
-		$data['year_expire'] = [];
+		$data['year_expire'] = array();
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = [
+			$data['year_expire'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			];
+			);
 		}
 
 		if ($this->config->get('bluepay_redirect_card') == '1') {
@@ -54,7 +54,7 @@ class ControllerExtensionPaymentBluePayRedirect extends Controller {
 			$data['bluepay_redirect_card'] = false;
 		}
 
-		$data['existing_cards'] = [];
+		$data['existing_cards'] = array();
 		if ($this->customer->isLogged() && $data['bluepay_redirect_card']) {
 			$this->load->model('extension/payment/bluepay_redirect');
 

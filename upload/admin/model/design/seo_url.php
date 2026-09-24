@@ -18,10 +18,10 @@ class ModelDesignSeoUrl extends Model {
 		return $query->row;
 	}
 
-	public function getSeoUrls($data = []) {
+	public function getSeoUrls($data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "url_alias`";
 
-		$implode = [];
+		$implode = array();
 
 		if (!empty($data['filter_query'])) {
 			$implode[] = "`query` LIKE '" . $this->db->escape((string)$data['filter_query']) . "'";
@@ -35,10 +35,10 @@ class ModelDesignSeoUrl extends Model {
 			$sql .= " WHERE " . implode(" AND ", $implode);
 		}
 
-		$sort_data = [
+		$sort_data = array(
 			'query',
 			'keyword',
-		];
+		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
@@ -69,10 +69,10 @@ class ModelDesignSeoUrl extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalSeoUrls($data = []) {
+	public function getTotalSeoUrls($data = array()) {
 		$sql = "SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "url_alias`";
 
-		$implode = [];
+		$implode = array();
 
 		if (!empty($data['filter_query'])) {
 			$implode[] = "query LIKE '" . $this->db->escape($data['filter_query']) . "'";

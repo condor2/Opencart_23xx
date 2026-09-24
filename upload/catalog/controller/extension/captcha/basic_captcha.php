@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionCaptchaBasicCaptcha extends Controller {
-	public function index($error = []) {
+	public function index($error = array()) {
 		$this->load->language('extension/captcha/basic_captcha');
 
 		$data['text_captcha'] = $this->language->get('text_captcha');

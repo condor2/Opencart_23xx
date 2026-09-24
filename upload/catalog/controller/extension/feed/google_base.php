@@ -15,15 +15,15 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 
 			$this->load->model('tool/image');
 
-			$product_data = [];
+			$product_data = array();
 
 			$google_base_categories = $this->model_extension_feed_google_base->getCategories();
 
 			foreach ($google_base_categories as $google_base_category) {
-				$filter_data = [
+				$filter_data = array(
 					'filter_category_id' => $google_base_category['category_id'],
 					'filter_filter'      => false
-				];
+				);
 
 				$products = $this->model_catalog_product->getProducts($filter_data);
 
@@ -59,7 +59,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 							$output .= '  <g:ean>' . $product['ean'] . '</g:ean>';
 						}
 
-						$currencies = [
+						$currencies = array(
 							'USD', // US Dollar
 							'EUR', // Euro
 							'GBP', // British Pound
@@ -124,7 +124,7 @@ class ControllerExtensionFeedGoogleBase extends Controller {
 							'UZS', // Uzbekistani Som
 							'VND', // Vietnamese Dong
 							'ZMW'  // Zambian Kwacha
-						];
+						);
 
 						if (in_array($this->session->data['currency'], $currencies)) {
 							$currency_code = $this->session->data['currency'];

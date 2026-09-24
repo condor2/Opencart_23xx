@@ -15,7 +15,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 
 		$this->load->model('tool/image');
 
-		$data['products'] = [];
+		$data['products'] = array();
 
 		if (!$setting['limit']) {
 			$setting['limit'] = 4;
@@ -58,7 +58,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 						$rating = false;
 					}
 
-					$data['products'][] = [
+					$data['products'][] = array(
 						'product_id'  => $product_info['product_id'],
 						'thumb'       => $image,
 						'name'        => $product_info['name'],
@@ -68,7 +68,7 @@ class ControllerExtensionModuleFeatured extends Controller {
 						'tax'         => $tax,
 						'rating'      => $rating,
 						'href'        => $this->url->link('product/product', 'product_id=' . $product_info['product_id'])
-					];
+					);
 				}
 			}
 		}

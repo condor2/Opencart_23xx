@@ -28,16 +28,16 @@ class ControllerExtensionPaymentG2APay extends Controller {
 
 		$this->load->model('extension/extension');
 
-		$totals = [];
+		$totals = array();
 		$taxes = $this->cart->getTaxes();
 		$total = 0;
 
 		// Because __call can not keep var references so we put them into an array.
-		$total_data = [
+		$total_data = array(
 			'totals' => &$totals,
 			'taxes'  => &$taxes,
 			'total'  => &$total
-		];
+		);
 
 		$i = 0;
 
@@ -95,7 +95,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 
 		$string = $this->session->data['order_id'] . $order_total . $order_info['currency_code'] . html_entity_decode($this->config->get('g2apay_secret'));
 
-		$fields = [
+		$fields = array(
 			'api_hash'    => $this->config->get('g2apay_api_hash'),
 			'hash'        => hash('sha256', $string),
 			'order_id'    => $this->session->data['order_id'],
@@ -105,7 +105,7 @@ class ControllerExtensionPaymentG2APay extends Controller {
 			'url_failure' => $this->url->link('checkout/failure'),
 			'url_ok'      => $this->url->link('extension/payment/g2apay/success'),
 			'items'       => isset($items) ? json_encode($items) : ''
-		];
+		);
 
 		$response_data = $this->model_extension_payment_g2apay->sendCurl($url, $fields);
 

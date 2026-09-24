@@ -13,7 +13,7 @@ class ModelExtensionShippingParcelforce48 extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
 			$cost = 0;
@@ -48,7 +48,7 @@ class ModelExtensionShippingParcelforce48 extends Model {
 				}
 			}
 
-			$quote_data = [];
+			$quote_data = array();
 
 			if ((float)$cost) {
 				$text = $this->language->get('text_description');
@@ -65,21 +65,21 @@ class ModelExtensionShippingParcelforce48 extends Model {
 					$text .= ' (' . $this->language->get('text_time') . ')';
 				}
 
-				$quote_data['parcelforce_48'] = [
+				$quote_data['parcelforce_48'] = array(
 					'code'         => 'parcelforce_48.parcelforce_48',
 					'title'        => $text,
 					'cost'         => $cost,
 					'tax_class_id' => $this->config->get('parcelforce_48_tax_class_id'),
 					'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('parcelforce_48_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-				];
+				);
 
-				$method_data = [
+				$method_data = array(
 					'code'       => 'parcelforce_48',
 					'title'      => $this->language->get('text_title'),
 					'quote'      => $quote_data,
 					'sort_order' => $this->config->get('parcelforce_48_sort_order'),
 					'error'      => false
-				];
+				);
 			}
 		}
 

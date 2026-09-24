@@ -5,7 +5,7 @@
  * @package Catalog\Controller\Extension\Module
  */
 class ControllerExtensionModuleAmazonLogin extends Controller {
-	private $error = [];
+	private $error = array();
 
 	/**
 	 * @return string
@@ -71,7 +71,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 			$this->session->data['access_token'] = $this->request->get['access_token'];
 			$user = $this->model_extension_payment_amazon_login_pay->getUserInfo($this->request->get['access_token']);
 		} else {
-			$user = [];
+			$user = array();
 		}
 
 		if ((array)$user) {
@@ -107,10 +107,10 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 					if ($this->config->get('config_customer_activity')) {
 						$this->load->model('account/activity');
 
-						$activity_data = [
+						$activity_data = array(
 							'customer_id' => $this->customer->getId(),
 							'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-						];
+						);
 
 						$this->model_account_activity->addActivity('login', $activity_data);
 					}
@@ -130,7 +130,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 				$last_name = array_pop($full_name);
 				$first_name = implode(' ', $full_name);
 
-				$data = [
+				$data = array(
 					'customer_group_id' => (int)$this->config->get('config_customer_group_id'),
 					'firstname'         => $first_name,
 					'lastname'          => $last_name,
@@ -145,7 +145,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 					'postcode'          => '',
 					'country_id'        => (int)$country_id,
 					'zone_id'           => (int)$zone_id,
-				];
+				);
 
 				$customer_id = $this->model_extension_payment_amazon_login_pay->addCustomer($data);
 
@@ -173,10 +173,10 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 					if ($this->config->get('config_customer_activity')) {
 						$this->load->model('account/activity');
 
-						$activity_data = [
+						$activity_data = array(
 							'customer_id' => $this->customer->getId(),
 							'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-						];
+						);
 
 						$this->model_account_activity->addActivity('login', $activity_data);
 					}

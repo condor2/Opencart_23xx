@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateLogin extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index() {
 		if ($this->affiliate->isLogged()) {
@@ -18,10 +18,10 @@ class ControllerAffiliateLogin extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('affiliate/activity');
 
-				$activity_data = [
+				$activity_data = array(
 					'affiliate_id' => $this->affiliate->getId(),
 					'name'         => $this->affiliate->getFirstName() . ' ' . $this->affiliate->getLastName()
-				];
+				);
 
 				$this->model_affiliate_activity->addActivity('login', $activity_data);
 			}
@@ -34,22 +34,22 @@ class ControllerAffiliateLogin extends Controller {
 			}
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('affiliate/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_login'),
 			'href' => $this->url->link('affiliate/login', '', true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

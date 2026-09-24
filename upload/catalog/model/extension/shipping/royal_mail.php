@@ -254,7 +254,7 @@ class ModelExtensionShippingRoyalMail extends Model {
 			$status = false;
 		}
 
-		$quote_data = [];
+		$quote_data = array();
 
 		if ($status) {
 			$weight = $this->cart->getWeight();
@@ -290,13 +290,13 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_insurance') . ' ' . $this->currency->format(500, $this->session->data['currency']) . ')';
 					}
 
-					$quote_data['special_delivery_500'] = [
+					$quote_data['special_delivery_500'] = array(
 						'code'         => 'royal_mail.special_delivery_500',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
@@ -331,13 +331,13 @@ class ModelExtensionShippingRoyalMail extends Model {
 
 					}
 
-					$quote_data['special_delivery_1000'] = [
+					$quote_data['special_delivery_1000'] = array(
 						'code'         => 'royal_mail.special_delivery_1000',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
@@ -371,13 +371,13 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_insurance') . ' ' . $this->currency->format(2500, $this->session->data['currency']) . ')';
 					}
 
-					$quote_data['special_delivery_2500'] = [
+					$quote_data['special_delivery_2500'] = array(
 						'code'         => 'royal_mail.special_delivery_2500',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
@@ -406,13 +406,13 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['1st_class_signed'] = [
+					$quote_data['1st_class_signed'] = array(
 						'code'         => 'royal_mail.1st_class_signed',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
@@ -441,13 +441,13 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['2nd_class_signed'] = [
+					$quote_data['2nd_class_signed'] = array(
 						'code'         => 'royal_mail.2nd_class_signed',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
@@ -476,13 +476,13 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['1st_class_standard'] = [
+					$quote_data['1st_class_standard'] = array(
 						'code'         => 'royal_mail.1st_class_standard',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
@@ -511,17 +511,17 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['2nd_class_standard'] = [
+					$quote_data['2nd_class_standard'] = array(
 						'code'         => 'royal_mail.2nd_class_standard',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
-			$europe = [
+			$europe = array(
 				'AL',
 				'AD',
 				'AM',
@@ -578,9 +578,9 @@ class ModelExtensionShippingRoyalMail extends Model {
 				'UA',
 				'UZ',
 				'VA'
-			];
+			);
 
-			$non_eu = [
+			$non_eu = array(
 				'AL',
 				'AD',
 				'AM',
@@ -609,9 +609,9 @@ class ModelExtensionShippingRoyalMail extends Model {
 				'UA',
 				'UZ',
 				'VA'
-			];
+			);
 
-			$zone_1 = [
+			$zone_1 = array(
 				'AF',
 				'NA',
 				'DZ',
@@ -766,9 +766,9 @@ class ModelExtensionShippingRoyalMail extends Model {
 				'YE',
 				'ZM',
 				'ZW'
-			];
+			);
 
-			$zone_2 = [
+			$zone_2 = array(
 				'AU',
 				'IO',
 				'CX',
@@ -792,13 +792,13 @@ class ModelExtensionShippingRoyalMail extends Model {
 				'TO',
 				'TV',
 				'WS'
-			];
+			);
 
 			// International Standard
 			if ($this->config->get('royal_mail_international_standard_status') && $address['iso_code_2'] != 'GB') {
 				$cost = 0;
 
-				$rates = [];
+				$rates = array();
 
 				// EU
 				if (in_array($address['iso_code_2'], $europe)) {
@@ -834,18 +834,18 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['international_standard'] = [
+					$quote_data['international_standard'] = array(
 						'code'         => 'royal_mail.international_standard',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
 			// International Tracked & Signed
-			$tracked_signed = [
+			$tracked_signed = array(
 				'AD',
 				'AR',
 				'AT',
@@ -888,12 +888,12 @@ class ModelExtensionShippingRoyalMail extends Model {
 				'TT',
 				'US',
 				'VA'
-			];
+			);
 
 			if ($this->config->get('royal_mail_international_tracked_signed_status') && in_array($address['iso_code_2'], $tracked_signed)) {
 				$cost = 0;
 
-				$rates = [];
+				$rates = array();
 
 				// EU
 				if (in_array($address['iso_code_2'], $europe)) {
@@ -929,18 +929,18 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['international_tracked_signed'] = [
+					$quote_data['international_tracked_signed'] = array(
 						'code'         => 'royal_mail.international_tracked_signed',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
 			// International Tracked
-			$tracked = [
+			$tracked = array(
 				'AD',
 				'AU',
 				'AT',
@@ -974,12 +974,12 @@ class ModelExtensionShippingRoyalMail extends Model {
 				'SE',
 				'CH',
 				'US'
-			];
+			);
 
 			if ($this->config->get('royal_mail_international_tracked_status') && in_array($address['iso_code_2'], $tracked)) {
 				$cost = 0;
 
-				$rates = [];
+				$rates = array();
 
 				// EU
 				if (in_array($address['iso_code_2'], $europe) && !in_array($address['iso_code_2'], $non_eu)) {
@@ -1020,18 +1020,18 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['international_tracked'] = [
+					$quote_data['international_tracked'] = array(
 						'code'         => 'royal_mail.international_tracked',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
 			// International Signed
-			$signed = [
+			$signed = array(
 				'AF',
 				'NA',
 				'AL',
@@ -1224,12 +1224,12 @@ class ModelExtensionShippingRoyalMail extends Model {
 				'YE',
 				'ZM',
 				'ZW'
-			];
+			);
 
 			if ($this->config->get('royal_mail_international_signed_status') && in_array($address['iso_code_2'], $signed)) {
 				$cost = 0;
 
-				$rates = [];
+				$rates = array();
 
 				// EU
 				if (in_array($address['iso_code_2'], $europe)) {
@@ -1265,13 +1265,13 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['international_signed'] = [
+					$quote_data['international_signed'] = array(
 						'code'         => 'royal_mail.international_signed',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
@@ -1300,27 +1300,27 @@ class ModelExtensionShippingRoyalMail extends Model {
 						$title .= ' (' . $this->language->get('text_weight') . ' ' . $this->weight->format($weight, $this->config->get('config_weight_class_id')) . ')';
 					}
 
-					$quote_data['international_economy'] = [
+					$quote_data['international_economy'] = array(
 						'code'         => 'royal_mail.international_economy',
 						'title'        => $title,
 						'cost'         => $cost,
 						'tax_class_id' => $this->config->get('royal_mail_tax_class_id'),
 						'text'         => $this->currency->format($this->tax->calculate($cost, $this->config->get('royal_mail_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-					];
+					);
 				}
 			}
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($quote_data) {
-			$method_data = [
+			$method_data = array(
 				'code'       => 'royal_mail',
 				'title'      => $this->language->get('text_title'),
 				'quote'      => $quote_data,
 				'sort_order' => $this->config->get('royal_mail_sort_order'),
 				'error'      => false
-			];
+			);
 		}
 
 		return $method_data;

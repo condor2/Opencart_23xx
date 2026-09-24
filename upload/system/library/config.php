@@ -13,7 +13,7 @@
  * Config class
  */
 class Config {
-	private $data = [];
+	private $data = array();
 
 	/**
 	 * @param string $key
@@ -48,7 +48,7 @@ class Config {
 		$file = DIR_CONFIG . $filename . '.php';
 
 		if (file_exists($file)) {
-			$_ = [];
+			$_ = array();
 
 			require($file);
 

@@ -1,6 +1,6 @@
 <?php
-$_['paypal_carrier'] = [
-	'GLOBAL' => [
+$_['paypal_carrier'] = array(
+	'GLOBAL' => array(
 		'99minutos'                                       => '99MINUTOS',
 		'A2B Express Logistics'                           => 'A2B_BA',
 		'AB Custom Group'                                 => 'ABCUSTOM_SFTP',
@@ -585,13 +585,13 @@ $_['paypal_carrier'] = [
 		'ZTO Express China'                               => 'ZTO_DOMESTIC',
 		'Zuellig Pharma Korea'                            => 'ZUELLIGPHARMA_SFTP',
 		'Other'                                           => 'OTHER'
-	],
-	'ARG' => [
+	),
+	'ARG' => array(
 		'Fasttrack'                => 'FASTRACK',
 		'Grupo logistico Andreani' => 'ANDREANI',
 		'OCA Argentina'            => 'ARG_OCA'
-	],
-	'AUS' => [
+	),
+	'AUS' => array(
 		'ADSone'                                       => 'ADSONE',
 		'Allied Express'                               => 'ALLIEDEXPRESS',
 		'Aramex Australia (formerly Fastway AU)'       => 'ARAMEX_AU',
@@ -623,42 +623,42 @@ $_['paypal_carrier'] = [
 		'Toll IPEC'                                    => 'TOLL',
 		'UBI Smart Parcel'                             => 'UBI_LOGISTICS',
 		'XL Express'                                   => 'XL_EXPRESS'
-	],
-	'AUT' => [
+	),
+	'AUT' => array(
 		'austrian post'              => 'AUSTRIAN_POST_EXPRESS',
 		'Austrian Post (Registered)' => 'AU_AUSTRIAN_POST'
-	],
-	'BGD' => [
+	),
+	'BGD' => array(
 		'Paperfly Private Limited' => 'PAPERFLY'
-	],
-	'BEL' => [
+	),
+	'BEL' => array(
 		'B2C courier Europe'        => 'B_TWO_C_EUROPE',
 		'dhl benelux'               => 'DHL_BENELUX',
 		'DHL Benelux'               => 'BEL_DHL',
 		'Landmark Global'           => 'LANDMARK_GLOBAL',
 		'Landmark Global Reference' => 'LANDMARK_GLOBAL_REFERENCE',
 		'Mikropakket Belgium'       => 'MIKROPAKKET_BE'
-	],
-	'BIH' => [
+	),
+	'BIH' => array(
 		'BH Posta (www.posta.ba)' => 'BH_POSTA'
-	],
-	'BRA' => [
+	),
+	'BRA' => array(
 		'Correios Brazil'                  => 'BRA_CORREIOS',
 		'Directlog (www.directlog.com.br)' => 'DIRECTLOG',
 		'Frete Rapido'                     => 'FRETERAPIDO',
 		'Intelipost (TMS for LATAM)'       => 'INTELIPOST',
 		'Total Express'                    => 'TOTAL_EXPRESS'
-	],
-	'BGR' => [
+	),
+	'BGR' => array(
 		'A1Post'          => 'A1POST',
 		'Bulgarian Posts' => 'BG_BULGARIAN_POST'
-	],
-	'KHM' => [
+	),
+	'KHM' => array(
 		'AFL LOGISTICS'      => 'AFLLOG_FTP',
 		'Cambodia Post'      => 'KHM_CAMBODIA_POST',
 		'Roadbull Logistics' => 'ROADRUNNER_FREIGHT'
-	],
-	'CAN' => [
+	),
+	'CAN' => array(
 		'Canada Post'                            => 'CA_CANADA_POST',
 		'Chit Chats'                             => 'CHITCHATS',
 		'Corporate Couriers'                     => 'CORPORATECOURIERS_WEBHOOK',
@@ -675,12 +675,12 @@ $_['paypal_carrier'] = [
 		'RPX Logistics'                          => 'RPXLOGISTICS',
 		'Stallion Express'                       => 'STALLIONEXPRESS',
 		'Ziing Final Mile Inc'                   => 'ZIINGFINALMILE'
-	],
-	'CHL' => [
+	),
+	'CHL' => array(
 		'Blue Express'     => 'BLUEX',
 		'STARKEN couriers' => 'STARKEN'
-	],
-	'CHN' => [
+	),
+	'CHN' => array(
 		'17 Post Service'                              => 'CN_17POST',
 		'ACS Worldwide Express'                        => 'ACSWORLDWIDE',
 		'AliExpress Standard Shipping'                 => 'CAINIAO',
@@ -778,37 +778,37 @@ $_['paypal_carrier'] = [
 		'YunExpress'                                   => 'YUNEXPRESS',
 		'ZJS International'                            => 'ZJS_EXPRESS',
 		'ZTO Express'                                  => 'ZTO_EXPRESS'
-	],
-	'COL' => [
+	),
+	'COL' => array(
 		'Coordinadora' => 'COORDINADORA'
-	],
-	'HRV' => [
+	),
+	'HRV' => array(
 		'GLS Croatia'      => 'GLS_CROTIA',
 		'Hrvatska posta'   => 'HRV_HRVATSKA',
 		'Overseas Express' => 'OVERSE_EXP'
-	],
-	'CYP' => [
+	),
+	'CYP' => array(
 		'cyprus post' => 'CYPRUS_POST_CYP'
-	],
-	'CZE' => [
+	),
+	'CZE' => array(
 		'Czech Post'         => 'CESKA_CZ',
 		'GLS Czech Republic' => 'GLS_CZ'
-	],
-	'DNK' => [
+	),
+	'DNK' => array(
 		'Budbee courier'     => 'BUDBEE_WEBHOOK',
 		'Danske Fragtaend'   => 'DANSKE_FRAGT',
 		'ostnord denmark'    => 'POSTNORD_LOGISTICS_DK',
 		'PostNord Logistics' => 'POSTNORD_LOGISTICS',
 		'Xpressen courier'   => 'XPRESSEN_DK'
-	],
-	'EST' => [
+	),
+	'EST' => array(
 		'Omniva' => 'OMNIVA'
-	],
-	'FIN' => [
+	),
+	'FIN' => array(
 		'Matkahuolto'   => 'MATKAHUOLTO',
 		'Posti courier' => 'POSTI'
-	],
-	'FRA' => [
+	),
+	'FRA' => array(
 		'Chronopost france (www.chronopost.fr)' => 'CHRONOPOST_FR',
 		'Colis Privé'                           => 'COLIS_PRIVE',
 		'Colissimo'                             => 'FR_COLIS',
@@ -820,8 +820,8 @@ $_['paypal_carrier'] = [
 		'La Poste'                              => 'LA_POSTE_SUIVI',
 		'TNT France'                            => 'TNT_FR',
 		'VIR Transport'                         => 'VIRTRANSPORT'
-	],
-	'DEU' => [
+	),
+	'DEU' => array(
 		'Hermes Germany'                                  => 'HERMES_DE',
 		'AO Deutschland'                                  => 'AO_DEUTSCHLAND',
 		'DPD Germany'                                     => 'DE_DPD_DELISTRACK',
@@ -839,15 +839,15 @@ $_['paypal_carrier'] = [
 		'Raben Group'                                     => 'RABEN_GROUP',
 		'Streck Transport'                                => 'STRECK_TRANSPORT',
 		'Swiship DE'                                      => 'SWISHIP_DE'
-	],
-	'GRC' => [
+	),
+	'GRC' => array(
 		'ACS Courier'        => 'ACS_GR',
 		'Easy Mail'          => 'EASY_MAIL',
 		'Geniki Taxydromiki' => 'GENIKI_GR',
 		'Speed Couriers'     => 'SPEEDCOURIERS_GR',
 		'SPEEDEX couriers'   => 'SPEEDEXCOURIER'
-	],
-	'HKG' => [
+	),
+	'HKG' => array(
 		'CFL Logistics'                            => 'CFL_LOGISTICS',
 		'CJ Logistics International(Hong Kong)'    => 'CJ_HK_INTERNATIONAL',
 		'CL E-Logistics Solutions Limited'         => 'CLE_LOGISTICS',
@@ -881,12 +881,12 @@ $_['paypal_carrier'] = [
 		'STEP FORWARD FREIGHT SERVICE CO LTD'      => 'STEPFORWARDFS',
 		'Zeek courier'                             => 'SFPLUS_WEBHOOK',
 		'Zeek2Door'                                => 'ZEEK_2_DOOR'
-	],
-	'HUN' => [
+	),
+	'HUN' => array(
 		'DPD Hungary' => 'DPD_HGRY',
 		'Magyar Post' => 'MAGYAR_HU'
-	],
-	'IND' => [
+	),
+	'IND' => array(
 		'Bombino Express Pvt'                       => 'BOMBINOEXP',
 		'Delhivery India'                           => 'IND_DELHIVERY',
 		'DELIVERYONTIME LOGISTICS PVT LTD'          => 'DELIVERYONTIME',
@@ -909,8 +909,8 @@ $_['paypal_carrier'] = [
 		'SHREE TIRUPATI COURIER SERVICES PVT. LTD.' => 'SHREETIRUPATI',
 		'SPOTON Logistics Pvt Ltd'                  => 'SPOTON',
 		'Trackon Couriers Pvt. Ltd'                 => 'TRACKON'
-	],
-	'IDN' => [
+	),
+	'IDN' => array(
 		'AlfaTrex'                        => 'ALFATREX',
 		'Choir Express Indonesia'         => 'CHOIR_EXP',
 		'INDOPAKET'                       => 'INDOPAKET',
@@ -927,18 +927,18 @@ $_['paypal_carrier'] = [
 		'Tiki shipment'                   => 'TIKI_ID',
 		'Trans Kargo Internasional'       => 'TRANS_KARGO',
 		'Wahana express (www.wahana.com)' => 'WAHANA_ID'
-	],
-	'IRL' => [
+	),
+	'IRL' => array(
 		'An Post'         => 'AN_POST',
 		'DPD Ireland'     => 'DPD_IR',
 		'Fastway Ireland' => 'FASTWAY_IR',
 		'Wiseloads'       => 'WISELOADS'
-	],
-	'ISR' => [
+	),
+	'ISR' => array(
 		'Israel Post'          => 'ISRAEL_POST',
 		'Israel Post Domestic' => 'ISR_POST_DOMESTIC'
-	],
-	'ITA' => [
+	),
+	'ITA' => array(
 		'BRT Bartolini(Parcel ID)'        => 'BRT_IT_PARCELID',
 		'BRT couriers Italy (www.brt.it)' => 'BRT_IT',
 		'Arco Spedizioni SP'              => 'ARCO_SPEDIZIONI',
@@ -955,19 +955,19 @@ $_['paypal_carrier'] = [
 		'SAILPOST'                        => 'SAILPOST',
 		'SDA Italy'                       => 'SDA_IT',
 		'TNT-Click Italy'                 => 'TNT_CLICK_IT'
-	],
-	'JPN' => [
+	),
+	'JPN' => array(
 		'eFEx (E-Commerce Fulfillment &amp; Express)' => 'EFEX',
 		'Japan Post'                                  => 'JPN_JAPAN_POST',
 		'KWE Global'                                  => 'KWE_GLOBAL',
 		'MailPlus'                                    => 'MAIL_PLUS',
 		'MailPlus (Japan)'                            => 'MAILPLUS_JPN',
 		'Seino'                                       => 'SEINO'
-	],
-	'JEY' => [
+	),
+	'JEY' => array(
 		'Jersey Post' => 'JERSEY_POST'
-	],
-	'KOR' => [
+	),
+	'KOR' => array(
 		'Cello Square'                    => 'CELLO_SQUARE',
 		'Croshot'                         => 'CROSHOT',
 		'Doora Logistics'                 => 'DOORA',
@@ -982,21 +982,21 @@ $_['paypal_carrier'] = [
 		'SHIPTER'                         => 'SHIPTER',
 		'SRE Korea (www.srekorea.co.kr)'  => 'SRE_KOREA',
 		'Tolos courier'                   => 'TOLOS'
-	],
-	'KWT' => [
+	),
+	'KWT' => array(
 		'Posta Plus' => 'POSTA_PLUS'
-	],
-	'LAO' => [
+	),
+	'LAO' => array(
 		'Lao Post' => 'LAO_POST'
-	],
-	'LVA' => [
+	),
+	'LVA' => array(
 		'CDEK courier'   => 'CDEK',
 		'Latvijas Pasts' => 'LATVIJAS_PASTS'
-	],
-	'LTU' => [
+	),
+	'LTU' => array(
 		'Venipak' => 'VENIPAK'
-	],
-	'MYS' => [
+	),
+	'MYS' => array(
 		'ABX Express'                                                     => 'ABXEXPRESS_MY',
 		'Airpak Express'                                                  => 'MYS_AIRPAK',
 		'City-Link Express'                                               => 'CITYLINK_MY',
@@ -1023,8 +1023,8 @@ $_['paypal_carrier'] = [
 		'WePost Sdn Bhd'                                                  => 'WEPOST',
 		'Wyngs'                                                           => 'WYNGS',
 		'ZeptoExpress'                                                    => 'ZEPTO_EXPRESS'
-	],
-	'MEX' => [
+	),
+	'MEX' => array(
 		'correos mexico'              => 'CORREOS_DE_MEXICO',
 		'Estafeta (www.estafeta.com)' => 'MEX_ESTAFETA',
 		'Grupo ampm'                  => 'GRUPO',
@@ -1033,8 +1033,8 @@ $_['paypal_carrier'] = [
 		'mexico senda express'        => 'MEX_SENDA',
 		'Paquetexpress'               => 'PAQUETEXPRESS',
 		'Redpack'                     => 'MEX_REDPACK'
-	],
-	'NLD' => [
+	),
+	'NLD' => array(
 		'Brouwer Transport en Logistiek' => 'BROUWER_TRANSPORT',
 		'DHL Netherland'                 => 'NLD_DHL',
 		'Fiege Netherlands'              => 'FIEGE_NL',
@@ -1043,56 +1043,56 @@ $_['paypal_carrier'] = [
 		'Paper Express'                  => 'PAPER_EXPRESS',
 		'PostNL International 3S'        => 'POSTNL_INTL_3S',
 		'Trunkrs courier'                => 'TRUNKRS_WEBHOOK'
-	],
-	'NZL' => [
+	),
+	'NZL' => array(
 		'Fastway New Zealand'     => 'FASTWAY_NZ',
 		'Interparcel New Zealand' => 'INTERPARCEL_NZ',
 		'Mainfreight'             => 'MAINFREIGHT',
 		'New Zealand Post'        => 'NZ_NZ_POST',
 		'Toll New Zealand'        => 'TOLL_NZ'
-	],
-	'NGA' => [
+	),
+	'NGA' => array(
 		'NIpost (www.nipost.gov.ng)' => 'NIPOST_NG'
-	],
-	'NOR' => [
+	),
+	'NOR' => array(
 		'Helthjem' => 'HELTHJEM'
-	],
-	'PAK' => [
+	),
+	'PAK' => array(
 		'forrun Pvt Ltd (Arpatech Venture)' => 'FORRUN',
 		'TCS courier'                       => 'TCS'
-	],
-	'PRY' => [
+	),
+	'PRY' => array(
 		'AEX Group' => 'AEX'
-	],
-	'PHL' => [
+	),
+	'PHL' => array(
 		'2GO Courier'             => 'TWO_GO',
 		'Jam Express Philippines' => 'PHL_JAMEXPRESS',
 		'PIXSELL LOGISTICS'       => 'PIXSELL',
 		'RAF Philippines'         => 'RAF_PH',
 		'Ximex Delivery Express'  => 'XDE_WEBHOOK',
 		'Xpost.ph'                => 'XPOST'
-	],
-	'POL' => [
+	),
+	'POL' => array(
 		'DHL Poland'                           => 'DHL_PL',
 		'DPD Poland'                           => 'DPD_POLAND',
 		'FedEx® Poland Domestic'               => 'FEDEX_POLAND',
 		'InPost Paczkomaty'                    => 'INPOST_PACZKOMATY',
 		'Poczta Polska (www.poczta-polska.pl)' => 'PL_POCZTA_POLSKA',
 		'Royal Mail'                           => 'ROYAL_MAIL'
-	],
-	'PRT' => [
+	),
+	'PRT' => array(
 		'Adicional Logistics' => 'ADICIONAL',
 		'Bneed courier'       => 'BNEED',
 		'Carriers courier'    => 'CARRIERS',
 		'Chronopost Portugal' => 'PRT_CHRONOPOST',
 		'CTT Portugal'        => 'PRT_CTT',
 		'Delnext'             => 'DELNEXT'
-	],
-	'ROU' => [
+	),
+	'ROU' => array(
 		'DPD Romania'                      => 'DPD_RO',
 		'Post Roman (www.posta-romana.ro)' => 'POSTA_RO'
-	],
-	'RUS' => [
+	),
+	'RUS' => array(
 		'Boxberry courier'  => 'BOX_BERRY',
 		'CSE courier'       => 'CSE',
 		'DHL Parcel Russia' => 'DHL_PARCEL_RU',
@@ -1102,17 +1102,17 @@ $_['paypal_carrier'] = [
 		'GBS-Broker'        => 'GBS_BROKER',
 		'Pony express'      => 'PONY_EXPRESS',
 		'ShopfansRU LLC'    => 'SHOPFANS'
-	],
-	'SAU' => [
+	),
+	'SAU' => array(
 		'Saudi Post'            => 'SAU_SAUDI_POST',
 		'SMSA Express'          => 'SMSA_EXPRESS',
 		'Thabit Logistics'      => 'THABIT_LOGISTICS',
 		'Zajil Express Company' => 'ZAJIL_EXPRESS'
-	],
-	'SRB' => [
+	),
+	'SRB' => array(
 		'Posta Serbia' => 'POST_SERBIA'
-	],
-	'SGP' => [
+	),
+	'SGP' => array(
 		'Cloudwish Asia'            => 'CLOUDWISH_ASIA',
 		'Detrack'                   => 'SG_DETRACK',
 		'Fonsen Logistics'          => 'FONSEN',
@@ -1138,15 +1138,15 @@ $_['paypal_carrier'] = [
 		'Urbanfox'                  => 'COUREX',
 		'WMG Delivery'              => 'WMG',
 		'Zyllem'                    => 'ZYLLEM'
-	],
-	'SVK' => [
+	),
+	'SVK' => array(
 		'GLS General Logistics Systems Slovakia s.r.o.' => 'GLS_SLOV'
-	],
-	'SVN' => [
+	),
+	'SVN' => array(
 		'GLS Slovenia'     => 'GLS_SLOVEN',
 		'Post of Slovenia' => 'POST_SLOVENIA'
-	],
-	'ZAF' => [
+	),
+	'ZAF' => array(
 		'Courier IT'                             => 'ZA_COURIERIT',
 		'Dawn Wing'                              => 'DAWN_WING',
 		'DPE South Africa'                       => 'DPE_SOUTH_AFRC',
@@ -1157,8 +1157,8 @@ $_['paypal_carrier'] = [
 		'South African Post Office'              => 'SOUTH_AFRICAN_POST_OFFICE',
 		'Specialised Freight'                    => 'ZA_SPECIALISED_FREIGHT',
 		'The Courier Guy'                        => 'THECOURIERGUY'
-	],
-	'ESP' => [
+	),
+	'ESP' => array(
 		'AB Custom Group'               => 'ABCUSTOM',
 		'Ader couriers'                 => 'ADERONLINE',
 		'ASIGNA courier'                => 'ASIGNA',
@@ -1192,20 +1192,20 @@ $_['paypal_carrier'] = [
 		'VAMOX'                         => 'VAMOX',
 		'Viaxpress'                     => 'VIA_EXPRESS',
 		'Zeleris'                       => 'ZELERIS'
-	],
-	'SWE' => [
+	),
+	'SWE' => array(
 		'Airmee couriers'                  => 'AIRMEE_WEBHOOK',
 		'Bring'                            => 'BRING',
 		'DB Schenker (www.dbschenker.com)' => 'DBSCHENKER_SE',
 		'DB Schenker Sweden'               => 'DBSCHENKER_SV'
-	],
-	'CHE' => [
+	),
+	'CHE' => array(
 		'Asendia HonKong' => 'ASENDIA_HK',
 		'Planzer Group'   => 'PLANZER',
 		'Swiss Post FTP'  => 'SWISS_POST_FTP',
 		'ViaEurope'       => 'VIAEUROPE'
-	],
-	'TWN' => [
+	),
+	'TWN' => array(
 		'cnwangtong'              => 'CNWANGTONG',
 		'CTC Express'             => 'CTC_EXPRESS',
 		'Dimerco Express Group'   => 'DIMERCO',
@@ -1213,8 +1213,8 @@ $_['paypal_carrier'] = [
 		'Kerry TJ Logistics'      => 'KERRYTJ',
 		'PRESIDENT TRANSNET CORP' => 'PRESIDENT_TRANS',
 		'Tai Wan Global Business' => 'GLOBAL_EXPRESS'
-	],
-	'THA' => [
+	),
+	'THA' => array(
 		'Alphafast (www.alphafast.com)'          => 'ALPHAFAST',
 		'CJ Korea Express'                       => 'CJ_KR',
 		'Dynamic Logistics'                      => 'THA_DYNAMIC_LOGISTICS',
@@ -1225,28 +1225,28 @@ $_['paypal_carrier'] = [
 		'Sendit'                                 => 'SENDIT',
 		'SKYBOX'                                 => 'SKYBOX',
 		'Thailand Post (www.thailandpost.co.th)' => 'THA_THAILAND_POST'
-	],
-	'TUR' => [
+	),
+	'TUR' => array(
 		'ASE KARGO'     => 'ASE',
 		'CDEK TR'       => 'CDEK_TR',
 		'PTS courier'   => 'PTS',
 		'PTT Post'      => 'PTT_POST',
 		'ShipEntegra'   => 'SHIPENTEGRA',
 		'Yurtici Kargo' => 'YURTICI_KARGO'
-	],
-	'UKR' => [
+	),
+	'UKR' => array(
 		'Nova Poshta (International)' => 'NOVA_POSHTA_INT',
 		'Nova Poshta (novaposhta.ua)' => 'NOVA_POSHTA',
 		'UkrPoshta'                   => 'POSTA_UKR'
-	],
-	'ARE' => [
+	),
+	'ARE' => array(
 		'Beone Logistics'             => 'IBEONE',
 		'Mara Xpress'                 => 'MARA_XPRESS',
 		'Mena 360 (Fetchr)'           => 'FETCHR_WEBHOOK',
 		'One click delivery services' => 'ONECLICK',
 		'SKYNET UAE'                  => 'SKYNET_UAE'
-	],
-	'GBR' => [
+	),
+	'GBR' => array(
 		'Amazon Shipping'                      => 'AMAZON',
 		'AO Logistics'                         => 'AO_COURIER',
 		'APC overnight (apc-overnight.com)'    => 'APC_OVERNIGHT',
@@ -1304,8 +1304,8 @@ $_['paypal_carrier'] = [
 		'XDP Express Reference'                => 'XDP_UK_REFERENCE',
 		'Xpert Delivery'                       => 'XPERT_DELIVERY',
 		'Yodel (www.yodel.co.uk)'              => 'UK_YODEL'
-	],
-	'USA' => [
+	),
+	'USA' => array(
 		'A Duie Pyle'                          => 'ADUIEPYLE',
 		'AAA Cooper'                           => 'AAA_COOPER',
 		'ABF Freight'                          => 'GLOBAL_ABF',
@@ -1377,15 +1377,15 @@ $_['paypal_carrier'] = [
 		'Yakit courier'                        => 'YAKIT',
 		'YRC courier'                          => 'US_YRC',
 		'Zinc courier'                         => 'ZINC'
-	],
-	'URY' => [
+	),
+	'URY' => array(
 		'Correo Uruguayo' => 'CORREO_UY'
-	],
-	'VNM' => [
+	),
+	'VNM' => array(
 		'J&amp;T Express Vietnam'        => 'JTEXPRESS_VN',
 		'Kerry Express (Vietnam) Co Ltd' => 'KERRYTTC_VN',
 		'Nhat Tin Logistics'             => 'NTLOGISTICS_VN',
 		'Vietnam Post'                   => 'VNM_VIETNAM_POST',
 		'ViettelPost'                    => 'VNM_VIETTELPOST'
-	]
-];
+	)
+);

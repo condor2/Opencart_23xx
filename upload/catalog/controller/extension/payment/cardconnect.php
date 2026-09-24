@@ -45,7 +45,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 		} else {
 			$data['store_cards'] = false;
 
-			$data['cards'] = [];
+			$data['cards'] = array();
 		}
 
 		$data['echeck'] = $this->config->get('cardconnect_echeck');
@@ -62,7 +62,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 		$this->model_extension_payment_cardconnect->log('Posting order to CardConnect');
 
-		$json = [];
+		$json = array();
 
 		$json['error'] = '';
 
@@ -136,7 +136,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 							$order_status_id = $this->config->get('cardconnect_order_status_id_pending');
 						}
 
-						$data = [
+						$data = array(
 							'merchid'    => $this->config->get('cardconnect_merchant_id'),
 							'accttype'   => $accttype,
 							'account'    => $account,
@@ -158,15 +158,15 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 							'profile'    => $profile,
 							'capture'    => $capture,
 							'bankaba'    => $bankaba,
-							'userfields' => ['secret_token' => $this->config->get('cardconnect_token')],
+							'userfields' => array('secret_token' => $this->config->get('cardconnect_token')),
 							'frontendid' => '26'
-						];
+						);
 
 						$data_json = json_encode($data);
 
 						$url = 'https://' . $this->config->get('cardconnect_site') . '.cardconnect.com:' . (($this->config->get('cardconnect_environment') == 'live') ? 8443 : 6443) . '/cardconnect/rest/auth';
 
-						$header = [];
+						$header = array();
 
 						$header[] = 'Content-type: application/json';
 						$header[] = 'Content-length: ' . strlen($data_json);
@@ -262,7 +262,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 		$this->model_extension_payment_cardconnect->log('Deleting card');
 
-		$json = [];
+		$json = array();
 
 		if ($this->config->get('cardconnect_status')) {
 			if ($this->customer->isLogged()) {
@@ -333,7 +333,7 @@ class ControllerExtensionPaymentCardConnect extends Controller {
 
 		$this->load->model('extension/payment/cardconnect');
 
-		$error = [];
+		$error = array();
 
 		if (!isset($this->request->post['method']) || $this->request->post['method'] == 'card') {
 			if ($this->request->post['card_new']) {

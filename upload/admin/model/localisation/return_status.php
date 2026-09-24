@@ -40,7 +40,7 @@ class ModelLocalisationReturnStatus extends Model {
 		return $query->row;
 	}
 
-	public function getReturnStatuses($data = []) {
+	public function getReturnStatuses($data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "return_status WHERE language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
@@ -83,12 +83,12 @@ class ModelLocalisationReturnStatus extends Model {
 	}
 
 	public function getReturnStatusDescriptions($return_status_id) {
-		$return_status_data = [];
+		$return_status_data = array();
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "return_status WHERE return_status_id = '" . (int)$return_status_id . "'");
 
 		foreach ($query->rows as $result) {
-			$return_status_data[$result['language_id']] = ['name' => $result['name']];
+			$return_status_data[$result['language_id']] = array('name' => $result['name']);
 		}
 
 		return $return_status_data;

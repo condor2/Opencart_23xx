@@ -11,18 +11,18 @@ class ControllerCommonCurrency extends Controller {
 
 		$this->load->model('localisation/currency');
 
-		$data['currencies'] = [];
+		$data['currencies'] = array();
 
 		$results = $this->model_localisation_currency->getCurrencies();
 
 		foreach ($results as $result) {
 			if ($result['status']) {
-				$data['currencies'][] = [
+				$data['currencies'][] = array(
 					'title'        => $result['title'],
 					'code'         => $result['code'],
 					'symbol_left'  => $result['symbol_left'],
 					'symbol_right' => $result['symbol_right']
-				];
+				);
 			}
 		}
 

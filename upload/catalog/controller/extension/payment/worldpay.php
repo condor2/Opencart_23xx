@@ -33,7 +33,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 			$data['worldpay_card'] = false;
 		}
 
-		$data['existing_cards'] = [];
+		$data['existing_cards'] = array();
 		if ($this->customer->isLogged() && $data['worldpay_card']) {
 			$this->load->model('extension/payment/worldpay');
 			$data['existing_cards'] = $this->model_extension_payment_worldpay->getCards($this->customer->getId());
@@ -66,7 +66,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 
 		$country_info = $this->model_localisation_country->getCountry($order_info['payment_country_id']);
 
-		$billing_address = [
+		$billing_address = array(
 			"address1"    => $order_info['payment_address_1'],
 			"address2"    => $order_info['payment_address_2'],
 			"address3"    => '',
@@ -74,9 +74,9 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 			"city"        => $order_info['payment_city'],
 			"state"       => $order_info['payment_zone'],
 			"countryCode" => $country_info['iso_code_2'],
-		];
+		);
 
-		$order = [
+		$order = array(
 			"token"             => $this->request->post['token'],
 			"orderType"         => $order_type,
 			"amount"            => round($this->currency->format($order_info['total'], $order_info['currency_code'], $order_info['currency_value'], false) * 100),
@@ -85,7 +85,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 			"orderDescription"  => $order_info['store_name'] . ' - ' . date('Y-m-d H:i:s'),
 			"customerOrderCode" => $order_info['order_id'],
 			"billingAddress"    => $billing_address
-		];
+		);
 
 		$this->model_extension_payment_worldpay->logger($order);
 
@@ -108,7 +108,7 @@ class ControllerExtensionPaymentWorldpay extends Controller {
 				$expiry_date = mktime(0, 0, 0, 0, (string)$response->paymentMethod->expiryMonth, (string)$response->paymentMethod->expiryYear);
 
 				if (isset($response->paymentMethod)) {
-					$card_data = [];
+					$card_data = array();
 					$card_data['customer_id'] = $this->customer->getId();
 					$card_data['Token'] = $response->token;
 					$card_data['Last4Digits'] = (string)$response->paymentMethod->maskedCardNumber;

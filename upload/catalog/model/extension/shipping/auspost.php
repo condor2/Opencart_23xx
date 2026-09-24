@@ -15,7 +15,7 @@ class ModelExtensionShippingAusPost extends Model {
 
 		$error = '';
 
-		$quote_data = [];
+		$quote_data = array();
 
 		if ($status) {
 			$weight = $this->weight->convert($this->cart->getWeight(), $this->config->get('config_weight_class_id'), $this->config->get('auspost_weight_class_id'));
@@ -32,7 +32,7 @@ class ModelExtensionShippingAusPost extends Model {
 				curl_close($curl);
 
 				if ($response) {
-					$response_info = [];
+					$response_info = array();
 
 					$parts = explode("\n", trim($response));
 
@@ -51,13 +51,13 @@ class ModelExtensionShippingAusPost extends Model {
 							$title .= ' (' . $response_info['days'] . ' ' . $this->language->get('text_eta') . ')';
 						}
 
-						$quote_data['standard'] = [
+						$quote_data['standard'] = array(
 							'code'         => 'auspost.standard',
 							'title'        => $title,
 							'cost'         => $this->currency->convert($response_info['charge'], 'AUD', $this->config->get('config_currency')),
 							'tax_class_id' => $this->config->get('auspost_tax_class_id'),
 							'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($response_info['charge'], 'AUD', $this->session->data['currency']), $this->config->get('auspost_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'], 1.0000000)
-						];
+						);
 					}
 				}
 			}
@@ -74,7 +74,7 @@ class ModelExtensionShippingAusPost extends Model {
 				curl_close($curl);
 
 				if ($response) {
-					$response_info = [];
+					$response_info = array();
 
 					$parts = explode("\n", trim($response));
 
@@ -93,28 +93,28 @@ class ModelExtensionShippingAusPost extends Model {
 							$title .= ' (' . $response_info['days'] . ' ' . $this->language->get('text_eta') . ')';
 						}
 
-						$quote_data['express'] = [
+						$quote_data['express'] = array(
 							'code'         => 'auspost.express',
 							'title'        => $title,
 							'cost'         => $this->currency->convert($response_info['charge'], 'AUD', $this->config->get('config_currency')),
 							'tax_class_id' => $this->config->get('auspost_tax_class_id'),
 							'text'         => $this->currency->format($this->tax->calculate($this->currency->convert($response_info['charge'], 'AUD', $this->session->data['currency']), $this->config->get('auspost_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'], 1.0000000)
-						];
+						);
 					}
 				}
 			}
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($quote_data) {
-			$method_data = [
+			$method_data = array(
 				'code'       => 'auspost',
 				'title'      => $this->language->get('text_title'),
 				'quote'      => $quote_data,
 				'sort_order' => $this->config->get('auspost_sort_order'),
 				'error'      => $error
-			];
+			);
 		}
 
 		return $method_data;

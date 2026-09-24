@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountPassword extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index() {
 		if (!$this->customer->isLogged()) {
@@ -24,10 +24,10 @@ class ControllerAccountPassword extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('account/activity');
 
-				$activity_data = [
+				$activity_data = array(
 					'customer_id' => $this->customer->getId(),
 					'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-				];
+				);
 
 				$this->model_account_activity->addActivity('password', $activity_data);
 			}
@@ -35,22 +35,22 @@ class ControllerAccountPassword extends Controller {
 			$this->response->redirect($this->url->link('account/account', '', true));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/password', '', true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

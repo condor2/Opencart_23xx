@@ -553,7 +553,7 @@ class ControllerCatalogCategory extends Controller {
 		} elseif (!empty($category_info)) {
 			$data['category_store'] = $this->model_catalog_category->getCategoryStores($this->request->get['category_id']);
 		} else {
-			$data['category_store'] = [0];
+			$data['category_store'] = array(0);
 		}
 
 		if (isset($this->request->post['keyword'])) {

@@ -119,7 +119,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 					$link = '';
 				}
 
-				$data['extensions'][] = [
+				$data['extensions'][] = array(
 					'name'       => $this->language->get('heading_title'),
 					'link'       => $link,
 					'status'     => $this->config->get($extension . '_status') ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
@@ -128,7 +128,7 @@ class ControllerExtensionExtensionPayment extends Controller {
 					'uninstall'  => $this->url->link('extension/extension/payment/uninstall', 'token=' . $this->session->data['token'] . '&extension=' . $extension, true),
 					'installed'  => in_array($extension, $extensions),
 					'edit'       => $this->url->link('extension/payment/' . $extension, 'token=' . $this->session->data['token'], true)
-				];
+				);
 			}
 		}
 

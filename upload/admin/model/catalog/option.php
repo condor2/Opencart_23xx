@@ -67,18 +67,18 @@ class ModelCatalogOption extends Model {
 		return $query->row;
 	}
 
-	public function getOptions(array $data = []) {
+	public function getOptions(array $data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "option` o LEFT JOIN `" . DB_PREFIX . "option_description` od ON (o.`option_id` = od.`option_id`) WHERE od.`language_id` = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
 			$sql .= " AND od.`name` LIKE '" . $this->db->escape($data['filter_name']) . "%'";
 		}
 
-		$sort_data = [
+		$sort_data = array(
 			'od.name',
 			'o.type',
 			'o.sort_order'
-		];
+		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];
@@ -110,12 +110,12 @@ class ModelCatalogOption extends Model {
 	}
 
 	public function getOptionDescriptions(int $option_id) {
-		$option_data = [];
+		$option_data = array();
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "option_description` WHERE `option_id` = '" . (int)$option_id . "'");
 
 		foreach ($query->rows as $result) {
-			$option_data[$result['language_id']] = ['name' => $result['name']];
+			$option_data[$result['language_id']] = array('name' => $result['name']);
 		}
 
 		return $option_data;
@@ -128,42 +128,42 @@ class ModelCatalogOption extends Model {
 	}
 
 	public function getOptionValues(int $option_id) {
-		$option_value_data = [];
+		$option_value_data = array();
 
 		$option_value_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "option_value` ov LEFT JOIN `" . DB_PREFIX . "option_value_description` ovd ON (ov.`option_value_id` = ovd.`option_value_id`) WHERE ov.`option_id` = '" . (int)$option_id . "' AND ovd.`language_id` = '" . (int)$this->config->get('config_language_id') . "' ORDER BY ov.sort_order, ovd.name");
 
 		foreach ($option_value_query->rows as $option_value) {
-			$option_value_data[] = [
+			$option_value_data[] = array(
 				'option_value_id' => $option_value['option_value_id'],
 				'name'            => $option_value['name'],
 				'image'           => $option_value['image'],
 				'sort_order'      => $option_value['sort_order']
-			];
+			);
 		}
 
 		return $option_value_data;
 	}
 
 	public function getOptionValueDescriptions(int $option_id) {
-		$option_value_data = [];
+		$option_value_data = array();
 
 		$option_value_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "option_value` WHERE `option_id` = '" . (int)$option_id . "' ORDER BY `sort_order`");
 
 		foreach ($option_value_query->rows as $option_value) {
-			$option_value_description_data = [];
+			$option_value_description_data = array();
 
 			$option_value_description_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "option_value_description` WHERE `option_value_id` = '" . (int)$option_value['option_value_id'] . "'");
 
 			foreach ($option_value_description_query->rows as $option_value_description) {
-				$option_value_description_data[$option_value_description['language_id']] = ['name' => $option_value_description['name']];
+				$option_value_description_data[$option_value_description['language_id']] = array('name' => $option_value_description['name']);
 			}
 
-			$option_value_data[] = [
+			$option_value_data[] = array(
 				'option_value_id'          => $option_value['option_value_id'],
 				'option_value_description' => $option_value_description_data,
 				'image'                    => $option_value['image'],
 				'sort_order'               => $option_value['sort_order']
-			];
+			);
 		}
 
 		return $option_value_data;

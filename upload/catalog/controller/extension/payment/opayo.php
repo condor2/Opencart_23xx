@@ -39,7 +39,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 			$data['logged'] = $this->customer->isLogged();
 
-			$data['cards'] = [];
+			$data['cards'] = array();
 
 			if ($data['logged'] && $data['card_save']) {
 				$this->load->model('extension/payment/opayo');
@@ -47,24 +47,24 @@ class ControllerExtensionPaymentOpayo extends Controller {
 				$data['cards'] = $this->model_extension_payment_opayo->getCards($this->customer->getId());
 			}
 
-			$data['months'] = [];
+			$data['months'] = array();
 
 			for ($i = 1; $i <= 12; $i++) {
-				$data['months'][] = [
+				$data['months'][] = array(
 					'code' => sprintf('%02d', $i),
 					'name' => sprintf('%02d', $i)
-				];
+				);
 			}
 
 			$today = getdate();
 
-			$data['years'] = [];
+			$data['years'] = array();
 
 			for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-				$data['years'][] = [
+				$data['years'][] = array(
 					'code' => sprintf('%04d', $i),
 					'name' => sprintf('%02d', $i % 100)
-				];
+				);
 			}
 
 			return $this->load->view('extension/payment/opayo', $data);
@@ -90,7 +90,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 		$setting = array_replace_recursive((array)$config_setting, (array)$this->config->get('opayo_setting'));
 
-		$payment_data = [];
+		$payment_data = array();
 
 		$url = '';
 
@@ -239,7 +239,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 
 		$response_data = $this->model_extension_payment_opayo->sendCurl($url, $payment_data);
 
-		$json = [];
+		$json = array();
 
 		if ($response_data['Status'] == '3DAUTH') {
 			$json['ACSURL'] = $response_data['ACSURL'];
@@ -256,7 +256,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			$card_id = '';
 
 			if (!empty($payment_data['CreateToken']) && $this->customer->isLogged()) {
-				$card_data = [];
+				$card_data = array();
 
 				$card_data['customer_id'] = $this->customer->getId();
 				$card_data['Token'] = '';
@@ -313,7 +313,7 @@ class ControllerExtensionPaymentOpayo extends Controller {
 			$card_id = '';
 
 			if (!empty($payment_data['CreateToken']) && !empty($response_data['Token']) && $this->customer->isLogged()) {
-				$card_data = [];
+				$card_data = array();
 
 				$card_data['customer_id'] = $this->customer->getId();
 				$card_data['Token'] = $response_data['Token'];

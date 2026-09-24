@@ -17,22 +17,22 @@ class ControllerAccountRecurring extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/recurring', $url, true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -55,7 +55,7 @@ class ControllerAccountRecurring extends Controller {
 
 		$limit = 10;
 
-		$data['recurrings'] = [];
+		$data['recurrings'] = array();
 
 		$this->load->model('account/recurring');
 
@@ -70,13 +70,13 @@ class ControllerAccountRecurring extends Controller {
 				$status = '';
 			}
 
-			$data['recurrings'][] = [
+			$data['recurrings'][] = array(
 				'order_recurring_id' => $result['order_recurring_id'],
 				'product'            => $result['product_name'],
 				'status'             => $status,
 				'date_added'         => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'view'               => $this->url->link('account/recurring/info', 'order_recurring_id=' . $result['order_recurring_id'], true),
-			];
+			);
 		}
 
 		$pagination = new Pagination();
@@ -127,27 +127,27 @@ class ControllerAccountRecurring extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$data['breadcrumbs'] = [];
+			$data['breadcrumbs'] = array();
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),
 				'href' => $this->url->link('common/home'),
-			];
+			);
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_account'),
 				'href' => $this->url->link('account/account', '', true),
-			];
+			);
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('heading_title'),
 				'href' => $this->url->link('account/recurring', $url, true),
-			];
+			);
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_recurring'),
 				'href' => $this->url->link('account/recurring/info', 'order_recurring_id=' . $this->request->get['order_recurring_id'] . $url, true),
-			];
+			);
 
 			$data['heading_title'] = $this->language->get('text_recurring');
 
@@ -186,16 +186,16 @@ class ControllerAccountRecurring extends Controller {
 			$data['reference'] = $recurring_info['reference'];
 
 			// Transactions
-			$data['transactions'] = [];
+			$data['transactions'] = array();
 
 			$results = $this->model_account_recurring->getOrderRecurringTransactions($this->request->get['order_recurring_id']);
 
 			foreach ($results as $result) {
-				$data['transactions'][] = [
+				$data['transactions'][] = array(
 					'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 					'type'       => $result['type'],
 					'amount'     => $this->currency->format($result['amount'], $recurring_info['currency_code'])
-				];
+				);
 			}
 
 			$data['order'] = $this->url->link('account/order/info', 'order_id=' . $recurring_info['order_id'], true);
@@ -220,27 +220,27 @@ class ControllerAccountRecurring extends Controller {
 
 			$data['button_continue'] = $this->language->get('button_continue');
 
-			$data['breadcrumbs'] = [];
+			$data['breadcrumbs'] = array();
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_home'),
 				'href' => $this->url->link('common/home')
-			];
+			);
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_account'),
 				'href' => $this->url->link('account/account', '', true)
-			];
+			);
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('heading_title'),
 				'href' => $this->url->link('account/recurring', '', true)
-			];
+			);
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_recurring'),
 				'href' => $this->url->link('account/recurring/info', 'order_recurring_id=' . $order_recurring_id, true)
-			];
+			);
 
 			$data['continue'] = $this->url->link('account/recurring', '', true);
 

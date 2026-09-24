@@ -1,6 +1,6 @@
 <?php
 class ControllerAccountAddress extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index() {
 		if (!$this->customer->isLogged()) {
@@ -45,10 +45,10 @@ class ControllerAccountAddress extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('account/activity');
 
-				$activity_data = [
+				$activity_data = array(
 					'customer_id' => $this->customer->getId(),
 					'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-				];
+				);
 
 				$this->model_account_activity->addActivity('address_add', $activity_data);
 			}
@@ -102,10 +102,10 @@ class ControllerAccountAddress extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('account/activity');
 
-				$activity_data = [
+				$activity_data = array(
 					'customer_id' => $this->customer->getId(),
 					'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-				];
+				);
 
 				$this->model_account_activity->addActivity('address_edit', $activity_data);
 			}
@@ -152,10 +152,10 @@ class ControllerAccountAddress extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('account/activity');
 
-				$activity_data = [
+				$activity_data = array(
 					'customer_id' => $this->customer->getId(),
 					'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-				];
+				);
 
 				$this->model_account_activity->addActivity('address_delete', $activity_data);
 			}
@@ -167,20 +167,20 @@ class ControllerAccountAddress extends Controller {
 	}
 
 	protected function getList() {
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/address', '', true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -206,7 +206,7 @@ class ControllerAccountAddress extends Controller {
 			$data['success'] = '';
 		}
 
-		$data['addresses'] = [];
+		$data['addresses'] = array();
 
 		$results = $this->model_account_address->getAddresses();
 
@@ -217,7 +217,7 @@ class ControllerAccountAddress extends Controller {
 				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
 			}
 
-			$find = [
+			$find = array(
 				'{firstname}',
 				'{lastname}',
 				'{company}',
@@ -228,9 +228,9 @@ class ControllerAccountAddress extends Controller {
 				'{zone}',
 				'{zone_code}',
 				'{country}'
-			];
+			);
 
-			$replace = [
+			$replace = array(
 				'firstname' => $result['firstname'],
 				'lastname'  => $result['lastname'],
 				'company'   => $result['company'],
@@ -241,14 +241,14 @@ class ControllerAccountAddress extends Controller {
 				'zone'      => $result['zone'],
 				'zone_code' => $result['zone_code'],
 				'country'   => $result['country']
-			];
+			);
 
-			$data['addresses'][] = [
+			$data['addresses'][] = array(
 				'address_id' => $result['address_id'],
-				'address'    => str_replace(["\r\n", "\r", "\n"], '<br />', preg_replace(["/\\s\\s+/", "/\r\r+/", "/\n\n+/"], '<br />', trim(str_replace($find, $replace, $format)))),
+				'address'    => str_replace(array("\r\n", "\r", "\n"), '<br />', preg_replace(array("/\\s\\s+/", "/\r\r+/", "/\n\n+/"), '<br />', trim(str_replace($find, $replace, $format)))),
 				'update'     => $this->url->link('account/address/edit', 'address_id=' . $result['address_id'], true),
 				'delete'     => $this->url->link('account/address/delete', 'address_id=' . $result['address_id'], true)
-			];
+			);
 		}
 
 		$data['add'] = $this->url->link('account/address/add', '', true);
@@ -265,33 +265,33 @@ class ControllerAccountAddress extends Controller {
 	}
 
 	protected function getForm() {
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('account/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('account/address', '', true)
-		];
+		);
 
 		if (!isset($this->request->get['address_id'])) {
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_edit_address'),
 				'href' => $this->url->link('account/address/add', '', true)
-			];
+			);
 		} else {
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('text_edit_address'),
 				'href' => $this->url->link('account/address/edit', 'address_id=' . $this->request->get['address_id'], true)
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');
@@ -363,7 +363,7 @@ class ControllerAccountAddress extends Controller {
 		if (isset($this->error['custom_field'])) {
 			$data['error_custom_field'] = $this->error['custom_field'];
 		} else {
-			$data['error_custom_field'] = [];
+			$data['error_custom_field'] = array();
 		}
 
 		if (!isset($this->request->get['address_id'])) {
@@ -462,7 +462,7 @@ class ControllerAccountAddress extends Controller {
 		} elseif (isset($address_info)) {
 			$data['address_custom_field'] = $address_info['custom_field'];
 		} else {
-			$data['address_custom_field'] = [];
+			$data['address_custom_field'] = array();
 		}
 
 		if (isset($this->request->post['default'])) {

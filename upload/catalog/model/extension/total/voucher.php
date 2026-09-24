@@ -17,7 +17,7 @@ class ModelExtensionTotalVoucher extends Model {
 
 		if ($voucher_query->num_rows) {
 			if ($voucher_query->row['order_id']) {
-				$implode = [];
+				$implode = array();
 
 				foreach ($this->config->get('config_complete_status') as $order_status_id) {
 					$implode[] = "'" . (int)$order_status_id . "'";
@@ -52,7 +52,7 @@ class ModelExtensionTotalVoucher extends Model {
 		}
 
 		if ($status && isset($amount)) {
-			return [
+			return array(
 				'voucher_id'       => $voucher_query->row['voucher_id'],
 				'code'             => $voucher_query->row['code'],
 				'from_name'        => $voucher_query->row['from_name'],
@@ -66,9 +66,9 @@ class ModelExtensionTotalVoucher extends Model {
 				'amount'           => $amount,
 				'status'           => $voucher_query->row['status'],
 				'date_added'       => $voucher_query->row['date_added']
-			];
+			);
 		} else {
-			return [];
+			return array();
 		}
 	}
 
@@ -82,12 +82,12 @@ class ModelExtensionTotalVoucher extends Model {
 				$amount = min($voucher_info['amount'], $total['total']);
 
 				if ($amount > 0) {
-					$total['totals'][] = [
+					$total['totals'][] = array(
 						'code'       => 'voucher',
 						'title'      => sprintf($this->language->get('text_voucher'), $this->session->data['voucher']),
 						'value'      => -$amount,
 						'sort_order' => $this->config->get('voucher_sort_order')
-					];
+					);
 
 					$total['total'] -= $amount;
 				} else {

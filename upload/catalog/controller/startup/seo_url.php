@@ -70,7 +70,7 @@ class ControllerStartupSeoUrl extends Controller {
 
 		$url = '';
 
-		$data = [];
+		$data = array();
 
 		parse_str($url_info['query'], $data);
 

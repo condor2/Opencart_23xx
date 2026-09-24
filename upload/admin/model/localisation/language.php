@@ -281,15 +281,15 @@ class ModelLocalisationLanguage extends Model {
 		return $query->row;
 	}
 
-	public function getLanguages($data = []) {
+	public function getLanguages($data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "language";
 
-			$sort_data = [
+			$sort_data = array(
 				'name',
 				'code',
 				'sort_order'
-			];
+			);
 
 			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 				$sql .= " ORDER BY " . $data['sort'];
@@ -322,12 +322,12 @@ class ModelLocalisationLanguage extends Model {
 			$language_data = $this->cache->get('language');
 
 			if (!$language_data) {
-				$language_data = [];
+				$language_data = array();
 
 				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "language ORDER BY sort_order, name");
 
 				foreach ($query->rows as $result) {
-					$language_data[$result['code']] = [
+					$language_data[$result['code']] = array(
 						'language_id' => $result['language_id'],
 						'name'        => $result['name'],
 						'code'        => $result['code'],
@@ -336,7 +336,7 @@ class ModelLocalisationLanguage extends Model {
 						'directory'   => $result['directory'],
 						'sort_order'  => $result['sort_order'],
 						'status'      => $result['status']
-					];
+					);
 				}
 
 				$this->cache->set('language', $language_data);

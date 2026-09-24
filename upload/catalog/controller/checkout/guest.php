@@ -28,7 +28,7 @@ class ControllerCheckoutGuest extends Controller {
 		$data['button_continue'] = $this->language->get('button_continue');
 		$data['button_upload'] = $this->language->get('button_upload');
 
-		$data['customer_groups'] = [];
+		$data['customer_groups'] = array();
 
 		if (is_array($this->config->get('config_customer_group_display'))) {
 			$this->load->model('account/customer_group');
@@ -139,18 +139,18 @@ class ControllerCheckoutGuest extends Controller {
 			if (isset($this->session->data['guest']['custom_field'])) {
 				$guest_custom_field = $this->session->data['guest']['custom_field'];
 			} else {
-				$guest_custom_field = [];
+				$guest_custom_field = array();
 			}
 
 			if (isset($this->session->data['payment_address']['custom_field'])) {
 				$address_custom_field = $this->session->data['payment_address']['custom_field'];
 			} else {
-				$address_custom_field = [];
+				$address_custom_field = array();
 			}
 
 			$data['guest_custom_field'] = $guest_custom_field + $address_custom_field;
 		} else {
-			$data['guest_custom_field'] = [];
+			$data['guest_custom_field'] = array();
 		}
 
 		$data['shipping_required'] = $this->cart->hasShipping();
@@ -174,7 +174,7 @@ class ControllerCheckoutGuest extends Controller {
 	public function save() {
 		$this->load->language('checkout/checkout');
 
-		$json = [];
+		$json = array();
 
 		// Validate if customer is logged in.
 		if ($this->customer->isLogged()) {
@@ -275,7 +275,7 @@ class ControllerCheckoutGuest extends Controller {
 			if (isset($this->request->post['custom_field']['account'])) {
 				$this->session->data['guest']['custom_field'] = $this->request->post['custom_field']['account'];
 			} else {
-				$this->session->data['guest']['custom_field'] = [];
+				$this->session->data['guest']['custom_field'] = array();
 			}
 
 			$this->session->data['payment_address']['firstname'] = $this->request->post['firstname'];
@@ -307,7 +307,7 @@ class ControllerCheckoutGuest extends Controller {
 			if (isset($this->request->post['custom_field']['address'])) {
 				$this->session->data['payment_address']['custom_field'] = $this->request->post['custom_field']['address'];
 			} else {
-				$this->session->data['payment_address']['custom_field'] = [];
+				$this->session->data['payment_address']['custom_field'] = array();
 			}
 
 			$this->load->model('localisation/zone');
@@ -362,7 +362,7 @@ class ControllerCheckoutGuest extends Controller {
 				if (isset($this->request->post['custom_field']['address'])) {
 					$this->session->data['shipping_address']['custom_field'] = $this->request->post['custom_field']['address'];
 				} else {
-					$this->session->data['shipping_address']['custom_field'] = [];
+					$this->session->data['shipping_address']['custom_field'] = array();
 				}
 			}
 

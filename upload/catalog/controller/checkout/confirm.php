@@ -54,22 +54,22 @@ class ControllerCheckoutConfirm extends Controller {
 		}
 
 		if (!$redirect) {
-			$order_data = [];
+			$order_data = array();
 
-			$totals = [];
+			$totals = array();
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
 			// Because __call can not keep var references so we put them into an array.
-			$total_data = [
+			$total_data = array(
 				'totals' => &$totals,
 				'taxes'  => &$taxes,
 				'total'  => &$total
-			];
+			);
 
 			$this->load->model('extension/extension');
 
-			$sort_order = [];
+			$sort_order = array();
 
 			$results = $this->model_extension_extension->getExtensions('total');
 
@@ -88,7 +88,7 @@ class ControllerCheckoutConfirm extends Controller {
 				}
 			}
 
-			$sort_order = [];
+			$sort_order = array();
 
 			foreach ($totals as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -150,7 +150,7 @@ class ControllerCheckoutConfirm extends Controller {
 			$order_data['payment_country'] = $this->session->data['payment_address']['country'];
 			$order_data['payment_country_id'] = $this->session->data['payment_address']['country_id'];
 			$order_data['payment_address_format'] = $this->session->data['payment_address']['address_format'];
-			$order_data['payment_custom_field'] = ($this->session->data['payment_address']['custom_field'] ?? []);
+			$order_data['payment_custom_field'] = ($this->session->data['payment_address']['custom_field'] ?? array());
 
 			if (isset($this->session->data['payment_method']['title'])) {
 				$order_data['payment_method'] = $this->session->data['payment_method']['title'];
@@ -177,7 +177,7 @@ class ControllerCheckoutConfirm extends Controller {
 				$order_data['shipping_country'] = $this->session->data['shipping_address']['country'];
 				$order_data['shipping_country_id'] = $this->session->data['shipping_address']['country_id'];
 				$order_data['shipping_address_format'] = $this->session->data['shipping_address']['address_format'];
-				$order_data['shipping_custom_field'] = ($this->session->data['shipping_address']['custom_field'] ?? []);
+				$order_data['shipping_custom_field'] = ($this->session->data['shipping_address']['custom_field'] ?? array());
 
 				if (isset($this->session->data['shipping_method']['title'])) {
 					$order_data['shipping_method'] = $this->session->data['shipping_method']['title'];
@@ -203,18 +203,18 @@ class ControllerCheckoutConfirm extends Controller {
 				$order_data['shipping_country'] = '';
 				$order_data['shipping_country_id'] = '';
 				$order_data['shipping_address_format'] = '';
-				$order_data['shipping_custom_field'] = [];
+				$order_data['shipping_custom_field'] = array();
 				$order_data['shipping_method'] = '';
 				$order_data['shipping_code'] = '';
 			}
 
-			$order_data['products'] = [];
+			$order_data['products'] = array();
 
 			foreach ($this->cart->getProducts() as $product) {
-				$option_data = [];
+				$option_data = array();
 
 				foreach ($product['option'] as $option) {
-					$option_data[] = [
+					$option_data[] = array(
 						'product_option_id'       => $option['product_option_id'],
 						'product_option_value_id' => $option['product_option_value_id'],
 						'option_id'               => $option['option_id'],
@@ -222,10 +222,10 @@ class ControllerCheckoutConfirm extends Controller {
 						'name'                    => $option['name'],
 						'value'                   => $option['value'],
 						'type'                    => $option['type']
-					];
+					);
 				}
 
-				$order_data['products'][] = [
+				$order_data['products'][] = array(
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
 					'model'      => $product['model'],
@@ -237,15 +237,15 @@ class ControllerCheckoutConfirm extends Controller {
 					'total'      => $product['total'],
 					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
 					'reward'     => $product['reward']
-				];
+				);
 			}
 
 			// Gift Voucher
-			$order_data['vouchers'] = [];
+			$order_data['vouchers'] = array();
 
 			if (!empty($this->session->data['vouchers'])) {
 				foreach ($this->session->data['vouchers'] as $voucher) {
-					$order_data['vouchers'][] = [
+					$order_data['vouchers'][] = array(
 						'description'      => $voucher['description'],
 						'code'             => token(10),
 						'to_name'          => $voucher['to_name'],
@@ -255,7 +255,7 @@ class ControllerCheckoutConfirm extends Controller {
 						'voucher_theme_id' => $voucher['voucher_theme_id'],
 						'message'          => $voucher['message'],
 						'amount'           => $voucher['amount']
-					];
+					);
 				}
 			}
 
@@ -338,10 +338,10 @@ class ControllerCheckoutConfirm extends Controller {
 
 			$this->load->model('tool/upload');
 
-			$data['products'] = [];
+			$data['products'] = array();
 
 			foreach ($this->cart->getProducts() as $product) {
-				$option_data = [];
+				$option_data = array();
 
 				foreach ($product['option'] as $option) {
 					if ($option['type'] != 'file') {
@@ -356,22 +356,22 @@ class ControllerCheckoutConfirm extends Controller {
 						}
 					}
 
-					$option_data[] = [
+					$option_data[] = array(
 						'name'  => $option['name'],
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-					];
+					);
 				}
 
 				$recurring = '';
 
 				if ($product['recurring']) {
-					$frequencies = [
+					$frequencies = array(
 						'day'        => $this->language->get('text_day'),
 						'week'       => $this->language->get('text_week'),
 						'semi_month' => $this->language->get('text_semi_month'),
 						'month'      => $this->language->get('text_month'),
 						'year'       => $this->language->get('text_year'),
-					];
+					);
 
 					if ($product['recurring']['trial']) {
 						$recurring = sprintf($this->language->get('text_trial_description'), $this->currency->format($this->tax->calculate($product['recurring']['trial_price'] * $product['quantity'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']), $product['recurring']['trial_cycle'], $frequencies[$product['recurring']['trial_frequency']], $product['recurring']['trial_duration']) . ' ';
@@ -384,7 +384,7 @@ class ControllerCheckoutConfirm extends Controller {
 					}
 				}
 
-				$data['products'][] = [
+				$data['products'][] = array(
 					'cart_id'    => $product['cart_id'],
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
@@ -396,28 +396,28 @@ class ControllerCheckoutConfirm extends Controller {
 					'price'      => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
 					'total'      => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'], $this->session->data['currency']),
 					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id'])
-				];
+				);
 			}
 
 			// Gift Voucher
-			$data['vouchers'] = [];
+			$data['vouchers'] = array();
 
 			if (!empty($this->session->data['vouchers'])) {
 				foreach ($this->session->data['vouchers'] as $voucher) {
-					$data['vouchers'][] = [
+					$data['vouchers'][] = array(
 						'description' => $voucher['description'],
 						'amount'      => $this->currency->format($voucher['amount'], $this->session->data['currency'])
-					];
+					);
 				}
 			}
 
-			$data['totals'] = [];
+			$data['totals'] = array();
 
 			foreach ($order_data['totals'] as $total) {
-				$data['totals'][] = [
+				$data['totals'][] = array(
 					'title' => $total['title'],
 					'text'  => $this->currency->format($total['value'], $this->session->data['currency'])
-				];
+				);
 			}
 
 			$data['payment'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);

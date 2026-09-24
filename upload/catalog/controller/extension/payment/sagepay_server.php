@@ -27,7 +27,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 			$data['sagepay_server_card'] = false;
 		}
 
-		$data['cards'] = [];
+		$data['cards'] = array();
 
 		if ($this->customer->isLogged() && $data['sagepay_server_card']) {
 			$this->load->model('extension/payment/sagepay_server');
@@ -39,7 +39,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 	}
 
 	public function send() {
-		$payment_data = [];
+		$payment_data = array();
 
 		$url = '';
 
@@ -168,7 +168,7 @@ class ControllerExtensionPaymentSagepayServer extends Controller {
 
 		$response_data = $this->model_extension_payment_sagepay_server->sendCurl($url, $payment_data);
 
-		$json = [];
+		$json = array();
 
 		if ((substr($response_data['Status'], 0, 2) == "OK") || $response_data['Status'] == 'AUTHENTICATED' || $response_data['Status'] == 'REGISTERED') {
 			$json['redirect'] = $response_data['NextURL'];

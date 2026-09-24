@@ -5,17 +5,17 @@ class ControllerCheckoutCart extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'href' => $this->url->link('common/home'),
 			'text' => $this->language->get('text_home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'href' => $this->url->link('checkout/cart'),
 			'text' => $this->language->get('heading_title')
-		];
+		);
 
 		if ($this->cart->hasProducts() || !empty($this->session->data['vouchers'])) {
 			$data['heading_title'] = $this->language->get('heading_title');
@@ -71,7 +71,7 @@ class ControllerCheckoutCart extends Controller {
 			$this->load->model('tool/image');
 			$this->load->model('tool/upload');
 
-			$data['products'] = [];
+			$data['products'] = array();
 
 			$products = $this->cart->getProducts();
 
@@ -94,7 +94,7 @@ class ControllerCheckoutCart extends Controller {
 					$image = $this->model_tool_image->resize('placeholder.png', $this->config->get($this->config->get('config_theme') . '_image_cart_width'), $this->config->get($this->config->get('config_theme') . '_image_cart_height'));
 				}
 
-				$option_data = [];
+				$option_data = array();
 
 				foreach ($product['option'] as $option) {
 					if ($option['type'] != 'file') {
@@ -109,10 +109,10 @@ class ControllerCheckoutCart extends Controller {
 						}
 					}
 
-					$option_data[] = [
+					$option_data[] = array(
 						'name'  => $option['name'],
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
-					];
+					);
 				}
 
 				// Display prices
@@ -129,13 +129,13 @@ class ControllerCheckoutCart extends Controller {
 				$recurring = '';
 
 				if ($product['recurring']) {
-					$frequencies = [
+					$frequencies = array(
 						'day'        => $this->language->get('text_day'),
 						'week'       => $this->language->get('text_week'),
 						'semi_month' => $this->language->get('text_semi_month'),
 						'month'      => $this->language->get('text_month'),
 						'year'       => $this->language->get('text_year')
-					];
+					);
 
 					if ($product['recurring']['trial']) {
 						$recurring = sprintf($this->language->get('text_trial_description'), $this->currency->format($this->tax->calculate($product['recurring']['trial_price'] * $product['quantity'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']), $product['recurring']['trial_cycle'], $frequencies[$product['recurring']['trial_frequency']], $product['recurring']['trial_duration']) . ' ';
@@ -148,7 +148,7 @@ class ControllerCheckoutCart extends Controller {
 					}
 				}
 
-				$data['products'][] = [
+				$data['products'][] = array(
 					'cart_id'   => $product['cart_id'],
 					'thumb'     => $image,
 					'name'      => $product['name'],
@@ -161,40 +161,40 @@ class ControllerCheckoutCart extends Controller {
 					'price'     => $price,
 					'total'     => $total,
 					'href'      => $this->url->link('product/product', 'product_id=' . $product['product_id'])
-				];
+				);
 			}
 
 			// Gift Voucher
-			$data['vouchers'] = [];
+			$data['vouchers'] = array();
 
 			if (!empty($this->session->data['vouchers'])) {
 				foreach ($this->session->data['vouchers'] as $key => $voucher) {
-					$data['vouchers'][] = [
+					$data['vouchers'][] = array(
 						'key'         => $key,
 						'description' => $voucher['description'],
 						'amount'      => $this->currency->format($voucher['amount'], $this->session->data['currency']),
 						'remove'      => $this->url->link('checkout/cart', 'remove=' . $key)
-					];
+					);
 				}
 			}
 
 			// Totals
 			$this->load->model('extension/extension');
 
-			$totals = [];
+			$totals = array();
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
 			// Because __call can not keep var references so we put them into an array.
-			$total_data = [
+			$total_data = array(
 				'totals' => &$totals,
 				'taxes'  => &$taxes,
 				'total'  => &$total
-			];
+			);
 
 			// Display prices
 			if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-				$sort_order = [];
+				$sort_order = array();
 
 				$results = $this->model_extension_extension->getExtensions('total');
 
@@ -213,7 +213,7 @@ class ControllerCheckoutCart extends Controller {
 					}
 				}
 
-				$sort_order = [];
+				$sort_order = array();
 
 				foreach ($totals as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];
@@ -222,13 +222,13 @@ class ControllerCheckoutCart extends Controller {
 				array_multisort($sort_order, SORT_ASC, $totals);
 			}
 
-			$data['totals'] = [];
+			$data['totals'] = array();
 
 			foreach ($totals as $total) {
-				$data['totals'][] = [
+				$data['totals'][] = array(
 					'title' => $total['title'],
 					'text'  => $this->currency->format($total['value'], $this->session->data['currency'])
-				];
+				);
 			}
 
 			$data['continue'] = $this->url->link('common/home');
@@ -237,7 +237,7 @@ class ControllerCheckoutCart extends Controller {
 
 			$this->load->model('extension/extension');
 
-			$data['modules'] = [];
+			$data['modules'] = array();
 
 			$files = glob(DIR_APPLICATION . '/controller/extension/total/*.php');
 
@@ -284,7 +284,7 @@ class ControllerCheckoutCart extends Controller {
 	public function add() {
 		$this->load->language('checkout/cart');
 
-		$json = [];
+		$json = array();
 
 		if (isset($this->request->post['product_id'])) {
 			$product_id = (int)$this->request->post['product_id'];
@@ -306,7 +306,7 @@ class ControllerCheckoutCart extends Controller {
 			if (isset($this->request->post['option'])) {
 				$option = array_filter($this->request->post['option']);
 			} else {
-				$option = [];
+				$option = array();
 			}
 
 			$product_options = $this->model_catalog_product->getProductOptions($this->request->post['product_id']);
@@ -326,7 +326,7 @@ class ControllerCheckoutCart extends Controller {
 			$recurrings = $this->model_catalog_product->getProfiles($product_info['product_id']);
 
 			if ($recurrings) {
-				$recurring_ids = [];
+				$recurring_ids = array();
 
 				foreach ($recurrings as $recurring) {
 					$recurring_ids[] = $recurring['recurring_id'];
@@ -351,20 +351,20 @@ class ControllerCheckoutCart extends Controller {
 				// Totals
 				$this->load->model('extension/extension');
 
-				$totals = [];
+				$totals = array();
 				$taxes = $this->cart->getTaxes();
 				$total = 0;
 
 				// Because __call can not keep var references so we put them into an array.
-				$total_data = [
+				$total_data = array(
 					'totals' => &$totals,
 					'taxes'  => &$taxes,
 					'total'  => &$total
-				];
+				);
 
 				// Display prices
 				if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-					$sort_order = [];
+					$sort_order = array();
 
 					$results = $this->model_extension_extension->getExtensions('total');
 
@@ -383,7 +383,7 @@ class ControllerCheckoutCart extends Controller {
 						}
 					}
 
-					$sort_order = [];
+					$sort_order = array();
 
 					foreach ($totals as $key => $value) {
 						$sort_order[$key] = $value['sort_order'];
@@ -405,7 +405,7 @@ class ControllerCheckoutCart extends Controller {
 	public function edit() {
 		$this->load->language('checkout/cart');
 
-		$json = [];
+		$json = array();
 
 		// Update
 		if (!empty($this->request->post['quantity'])) {
@@ -431,7 +431,7 @@ class ControllerCheckoutCart extends Controller {
 	public function remove() {
 		$this->load->language('checkout/cart');
 
-		$json = [];
+		$json = array();
 
 		// Remove
 		if (isset($this->request->post['key'])) {
@@ -450,20 +450,20 @@ class ControllerCheckoutCart extends Controller {
 			// Totals
 			$this->load->model('extension/extension');
 
-			$totals = [];
+			$totals = array();
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
 			// Because __call can not keep var references so we put them into an array.
-			$total_data = [
+			$total_data = array(
 				'totals' => &$totals,
 				'taxes'  => &$taxes,
 				'total'  => &$total
-			];
+			);
 
 			// Display prices
 			if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
-				$sort_order = [];
+				$sort_order = array();
 
 				$results = $this->model_extension_extension->getExtensions('total');
 
@@ -482,7 +482,7 @@ class ControllerCheckoutCart extends Controller {
 					}
 				}
 
-				$sort_order = [];
+				$sort_order = array();
 
 				foreach ($totals as $key => $value) {
 					$sort_order[$key] = $value['sort_order'];

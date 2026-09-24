@@ -47,14 +47,14 @@ class ModelLocalisationGeoZone extends Model {
 		return $query->row;
 	}
 
-	public function getGeoZones($data = []) {
+	public function getGeoZones($data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "geo_zone";
 
-			$sort_data = [
+			$sort_data = array(
 				'name',
 				'description'
-			];
+			);
 
 			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 				$sql .= " ORDER BY " . $data['sort'];
@@ -130,7 +130,7 @@ class ModelLocalisationGeoZone extends Model {
 
 	public function getZonesByGeoZones($geo_zone_ids) {
 		if (empty($geo_zone_ids)) {
-			return [];
+			return array();
 		}
 
 		$sql  = "SELECT DISTINCT zgz.country_id, z.zone_id, c.`name` AS country, z.`name` AS zone ";
@@ -142,13 +142,13 @@ class ModelLocalisationGeoZone extends Model {
 
 		$query = $this->db->query($sql);
 
-		$results = [];
+		$results = array();
 
 		foreach ($query->rows as $row) {
 			$country_id = $row['country_id'];
 
 			if (!isset($results[$country_id])) {
-				$results[$country_id] = [];
+				$results[$country_id] = array();
 			}
 
 			$results[$country_id][$row['zone_id']] = $row['zone'];

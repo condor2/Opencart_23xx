@@ -12,12 +12,12 @@ class ModelLocalisationCurrency extends Model {
 		$currency_data = $this->cache->get('currency.' . md5($sql));
 
 		if (!$currency_data) {
-			$currency_data = [];
+			$currency_data = array();
 
 			$query = $this->db->query($sql);
 
 			foreach ($query->rows as $result) {
-				$currency_data[$result['code']] = [
+				$currency_data[$result['code']] = array(
 					'currency_id'   => $result['currency_id'],
 					'title'         => $result['title'],
 					'code'          => $result['code'],
@@ -27,7 +27,7 @@ class ModelLocalisationCurrency extends Model {
 					'value'         => $result['value'],
 					'status'        => $result['status'],
 					'date_modified' => $result['date_modified']
-				];
+				);
 			}
 
 			$this->cache->set('currency.' . md5($sql), $currency_data);

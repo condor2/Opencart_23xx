@@ -15,14 +15,14 @@ class ControllerExtensionModuleSpecial extends Controller {
 
 		$this->load->model('tool/image');
 
-		$data['products'] = [];
+		$data['products'] = array();
 
-		$filter_data = [
+		$filter_data = array(
 			'sort'  => 'pd.name',
 			'order' => 'ASC',
 			'start' => 0,
 			'limit' => $setting['limit']
-		];
+		);
 
 		$results = $this->model_catalog_product->getProductSpecials($filter_data);
 
@@ -58,7 +58,7 @@ class ControllerExtensionModuleSpecial extends Controller {
 					$rating = false;
 				}
 
-				$data['products'][] = [
+				$data['products'][] = array(
 					'product_id'  => $result['product_id'],
 					'thumb'       => $image,
 					'name'        => $result['name'],
@@ -68,7 +68,7 @@ class ControllerExtensionModuleSpecial extends Controller {
 					'tax'         => $tax,
 					'rating'      => $rating,
 					'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
-				];
+				);
 			}
 
 			return $this->load->view('extension/module/special', $data);

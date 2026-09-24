@@ -229,7 +229,7 @@ class ControllerExtensionInstaller extends Controller {
 			$json['error'] = $this->language->get('error_permission');
 		}
 
-		$directory = DIR_UPLOAD . str_replace(['../', '..\\', '..'], '', $this->request->post['path']) . '/upload/';
+		$directory = DIR_UPLOAD . str_replace(array('../', '..\\', '..'), '', $this->request->post['path']) . '/upload/';
 
 		if (!is_dir($directory)) {
 			$json['error'] = $this->language->get('error_directory');
@@ -239,7 +239,7 @@ class ControllerExtensionInstaller extends Controller {
 			// Get a list of files ready to upload
 			$files = array();
 
-			$path = [$directory . '*'];
+			$path = array($directory . '*');
 
 			while (count($path) != 0) {
 				$next = array_shift($path);
@@ -514,13 +514,13 @@ class ControllerExtensionInstaller extends Controller {
 			// Get a list of files ready to upload
 			$files = array();
 
-			$path = [$directory];
+			$path = array($directory);
 
 			while (count($path) != 0) {
 				$next = array_shift($path);
 
 				// We have to use scandir function because glob will not pick up dot files.
-				foreach (array_diff(scandir($next), ['.', '..']) as $file) {
+				foreach (array_diff(scandir($next), array('.', '..')) as $file) {
 					$file = $next . '/' . $file;
 
 					if (is_dir($file)) {
@@ -570,13 +570,13 @@ class ControllerExtensionInstaller extends Controller {
 					// Get a list of files ready to upload
 					$files = array();
 
-					$path = [$directory];
+					$path = array($directory);
 
 					while (count($path) != 0) {
 						$next = array_shift($path);
 
 						// We have to use scandir function because glob will not pick up dot files.
-						foreach (array_diff(scandir($next), ['.', '..']) as $file) {
+						foreach (array_diff(scandir($next), array('.', '..')) as $file) {
 							$file = $next . '/' . $file;
 
 							if (is_dir($file)) {

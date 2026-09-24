@@ -37,7 +37,7 @@ class ControllerExtensionTotalReward extends Controller {
 	public function reward() {
 		$this->load->language('extension/total/reward');
 
-		$json = [];
+		$json = array();
 
 		$points = $this->customer->getRewardPoints();
 

@@ -43,7 +43,7 @@ function safe_glob(string $pattern, int $flags = 0): array|false {
 
 	// 2. Fallback: Manually parse {a,b,c} patterns
 	if (preg_match('/\{([^}]+)\}/', $pattern, $matches)) {
-		$files = [];
+		$files = array();
 
 		$parts = explode(',', $matches[1]);
 

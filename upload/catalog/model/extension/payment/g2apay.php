@@ -15,15 +15,15 @@ class ModelExtensionPaymentG2APay extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
-			$method_data = [
+			$method_data = array(
 				'code'       => 'g2apay',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('g2apay_sort_order')
-			];
+			);
 		}
 
 		return $method_data;

@@ -1,6 +1,6 @@
 <?php
 class ControllerInstallStep2 extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index(): void {
 		$this->language->load('install/step_2');
@@ -157,11 +157,11 @@ class ControllerInstallStep2 extends Controller {
 		$data['file_uploads'] = ini_get('file_uploads');
 		$data['session_auto_start'] = ini_get('session_auto_start');
 
-		$db = [
+		$db = array(
 			'mysqli',
 			'pgsql',
 			'pdo'
-		];
+		);
 
 		if (!array_filter($db, 'extension_loaded')) {
 			$data['db'] = false;
@@ -235,11 +235,11 @@ class ControllerInstallStep2 extends Controller {
 			$this->error['warning'] = $this->language->get('error_session');
 		}
 
-		$db = [
+		$db = array(
 			'mysqli',
 			'pdo',
 			'pgsql'
-		];
+		);
 
 		if (!array_filter($db, 'extension_loaded')) {
 			$this->error['warning'] = $this->language->get('error_db');

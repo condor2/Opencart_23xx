@@ -37,7 +37,7 @@ class ControllerCheckoutLogin extends Controller {
 	public function save() {
 		$this->load->language('checkout/checkout');
 
-		$json = [];
+		$json = array();
 
 		if ($this->customer->isLogged()) {
 			$json['redirect'] = $this->url->link('checkout/checkout', '', true);
@@ -105,10 +105,10 @@ class ControllerCheckoutLogin extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('account/activity');
 
-				$activity_data = [
+				$activity_data = array(
 					'customer_id' => $this->customer->getId(),
 					'name'        => $this->customer->getFirstName() . ' ' . $this->customer->getLastName()
-				];
+				);
 
 				$this->model_account_activity->addActivity('login', $activity_data);
 			}

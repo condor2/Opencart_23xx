@@ -60,7 +60,7 @@ function usage() {
 	echo "Usage:\n";
 	echo "======\n";
 	echo "\n";
-	$options = implode(" ", [
+	$options = implode(" ", array(
 		'--db_hostname', 'localhost',
 		'--db_username', 'root',
 		'--db_password', 'pass',
@@ -71,21 +71,21 @@ function usage() {
 		'--password', 'admin',
 		'--email', 'youremail@example.com',
 		'--http_server', 'http://localhost/opencart/'
-	]);
+	));
 	echo 'php cli_install.php install ' . $options . "\n\n";
 }
 
 function get_options($argv) {
-	$defaults = [
+	$defaults = array(
 		'db_hostname' => 'localhost',
 		'db_database' => 'opencart',
 		'db_prefix'   => 'oc_',
 		'db_driver'   => 'mysqli',
 		'db_port'     => '3306',
 		'username'    => 'admin',
-	];
+	);
 
-	$options = [];
+	$options = array();
 
 	$total = count($argv);
 
@@ -101,7 +101,7 @@ function get_options($argv) {
 }
 
 function valid($options) {
-	$required = [
+	$required = array(
 		'db_hostname',
 		'db_username',
 		'db_password',
@@ -112,9 +112,9 @@ function valid($options) {
 		'password',
 		'email',
 		'http_server',
-	];
+	);
 
-	$missing = [];
+	$missing = array();
 
 	foreach ($required as $r) {
 		if (!array_key_exists($r, $options)) {
@@ -128,7 +128,7 @@ function valid($options) {
 
 	$valid = count($missing) === 0;
 
-	return [$valid, $missing];
+	return array($valid, $missing);
 }
 
 function install($options) {
@@ -178,7 +178,7 @@ function check_requirements() {
 		$error = 'Warning: ZLIB extension needs to be loaded for OpenCart to work!';
 	}
 
-	return [$error === null, $error];
+	return array($error === null, $error);
 }
 
 function setup_db($data) {
@@ -314,14 +314,14 @@ function write_config_files($options) {
 }
 
 function dir_permissions() {
-	$dirs = [
+	$dirs = array(
 		DIR_OPENCART . 'image/',
 		DIR_OPENCART . 'system/storage/download/',
 		DIR_OPENCART . 'system/storage/upload/',
 		DIR_OPENCART . 'system/storage/cache/',
 		DIR_OPENCART . 'system/storage/logs/',
 		DIR_OPENCART . 'system/storage/modification/',
-	];
+	);
 
 	exec('chmod o+w -R ' . implode(' ', $dirs));
 }

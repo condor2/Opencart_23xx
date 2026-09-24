@@ -13,7 +13,7 @@
  * Response class
  */
 class Response {
-	private $headers = [];
+	private $headers = array();
 	private $level = 0;
 	private $output;
 
@@ -35,7 +35,7 @@ class Response {
 	 * @return void
 	 */
 	public function redirect($url, $status = 302) {
-		header('Location: ' . str_replace(['&amp;', "\n", "\r"], ['&', '', ''], $url), true, $status);
+		header('Location: ' . str_replace(array('&amp;', "\n", "\r"), array('&', '', ''), $url), true, $status);
 		exit();
 	}
 

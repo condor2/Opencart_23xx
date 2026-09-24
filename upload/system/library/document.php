@@ -27,15 +27,15 @@ class Document {
 	/**
 	 * @var array
 	 */
-	private array $links = [];
+	private array $links = array();
 	/**
 	 * @var array
 	 */
-	private array $styles = [];
+	private array $styles = array();
 	/**
 	 * @var array
 	 */
-	private array $scripts = [];
+	private array $scripts = array();
 
 	/**
 	 * setTitle
@@ -104,10 +104,10 @@ class Document {
 	 * @return void
 	 */
 	public function addLink($href, $rel) {
-		$this->links[$href] = [
+		$this->links[$href] = array(
 			'href' => $href,
 			'rel'  => $rel
-		];
+		);
 	}
 
 	/**
@@ -129,11 +129,11 @@ class Document {
 	 * @return void
 	 */
 	public function addStyle($href, $rel = 'stylesheet', $media = 'screen') {
-		$this->styles[$href] = [
+		$this->styles[$href] = array(
 			'href'  => $href,
 			'rel'   => $rel,
 			'media' => $media
-		];
+		);
 	}
 
 	/**
@@ -168,7 +168,7 @@ class Document {
 		if (isset($this->scripts[$position])) {
 			return $this->scripts[$position];
 		} else {
-			return [];
+			return array();
 		}
 	}
 }

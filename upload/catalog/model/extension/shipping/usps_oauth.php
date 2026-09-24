@@ -21,7 +21,7 @@ class ModelExtensionShippingUspsOauth extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
 			$clientId     = $this->config->get('usps_oauth_client_id');
@@ -30,12 +30,12 @@ class ModelExtensionShippingUspsOauth extends Model {
 
 			$accessToken = $this->getAccessToken($clientId, $clientSecret, $endpoint);
 			if (!$accessToken) {
-				return [
+				return array(
 					'code'  => 'usps_oauth',
 					'title' => $this->language->get('text_title'),
 					'error' => 'Auth Failed',
-					'quote' => []
-				];
+					'quote' => array()
+				);
 			}
 
 			// Total weight only
@@ -70,21 +70,21 @@ class ModelExtensionShippingUspsOauth extends Model {
 			// else: keep default 12×10×4 for most e-commerce orders
 
 			// Services we want to offer
-			$service_names = [
+			$service_names = array(
 				'USPS_GROUND_ADVANTAGE' => 'USPS Ground Advantage',
 				'PRIORITY_MAIL'         => 'Priority Mail',
 				'PRIORITY_MAIL_EXPRESS' => 'Priority Mail Express',
 				'MEDIA_MAIL'            => 'Media Mail'
-			];
+			);
 
-			$quote_data = [];
+			$quote_data = array();
 
 			foreach ($service_names as $usps_code => $title) {
 				if (!$this->config->get('usps_oauth_' . strtolower($usps_code))) {
 					continue;
 				}
 
-				$priceRequest = [
+				$priceRequest = array(
 					'originZIPCode'                => $this->config->get('usps_oauth_postcode'),
 					'destinationZIPCode'           => $address['postcode'],
 					'weight'                       => (float)$weight,
@@ -97,14 +97,14 @@ class ModelExtensionShippingUspsOauth extends Model {
 					'destinationEntryFacilityType' => 'NONE',
 					'priceType'                    => $this->config->get('usps_oauth_price_type') ?: 'RETAIL',
 					'mailingDate'                  => date('Y-m-d')
-				];
+				);
 
 				$ch = curl_init($endpoint . 'prices/v3/base-rates/search');
 				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_HTTPHEADER, [
+				curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 					'Authorization: Bearer ' . $accessToken,
 					'Content-Type: application/json'
-				]);
+				));
 				curl_setopt($ch, CURLOPT_POST, true);
 				curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($priceRequest));
 
@@ -129,7 +129,7 @@ class ModelExtensionShippingUspsOauth extends Model {
 						$cost += (float)$handling_fee;
 					}
 
-					$quote_data[strtolower($usps_code)] = [
+					$quote_data[strtolower($usps_code)] = array(
 						'code'         => 'usps_oauth.' . strtolower($usps_code),
 						'title'        => $title,
 						'cost'         => $cost,
@@ -142,18 +142,18 @@ class ModelExtensionShippingUspsOauth extends Model {
 							),
 							$this->session->data['currency']
 						)
-					];
+					);
 				}
 			}
 
 			if (!empty($quote_data)) {
-				$method_data = [
+				$method_data = array(
 					'code'       => 'usps_oauth',
 					'title'      => $this->language->get('text_title'),
 					'quote'      => $quote_data,
 					'sort_order' => (int)$this->config->get('usps_oauth_sort_order'),
 					'error'      => false
-				];
+				);
 			}
 		}
 
@@ -164,12 +164,12 @@ class ModelExtensionShippingUspsOauth extends Model {
 		$ch = curl_init($endpoint . 'oauth2/v3/token');
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(array(
 			'client_id'     => $clientId,
 			'client_secret' => $clientSecret,
 			'grant_type'    => 'client_credentials'
-		]));
-		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+		)));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 
 		$response = curl_exec($ch);
 		$data = json_decode($response, true);

@@ -1,13 +1,13 @@
 <?php
 class ModelAffiliateTransaction extends Model {
-	public function getTransactions(array $data = []) {
+	public function getTransactions(array $data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "affiliate_transaction` WHERE `affiliate_id` = '" . (int)$this->affiliate->getId() . "'";
 
-		$sort_data = [
+		$sort_data = array(
 			'amount',
 			'description',
 			'date_added'
-		];
+		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];

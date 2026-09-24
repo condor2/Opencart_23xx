@@ -22,16 +22,16 @@ class ModelExtensionModification extends Model {
 		return $query->row;
 	}
 
-	public function getModifications($data = []) {
+	public function getModifications($data = array()) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "modification";
 
-		$sort_data = [
+		$sort_data = array(
 			'name',
 			'author',
 			'version',
 			'status',
 			'date_added'
-		];
+		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];

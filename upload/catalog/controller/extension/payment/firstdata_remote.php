@@ -23,7 +23,7 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 			$data['stored_cards'] = $this->model_extension_payment_firstdata_remote->getStoredCards();
 		} else {
 			$data['card_storage'] = 0;
-			$data['stored_cards'] = [];
+			$data['stored_cards'] = array();
 		}
 
 		$data['accepted_cards'] = $this->config->get('firstdata_remote_cards_accepted');
@@ -35,24 +35,24 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		$data['text_card_type_ma'] = $this->language->get('text_card_type_ma');
 		$data['text_card_new'] = $this->language->get('text_card_new');
 
-		$data['months'] = [];
+		$data['months'] = array();
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = [
+			$data['months'][] = array(
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			];
+			);
 		}
 
 		$today = getdate();
 
-		$data['year_expire'] = [];
+		$data['year_expire'] = array();
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = [
+			$data['year_expire'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%02d', $i % 100)
-			];
+			);
 		}
 
 		return $this->load->view('extension/payment/firstdata_remote', $data);
@@ -63,7 +63,7 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 		$this->load->model('extension/payment/firstdata_remote');
 		$this->load->language('extension/payment/firstdata_remote');
 
-		$address_codes = [
+		$address_codes = array(
 			'PPX' => $this->language->get('text_address_ppx'),
 			'YYY' => $this->language->get('text_address_yyy'),
 			'YNA' => $this->language->get('text_address_yna'),
@@ -72,9 +72,9 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 			'YPX' => $this->language->get('text_address_ypx'),
 			'PYX' => $this->language->get('text_address_pyx'),
 			'XXU' => $this->language->get('text_address_xxu')
-		];
+		);
 
-		$cvv_codes = [
+		$cvv_codes = array(
 			'M'    => $this->language->get('text_card_code_m'),
 			'N'    => $this->language->get('text_card_code_n'),
 			'P'    => $this->language->get('text_card_code_p'),
@@ -82,7 +82,7 @@ class ControllerExtensionPaymentFirstdataRemote extends Controller {
 			'U'    => $this->language->get('text_card_code_u'),
 			'X'    => $this->language->get('text_card_code_x'),
 			'NONE' => $this->language->get('text_card_code_blank')
-		];
+		);
 
 		if (!isset($this->request->post['cc_choice']) || (isset($this->request->post['cc_choice']) && $this->request->post['cc_choice'] == 'new')) {
 			if ($this->request->post['cc_number'] == '') {

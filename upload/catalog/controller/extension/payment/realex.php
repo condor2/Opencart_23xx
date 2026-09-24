@@ -20,25 +20,25 @@ class ControllerExtensionPaymentRealex extends Controller {
 		}
 
 		if ($this->config->get('realex_card_select') == 1) {
-			$card_types = [
+			$card_types = array(
 				'visa'   => $this->language->get('text_card_visa'),
 				'mc'     => $this->language->get('text_card_mc'),
 				'amex'   => $this->language->get('text_card_amex'),
 				'switch' => $this->language->get('text_card_switch'),
 				'laser'  => $this->language->get('text_card_laser'),
 				'diners' => $this->language->get('text_card_diners'),
-			];
+			);
 
-			$data['cards'] = [];
+			$data['cards'] = array();
 
 			$accounts = $this->config->get('realex_account');
 
 			foreach ($accounts as $card => $account) {
 				if (isset($account['enabled']) && $account['enabled'] == 1) {
-					$data['cards'][] = [
+					$data['cards'][] = array(
 						'type'    => $card_types[$card],
 						'account' => (isset($account['default']) && $account['default'] == 1 ? $this->config->get('realex_merchant_id') : $account['merchant_id']),
-					];
+					);
 				}
 			}
 

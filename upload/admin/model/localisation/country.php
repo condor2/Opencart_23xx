@@ -26,11 +26,11 @@ class ModelLocalisationCountry extends Model {
 		return $query->row;
 	}
 
-	public function getCountries($data = []) {
+	public function getCountries($data = array()) {
 		if ($data) {
 			$sql = "SELECT * FROM " . DB_PREFIX . "country";
 
-			$implode = [];
+			$implode = array();
 
 			if (!empty($data['filter_name'])) {
 				$implode[] = "`name` LIKE '" . $this->db->escape((string)$data['filter_name']) . "%'";
@@ -48,11 +48,11 @@ class ModelLocalisationCountry extends Model {
 				$sql .= " WHERE " . implode(" AND ", $implode);
 			}
 
-			$sort_data = [
+			$sort_data = array(
 				'name',
 				'iso_code_2',
 				'iso_code_3'
-			];
+			);
 
 			if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 				$sql .= " ORDER BY " . $data['sort'];
@@ -96,10 +96,10 @@ class ModelLocalisationCountry extends Model {
 		}
 	}
 
-	public function getTotalCountries($data = []) {
+	public function getTotalCountries($data = array()) {
 		$sql = "SELECT COUNT(*) AS `total` FROM `" . DB_PREFIX . "country`";
 
-		$implode = [];
+		$implode = array();
 
 		if (!empty($data['filter_name'])) {
 			$implode[] = "`name` LIKE '" . $this->db->escape((string)$data['filter_name']) . "%'";

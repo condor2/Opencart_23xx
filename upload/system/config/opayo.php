@@ -1,77 +1,77 @@
 <?php
-$_['opayo_setting'] = [
-	'general' => [
+$_['opayo_setting'] = array(
+	'general' => array(
 		'environment'        => 'live',
 		'transaction_method' => 'PAYMENT',
 		'card_save'          => true,
 		'debug'              => false,
 		'order_status_id'    => 1
-	],
-	'cron' => [
+	),
+	'cron' => array(
 		'token'    => '',
 		'url'      => '',
 		'last_run' => ''
-	],
-	'environment' => [
-		'test' => [
+	),
+	'environment' => array(
+		'test' => array(
 			'code' => 'test',
 			'name' => 'text_test'
-		],
-		'live' => [
+		),
+		'live' => array(
 			'code' => 'live',
 			'name' => 'text_live'
-		]
-	],
-	'transaction_method' => [
-		'PAYMENT' => [
+		)
+	),
+	'transaction_method' => array(
+		'PAYMENT' => array(
 			'code' => 'PAYMENT',
 			'name' => 'text_payment'
-		],
-		'DEFERRED' => [
+		),
+		'DEFERRED' => array(
 			'code' => 'DEFERRED',
 			'name' => 'text_defered'
-		],
-		'AUTHENTICATE' => [
+		),
+		'AUTHENTICATE' => array(
 			'code' => 'AUTHENTICATE',
 			'name' => 'text_authenticate'
-		]
-	],
-	'card_type' => [
-		'Visa' => [
+		)
+	),
+	'card_type' => array(
+		'Visa' => array(
 			'code' => 'VISA',
 			'name' => 'Visa',
-		],
-		'MasterCard' => [
+		),
+		'MasterCard' => array(
 			'code' => 'MC',
 			'name' => 'MasterCard'
-		],
-		'DELTA' => [
+		),
+		'DELTA' => array(
 			'code' => 'DELTA',
 			'name' => 'Visa Delta/Debit'
-		],
-		'SOLO' => [
+		),
+		'SOLO' => array(
 			'code' => 'SOLO',
 			'name' => 'Solo'
-		],
-		'MAESTRO' => [
+		),
+		'MAESTRO' => array(
 			'code' => 'MAESTRO',
 			'name' => 'Maestro'
-		],
-		'UKE' => [
+		),
+		'UKE' => array(
 			'code' => 'UKE',
 			'name' => 'Visa Electron UK Debit'
-		],
-		'AMEX' => [
+		),
+		'AMEX' => array(
 			'code' => 'AMEX',
 			'name' => 'American Express'
-		],
-		'DC' => [
+		),
+		'DC' => array(
 			'code' => 'DC',
 			'name' => 'Diners Club'
-		],
-		'JCB' => [
+		),
+		'JCB' => array(
 			'code' => 'JCB',
 			'name' => 'Japan Credit Bureau'
-		]
-	]
-];
+		)
+	)
+);

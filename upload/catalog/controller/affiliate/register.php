@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateRegister extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index() {
 		if ($this->affiliate->isLogged()) {
@@ -26,10 +26,10 @@ class ControllerAffiliateRegister extends Controller {
 			if ($this->config->get('config_customer_activity')) {
 				$this->load->model('affiliate/activity');
 
-				$activity_data = [
+				$activity_data = array(
 					'affiliate_id' => $affiliate_id,
 					'name'         => $this->request->post['firstname'] . ' ' . $this->request->post['lastname']
-				];
+				);
 
 				$this->model_affiliate_activity->addActivity('register', $activity_data);
 			}
@@ -37,22 +37,22 @@ class ControllerAffiliateRegister extends Controller {
 			$this->response->redirect($this->url->link('affiliate/success'));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('affiliate/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_register'),
 			'href' => $this->url->link('affiliate/register', '', true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 
@@ -458,7 +458,7 @@ class ControllerAffiliateRegister extends Controller {
 	}
 
 	public function country() {
-		$json = [];
+		$json = array();
 
 		$this->load->model('localisation/country');
 
@@ -467,7 +467,7 @@ class ControllerAffiliateRegister extends Controller {
 		if ($country_info) {
 			$this->load->model('localisation/zone');
 
-			$json = [
+			$json = array(
 				'country_id'        => $country_info['country_id'],
 				'name'              => $country_info['name'],
 				'iso_code_2'        => $country_info['iso_code_2'],
@@ -476,7 +476,7 @@ class ControllerAffiliateRegister extends Controller {
 				'postcode_required' => $country_info['postcode_required'],
 				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
 				'status'            => $country_info['status']
-			];
+			);
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

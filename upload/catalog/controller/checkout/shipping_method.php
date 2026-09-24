@@ -5,7 +5,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 
 		if (isset($this->session->data['shipping_address'])) {
 			// Shipping Methods
-			$method_data = [];
+			$method_data = array();
 
 			$this->load->model('extension/extension');
 
@@ -18,17 +18,17 @@ class ControllerCheckoutShippingMethod extends Controller {
 					$quote = $this->{'model_extension_shipping_' . $result['code']}->getQuote($this->session->data['shipping_address']);
 
 					if ($quote) {
-						$method_data[$result['code']] = [
+						$method_data[$result['code']] = array(
 							'title'      => $quote['title'],
 							'quote'      => $quote['quote'],
 							'sort_order' => $quote['sort_order'],
 							'error'      => $quote['error']
-						];
+						);
 					}
 				}
 			}
 
-			$sort_order = [];
+			$sort_order = array();
 
 			foreach ($method_data as $key => $value) {
 				$sort_order[$key] = $value['sort_order'];
@@ -54,7 +54,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 		if (isset($this->session->data['shipping_methods'])) {
 			$data['shipping_methods'] = $this->session->data['shipping_methods'];
 		} else {
-			$data['shipping_methods'] = [];
+			$data['shipping_methods'] = array();
 		}
 
 		if (isset($this->session->data['shipping_method']['code'])) {
@@ -75,7 +75,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 	public function save() {
 		$this->load->language('checkout/checkout');
 
-		$json = [];
+		$json = array();
 
 		// Validate if shipping is required. If not the customer should not have reached this page.
 		if (!$this->cart->hasShipping()) {

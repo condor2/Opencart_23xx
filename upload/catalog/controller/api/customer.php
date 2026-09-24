@@ -6,13 +6,13 @@ class ControllerApiCustomer extends Controller {
 		// Delete past customer in case there is an error
 		unset($this->session->data['customer']);
 
-		$json = [];
+		$json = array();
 
 		if (!isset($this->session->data['api_id'])) {
 			$json['error']['warning'] = $this->language->get('error_permission');
 		} else {
 			// Add keys for missing post vars
-			$keys = [
+			$keys = array(
 				'customer_id',
 				'customer_group_id',
 				'firstname',
@@ -20,7 +20,7 @@ class ControllerApiCustomer extends Controller {
 				'email',
 				'telephone',
 				'fax'
-			];
+			);
 
 			foreach ($keys as $key) {
 				if (!isset($this->request->post[$key])) {
@@ -76,7 +76,7 @@ class ControllerApiCustomer extends Controller {
 			}
 
 			if (!$json) {
-				$this->session->data['customer'] = [
+				$this->session->data['customer'] = array(
 					'customer_id'       => $this->request->post['customer_id'],
 					'customer_group_id' => $customer_group_id,
 					'firstname'         => $this->request->post['firstname'],
@@ -84,8 +84,8 @@ class ControllerApiCustomer extends Controller {
 					'email'             => $this->request->post['email'],
 					'telephone'         => $this->request->post['telephone'],
 					'fax'               => $this->request->post['fax'],
-					'custom_field'      => $this->request->post['custom_field'] ?? []
-				];
+					'custom_field'      => $this->request->post['custom_field'] ?? array()
+				);
 
 				$json['success'] = $this->language->get('text_success');
 			}

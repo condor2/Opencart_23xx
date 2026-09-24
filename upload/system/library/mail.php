@@ -7,7 +7,7 @@ class Mail extends \stdClass {
 	protected $subject;
 	protected $text;
 	protected $html;
-	protected $attachments = [];
+	protected $attachments = array();
 	public $protocol = 'mail';
 	public $smtp_hostname;
 	public $smtp_username;
@@ -17,7 +17,7 @@ class Mail extends \stdClass {
 	public $verp = false;
 	public $parameter = '';
 
-	public function __construct($config = []) {
+	public function __construct($config = array()) {
 		foreach ($config as $key => $value) {
 			$this->{$key} = $value;
 		}
@@ -95,7 +95,7 @@ class Mail extends \stdClass {
 		if ($this->protocol != 'mail') {
 			$header .= 'To: <' . $to . '>' . $eol;
 			$header .= 'Subject: =?UTF-8?B?' . base64_encode($this->subject) . '?=' . $eol;
-			$header .= 'Message-ID: <' . base_convert(str_replace(['.', ' '], '', microtime()), 10, 36) . '.' . base_convert(bin2hex(openssl_random_pseudo_bytes(8)), 16, 36) . substr($this->from, strrpos($this->from, '@')) . '>' . $eol;
+			$header .= 'Message-ID: <' . base_convert(str_replace(array('.', ' '), '', microtime()), 10, 36) . '.' . base_convert(bin2hex(openssl_random_pseudo_bytes(8)), 16, 36) . substr($this->from, strrpos($this->from, '@')) . '>' . $eol;
 		}
 
 		$header .= 'Date: ' . date('D, d M Y H:i:s O') . $eol;
@@ -387,7 +387,7 @@ class Mail extends \stdClass {
 				$lines = explode("\n", $message);
 
 				foreach ($lines as $line) {
-					$results = ($line === '') ? [''] : str_split($line, 998);
+					$results = ($line === '') ? array('') : str_split($line, 998);
 
 					foreach ($results as $result) {
 						fwrite($handle, $result . "\r\n");

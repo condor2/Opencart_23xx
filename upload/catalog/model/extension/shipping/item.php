@@ -13,7 +13,7 @@ class ModelExtensionShippingItem extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
 			$items = 0;
@@ -24,23 +24,23 @@ class ModelExtensionShippingItem extends Model {
 				}
 			}
 
-			$quote_data = [];
+			$quote_data = array();
 
-			$quote_data['item'] = [
+			$quote_data['item'] = array(
 				'code'         => 'item.item',
 				'title'        => $this->language->get('text_description'),
 				'cost'         => $this->config->get('item_cost') * $items,
 				'tax_class_id' => $this->config->get('item_tax_class_id'),
 				'text'         => $this->currency->format($this->tax->calculate($this->config->get('item_cost') * $items, $this->config->get('item_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-			];
+			);
 
-			$method_data = [
+			$method_data = array(
 				'code'       => 'item',
 				'title'      => $this->language->get('text_title'),
 				'quote'      => $quote_data,
 				'sort_order' => $this->config->get('item_sort_order'),
 				'error'      => false
-			];
+			);
 		}
 
 		return $method_data;

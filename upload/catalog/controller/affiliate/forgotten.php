@@ -1,6 +1,6 @@
 <?php
 class ControllerAffiliateForgotten extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index() {
 		if ($this->affiliate->isLogged()) {
@@ -51,10 +51,10 @@ class ControllerAffiliateForgotten extends Controller {
 				if ($affiliate_info) {
 					$this->load->model('affiliate/activity');
 
-					$activity_data = [
+					$activity_data = array(
 						'affiliate_id' => $affiliate_info['affiliate_id'],
 						'name'         => $affiliate_info['firstname'] . ' ' . $affiliate_info['lastname']
-					];
+					);
 
 					$this->model_affiliate_activity->addActivity('forgotten', $activity_data);
 				}
@@ -63,22 +63,22 @@ class ControllerAffiliateForgotten extends Controller {
 			$this->response->redirect($this->url->link('affiliate/login', '', true));
 		}
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_account'),
 			'href' => $this->url->link('affiliate/account', '', true)
-		];
+		);
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_forgotten'),
 			'href' => $this->url->link('affiliate/forgotten', '', true)
-		];
+		);
 
 		$data['heading_title'] = $this->language->get('heading_title');
 

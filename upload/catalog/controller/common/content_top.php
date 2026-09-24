@@ -41,7 +41,7 @@ class ControllerCommonContentTop extends Controller {
 
 		$this->load->model('extension/module');
 
-		$data['modules'] = [];
+		$data['modules'] = array();
 
 		$modules = $this->model_design_layout->getLayoutModules($layout_id, 'content_top');
 

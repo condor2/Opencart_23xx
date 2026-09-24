@@ -135,7 +135,7 @@ class APCu {
 			try {
 				$it = new \APCUIterator($pattern, APC_ITER_KEY);
 
-				$keys = [];
+				$keys = array();
 				foreach ($it as $entry) {
 					if (is_array($entry) && isset($entry['key'])) {
 						$keys[] = $entry['key'];
@@ -170,7 +170,7 @@ class APCu {
 					return (bool)@apcu_delete($fullPrefix);
 				}
 
-				$keys = [];
+				$keys = array();
 				foreach ($info['cache_list'] as $entry) {
 					// Different APCu builds may use 'key' or 'info' fields.
 					if (isset($entry['key'])) {
@@ -266,13 +266,13 @@ class APCu {
 	 */
 	public function listKeys($patternSuffix = null) {
 		if (!$this->active || !class_exists('\APCUIterator')) {
-			return [];
+			return array();
 		}
 
 		$m = '^' . preg_quote($this->prefix, '/') . ($patternSuffix !== null ? $patternSuffix : '');
 		$pattern = '/' . $m . '/';
 
-		$out = [];
+		$out = array();
 
 		try {
 			$it = new \APCUIterator($pattern, APC_ITER_KEY);
@@ -284,7 +284,7 @@ class APCu {
 				}
 			}
 		} catch (\Throwable $e) {
-			return [];
+			return array();
 		}
 
 		return $out;

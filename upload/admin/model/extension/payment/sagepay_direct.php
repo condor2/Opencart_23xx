@@ -74,7 +74,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 		if (!empty($sagepay_direct_order) && $sagepay_direct_order['release_status'] == 0) {
 
-			$void_data = [];
+			$void_data = array();
 
 			$url = '';
 
@@ -99,7 +99,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			return $this->sendCurl($url, $void_data);
 		} else {
-			return [];
+			return array();
 		}
 	}
 
@@ -112,7 +112,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 		$total_released = $this->getTotalReleased($sagepay_direct_order['sagepay_direct_order_id']);
 
 		if (!empty($sagepay_direct_order) && $sagepay_direct_order['release_status'] == 0 && ($total_released + $amount <= $sagepay_direct_order['total'])) {
-			$release_data = [];
+			$release_data = array();
 
 			$url = '';
 
@@ -138,7 +138,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			return $this->sendCurl($url, $release_data);
 		} else {
-			return [];
+			return array();
 		}
 	}
 
@@ -151,7 +151,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 		if (!empty($sagepay_direct_order) && $sagepay_direct_order['rebate_status'] != 1) {
 
-			$refund_data = [];
+			$refund_data = array();
 
 			$url = '';
 
@@ -180,7 +180,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			return $this->sendCurl($url, $refund_data);
 		} else {
-			return [];
+			return array();
 		}
 	}
 
@@ -197,7 +197,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 
 			return $order;
 		} else {
-			return [];
+			return array();
 		}
 	}
 
@@ -207,7 +207,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 		if ($query->num_rows) {
 			return $query->rows;
 		} else {
-			return [];
+			return array();
 		}
 	}
 
@@ -228,7 +228,7 @@ class ModelExtensionPaymentSagepayDirect extends Model {
 	}
 
 	public function sendCurl($url, $payment_data) {
-		$data = [];
+		$data = array();
 
 		$curl = curl_init($url);
 

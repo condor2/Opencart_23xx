@@ -11,10 +11,10 @@ class ControllerEventDebug extends Controller {
 		if ($route == '') {
 			// Add the route you want to test
 			if (isset($this->session->data['debug'][$route])) {
-				$data = [
+				$data = array(
 					'route' => $route,
 					'time'  => microtime() - $this->session->data['debug'][$route]
-				];
+				);
 
 				$this->log->write($data);
 			}

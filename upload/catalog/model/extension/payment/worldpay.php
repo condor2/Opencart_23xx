@@ -15,15 +15,15 @@ class ModelExtensionPaymentWorldpay extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
-			$method_data = [
+			$method_data = array(
 				'code'       => 'worldpay',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('worldpay_sort_order')
-			];
+			);
 		}
 
 		return $method_data;
@@ -33,19 +33,19 @@ class ModelExtensionPaymentWorldpay extends Model {
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "worldpay_card WHERE customer_id = '" . (int)$customer_id . "'");
 
-		$card_data = [];
+		$card_data = array();
 
 		$this->load->model('account/address');
 
 		foreach ($query->rows as $row) {
-			$card_data[] = [
+			$card_data[] = array(
 				'card_id'     => $row['card_id'],
 				'customer_id' => $row['customer_id'],
 				'token'       => $row['token'],
 				'digits'      => $row['digits'],
 				'expiry'      => $row['expiry'],
 				'type'        => $row['type'],
-			];
+			);
 		}
 
 		return $card_data;
@@ -91,7 +91,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 	public function getTransactions($worldpay_order_id, $currency_code) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "worldpay_order_transaction` WHERE `worldpay_order_id` = '" . (int)$worldpay_order_id . "'");
 
-		$transactions = [];
+		$transactions = array();
 
 		if ($query->num_rows) {
 			foreach ($query->rows as $row) {
@@ -131,7 +131,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
-		$order = [
+		$order = array(
 			"token"             => $token,
 			"orderType"         => 'RECURRING',
 			"amount"            => (int)($price * 100),
@@ -139,7 +139,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 			"name"              => $order_info['firstname'] . ' ' . $order_info['lastname'],
 			"orderDescription"  => $order_info['store_name'] . ' - ' . date('Y-m-d H:i:s'),
 			"customerOrderCode" => 'orderRecurring-' . $order_recurring_id
-		];
+		);
 
 		$this->model_extension_payment_worldpay->logger($order);
 
@@ -188,7 +188,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 		$this->load->model('account/order');
 		$this->load->model('checkout/order');
 		$profiles = $this->getProfiles();
-		$cron_data = [];
+		$cron_data = array();
 		$i = 1;
 		foreach ($profiles as $profile) {
 			$recurring_order = $this->getRecurringOrder($profile['order_recurring_id']);
@@ -213,7 +213,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 				continue;
 			}
 
-			$order = [
+			$order = array(
 				"token"             => $recurring_order['token'],
 				"orderType"         => 'RECURRING',
 				"amount"            => (int)($price * 100),
@@ -221,7 +221,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 				"name"              => $order_info['firstname'] . ' ' . $order_info['lastname'],
 				"orderDescription"  => $order_info['store_name'] . ' - ' . date('Y-m-d H:i:s'),
 				"customerOrderCode" => 'orderRecurring-' . $profile['order_recurring_id'] . '-repeat-' . $i++
-			];
+			);
 
 			$this->model_extension_payment_worldpay->logger($order);
 
@@ -312,7 +312,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 
 		$query = $this->db->query($sql);
 
-		$order_recurring = [];
+		$order_recurring = array();
 
 		foreach ($query->rows as $profile) {
 			$order_recurring[] = $this->getProfile($profile['order_recurring_id']);
@@ -355,11 +355,11 @@ class ModelExtensionPaymentWorldpay extends Model {
 		curl_setopt(
 			$curl,
 			CURLOPT_HTTPHEADER,
-			[
+			array(
 				"Authorization: " . $this->config->get('worldpay_service_key'),
 				"Content-Type: application/json",
 				"Content-Length: " . $content_length
-			]
+			)
 		);
 
 		$result = json_decode(curl_exec($curl));

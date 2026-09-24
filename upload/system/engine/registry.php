@@ -35,7 +35,7 @@
  * @property Url            $url
  */
 class Registry {
-	private $data = [];
+	private $data = array();
 
 	/**
 	 * __get

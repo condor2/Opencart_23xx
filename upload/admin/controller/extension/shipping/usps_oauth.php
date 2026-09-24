@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionShippingUspsOauth extends Controller {
-	private $error = [];
+	private $error = array();
 
 	public function index() {
 		$this->load->language('extension/shipping/usps_oauth');
@@ -13,13 +13,13 @@ class ControllerExtensionShippingUspsOauth extends Controller {
 			$this->model_setting_setting->editSetting('usps_oauth', $this->request->post);
 
 			// Updated Service List for USPS v3 Mail Classes
-			$services = [
+			$services = array(
 				'usps_ground_advantage',
 				'priority_mail',
 				'priority_mail_express',
 				'media_mail',
 				'library_mail'
-			];
+			);
 
 			foreach ($services as $service) {
 				if (isset($this->request->post['usps_oauth_' . $service])) {
@@ -78,25 +78,25 @@ class ControllerExtensionShippingUspsOauth extends Controller {
 		$data['error_client_secret'] = $this->error['client_secret'] ?? '';
 
 		// Breadcrumbs
-		$data['breadcrumbs'] = [];
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'] = array();
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
-		];
-		$data['breadcrumbs'][] = [
+		);
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_shipping'),
 			'href' => $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=shipping', true)
-		];
-		$data['breadcrumbs'][] = [
+		);
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
 			'href' => $this->url->link('extension/shipping/usps_oauth', 'token=' . $this->session->data['token'], true)
-		];
+		);
 
 		$data['action'] = $this->url->link('extension/shipping/usps_oauth', 'token=' . $this->session->data['token'], true);
 		$data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token'] . '&type=shipping', true);
 
 		// Pulling settings from config
-		$fields = [
+		$fields = array(
 			'usps_oauth_client_id',
 			'usps_oauth_client_secret',
 			'usps_oauth_test',
@@ -113,7 +113,7 @@ class ControllerExtensionShippingUspsOauth extends Controller {
 			'usps_oauth_priority_mail',
 			'usps_oauth_priority_mail_express',
 			'usps_oauth_media_mail'
-		];
+		);
 
 		foreach ($fields as $field) {
 			if (isset($this->request->post[$field])) {

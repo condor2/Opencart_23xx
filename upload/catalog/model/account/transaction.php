@@ -1,13 +1,13 @@
 <?php
 class ModelAccountTransaction extends Model {
-	public function getTransactions(array $data = []) {
+	public function getTransactions(array $data = array()) {
 		$sql = "SELECT * FROM `" . DB_PREFIX . "customer_transaction` WHERE `customer_id` = '" . (int)$this->customer->getId() . "'";
 
-		$sort_data = [
+		$sort_data = array(
 			'amount',
 			'description',
 			'date_added'
-		];
+		);
 
 		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
 			$sql .= " ORDER BY " . $data['sort'];

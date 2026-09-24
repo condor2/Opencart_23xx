@@ -15,15 +15,15 @@ class ModelExtensionPaymentTwoCheckout extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
-			$method_data = [
+			$method_data = array(
 				'code'       => 'twocheckout',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
 				'sort_order' => $this->config->get('twocheckout_sort_order')
-			];
+			);
 		}
 
 		return $method_data;

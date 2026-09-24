@@ -17,33 +17,33 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 
 		$data['button_confirm'] = $this->language->get('button_confirm');
 
-		$data['months'] = [];
+		$data['months'] = array();
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = [
+			$data['months'][] = array(
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			];
+			);
 		}
 
 		$today = getdate();
 
-		$data['year_valid'] = [];
+		$data['year_valid'] = array();
 
 		for ($i = $today['year'] - 10; $i < $today['year'] + 1; $i++) {
-			$data['year_valid'][] = [
+			$data['year_valid'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			];
+			);
 		}
 
-		$data['year_expire'] = [];
+		$data['year_expire'] = array();
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = [
+			$data['year_expire'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%04d', $i)
-			];
+			);
 		}
 
 		return $this->load->view('extension/payment/perpetual_payments', $data);
@@ -56,13 +56,13 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 
 		$this->load->language('extension/payment/perpetual_payments');
 
-		$json = [];
+		$json = array();
 
 		$this->load->model('checkout/order');
 
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
-		$payment_data = [
+		$payment_data = array(
 			'auth_id'       => $this->config->get('perpetual_payments_auth_id'),
 			'auth_pass'     => $this->config->get('perpetual_payments_auth_pass'),
 			'card_num'      => str_replace(' ', '', $this->request->post['cc_number']),
@@ -82,7 +82,7 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 			'tran_testmode' => $this->config->get('perpetual_payments_test'),
 			'tran_type'     => 'Sale',
 			'tran_class'    => 'MoTo',
-		];
+		);
 
 		$curl = curl_init('https://secure.voice-pay.com/gateway/remote');
 

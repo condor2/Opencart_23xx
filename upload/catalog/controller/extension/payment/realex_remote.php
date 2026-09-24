@@ -18,44 +18,44 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 
 		$accounts = $this->config->get('realex_remote_account');
 
-		$card_types = [
+		$card_types = array(
 			'visa'   => $this->language->get('text_card_visa'),
 			'mc'     => $this->language->get('text_card_mc'),
 			'amex'   => $this->language->get('text_card_amex'),
 			'switch' => $this->language->get('text_card_switch'),
 			'laser'  => $this->language->get('text_card_laser'),
 			'diners' => $this->language->get('text_card_diners'),
-		];
+		);
 
-		$data['cards'] = [];
+		$data['cards'] = array();
 
 		foreach ($accounts as $card => $account) {
 			if (isset($account['enabled']) && $account['enabled'] == 1) {
-				$data['cards'][] = [
+				$data['cards'][] = array(
 					'code' => $card,
 					'text' => $card_types[$card],
-				];
+				);
 			}
 		}
 
-		$data['months'] = [];
+		$data['months'] = array();
 
 		for ($i = 1; $i <= 12; $i++) {
-			$data['months'][] = [
+			$data['months'][] = array(
 				'text'  => sprintf('%02d', $i),
 				'value' => sprintf('%02d', $i)
-			];
+			);
 		}
 
 		$today = getdate();
 
-		$data['year_expire'] = [];
+		$data['year_expire'] = array();
 
 		for ($i = $today['year']; $i < $today['year'] + 11; $i++) {
-			$data['year_expire'][] = [
+			$data['year_expire'][] = array(
 				'text'  => sprintf('%02d', $i % 100),
 				'value' => sprintf('%02d', $i % 100)
-			];
+			);
 		}
 
 		return $this->load->view('extension/payment/realex_remote', $data);
@@ -115,7 +115,7 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 
 				// Proceed to 3D secure
 				if (isset($verify_3ds->result) && $verify_3ds->result == '00') {
-					$enc_data = [
+					$enc_data = array(
 						'account'   => $account,
 						'amount'    => $amount,
 						'currency'  => $currency,
@@ -127,11 +127,11 @@ class ControllerExtensionPaymentRealexRemote extends Controller {
 						'cc_type'   => $this->request->post['cc_type'],
 						'cc_cvv2'   => $this->request->post['cc_cvv2'],
 						'cc_issue'  => $this->request->post['cc_issue']
-					];
+					);
 
 					$md = $this->encryption->encrypt(json_encode($enc_data));
 
-					$json = [];
+					$json = array();
 					$json['ACSURL'] = (string)$verify_3ds->url;
 					$json['MD'] = $md;
 					$json['PaReq'] = (string)$verify_3ds->pareq;

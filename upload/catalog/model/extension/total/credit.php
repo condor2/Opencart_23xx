@@ -9,12 +9,12 @@ class ModelExtensionTotalCredit extends Model {
 			$credit = min($balance, $total['total']);
 
 			if ((float)$credit > 0) {
-				$total['totals'][] = [
+				$total['totals'][] = array(
 					'code'       => 'credit',
 					'title'      => $this->language->get('text_credit'),
 					'value'      => -$credit,
 					'sort_order' => $this->config->get('credit_sort_order')
-				];
+				);
 
 				$total['total'] -= $credit;
 			}

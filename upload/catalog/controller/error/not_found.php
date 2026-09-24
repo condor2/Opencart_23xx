@@ -5,12 +5,12 @@ class ControllerErrorNotFound extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		$data['breadcrumbs'] = [];
+		$data['breadcrumbs'] = array();
 
-		$data['breadcrumbs'][] = [
+		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
-		];
+		);
 
 		if (isset($this->request->get['route'])) {
 			$url_data = $this->request->get;
@@ -27,10 +27,10 @@ class ControllerErrorNotFound extends Controller {
 				$url = '&' . urldecode(http_build_query($url_data, '', '&'));
 			}
 
-			$data['breadcrumbs'][] = [
+			$data['breadcrumbs'][] = array(
 				'text' => $this->language->get('heading_title'),
 				'href' => $this->url->link($route, $url, $this->request->server['HTTPS'])
-			];
+			);
 		}
 
 		$data['heading_title'] = $this->language->get('heading_title');

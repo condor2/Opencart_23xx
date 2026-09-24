@@ -17,7 +17,7 @@
  * @mixin TWraps
  */
 class Proxy extends \stdClass {
-	protected $data = [];
+	protected $data = array();
 
 	/**
 	 * @param string $key
@@ -35,7 +35,7 @@ class Proxy extends \stdClass {
 	}
 
 	public function __call($key, $args) {
-		$arg_data = [];
+		$arg_data = array();
 
 		$args = func_get_args();
 

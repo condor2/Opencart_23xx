@@ -13,26 +13,26 @@ class ModelExtensionShippingFlat extends Model {
 			$status = false;
 		}
 
-		$method_data = [];
+		$method_data = array();
 
 		if ($status) {
-			$quote_data = [];
+			$quote_data = array();
 
-			$quote_data['flat'] = [
+			$quote_data['flat'] = array(
 				'code'         => 'flat.flat',
 				'title'        => $this->language->get('text_description'),
 				'cost'         => $this->config->get('flat_cost'),
 				'tax_class_id' => $this->config->get('flat_tax_class_id'),
 				'text'         => $this->currency->format($this->tax->calculate($this->config->get('flat_cost'), $this->config->get('flat_tax_class_id'), $this->config->get('config_tax')), $this->session->data['currency'])
-			];
+			);
 
-			$method_data = [
+			$method_data = array(
 				'code'       => 'flat',
 				'title'      => $this->language->get('text_title'),
 				'quote'      => $quote_data,
 				'sort_order' => $this->config->get('flat_sort_order'),
 				'error'      => false
-			];
+			);
 		}
 
 		return $method_data;

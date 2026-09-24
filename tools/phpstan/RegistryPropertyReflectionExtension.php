@@ -35,7 +35,7 @@ class RegistryPropertyReflectionExtension implements PropertiesClassReflectionEx
 		$type = new NullType();
 		if ($this->reflectionProvider->hasClass($className)) {
 			$found = new ObjectType($className);
-			$type = new GenericObjectType('\Proxy', [$found]);
+			$type = new GenericObjectType('\Proxy', array($found));
 			$type = TypeCombinator::addNull($type);
 		}
 

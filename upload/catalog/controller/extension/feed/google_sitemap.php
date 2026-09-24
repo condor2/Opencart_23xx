@@ -81,7 +81,7 @@ class ControllerExtensionFeedGoogleSitemap extends Controller {
 			$output .= '  <priority>0.7</priority>' . PHP_EOL;
 			$output .= '</url>' . PHP_EOL;
 
-			$products = $this->model_catalog_product->getProducts(['filter_category_id' => $result['category_id']]);
+			$products = $this->model_catalog_product->getProducts(array('filter_category_id' => $result['category_id']));
 
 			foreach ($products as $product) {
 				$output .= '<url>' . PHP_EOL;

@@ -1,7 +1,7 @@
 <?php
 class ModelExtensionExtension extends Model {
 	public function getInstalled($type) {
-		$extension_data = [];
+		$extension_data = array();
 
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension WHERE `type` = '" . $this->db->escape($type) . "' ORDER BY code");
 
