@@ -134,15 +134,7 @@ define('DIR_UPLOAD', DIR_STORAGE . 'upload/');<br>
 # Ocmod Compatibility
 
 ## Ocmod extensions should be adapted to work with this version.
-Old array was changed to new modern array<br>
-<b>From:</b>
-````
-array ();
-````
-<b>To:</b>
-````
-[]
-````
+
 Backward escaped quotes was added in MySQL commands:<br>
 <b>From:</b>
 ````
