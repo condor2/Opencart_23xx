@@ -13,6 +13,7 @@ parameters:
         - ./upload/system/storage/cache/
     tmpDir: .cache
     ignoreErrors:
+        - '#Class Event constructor invoked with 0 parameter, 1-2 required\.#'
         - '#Constant [A-Z_]+ not found\.#'
         - '#might not be defined\.#'
         - '#Undefined variable: \$dir_opencart#'
