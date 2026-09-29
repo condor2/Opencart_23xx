@@ -345,7 +345,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		curl_setopt($curl_token, CURLOPT_RETURNTRANSFER, true);
 
 		$response_token = curl_exec($curl_token);
-		curl_close($curl_token);
+
 		$decoded_token = json_decode($response_token);
 
 		if (!isset($decoded_token->aud) || $decoded_token->aud != $this->config->get('amazon_login_pay_client_id')) {
@@ -359,7 +359,6 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		curl_setopt($curl_profile, CURLOPT_RETURNTRANSFER, true);
 
 		$response_profile = curl_exec($curl_profile);
-		curl_close($curl_profile);
 
 		return json_decode($response_profile);
 	}
@@ -448,7 +447,6 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 		$response = curl_exec($curl);
-		curl_close($curl);
 
 		[$other, $responseBody] = explode("\r\n\r\n", $response, 2);
 		$other = preg_split("/\r\n|\n|\r/", $other);

@@ -210,7 +210,6 @@ class ModelExtensionPaymentBluePayHosted extends Model {
 
 		$response_data = curl_exec($curl);
 
-		curl_close($curl);
 
 		return json_decode($response_data, true);
 	}

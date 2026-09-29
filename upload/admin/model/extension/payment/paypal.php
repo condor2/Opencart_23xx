@@ -291,7 +291,6 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		$response = curl_exec($curl);
 
-		curl_close($curl);
 
 		$result = json_decode($response, true);
 
@@ -315,7 +314,6 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		$response = curl_exec($curl);
 
-		curl_close($curl);
 
 		$result = json_decode($response, true);
 
@@ -341,7 +339,7 @@ class ModelExtensionPaymentPayPal extends Model {
 
 		$response = curl_exec($curl);
 
-		curl_close($curl);
+
 	}
 
 	public function log($data, $title = null) {

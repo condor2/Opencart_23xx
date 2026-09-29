@@ -241,11 +241,7 @@ class CurlMultiHandler
         unset($this->delays[$id], $this->handles[$id]);
         \curl_multi_remove_handle($this->_mh, $handle);
 
-        if (PHP_VERSION_ID < 80000) {
-            \curl_close($handle);
-        }
-
-        return true;
+return true;
     }
 
     private function processMessages(): void

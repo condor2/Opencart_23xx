@@ -66,7 +66,6 @@ class ModelExtensionPaymentGlobalpayRemote extends Model {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$response = curl_exec($ch);
-		curl_close($ch);
 
 		$this->logger('checkEnrollment xml response');
 		$this->logger($response);
@@ -114,7 +113,6 @@ class ModelExtensionPaymentGlobalpayRemote extends Model {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$response = curl_exec($ch);
-		curl_close($ch);
 
 		$this->logger('enrollmentSignature xml response');
 		$this->logger($response);
@@ -228,7 +226,6 @@ class ModelExtensionPaymentGlobalpayRemote extends Model {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		$response = curl_exec($ch);
-		curl_close($ch);
 
 		$this->logger('capturePayment xml response');
 		$this->logger($response);

@@ -61,7 +61,6 @@ class ModelExtensionPaymentPilibaba extends Model {
 		if (curl_errno($ch)) {
 			$this->log('cURL error: ' . curl_errno($ch));
 		}
-		curl_close($ch);
 
 		$this->log('Response: ' . print_r($response, true));
 

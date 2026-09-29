@@ -17,7 +17,6 @@ class Controller3rdPartyExtension extends Controller {
 
 		$response = curl_exec($curl);
 
-		curl_close($curl);
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput($response);

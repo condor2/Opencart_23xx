@@ -117,7 +117,7 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 
 			$json = curl_exec($curl);
 
-			curl_close($curl);
+
 		}
 
 		return $json;

@@ -37,6 +37,6 @@ class CurlRequest implements HttpRequest
 
     public function close()
     {
-        curl_close($this->_handle);
+
     }
 }

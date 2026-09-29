@@ -68,7 +68,6 @@ class ModelExtensionPaymentGlobalpay extends Model {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			$response = curl_exec($ch);
-			curl_close($ch);
 
 			return simplexml_load_string($response);
 		} else {
@@ -133,7 +132,6 @@ class ModelExtensionPaymentGlobalpay extends Model {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			$response = curl_exec($ch);
-			curl_close($ch);
 
 			return simplexml_load_string($response);
 		} else {
@@ -201,7 +199,6 @@ class ModelExtensionPaymentGlobalpay extends Model {
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $xml);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 			$response = curl_exec($ch);
-			curl_close($ch);
 
 			return simplexml_load_string($response);
 		} else {

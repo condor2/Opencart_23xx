@@ -116,7 +116,6 @@ class ModelExtensionShippingUspsOauth extends Model {
 				}
 
 				$response = json_decode($result, true);
-				curl_close($ch);
 
 				$cost = 0;
 				if (isset($response['totalBasePrice']) && is_numeric($response['totalBasePrice'])) {
@@ -173,7 +172,6 @@ class ModelExtensionShippingUspsOauth extends Model {
 
 		$response = curl_exec($ch);
 		$data = json_decode($response, true);
-		curl_close($ch);
 
 		return $data['access_token'] ?? false;
 	}

@@ -108,7 +108,6 @@ class ModelExtensionPaymentCardConnect extends Model {
 		if (curl_errno($ch)) {
 			$this->model_extension_payment_cardconnect->log('cURL error: ' . curl_errno($ch));
 		}
-		curl_close($ch);
 
 		$response_data = json_decode($response_data, true);
 
@@ -203,7 +202,6 @@ class ModelExtensionPaymentCardConnect extends Model {
 		if (curl_errno($ch)) {
 			$this->model_extension_payment_cardconnect->log('cURL error: ' . curl_errno($ch));
 		}
-		curl_close($ch);
 
 		$response_data = json_decode($response_data, true);
 
@@ -252,7 +250,6 @@ class ModelExtensionPaymentCardConnect extends Model {
 		if (curl_errno($ch)) {
 			$this->model_extension_payment_cardconnect->log('cURL error: ' . curl_errno($ch));
 		}
-		curl_close($ch);
 
 		$response_data = json_decode($response_data, true);
 
@@ -301,7 +298,6 @@ class ModelExtensionPaymentCardConnect extends Model {
 		if (curl_errno($ch)) {
 			$this->model_extension_payment_cardconnect->log('cURL error: ' . curl_errno($ch));
 		}
-		curl_close($ch);
 
 		$response_data = json_decode($response_data, true);
 

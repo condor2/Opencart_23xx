@@ -414,7 +414,6 @@ class ModelExtensionPaymentSagePayDirect extends Model {
 
 		$response = curl_exec($curl);
 
-		curl_close($curl);
 
 		$response_info = explode(chr(10), $response);
 

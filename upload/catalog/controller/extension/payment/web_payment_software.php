@@ -77,7 +77,6 @@ class ControllerExtensionPaymentWebPaymentSoftware extends Controller {
 
 		$response = curl_exec($curl);
 
-		curl_close($curl);
 
 		//If in test mode strip results to only contain xml data
 		if ($this->config->get('web_payment_software_mode') == 'test') {
