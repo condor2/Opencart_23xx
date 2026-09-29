@@ -201,7 +201,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 			$error = $this->language->get('error_invalid_hash');
 		}
 
-		if ($success)
+		if ($success) {
 			$this->finalizeOrder($payment);
 
 			$this->response->redirect($this->url->link('checkout/success', '', true));
