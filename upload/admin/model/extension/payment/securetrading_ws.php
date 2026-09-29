@@ -282,7 +282,6 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 			$this->log->write('Secure Trading WS CURL Error: (' . curl_errno($ch) . ') ' . curl_error($ch));
 		}
 
-
 		if (empty($response) || $response === 'No records found for search') {
 			return false;
 		}
@@ -337,7 +336,6 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 		if ($response === false) {
 			$this->log->write('Secure Trading WS CURL Error: (' . curl_errno($ch) . ') ' . curl_error($ch));
 		}
-
 
 		return $response;
 	}

@@ -362,9 +362,7 @@ class ModelExtensionPaymentWorldpay extends Model {
 			)
 		);
 
-		$result = json_decode(curl_exec($curl));
-
-		return $result;
+		return json_decode(curl_exec($curl));
 	}
 
 	public function logger($data) {

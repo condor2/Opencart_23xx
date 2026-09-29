@@ -112,7 +112,6 @@ class ControllerExtensionPaymentNochex extends Controller {
 
 		$response = curl_exec($curl);
 
-
 		if (strcmp($response, 'AUTHORISED') == 0) {
 			$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('nochex_order_status_id'));
 		} else {

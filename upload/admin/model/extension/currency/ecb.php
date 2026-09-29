@@ -22,7 +22,6 @@ class ModelExtensionCurrencyEcb extends Model {
 
 				$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-
 				if ($status == 200) {
 					$dom = new \DOMDocument('1.0', 'UTF-8');
 					$dom->loadXml($response);

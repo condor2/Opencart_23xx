@@ -416,7 +416,6 @@ class ControllerExtensionPaymentLaybuy extends Controller {
 					$this->model_extension_payment_laybuy->log('cURL error: ' . curl_errno($ch));
 				}
 
-
 				$results = json_decode($result, true);
 
 				$this->model_extension_payment_laybuy->log('Response: ' . print_r($results, true));

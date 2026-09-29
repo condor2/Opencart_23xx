@@ -261,7 +261,6 @@ class ModelExtensionPaymentOpayo extends Model {
 
 		$response = curl_exec($curl);
 
-
 		$response_info = explode(chr(10), $response);
 
 		$data = array();

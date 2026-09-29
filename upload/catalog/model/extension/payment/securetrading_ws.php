@@ -57,7 +57,6 @@ class ModelExtensionPaymentSecureTradingWs extends Model {
 			$this->log->write('Secure Trading WS CURL Error: (' . curl_errno($ch) . ') ' . curl_error($ch));
 		}
 
-
 		return $response;
 	}
 

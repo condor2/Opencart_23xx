@@ -72,7 +72,6 @@ class ModelExtensionFraudFraudLabsPro extends Model {
 
 		$response = curl_exec($curl);
 
-
 		$risk_score = 0;
 
 		if ((null === ($json = json_decode($response))) === false) {

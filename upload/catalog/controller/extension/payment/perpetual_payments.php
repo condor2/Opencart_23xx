@@ -97,7 +97,6 @@ class ControllerExtensionPaymentPerpetualPayments extends Controller {
 
 		$response = curl_exec($curl);
 
-
 		if ($response) {
 			$data = explode('|', $response);
 

@@ -29,7 +29,6 @@ class ModelExtensionShippingAusPost extends Model {
 
 				$response = curl_exec($curl);
 
-
 				if ($response) {
 					$response_info = array();
 
@@ -69,7 +68,6 @@ class ModelExtensionShippingAusPost extends Model {
 				curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
 				$response = curl_exec($curl);
-
 
 				if ($response) {
 					$response_info = array();

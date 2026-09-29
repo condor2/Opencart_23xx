@@ -53,7 +53,6 @@ class ModelExtensionFraudMaxMind extends Model {
 
 			$response = curl_exec($curl);
 
-
 			$risk_score = 0;
 
 			if ($response) {

@@ -158,7 +158,6 @@ class ModelExtensionShippingFedex extends Model {
 
 			$response = curl_exec($curl);
 
-
 			$dom = new DOMDocument('1.0', 'UTF-8');
 			$dom->loadXml($response);
 

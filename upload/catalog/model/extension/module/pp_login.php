@@ -64,10 +64,7 @@ class ModelExtensionModulePPLogin extends Model {
 
 		curl_setopt_array($ch, $opts);
 
-		$response = json_decode(curl_exec($ch));
-
-
-		return $response;
+		return json_decode(curl_exec($ch));
 	}
 
 	public function log($data, $class_step = 6) {

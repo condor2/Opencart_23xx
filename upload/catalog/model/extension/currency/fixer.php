@@ -21,7 +21,6 @@ class ModelExtensionCurrencyFixer extends Model {
 
 		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-
 		if ($status == 200) {
 			$response_info = json_decode($response, true);
 		} else {

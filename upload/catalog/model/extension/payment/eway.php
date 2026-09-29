@@ -170,7 +170,6 @@ class ModelExtensionPaymentEway extends Model {
 			}
 		}
 
-
 		return $response;
 	}
 }

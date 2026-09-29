@@ -631,7 +631,6 @@ class PayPal {
 				$response_headers[$key] = $value;
 			}
 
-
 			if (isset($buffer) && is_resource($buffer)) {
 				fclose($buffer);
 			}

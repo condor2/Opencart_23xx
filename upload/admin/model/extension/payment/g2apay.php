@@ -126,7 +126,6 @@ class ModelExtensionPaymentG2aPay extends Model {
 
 		$response = json_decode(curl_exec($curl));
 
-
 		if (is_object($response)) {
 			return (string)$response->status;
 		} else {

@@ -180,7 +180,6 @@ class ControllerExtensionPaymentAuthorizeNetAim extends Controller {
 			$this->log->write('AUTHNET AIM CURL ERROR: Empty Gateway Response');
 		}
 
-
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
