@@ -189,7 +189,7 @@ class ControllerExtensionPaymentEway extends Controller {
 		return (int)($value * 10 ** $power);
 	}
 
-	public function ValidateDenomination(float $value, float $currency) {
+	public function ValidateDenomination($value, $currency) {
 		$power = $this->currency->getDecimalPlace($currency);
 
 		$value = (float)$value;

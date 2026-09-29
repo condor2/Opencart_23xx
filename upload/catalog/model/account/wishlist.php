@@ -1,12 +1,12 @@
 <?php
 class ModelAccountWishlist extends Model {
-	public function addWishlist(int $product_id) {
+	public function addWishlist($product_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_wishlist` WHERE `customer_id` = '" . (int)$this->customer->getId() . "' AND `product_id` = '" . (int)$product_id . "'");
 
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "customer_wishlist` SET `customer_id` = '" . (int)$this->customer->getId() . "', `product_id` = '" . (int)$product_id . "', `date_added` = NOW()");
 	}
 
-	public function deleteWishlist(int $product_id) {
+	public function deleteWishlist($product_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_wishlist` WHERE `customer_id` = '" . (int)$this->customer->getId() . "' AND `product_id` = '" . (int)$product_id . "'");
 	}
 

@@ -1,6 +1,6 @@
 <?php
 class ModelCustomerCustomer extends Model {
-	public function addCustomer(array $data) {
+	public function addCustomer($data) {
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "customer` SET `customer_group_id` = '" . (int)$data['customer_group_id'] . "', `firstname` = '" . trim($this->db->escape($data['firstname'])) . "', `lastname` = '" . trim($this->db->escape($data['lastname'])) . "', `email` = '" . $this->db->escape($data['email']) . "', `telephone` = '" . $this->db->escape($data['telephone']) . "', `fax` = '" . $this->db->escape($data['fax']) . "', `custom_field` = '" . $this->db->escape(isset($data['custom_field']) ? json_encode($data['custom_field']) : '') . "', `newsletter` = '" . (int)$data['newsletter'] . "', `password` = '" . $this->db->escape(password_hash(html_entity_decode($data['password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT)) . "', `status` = '" . (bool)$data['status'] . "', `approved` = '" . (int)$data['approved'] . "', `safe` = '" . (int)$data['safe'] . "', `date_added` = NOW()");
 
 		$customer_id = $this->db->getLastId();
@@ -20,7 +20,7 @@ class ModelCustomerCustomer extends Model {
 		return (int)$customer_id;
 	}
 
-	public function editCustomer(int $customer_id, array $data) {
+	public function editCustomer($customer_id, $data) {
 		if (!isset($data['custom_field'])) {
 			$data['custom_field'] = array();
 		}
@@ -50,11 +50,11 @@ class ModelCustomerCustomer extends Model {
 		}
 	}
 
-	public function editToken(int $customer_id, string $token) {
+	public function editToken($customer_id, $token) {
 		$this->db->query("UPDATE `" . DB_PREFIX . "customer` SET `token` = '" . $this->db->escape($token) . "' WHERE `customer_id` = '" . (int)$customer_id . "'");
 	}
 
-	public function deleteCustomer(int $customer_id) {
+	public function deleteCustomer($customer_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer` WHERE `customer_id` = '" . (int)$customer_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_activity` WHERE `customer_id` = '" . (int)$customer_id . "'");
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_reward` WHERE `customer_id` = '" . (int)$customer_id . "'");
@@ -64,19 +64,19 @@ class ModelCustomerCustomer extends Model {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "address` WHERE `customer_id` = '" . (int)$customer_id . "'");
 	}
 
-	public function getCustomer(int $customer_id) {
+	public function getCustomer($customer_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "customer` WHERE `customer_id` = '" . (int)$customer_id . "'");
 
 		return $query->row;
 	}
 
-	public function getCustomerByEmail(string $email) {
+	public function getCustomerByEmail($email) {
 		$query = $this->db->query("SELECT DISTINCT * FROM `" . DB_PREFIX . "customer` WHERE LCASE(email) = '" . $this->db->escape(utf8_strtolower($email)) . "'");
 
 		return $query->row;
 	}
 
-	public function getCustomers(array $data = array()) {
+	public function getCustomers($data = array()) {
 		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cgd.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group_description cgd ON (c.customer_group_id = cgd.customer_group_id) WHERE cgd.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 
 		if (!empty($data['filter_name'])) {
@@ -150,7 +150,7 @@ class ModelCustomerCustomer extends Model {
 		return $query->rows;
 	}
 
-	public function approve(int $customer_id) {
+	public function approve($customer_id) {
 		$customer_info = $this->getCustomer($customer_id);
 
 		if ($customer_info) {
@@ -207,7 +207,7 @@ class ModelCustomerCustomer extends Model {
 		}
 	}
 
-	public function getAddress(int $address_id) {
+	public function getAddress($address_id) {
 		$address_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "address WHERE address_id = '" . (int)$address_id . "'");
 
 		if ($address_query->num_rows) {
@@ -260,7 +260,7 @@ class ModelCustomerCustomer extends Model {
 		return array();
 	}
 
-	public function getAddresses(int $customer_id) {
+	public function getAddresses($customer_id) {
 		$address_data = array();
 
 		$query = $this->db->query("SELECT address_id FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$customer_id . "'");
@@ -276,7 +276,7 @@ class ModelCustomerCustomer extends Model {
 		return $address_data;
 	}
 
-	public function getTotalCustomers(array $data = array()) {
+	public function getTotalCustomers($data = array()) {
 		$sql = "SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer c";
 
 		$implode = array();
@@ -328,35 +328,35 @@ class ModelCustomerCustomer extends Model {
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalAddressesByCustomerId(int $customer_id) {
+	public function getTotalAddressesByCustomerId($customer_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "address WHERE customer_id = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalAddressesByCountryId(int $country_id) {
+	public function getTotalAddressesByCountryId($country_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "address WHERE country_id = '" . (int)$country_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalAddressesByZoneId(int $zone_id) {
+	public function getTotalAddressesByZoneId($zone_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "address WHERE zone_id = '" . (int)$zone_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalCustomersByCustomerGroupId(int $customer_group_id) {
+	public function getTotalCustomersByCustomerGroupId($customer_group_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE customer_group_id = '" . (int)$customer_group_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function addHistory(int $customer_id, string $comment) {
+	public function addHistory($customer_id, $comment) {
 		$this->db->query("INSERT INTO " . DB_PREFIX . "customer_history SET customer_id = '" . (int)$customer_id . "', comment = '" . $this->db->escape(strip_tags($comment)) . "', date_added = NOW()");
 	}
 
-	public function getHistories(int $customer_id, int $start = 0, int $limit = 10) {
+	public function getHistories($customer_id, $start = 0, $limit = 10) {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -370,13 +370,13 @@ class ModelCustomerCustomer extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalHistories(int $customer_id) {
+	public function getTotalHistories($customer_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_history WHERE customer_id = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function addTransaction(int $customer_id, string $description = '', int $amount = 0, int $order_id = 0) {
+	public function addTransaction($customer_id, $description = '', $amount = 0, $order_id = 0) {
 		$customer_info = $this->getCustomer($customer_id);
 
 		if ($customer_info) {
@@ -415,11 +415,11 @@ class ModelCustomerCustomer extends Model {
 		}
 	}
 
-	public function deleteTransaction(int $order_id) {
+	public function deleteTransaction($order_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_transaction WHERE order_id = '" . (int)$order_id . "'");
 	}
 
-	public function getTransactions(int $customer_id, int $start = 0, int $limit = 10) {
+	public function getTransactions($customer_id, $start = 0, $limit = 10) {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -433,25 +433,25 @@ class ModelCustomerCustomer extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalTransactions(int $customer_id) {
+	public function getTotalTransactions($customer_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total  FROM " . DB_PREFIX . "customer_transaction WHERE customer_id = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTransactionTotal(int $customer_id) {
+	public function getTransactionTotal($customer_id) {
 		$query = $this->db->query("SELECT SUM(amount) AS total FROM " . DB_PREFIX . "customer_transaction WHERE customer_id = '" . (int)$customer_id . "'");
 
 		return (float)$query->row['total'];
 	}
 
-	public function getTotalTransactionsByOrderId(int $order_id) {
+	public function getTotalTransactionsByOrderId($order_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_transaction WHERE order_id = '" . (int)$order_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function addReward(int $customer_id, string $description = '', int $points = 0, int $order_id = 0) {
+	public function addReward($customer_id, $description = '', $points = 0, $order_id = 0) {
 		$customer_info = $this->getCustomer($customer_id);
 
 		if ($customer_info) {
@@ -490,35 +490,35 @@ class ModelCustomerCustomer extends Model {
 		}
 	}
 
-	public function deleteReward(int $order_id) {
+	public function deleteReward($order_id) {
 		$this->db->query("DELETE FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "' AND points > 0");
 	}
 
-	public function getRewards(int $customer_id, int $start = 0, int $limit = 10) {
+	public function getRewards($customer_id, $start = 0, $limit = 10) {
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$customer_id . "' ORDER BY date_added DESC LIMIT " . (int)$start . "," . (int)$limit);
 
 		return $query->rows;
 	}
 
-	public function getTotalRewards(int $customer_id) {
+	public function getTotalRewards($customer_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getRewardTotal(int $customer_id) {
+	public function getRewardTotal($customer_id) {
 		$query = $this->db->query("SELECT SUM(points) AS total FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalCustomerRewardsByOrderId(int $order_id) {
+	public function getTotalCustomerRewardsByOrderId($order_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_reward WHERE order_id = '" . (int)$order_id . "' AND points > 0");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getIps(int $customer_id, int $start = 0, int $limit = 10) {
+	public function getIps($customer_id, $start = 0, $limit = 10) {
 		if ($start < 0) {
 			$start = 0;
 		}
@@ -531,25 +531,25 @@ class ModelCustomerCustomer extends Model {
 		return $query->rows;
 	}
 
-	public function getTotalIps(int $customer_id) {
+	public function getTotalIps($customer_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_ip WHERE customer_id = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalCustomersByIp(string $ip) {
+	public function getTotalCustomersByIp($ip) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($ip) . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalLoginAttempts(string $email) {
+	public function getTotalLoginAttempts($email) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_login` WHERE `email` = '" . $this->db->escape($email) . "'");
 
 		return $query->row;
 	}
 
-	public function deleteLoginAttempts(string $email) {
+	public function deleteLoginAttempts($email) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "customer_login` WHERE `email` = '" . $this->db->escape($email) . "'");
 	}
 }

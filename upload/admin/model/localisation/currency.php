@@ -38,7 +38,7 @@ class ModelLocalisationCurrency extends Model {
 		return $query->row;
 	}
 
-	public function getCurrencies(array $data = array()) {
+	public function getCurrencies($data = array()) {
 		$sql = "SELECT * FROM " . DB_PREFIX . "currency";
 
 		$sort_data = array(

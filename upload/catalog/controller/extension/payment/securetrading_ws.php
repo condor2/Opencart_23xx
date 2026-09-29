@@ -305,7 +305,7 @@ class ControllerExtensionPaymentSecureTradingWs extends Controller {
 		}
 	}
 
-	private function processAuthResponse($response, int $order_id) {
+	private function processAuthResponse($response, $order_id) {
 		$json = array();
 
 		if ($response !== false) {

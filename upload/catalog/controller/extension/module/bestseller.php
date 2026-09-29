@@ -1,6 +1,6 @@
 <?php
 class ControllerExtensionModuleBestSeller extends Controller {
-	public function index(array $setting) {
+	public function index($setting) {
 		$this->load->language('extension/module/bestseller');
 
 		$data['heading_title'] = $this->language->get('heading_title');

@@ -51,7 +51,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "amazon_login_pay_order_transaction`;");
 	}
 
-	public function getOrder(int $order_id) {
+	public function getOrder($order_id) {
 
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "amazon_login_pay_order` WHERE `order_id` = '" . (int)$order_id . "' LIMIT 1");
 
@@ -384,7 +384,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		return array('status' => (int)$code, 'ResponseBody' => $responseBody);
 	}
 
-	private function getParametersAsString(array $parameters) {
+	private function getParametersAsString($parameters) {
 		$queryParameters = array();
 		foreach ($parameters as $key => $value) {
 			$queryParameters[] = $key . '=' . $this->urlencode($value);
@@ -393,7 +393,7 @@ class ModelExtensionPaymentAmazonLoginPay extends Model {
 		return implode('&', $queryParameters);
 	}
 
-	private function calculateStringToSignV2(array $parameters, $url) {
+	private function calculateStringToSignV2($parameters, $url) {
 		$data = 'POST';
 		$data .= "\n";
 		$endpoint = parse_url($url);

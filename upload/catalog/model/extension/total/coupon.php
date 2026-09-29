@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionTotalCoupon extends Model {
-	public function getCoupon(string $code) {
+	public function getCoupon($code) {
 		$status = true;
 
 		$coupon_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "coupon` WHERE code = '" . $this->db->escape($code) . "' AND ((date_start = '0000-00-00' OR date_start < NOW()) AND (date_end = '0000-00-00' OR date_end > NOW())) AND status = '1'");
@@ -97,7 +97,7 @@ class ModelExtensionTotalCoupon extends Model {
 		}
 	}
 
-	public function getTotal(array $total) {
+	public function getTotal($total) {
 		if (isset($this->session->data['coupon'])) {
 			$this->load->language('extension/total/coupon');
 
@@ -185,7 +185,7 @@ class ModelExtensionTotalCoupon extends Model {
 		}
 	}
 
-	public function confirm(array $order_info, array $order_total) {
+	public function confirm($order_info, $order_total) {
 		$code = '';
 
 		$start = strpos($order_total['title'], '(');
@@ -229,17 +229,17 @@ class ModelExtensionTotalCoupon extends Model {
 		return 0;
 	}
 
-	public function unconfirm(int $order_id) {
+	public function unconfirm($order_id) {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "coupon_history` WHERE order_id = '" . (int)$order_id . "'");
 	}
 
-	public function getTotalCouponHistoriesByCoupon(string $coupon) {
+	public function getTotalCouponHistoriesByCoupon($coupon) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "coupon_history` ch LEFT JOIN `" . DB_PREFIX . "coupon` c ON (ch.coupon_id = c.coupon_id) WHERE c.code = '" . $this->db->escape($coupon) . "'");
 
 		return (int)$query->row['total'];
 	}
 
-	public function getTotalCouponHistoriesByCustomerId(string $coupon, int $customer_id) {
+	public function getTotalCouponHistoriesByCustomerId($coupon, $customer_id) {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM `" . DB_PREFIX . "coupon_history` ch LEFT JOIN `" . DB_PREFIX . "coupon` c ON (ch.coupon_id = c.coupon_id) WHERE c.code = '" . $this->db->escape($coupon) . "' AND ch.customer_id = '" . (int)$customer_id . "'");
 
 		return (int)$query->row['total'];

@@ -212,7 +212,7 @@ class ControllerExtensionPaymentCardinity extends Controller {
 		}
 	}
 
-	private function finalizeOrder(string $payment) {
+	private function finalizeOrder($payment) {
 		$this->load->model('checkout/order');
 
 		$this->load->language('extension/payment/cardinity');

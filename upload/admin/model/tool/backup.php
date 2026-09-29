@@ -15,7 +15,7 @@ class ModelToolBackup extends Model {
 		return $table_data;
 	}
 
-	public function backup(array $tables) {
+	public function backup($tables) {
 		$output = '';
 
 		foreach ($tables as $table) {

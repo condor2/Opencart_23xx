@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionModuleLaybuyLayout extends Model {
-	public function getStatusLabel(int $id) {
+	public function getStatusLabel($id) {
 		$statuses = $this->getTransactionStatuses();
 
 		foreach ($statuses as $status) {
@@ -14,7 +14,7 @@ class ModelExtensionModuleLaybuyLayout extends Model {
 		return $id;
 	}
 
-	public function getTransactionByOrderId(int $order_id) {
+	public function getTransactionByOrderId($order_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "laybuy_transaction` WHERE `order_id` = '" . (int)$order_id . "' ORDER BY `laybuy_ref_no` DESC LIMIT 1");
 
 		return $query->row;
@@ -48,7 +48,7 @@ class ModelExtensionModuleLaybuyLayout extends Model {
 
 	}
 
-	public function isLayBuyOrder(int $order_id) {
+	public function isLayBuyOrder($order_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "laybuy_transaction` WHERE `order_id` = '" . (int)$order_id . "'");
 
 		if ($query->num_rows) {

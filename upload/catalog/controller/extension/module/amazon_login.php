@@ -207,7 +207,7 @@ class ControllerExtensionModuleAmazonLogin extends Controller {
 		}
 	}
 
-	protected function validate(string $email) {
+	protected function validate($email) {
 		if (!$this->customer->login($email, '', true)) {
 			$this->error['warning'] = $this->language->get('error_login');
 		}
