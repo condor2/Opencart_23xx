@@ -55,7 +55,7 @@ class MySQLi {
 				$this->connection->real_connect($hostname, $username, $password, $database, $port, null);
 			}
 
-			$this->connection->set_charset('utf8');
+			$this->connection->set_charset('utf8mb4');
 
 			$this->query("SET SESSION sql_mode = 'NO_ZERO_IN_DATE,NO_ENGINE_SUBSTITUTION'");
 			$this->query("SET FOREIGN_KEY_CHECKS = 0");
