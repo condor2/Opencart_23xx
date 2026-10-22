@@ -31,17 +31,30 @@ class ControllerCommonFileManager extends Controller {
 
 		if (substr(str_replace('\\', '/', realpath($directory) . '/' . $filter_name), 0, strlen(DIR_IMAGE . 'catalog')) == str_replace('\\', '/', DIR_IMAGE . 'catalog')) {
 			// Get directories
-			$directories = glob($directory . '/' . $filter_name . '*', GLOB_ONLYDIR);
+			$directories = glob($directory . '/*', GLOB_ONLYDIR);
 
 			if (!$directories) {
 				$directories = array();
 			}
 
 			// Get files
-			$files = safe_glob($directory . '/' . $filter_name . '*.{ico,jpg,jpeg,png,gif,svg,svgz,webp,JPG,JPEG,PNG,GIF,SVG,SVGZ,WEBP}', GLOB_BRACE);
+			$files = safe_glob($directory . '/*.{ico,jpg,jpeg,png,gif,svg,svgz,webp,JPG,JPEG,PNG,GIF,SVG,SVGZ,WEBP}', GLOB_BRACE);
 
 			if (!$files) {
 				$files = array();
+			}
+
+			// Match names case-insensitively; * matches any sequence, ? one character.
+			// Unanchored matching finds the search text anywhere in the name.
+			if ($filter_name !== '') {
+				$pattern = '~' . str_replace(array('\*', '\?'), array('.*', '.'), preg_quote($filter_name, '~')) . '~isu';
+
+				$matches = function($path) use ($pattern) {
+					return preg_match($pattern, basename($path)) === 1;
+				};
+
+				$directories = array_values(array_filter($directories, $matches));
+				$files = array_values(array_filter($files, $matches));
 			}
 		}
 
