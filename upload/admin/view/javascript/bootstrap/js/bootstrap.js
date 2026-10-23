@@ -1392,9 +1392,9 @@ if (typeof jQuery === 'undefined') {
       return sanitizeFn(unsafeHtml)
     }
 
-    // IE 8 and below don't support createHTMLDocument
-    if (!document.implementation || !document.implementation.createHTMLDocument) {
-      return unsafeHtml
+    // CVE-2025-1647: fail closed if DOM clobbering disables HTML sanitization.
+    if (!document.implementation || typeof document.implementation.createHTMLDocument !== 'function') {
+      return ''
     }
 
     var createdDocument = document.implementation.createHTMLDocument('sanitization')
